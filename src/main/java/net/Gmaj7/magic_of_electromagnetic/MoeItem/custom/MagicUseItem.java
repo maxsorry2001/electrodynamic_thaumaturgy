@@ -4,6 +4,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -18,11 +20,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 
@@ -62,10 +66,12 @@ public class MagicUseItem extends Item {
             MoeFunction.RayHitResult hitResult = MoeFunction.getRayHitResult(level, livingEntity, start, end, true, 0.15F);
             MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity);
             level.addFreshEntity(moeRayEntity);
-            stack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 100);
-            for (Entity target : hitResult.getTargets()){
-                if(target instanceof LivingEntity){
-                    target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), 2);
+            stack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 400);
+            for (HitResult result: hitResult.getTargets()){
+                if(result instanceof EntityHitResult){
+                    Entity target = ((EntityHitResult) result).getEntity();
+                    if(target instanceof LivingEntity)
+                        target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), 8);
                 }
             }
         }
@@ -74,30 +80,32 @@ public class MagicUseItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
-        int Type = itemStack.get(MoeDataComponentTypes.ELECTROMAGNETIC_MAGIC_TYPE.get());
+        MoeMagicType type = getType(itemStack);
         int energy = itemStack.get(MoeDataComponentTypes.MOE_ENERGY.get());
-        if (Type == 1 && energy > 5){
+        if (type == MoeMagicType.RAY && energy > 20) {
             player.startUsingItem(usedHand);
+            return InteractionResultHolder.consume(itemStack);
         }
-        else if (Type == 2 && energy > 600){
+        else if (type == MoeMagicType.PLASMA && energy > 600) {
             PlasmaEntity plasmaEntity = new PlasmaEntity(player, level);
             itemStack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 600);
-            plasmaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 0);
+            plasmaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 1.5F);
             level.addFreshEntity(plasmaEntity);
             player.getCooldowns().addCooldown(itemStack.getItem(), 10);
+            return InteractionResultHolder.consume(itemStack);
         }
-        return InteractionResultHolder.consume(itemStack);
+        else return InteractionResultHolder.fail(itemStack);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        int type = stack.get(MoeDataComponentTypes.ELECTROMAGNETIC_MAGIC_TYPE.get());
-        Component typeLiteral = null;
-        switch (type){
-            case 0 -> typeLiteral = Component.translatable("moe_no_magic");
-            case 1 -> typeLiteral = Component.translatable("moe_ray");
-            case 2 -> typeLiteral = Component.translatable("moe_plasma");
+        Component typeLiteral;
+        switch (getType(stack)){
+            case RAY -> typeLiteral = Component.translatable("moe_ray");
+            case PLASMA -> typeLiteral = Component.translatable("moe_plasma");
+            case EMPTY -> typeLiteral = Component.translatable("moe_no_magic");
+            default -> typeLiteral = Component.translatable("moe_no_magic");
         }
         tooltipComponents.add(typeLiteral);
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
@@ -125,5 +133,16 @@ public class MagicUseItem extends Item {
         int stackMaxEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM).getMaxEnergyStored();
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
+    }
+
+    private MoeMagicType getType(ItemStack itemStack){
+        MoeMagicType result = MoeMagicType.EMPTY;
+        if(itemStack.has(DataComponents.CONTAINER)) {
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            ItemStack typeStack = contents.getStackInSlot(0);
+            Item item = typeStack.getItem();
+            if(item instanceof MoeMagicTypeModuleItem) result = ((MoeMagicTypeModuleItem) item).getMagicType();
+        }
+        return result;
     }
 }

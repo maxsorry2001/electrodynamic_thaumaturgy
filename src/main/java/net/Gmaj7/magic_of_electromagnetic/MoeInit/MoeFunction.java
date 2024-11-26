@@ -47,19 +47,19 @@ public class MoeFunction {
                 hits.add(hit);
             }
         }
-        return new RayHitResult(end, entities);
+        return new RayHitResult(end, hits);
     }
 
     public static class RayHitResult{
         private Vec3 end;
-        private List<? extends Entity> targets;
+        private List<HitResult> targets;
 
-        public RayHitResult(Vec3 end, List<? extends Entity> hits) {
+        public RayHitResult(Vec3 end, List<HitResult> hits) {
             this.end = end;
             this.targets = hits;
         }
 
-        public List<? extends Entity> getTargets() {
+        public List<HitResult> getTargets() {
             return targets;
         }
 
