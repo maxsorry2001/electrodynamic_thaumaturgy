@@ -32,6 +32,14 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get())));
                         output.accept(MoeItems.RAY_MODULE.get());
                         output.accept(MoeItems.PLASMA_MODULE.get());
+                        output.accept(MoeItems.IRON_LC.get());
+                        output.accept(MoeItems.GOLD_LC.get());
+                        output.accept(MoeItems.COPPER_LC.get());
+                        output.accept(MoeItems.NETHERITE_LC.get());
+                        output.accept(MoeItems.IRON_POWER.get());
+                        output.accept(MoeItems.GOLD_POWER.get());
+                        output.accept(MoeItems.COPPER_POWER.get());
+                        output.accept(MoeItems.NETHERITE_POWER.get());
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());
                     }))
                     .build());
@@ -45,13 +53,17 @@ public class MoeTabs {
     private static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
         if (item == MoeItems.ELECTROMAGNETIC_ROD.get()){
-            List<ItemStack> list = new ArrayList<ItemStack>();
+            List<ItemStack> list = new ArrayList<>();
             list.add(0, new ItemStack(MoeItems.RAY_MODULE.get()));
+            list.add(1, new ItemStack(MoeItems.NETHERITE_LC.get()));
+            list.add(2,new ItemStack(MoeItems.NETHERITE_POWER.get()));
             itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         }
         else {
-            List<ItemStack> list = new ArrayList<ItemStack>();
+            List<ItemStack> list = new ArrayList<>();
             list.add(0, new ItemStack(MoeItems.PLASMA_MODULE.get()));
+            list.add(1, new ItemStack(MoeItems.NETHERITE_LC.get()));
+            list.add(2,new ItemStack(MoeItems.NETHERITE_POWER.get()));
             itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         }
         return itemStack;

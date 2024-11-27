@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,6 +20,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class PlasmaEntity extends AbstractArrow {
+    private float plasmaDamage;
     public PlasmaEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
@@ -35,7 +37,7 @@ public class PlasmaEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        entity.hurt(new DamageSource(entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.FIREBALL)), 12);
+        entity.hurt(new DamageSource(entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.FIREBALL)), this.plasmaDamage);
     }
 
     @Override
@@ -78,5 +80,25 @@ public class PlasmaEntity extends AbstractArrow {
         super.tick();
         if(++tickCount >= 10)
             this.discard();
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putFloat("plasma_damage", this.plasmaDamage);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        this.plasmaDamage = compound.getFloat("plasma_damage");
+    }
+
+    public void setPlasmaDamage(float plasmaDamage) {
+        this.plasmaDamage = plasmaDamage;
+    }
+
+    public float getPlasmaDamage() {
+        return plasmaDamage;
     }
 }

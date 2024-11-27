@@ -2,10 +2,13 @@ package net.Gmaj7.magic_of_electromagnetic.MoeItem;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.ElectromagneticTier;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -32,4 +35,22 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(MoeMagicType.RAY, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PLASMA_MODULE = MOE_ITEM.register("plasma_module",
             () -> new MoeMagicTypeModuleItem(MoeMagicType.PLASMA, new Item.Properties().stacksTo(1)));
+
+    public static final Supplier<Item> IRON_LC = MOE_ITEM.register("iron_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> GOLD_LC = MOE_ITEM.register("gold_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.GOLD, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> COPPER_LC = MOE_ITEM.register("copper_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.COPPER, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> NETHERITE_LC = MOE_ITEM.register("netherite_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.NETHERITE, new Item.Properties().stacksTo(1)));
+
+    public static final Supplier<Item> IRON_POWER = MOE_ITEM.register("iron_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> GOLD_POWER = MOE_ITEM.register("gold_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.GOLD, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> COPPER_POWER = MOE_ITEM.register("copper_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.COPPER, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> NETHERITE_POWER = MOE_ITEM.register("netherite_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.NETHERITE, new Item.Properties().stacksTo(1)));
 }

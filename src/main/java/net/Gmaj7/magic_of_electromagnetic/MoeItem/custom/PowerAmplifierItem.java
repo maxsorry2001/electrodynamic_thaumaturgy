@@ -8,12 +8,13 @@ public class PowerAmplifierItem extends ElectromagneticTierItem{
     }
 
     public float getMagnification(){
-        float result = 1.0F;
+        float result;
         switch (this.getTier()){
-            case IRON -> result = 0.8F;
-            case GOLD -> result = 1.2F;
-            case COPPER -> result = 1.6F;
-            case NETHERRITE -> result = 2.0F;
+            case IRON -> result = 1.0F;
+            case GOLD -> result = 1.5F;
+            case COPPER -> result = 2.0F;
+            case NETHERITE -> result = 2.5F;
+            default -> result = 0F;
         }
         return result;
     }

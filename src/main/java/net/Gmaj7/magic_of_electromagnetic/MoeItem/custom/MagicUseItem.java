@@ -71,7 +71,7 @@ public class MagicUseItem extends Item {
                 if(result instanceof EntityHitResult){
                     Entity target = ((EntityHitResult) result).getEntity();
                     if(target instanceof LivingEntity)
-                        target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), 8);
+                        target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), getMagicDamage(stack) * 0.75F);
                 }
             }
         }
@@ -90,6 +90,7 @@ public class MagicUseItem extends Item {
             PlasmaEntity plasmaEntity = new PlasmaEntity(player, level);
             itemStack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 600);
             plasmaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 1.5F);
+            plasmaEntity.setPlasmaDamage(getMagicDamage(itemStack));
             level.addFreshEntity(plasmaEntity);
             player.getCooldowns().addCooldown(itemStack.getItem(), 10);
             return InteractionResultHolder.consume(itemStack);
@@ -144,5 +145,31 @@ public class MagicUseItem extends Item {
             if(item instanceof MoeMagicTypeModuleItem) result = ((MoeMagicTypeModuleItem) item).getMagicType();
         }
         return result;
+    }
+
+    private float getMagicDamage(ItemStack itemStack){
+        float result = getBaseDamage(itemStack) * getBasePower(itemStack);
+        return result;
+    }
+    private float getBaseDamage(ItemStack itemStack){
+        float damage = 0;
+        if(itemStack.has(DataComponents.CONTAINER)){
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            ItemStack lcModule = contents.getStackInSlot(1);
+            Item item = lcModule.getItem();
+            if(item instanceof LcOscillatorModuleItem) damage = ((LcOscillatorModuleItem) item).getBasicDamage();
+        }
+        return damage;
+    }
+
+    private float getBasePower(ItemStack itemStack){
+        float power = 0;
+        if(itemStack.has(DataComponents.CONTAINER)){
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            ItemStack powerModule = contents.getStackInSlot(2);
+            Item item = powerModule.getItem();
+            if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
+        }
+        return power;
     }
 }
