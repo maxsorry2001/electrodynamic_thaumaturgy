@@ -3,7 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.ElectromagneticTier;
 import net.minecraft.world.item.Item;
 
-public class ElectromagneticTierItem extends Item {
+public class ElectromagneticTierItem extends Item implements IMoeModuleItem {
     private final ElectromagneticTier tier;
     public ElectromagneticTierItem(ElectromagneticTier tier, Properties properties) {
         super(properties);
@@ -12,5 +12,9 @@ public class ElectromagneticTierItem extends Item {
 
     public ElectromagneticTier getTier() {
         return tier;
+    }
+
+    public boolean isEmpty(){
+        return tier == ElectromagneticTier.EMPTY;
     }
 }

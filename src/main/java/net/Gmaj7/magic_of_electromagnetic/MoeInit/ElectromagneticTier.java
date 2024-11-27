@@ -4,6 +4,8 @@ public enum ElectromagneticTier {
     IRON,
     GOLD,
     COPPER,
-    NETHERRITE;
+    NETHERITE,
+    NULL,
+    EMPTY;
     private ElectromagneticTier(){}
 }

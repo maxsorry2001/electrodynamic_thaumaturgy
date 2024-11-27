@@ -22,7 +22,7 @@ public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyT
         this.button = this.addRenderableWidget(Button.builder(Component.translatable("moe_assemble"), (p) -> { })
                 .bounds(this.width / 2 + this.imageWidth / 4, this.height / 2 - this.imageHeight / 3, 30, 20).build());
         this.inventoryLabelY = 1000;
-        this.titleLabelY = 1000;
+        this.titleLabelX = this.imageWidth / 3;
         super.init();
     }
 
@@ -35,12 +35,12 @@ public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyT
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if(this.menu.slots.get(0).hasItem() && this.menu.slots.get(0).getItem().getItem() instanceof MagicUseItem) {
+        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicUseItem) {
             double d0 = mouseX - this.width / 2 - this.imageWidth / 4;
             double d1 = mouseY - this.height / 2 + this.imageHeight / 3;
             if(d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20){
                 if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
-                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
+                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
                     return true;
                 }
             }
