@@ -14,5 +14,8 @@
   "moe_plasma": "plasma",
   "moe_assemble": "assemble",
   "moe_tab": "Magic of Electromagnetic",
-  "moe_show_energy": "Energy:"
+  "moe_show_energy": "Energy:",
+
+  "key.category.magic_of_electromagnetic.moe": "Magic of Electromagnetic",
+  "key.magic_of_electromagnetic.switch_magic": "Switch magic"
 }

@@ -13,6 +13,9 @@
   "moe_ray": "射线法术",
   "moe_plasma": "等离子法术",
   "moe_assemble": "装配",
-  "moe_tab": "电磁法能",
-  "moe_show_energy": "能量:"
+  "moe_tab": "电磁法则",
+  "moe_show_energy": "能量:",
+
+  "key.category.magic_of_electromagnetic.moe": "电磁法则",
+  "key.magic_of_electromagnetic.switch_magic": "选择魔法"
 }

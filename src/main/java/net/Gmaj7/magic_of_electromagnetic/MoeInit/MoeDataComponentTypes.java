@@ -17,6 +17,10 @@ public class MoeDataComponentTypes {
             MOE_DATA_COMPONENT_TYPE.register("moe_energy",
                     () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
+    public static final Supplier<DataComponentType<Integer>> MAGIC_SLOT =
+            MOE_DATA_COMPONENT_TYPE.register("moe_energy",
+                    () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
     public static void register(IEventBus eventBus){
         MOE_DATA_COMPONENT_TYPE.register(eventBus);
     }

@@ -25,11 +25,13 @@ public class MoeItems {
     public static final Supplier<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
             () -> new MagicUseItem(new Item.Properties().stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
-                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
+                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+                    .component(MoeDataComponentTypes.MAGIC_SLOT.get(), 0)));
     public static final Supplier<Item> ELECTROMAGNETIC_BOOK = MOE_ITEM.register("electromagnetic_book",
             () -> new MagicUseItem(new Item.Properties().stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
-                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
+                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+                    .component(MoeDataComponentTypes.MAGIC_SLOT.get(), 0)));
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(MoeMagicType.RAY, new Item.Properties().stacksTo(1)));
