@@ -14,12 +14,12 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class PlasmaEntityModel<T extends Entity> extends EntityModel<T> {
+public class PulsedPlasmaEntityModel<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "plasma"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "pulsed_plasma"), "main");
 	private final ModelPart bone;
 
-	public PlasmaEntityModel(ModelPart root) {
+	public PulsedPlasmaEntityModel(ModelPart root) {
 		this.bone = root.getChild("bone");
 	}
 

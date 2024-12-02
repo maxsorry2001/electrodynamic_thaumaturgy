@@ -1,21 +1,21 @@
 {
   "item.magic_of_electromagnetic.electromagnetic_rod": "电磁导能杖",
   "item.magic_of_electromagnetic.electromagnetic_book": "电磁导能书",
-  "item.magic_of_electromagnetic.ray_module": "射线发射模块",
-  "item.magic_of_electromagnetic.plasma_module": "等离子发射模块",
+  "item.magic_of_electromagnetic.ray_module": "射线模块",
+  "item.magic_of_electromagnetic.pulsed_plasma_module": "脉冲等离子模块",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "电磁装配台",
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "电磁射线",
-  "entity.magic_of_electromagnetic.plasma_entity": "等离子体",
+  "entity.magic_of_electromagnetic.pulsed_plasma_entity": "脉冲等离子体",
 
   "moe_no_magic": "无法术",
   "moe_ray": "射线法术",
-  "moe_plasma": "等离子法术",
+  "moe_pulsed_plasma": "脉冲等离子法术",
   "moe_assemble": "装配",
   "moe_tab": "电磁法则",
   "moe_show_energy": "能量:",
 
   "key.category.magic_of_electromagnetic.moe": "电磁法则",
-  "key.magic_of_electromagnetic.switch_magic": "选择魔法"
+  "key.magic_of_electromagnetic.switch_magic": "调整法术"
 }

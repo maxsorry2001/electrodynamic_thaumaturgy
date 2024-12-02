@@ -7,15 +7,15 @@ public class LcOscillatorModuleItem extends ElectromagneticTierItem {
         super(tier, properties);
     }
 
-    public float getBasicDamage(){
-        float damage;
+    public float getBasicAmount(){
+        float amount;
         switch (this.getTier()){
-            case IRON -> damage = 2.5F;
-            case GOLD -> damage = 5.0F;
-            case COPPER -> damage = 7.5F;
-            case NETHERITE -> damage = 10.0F;
-            default -> damage = 0F;
+            case IRON -> amount = 2.5F;
+            case GOLD -> amount = 5.0F;
+            case COPPER -> amount = 7.5F;
+            case NETHERITE -> amount = 10.0F;
+            default -> amount = 0F;
         }
-        return damage;
+        return amount;
     }
 }

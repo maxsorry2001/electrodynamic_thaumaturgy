@@ -17,4 +17,17 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     public boolean isEmpty(){
         return magicType == MoeMagicType.EMPTY;
     }
+
+    public String getTexture(){
+        String location;
+        switch (this.magicType){
+            case RAY -> location = "ray";
+            case PULSED_PLASMA -> location = "plasma";
+            case GLOWING -> location = "glowing";
+            case PROTECT -> location = "protect";
+            default -> location = "null";
+        }
+        location = location + "_module.png";
+        return location;
+    }
 }

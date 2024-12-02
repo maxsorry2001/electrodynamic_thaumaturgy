@@ -1,7 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PulsedPlasmaEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
@@ -31,6 +31,8 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import java.util.List;
 
 public class MagicUseItem extends Item {
+    private static final int maxMagicSlots = 8;
+    private static final int magicConfigSlots = 3;
     public MagicUseItem(Properties properties) {
         super(properties);
     }
@@ -51,7 +53,6 @@ public class MagicUseItem extends Item {
         if(livingEntity instanceof Player player){
             player.getCooldowns().addCooldown(stack.getItem(), 10);
         }
-
     }
 
     @Override
@@ -71,7 +72,7 @@ public class MagicUseItem extends Item {
                 if(result instanceof EntityHitResult){
                     Entity target = ((EntityHitResult) result).getEntity();
                     if(target instanceof LivingEntity)
-                        target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), getMagicDamage(stack) * 0.75F);
+                        target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), getMagicAmount(stack) * 0.75F);
                 }
             }
         }
@@ -86,12 +87,12 @@ public class MagicUseItem extends Item {
             player.startUsingItem(usedHand);
             return InteractionResultHolder.consume(itemStack);
         }
-        else if (type == MoeMagicType.PLASMA && energy > 600) {
-            PlasmaEntity plasmaEntity = new PlasmaEntity(player, level);
+        else if (type == MoeMagicType.PULSED_PLASMA && energy > 600) {
+            PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(player, level);
             itemStack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 600);
-            plasmaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 1.5F);
-            plasmaEntity.setPlasmaDamage(getMagicDamage(itemStack));
-            level.addFreshEntity(plasmaEntity);
+            pulsedPlasmaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 1.5F);
+            pulsedPlasmaEntity.setPlasmaDamage(getMagicAmount(itemStack));
+            level.addFreshEntity(pulsedPlasmaEntity);
             player.getCooldowns().addCooldown(itemStack.getItem(), 10);
             return InteractionResultHolder.consume(itemStack);
         }
@@ -101,18 +102,13 @@ public class MagicUseItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        Component typeLiteral;
-        switch (getType(stack)){
-            case RAY -> typeLiteral = Component.translatable("moe_ray");
-            case PLASMA -> typeLiteral = Component.translatable("moe_plasma");
-            case EMPTY -> typeLiteral = Component.translatable("moe_no_magic");
-            default -> typeLiteral = Component.translatable("moe_no_magic");
-        }
-        tooltipComponents.add(typeLiteral);
+        tooltipComponents.add(MoeMagicType.getTranslate(getType(stack)));
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
+        int k = stack.get(MoeDataComponentTypes.MAGIC_SLOT);
         if(i < j){
             tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+            tooltipComponents.add(Component.literal(Integer.toString(k)));
         }
     }
 
@@ -147,23 +143,23 @@ public class MagicUseItem extends Item {
         return result;
     }
 
-    private float getMagicDamage(ItemStack itemStack){
-        float result = getBaseDamage(itemStack) * getBasePower(itemStack);
+    private float getMagicAmount(ItemStack itemStack){
+        float result = getBaseAmount(itemStack) * getBasePower(itemStack);
         return result;
     }
-    private float getBaseDamage(ItemStack itemStack){
-        float damage = 0;
+    private float getBaseAmount(ItemStack itemStack){
+        float amount = 0;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
             ItemStack lcModule = contents.getStackInSlot(1);
             Item item = lcModule.getItem();
-            if(item instanceof LcOscillatorModuleItem) damage = ((LcOscillatorModuleItem) item).getBasicDamage();
+            if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
         }
-        return damage;
+        return amount;
     }
 
     private float getBasePower(ItemStack itemStack){
-        float power = 0;
+        float power = 1;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
             ItemStack powerModule = contents.getStackInSlot(2);
@@ -171,5 +167,13 @@ public class MagicUseItem extends Item {
             if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
         }
         return power;
+    }
+
+    public static int getMagicConfigSlots() {
+        return magicConfigSlots;
+    }
+
+    public static int getMaxMagicSlots() {
+        return maxMagicSlots;
     }
 }

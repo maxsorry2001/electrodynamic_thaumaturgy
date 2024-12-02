@@ -19,17 +19,17 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class PlasmaEntity extends AbstractArrow {
+public class PulsedPlasmaEntity extends AbstractArrow {
     private float plasmaDamage;
-    public PlasmaEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+    public PulsedPlasmaEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
 
-    public PlasmaEntity(Level pLevel) {
-        super(MoeEntities.PLASMA_ENTITY.get(), pLevel);
+    public PulsedPlasmaEntity(Level pLevel) {
+        super(MoeEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
     }
-    public PlasmaEntity(LivingEntity pOwner, Level pLevel) {
-        super(MoeEntities.PLASMA_ENTITY.get(), pLevel);
+    public PulsedPlasmaEntity(LivingEntity pOwner, Level pLevel) {
+        super(MoeEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
         this.setOwner(pOwner);
         this.setPos(pOwner.getX(), pOwner.getEyeY() - 0.1, pOwner.getZ());
     }

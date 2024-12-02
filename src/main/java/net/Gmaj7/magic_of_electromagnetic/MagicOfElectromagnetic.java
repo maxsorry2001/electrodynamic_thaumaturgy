@@ -4,7 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PlasmaEntityRender;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PulsedPlasmaEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
@@ -80,7 +80,7 @@ public class MagicOfElectromagnetic
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(MoeEntities.MOE_RAY_ENTITY.get(), MoeRayEntityRender::new);
-            EntityRenderers.register(MoeEntities.PLASMA_ENTITY.get(), PlasmaEntityRender::new);
+            EntityRenderers.register(MoeEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
         }
     }
 }

@@ -1,8 +1,12 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
@@ -32,13 +36,12 @@ public class MoeFunction {
 
     }
     public static RayHitResult getRayHitResult(Level level, Entity source, Vec3 start, Vec3 end, boolean checkForBlocks, float bbInflation) {
-        BlockHitResult blockHitResult = null;
+        BlockHitResult blockHitResult;
         if (checkForBlocks) {
             blockHitResult = level.clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, source));
             end = blockHitResult.getLocation();
         }
         AABB range = source.getBoundingBox().expandTowards(end.subtract(start));
-
         List<HitResult> hits = new ArrayList<>();
         List<? extends Entity> entities = level.getEntities(source, range);
         for (Entity target : entities) {
@@ -66,5 +69,20 @@ public class MoeFunction {
         public Vec3 getEnd() {
             return end;
         }
+    }
+
+    public static ItemContainerContents setEmpty(){
+        List<ItemStack> list = new ArrayList<>();
+        int n = MagicUseItem.getMagicConfigSlots();
+        for (int i = 0; i < MagicUseItem.getMaxMagicSlots(); i ++){
+            for (int j = 0; j < n; j++){
+                switch (j){
+                    case 0 -> list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+                    case 1 -> list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
+                    case 2 -> list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
+                }
+            }
+        }
+        return ItemContainerContents.fromItems(list);
     }
 }

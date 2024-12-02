@@ -2,16 +2,16 @@
   "item.magic_of_electromagnetic.electromagnetic_rod": "Electromagnetic Rod",
   "item.magic_of_electromagnetic.electromagnetic_book": "Electromagnetic Book",
   "item.magic_of_electromagnetic.ray_module": "Ray Shoot Module",
-  "item.magic_of_electromagnetic.plasma_module": "Plasma Shoot Module",
+  "item.magic_of_electromagnetic.pulsed_plasma_module": "Pulsed Plasma Module",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "Electromagnetic Ray",
-  "entity.magic_of_electromagnetic.plasma_entity": "Plasma",
+  "entity.magic_of_electromagnetic.pulsed_plasma_entity": "Pulsed Plasma",
 
   "moe_no_magic": "No magic",
   "moe_ray": "Ray",
-  "moe_plasma": "plasma",
+  "moe_pulsed_plasma": "pulsed plasma",
   "moe_assemble": "assemble",
   "moe_tab": "Magic of Electromagnetic",
   "moe_show_energy": "Energy:",

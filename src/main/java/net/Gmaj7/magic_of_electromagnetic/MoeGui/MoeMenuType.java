@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeGui;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeAssemblyTableMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;

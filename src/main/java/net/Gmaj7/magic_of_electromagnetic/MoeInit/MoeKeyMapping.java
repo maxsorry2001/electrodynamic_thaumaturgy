@@ -3,7 +3,6 @@ package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
-import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
 public class MoeKeyMapping {

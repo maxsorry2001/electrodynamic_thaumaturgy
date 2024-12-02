@@ -1,6 +1,7 @@
-package net.Gmaj7.magic_of_electromagnetic.MoeGui;
+package net.Gmaj7.magic_of_electromagnetic.MoeGui.screen;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeAssemblyTableMenu;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

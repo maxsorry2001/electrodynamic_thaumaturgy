@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -31,7 +32,7 @@ public class MoeTabs {
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get()));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get())));
                         output.accept(MoeItems.RAY_MODULE.get());
-                        output.accept(MoeItems.PLASMA_MODULE.get());
+                        output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());
@@ -52,20 +53,28 @@ public class MoeTabs {
 
     private static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
+        List<ItemStack> list = new ArrayList<>();
         if (item == MoeItems.ELECTROMAGNETIC_ROD.get()){
-            List<ItemStack> list = new ArrayList<>();
             list.add(0, new ItemStack(MoeItems.RAY_MODULE.get()));
             list.add(1, new ItemStack(MoeItems.NETHERITE_LC.get()));
             list.add(2,new ItemStack(MoeItems.NETHERITE_POWER.get()));
-            itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         }
         else {
-            List<ItemStack> list = new ArrayList<>();
-            list.add(0, new ItemStack(MoeItems.PLASMA_MODULE.get()));
+            list.add(0, new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
             list.add(1, new ItemStack(MoeItems.NETHERITE_LC.get()));
-            list.add(2,new ItemStack(MoeItems.NETHERITE_POWER.get()));
-            itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
+            list.add(2, new ItemStack(MoeItems.NETHERITE_POWER.get()));
         }
+        int n = MagicUseItem.getMagicConfigSlots();
+        for (int i = 1; i < MagicUseItem.getMaxMagicSlots(); i ++){
+            for (int j = 0; j < n; j++){
+                switch (j){
+                    case 0 -> list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+                    case 1 -> list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
+                    case 2 -> list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
+                }
+            }
+        }
+        itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         return itemStack;
     }
 }
