@@ -54,25 +54,16 @@ public class MoeTabs {
     private static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
         List<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(MoeItems.NETHERITE_POWER.get()));
+        list.add(new ItemStack(MoeItems.NETHERITE_LC.get()));
         if (item == MoeItems.ELECTROMAGNETIC_ROD.get()){
-            list.add(0, new ItemStack(MoeItems.RAY_MODULE.get()));
-            list.add(1, new ItemStack(MoeItems.NETHERITE_LC.get()));
-            list.add(2,new ItemStack(MoeItems.NETHERITE_POWER.get()));
+            list.add(new ItemStack(MoeItems.RAY_MODULE.get()));
         }
         else {
-            list.add(0, new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
-            list.add(1, new ItemStack(MoeItems.NETHERITE_LC.get()));
-            list.add(2, new ItemStack(MoeItems.NETHERITE_POWER.get()));
+            list.add(new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
         }
-        int n = MagicUseItem.getMagicConfigSlots();
-        for (int i = 1; i < MagicUseItem.getMaxMagicSlots(); i ++){
-            for (int j = 0; j < n; j++){
-                switch (j){
-                    case 0 -> list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
-                    case 1 -> list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-                    case 2 -> list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
-                }
-            }
+        for (int i = 3; i < MagicUseItem.getMaxMagicSlots(); i ++){
+                list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
         }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         return itemStack;
