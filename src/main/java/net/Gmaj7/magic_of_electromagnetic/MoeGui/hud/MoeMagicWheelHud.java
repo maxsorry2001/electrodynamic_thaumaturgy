@@ -17,7 +17,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class MoeMagicWheelHud implements LayeredDraw.Layer {
     public static MoeMagicWheelHud instance = new MoeMagicWheelHud();
-    private static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/select_hud.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/select_hud.png");
     public boolean active;
     private int selection;
     @Override
@@ -30,10 +30,13 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
         if(!active) return;
         Player player = Minecraft.getInstance().player;
         ItemStack stack = player.getMainHandItem();
-        if (player == null || Minecraft.getInstance().screen != null || Minecraft.getInstance().mouseHandler.isMouseGrabbed()) {
+        if (player == null || Minecraft.getInstance().screen != null || Minecraft.getInstance().mouseHandler.isMouseGrabbed()
+            ) {
             close();
             return;
         }
+        if(!(stack.getItem() instanceof MagicUseItem)) stack = player.getOffhandItem();
+        if(!((stack.getItem()) instanceof MagicUseItem)) return;
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY / 2;
         double alpha = - 0.4375 * Math.PI;

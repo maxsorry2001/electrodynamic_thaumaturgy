@@ -16,15 +16,15 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;
-        ItemStack mainHand = player.getMainHandItem();
+        ItemStack itemStack = player.getMainHandItem();
+        if (!(itemStack.getItem() instanceof MagicUseItem)) itemStack = player.getOffhandItem();
+        if (!(itemStack.getItem() instanceof MagicUseItem)) return;
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();
-        if (mainHand.getItem() instanceof MagicUseItem) {
-            ItemStack typeStack = mainHand.get(DataComponents.CONTAINER).getStackInSlot(mainHand.get(MoeDataComponentTypes.MAGIC_SLOT));
-            if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item){
-                if (item.getMagicType() != MoeMagicType.EMPTY && item.getMagicType() != MoeMagicType.ERROR){
-                    guiGraphics.renderFakeItem(typeStack, screenWidth / 5, screenHeight * 7 / 8);
-                }
+        ItemStack typeStack = itemStack.get(DataComponents.CONTAINER).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SLOT));
+        if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item){
+            if (item.getMagicType() != MoeMagicType.EMPTY && item.getMagicType() != MoeMagicType.ERROR){
+                    guiGraphics.renderFakeItem(typeStack, screenWidth / 6, screenHeight * 7 / 8);
             }
         }
     }

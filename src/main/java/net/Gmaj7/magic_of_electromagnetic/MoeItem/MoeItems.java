@@ -9,6 +9,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
+import net.Gmaj7.magic_of_electromagnetic.magic.electromagneticRay;
+import net.Gmaj7.magic_of_electromagnetic.magic.pulsedPlasma;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -24,15 +26,15 @@ public class MoeItems {
     public static final Supplier<BlockItem> ELECTROMAGNETIC_ASSEMBLY_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_assembly_table", MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
-            () -> new MoeMagicTypeModuleItem(MoeMagicType.RAY, new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new electromagneticRay(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PULSED_PLASMA_MODULE = MOE_ITEM.register("pulsed_plasma_module",
-            () -> new MoeMagicTypeModuleItem(MoeMagicType.PULSED_PLASMA, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protect_module",
-            () -> new MoeMagicTypeModuleItem(MoeMagicType.PROTECT, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> GLOWING_MODULE = MOE_ITEM.register("glowing_module",
-            () -> new MoeMagicTypeModuleItem(MoeMagicType.GLOWING, new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new pulsedPlasma(), new Item.Properties().stacksTo(1)));
+    //public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protect_module",
+    //        () -> new MoeMagicTypeModuleItem(MoeMagicType.PROTECT, new Item.Properties().stacksTo(1)));
+    //public static final Supplier<Item> GLOWING_MODULE = MOE_ITEM.register("glowing_module",
+    //        () -> new MoeMagicTypeModuleItem(MoeMagicType.GLOWING, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
-            () -> new MoeMagicTypeModuleItem(MoeMagicType.EMPTY, new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> IRON_LC = MOE_ITEM.register("iron_lc",
             () -> new LcOscillatorModuleItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));

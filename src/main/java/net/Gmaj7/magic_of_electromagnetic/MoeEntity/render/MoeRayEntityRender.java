@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class MoeRayEntityRender extends EntityRenderer<MoeRayEntity> {
     public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moe_ray_entity_model"), "main");
@@ -47,6 +48,7 @@ public class MoeRayEntityRender extends EntityRenderer<MoeRayEntity> {
     @Override
     public void render(MoeRayEntity p_entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
+        float lifetime = MoeRayEntity.time;
         float scalar = .25f;
         float length = 32 * scalar * scalar;
         float f = p_entity.tickCount + partialTick;
@@ -61,6 +63,8 @@ public class MoeRayEntityRender extends EntityRenderer<MoeRayEntity> {
             VertexConsumer consumer = bufferSource.getBuffer(RenderType.energySwirl(CORE, 0, 0));
             {
                 poseStack.pushPose();
+                float expansion = Mth.clampedLerp(1, 0, f / (lifetime - 8));
+                poseStack.scale(expansion, 1, expansion);
                 poseStack.mulPose(Axis.YP.rotationDegrees(f * -10));
                 this.body.render(poseStack, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, -1);
                 poseStack.popPose();

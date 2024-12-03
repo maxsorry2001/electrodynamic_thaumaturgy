@@ -28,4 +28,9 @@ public enum MoeMagicType {
         }
         return Component.translatable(translate);
     }
+
+    public static boolean isEmpty(MoeMagicType type){
+        if(type == EMPTY || type == ERROR) return true;
+        else return false;
+    }
 }

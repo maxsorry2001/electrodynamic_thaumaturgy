@@ -5,6 +5,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PulsedPlasmaEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -46,56 +47,20 @@ public class MagicUseItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 72000;
-    }
-
-    @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
-        super.releaseUsing(stack, level, livingEntity, timeCharged);
-        if(livingEntity instanceof Player player){
-            player.getCooldowns().addCooldown(stack.getItem(), 10);
-        }
-    }
-
-    @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        super.onUseTick(level, livingEntity, stack, remainingUseDuration);
-        int energy = stack.get(MoeDataComponentTypes.MOE_ENERGY.get());
-        if(energy < 100)
-            livingEntity.stopUsingItem();
-        else if(remainingUseDuration % 5 == 0){
-            Vec3 start = livingEntity.getEyePosition().subtract(0,0.25, 0);
-            Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
-            MoeFunction.RayHitResult hitResult = MoeFunction.getRayHitResult(level, livingEntity, start, end, true, 0.15F);
-            MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity);
-            level.addFreshEntity(moeRayEntity);
-            stack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 400);
-            for (HitResult result: hitResult.getTargets()){
-                if(result instanceof EntityHitResult){
-                    Entity target = ((EntityHitResult) result).getEntity();
-                    if(target instanceof LivingEntity)
-                        target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), getMagicAmount(stack) * 0.75F);
-                }
-            }
-        }
+        return 20;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
+        ItemStack typeStack = getMagic(itemStack);
         MoeMagicType type = getType(itemStack);
         int energy = itemStack.get(MoeDataComponentTypes.MOE_ENERGY.get());
-        if (type == MoeMagicType.RAY && energy > 20) {
-            player.startUsingItem(usedHand);
-            return InteractionResultHolder.consume(itemStack);
-        }
-        else if (type == MoeMagicType.PULSED_PLASMA && energy > 600) {
-            PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(player, level);
-            itemStack.set(MoeDataComponentTypes.MOE_ENERGY.get(), energy - 600);
-            pulsedPlasmaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 1.5F);
-            pulsedPlasmaEntity.setPlasmaDamage(getMagicAmount(itemStack));
-            level.addFreshEntity(pulsedPlasmaEntity);
-            player.getCooldowns().addCooldown(itemStack.getItem(), 10);
+        if(!MoeMagicType.isEmpty(type) && typeStack.getItem() instanceof MoeMagicTypeModuleItem item
+                && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(item)) {
+            item.cast(player, itemStack);
+            itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - item.getBaseEnergyCost());
+            player.getCooldowns().addCooldown(item, item.getBaseCooldown());
             return InteractionResultHolder.consume(itemStack);
         }
         else return InteractionResultHolder.fail(itemStack);
@@ -134,46 +99,30 @@ public class MagicUseItem extends Item {
 
     private MoeMagicType getType(ItemStack itemStack){
         MoeMagicType result = MoeMagicType.EMPTY;
+        ItemStack typeStack = getMagic(itemStack);
+        Item item = typeStack.getItem();
+        if(item instanceof MoeMagicTypeModuleItem) result = ((MoeMagicTypeModuleItem) item).getMagicType();
+        return result;
+    }
+
+    private ItemStack getMagic(ItemStack itemStack){
         if(itemStack.has(DataComponents.CONTAINER) && itemStack.has(MoeDataComponentTypes.MAGIC_SLOT)) {
             ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
             ItemStack typeStack = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SLOT));
-            Item item = typeStack.getItem();
-            if(item instanceof MoeMagicTypeModuleItem) result = ((MoeMagicTypeModuleItem) item).getMagicType();
+            return typeStack;
         }
-        return result;
-    }
-
-    private float getMagicAmount(ItemStack itemStack){
-        float result = getBaseAmount(itemStack) * getBasePower(itemStack);
-        return result;
-    }
-    private float getBaseAmount(ItemStack itemStack){
-        float amount = 0;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack lcModule = contents.getStackInSlot(lcNum);
-            Item item = lcModule.getItem();
-            if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
-        }
-        return amount;
-    }
-
-    private float getBasePower(ItemStack itemStack){
-        float power = 1;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack powerModule = contents.getStackInSlot(powerNum);
-            Item item = powerModule.getItem();
-            if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
-        }
-        return power;
-    }
-
-    public static int getMagicBaseSlots() {
-        return magicBaseSlots;
+        else return new ItemStack(MoeItems.EMPTY_MODULE.get());
     }
 
     public static int getMaxMagicSlots() {
         return maxMagicSlots;
+    }
+
+    public static int getPowerNum() {
+        return powerNum;
+    }
+
+    public static int getLcNum() {
+        return lcNum;
     }
 }
