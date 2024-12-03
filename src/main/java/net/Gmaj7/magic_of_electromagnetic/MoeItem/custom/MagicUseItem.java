@@ -31,8 +31,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import java.util.List;
 
 public class MagicUseItem extends Item {
-    private static final int maxMagicSlots = 8;
-    private static final int magicConfigSlots = 3;
+    private static final int maxMagicSlots = 10;
+    private static final int magicBaseSlots = 2;
+    private static final int powerNum = 0;
+    private static final int lcNum = 1;
     public MagicUseItem(Properties properties) {
         super(properties);
     }
@@ -105,10 +107,8 @@ public class MagicUseItem extends Item {
         tooltipComponents.add(MoeMagicType.getTranslate(getType(stack)));
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
-        int k = stack.get(MoeDataComponentTypes.MAGIC_SLOT);
         if(i < j){
             tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
-            tooltipComponents.add(Component.literal(Integer.toString(k)));
         }
     }
 
@@ -134,9 +134,9 @@ public class MagicUseItem extends Item {
 
     private MoeMagicType getType(ItemStack itemStack){
         MoeMagicType result = MoeMagicType.EMPTY;
-        if(itemStack.has(DataComponents.CONTAINER)) {
+        if(itemStack.has(DataComponents.CONTAINER) && itemStack.has(MoeDataComponentTypes.MAGIC_SLOT)) {
             ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-            ItemStack typeStack = contents.getStackInSlot(0);
+            ItemStack typeStack = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SLOT));
             Item item = typeStack.getItem();
             if(item instanceof MoeMagicTypeModuleItem) result = ((MoeMagicTypeModuleItem) item).getMagicType();
         }
@@ -151,7 +151,7 @@ public class MagicUseItem extends Item {
         float amount = 0;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack lcModule = contents.getStackInSlot(1);
+            ItemStack lcModule = contents.getStackInSlot(lcNum);
             Item item = lcModule.getItem();
             if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
         }
@@ -162,15 +162,15 @@ public class MagicUseItem extends Item {
         float power = 1;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack powerModule = contents.getStackInSlot(2);
+            ItemStack powerModule = contents.getStackInSlot(powerNum);
             Item item = powerModule.getItem();
             if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
         }
         return power;
     }
 
-    public static int getMagicConfigSlots() {
-        return magicConfigSlots;
+    public static int getMagicBaseSlots() {
+        return magicBaseSlots;
     }
 
     public static int getMaxMagicSlots() {

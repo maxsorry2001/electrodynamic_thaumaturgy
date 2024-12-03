@@ -73,15 +73,10 @@ public class MoeFunction {
 
     public static ItemContainerContents setEmpty(){
         List<ItemStack> list = new ArrayList<>();
-        int n = MagicUseItem.getMagicConfigSlots();
-        for (int i = 0; i < MagicUseItem.getMaxMagicSlots(); i ++){
-            for (int j = 0; j < n; j++){
-                switch (j){
-                    case 0 -> list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
-                    case 1 -> list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-                    case 2 -> list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
-                }
-            }
+        list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
+        list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
+        for (int i = 2; i < MagicUseItem.getMaxMagicSlots(); i ++){
+                list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
         }
         return ItemContainerContents.fromItems(list);
     }

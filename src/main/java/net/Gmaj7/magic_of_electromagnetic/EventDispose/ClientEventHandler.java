@@ -4,11 +4,14 @@ import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.hud.MoeMagicWheelHud;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.hud.MoeShowMagicHud;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeAssemblyTableScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyMapping;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyState;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,19 +44,28 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerKey(RegisterKeyMappingsEvent event){
-            event.register(MoeKeyMapping.SWITCH_MAGIC);
+            event.register(MoeKeyMapping.SELECT_MAGIC);
         }
 
         @SubscribeEvent
         public static void registerHud(RegisterGuiLayersEvent event){
             event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "type_show"), new MoeShowMagicHud());
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "magic_select"), MoeMagicWheelHud.instance);
         }
     }
 
     @EventBusSubscriber(modid = MagicOfElectromagnetic.MODID, value = Dist.CLIENT)
     public static class notBusEvent{
+        private static final MoeKeyState SELECT_MAGIC = new MoeKeyState(MoeKeyMapping.SELECT_MAGIC);
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event){
+            if(SELECT_MAGIC.wasPressed()){
+                if(Minecraft.getInstance().screen == null) MoeMagicWheelHud.instance.open();
+            }
+            if(SELECT_MAGIC.wasReleased()){
+                if(Minecraft.getInstance().screen == null && MoeMagicWheelHud.instance.active) MoeMagicWheelHud.instance.close();
+            }
+            SELECT_MAGIC.update();
         }
     }
 }
