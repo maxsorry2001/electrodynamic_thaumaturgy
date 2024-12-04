@@ -10,6 +10,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
 import net.Gmaj7.magic_of_electromagnetic.magic.electromagneticRay;
+import net.Gmaj7.magic_of_electromagnetic.magic.glowing;
 import net.Gmaj7.magic_of_electromagnetic.magic.pulsedPlasma;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
@@ -31,8 +32,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new pulsedPlasma(), new Item.Properties().stacksTo(1)));
     //public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protect_module",
     //        () -> new MoeMagicTypeModuleItem(MoeMagicType.PROTECT, new Item.Properties().stacksTo(1)));
-    //public static final Supplier<Item> GLOWING_MODULE = MOE_ITEM.register("glowing_module",
-    //        () -> new MoeMagicTypeModuleItem(MoeMagicType.GLOWING, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> GLOWING_MODULE = MOE_ITEM.register("glowing_module",
+            () -> new MoeMagicTypeModuleItem(new glowing(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 
