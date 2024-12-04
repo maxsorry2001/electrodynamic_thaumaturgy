@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "magic_of_electromagnetic:item/ray_module"
+    "layer0": "magic_of_electromagnetic:item/copper_lc"
   }
 }
