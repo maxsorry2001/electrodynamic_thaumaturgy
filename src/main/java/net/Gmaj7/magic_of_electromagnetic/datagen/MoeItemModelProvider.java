@@ -16,7 +16,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.EMPTY_MODULE.get());
         basicItem(MoeItems.RAY_MODULE.get());
         basicItem(MoeItems.PULSED_PLASMA_MODULE.get());
-        basicItem(MoeItems.GLOWING_MODULE.get());
+        basicItem(MoeItems.EXCITING_MODULE.get());
         basicItem(MoeItems.IRON_POWER.get());
         basicItem(MoeItems.GOLD_POWER.get());
         basicItem(MoeItems.COPPER_POWER.get());

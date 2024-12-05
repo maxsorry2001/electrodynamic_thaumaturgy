@@ -3,6 +3,20 @@
   "item.magic_of_electromagnetic.electromagnetic_book": "电磁导能书",
   "item.magic_of_electromagnetic.ray_module": "射线模块",
   "item.magic_of_electromagnetic.pulsed_plasma_module": "脉冲等离子模块",
+  "item.magic_of_electromagnetic.exciting_module": "激发模块",
+  "item.magic_of_electromagnetic.empty_module": "空模块",
+  "item.magic_of_electromagnetic.empty_lc": "空Lc",
+  "item.magic_of_electromagnetic.iron_lc": "铁制Lc",
+  "item.magic_of_electromagnetic.gold_lc": "金制Lc",
+  "item.magic_of_electromagnetic.copper_lc": "铜质Lc",
+  "item.magic_of_electromagnetic.netherite_lc": "下界合金Lc",
+  "item.magic_of_electromagnetic.empty_power": "空功放",
+  "item.magic_of_electromagnetic.iron_power": "铁制功率放大器",
+  "item.magic_of_electromagnetic.gold_power": "金制功率放大器",
+  "item.magic_of_electromagnetic.copper_power": "铜制功率放大器",
+  "item.magic_of_electromagnetic.netherite_power": "下界合金功率放大器",
+
+  "effect.magic_of_electromagnetic.exciting": "激发",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "电磁装配台",
 
@@ -11,6 +25,7 @@
 
   "moe_no_magic": "无法术",
   "moe_ray": "射线法术",
+  "moe_exciting": "激发法术",
   "moe_pulsed_plasma": "脉冲等离子法术",
   "moe_assemble": "装配",
   "moe_tab": "电磁法则",

@@ -15,8 +15,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class electromagneticRay implements IMoeMagic{
-    public electromagneticRay(){}
+public class ElectromagneticRay implements IMoeMagic{
+    public ElectromagneticRay(){}
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.RAY;

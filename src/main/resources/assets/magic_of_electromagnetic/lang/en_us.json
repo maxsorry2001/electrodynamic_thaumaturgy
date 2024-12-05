@@ -3,6 +3,20 @@
   "item.magic_of_electromagnetic.electromagnetic_book": "Electromagnetic Book",
   "item.magic_of_electromagnetic.ray_module": "Ray Shoot Module",
   "item.magic_of_electromagnetic.pulsed_plasma_module": "Pulsed Plasma Module",
+  "item.magic_of_electromagnetic.exciting_module": "Exciting Module",
+  "item.magic_of_electromagnetic.empty_module": "Empty Module",
+  "item.magic_of_electromagnetic.empty_lc": "Empty Lc",
+  "item.magic_of_electromagnetic.iron_lc": "Iron Lc",
+  "item.magic_of_electromagnetic.gold_lc": "Gold Lc",
+  "item.magic_of_electromagnetic.copper_lc": "Copper Lc",
+  "item.magic_of_electromagnetic.netherite_lc": "Netherite Lc",
+  "item.magic_of_electromagnetic.empty_power": "Empty Power",
+  "item.magic_of_electromagnetic.iron_power": "Iron Power",
+  "item.magic_of_electromagnetic.gold_power": "Gold Power",
+  "item.magic_of_electromagnetic.copper_power": "Copper Power",
+  "item.magic_of_electromagnetic.netherite_power": "Netherite Power",
+
+  "effect.magic_of_electromagnetic.exciting": "Exciting",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
 
@@ -11,6 +25,7 @@
 
   "moe_no_magic": "No magic",
   "moe_ray": "Ray",
+  "moe_exciting": "Exciting",
   "moe_pulsed_plasma": "pulsed plasma",
   "moe_assemble": "assemble",
   "moe_tab": "Magic of Electromagnetic",

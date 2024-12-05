@@ -6,8 +6,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-public class pulsedPlasma implements IMoeMagic{
-    public pulsedPlasma(){}
+public class PulsedPlasma implements IMoeMagic{
+    public PulsedPlasma(){}
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.PULSED_PLASMA;

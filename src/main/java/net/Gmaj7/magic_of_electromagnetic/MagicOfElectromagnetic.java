@@ -2,10 +2,12 @@ package net.Gmaj7.magic_of_electromagnetic;
 
 import com.mojang.logging.LogUtils;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
+import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PulsedPlasmaEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -49,6 +51,8 @@ public class MagicOfElectromagnetic
         MoeTabs.MOE_CREATIVE_TABS.register(modEventBus);
         MoeBlocks.MOE_BLOCKS.register(modEventBus);
         MoeItems.MOE_ITEM.register(modEventBus);
+        MoeAttachmentType.register(modEventBus);
+        MoeEffects.register(modEventBus);
         MoeEntities.register(modEventBus);
         MoeDataComponentTypes.register(modEventBus);
         MoeMenuType.register(modEventBus);

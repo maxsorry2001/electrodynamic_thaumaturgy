@@ -33,7 +33,7 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get())));
                         output.accept(MoeItems.RAY_MODULE.get());
                         output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
-                        output.accept(MoeItems.GLOWING_MODULE.get());
+                        output.accept(MoeItems.EXCITING_MODULE.get());
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());
