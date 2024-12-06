@@ -20,8 +20,8 @@ public class Exciting implements IMoeMagic{
     }
 
     @Override
-    public void cast(Player player, ItemStack itemStack) {
-        List<LivingEntity> list = player.level().getEntitiesOfClass(LivingEntity.class, new AABB(player.blockPosition()).inflate(20));
+    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+        List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, 200));

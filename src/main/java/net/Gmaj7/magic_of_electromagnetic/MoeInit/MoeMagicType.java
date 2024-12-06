@@ -22,7 +22,7 @@ public enum MoeMagicType {
             case PULSED_PLASMA -> translate = "moe_pulsed_plasma";
             case BALL_PLASMA -> translate = "moe_ball_plasma";
             case EXCITING -> translate = "moe_exciting";
-            case PROTECT -> translate = "moe_protect";
+            case PROTECT -> translate = "moe_protecting";
             case SHOCK -> translate = "moe_shock";
             default -> translate = "moe_no_magic";
         }

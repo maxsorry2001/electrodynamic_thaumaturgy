@@ -23,18 +23,18 @@ public class ElectromagneticRay implements IMoeMagic{
     }
 
     @Override
-    public void cast(Player player, ItemStack itemStack) {
-        Vec3 start = player.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = player.getLookAngle().normalize().scale(20).add(start);
-        Level level = player.level();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getRayHitResult(level, player, start, end, true, 0.15F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), player);
+    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+        Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
+        Level level = livingEntity.level();
+        MoeFunction.RayHitResult hitResult = MoeFunction.getRayHitResult(level, livingEntity, start, end, true, 0.15F);
+        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity);
         level.addFreshEntity(moeRayEntity);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity)
-                    target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), player), MoeFunction.getMagicAmount(itemStack) * 0.75F);
+                    target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
             }
         }
     }

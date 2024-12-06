@@ -14,6 +14,8 @@ public class MoeAttachmentType {
 
     public static final Supplier<AttachmentType<Float>> EXCITING_DAMAGE = MOE_ATTACHMENT_TYPE.register("exciting_damage",
             () -> AttachmentType.<Float>builder(() -> 1.0F).serialize(Codec.FLOAT).build());
+    public static final Supplier<AttachmentType<Float>> ELECTROMAGNETIC_PROTECT = MOE_ATTACHMENT_TYPE.register("electromagnetic_protect",
+            () -> AttachmentType.<Float>builder(() -> 1.0F).serialize(Codec.FLOAT).build());
 
     public static void register(IEventBus eventBus){MOE_ATTACHMENT_TYPE.register(eventBus);}
 }

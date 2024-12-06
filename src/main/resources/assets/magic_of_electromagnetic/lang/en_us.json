@@ -17,6 +17,7 @@
   "item.magic_of_electromagnetic.netherite_power": "Netherite Power",
 
   "effect.magic_of_electromagnetic.exciting": "Exciting",
+  "effect.magic_of_electromagnetic.protecting": "Magnetic Protection",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
 
@@ -26,8 +27,9 @@
   "moe_no_magic": "No magic",
   "moe_ray": "Ray",
   "moe_exciting": "Exciting",
-  "moe_pulsed_plasma": "pulsed plasma",
-  "moe_assemble": "assemble",
+  "moe_pulsed_plasma": "Pulsed Plasma",
+  "moe_protecting": "Magnetic Barrier",
+  "moe_assemble": "Assemble",
   "moe_tab": "Magic of Electromagnetic",
   "moe_show_energy": "Energy:",
 

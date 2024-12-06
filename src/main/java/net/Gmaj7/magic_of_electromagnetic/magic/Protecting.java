@@ -1,30 +1,29 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PulsedPlasmaEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-public class PulsedPlasma implements IMoeMagic{
-    public PulsedPlasma(){}
+public class Protecting implements IMoeMagic{
     @Override
     public MoeMagicType getType() {
-        return MoeMagicType.PULSED_PLASMA;
+        return MoeMagicType.PROTECT;
     }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(livingEntity, livingEntity.level());
-        pulsedPlasmaEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 5, 1.5F);
-        pulsedPlasmaEntity.setPlasmaDamage(MoeFunction.getMagicAmount(itemStack));
-        livingEntity.level().addFreshEntity(pulsedPlasmaEntity);
+        livingEntity.addEffect(new MobEffectInstance(MoeEffects.PROTECTING, 600));
+        livingEntity.setData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT, MoeFunction.getMagicAmount(itemStack));
     }
 
     @Override
     public int getBaseEnergyCost() {
-        return 600;
+        return 300;
     }
 
     @Override

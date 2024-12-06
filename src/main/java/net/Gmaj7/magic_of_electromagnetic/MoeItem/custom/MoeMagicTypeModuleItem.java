@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.Gmaj7.magic_of_electromagnetic.magic.IMoeMagic;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,8 +25,8 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
         return this.magic == null;
     }
 
-    public void cast(Player player, ItemStack itemStack){
-        this.magic.cast(player, itemStack);
+    public void cast(LivingEntity livingEntity, ItemStack itemStack){
+        this.magic.cast(livingEntity, itemStack);
     }
 
     public int getBaseEnergyCost(){

@@ -8,6 +8,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
+import net.Gmaj7.magic_of_electromagnetic.magic.Protecting;
 import net.Gmaj7.magic_of_electromagnetic.magic.PulsedPlasma;
 import net.Gmaj7.magic_of_electromagnetic.magic.ElectromagneticRay;
 import net.Gmaj7.magic_of_electromagnetic.magic.Exciting;
@@ -29,8 +30,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PULSED_PLASMA_MODULE = MOE_ITEM.register("pulsed_plasma_module",
             () -> new MoeMagicTypeModuleItem(new PulsedPlasma(), new Item.Properties().stacksTo(1)));
-    //public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protect_module",
-    //        () -> new MoeMagicTypeModuleItem(MoeMagicType.PROTECT, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protecting_module",
+            () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EXCITING_MODULE = MOE_ITEM.register("exciting_module",
             () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",

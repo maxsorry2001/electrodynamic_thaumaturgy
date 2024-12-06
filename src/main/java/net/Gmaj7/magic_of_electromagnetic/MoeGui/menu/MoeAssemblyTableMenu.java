@@ -50,10 +50,12 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
                 MoeAssemblyTableMenu.this.slotUpdateListener.run();
             }
         };
-        this.addSlot(new Slot(this.container, powerSlotNum, 70, 10));
-        this.addSlot(new Slot(this.container, lcSlotNum, 88, 10));
-        for (int i = typeSlotStartNum; i < typeSlotEndNum; i++)
-            this.addSlot(new Slot(this.container, i, 18 * i - 16, 40));
+        this.addSlot(new Slot(this.container, powerSlotNum, 70, 20));
+        this.addSlot(new Slot(this.container, lcSlotNum, 88, 20));
+        for (int i = typeSlotStartNum; i < typeSlotEndNum; i++) {
+            if(i < 6) this.addSlot(new Slot(this.container, i, 18 * i + 16, 40));
+            else this.addSlot(new Slot(this.container, i , 18 * i - 56, 58));
+        }
         this.addSlot(new Slot(this.container, toolSlotNum, 20, 10));
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -175,13 +177,6 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
-    }
-
-    private ElectromagneticTier checkTier(ItemStack itemStack){
-        ElectromagneticTier tier = ElectromagneticTier.NULL;
-        if(itemStack.isEmpty()) tier = ElectromagneticTier.EMPTY;
-        else if (itemStack.getItem() instanceof ElectromagneticTierItem) tier = ((ElectromagneticTierItem) itemStack.getItem()).getTier();
-        return tier;
     }
 
     public Slot getToolSlot(){
