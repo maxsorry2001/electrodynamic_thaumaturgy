@@ -2,7 +2,6 @@ package net.Gmaj7.magic_of_electromagnetic.MoeGui.menu;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.ElectromagneticTier;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
 import net.minecraft.core.component.DataComponents;

@@ -8,10 +8,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
-import net.Gmaj7.magic_of_electromagnetic.magic.Protecting;
-import net.Gmaj7.magic_of_electromagnetic.magic.PulsedPlasma;
-import net.Gmaj7.magic_of_electromagnetic.magic.ElectromagneticRay;
-import net.Gmaj7.magic_of_electromagnetic.magic.Exciting;
+import net.Gmaj7.magic_of_electromagnetic.magic.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -34,6 +31,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EXCITING_MODULE = MOE_ITEM.register("exciting_module",
             () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ELECTRIC_FIELD_DOMAIN_MODULE = MOE_ITEM.register("electric_field_domain_module",
+            () -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 

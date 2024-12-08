@@ -3,7 +3,6 @@ package net.Gmaj7.magic_of_electromagnetic.mixin;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Attackable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

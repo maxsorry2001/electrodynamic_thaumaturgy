@@ -35,6 +35,7 @@ public class MoeTabs {
                         output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
                         output.accept(MoeItems.EXCITING_MODULE.get());
                         output.accept(MoeItems.PROTECT_MODULE.get());
+                        output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());

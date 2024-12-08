@@ -21,5 +21,7 @@ public class EffectEvent {
             entity.removeData(MoeAttachmentType.EXCITING_DAMAGE);
         else if (effect == MoeEffects.PROTECTING && entity.hasData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT))
             entity.removeData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT);
+        else if (effect == MoeEffects.ELECTRIC_FIELD_DOMAIN && entity.hasData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE))
+            entity.removeData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE);
     }
 }

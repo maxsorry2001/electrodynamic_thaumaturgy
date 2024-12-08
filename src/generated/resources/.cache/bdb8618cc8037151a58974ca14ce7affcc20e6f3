@@ -1,6 +1,7 @@
-// 1.21.1	2024-12-06T11:12:13.8653299	Item Models: magic_of_electromagnetic
+// 1.21.1	2024-12-08T21:35:02.246364	Item Models: magic_of_electromagnetic
 09fca8f9cc560574c0a120c208f85f542c2793aa assets/magic_of_electromagnetic/models/item/copper_lc.json
 5af3068de3018c2085a5d963d4cd456b4d8875e8 assets/magic_of_electromagnetic/models/item/copper_power.json
+51ed3176340e4903af89f7142321cbc1a29c81c8 assets/magic_of_electromagnetic/models/item/electric_field_domain_module.json
 b8ca6f0dfd37b273ebc08a1293f784c49b1b0721 assets/magic_of_electromagnetic/models/item/electromagnetic_book.json
 0e823f1449ceb99c2958a083e6ecfe514f8603e9 assets/magic_of_electromagnetic/models/item/electromagnetic_rod.json
 141930fecf31ae50f2025cce08ddda9f026f6bbe assets/magic_of_electromagnetic/models/item/empty_lc.json

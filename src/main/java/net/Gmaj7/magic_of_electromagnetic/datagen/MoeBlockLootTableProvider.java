@@ -1,13 +1,10 @@
 package net.Gmaj7.magic_of_electromagnetic.datagen;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Set;

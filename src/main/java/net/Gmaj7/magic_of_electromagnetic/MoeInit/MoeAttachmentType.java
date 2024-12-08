@@ -16,6 +16,8 @@ public class MoeAttachmentType {
             () -> AttachmentType.<Float>builder(() -> 1.0F).serialize(Codec.FLOAT).build());
     public static final Supplier<AttachmentType<Float>> ELECTROMAGNETIC_PROTECT = MOE_ATTACHMENT_TYPE.register("electromagnetic_protect",
             () -> AttachmentType.<Float>builder(() -> 1.0F).serialize(Codec.FLOAT).build());
+    public static final Supplier<AttachmentType<Float>> ELECTRIC_FIELD_DOMAIN_DAMAGE = MOE_ATTACHMENT_TYPE.register("electric_field_domain_damage",
+            () -> AttachmentType.<Float>builder(() -> 1.0F).serialize(Codec.FLOAT).build());
 
     public static void register(IEventBus eventBus){MOE_ATTACHMENT_TYPE.register(eventBus);}
 }

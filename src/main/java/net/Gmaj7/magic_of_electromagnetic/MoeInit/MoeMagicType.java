@@ -6,6 +6,7 @@ public enum MoeMagicType {
     RAY,
     PULSED_PLASMA,
     BALL_PLASMA,
+    ELECTRIC_FIELD_DOMAIN,
     EXCITING,
     PROTECT,
     SHOCK,
@@ -21,6 +22,7 @@ public enum MoeMagicType {
             case RAY -> translate = "moe_ray";
             case PULSED_PLASMA -> translate = "moe_pulsed_plasma";
             case BALL_PLASMA -> translate = "moe_ball_plasma";
+            case ELECTRIC_FIELD_DOMAIN -> translate = "electric_field_domain";
             case EXCITING -> translate = "moe_exciting";
             case PROTECT -> translate = "moe_protecting";
             case SHOCK -> translate = "moe_shock";

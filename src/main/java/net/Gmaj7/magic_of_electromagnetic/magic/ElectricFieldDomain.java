@@ -8,21 +8,21 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class Protecting implements IMoeMagic{
+public class ElectricFieldDomain implements IMoeMagic{
     @Override
     public MoeMagicType getType() {
-        return MoeMagicType.PROTECT;
+        return MoeMagicType.ELECTRIC_FIELD_DOMAIN;
     }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        livingEntity.addEffect(new MobEffectInstance(MoeEffects.PROTECTING, 600));
-        livingEntity.setData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT, MoeFunction.getMagicAmount(itemStack));
+        livingEntity.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_FIELD_DOMAIN, 200));
+        livingEntity.setData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE, MoeFunction.getMagicAmount(itemStack) / 2);
     }
 
     @Override
     public int getBaseEnergyCost() {
-        return 300;
+        return 200;
     }
 
     @Override

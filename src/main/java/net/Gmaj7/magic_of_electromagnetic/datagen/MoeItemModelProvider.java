@@ -18,6 +18,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.PULSED_PLASMA_MODULE.get());
         basicItem(MoeItems.EXCITING_MODULE.get());
         basicItem(MoeItems.PROTECT_MODULE.get());
+        basicItem(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
         basicItem(MoeItems.IRON_POWER.get());
         basicItem(MoeItems.GOLD_POWER.get());
         basicItem(MoeItems.COPPER_POWER.get());

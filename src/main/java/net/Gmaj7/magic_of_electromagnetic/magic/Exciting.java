@@ -7,7 +7,6 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 
@@ -25,7 +24,7 @@ public class Exciting implements IMoeMagic{
         for (LivingEntity target : list){
             if(target instanceof Enemy) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, 200));
-                target.setData(MoeAttachmentType.EXCITING_DAMAGE, MoeFunction.getMagicAmount(itemStack) / 15);
+                target.setData(MoeAttachmentType.EXCITING_DAMAGE, MoeFunction.getMagicAmount(itemStack) / 10);
             }
         }
     }
