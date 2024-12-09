@@ -24,12 +24,12 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.IRON_POWER.get());
         basicItem(MoeItems.GOLD_POWER.get());
         basicItem(MoeItems.COPPER_POWER.get());
-        basicItem(MoeItems.NETHERITE_POWER.get());
+        basicItem(MoeItems.SUPERCONDUCTING_POWER.get());
         basicItem(MoeItems.EMPTY_POWER.get());
         basicItem(MoeItems.IRON_LC.get());
         basicItem(MoeItems.GOLD_LC.get());
         basicItem(MoeItems.COPPER_LC.get());
-        basicItem(MoeItems.NETHERITE_LC.get());
+        basicItem(MoeItems.SUPERCONDUCTING_LC.get());
         basicItem(MoeItems.EMPTY_LC.get());
         basicItem(MoeItems.FE_CU_SOLUTION_BATTERY.get());
         basicItem(MoeItems.FE_CU_CARROT_BATTERY.get());
@@ -37,6 +37,11 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.IRON_SHEET.get());
         basicItem(MoeItems.COPPER_SHEET.get());
         basicItem(MoeItems.ENERGY_CORE.get());
+        basicItem(MoeItems.CAPACITOR.get());
+        basicItem(MoeItems.INDUCTANCE.get());
+        basicItem(MoeItems.BJT.get());
+        basicItem(MoeItems.BOARD.get());
+        basicItem(MoeItems.SUPERCONDUCTING_UPDATE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

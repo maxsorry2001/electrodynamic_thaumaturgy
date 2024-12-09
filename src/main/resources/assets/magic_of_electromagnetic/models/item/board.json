@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "magic_of_electromagnetic:item/netherite_lc"
+    "layer0": "magic_of_electromagnetic:item/board"
   }
 }

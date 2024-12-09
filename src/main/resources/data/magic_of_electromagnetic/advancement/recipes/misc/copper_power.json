@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_power": {
+      "conditions": {
+        "items": [
+          {
+            "items": "magic_of_electromagnetic:gold_power"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "magic_of_electromagnetic:copper_power"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_power"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "magic_of_electromagnetic:copper_power"
+    ]
+  }
+}

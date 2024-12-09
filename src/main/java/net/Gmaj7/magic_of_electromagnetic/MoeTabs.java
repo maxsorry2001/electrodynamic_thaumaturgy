@@ -41,17 +41,22 @@ public class MoeTabs {
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());
-                        output.accept(MoeItems.NETHERITE_LC.get());
+                        output.accept(MoeItems.SUPERCONDUCTING_LC.get());
                         output.accept(MoeItems.IRON_POWER.get());
                         output.accept(MoeItems.GOLD_POWER.get());
                         output.accept(MoeItems.COPPER_POWER.get());
-                        output.accept(MoeItems.NETHERITE_POWER.get());
+                        output.accept(MoeItems.SUPERCONDUCTING_POWER.get());
                         output.accept(MoeItems.FE_CU_CARROT_BATTERY.get());
                         output.accept(MoeItems.FE_CU_POTATO_BATTERY.get());
                         output.accept(MoeItems.FE_CU_SOLUTION_BATTERY.get());
                         output.accept(MoeItems.ENERGY_CORE.get());
                         output.accept(MoeItems.IRON_SHEET.get());
                         output.accept(MoeItems.COPPER_SHEET.get());
+                        output.accept(MoeItems.CAPACITOR.get());
+                        output.accept(MoeItems.INDUCTANCE.get());
+                        output.accept(MoeItems.BJT.get());
+                        output.accept(MoeItems.BOARD.get());
+                        output.accept(MoeItems.SUPERCONDUCTING_UPDATE.get());
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());
                     }))
                     .build());
@@ -65,8 +70,8 @@ public class MoeTabs {
     private static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
         List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(MoeItems.NETHERITE_POWER.get()));
-        list.add(new ItemStack(MoeItems.NETHERITE_LC.get()));
+        list.add(new ItemStack(MoeItems.SUPERCONDUCTING_POWER.get()));
+        list.add(new ItemStack(MoeItems.SUPERCONDUCTING_LC.get()));
         if (item == MoeItems.ELECTROMAGNETIC_ROD.get()){
             list.add(new ItemStack(MoeItems.RAY_MODULE.get()));
         }

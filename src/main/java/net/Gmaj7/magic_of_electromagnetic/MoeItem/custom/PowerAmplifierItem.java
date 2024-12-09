@@ -13,7 +13,7 @@ public class PowerAmplifierItem extends ElectromagneticTierItem{
             case IRON -> result = 1.0F;
             case GOLD -> result = 1.5F;
             case COPPER -> result = 2.0F;
-            case NETHERITE -> result = 2.5F;
+            case SUPERCONDUCTING -> result = 2.5F;
             default -> result = 0F;
         }
         return result;

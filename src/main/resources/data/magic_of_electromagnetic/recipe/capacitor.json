@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:iron_sheet"
+    },
+    "b": {
+      "item": "magic_of_electromagnetic:copper_sheet"
+    }
+  },
+  "pattern": [
+    "   ",
+    "a a",
+    "b b"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:capacitor"
+  }
+}

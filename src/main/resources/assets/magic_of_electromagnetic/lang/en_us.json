@@ -11,18 +11,23 @@
   "item.magic_of_electromagnetic.iron_lc": "Iron Lc",
   "item.magic_of_electromagnetic.gold_lc": "Gold Lc",
   "item.magic_of_electromagnetic.copper_lc": "Copper Lc",
-  "item.magic_of_electromagnetic.netherite_lc": "Netherite Lc",
+  "item.magic_of_electromagnetic.superconducting_lc": "Superconducting Lc",
   "item.magic_of_electromagnetic.empty_power": "Empty Power",
   "item.magic_of_electromagnetic.iron_power": "Iron Power",
   "item.magic_of_electromagnetic.gold_power": "Gold Power",
   "item.magic_of_electromagnetic.copper_power": "Copper Power",
-  "item.magic_of_electromagnetic.netherite_power": "Netherite Power",
+  "item.magic_of_electromagnetic.superconducting_power": "Superconducting Power",
   "item.magic_of_electromagnetic.fe_cu_carrot_battery": "Fe_Cu carrot battery",
   "item.magic_of_electromagnetic.fe_cu_potato_battery": "Fe_Cu potato battery",
   "item.magic_of_electromagnetic.fe_cu_solution_battery": "Fe_Cu solution battery",
   "item.magic_of_electromagnetic.copper_sheet": "Copper sheet",
   "item.magic_of_electromagnetic.iron_sheet": "Iron sheet",
   "item.magic_of_electromagnetic.energy_core": "Energy Core",
+  "item.magic_of_electromagnetic.capacitor": "Capacitor",
+  "item.magic_of_electromagnetic.inductance": "Inductor",
+  "item.magic_of_electromagnetic.board": "Board",
+  "item.magic_of_electromagnetic.bjt": "Bipolar Junction Transistor",
+  "item.magic_of_electromagnetic.superconducting_update": "Superconducting Updating Tool",
 
   "effect.magic_of_electromagnetic.exciting": "Exciting",
   "effect.magic_of_electromagnetic.protecting": "Magnetic Protection",
@@ -46,6 +51,6 @@
   "moe_tab": "Magic of Electromagnetic",
   "moe_show_energy": "Energy:",
 
-  "key.category.magic_of_electromagnetic.moe": "Magic of Electromagnetic",
+  "key.category.magic_of_electromagnetic.moe": "The Rule of Electromagnetic Magic",
   "key.magic_of_electromagnetic.switch_magic": "Switch magic"
 }

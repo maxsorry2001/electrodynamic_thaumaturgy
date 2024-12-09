@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "magic_of_electromagnetic:item/netherite_power"
+    "layer0": "magic_of_electromagnetic:item/capacitor"
   }
 }

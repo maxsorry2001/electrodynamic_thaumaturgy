@@ -43,8 +43,8 @@ public class MoeItems {
             () -> new LcOscillatorModuleItem(ElectromagneticTier.GOLD, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COPPER_LC = MOE_ITEM.register("copper_lc",
             () -> new LcOscillatorModuleItem(ElectromagneticTier.COPPER, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> NETHERITE_LC = MOE_ITEM.register("netherite_lc",
-            () -> new LcOscillatorModuleItem(ElectromagneticTier.NETHERITE, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> SUPERCONDUCTING_LC = MOE_ITEM.register("superconducting_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.SUPERCONDUCTING, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_LC = MOE_ITEM.register("empty_lc",
             () -> new LcOscillatorModuleItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
 
@@ -54,14 +54,20 @@ public class MoeItems {
             () -> new PowerAmplifierItem(ElectromagneticTier.GOLD, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COPPER_POWER = MOE_ITEM.register("copper_power",
             () -> new PowerAmplifierItem(ElectromagneticTier.COPPER, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> NETHERITE_POWER = MOE_ITEM.register("netherite_power",
-            () -> new PowerAmplifierItem(ElectromagneticTier.NETHERITE, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> SUPERCONDUCTING_POWER = MOE_ITEM.register("superconducting_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.SUPERCONDUCTING, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_POWER = MOE_ITEM.register("empty_power",
             () -> new PowerAmplifierItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");
     public static final Supplier<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core", new Item.Properties().stacksTo(1));
+    public static final Supplier<Item> CAPACITOR = MOE_ITEM.registerSimpleItem("capacitor", new Item.Properties().stacksTo(1));
+    public static final Supplier<Item> INDUCTANCE = MOE_ITEM.registerSimpleItem("inductance", new Item.Properties().stacksTo(1));
+    public static final Supplier<Item> BOARD = MOE_ITEM.registerSimpleItem("board", new Item.Properties());
+    public static final Supplier<Item> BJT = MOE_ITEM.registerSimpleItem("bjt", new Item.Properties().stacksTo(1));
+    public static final Supplier<Item> SUPERCONDUCTING_UPDATE = MOE_ITEM.register("superconducting_update",
+            () -> new SuperconductingUpdateItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> FE_CU_POTATO_BATTERY = MOE_ITEM.register("fe_cu_potato_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
     public static final Supplier<Item> FE_CU_CARROT_BATTERY = MOE_ITEM.register("fe_cu_carrot_battery",
