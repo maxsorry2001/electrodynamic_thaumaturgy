@@ -19,6 +19,5 @@ public class MoeEffects {
             () -> new MoeEffect(MobEffectCategory.BENEFICIAL, 66322298));
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_FIELD_DOMAIN = MOE_EFFECTS.register("electric_field_domain",
             () -> new ElectricFieldDomainEffect(MobEffectCategory.BENEFICIAL, 66322298));
-
     public static void register(IEventBus eventBus){MOE_EFFECTS.register(eventBus);}
 }

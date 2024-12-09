@@ -36,6 +36,8 @@ public class MoeTabs {
                         output.accept(MoeItems.EXCITING_MODULE.get());
                         output.accept(MoeItems.PROTECT_MODULE.get());
                         output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
+                        output.accept(MoeItems.ATTRACT_MODULE.get());
+                        output.accept(MoeItems.CHAIN_MODULE.get());
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());
@@ -47,6 +49,7 @@ public class MoeTabs {
                         output.accept(MoeItems.FE_CU_CARROT_BATTERY.get());
                         output.accept(MoeItems.FE_CU_POTATO_BATTERY.get());
                         output.accept(MoeItems.FE_CU_SOLUTION_BATTERY.get());
+                        output.accept(MoeItems.ENERGY_CORE.get());
                         output.accept(MoeItems.IRON_SHEET.get());
                         output.accept(MoeItems.COPPER_SHEET.get());
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());

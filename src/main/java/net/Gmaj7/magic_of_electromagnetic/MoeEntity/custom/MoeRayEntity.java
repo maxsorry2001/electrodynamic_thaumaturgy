@@ -52,12 +52,12 @@ public class MoeRayEntity extends Entity implements IEntityWithComplexSpawn {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
-
+        this.distance = compoundTag.getFloat("moe_ray_time");
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
-
+        compoundTag.putFloat("moe_ray_time", this.distance);
     }
 
     @Override

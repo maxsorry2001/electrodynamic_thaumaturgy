@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "b": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    " a ",
+    "aba",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:energy_core"
+  }
+}

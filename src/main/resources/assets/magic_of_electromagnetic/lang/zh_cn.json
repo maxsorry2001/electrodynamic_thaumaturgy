@@ -8,10 +8,10 @@
   "item.magic_of_electromagnetic.electric_field_domain_module": "强电领域模块",
   "item.magic_of_electromagnetic.empty_module": "空模块",
   "item.magic_of_electromagnetic.empty_lc": "空Lc",
-  "item.magic_of_electromagnetic.iron_lc": "铁制Lc",
-  "item.magic_of_electromagnetic.gold_lc": "金制Lc",
-  "item.magic_of_electromagnetic.copper_lc": "铜质Lc",
-  "item.magic_of_electromagnetic.netherite_lc": "下界合金Lc",
+  "item.magic_of_electromagnetic.iron_lc": "铁制Lc振荡电路",
+  "item.magic_of_electromagnetic.gold_lc": "金制Lc振荡电路",
+  "item.magic_of_electromagnetic.copper_lc": "铜质Lc振荡电路",
+  "item.magic_of_electromagnetic.netherite_lc": "下界合金Lc振荡电路",
   "item.magic_of_electromagnetic.empty_power": "空功放",
   "item.magic_of_electromagnetic.iron_power": "铁制功率放大器",
   "item.magic_of_electromagnetic.gold_power": "金制功率放大器",
@@ -22,6 +22,7 @@
   "item.magic_of_electromagnetic.fe_cu_solution_battery": "铁—铜电极溶液电池",
   "item.magic_of_electromagnetic.copper_sheet": "铜片",
   "item.magic_of_electromagnetic.iron_sheet": "铁片",
+  "item.magic_of_electromagnetic.energy_core": "导能核心",
 
   "effect.magic_of_electromagnetic.exciting": "激发",
   "effect.magic_of_electromagnetic.protecting": "磁力保护",
@@ -36,10 +37,15 @@
   "moe_exciting": "激发法术",
   "moe_pulsed_plasma": "脉冲等离子法术",
   "moe_protecting": "磁力屏障法术",
+  "electric_field_domain": "强电领域",
+  "moe_chain": "连锁电流",
+  "moe_attract": "磁吸",
+
   "moe_assemble": "装配",
-  "moe_tab": "电磁法则",
+
+  "moe_tab": "电磁导魔法则",
   "moe_show_energy": "能量:",
 
-  "key.category.magic_of_electromagnetic.moe": "电磁法则",
+  "key.category.magic_of_electromagnetic.moe": "电磁导魔法则",
   "key.magic_of_electromagnetic.switch_magic": "调整法术"
 }

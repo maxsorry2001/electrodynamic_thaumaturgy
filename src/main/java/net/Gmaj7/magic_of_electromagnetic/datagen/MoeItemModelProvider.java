@@ -19,6 +19,8 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.EXCITING_MODULE.get());
         basicItem(MoeItems.PROTECT_MODULE.get());
         basicItem(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
+        basicItem(MoeItems.CHAIN_MODULE.get());
+        basicItem(MoeItems.ATTRACT_MODULE.get());
         basicItem(MoeItems.IRON_POWER.get());
         basicItem(MoeItems.GOLD_POWER.get());
         basicItem(MoeItems.COPPER_POWER.get());
@@ -34,6 +36,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.FE_CU_POTATO_BATTERY.get());
         basicItem(MoeItems.IRON_SHEET.get());
         basicItem(MoeItems.COPPER_SHEET.get());
+        basicItem(MoeItems.ENERGY_CORE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

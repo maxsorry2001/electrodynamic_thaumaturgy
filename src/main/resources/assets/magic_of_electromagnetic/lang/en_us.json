@@ -22,6 +22,7 @@
   "item.magic_of_electromagnetic.fe_cu_solution_battery": "Fe_Cu solution battery",
   "item.magic_of_electromagnetic.copper_sheet": "Copper sheet",
   "item.magic_of_electromagnetic.iron_sheet": "Iron sheet",
+  "item.magic_of_electromagnetic.energy_core": "Energy Core",
 
   "effect.magic_of_electromagnetic.exciting": "Exciting",
   "effect.magic_of_electromagnetic.protecting": "Magnetic Protection",
@@ -36,7 +37,12 @@
   "moe_exciting": "Exciting",
   "moe_pulsed_plasma": "Pulsed Plasma",
   "moe_protecting": "Magnetic Barrier",
+  "electric_field_domain": "Electric Field Domain",
+  "moe_chain": "Lighting Chain",
+  "moe_attract": "Attract",
+
   "moe_assemble": "Assemble",
+
   "moe_tab": "Magic of Electromagnetic",
   "moe_show_energy": "Energy:",
 

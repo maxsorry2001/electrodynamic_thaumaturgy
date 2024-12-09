@@ -4,12 +4,13 @@ import net.minecraft.network.chat.Component;
 
 public enum MoeMagicType {
     RAY,
+    ATTRACT,
     PULSED_PLASMA,
     BALL_PLASMA,
     ELECTRIC_FIELD_DOMAIN,
     EXCITING,
     PROTECT,
-    SHOCK,
+    CHAIN,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -20,12 +21,13 @@ public enum MoeMagicType {
         String translate;
         switch (type){
             case RAY -> translate = "moe_ray";
+            case ATTRACT -> translate = "moe_attract";
             case PULSED_PLASMA -> translate = "moe_pulsed_plasma";
             case BALL_PLASMA -> translate = "moe_ball_plasma";
             case ELECTRIC_FIELD_DOMAIN -> translate = "electric_field_domain";
             case EXCITING -> translate = "moe_exciting";
             case PROTECT -> translate = "moe_protecting";
-            case SHOCK -> translate = "moe_shock";
+            case CHAIN -> translate = "moe_chain";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

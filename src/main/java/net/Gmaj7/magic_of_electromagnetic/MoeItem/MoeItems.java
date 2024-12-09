@@ -30,6 +30,10 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTRIC_FIELD_DOMAIN_MODULE = MOE_ITEM.register("electric_field_domain_module",
             () -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ATTRACT_MODULE = MOE_ITEM.register("attract_module",
+            () -> new MoeMagicTypeModuleItem(new Attract(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> CHAIN_MODULE = MOE_ITEM.register("chain_module",
+            () -> new MoeMagicTypeModuleItem(new Chain(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 
@@ -57,6 +61,7 @@ public class MoeItems {
 
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");
+    public static final Supplier<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core", new Item.Properties().stacksTo(1));
     public static final Supplier<Item> FE_CU_POTATO_BATTERY = MOE_ITEM.register("fe_cu_potato_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
     public static final Supplier<Item> FE_CU_CARROT_BATTERY = MOE_ITEM.register("fe_cu_carrot_battery",
