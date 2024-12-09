@@ -4,10 +4,7 @@ import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.ElectromagneticTier;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
 import net.Gmaj7.magic_of_electromagnetic.magic.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
@@ -57,6 +54,15 @@ public class MoeItems {
             () -> new PowerAmplifierItem(ElectromagneticTier.NETHERITE, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_POWER = MOE_ITEM.register("empty_power",
             () -> new PowerAmplifierItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
+
+    public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
+    public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");
+    public static final Supplier<Item> FE_CU_POTATO_BATTERY = MOE_ITEM.register("fe_cu_potato_battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
+    public static final Supplier<Item> FE_CU_CARROT_BATTERY = MOE_ITEM.register("fe_cu_carrot_battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
+    public static final Supplier<Item> FE_CU_SOLUTION_BATTERY = MOE_ITEM.register("fe_cu_solution_battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
 
     public static final Supplier<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
             () -> new MagicUseItem(new Item.Properties().stacksTo(1)

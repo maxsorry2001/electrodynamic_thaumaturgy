@@ -41,7 +41,8 @@ public class MagicUseItem extends Item {
         MoeMagicType type = getType(itemStack);
         int energy = itemStack.get(MoeDataComponentTypes.MOE_ENERGY.get());
         if(!MoeMagicType.isEmpty(type) && typeStack.getItem() instanceof MoeMagicTypeModuleItem item
-                && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(item)) {
+                && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(item)
+                && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)) {
             item.cast(player, itemStack);
             itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - item.getBaseEnergyCost());
             player.getCooldowns().addCooldown(item, item.getBaseCooldown());

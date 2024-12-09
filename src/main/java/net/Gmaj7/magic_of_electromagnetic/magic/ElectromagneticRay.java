@@ -26,7 +26,7 @@ public class ElectromagneticRay implements IMoeMagic{
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         Level level = livingEntity.level();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getRayHitResult(level, livingEntity, start, end, true, 0.15F);
+        MoeFunction.RayHitResult hitResult = MoeFunction.getRayHitResult(level, livingEntity, start, end, true, 0.5F);
         MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity);
         level.addFreshEntity(moeRayEntity);
         for (HitResult result : hitResult.getTargets()) {

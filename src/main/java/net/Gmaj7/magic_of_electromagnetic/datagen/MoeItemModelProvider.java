@@ -29,6 +29,11 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.COPPER_LC.get());
         basicItem(MoeItems.NETHERITE_LC.get());
         basicItem(MoeItems.EMPTY_LC.get());
+        basicItem(MoeItems.FE_CU_SOLUTION_BATTERY.get());
+        basicItem(MoeItems.FE_CU_CARROT_BATTERY.get());
+        basicItem(MoeItems.FE_CU_POTATO_BATTERY.get());
+        basicItem(MoeItems.IRON_SHEET.get());
+        basicItem(MoeItems.COPPER_SHEET.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

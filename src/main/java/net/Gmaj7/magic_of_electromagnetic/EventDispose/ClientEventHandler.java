@@ -40,6 +40,10 @@ public class ClientEventHandler {
             event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
                     MoeItems.ELECTROMAGNETIC_ROD.get(),
                     MoeItems.ELECTROMAGNETIC_BOOK.get());
+            event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
+                    MoeItems.FE_CU_POTATO_BATTERY.get(),
+                    MoeItems.FE_CU_CARROT_BATTERY.get(),
+                    MoeItems.FE_CU_SOLUTION_BATTERY.get());
         }
 
         @SubscribeEvent

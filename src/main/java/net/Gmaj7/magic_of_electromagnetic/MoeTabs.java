@@ -44,6 +44,11 @@ public class MoeTabs {
                         output.accept(MoeItems.GOLD_POWER.get());
                         output.accept(MoeItems.COPPER_POWER.get());
                         output.accept(MoeItems.NETHERITE_POWER.get());
+                        output.accept(MoeItems.FE_CU_CARROT_BATTERY.get());
+                        output.accept(MoeItems.FE_CU_POTATO_BATTERY.get());
+                        output.accept(MoeItems.FE_CU_SOLUTION_BATTERY.get());
+                        output.accept(MoeItems.IRON_SHEET.get());
+                        output.accept(MoeItems.COPPER_SHEET.get());
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());
                     }))
                     .build());
