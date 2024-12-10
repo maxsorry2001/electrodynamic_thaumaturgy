@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:iron_sheet"
+    },
+    "b": {
+      "item": "minecraft:redstone"
+    },
+    "c": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    }
+  },
+  "pattern": [
+    "  c",
+    "abb",
+    "  c"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:electric_field_domain_module"
+  }
+}

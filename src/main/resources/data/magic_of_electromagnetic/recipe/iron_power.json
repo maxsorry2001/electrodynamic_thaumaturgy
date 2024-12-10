@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:bjt"
+    },
+    "b": {
+      "item": "magic_of_electromagnetic:board"
+    },
+    "d": {
+      "item": "minecraft:iron_ingot"
+    },
+    "e": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " a ",
+    "dbe",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:iron_power"
+  }
+}

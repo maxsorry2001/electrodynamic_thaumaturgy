@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:iron_sheet"
+    },
+    "b": {
+      "item": "minecraft:redstone"
+    },
+    "c": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    "   ",
+    "abc",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:exciting_module"
+  }
+}

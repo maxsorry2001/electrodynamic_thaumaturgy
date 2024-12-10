@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "magic_of_electromagnetic:gold_power"
+    },
+    "d": {
+      "item": "minecraft:copper_ingot"
+    },
+    "e": {
+      "item": "minecraft:end_rod"
+    }
+  },
+  "pattern": [
+    "   ",
+    "dbe",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:copper_power"
+  }
+}
