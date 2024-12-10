@@ -28,6 +28,6 @@ public class PulsedPlasma implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 20;
+        return 40;
     }
 }

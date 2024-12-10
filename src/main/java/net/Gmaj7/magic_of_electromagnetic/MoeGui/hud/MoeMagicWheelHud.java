@@ -45,6 +45,7 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
             ItemStack type = contents.getStackInSlot(i);
             if(type.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()){
                 guiGraphics.renderFakeItem(type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
+                guiGraphics.renderItemDecorations(Minecraft.getInstance().font, type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
             }
             alpha = alpha + 0.25 * Math.PI;
         }
