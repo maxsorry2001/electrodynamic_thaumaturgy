@@ -24,14 +24,16 @@ public class Chain implements IMoeMagic{
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = livingEntity.level().getNearestEntity(LivingEntity.class, TargetingConditions.forCombat(), livingEntity, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), livingEntity.getBoundingBox().inflate(6, 2, 6));
         if(target != null) {
+            float a = target.getHealth();
             target.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), MoeFunction.getMagicAmount(itemStack));
             addParticle(livingEntity, target);
-            if(target.getHealth() > MoeFunction.getMagicAmount(itemStack)) {
+            if(a > MoeFunction.getMagicAmount(itemStack)) {
                 List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
                 for (LivingEntity target1 : list) {
                     if (target1 == target || target1 == livingEntity) continue;
                     addParticle(target, target1);
-                    target1.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), MoeFunction.getMagicAmount(itemStack) / 5);
+                    float b = MoeFunction.getMagicAmount(itemStack) / 5;
+                    target1.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), b);
                 }
             }
         }
