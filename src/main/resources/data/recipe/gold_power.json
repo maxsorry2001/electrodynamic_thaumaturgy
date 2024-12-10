@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "magic_of_electromagnetic:iron_power"
+    },
+    "d": {
+      "item": "minecraft:gold_ingot"
+    },
+    "e": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "   ",
+    "dbe",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:gold_power"
+  }
+}

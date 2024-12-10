@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:capacitor"
+    },
+    "b": {
+      "item": "magic_of_electromagnetic:board"
+    },
+    "c": {
+      "item": "magic_of_electromagnetic:inductance"
+    },
+    "d": {
+      "item": "minecraft:iron_ingot"
+    },
+    "e": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " a ",
+    "dbe",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:iron_lc"
+  }
+}
