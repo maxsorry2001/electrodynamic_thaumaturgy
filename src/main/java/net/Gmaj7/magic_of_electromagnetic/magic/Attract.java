@@ -16,7 +16,7 @@ public class Attract implements IMoeMagic{
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         PlasmaArrowEntity plasmaArrowEntity = new PlasmaArrowEntity(livingEntity.level(), livingEntity);
         plasmaArrowEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 1.5F, 1.0F);
-        plasmaArrowEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack));
+        plasmaArrowEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
         livingEntity.level().addFreshEntity(plasmaArrowEntity);
     }
 
