@@ -2,7 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,7 +28,7 @@ public class MoeFunction {
         float amount = 0;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack lcModule = contents.getStackInSlot(MagicUseItem.getLcNum());
+            ItemStack lcModule = contents.getStackInSlot(MagicCastItem.getLcNum());
             Item item = lcModule.getItem();
             if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
         }
@@ -39,7 +39,7 @@ public class MoeFunction {
         float power = 1;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack powerModule = contents.getStackInSlot(MagicUseItem.getPowerNum());
+            ItemStack powerModule = contents.getStackInSlot(MagicCastItem.getPowerNum());
             Item item = powerModule.getItem();
             if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
         }
@@ -104,7 +104,7 @@ public class MoeFunction {
         List<ItemStack> list = new ArrayList<>();
         list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
         list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-        for (int i = 2; i < MagicUseItem.getMaxMagicSlots(); i ++){
+        for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i ++){
                 list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
         }
         return ItemContainerContents.fromItems(list);

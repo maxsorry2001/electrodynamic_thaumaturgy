@@ -146,6 +146,14 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.IRON_INGOT)
                 .define('d', Items.COPPER_INGOT)
                 .unlockedBy("has_redstone", has(Items.REDSTONE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get())
+                .pattern("  c")
+                .pattern("abc")
+                .pattern("  c")
+                .define('a', MoeItems.IRON_SHEET.get())
+                .define('b', Items.REDSTONE)
+                .define('c', Items.GLASS)
+                .unlockedBy("has_redstone", has(Items.REDSTONE)).save(recipeOutput);
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_LC.get())

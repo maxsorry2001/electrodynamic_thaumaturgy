@@ -21,6 +21,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
         basicItem(MoeItems.CHAIN_MODULE.get());
         basicItem(MoeItems.ATTRACT_MODULE.get());
+        basicItem(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
         basicItem(MoeItems.IRON_POWER.get());
         basicItem(MoeItems.GOLD_POWER.get());
         basicItem(MoeItems.COPPER_POWER.get());

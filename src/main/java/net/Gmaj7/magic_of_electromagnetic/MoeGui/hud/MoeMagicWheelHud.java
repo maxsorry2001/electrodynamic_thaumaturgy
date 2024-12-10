@@ -2,7 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeGui.hud;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeSelectMagicPacket;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -35,13 +35,13 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
             close();
             return;
         }
-        if(!(stack.getItem() instanceof MagicUseItem)) stack = player.getOffhandItem();
-        if(!((stack.getItem()) instanceof MagicUseItem)) return;
+        if(!(stack.getItem() instanceof MagicCastItem)) stack = player.getOffhandItem();
+        if(!((stack.getItem()) instanceof MagicCastItem)) return;
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY * 2 / 3;
         double alpha = - 0.375 * Math.PI;
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
-        for (int i = 2; i < MagicUseItem.getMaxMagicSlots(); i++){
+        for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
             ItemStack type = contents.getStackInSlot(i);
             if(type.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()){
                 guiGraphics.renderFakeItem(type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);

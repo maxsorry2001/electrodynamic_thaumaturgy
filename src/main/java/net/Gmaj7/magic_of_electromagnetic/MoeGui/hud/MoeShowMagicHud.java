@@ -2,7 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeGui.hud;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -17,8 +17,8 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;
         ItemStack itemStack = player.getMainHandItem();
-        if (!(itemStack.getItem() instanceof MagicUseItem)) itemStack = player.getOffhandItem();
-        if (!(itemStack.getItem() instanceof MagicUseItem)) return;
+        if (!(itemStack.getItem() instanceof MagicCastItem)) itemStack = player.getOffhandItem();
+        if (!(itemStack.getItem() instanceof MagicCastItem)) return;
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();
         ItemStack typeStack = itemStack.get(DataComponents.CONTAINER).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SLOT));

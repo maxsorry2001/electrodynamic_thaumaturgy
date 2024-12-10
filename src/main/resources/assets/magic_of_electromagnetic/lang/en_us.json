@@ -6,6 +6,9 @@
   "item.magic_of_electromagnetic.exciting_module": "Exciting Module",
   "item.magic_of_electromagnetic.protecting_module": "Protecting Module",
   "item.magic_of_electromagnetic.electric_field_domain_module": "Electric Field Domain Module",
+  "item.magic_of_electromagnetic.electric_energy_release_module": "Electric Energy Release Module",
+  "item.magic_of_electromagnetic.attract_module": "Attract Module",
+  "item.magic_of_electromagnetic.chain_module": "Lighting Chain Module",
   "item.magic_of_electromagnetic.empty_module": "Empty Module",
   "item.magic_of_electromagnetic.empty_lc": "Empty Lc",
   "item.magic_of_electromagnetic.iron_lc": "Iron Lc",
@@ -31,6 +34,8 @@
 
   "effect.magic_of_electromagnetic.exciting": "Exciting",
   "effect.magic_of_electromagnetic.protecting": "Magnetic Protection",
+  "effect.magic_of_electromagnetic.electric_energy_release" : "Electric Energy Release",
+  "effect.magic_of_electromagnetic.electric_field_domain" : "Electric Field Domain",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
 
@@ -45,6 +50,7 @@
   "electric_field_domain": "Electric Field Domain",
   "moe_chain": "Lighting Chain",
   "moe_attract": "Attract",
+  "moe_electric_energy_release": "Electric Energy release",
 
   "moe_assemble": "Assemble",
 

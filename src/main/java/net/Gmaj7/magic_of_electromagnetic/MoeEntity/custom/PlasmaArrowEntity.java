@@ -5,6 +5,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -40,8 +41,8 @@ public class PlasmaArrowEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if(++tickCount > liveTime && !this.level().isClientSide()) this.discard();
-        List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5));
-        for (LivingEntity target : list){
+        List<Entity> list = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(5));
+        for (Entity target : list){
             if (target == this.getOwner()) continue;
             Vec3 vec3 = new Vec3(this.getX() - target.getX(), this.getY() - target.getY(), this.getZ() - target.getZ());
             Vec3 vec31 = vec3.normalize().multiply(0.1, 0.1, 0.1);

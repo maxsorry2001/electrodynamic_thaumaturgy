@@ -2,7 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeGui.screen;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeAssemblyTableMenu;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -36,7 +36,7 @@ public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyT
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicUseItem) {
+        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
             double d0 = mouseX - this.width / 2 - this.imageWidth / 4;
             double d1 = mouseY - this.height / 2 + this.imageHeight / 3;
             if(d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20){

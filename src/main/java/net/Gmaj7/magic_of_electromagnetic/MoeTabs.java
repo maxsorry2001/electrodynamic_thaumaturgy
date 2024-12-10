@@ -2,7 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicUseItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -38,6 +38,7 @@ public class MoeTabs {
                         output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
                         output.accept(MoeItems.ATTRACT_MODULE.get());
                         output.accept(MoeItems.CHAIN_MODULE.get());
+                        output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());
@@ -78,7 +79,7 @@ public class MoeTabs {
         else {
             list.add(new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
         }
-        for (int i = 3; i < MagicUseItem.getMaxMagicSlots(); i ++){
+        for (int i = 3; i < MagicCastItem.getMaxMagicSlots(); i ++){
                 list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
         }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));

@@ -73,7 +73,7 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof  MagicUseItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
+            else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
                 return ItemStack.EMPTY;
             }else if (!this.slots.get(lcSlotNum).hasItem() && item instanceof LcOscillatorModuleItem && !this.moveItemStackTo(itemstack1, lcSlotNum, lcSlotNum + 1, false)){
                 return ItemStack.EMPTY;
@@ -131,7 +131,7 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
         ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
         ItemStack toolStack = toolSlot.copy();
         this.access.execute((level1, blockPos) -> {
-            if(toolStack.getItem() instanceof MagicUseItem) {
+            if(toolStack.getItem() instanceof MagicCastItem) {
                 ItemContainerContents contents = toolStack.get(DataComponents.CONTAINER);
                 List<ItemStack> newList = new ArrayList<>();
                 for (int i = powerSlotNum; i < typeSlotEndNum; i++){

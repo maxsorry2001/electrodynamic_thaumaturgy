@@ -20,12 +20,12 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.List;
 
-public class MagicUseItem extends Item {
+public class MagicCastItem extends Item {
     private static final int maxMagicSlots = 10;
     private static final int magicBaseSlots = 2;
     private static final int powerNum = 0;
     private static final int lcNum = 1;
-    public MagicUseItem(Properties properties) {
+    public MagicCastItem(Properties properties) {
         super(properties);
     }
 

@@ -7,6 +7,7 @@ public enum MoeMagicType {
     ATTRACT,
     PULSED_PLASMA,
     ELECTRIC_FIELD_DOMAIN,
+    ELECTRIC_ENERGY_RELEASE,
     EXCITING,
     PROTECT,
     CHAIN,
@@ -26,6 +27,7 @@ public enum MoeMagicType {
             case EXCITING -> translate = "moe_exciting";
             case PROTECT -> translate = "moe_protecting";
             case CHAIN -> translate = "moe_chain";
+            case ELECTRIC_ENERGY_RELEASE -> translate = "moe_electric_energy_release";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);
