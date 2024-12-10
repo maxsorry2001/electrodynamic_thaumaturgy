@@ -38,6 +38,6 @@ public class ElectricEnergyRelease implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 20;
+        return 80;
     }
 }

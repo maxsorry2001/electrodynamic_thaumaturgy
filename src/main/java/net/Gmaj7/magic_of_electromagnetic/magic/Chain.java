@@ -44,7 +44,7 @@ public class Chain implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 20;
+        return 80;
     }
 
     private void addParticle(LivingEntity livingEntityStart, LivingEntity livingEntityEnd){
