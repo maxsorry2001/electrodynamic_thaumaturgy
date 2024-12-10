@@ -41,6 +41,7 @@
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "电磁射线",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "脉冲等离子体",
+  "entity.magic_of_electromagnetic.plasma_arrow_entity": "磁吸矢",
 
   "moe_no_magic": "无法术",
   "moe_ray": "电磁射线",
