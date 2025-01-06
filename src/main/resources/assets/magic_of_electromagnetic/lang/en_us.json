@@ -41,7 +41,7 @@
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "Electromagnetic Ray",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "Pulsed Plasma",
-  "entity.magic_of_electromagnetic.plasma_arrow_entity": "Attract Arrow",
+  "entity.magic_of_electromagnetic.magnet_arrow_entity": "Attract Arrow",
 
   "moe_no_magic": "No magic",
   "moe_ray": "Ray",

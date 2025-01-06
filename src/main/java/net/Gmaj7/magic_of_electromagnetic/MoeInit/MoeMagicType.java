@@ -11,6 +11,9 @@ public enum MoeMagicType {
     EXCITING,
     PROTECT,
     CHAIN,
+    REFRACTION,
+    ELECTROMAGNETIC_FORCE_RAMP,
+    PLASMA_TORCH,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -28,6 +31,9 @@ public enum MoeMagicType {
             case PROTECT -> translate = "moe_protecting";
             case CHAIN -> translate = "moe_chain";
             case ELECTRIC_ENERGY_RELEASE -> translate = "moe_electric_energy_release";
+            case REFRACTION -> translate = "moe_refraction";
+            case ELECTROMAGNETIC_FORCE_RAMP -> translate = "moe_electromagnetic_force_ramp";
+            case PLASMA_TORCH -> translate = "plasma_torch";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

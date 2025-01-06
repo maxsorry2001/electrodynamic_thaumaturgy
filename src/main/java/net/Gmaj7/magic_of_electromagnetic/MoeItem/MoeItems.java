@@ -34,8 +34,14 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new Attract(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> CHAIN_MODULE = MOE_ITEM.register("chain_module",
             () -> new MoeMagicTypeModuleItem(new Chain(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> REFRACTION_MODULE = MOE_ITEM.register("refraction_module",
+            () -> new MoeMagicTypeModuleItem(new Refraction(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTRIC_ENERGY_RELEASE_MODULE = MOE_ITEM.register("electric_energy_release_module",
             () -> new MoeMagicTypeModuleItem(new ElectricEnergyRelease(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> FORCE_RAMP_MODULE = MOE_ITEM.register("force_ramp_module",
+            () -> new MoeMagicTypeModuleItem(new ElectromagneticForceRamp(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> PLASMA_TORCH_MODULE = MOE_ITEM.register("plasma_torch_module",
+            () -> new MoeMagicTypeModuleItem(new PlasmaTorch(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 

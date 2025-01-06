@@ -38,7 +38,10 @@ public class MoeTabs {
                         output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
                         output.accept(MoeItems.ATTRACT_MODULE.get());
                         output.accept(MoeItems.CHAIN_MODULE.get());
+                        output.accept(MoeItems.REFRACTION_MODULE.get());
                         output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
+                        output.accept(MoeItems.FORCE_RAMP_MODULE.get());
+                        output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());

@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -20,6 +21,7 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/select_hud.png");
     public boolean active;
     private int selection;
+    private InteractionHand useHand;
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         if (Minecraft.getInstance().options.hideGui || Minecraft.getInstance().player.isSpectator()) {
@@ -29,14 +31,12 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
         var screenHeight = guiGraphics.guiHeight();
         if(!active) return;
         Player player = Minecraft.getInstance().player;
-        ItemStack stack = player.getMainHandItem();
+        ItemStack stack = player.getItemInHand(useHand);
         if (player == null || Minecraft.getInstance().screen != null || Minecraft.getInstance().mouseHandler.isMouseGrabbed()
             ) {
             close();
             return;
         }
-        if(!(stack.getItem() instanceof MagicCastItem)) stack = player.getOffhandItem();
-        if(!((stack.getItem()) instanceof MagicCastItem)) return;
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY * 2 / 3;
         double alpha = - 0.375 * Math.PI;
@@ -53,8 +53,8 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
         guiGraphics.blit(TEXTURE, centerX - textureWidth / 2, centerY - textureHeight / 2, 0, 0, textureWidth, textureHeight);
         double mouseX = Minecraft.getInstance().mouseHandler.xpos(), mouseY = Minecraft.getInstance().mouseHandler.ypos();
         double screenCenterX = Minecraft.getInstance().getWindow().getScreenWidth() / 2F, screenCenterY = Minecraft.getInstance().getWindow().getScreenHeight() / 2F;
-        double Lx = mouseX - screenCenterX, Ly = mouseY - screenCenterY, l = Math.sqrt(Math.pow(Lx, 2) + Math.pow(Ly, 2));
-        double beta = Math.asin(Ly / l);
+        double Lx = mouseX - screenCenterX, Ly = mouseY - screenCenterY;
+        double beta = Math.asin(Ly / Math.sqrt(Math.pow(Lx, 2) + Math.pow(Ly, 2)));
         if(Lx < 0) beta = beta < 0 ? - Math.PI - beta : Math.PI - beta;
         if(beta >= - Math.PI && beta < - Math.PI * 0.75) selection = 8;
         else if (beta < - Math.PI * 0.5) selection = 9;
@@ -69,13 +69,14 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
     public void close(){
         active = false;
         if(selection > 1)
-            PacketDistributor.sendToServer(new MoeSelectMagicPacket(selection));
+            PacketDistributor.sendToServer(new MoeSelectMagicPacket(selection, useHand));
         Minecraft.getInstance().mouseHandler.grabMouse();
     }
 
-    public void open(){
+    public void open(InteractionHand hand){
         active = true;
         selection = 1;
+        useHand = hand;
         Minecraft.getInstance().mouseHandler.releaseMouse();
     }
 }

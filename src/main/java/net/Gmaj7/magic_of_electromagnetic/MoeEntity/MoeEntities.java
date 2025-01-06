@@ -2,7 +2,8 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaArrowEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MagnetArrowEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaTorchBeaconEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PulsedPlasmaEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
@@ -26,12 +27,18 @@ public class MoeEntities {
                     .sized(3F, 3F)
                     .clientTrackingRange(4)
                     .build("pulsed_plasma_entity"));
-    public static final Supplier<EntityType<PlasmaArrowEntity>> PLASMA_ARROW_ENTITY =
-            MOE_ENTITY_TYPES.register("plasma_arrow_entity", () -> EntityType.Builder.<PlasmaArrowEntity>of(PlasmaArrowEntity::new, MobCategory.MISC)
+    public static final Supplier<EntityType<MagnetArrowEntity>> MAGNET_ARROW_ENTITY =
+            MOE_ENTITY_TYPES.register("magnet_arrow_entity", () -> EntityType.Builder.<MagnetArrowEntity>of(MagnetArrowEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)
-                    .build("plasma_arrow_entity"));
+                    .build("magnet_arrow_entity"));
+    public static final Supplier<EntityType<PlasmaTorchBeaconEntity>> PLASMA_TORCH_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("plasma_torch_beacon_entity", () -> EntityType.Builder.<PlasmaTorchBeaconEntity>of(PlasmaTorchBeaconEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .eyeHeight(0.13F)
+                    .clientTrackingRange(4)
+                    .build("plasma_torch_beacon_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

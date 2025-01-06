@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,20 +19,20 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class PlasmaArrowEntity extends AbstractArrow {
+public class MagnetArrowEntity extends AbstractArrow {
     private int liveTime;
-    public PlasmaArrowEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+    public MagnetArrowEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public PlasmaArrowEntity(Level level){
-        super(MoeEntities.PLASMA_ARROW_ENTITY.get(), level);
+    public MagnetArrowEntity(Level level){
+        super(MoeEntities.MAGNET_ARROW_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public PlasmaArrowEntity(Level level, LivingEntity owner){
-        super(MoeEntities.PLASMA_ARROW_ENTITY.get(), level);
+    public MagnetArrowEntity(Level level, LivingEntity owner){
+        super(MoeEntities.MAGNET_ARROW_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.pickup = Pickup.DISALLOWED;
@@ -41,12 +42,19 @@ public class PlasmaArrowEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if(++tickCount > liveTime && !this.level().isClientSide()) this.discard();
-        List<Entity> list = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(5));
+        List<Entity> list = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(10));
         for (Entity target : list){
             if (target == this.getOwner()) continue;
             Vec3 vec3 = new Vec3(this.getX() - target.getX(), this.getY() - target.getY(), this.getZ() - target.getZ());
             Vec3 vec31 = vec3.normalize().multiply(0.1, 0.1, 0.1);
             target.move(MoverType.SELF, vec31);
+        }
+        if(this.level().isClientSide() && tickCount % 20 == 0){
+            for (int j = 1; j < 90; j++){
+                double theta = j * 2 *Math.PI / 90;
+                this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX() + 10 * Math.sin(theta), this.getY(), this.getZ() + 10 * Math.cos(theta), - Math.sin(theta), 0, - Math.cos(theta));
+                this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX() + 5 * Math.sin(theta), this.getY(), this.getZ() + 5 * Math.cos(theta), - Math.sin(theta), 0, - Math.cos(theta));
+            }
         }
     }
 

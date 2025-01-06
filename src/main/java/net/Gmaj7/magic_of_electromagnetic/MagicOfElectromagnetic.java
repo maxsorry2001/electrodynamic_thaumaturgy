@@ -5,7 +5,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PlasmaArrowRender;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MagnetArrowRender;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PlasmaTorchBeaconRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PulsedPlasmaEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
@@ -86,7 +87,8 @@ public class MagicOfElectromagnetic
         {
             EntityRenderers.register(MoeEntities.MOE_RAY_ENTITY.get(), MoeRayEntityRender::new);
             EntityRenderers.register(MoeEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
-            EntityRenderers.register(MoeEntities.PLASMA_ARROW_ENTITY.get(), PlasmaArrowRender::new);
+            EntityRenderers.register(MoeEntities.MAGNET_ARROW_ENTITY.get(), MagnetArrowRender::new);
+            EntityRenderers.register(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), PlasmaTorchBeaconRender::new);
         }
     }
 }

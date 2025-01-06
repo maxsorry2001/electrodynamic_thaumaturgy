@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -18,13 +19,19 @@ public class ElectricFieldDomainEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.getOnPos()).inflate(5));
+        List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.getOnPos()).inflate(10));
         for (LivingEntity target : list){
             if(target != livingEntity && target.walkAnimation.speed() > 0.01 && livingEntity.hasData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE) && target.onGround()) {
                 float num = livingEntity.getData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE);
-                float r = (float) Math.min(Math.abs(livingEntity.getX() - target.getX()), Math.abs(livingEntity.getZ() - target.getZ()));
-                r = Math.max(r, 1);
-                target.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), (float) (num / Math.pow(r, 2)));
+                float rr = (float) (Math.pow(target.getX() - livingEntity.getX(), 2) + Math.pow(target.getZ() - livingEntity.getZ(), 2));
+                rr = Math.max(rr, 1);
+                target.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), num / rr);
+            }
+        }
+        if(livingEntity.level().isClientSide()){
+            for (int j = 1; j < 90; j++){
+                double theta = j * 2 *Math.PI / 90;
+                livingEntity.level().addParticle(ParticleTypes.ELECTRIC_SPARK, livingEntity.getX() + 2 * Math.sin(theta), livingEntity.getY(), livingEntity.getZ() + 2 * Math.cos(theta), Math.sin(theta) * 10, 0, Math.cos(theta) * 10);
             }
         }
         return super.applyEffectTick(livingEntity, amplifier);

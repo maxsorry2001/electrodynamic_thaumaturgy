@@ -11,8 +11,10 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyMapping;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyState;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -64,7 +66,14 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event){
             if(SELECT_MAGIC.wasPressed()){
-                if(Minecraft.getInstance().screen == null) MoeMagicWheelHud.instance.open();
+                if(Minecraft.getInstance().screen == null) {
+                    for (InteractionHand hand : InteractionHand.values()){
+                        if(Minecraft.getInstance().player.getItemInHand(hand).getItem() instanceof MagicCastItem) {
+                            MoeMagicWheelHud.instance.open(hand);
+                            break;
+                        }
+                    }
+                }
             }
             if(SELECT_MAGIC.wasReleased()){
                 if(Minecraft.getInstance().screen == null && MoeMagicWheelHud.instance.active) MoeMagicWheelHud.instance.close();

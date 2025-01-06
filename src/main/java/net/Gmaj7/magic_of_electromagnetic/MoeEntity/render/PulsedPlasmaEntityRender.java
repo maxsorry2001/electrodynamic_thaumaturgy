@@ -31,7 +31,7 @@ public class PulsedPlasmaEntityRender extends EntityRenderer<PulsedPlasmaEntity>
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, p_entity.yRotO, p_entity.getYRot())));
         poseStack.mulPose(Axis.XN.rotationDegrees(Mth.lerp(partialTick, p_entity.xRotO, p_entity.getXRot())));
-        poseStack.scale(5F, 5F, 5F);
+        poseStack.scale(2.5F, 2.5F, 2.5F);
         VertexConsumer buffer = bufferSource.getBuffer(this.pulsedPlasmaEntityModel.renderType(this.getTextureLocation(p_entity)));
         this.pulsedPlasmaEntityModel.renderToBuffer(poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
