@@ -14,6 +14,7 @@ public enum MoeMagicType {
     REFRACTION,
     ELECTROMAGNETIC_FORCE_RAMP,
     PLASMA_TORCH,
+    ELECTROMAGNETIC_ASSAULT,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -34,6 +35,7 @@ public enum MoeMagicType {
             case REFRACTION -> translate = "moe_refraction";
             case ELECTROMAGNETIC_FORCE_RAMP -> translate = "moe_electromagnetic_force_ramp";
             case PLASMA_TORCH -> translate = "plasma_torch";
+            case ELECTROMAGNETIC_ASSAULT -> translate = "electromagnetic_assault";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

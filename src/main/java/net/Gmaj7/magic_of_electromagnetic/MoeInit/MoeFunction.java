@@ -64,7 +64,7 @@ public class MoeFunction {
             return BlockHitResult.miss(end, Direction.UP, BlockPos.containing(end));
 
     }
-    public static RayHitResult getRayHitResult(Level level, Entity source, Vec3 start, Vec3 end, boolean checkForBlocks, float bbInflation) {
+    public static RayHitResult getLineHitResult(Level level, Entity source, Vec3 start, Vec3 end, boolean checkForBlocks, float bbInflation) {
         BlockHitResult blockHitResult;
         if (checkForBlocks) {
             blockHitResult = level.clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, source));
