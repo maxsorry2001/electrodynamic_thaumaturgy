@@ -23,6 +23,7 @@ import java.util.List;
 public class MagicCastItem extends Item {
     private static final int maxMagicSlots = 10;
     private static final int magicBaseSlots = 2;
+    private static final int maxEnhancementSlots = 18;
     private static final int powerNum = 0;
     private static final int lcNum = 1;
     public MagicCastItem(Properties properties) {
@@ -109,5 +110,9 @@ public class MagicCastItem extends Item {
 
     public static int getLcNum() {
         return lcNum;
+    }
+
+    public static int getMaxEnhancementSlots() {
+        return maxEnhancementSlots;
     }
 }

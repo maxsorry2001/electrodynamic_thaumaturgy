@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -93,6 +94,21 @@ public class MoeFunction {
 
         public List<HitResult> getTargets() {
             return targets;
+        }
+
+        public HitResult getNearest(LivingEntity livingEntity){
+            HitResult nearest = null;
+            double distance = 0;
+            for (HitResult target : getTargets()){
+                if(nearest == null) {
+                    nearest = target;
+                    distance = target.distanceTo(livingEntity);
+                }
+                else {
+                    nearest =  target.distanceTo(livingEntity) < distance ? target : nearest;
+                }
+            }
+            return nearest;
         }
 
         public Vec3 getEnd() {

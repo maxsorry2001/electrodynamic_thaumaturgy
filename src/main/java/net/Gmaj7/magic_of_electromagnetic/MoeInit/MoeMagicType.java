@@ -15,6 +15,7 @@ public enum MoeMagicType {
     ELECTROMAGNETIC_FORCE_RAMP,
     PLASMA_TORCH,
     ELECTROMAGNETIC_ASSAULT,
+    ENTROPY_MAGNET_UPHEAVAL,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -36,6 +37,7 @@ public enum MoeMagicType {
             case ELECTROMAGNETIC_FORCE_RAMP -> translate = "moe_electromagnetic_force_ramp";
             case PLASMA_TORCH -> translate = "plasma_torch";
             case ELECTROMAGNETIC_ASSAULT -> translate = "electromagnetic_assault";
+            case ENTROPY_MAGNET_UPHEAVAL -> translate = "entropy_magnet_upheaval";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

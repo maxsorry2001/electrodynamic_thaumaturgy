@@ -3,6 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEffect;
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.ElectricFieldDomainEffect;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.ExcitingEffect;
+import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.LowEntropy;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -26,5 +27,8 @@ public class MoeEffects {
             () -> new MoeEffect(MobEffectCategory.BENEFICIAL, 66322298)
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.emspeed"), 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
                     .addAttributeModifier(Attributes.ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.easpeed"), 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> LOW_ENTROPY = MOE_EFFECTS.register("low_entropy",
+            () -> new LowEntropy(MobEffectCategory.HARMFUL, 0xFF)
+                    .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.lespeed"), -0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static void register(IEventBus eventBus){MOE_EFFECTS.register(eventBus);}
 }
