@@ -3,6 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeItem;
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.ElectromagneticTier;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
 import net.Gmaj7.magic_of_electromagnetic.magic.*;
@@ -71,6 +72,13 @@ public class MoeItems {
     public static final Supplier<Item> EMPTY_POWER = MOE_ITEM.register("empty_power",
             () -> new PowerAmplifierItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
 
+    public static final Supplier<Item> STRENGTH_ENHANCE = MOE_ITEM.register("strength_enhance",
+            () -> new EnhancementModuleItem(EnhancementType.STRENGTH, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> COOLDOWN_ENHANCE = MOE_ITEM.register("cooldown_enhance",
+            () -> new EnhancementModuleItem(EnhancementType.STRENGTH, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> EMPTY_ENHANCE = MOE_ITEM.register("empty_enhance",
+            () -> new EnhancementModuleItem(EnhancementType.EMPTY, new Item.Properties().stacksTo(1)));
+
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");
     public static final Supplier<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core", new Item.Properties().stacksTo(1));
@@ -91,10 +99,10 @@ public class MoeItems {
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
                     .component(DataComponents.CONTAINER, setEmpty())
-                    .component(MoeDataComponentTypes.MAGIC_SLOT.get(), 2)));
+                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)));
     public static final Supplier<Item> ELECTROMAGNETIC_BOOK = MOE_ITEM.register("electromagnetic_book",
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
                     .component(DataComponents.CONTAINER, setEmpty())
-                    .component(MoeDataComponentTypes.MAGIC_SLOT.get(), 2)));
+                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)));
 }

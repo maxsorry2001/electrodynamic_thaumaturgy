@@ -23,7 +23,7 @@ import java.util.List;
 public class MagicCastItem extends Item {
     private static final int maxMagicSlots = 10;
     private static final int magicBaseSlots = 2;
-    private static final int maxEnhancementSlots = 18;
+    private static final int maxEnhancementSlots = 14;
     private static final int powerNum = 0;
     private static final int lcNum = 1;
     public MagicCastItem(Properties properties) {
@@ -92,9 +92,9 @@ public class MagicCastItem extends Item {
     }
 
     private ItemStack getMagic(ItemStack itemStack){
-        if(itemStack.has(DataComponents.CONTAINER) && itemStack.has(MoeDataComponentTypes.MAGIC_SLOT)) {
+        if(itemStack.has(DataComponents.CONTAINER) && itemStack.has(MoeDataComponentTypes.MAGIC_SELECT)) {
             ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-            ItemStack typeStack = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SLOT));
+            ItemStack typeStack = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
             return typeStack;
         }
         else return new ItemStack(MoeItems.EMPTY_MODULE.get());

@@ -44,6 +44,10 @@ public class MoeTabs {
                         output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
                         output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
                         output.accept(MoeItems.ENTROPY_MAGNET_UPHEAVAL_MODULE.get());
+
+                        output.accept(MoeItems.COOLDOWN_ENHANCE.get());
+                        output.accept(MoeItems.STRENGTH_ENHANCE.get());
+
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
                         output.accept(MoeItems.COPPER_LC.get());
@@ -84,8 +88,12 @@ public class MoeTabs {
         else {
             list.add(new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
         }
-        for (int i = 3; i < MagicCastItem.getMaxMagicSlots(); i ++){
-                list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+        int i = 3;
+        for ( ; i < MagicCastItem.getMaxMagicSlots(); i ++){
+            list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+        }
+        for ( ; i < MagicCastItem.getMaxEnhancementSlots(); i ++){
+            list.add(new ItemStack(MoeItems.EMPTY_ENHANCE.get()));
         }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         return itemStack;

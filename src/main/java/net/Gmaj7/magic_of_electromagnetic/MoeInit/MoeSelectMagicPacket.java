@@ -36,7 +36,7 @@ public class MoeSelectMagicPacket implements CustomPacketPayload {
         context.enqueueWork(() -> {
             if(context.player() instanceof ServerPlayer serverPlayer){
                 ItemStack itemInHand = serverPlayer.getItemInHand(packet.hand);
-                itemInHand.set(MoeDataComponentTypes.MAGIC_SLOT, packet.magicSelect);
+                itemInHand.set(MoeDataComponentTypes.MAGIC_SELECT, packet.magicSelect);
             }
         });
     }

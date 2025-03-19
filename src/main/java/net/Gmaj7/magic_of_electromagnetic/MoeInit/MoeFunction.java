@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.EnhancementModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
@@ -46,6 +47,29 @@ public class MoeFunction {
         }
         return power;
     }
+
+    public static float getStrengthEnhancement(ItemStack itemStack){
+        float strength = 1;
+        if(itemStack.has(DataComponents.CONTAINER)){
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            for (int i = MagicCastItem.getMaxMagicSlots(); i < MagicCastItem.getMaxEnhancementSlots(); i++){
+                strength = strength + EnhancementModuleItem.checkStrength(contents.getStackInSlot(i));
+            }
+        }
+        return strength;
+    }
+
+    public static float getCooldownEnhancement(ItemStack itemStack){
+        float cooldown = 1;
+        if(itemStack.has(DataComponents.CONTAINER)){
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            for (int i = MagicCastItem.getMaxMagicSlots(); i < MagicCastItem.getMaxEnhancementSlots(); i++){
+                cooldown = cooldown + EnhancementModuleItem.checkCooldown(contents.getStackInSlot(i));
+            }
+        }
+        return cooldown;
+    }
+
     public static HitResult checkEntityIntersecting(Entity entity, Vec3 start, Vec3 end, float bbInflation) {
         Vec3 hitPos = null;
         if (entity.isMultipartEntity()) {
@@ -120,8 +144,9 @@ public class MoeFunction {
         List<ItemStack> list = new ArrayList<>();
         list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
         list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-        for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i ++){
-                list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+        for (int i = 2; i < MagicCastItem.getMaxEnhancementSlots(); i ++){
+            if(i < MagicCastItem.getMaxMagicSlots()) list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+            else list.add(new ItemStack(MoeItems.EMPTY_ENHANCE.get()));
         }
         return ItemContainerContents.fromItems(list);
     }
