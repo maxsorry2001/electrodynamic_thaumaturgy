@@ -92,9 +92,6 @@ public class MoeTabs {
         for ( ; i < MagicCastItem.getMaxMagicSlots(); i ++){
             list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
         }
-        for ( ; i < MagicCastItem.getMaxEnhancementSlots(); i ++){
-            list.add(new ItemStack(MoeItems.EMPTY_ENHANCE.get()));
-        }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         return itemStack;
     }

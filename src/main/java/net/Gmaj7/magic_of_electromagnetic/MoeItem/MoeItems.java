@@ -3,6 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeItem;
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.ElectromagneticTier;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
@@ -22,33 +23,47 @@ public class MoeItems {
     public static final Supplier<BlockItem> ELECTROMAGNETIC_ASSEMBLY_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_assembly_table", MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
-            () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> PULSED_PLASMA_MODULE = MOE_ITEM.register("pulsed_plasma_module",
-            () -> new MoeMagicTypeModuleItem(new PulsedPlasma(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new PulsedPlasma(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protecting_module",
-            () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> EXCITING_MODULE = MOE_ITEM.register("exciting_module",
-            () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> ELECTRIC_FIELD_DOMAIN_MODULE = MOE_ITEM.register("electric_field_domain_module",
-            () -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> ATTRACT_MODULE = MOE_ITEM.register("attract_module",
-            () -> new MoeMagicTypeModuleItem(new Attract(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new Attract(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> CHAIN_MODULE = MOE_ITEM.register("chain_module",
-            () -> new MoeMagicTypeModuleItem(new Chain(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new Chain(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> REFRACTION_MODULE = MOE_ITEM.register("refraction_module",
-            () -> new MoeMagicTypeModuleItem(new Refraction(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new Refraction(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> ELECTRIC_ENERGY_RELEASE_MODULE = MOE_ITEM.register("electric_energy_release_module",
-            () -> new MoeMagicTypeModuleItem(new ElectricEnergyRelease(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new ElectricEnergyRelease(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> FORCE_RAMP_MODULE = MOE_ITEM.register("force_ramp_module",
-            () -> new MoeMagicTypeModuleItem(new ElectromagneticForceRamp(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new ElectromagneticForceRamp(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> PLASMA_TORCH_MODULE = MOE_ITEM.register("plasma_torch_module",
-            () -> new MoeMagicTypeModuleItem(new PlasmaTorch(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new PlasmaTorch(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> ELECTROMAGNETIC_ASSAULT_MODULE = MOE_ITEM.register("electromagnetic_assault_module",
-            () -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> ENTROPY_MAGNET_UPHEAVAL_MODULE = MOE_ITEM.register("entropy_magnet_upheaval_module",
-            () -> new MoeMagicTypeModuleItem(new EntropyMagnetUpheaval(), new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(new EntropyMagnetUpheaval(), new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
-            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(1F, 1F))));
 
     public static final Supplier<Item> IRON_LC = MOE_ITEM.register("iron_lc",
             () -> new LcOscillatorModuleItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));
