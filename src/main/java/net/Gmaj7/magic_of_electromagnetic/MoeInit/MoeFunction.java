@@ -58,6 +58,28 @@ public class MoeFunction {
         return strengthRate;
     }
 
+    public static float getCoolDownRate(ItemStack itemStack){
+        float rate = 1;
+        if(itemStack.has(DataComponents.CONTAINER)){
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            ItemStack typeModule = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
+            EnhancementData enhancementData = typeModule.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+            rate = enhancementData.coolDown();
+        }
+        return rate;
+    }
+
+    public static float getEfficiency(ItemStack itemStack){
+        float efficiency = 1;
+        if(itemStack.has(DataComponents.CONTAINER)){
+            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+            ItemStack typeModule = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
+            EnhancementData enhancementData = typeModule.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+            efficiency = enhancementData.efficiency();
+        }
+        return efficiency;
+    }
+
     public static HitResult checkEntityIntersecting(Entity entity, Vec3 start, Vec3 end, float bbInflation) {
         Vec3 hitPos = null;
         if (entity.isMultipartEntity()) {

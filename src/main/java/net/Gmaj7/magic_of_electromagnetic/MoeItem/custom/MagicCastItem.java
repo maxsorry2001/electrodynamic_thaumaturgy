@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.minecraft.core.component.DataComponents;
@@ -44,8 +45,8 @@ public class MagicCastItem extends Item {
                 && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(item)
                 && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)) {
             item.cast(player, itemStack);
-            itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - item.getBaseEnergyCost());
-            player.getCooldowns().addCooldown(item, item.getBaseCooldown());
+            itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - (int)(item.getBaseEnergyCost() * MoeFunction.getEfficiency(itemStack)));
+            player.getCooldowns().addCooldown(item, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
             return InteractionResultHolder.consume(itemStack);
         }
         else return InteractionResultHolder.fail(itemStack);

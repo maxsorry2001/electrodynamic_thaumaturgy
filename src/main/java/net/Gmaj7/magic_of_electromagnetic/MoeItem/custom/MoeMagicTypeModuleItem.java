@@ -45,6 +45,8 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         EnhancementData enhancementData = stack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
         tooltipComponents.add(Component.literal(Float.toString(enhancementData.strength())).append("strength"));
+        tooltipComponents.add(Component.literal(Float.toString(enhancementData.coolDown())).append("cooldown"));
+        tooltipComponents.add(Component.literal(Float.toString(enhancementData.efficiency())).append("efficiency"));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }
