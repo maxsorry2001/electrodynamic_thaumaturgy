@@ -43,6 +43,7 @@
   "effect.magic_of_electromagnetic.electric_field_domain" : "Electric Field Domain",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
+  "block.magic_of_electromagnetic.electromagnetic_modem_table": "Enhancement Modem Table",
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "Electromagnetic Ray",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "Pulsed Plasma",

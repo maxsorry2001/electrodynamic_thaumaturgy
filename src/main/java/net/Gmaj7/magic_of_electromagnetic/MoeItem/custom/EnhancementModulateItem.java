@@ -32,24 +32,14 @@ public class EnhancementModulateItem extends Item{
         return num;
     }
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        if(usedHand == InteractionHand.MAIN_HAND){
-            ItemStack mainHand = player.getMainHandItem();
-            ItemStack offHand = player.getOffhandItem();
-            if(mainHand.getItem() instanceof EnhancementModulateItem && offHand.getItem() instanceof MoeMagicTypeModuleItem){
-                EnhancementData enhancementData = offHand.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-                switch (((EnhancementModulateItem) mainHand.getItem()).getEnhancementType()){
-                    case STRENGTH -> offHand.set(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(enhancementData.strength() + getEnhancementNum(), enhancementData.coolDown(), enhancementData.efficiency()));
-                    case COOLDOWN -> offHand.set(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(enhancementData.strength(), Math.max(enhancementData.coolDown() - getEnhancementNum(), 0.1F), enhancementData.efficiency()));
-                    case EFFICIENCY -> offHand.set(MoeDataComponentTypes.ENHANCEMENT_DATA, new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), Math.max(enhancementData.efficiency() - getEnhancementNum(), 0.1F)));
-                    default -> {}
-                }
-                player.swing(InteractionHand.MAIN_HAND);
-                return InteractionResultHolder.success(mainHand);
-            }
-            else return InteractionResultHolder.fail(mainHand);
+    public EnhancementData modemEnhancementData(EnhancementData enhancementData) {
+        EnhancementData newEnhancementData;
+        switch (enhancementType){
+            case STRENGTH -> newEnhancementData = new EnhancementData(enhancementData.strength() + getEnhancementNum(), enhancementData.coolDown(), enhancementData.efficiency());
+            case COOLDOWN -> newEnhancementData = new EnhancementData(enhancementData.strength(), Math.max(enhancementData.coolDown() - getEnhancementNum(), 0.1F), enhancementData.efficiency());
+            case EFFICIENCY -> newEnhancementData = new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), Math.max(enhancementData.efficiency() - getEnhancementNum(), 0.1F));
+            default -> {newEnhancementData = EnhancementData.defaultData;}
         }
-        return InteractionResultHolder.consume(player.getItemInHand(usedHand));
+        return newEnhancementData;
     }
 }

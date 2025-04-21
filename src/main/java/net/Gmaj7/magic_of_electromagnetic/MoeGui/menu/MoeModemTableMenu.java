@@ -2,10 +2,11 @@ package net.Gmaj7.magic_of_electromagnetic.MoeGui.menu;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,23 +22,21 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoeAssemblyTableMenu extends AbstractContainerMenu {
+public class MoeModemTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     private final ContainerLevelAccess access;
-    private final int toolSlotNum = 10;
-    private final int typeSlotStartNum = 2;
-    private final int lcSlotNum = 1;
-    private final int powerSlotNum = 0;
-    private final int typeSlotEndNum = 10;
+    private final int toolSlotNum = 8;
+    private final int enhanceStartNum = 0;
+    private final int enhanceEndNum = 8;
     Runnable slotUpdateListener;
 
-    public MoeAssemblyTableMenu(int containerId, Inventory inventory){
+    public MoeModemTableMenu(int containerId, Inventory inventory){
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
 
-    public MoeAssemblyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
-        super(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), containerId);
+    public MoeModemTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
+        super(MoeMenuType.MODEM_TABLE_MENU.get(), containerId);
         this.access = access;
         checkContainerSize(inventory, toolSlotNum + 1);
         this.level = inventory.player.level();
@@ -46,14 +45,12 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
             @Override
             public void setChanged() {
                 super.setChanged();
-                MoeAssemblyTableMenu.this.slotsChanged(this);
-                MoeAssemblyTableMenu.this.slotUpdateListener.run();
+                MoeModemTableMenu.this.slotsChanged(this);
+                MoeModemTableMenu.this.slotUpdateListener.run();
             }
         };
-        this.addSlot(new Slot(this.container, powerSlotNum, 70, 20));
-        this.addSlot(new Slot(this.container, lcSlotNum, 88, 20));
-        for (int i = typeSlotStartNum; i < typeSlotEndNum; i++) {
-            if(i < 6) this.addSlot(new Slot(this.container, i, 18 * i + 16, 40));
+        for (int i = enhanceStartNum; i < enhanceEndNum; i++) {
+            if(i < 4) this.addSlot(new Slot(this.container, i, 18 * i + 16, 40));
             else this.addSlot(new Slot(this.container, i , 18 * i - 56, 58));
         }
         this.addSlot(new Slot(this.container, toolSlotNum, 20, 10));
@@ -66,7 +63,6 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
-            player.sendSystemMessage(Component.literal(String.valueOf(index)));
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
@@ -77,12 +73,8 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
             }
             else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
                 return ItemStack.EMPTY;
-            }else if (!this.slots.get(lcSlotNum).hasItem() && item instanceof LcOscillatorModuleItem && !this.moveItemStackTo(itemstack1, lcSlotNum, lcSlotNum + 1, false)){
-                return ItemStack.EMPTY;
-            }else if (!this.slots.get(powerSlotNum).hasItem() && item instanceof PowerAmplifierItem && !this.moveItemStackTo(itemstack1, powerSlotNum, powerSlotNum + 1, false)){
-                return ItemStack.EMPTY;
-            }else if (item instanceof MoeMagicTypeModuleItem){
-                boolean flag = moveModuleItem(typeSlotStartNum, typeSlotEndNum, itemstack1);
+            }else if (item instanceof EnhancementModulateItem){
+                boolean flag = moveModuleItem(enhanceStartNum, enhanceEndNum, itemstack1);
                 if (flag) return ItemStack.EMPTY;
             }
             else if (index >= toolSlotNum + 1 && index < toolSlotNum + 28) {
@@ -111,7 +103,7 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());
+        return stillValid(this.access, player, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get());
     }
 
     @Override
@@ -125,25 +117,16 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
     @Override
     public boolean clickMenuButton(Player player, int id) {
         ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
-        ItemStack toolStack = toolSlot.copy();
         this.access.execute((level1, blockPos) -> {
-            if(toolStack.getItem() instanceof MagicCastItem) {
-                ItemContainerContents contents = toolStack.get(DataComponents.CONTAINER);
-                List<ItemStack> newList = new ArrayList<>();
-                for (int i = powerSlotNum; i < typeSlotEndNum; i++){
+            if(toolSlot.getItem() instanceof MagicCastItem) {
+                EnhancementData enhancementData = EnhancementData.defaultData;
+                for (int i = enhanceStartNum; i < enhanceEndNum; i++){
                     ItemStack itemStack = this.slots.get(i).getItem();
-                    ItemStack menuSlot = contents.getStackInSlot(i).copy();
-                    if(menuSlot.getItem() instanceof IMoeModuleItem && ((IMoeModuleItem) menuSlot.getItem()).isEmpty())
-                        menuSlot = ItemStack.EMPTY;
-                    if(itemStack.isEmpty()){
-                        if(i == powerSlotNum) newList.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
-                        else if (i == lcSlotNum) newList.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-                        else newList.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+                    if(itemStack.getItem() instanceof EnhancementModulateItem item){
+                        enhancementData = item.modemEnhancementData(enhancementData);
                     }
-                    else newList.add(itemStack);
-                    this.container.setItem(i, menuSlot);
                 }
-                toolSlot.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(newList));
+                toolSlot.set(MoeDataComponentTypes.ENHANCEMENT_DATA, enhancementData);
             }
         });
         return true;

@@ -61,9 +61,7 @@ public class MoeFunction {
     public static float getCoolDownRate(ItemStack itemStack){
         float rate = 1;
         if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack typeModule = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
-            EnhancementData enhancementData = typeModule.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+            EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
             rate = enhancementData.coolDown();
         }
         return rate;

@@ -43,6 +43,7 @@
   "effect.magic_of_electromagnetic.electric_field_domain" : "强电领域",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "电磁装配台",
+  "block.magic_of_electromagnetic.electromagnetic_modem_table": "强化调制台",
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "电磁射线",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "脉冲等离子体",

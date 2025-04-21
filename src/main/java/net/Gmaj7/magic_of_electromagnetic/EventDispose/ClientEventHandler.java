@@ -7,6 +7,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.hud.MoeMagicWheelHud;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.hud.MoeShowMagicHud;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeAssemblyTableScreen;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeModemTableScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyMapping;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyState;
@@ -35,6 +36,7 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void registerScreen(RegisterMenuScreensEvent event){
             event.register(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), MoeAssemblyTableScreen::new);
+            event.register(MoeMenuType.MODEM_TABLE_MENU.get(), MoeModemTableScreen::new);
         }
 
         @SubscribeEvent

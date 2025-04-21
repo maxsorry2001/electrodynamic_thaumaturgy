@@ -2,8 +2,11 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -49,12 +52,9 @@ public class MagnetArrowEntity extends AbstractArrow {
             Vec3 vec31 = vec3.normalize().multiply(0.1, 0.1, 0.1);
             target.move(MoverType.SELF, vec31);
         }
-        if(this.level().isClientSide() && tickCount % 20 == 0){
-            for (int j = 1; j < 90; j++){
-                double theta = j * 2 *Math.PI / 90;
-                this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX() + 10 * Math.sin(theta), this.getY(), this.getZ() + 10 * Math.cos(theta), - Math.sin(theta), 0, - Math.cos(theta));
-                this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX() + 5 * Math.sin(theta), this.getY(), this.getZ() + 5 * Math.cos(theta), - Math.sin(theta), 0, - Math.cos(theta));
-            }
+        if(this.level() instanceof ServerLevel serverLevel && tickCount % 20 == 0){
+            BlockPos blockPos = this.getOnPos().above();
+            serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> serverLevel.sendParticles(player, MoeParticles.EXPAND_CIRCLE_PARTICLE.get(), false, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0D, 0D, 0D, 0D));
         }
     }
 

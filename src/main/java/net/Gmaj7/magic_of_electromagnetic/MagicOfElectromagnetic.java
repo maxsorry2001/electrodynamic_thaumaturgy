@@ -12,6 +12,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.custom.ExpandCircleParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -22,6 +24,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -58,6 +61,7 @@ public class MagicOfElectromagnetic
         MoeEntities.register(modEventBus);
         MoeDataComponentTypes.register(modEventBus);
         MoeMenuType.register(modEventBus);
+        MoeParticles.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -89,6 +93,11 @@ public class MagicOfElectromagnetic
             EntityRenderers.register(MoeEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
             EntityRenderers.register(MoeEntities.MAGNET_ARROW_ENTITY.get(), MagnetArrowRender::new);
             EntityRenderers.register(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), PlasmaTorchBeaconRender::new);
+        }
+
+        @SubscribeEvent
+        public static void registerParticleProviders(RegisterParticleProvidersEvent event){
+            event.registerSpriteSet(MoeParticles.EXPAND_CIRCLE_PARTICLE.get(), ExpandCircleParticle.Provider::new);
         }
     }
 }
