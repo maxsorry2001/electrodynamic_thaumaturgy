@@ -44,6 +44,7 @@ public class MoeTabs {
                         output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
                         output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
                         output.accept(MoeItems.ENTROPY_MAGNET_UPHEAVAL_MODULE.get());
+                        output.accept(MoeItems.HEAL_MODULE.get());
 
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());
                         output.accept(MoeItems.STRENGTH_ENHANCE.get());

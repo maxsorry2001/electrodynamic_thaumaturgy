@@ -47,7 +47,7 @@ public class MoeFunction {
         return power;
     }
 
-    private static float getStrengthRate(ItemStack itemStack){
+    public static float getStrengthRate(ItemStack itemStack){
         float strengthRate = 1;
         if(itemStack.has(DataComponents.CONTAINER)){
             ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);

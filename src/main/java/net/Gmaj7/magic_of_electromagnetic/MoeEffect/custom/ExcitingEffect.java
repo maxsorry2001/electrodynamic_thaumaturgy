@@ -15,14 +15,12 @@ public class ExcitingEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        if(livingEntity.hasData(MoeAttachmentType.EXCITING_DAMAGE))
-            livingEntity.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), livingEntity.getData(MoeAttachmentType.EXCITING_DAMAGE));
+        livingEntity.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), (float) (0.5 * amplifier));
         return super.applyEffectTick(livingEntity, amplifier);
     }
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        int i = 20 >> amplifier;
-        return i > 0 ? duration % i == 0 : true;
+        return duration % 20 == 0;
     }
 }

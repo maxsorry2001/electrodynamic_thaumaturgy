@@ -21,8 +21,8 @@ public class ElectricFieldDomainEffect extends MobEffect {
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.getOnPos()).inflate(10));
         for (LivingEntity target : list){
-            if(target != livingEntity && target.walkAnimation.speed() > 0.01 && livingEntity.hasData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE) && target.onGround()) {
-                float num = livingEntity.getData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE);
+            if(target != livingEntity && target.walkAnimation.speed() > 0.01 && target.onGround()) {
+                float num = 3 * amplifier;
                 float rr = (float) (Math.pow(target.getX() - livingEntity.getX(), 2) + Math.pow(target.getZ() - livingEntity.getZ(), 2));
                 rr = Math.max(rr, 1);
                 target.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), num / rr);

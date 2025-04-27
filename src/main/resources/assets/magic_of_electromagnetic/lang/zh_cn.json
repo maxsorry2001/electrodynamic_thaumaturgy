@@ -36,6 +36,9 @@
   "item.magic_of_electromagnetic.board": "组件底板",
   "item.magic_of_electromagnetic.bjt": "三极管",
   "item.magic_of_electromagnetic.superconducting_update": "超导升级工具",
+  "item.magic_of_electromagnetic.cooldown_enhance": "冷却",
+  "item.magic_of_electromagnetic.strength_enhance": "强度",
+  "item.magic_of_electromagnetic.efficiency_enhance": "效率",
 
   "effect.magic_of_electromagnetic.exciting": "激发",
   "effect.magic_of_electromagnetic.protecting": "磁力保护",

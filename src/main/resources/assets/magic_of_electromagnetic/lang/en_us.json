@@ -36,6 +36,9 @@
   "item.magic_of_electromagnetic.board": "Board",
   "item.magic_of_electromagnetic.bjt": "Bipolar Junction Transistor",
   "item.magic_of_electromagnetic.superconducting_update": "Superconducting Updating Tool",
+  "item.magic_of_electromagnetic.cooldown_enhance": "Cooldown",
+  "item.magic_of_electromagnetic.strength_enhance": "Strength",
+  "item.magic_of_electromagnetic.efficiency_enhance": "Efficiency",
 
   "effect.magic_of_electromagnetic.exciting": "Exciting",
   "effect.magic_of_electromagnetic.protecting": "Magnetic Protection",

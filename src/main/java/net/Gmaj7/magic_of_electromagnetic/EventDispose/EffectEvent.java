@@ -17,11 +17,7 @@ public class EffectEvent {
     public static void effectDeal(MobEffectEvent.Remove event){
         Holder<MobEffect> effect = event.getEffect();
         LivingEntity entity = event.getEntity();
-        if(effect == MoeEffects.EXCITING && entity.hasData(MoeAttachmentType.EXCITING_DAMAGE))
-            entity.removeData(MoeAttachmentType.EXCITING_DAMAGE);
-        else if (effect == MoeEffects.PROTECTING && entity.hasData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT))
+        if (effect == MoeEffects.PROTECTING && entity.hasData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT))
             entity.removeData(MoeAttachmentType.ELECTROMAGNETIC_PROTECT);
-        else if (effect == MoeEffects.ELECTRIC_FIELD_DOMAIN && entity.hasData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE))
-            entity.removeData(MoeAttachmentType.ELECTRIC_FIELD_DOMAIN_DAMAGE);
     }
 }
