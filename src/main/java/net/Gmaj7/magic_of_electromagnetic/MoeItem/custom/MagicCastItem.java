@@ -1,5 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
@@ -61,6 +62,11 @@ public class MagicCastItem extends Item {
         if(i < j){
             tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         }
+        EnhancementData enhancementData = stack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        tooltipComponents.add(Component.literal("cooldown:").append(String.valueOf(enhancementData.coolDown())));
+        tooltipComponents.add(Component.literal("strength:").append(String.valueOf(enhancementData.strength())));
+        tooltipComponents.add(Component.literal("efficiency:").append(String.valueOf(enhancementData.efficiency())));
+        tooltipComponents.add(Component.literal("potential_difference:").append(String.valueOf(enhancementData.potential_difference())));
     }
 
     @Override

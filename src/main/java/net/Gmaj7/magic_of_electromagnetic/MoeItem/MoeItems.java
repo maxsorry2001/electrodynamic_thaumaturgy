@@ -49,8 +49,6 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENTROPY_MAGNET_UPHEAVAL_MODULE = MOE_ITEM.register("entropy_magnet_upheaval_module",
             () -> new MoeMagicTypeModuleItem(new EntropyMagnetUpheaval(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> HEAL_MODULE = MOE_ITEM.register("heal_module",
-            () -> new MoeMagicTypeModuleItem(new Heal(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 
@@ -82,6 +80,8 @@ public class MoeItems {
             () -> new EnhancementModulateItem(EnhancementType.COOLDOWN, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EFFICIENCY_ENHANCE = MOE_ITEM.register("efficiency_enhance",
             () -> new EnhancementModulateItem(EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> POTENTIAL_DIFFERENCE_ENHANCE = MOE_ITEM.register("potential_difference",
+            () -> new EnhancementModulateItem(EnhancementType.POTENTIAL_DIFFERENCE, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_ENHANCE = MOE_ITEM.register("empty_enhance",
             () -> new EnhancementModulateItem(EnhancementType.EMPTY, new Item.Properties().stacksTo(1)));
 
@@ -105,10 +105,12 @@ public class MoeItems {
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
                     .component(DataComponents.CONTAINER, setEmpty())
-                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)));
+                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
     public static final Supplier<Item> ELECTROMAGNETIC_BOOK = MOE_ITEM.register("electromagnetic_book",
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
                     .component(DataComponents.CONTAINER, setEmpty())
-                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)));
+                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 }

@@ -31,8 +31,10 @@ public class ElectromagneticAssault implements IMoeMagic{
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
-                if (target instanceof LivingEntity)
+                if (target instanceof LivingEntity) {
                     target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
+                    MoeFunction.checkPotentialDifference(itemStack, (LivingEntity) target);
+                }
             }
         }
         BlockPos blockPos = new BlockPos((int) end.x(), (int) end.y(), (int) end.z());

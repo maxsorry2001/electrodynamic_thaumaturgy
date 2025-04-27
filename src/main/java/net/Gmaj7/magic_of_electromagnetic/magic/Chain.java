@@ -32,6 +32,7 @@ public class Chain implements IMoeMagic{
                 addParticle(target, target1);
                 float b = MoeFunction.getMagicAmount(itemStack) / 5;
                 target1.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), b);
+                MoeFunction.checkPotentialDifference(itemStack, target1);
             }
         }
     }

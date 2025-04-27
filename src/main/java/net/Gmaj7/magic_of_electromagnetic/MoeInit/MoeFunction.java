@@ -1,5 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
+import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
@@ -7,7 +8,10 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -16,6 +20,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.entity.PartEntity;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,34 +53,31 @@ public class MoeFunction {
     }
 
     public static float getStrengthRate(ItemStack itemStack){
-        float strengthRate = 1;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack typeModule = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
-            EnhancementData enhancementData = typeModule.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-            strengthRate = enhancementData.strength();
-        }
-        return strengthRate;
+        return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).strength();
     }
 
     public static float getCoolDownRate(ItemStack itemStack){
-        float rate = 1;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-            rate = enhancementData.coolDown();
-        }
-        return rate;
+        return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).coolDown();
     }
 
     public static float getEfficiency(ItemStack itemStack){
-        float efficiency = 1;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
-            ItemStack typeModule = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
-            EnhancementData enhancementData = typeModule.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-            efficiency = enhancementData.efficiency();
+        return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).efficiency();
+    }
+
+    public static void checkPotentialDifference(ItemStack itemStack, LivingEntity livingEntity){
+        int level = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).potential_difference();
+        if(level > 0 && livingEntity.level().isClientSide()){
+            if(livingEntity.hasEffect(MoeEffects.POTENTIAL_DIFFERENCE)){
+                level = livingEntity.getEffect(MoeEffects.POTENTIAL_DIFFERENCE).getAmplifier() + level;
+                if(level >= 4) {
+                    PacketDistributor.sendToServer(new MoePacket.LightingPacket(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ()));
+                    level = level - 5;
+                    livingEntity.removeEffect(MoeEffects.POTENTIAL_DIFFERENCE);
+                }
+                if(level > -1) livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, 200, level));
+            }
+            else livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, level - 1));
         }
-        return efficiency;
     }
 
     public static HitResult checkEntityIntersecting(Entity entity, Vec3 start, Vec3 end, float bbInflation) {

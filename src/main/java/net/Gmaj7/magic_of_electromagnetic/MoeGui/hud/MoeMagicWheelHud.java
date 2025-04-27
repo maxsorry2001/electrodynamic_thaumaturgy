@@ -1,7 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeGui.hud;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeSelectMagicPacket;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.minecraft.client.DeltaTracker;
@@ -69,7 +69,7 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
     public void close(){
         active = false;
         if(selection > 1)
-            PacketDistributor.sendToServer(new MoeSelectMagicPacket(selection, useHand));
+            PacketDistributor.sendToServer(new MoePacket.MoeSelectMagicPacket(selection, useHand));
         Minecraft.getInstance().mouseHandler.grabMouse();
     }
 

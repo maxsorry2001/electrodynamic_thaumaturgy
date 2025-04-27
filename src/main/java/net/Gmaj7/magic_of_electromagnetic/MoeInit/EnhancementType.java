@@ -4,5 +4,6 @@ public enum EnhancementType {
     STRENGTH,
     COOLDOWN,
     EFFICIENCY,
+    POTENTIAL_DIFFERENCE,
     EMPTY;
 }

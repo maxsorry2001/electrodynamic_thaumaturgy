@@ -27,6 +27,7 @@ public class EnhancementModulateItem extends Item{
             case STRENGTH -> num = 0.25F;
             case COOLDOWN -> num = 0.15F;
             case EFFICIENCY -> num = 0.1F;
+            case POTENTIAL_DIFFERENCE -> num = 1F;
             case EMPTY -> num = 0;
         }
         return num;
@@ -35,9 +36,10 @@ public class EnhancementModulateItem extends Item{
     public EnhancementData modemEnhancementData(EnhancementData enhancementData) {
         EnhancementData newEnhancementData;
         switch (enhancementType){
-            case STRENGTH -> newEnhancementData = new EnhancementData(enhancementData.strength() + getEnhancementNum(), enhancementData.coolDown(), enhancementData.efficiency());
-            case COOLDOWN -> newEnhancementData = new EnhancementData(enhancementData.strength(), Math.max(enhancementData.coolDown() - getEnhancementNum(), 0.1F), enhancementData.efficiency());
-            case EFFICIENCY -> newEnhancementData = new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), Math.max(enhancementData.efficiency() - getEnhancementNum(), 0.1F));
+            case STRENGTH -> newEnhancementData = new EnhancementData(enhancementData.strength() + getEnhancementNum(), enhancementData.coolDown(), enhancementData.efficiency(), enhancementData.potential_difference());
+            case COOLDOWN -> newEnhancementData = new EnhancementData(enhancementData.strength(), Math.max(enhancementData.coolDown() - getEnhancementNum(), 0.1F), enhancementData.efficiency(), enhancementData.potential_difference());
+            case EFFICIENCY -> newEnhancementData = new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), Math.max(enhancementData.efficiency() - getEnhancementNum(), 0.1F), enhancementData.potential_difference());
+            case POTENTIAL_DIFFERENCE -> newEnhancementData = new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), enhancementData.efficiency(), enhancementData.potential_difference() + (int) getEnhancementNum());
             default -> {newEnhancementData = EnhancementData.defaultData;}
         }
         return newEnhancementData;
