@@ -12,9 +12,6 @@ import java.util.function.Supplier;
 public class MoeAttachmentType {
     public static final DeferredRegister<AttachmentType<?>> MOE_ATTACHMENT_TYPE = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MagicOfElectromagnetic.MODID);
 
-    public static final Supplier<AttachmentType<Float>> ELECTROMAGNETIC_PROTECT = MOE_ATTACHMENT_TYPE.register("electromagnetic_protect",
-            () -> AttachmentType.<Float>builder(() -> 1.0F).serialize(Codec.FLOAT).build());
-
     public static void register(IEventBus eventBus){
         MOE_ATTACHMENT_TYPE.register(eventBus);
     }
