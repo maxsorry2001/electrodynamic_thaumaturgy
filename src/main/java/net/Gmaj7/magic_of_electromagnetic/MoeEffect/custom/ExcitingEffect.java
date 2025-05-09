@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -15,7 +16,7 @@ public class ExcitingEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        livingEntity.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), (float) (0.5 * amplifier));
+        livingEntity.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT)), (float) (0.5 * amplifier));
         return super.applyEffectTick(livingEntity, amplifier);
     }
 

@@ -17,7 +17,6 @@ public class Protecting implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        livingEntity.addEffect(new MobEffectInstance(MoeEffects.PROTECTING, 600));
         ((MoeDataGet) livingEntity).getProtective().setProtecting(MoeFunction.getMagicAmount(itemStack));
     }
 

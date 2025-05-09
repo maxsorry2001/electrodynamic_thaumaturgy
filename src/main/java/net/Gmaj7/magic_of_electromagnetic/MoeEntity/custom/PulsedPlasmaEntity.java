@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -37,7 +38,7 @@ public class PulsedPlasmaEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        entity.hurt(new DamageSource(entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.FIREBALL)), 12);
+        entity.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), 12);
     }
 
     @Override

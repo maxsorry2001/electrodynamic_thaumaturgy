@@ -7,11 +7,12 @@ import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.PowerAmplifierItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -64,19 +65,21 @@ public class MoeFunction {
         return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).efficiency();
     }
 
-    public static void checkPotentialDifference(ItemStack itemStack, LivingEntity livingEntity){
-        int level = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).potential_difference();
-        if(level > 0 && livingEntity.level().isClientSide()){
+    public static void checkTargetEnhancement(ItemStack itemStack, LivingEntity livingEntity){
+        EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        int protentialDifference = enhancementData.potential_difference();
+        int bioelectricStop = enhancementData.bioelectricStop();
+        if(protentialDifference > 0 && livingEntity.level().isClientSide()){
             if(livingEntity.hasEffect(MoeEffects.POTENTIAL_DIFFERENCE)){
-                level = livingEntity.getEffect(MoeEffects.POTENTIAL_DIFFERENCE).getAmplifier() + level;
-                if(level >= 4) {
-                    PacketDistributor.sendToServer(new MoePacket.LightingPacket(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ()));
-                    level = level - 5;
+                protentialDifference = livingEntity.getEffect(MoeEffects.POTENTIAL_DIFFERENCE).getAmplifier() + protentialDifference;
+                if(protentialDifference >= 4) {
+                    PacketDistributor.sendToServer(new MoePacket.LightingPacket(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), getMagicAmount(itemStack)));
+                    protentialDifference = protentialDifference - 5;
                     livingEntity.removeEffect(MoeEffects.POTENTIAL_DIFFERENCE);
                 }
-                if(level > -1) livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, 200, level));
+                if(protentialDifference > -1) livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, 200, protentialDifference));
             }
-            else livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, level - 1));
+            else livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, protentialDifference - 1));
         }
     }
 
@@ -98,6 +101,10 @@ public class MoeFunction {
         else
             return BlockHitResult.miss(end, Direction.UP, BlockPos.containing(end));
 
+    }
+
+    public static <T> Holder<T> getHolder(Level level, ResourceKey<Registry<T>> registry, ResourceKey<T> resourceKey){
+        return level.registryAccess().registryOrThrow(registry).getHolderOrThrow(resourceKey);
     }
     public static RayHitResult getLineHitResult(Level level, Entity source, Vec3 start, Vec3 end, boolean checkForBlocks, float bbInflation) {
         BlockHitResult blockHitResult;

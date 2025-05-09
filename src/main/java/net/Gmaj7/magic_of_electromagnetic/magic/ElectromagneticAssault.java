@@ -1,6 +1,5 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.core.BlockPos;
@@ -32,8 +31,8 @@ public class ElectromagneticAssault implements IMoeMagic{
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
-                    MoeFunction.checkPotentialDifference(itemStack, (LivingEntity) target);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
+                    MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
         }

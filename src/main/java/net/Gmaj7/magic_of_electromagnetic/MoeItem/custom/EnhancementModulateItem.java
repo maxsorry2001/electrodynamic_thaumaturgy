@@ -21,27 +21,19 @@ public class EnhancementModulateItem extends Item{
         return enhancementType;
     }
 
-    public float getEnhancementNum(){
-        float num = 0;
-        switch (enhancementType){
-            case STRENGTH -> num = 0.25F;
-            case COOLDOWN -> num = 0.15F;
-            case EFFICIENCY -> num = 0.1F;
-            case POTENTIAL_DIFFERENCE -> num = 1F;
-            case EMPTY -> num = 0;
-        }
-        return num;
-    }
-
     public EnhancementData modemEnhancementData(EnhancementData enhancementData) {
-        EnhancementData newEnhancementData;
+        float strength = enhancementData.strength();
+        float coolDown = enhancementData.coolDown();
+        float efficiency = enhancementData.efficiency();
+        int potential_difference = enhancementData.potential_difference();
+        int bioelectric_stop = enhancementData.bioelectricStop();
         switch (enhancementType){
-            case STRENGTH -> newEnhancementData = new EnhancementData(enhancementData.strength() + getEnhancementNum(), enhancementData.coolDown(), enhancementData.efficiency(), enhancementData.potential_difference());
-            case COOLDOWN -> newEnhancementData = new EnhancementData(enhancementData.strength(), Math.max(enhancementData.coolDown() - getEnhancementNum(), 0.1F), enhancementData.efficiency(), enhancementData.potential_difference());
-            case EFFICIENCY -> newEnhancementData = new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), Math.max(enhancementData.efficiency() - getEnhancementNum(), 0.1F), enhancementData.potential_difference());
-            case POTENTIAL_DIFFERENCE -> newEnhancementData = new EnhancementData(enhancementData.strength(), enhancementData.coolDown(), enhancementData.efficiency(), enhancementData.potential_difference() + (int) getEnhancementNum());
-            default -> {newEnhancementData = EnhancementData.defaultData;}
+            case STRENGTH -> strength = strength + 0.25F;
+            case COOLDOWN -> coolDown =  Math.max(coolDown - 0.15F, 0.1F);
+            case EFFICIENCY -> efficiency = Math.max(efficiency - 0.1F, 0.1F);
+            case POTENTIAL_DIFFERENCE -> potential_difference = potential_difference + 1;
+            case BIOELECTRIC_STOP -> bioelectric_stop = bioelectric_stop + 1;
         }
-        return newEnhancementData;
+        return new EnhancementData(strength, coolDown, efficiency, potential_difference, bioelectric_stop);
     }
 }

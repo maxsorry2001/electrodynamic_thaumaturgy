@@ -52,25 +52,29 @@ public class MoePacket{
         private final double x;
         private final double y;
         private final double z;
+        private final float damage;
         public static final CustomPacketPayload.Type<LightingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lighting"));
         public static final StreamCodec<RegistryFriendlyByteBuf, LightingPacket> STREAM_CODEC = CustomPacketPayload.codec(LightingPacket::write, LightingPacket::new);
 
-        public LightingPacket(double x, double y, double z){
+        public LightingPacket(double x, double y, double z, float damage){
             this.x = x;
             this.y = y;
             this.z = z;
+            this.damage = damage;
         }
 
         public LightingPacket(FriendlyByteBuf buf){
             this.x = buf.readDouble();
             this.y = buf.readDouble();
             this.z = buf.readDouble();
+            this.damage = buf.readFloat();
         }
 
         public void write(FriendlyByteBuf buf){
             buf.writeDouble(x);
             buf.writeDouble(y);
             buf.writeDouble(z);
+            buf.writeFloat(damage);
         }
 
         @Override

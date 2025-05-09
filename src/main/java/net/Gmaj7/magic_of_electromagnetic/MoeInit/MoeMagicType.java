@@ -16,6 +16,7 @@ public enum MoeMagicType {
     PLASMA_TORCH,
     ELECTROMAGNETIC_ASSAULT,
     ENTROPY_MAGNET_UPHEAVAL,
+    ST_ELMO_S_FIRE,
     ERROR,
     EMPTY;
     private MoeMagicType(){

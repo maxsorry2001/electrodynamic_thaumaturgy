@@ -19,8 +19,6 @@ public class MoeEffects {
 
     public static final DeferredHolder<MobEffect, MobEffect> EXCITING = MOE_EFFECTS.register("exciting",
             () -> new ExcitingEffect(MobEffectCategory.HARMFUL, 0xFFFFFF));
-    public static final DeferredHolder<MobEffect, MobEffect> PROTECTING = MOE_EFFECTS.register("protecting",
-            () -> new MoeEffect(MobEffectCategory.BENEFICIAL, 0x00CDAA));
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_FIELD_DOMAIN = MOE_EFFECTS.register("electric_field_domain",
             () -> new ElectricFieldDomainEffect(MobEffectCategory.BENEFICIAL, 0x00ED73));
     public static final DeferredHolder<MobEffect, MobEffect> POTENTIAL_DIFFERENCE = MOE_EFFECTS.register("potential_difference",

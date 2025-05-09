@@ -33,8 +33,8 @@ public class ElectromagneticRay implements IMoeMagic{
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
-                    MoeFunction.checkPotentialDifference(itemStack, (LivingEntity) target);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
+                    MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
         }

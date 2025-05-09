@@ -23,7 +23,6 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
         var screenHeight = guiGraphics.guiHeight();
         ItemStack typeStack = itemStack.get(DataComponents.CONTAINER).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item){
-            float f = player.getCooldowns().getCooldownPercent(item, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true));
             if (item.getMagicType() != MoeMagicType.EMPTY && item.getMagicType() != MoeMagicType.ERROR){
                 guiGraphics.renderFakeItem(typeStack, screenWidth / 6, screenHeight * 7 / 8);
                 guiGraphics.renderItemDecorations(Minecraft.getInstance().font, typeStack, screenWidth / 6, screenHeight * 7 / 8);

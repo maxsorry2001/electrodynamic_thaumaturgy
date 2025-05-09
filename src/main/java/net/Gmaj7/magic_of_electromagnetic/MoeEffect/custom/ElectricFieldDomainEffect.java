@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,7 +26,7 @@ public class ElectricFieldDomainEffect extends MobEffect {
                 float num = 3 * amplifier;
                 float rr = (float) (Math.pow(target.getX() - livingEntity.getX(), 2) + Math.pow(target.getZ() - livingEntity.getZ(), 2));
                 rr = Math.max(rr, 1);
-                target.hurt(new DamageSource(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC), livingEntity), num / rr);
+                target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), num / rr);
             }
         }
         if(livingEntity.level().isClientSide()){
