@@ -47,6 +47,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new PlasmaTorch(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTROMAGNETIC_ASSAULT_MODULE = MOE_ITEM.register("electromagnetic_assault_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ST_ELMO_S_FIRE_MODULE = MOE_ITEM.register("st_elmo_s_fire_module",
+            () -> new MoeMagicTypeModuleItem(new St_Elmo_s_fire(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENTROPY_MAGNET_UPHEAVAL_MODULE = MOE_ITEM.register("entropy_magnet_upheaval_module",
             () -> new MoeMagicTypeModuleItem(new EntropyMagnetUpheaval(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",

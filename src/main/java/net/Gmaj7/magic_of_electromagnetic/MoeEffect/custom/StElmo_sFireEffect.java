@@ -11,8 +11,8 @@ import net.minecraft.world.entity.monster.Enemy;
 
 import java.util.List;
 
-public class StElmo_sFire extends MobEffect {
-    protected StElmo_sFire(MobEffectCategory category, int color) {
+public class StElmo_sFireEffect extends MobEffect {
+    public StElmo_sFireEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 
