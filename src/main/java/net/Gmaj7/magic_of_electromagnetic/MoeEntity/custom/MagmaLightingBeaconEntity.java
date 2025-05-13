@@ -2,9 +2,11 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class MagmaLightingBeaconEntity extends AbstractArrow {
     private  ItemStack magicItem;
-    private int opentick = 20;
+    private int opentick = 0;
     private boolean open = false;
 
 
@@ -42,8 +44,8 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if(open){
-            opentick--;
-            if(opentick == 0){
+            opentick++;
+            if(opentick == 20){
                 for (int dx = -2; dx <= 2; dx++){
                     for (int dz = -2; dz <= 2; dz++){
                         BlockPos blockPos = new BlockPos(getBlockX() + dx, getBlockY(), getBlockZ() + dz);
@@ -67,7 +69,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
                     }
                 }
             }
-            if(opentick < 0)
+            if(opentick > 20)
                 this.discard();
         }
     }
@@ -80,6 +82,8 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         this.open = true;
+        if(level() instanceof ServerLevel)
+            ((ServerLevel) level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE.get(), getX(), getY(), getZ(), 1, 0, 0, 0, 0);
     }
 
     @Override

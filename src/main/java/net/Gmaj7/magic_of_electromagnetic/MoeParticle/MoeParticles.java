@@ -11,8 +11,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class MoeParticles {
     public static final DeferredRegister<ParticleType<?>> MOE_PARTICLE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MagicOfElectromagnetic.MODID);
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> EXPAND_CIRCLE_PARTICLE = MOE_PARTICLE.register("expand_circle",
-            () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE = MOE_PARTICLE.register("magma_lighting_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TORCH_PARTICLE = MOE_PARTICLE.register("torch_particle",
+            () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus){MOE_PARTICLE.register(eventBus);}
 }

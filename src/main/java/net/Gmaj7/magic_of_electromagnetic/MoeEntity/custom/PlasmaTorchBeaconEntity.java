@@ -3,10 +3,11 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.Gmaj7.magic_of_electromagnetic.MoeTabs;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -52,15 +53,6 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
         super.tick();
         if(start){
             this.startTime++;
-            for (int i = 0; i < 20; i++)
-                this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX(), this.getY() + 0.3 * (100 - startTime + i), this.getZ(), 0, 0, 0);
-            if(startTime > 99 & level().isClientSide()){
-                for (int j = 1; j < 90; j++){
-                    double theta = j * 2 *Math.PI / 90;
-                    for (int k = 0; k < 10; k++ )
-                        this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX() + 5 * Math.sin(theta), this.getY() + k, this.getZ() + 5 * Math.cos(theta), 0, 0, 0);
-                }
-            }
             if(startTime > 100){
                 List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
                 for (LivingEntity target : list){
@@ -87,6 +79,8 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         this.start = true;
+        if(level() instanceof ServerLevel)
+            ((ServerLevel) level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), getX(), getY(), getZ(), 1, 0, 0, 0, 0);
     }
 
     @Override

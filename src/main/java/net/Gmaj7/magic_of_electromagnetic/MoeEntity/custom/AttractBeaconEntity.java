@@ -21,20 +21,20 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class MagnetArrowEntity extends AbstractArrow {
+public class AttractBeaconEntity extends AbstractArrow {
     private int liveTime;
-    public MagnetArrowEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+    public AttractBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public MagnetArrowEntity(Level level){
-        super(MoeEntities.MAGNET_ARROW_ENTITY.get(), level);
+    public AttractBeaconEntity(Level level){
+        super(MoeEntities.ATTRACT_BEACON_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public MagnetArrowEntity(Level level, LivingEntity owner){
-        super(MoeEntities.MAGNET_ARROW_ENTITY.get(), level);
+    public AttractBeaconEntity(Level level, LivingEntity owner){
+        super(MoeEntities.ATTRACT_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.pickup = Pickup.DISALLOWED;
@@ -53,7 +53,7 @@ public class MagnetArrowEntity extends AbstractArrow {
         }
         if(this.level() instanceof ServerLevel serverLevel && tickCount % 20 == 0){
             BlockPos blockPos = this.getOnPos().above();
-            serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> serverLevel.sendParticles(player, MoeParticles.EXPAND_CIRCLE_PARTICLE.get(), false, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0D, 0D, 0D, 0D));
+            serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> serverLevel.sendParticles(player, MoeParticles.MAGMA_LIGHTING_PARTICLE.get(), false, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0D, 0D, 0D, 0D));
         }
     }
 

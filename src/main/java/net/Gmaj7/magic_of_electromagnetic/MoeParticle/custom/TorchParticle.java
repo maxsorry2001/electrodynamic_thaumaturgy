@@ -10,14 +10,16 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
-public class ExpandCircleParticle extends TextureSheetParticle {
+public class TorchParticle extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    protected ExpandCircleParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public TorchParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 0;
         this.setSpriteFromAge(spriteSet);
-        this.lifetime = 10;
+        this.lifetime = 100;
+        this.rCol = 0.8F;
+        this.alpha = 0.75F;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class ExpandCircleParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return this.quadSize * this.age * 20;
+        return this.quadSize * (101 - this.age) / 3;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class ExpandCircleParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new ExpandCircleParticle(clientLevel, x, y, z, spriteSet);
+            return new TorchParticle(clientLevel, x, y, z, spriteSet);
         }
     }
 }

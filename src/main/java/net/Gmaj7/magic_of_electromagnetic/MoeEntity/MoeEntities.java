@@ -24,12 +24,12 @@ public class MoeEntities {
                     .sized(3F, 3F)
                     .clientTrackingRange(4)
                     .build("pulsed_plasma_entity"));
-    public static final Supplier<EntityType<MagnetArrowEntity>> MAGNET_ARROW_ENTITY =
-            MOE_ENTITY_TYPES.register("magnet_arrow_entity", () -> EntityType.Builder.<MagnetArrowEntity>of(MagnetArrowEntity::new, MobCategory.MISC)
+    public static final Supplier<EntityType<AttractBeaconEntity>> ATTRACT_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("attract_beacon_entity", () -> EntityType.Builder.<AttractBeaconEntity>of(AttractBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)
-                    .build("magnet_arrow_entity"));
+                    .build("attract_beacon_entity"));
     public static final Supplier<EntityType<PlasmaTorchBeaconEntity>> PLASMA_TORCH_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("plasma_torch_beacon_entity", () -> EntityType.Builder.<PlasmaTorchBeaconEntity>of(PlasmaTorchBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
