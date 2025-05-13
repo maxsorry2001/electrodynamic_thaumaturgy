@@ -1,6 +1,5 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.world.effect.MobEffectInstance;

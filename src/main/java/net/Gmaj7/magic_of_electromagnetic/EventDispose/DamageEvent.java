@@ -1,10 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.EventDispose;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

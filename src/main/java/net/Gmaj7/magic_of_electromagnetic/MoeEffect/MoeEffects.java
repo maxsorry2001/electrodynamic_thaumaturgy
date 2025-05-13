@@ -33,5 +33,8 @@ public class MoeEffects {
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.lespeed"), -0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> ST_ELMO_S_FIRE = MOE_EFFECTS.register("st_elmo_s_fire",
             () -> new StElmo_sFireEffect(MobEffectCategory.BENEFICIAL, 0xAA0000));
+    public static final DeferredHolder<MobEffect, MobEffect> BIOELECTRIC_STOP = MOE_EFFECTS.register("bioelectric_stop",
+            () -> new MoeEffect(MobEffectCategory.HARMFUL, 0x0078AA)
+                    .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.bsspeed"), -0.15000000596046448, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static void register(IEventBus eventBus){MOE_EFFECTS.register(eventBus);}
 }

@@ -4,9 +4,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
-import net.minecraft.core.component.DataComponents;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.EnhancementModulateItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,11 +15,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoeModemTableMenu extends AbstractContainerMenu {
     private final Level level;

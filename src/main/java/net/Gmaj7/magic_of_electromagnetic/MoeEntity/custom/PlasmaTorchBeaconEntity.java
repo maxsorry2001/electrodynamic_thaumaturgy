@@ -3,6 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeTabs;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -25,21 +26,25 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
     private int startTime;
     private boolean start = false;
     private float damage;
+    private ItemStack itemStack;
     public PlasmaTorchBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
+        this.itemStack = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     }
 
     public PlasmaTorchBeaconEntity(Level level){
         super(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
+        this.itemStack = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     }
 
-    public PlasmaTorchBeaconEntity(Level level, LivingEntity owner){
+    public PlasmaTorchBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack){
         super(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.pickup = Pickup.DISALLOWED;
+        this.itemStack = itemStack;
     }
 
     @Override
@@ -61,6 +66,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
                 for (LivingEntity target : list){
                     if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
                         target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), damage);
+                        MoeFunction.checkTargetEnhancement(itemStack, target);
                     }
                 }
                 this.discard();
@@ -92,12 +98,14 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("moe_start_time", this.startTime);
+        compound.put("moe_magic_item", this.itemStack.save(this.registryAccess()));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.startTime = compound.getInt("moe_start_time");
+        this.itemStack = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
     }
 
     @Override

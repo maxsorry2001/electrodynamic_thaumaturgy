@@ -4,7 +4,6 @@ import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;

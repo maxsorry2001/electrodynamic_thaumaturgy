@@ -81,6 +81,9 @@ public class MoeFunction {
             }
             else livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, protentialDifference - 1));
         }
+        if(bioelectricStop > 0){
+            livingEntity.addEffect(new MobEffectInstance(MoeEffects.BIOELECTRIC_STOP, (int) (20 * getEfficiency(itemStack)), bioelectricStop - 1));
+        }
     }
 
     public static HitResult checkEntityIntersecting(Entity entity, Vec3 start, Vec3 end, float bbInflation) {

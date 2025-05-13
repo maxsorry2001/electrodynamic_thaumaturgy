@@ -1,10 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeEntity;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MagnetArrowEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaTorchBeaconEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PulsedPlasmaEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -39,6 +36,11 @@ public class MoeEntities {
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)
                     .build("plasma_torch_beacon_entity"));
+    public static final Supplier<EntityType<MagmaLightingBeaconEntity>> MAGMA_LIGHTING_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("magma_lighting_entity", () -> EntityType.Builder.<MagmaLightingBeaconEntity>of(MagmaLightingBeaconEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .eyeHeight(0.13F)
+                    .build("magma_lighting_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

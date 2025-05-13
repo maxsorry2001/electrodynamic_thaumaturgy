@@ -1,10 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;

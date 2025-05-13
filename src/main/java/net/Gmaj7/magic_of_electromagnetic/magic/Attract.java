@@ -3,7 +3,6 @@ package net.Gmaj7.magic_of_electromagnetic.magic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MagnetArrowEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
-import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 

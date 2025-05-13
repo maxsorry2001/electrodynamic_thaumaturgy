@@ -5,7 +5,6 @@ import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.*;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

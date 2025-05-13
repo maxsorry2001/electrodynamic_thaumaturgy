@@ -4,10 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MagnetArrowRender;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PlasmaTorchBeaconRender;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.PulsedPlasmaEntityRender;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.*;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
@@ -93,6 +90,7 @@ public class MagicOfElectromagnetic
             EntityRenderers.register(MoeEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
             EntityRenderers.register(MoeEntities.MAGNET_ARROW_ENTITY.get(), MagnetArrowRender::new);
             EntityRenderers.register(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), PlasmaTorchBeaconRender::new);
+            EntityRenderers.register(MoeEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), MagmaLightingBeaconRender::new);
         }
 
         @SubscribeEvent

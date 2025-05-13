@@ -1,6 +1,5 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock.custom;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeAssemblyTableMenu;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeModemTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

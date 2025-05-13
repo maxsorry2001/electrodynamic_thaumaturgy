@@ -41,12 +41,12 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new Refraction(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTRIC_ENERGY_RELEASE_MODULE = MOE_ITEM.register("electric_energy_release_module",
             () -> new MoeMagicTypeModuleItem(new ElectricEnergyRelease(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> FORCE_RAMP_MODULE = MOE_ITEM.register("force_ramp_module",
-            () -> new MoeMagicTypeModuleItem(new ElectromagneticForceRamp(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PLASMA_TORCH_MODULE = MOE_ITEM.register("plasma_torch_module",
             () -> new MoeMagicTypeModuleItem(new PlasmaTorch(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTROMAGNETIC_ASSAULT_MODULE = MOE_ITEM.register("electromagnetic_assault_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> MAGMA_LIGHTING_MODULE = MOE_ITEM.register("magma_lighting_module",
+            () -> new MoeMagicTypeModuleItem(new MagmaLighting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ST_ELMO_S_FIRE_MODULE = MOE_ITEM.register("st_elmo_s_fire_module",
             () -> new MoeMagicTypeModuleItem(new St_Elmo_s_fire(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENTROPY_MAGNET_UPHEAVAL_MODULE = MOE_ITEM.register("entropy_magnet_upheaval_module",
@@ -84,8 +84,8 @@ public class MoeItems {
             () -> new EnhancementModulateItem(EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> POTENTIAL_DIFFERENCE_ENHANCE = MOE_ITEM.register("potential_difference",
             () -> new EnhancementModulateItem(EnhancementType.POTENTIAL_DIFFERENCE, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> EMPTY_ENHANCE = MOE_ITEM.register("empty_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.EMPTY, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> BIOELECTRIC_STOP_ENHANCE = MOE_ITEM.register("bioelectric_stop_difference",
+            () -> new EnhancementModulateItem(EnhancementType.BIOELECTRIC_STOP, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");

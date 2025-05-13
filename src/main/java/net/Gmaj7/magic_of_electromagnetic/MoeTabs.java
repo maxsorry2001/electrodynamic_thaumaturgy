@@ -40,16 +40,17 @@ public class MoeTabs {
                         output.accept(MoeItems.CHAIN_MODULE.get());
                         output.accept(MoeItems.REFRACTION_MODULE.get());
                         output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
-                        output.accept(MoeItems.FORCE_RAMP_MODULE.get());
                         output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
                         output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
                         output.accept(MoeItems.ENTROPY_MAGNET_UPHEAVAL_MODULE.get());
                         output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
+                        output.accept(MoeItems.MAGMA_LIGHTING_MODULE.get());
 
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());
                         output.accept(MoeItems.STRENGTH_ENHANCE.get());
                         output.accept(MoeItems.EFFICIENCY_ENHANCE.get());
                         output.accept(MoeItems.POTENTIAL_DIFFERENCE_ENHANCE.get());
+                        output.accept(MoeItems.BIOELECTRIC_STOP_ENHANCE.get());
 
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());
@@ -75,13 +76,13 @@ public class MoeTabs {
                     }))
                     .build());
 
-    private static ItemStack setFullEnergyItem(ItemStack itemStack){
+    public static ItemStack setFullEnergyItem(ItemStack itemStack){
         IEnergyStorage energyStorage = itemStack.getCapability(Capabilities.EnergyStorage.ITEM);
         energyStorage.receiveEnergy(energyStorage.getMaxEnergyStored(), false);
         return itemStack;
     }
 
-    private static ItemStack getDefaultMagicUse(ItemLike item){
+    public static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
         List<ItemStack> list = new ArrayList<>();
         list.add(new ItemStack(MoeItems.SUPERCONDUCTING_POWER.get()));

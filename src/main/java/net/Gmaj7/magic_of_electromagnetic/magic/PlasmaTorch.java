@@ -1,6 +1,5 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MagnetArrowEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaTorchBeaconEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
@@ -15,7 +14,7 @@ public class PlasmaTorch implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        PlasmaTorchBeaconEntity plasmaTorchBeaconEntity = new PlasmaTorchBeaconEntity(livingEntity.level(), livingEntity);
+        PlasmaTorchBeaconEntity plasmaTorchBeaconEntity = new PlasmaTorchBeaconEntity(livingEntity.level(), livingEntity, itemStack);
         plasmaTorchBeaconEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 1.5F, 1.0F);
         plasmaTorchBeaconEntity.setDamage((int) MoeFunction.getMagicAmount(itemStack) * 3);
         livingEntity.level().addFreshEntity(plasmaTorchBeaconEntity);
