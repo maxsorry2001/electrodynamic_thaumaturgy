@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.EventDispose;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
