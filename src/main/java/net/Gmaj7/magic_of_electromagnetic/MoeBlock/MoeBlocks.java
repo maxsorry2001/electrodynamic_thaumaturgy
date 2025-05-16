@@ -1,8 +1,8 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.custom.ElectromagneticAssemblyTable;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.custom.ElectromagneticModemTable;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.ElectromagneticAssemblyTable;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.ElectromagneticModemTable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;

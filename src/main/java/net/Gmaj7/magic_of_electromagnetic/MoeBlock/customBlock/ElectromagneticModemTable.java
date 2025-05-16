@@ -1,6 +1,6 @@
-package net.Gmaj7.magic_of_electromagnetic.MoeBlock.custom;
+package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeAssemblyTableMenu;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeModemTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class ElectromagneticAssemblyTable extends Block {
-    public ElectromagneticAssemblyTable(Properties properties) {
+public class ElectromagneticModemTable extends Block {
+    public ElectromagneticModemTable(Properties properties) {
         super(properties);
     }
 
@@ -35,7 +35,7 @@ public class ElectromagneticAssemblyTable extends Block {
     @Override
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((p1, p2, p3) -> {
-            return new MoeAssemblyTableMenu(p1, p2, ContainerLevelAccess.create(level, pos));
-        }, Component.translatable("block.magic_of_electromagnetic.electromagnetic_assembly_table"));
+            return new MoeModemTableMenu(p1, p2, ContainerLevelAccess.create(level, pos));
+        }, Component.translatable("block.magic_of_electromagnetic.electromagnetic_modem_table"));
     }
 }

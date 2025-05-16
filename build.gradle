@@ -16,7 +16,8 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-repositories {maven {
+repositories {
+    maven {
     // location of a maven mirror for JEI files, as a fallback
     url = "https://modmaven.dev"
 }
@@ -126,6 +127,13 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
 
+    compileOnly "mekanism:Mekanism:${mek_version}:api"
+
+    // If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
+    runtimeOnly("mekanism:Mekanism:${mek_version}")// Mekanism
+    runtimeOnly("mekanism:Mekanism:${mek_version}:additions")// Mekanism: Additions
+    runtimeOnly("mekanism:Mekanism:${mek_version}:generators")// Mekanism: Generators
+    runtimeOnly("mekanism:Mekanism:${mek_version}:tools")// Mekanism: Tools
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"

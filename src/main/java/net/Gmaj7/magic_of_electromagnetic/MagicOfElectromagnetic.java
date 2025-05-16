@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic;
 
 import com.mojang.logging.LogUtils;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
@@ -60,6 +61,7 @@ public class MagicOfElectromagnetic
         MoeDataComponentTypes.register(modEventBus);
         MoeMenuType.register(modEventBus);
         MoeParticles.register(modEventBus);
+        MoeBlockEntities.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
