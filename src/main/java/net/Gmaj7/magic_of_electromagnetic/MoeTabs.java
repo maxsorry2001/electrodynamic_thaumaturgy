@@ -71,8 +71,10 @@ public class MoeTabs {
                         output.accept(MoeItems.BJT.get());
                         output.accept(MoeItems.BOARD.get());
                         output.accept(MoeItems.SUPERCONDUCTING_UPDATE.get());
-                        output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());
-                        output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get());
+
+                        output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
+                        output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
+                        output.accept(MoeBlocks.ENERGY_BLOCK);
                     }))
                     .build());
 

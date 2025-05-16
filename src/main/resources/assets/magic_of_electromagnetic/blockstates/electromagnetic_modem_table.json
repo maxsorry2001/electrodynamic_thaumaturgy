@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "magic_of_electromagnetic:block/electromagnetic_modem_table"
+    }
+  }
+}

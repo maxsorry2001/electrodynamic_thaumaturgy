@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public class EnergyBlock extends BaseEntityBlock {
     public static final MapCodec<EnergyBlock> CODEC = simpleCodec(EnergyBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    protected EnergyBlock(Properties properties) {
+    public EnergyBlock(Properties properties) {
         super(properties);
     }
 
@@ -37,7 +38,7 @@ public class EnergyBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+        return new EnergyBlockEntity(blockPos, blockState);
     }
 
     @Override

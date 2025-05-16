@@ -15,6 +15,7 @@ public class MoeBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
+        blockWithItem(MoeBlocks.ENERGY_BLOCK);
     }
 
     private  void blockWithItem(DeferredBlock<?> deferredBlock){
