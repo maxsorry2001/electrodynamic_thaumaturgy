@@ -22,7 +22,8 @@ public class MoeItems {
 
     public static final Supplier<BlockItem> ELECTROMAGNETIC_ASSEMBLY_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_assembly_table", MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
     public static final Supplier<BlockItem> ELECTROMAGNETIC_MODEM_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_modem_table", MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
-    public static final Supplier<BlockItem> ENERGY_BLOCK = MOE_ITEM.registerSimpleBlockItem("energy_block", MoeBlocks.ENERGY_BLOCK);
+    public static final Supplier<BlockItem> ENERGY_BLOCK = MOE_ITEM.register("energy_block",
+            () -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));

@@ -1,7 +1,8 @@
 package net.Gmaj7.magic_of_electromagnetic.EventDispose;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
@@ -49,6 +50,11 @@ public class ClientEventHandler {
                     MoeItems.FE_CU_POTATO_BATTERY.get(),
                     MoeItems.FE_CU_CARROT_BATTERY.get(),
                     MoeItems.FE_CU_SOLUTION_BATTERY.get());
+            event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
+                    blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
+                    MoeBlocks.ENERGY_BLOCK.get());
+            event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65535)),
+                    MoeItems.ENERGY_BLOCK.get());
         }
 
         @SubscribeEvent

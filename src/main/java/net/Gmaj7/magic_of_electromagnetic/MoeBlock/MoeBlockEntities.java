@@ -2,10 +2,8 @@ package net.Gmaj7.magic_of_electromagnetic.MoeBlock;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyBlockEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.EnchantingTableBlockEntity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

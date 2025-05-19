@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,7 +61,7 @@ public class EnergyBlock extends BaseEntityBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if(blockEntity instanceof EnergyBlockEntity energyBlockEntity){
-            EnergyStorage energyStorage = energyBlockEntity.getEnergy();
+            IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
             player.sendSystemMessage(Component.literal(String.valueOf(energyStorage.getEnergyStored())));
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
@@ -73,7 +72,7 @@ public class EnergyBlock extends BaseEntityBlock {
         IEnergyStorage energyStorage =stack.getCapability(Capabilities.EnergyStorage.ITEM);
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if(energyStorage != null && blockEntity instanceof EnergyBlockEntity energyBlockEntity){
-            EnergyStorage blockStorage = energyBlockEntity.getEnergy();
+            IEnergyStorage blockStorage = energyBlockEntity.getEnergy();
             int change = 2048;
             if(stack.getItem() instanceof BatteryItem && energyStorage.getEnergyStored() > 0) {
                 if (blockStorage.getEnergyStored() < blockStorage.getMaxEnergyStored()) {
