@@ -2,10 +2,14 @@ package net.Gmaj7.magic_of_electromagnetic.EventDispose;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = MagicOfElectromagnetic.MODID)
 public class DamageEvent {
@@ -17,7 +21,9 @@ public class DamageEvent {
         if (protecting > 0){
             float damage = event.getNewDamage();
             if(protecting > damage){
-                ((MoeDataGet)livingEntity).getProtective().setProtecting(protecting - damage);
+                float newProtecting = protecting - damage;
+                ((MoeDataGet)livingEntity).getProtective().setProtecting(newProtecting);
+                PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(newProtecting));
                 event.setNewDamage(0);
             }
             else {

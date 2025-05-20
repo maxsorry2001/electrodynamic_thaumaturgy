@@ -16,5 +16,8 @@ public class PayLoadHandler {
 
         payloadRegistrar.playToServer(MoePacket.MoeSelectMagicPacket.TYPE, MoePacket.MoeSelectMagicPacket.STREAM_CODEC, MoePacket.MoeSelectMagicPacket::handle);
         payloadRegistrar.playToServer(MoePacket.LightingPacket.TYPE, MoePacket.LightingPacket.STREAM_CODEC, MoePacket.LightingPacket::handle);
+
+        payloadRegistrar.playToClient(MoePacket.ProtectingPacket.TYPE, MoePacket.ProtectingPacket.STREAM_CODEC, MoePacket.ProtectingPacket::handle);
+        payloadRegistrar.playToClient(MoePacket.EnergySetPacket.TYPE, MoePacket.EnergySetPacket.STREAM_CODEC, MoePacket.EnergySetPacket::handle);
     }
 }

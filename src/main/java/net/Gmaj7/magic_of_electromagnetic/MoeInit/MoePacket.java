@@ -1,6 +1,9 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,6 +14,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 public class MoePacket{
     public static class MoeSelectMagicPacket implements CustomPacketPayload {
@@ -88,6 +92,75 @@ public class MoePacket{
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverPlayer.level());
                     lightningBolt.teleportTo(packet.x, packet.y, packet.z);
                     serverPlayer.level().addFreshEntity(lightningBolt);
+                }
+            });
+        }
+    }
+
+    public static class ProtectingPacket implements CustomPacketPayload{
+        float protectNum;
+        public static final CustomPacketPayload.Type<ProtectingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "protecting"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, ProtectingPacket> STREAM_CODEC = CustomPacketPayload.codec(ProtectingPacket::write, ProtectingPacket::new);
+
+        public ProtectingPacket(float protectNum){
+            this.protectNum = protectNum;
+        }
+
+        public ProtectingPacket(FriendlyByteBuf buf){
+            this.protectNum = buf.readFloat();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeFloat(protectNum);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(ProtectingPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if(context.player().level().isClientSide()){
+                    ((MoeDataGet)context.player()).getProtective().setProtecting(packet.protectNum);
+                }
+            });
+        }
+    }
+
+    public static class EnergySetPacket implements CustomPacketPayload{
+        int energy;
+        BlockPos blockPos;
+        public static final CustomPacketPayload.Type<EnergySetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "energy_set"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, EnergySetPacket> STREAM_CODEC = CustomPacketPayload.codec(EnergySetPacket::write, EnergySetPacket::new);
+
+        public EnergySetPacket(int energy, BlockPos blockPos){
+            this.energy = energy;
+            this.blockPos = blockPos;
+        }
+
+        public EnergySetPacket(FriendlyByteBuf buf){
+            this.energy = buf.readInt();
+            this.blockPos = buf.readBlockPos();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeInt(energy);
+            buf.writeBlockPos(blockPos);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(EnergySetPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if(context.player().level().isClientSide()){
+                    BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
+                    if(blockEntity instanceof IMoeEnergyBlockEntity) {
+                        ((IMoeEnergyBlockEntity) blockEntity).setEnergy(packet.energy);
+                    }
                 }
             });
         }

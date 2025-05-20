@@ -1,11 +1,13 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeGui.hud;
 
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.component.DataComponents;
@@ -28,5 +30,7 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
                 guiGraphics.renderItemDecorations(Minecraft.getInstance().font, typeStack, screenWidth / 6, screenHeight * 7 / 8);
             }
         }
+        float protect = ((MoeDataGet)player).getProtective().getProtecting();
+        if(protect > 0) guiGraphics.drawString(Minecraft.getInstance().font, String.valueOf(protect), screenWidth / 2, screenHeight / 2, 0x0000FF);
     }
 }
