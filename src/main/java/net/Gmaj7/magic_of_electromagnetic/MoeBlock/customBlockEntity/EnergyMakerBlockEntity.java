@@ -4,17 +4,15 @@ import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity {
-
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(65536) {
+public class EnergyMakerBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity {
+    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16384) {
         @Override
         public void change(int i) {
             if(!level.isClientSide()){
@@ -22,27 +20,21 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
             }
         }
     };
-    public EnergyBlockEntity(BlockPos pos, BlockState blockState) {
+    public EnergyMakerBlockEntity(BlockPos pos, BlockState blockState) {
         super(MoeBlockEntities.ENERGY_MAKER_BLOCK_BE.get(), pos, blockState);
     }
 
-    @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
+    public static void tick(Level level, BlockPos pos, BlockState state, EnergyMakerBlockEntity energyMakerBlockEntity){
+        energyMakerBlockEntity.getEnergy().receiveEnergy(1, false);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setEnergy(tag.getInt("energy"));
-    }
-
     public IEnergyStorage getEnergy() {
         return energy;
     }
 
-    public void setEnergy(int i){
+    @Override
+    public void setEnergy(int i) {
         energy.setEnergy(i);
     }
 }

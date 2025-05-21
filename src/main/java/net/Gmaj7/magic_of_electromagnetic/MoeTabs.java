@@ -75,6 +75,7 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
                         output.accept(MoeBlocks.ENERGY_BLOCK);
+                        output.accept(MoeBlocks.ENERGY_MAKER_BLOCK);
                     }))
                     .build());
 

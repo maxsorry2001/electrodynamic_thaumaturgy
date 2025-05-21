@@ -52,7 +52,8 @@ public class ClientEventHandler {
                     MoeItems.FE_CU_SOLUTION_BATTERY.get());
             event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                     blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
-                    MoeBlocks.ENERGY_BLOCK.get());
+                    MoeBlocks.ENERGY_BLOCK.get(),
+                    MoeBlocks.ENERGY_MAKER_BLOCK.get());
             event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65535)),
                     MoeItems.ENERGY_BLOCK.get());
         }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "magic_of_electromagnetic:block/energy_maker_block"
+    }
+  }
+}
