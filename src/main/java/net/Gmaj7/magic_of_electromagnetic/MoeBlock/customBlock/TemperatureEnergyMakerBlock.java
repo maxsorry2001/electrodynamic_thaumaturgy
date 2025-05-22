@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class TemperatureEnergyMakerBlock extends BaseEntityBlock {
+public class TemperatureEnergyMakerBlock extends AbstractEnergyMakerBlock {
     public static final MapCodec<TemperatureEnergyMakerBlock> CODEC = simpleCodec(TemperatureEnergyMakerBlock::new);
     public TemperatureEnergyMakerBlock(Properties properties) {
         super(properties);

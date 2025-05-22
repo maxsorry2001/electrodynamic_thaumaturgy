@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class TemperatureEnergyMakerBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity {
+public class TemperatureEnergyMakerBlockEntity extends AbstractEnergyMakerBlockEntity {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16384) {
         @Override
         public void change(int i) {
@@ -25,25 +25,25 @@ public class TemperatureEnergyMakerBlockEntity extends BlockEntity implements IM
         super(MoeBlockEntities.ENERGY_MAKER_BLOCK_BE.get(), pos, blockState);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, TemperatureEnergyMakerBlockEntity temperatureEnergyMakerBlockEntity){
-        if(canEnergyMake(level, pos))
-            temperatureEnergyMakerBlockEntity.getEnergy().receiveEnergy(1, false);
+    @Override
+    protected void energyMake(AbstractEnergyMakerBlockEntity blockEntity) {
+        blockEntity.getEnergy().receiveEnergy(1, false);
     }
 
-    private static boolean canEnergyMake(Level level, BlockPos pos) {
-        BlockState blockStateUp = level.getBlockState(pos.above());
-        BlockState blockStateDown = level.getBlockState(pos.below());
+    protected boolean canEnergyMake() {
+        BlockState blockStateUp = level.getBlockState(getBlockPos().above());
+        BlockState blockStateDown = level.getBlockState(getBlockPos().below());
         return (isCold(blockStateUp) && isHot(blockStateDown)) || (isHot(blockStateUp) && isCold(blockStateDown));
     }
 
-    private static boolean isHot(BlockState blockState) {
+    private boolean isHot(BlockState blockState) {
         boolean flag = false;
         if(blockState.is(MoeTags.moeBlockTags.HOT_BLOCK)) flag = true;
         else if(blockState.getBlock() instanceof AbstractFurnaceBlock && blockState.getValue(AbstractFurnaceBlock.LIT)) flag = true;
         return flag;
     }
 
-    private static boolean isCold(BlockState blockState) {
+    private boolean isCold(BlockState blockState) {
         return blockState.is(MoeTags.moeBlockTags.COLD_BLOCK);
     }
 
