@@ -50,6 +50,8 @@
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "电磁装配台",
   "block.magic_of_electromagnetic.electromagnetic_modem_table": "强化调制台",
+  "block.magic_of_electromagnetic.energy_block": "储能立方",
+  "block.magic_of_electromagnetic.temperature_energy_maker_block": "温差发电机",
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "电磁射线",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "脉冲等离子体",

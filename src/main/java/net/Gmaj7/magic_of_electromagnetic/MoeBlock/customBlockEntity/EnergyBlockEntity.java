@@ -23,7 +23,7 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
         }
     };
     public EnergyBlockEntity(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.ENERGY_MAKER_BLOCK_BE.get(), pos, blockState);
+        super(MoeBlockEntities.ENERGY_BLOCK_BE.get(), pos, blockState);
     }
 
     @Override

@@ -1,0 +1,12 @@
+{
+  "values": [
+    "magma_block",
+    "campfire",
+    "lava",
+    "lava_cauldron",
+    "fire",
+    "soul_fire",
+    "torch",
+    "wall_torch"
+  ]
+}
