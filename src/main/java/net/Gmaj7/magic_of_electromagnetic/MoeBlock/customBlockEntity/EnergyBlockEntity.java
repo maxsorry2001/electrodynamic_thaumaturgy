@@ -1,11 +1,21 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeEnergyBlockMenu;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,9 +25,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 
-public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity {
+public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
     private final int tickEnergyTranslate = 1024;
 
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(65536) {
@@ -63,16 +74,16 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyBlockEntity energyBlockEntity){
         IItemHandler itemHandler = energyBlockEntity.getItemHandler();
         IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
-        if(!itemHandler.getStackInSlot(0).isEmpty()){
-            IEnergyStorage outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.EnergyStorage.ITEM);
+        IEnergyStorage inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.EnergyStorage.ITEM);
+        IEnergyStorage outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.EnergyStorage.ITEM);
+        if(outStorage != null){
             int canOut = outStorage.getMaxEnergyStored() - outStorage.getEnergyStored();
             if(canOut < energyBlockEntity.tickEnergyTranslate)
                 energyBlockEntity.outEnergy(Math.min(energyStorage.getEnergyStored(), canOut), outStorage, energyStorage);
             else
                 energyBlockEntity.outEnergy(Math.min(energyStorage.getEnergyStored(), energyBlockEntity.tickEnergyTranslate), outStorage, energyStorage);
         }
-        if (!itemHandler.getStackInSlot(1).isEmpty()){
-            IEnergyStorage inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.EnergyStorage.ITEM);
+        if (inStorage != null){
             int canIn = energyStorage.getMaxEnergyStored() - energyStorage.getEnergyStored();
             if(canIn < energyBlockEntity.tickEnergyTranslate)
                 energyBlockEntity.inEnergy(Math.min(inStorage.getEnergyStored(), canIn), inStorage, energyStorage);
@@ -109,5 +120,35 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
     @Override
     public IItemHandler getItemHandler() {
         return itemHandler;
+    }
+
+    public void drops() {
+        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++){
+            container.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        Containers.dropContents(this.level, this.worldPosition, container);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("moe_energy_block");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new MoeEnergyBlockMenu(i, inventory, this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return super.getUpdateTag(registries);
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return super.getUpdatePacket();
     }
 }
