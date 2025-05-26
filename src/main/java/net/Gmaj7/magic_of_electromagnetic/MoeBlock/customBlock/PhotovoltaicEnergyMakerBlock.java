@@ -3,7 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.PhotovoltaicEnergyMakerBE;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.TemperatureEnergyMakerBE;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.WirelessEnergySendBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -41,7 +41,7 @@ public class PhotovoltaicEnergyMakerBlock extends AbstractEnergyMakerBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get(), PhotovoltaicEnergyMakerBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.WIRELESS_ENERGY_SEND_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.WIRELESS_ENERGY_SEND_BE.get(), WirelessEnergySendBE::tick) : null;
     }
 
     @Nullable

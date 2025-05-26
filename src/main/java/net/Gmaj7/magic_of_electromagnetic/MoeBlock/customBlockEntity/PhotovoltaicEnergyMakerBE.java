@@ -3,12 +3,10 @@ package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -23,7 +21,7 @@ public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
         }
     };
     public PhotovoltaicEnergyMakerBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get(), pos, blockState);
+        super(MoeBlockEntities.WIRELESS_ENERGY_SEND_BE.get(), pos, blockState);
     }
 
     @Override
