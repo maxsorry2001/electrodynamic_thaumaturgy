@@ -21,7 +21,7 @@ public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
         }
     };
     public PhotovoltaicEnergyMakerBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.WIRELESS_ENERGY_SEND_BE.get(), pos, blockState);
+        super(MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get(), pos, blockState);
     }
 
     @Override

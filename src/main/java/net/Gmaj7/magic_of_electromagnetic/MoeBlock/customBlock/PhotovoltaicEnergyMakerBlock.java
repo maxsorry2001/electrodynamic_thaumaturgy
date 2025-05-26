@@ -41,7 +41,7 @@ public class PhotovoltaicEnergyMakerBlock extends AbstractEnergyMakerBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.WIRELESS_ENERGY_SEND_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.WIRELESS_ENERGY_SEND_BE.get(), WirelessEnergySendBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get(), PhotovoltaicEnergyMakerBE::tick) : null;
     }
 
     @Nullable
