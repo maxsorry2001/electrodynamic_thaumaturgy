@@ -52,6 +52,8 @@
   "block.magic_of_electromagnetic.electromagnetic_modem_table": "Enhancement Modem Table",
   "block.magic_of_electromagnetic.energy_block": "Energy Block",
   "block.magic_of_electromagnetic.temperature_energy_maker_block": "Temperature Difference Energy Maker",
+  "block.magic_of_electromagnetic.photovoltaic_energy_maker_block": "Photovoltaic Energy Maker",
+
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "Electromagnetic Ray",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "Pulsed Plasma",

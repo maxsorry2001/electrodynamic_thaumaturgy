@@ -58,7 +58,8 @@ public class ClientEventHandler {
             event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                     blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
                     MoeBlocks.ENERGY_BLOCK.get(),
-                    MoeBlocks.ENERGY_MAKER_BLOCK.get());
+                    MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get(),
+                    MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get());
             event.registerBlock(Capabilities.ItemHandler.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                     blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
                     MoeBlocks.ENERGY_BLOCK.get());

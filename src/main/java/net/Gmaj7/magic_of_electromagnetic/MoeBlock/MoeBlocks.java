@@ -1,10 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.ElectromagneticAssemblyTable;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.ElectromagneticModemTable;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.EnergyBlock;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.TemperatureEnergyMakerBlock;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,6 +21,9 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ENERGY_BLOCK = MOE_BLOCKS.register("energy_block",
             () ->  new EnergyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("temperature_energy_maker_block",
+    public static final DeferredBlock<Block> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("temperature_energy_maker_block",
             () ->  new TemperatureEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
+
+    public static final DeferredBlock<Block> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("photovoltaic_energy_maker_block",
+            () ->  new PhotovoltaicEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
 }

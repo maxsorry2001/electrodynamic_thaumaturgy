@@ -5,12 +5,14 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class TemperatureEnergyMakerBlockEntity extends AbstractEnergyMakerBlockEntity {
+public class TemperatureEnergyMakerBE extends AbstractEnergyMakerBE {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16384) {
         @Override
         public void change(int i) {
@@ -19,12 +21,24 @@ public class TemperatureEnergyMakerBlockEntity extends AbstractEnergyMakerBlockE
             }
         }
     };
-    public TemperatureEnergyMakerBlockEntity(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.ENERGY_MAKER_BLOCK_BE.get(), pos, blockState);
+    public TemperatureEnergyMakerBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.TEMPERATURE_ENERGY_MAKER_BLOCK_BE.get(), pos, blockState);
     }
 
     @Override
-    protected void energyMake(AbstractEnergyMakerBlockEntity blockEntity) {
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.putInt("energy", energy.getEnergyStored());
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        energy.setEnergy(tag.getInt("energy"));
+    }
+
+    @Override
+    protected void energyMake(AbstractEnergyMakerBE blockEntity) {
         blockEntity.getEnergy().receiveEnergy(1, false);
     }
 
@@ -33,12 +47,8 @@ public class TemperatureEnergyMakerBlockEntity extends AbstractEnergyMakerBlockE
         BlockState blockStateDown = level.getBlockState(getBlockPos().below());
         return (isCold(blockStateUp) && isHot(blockStateDown)) || (isHot(blockStateUp) && isCold(blockStateDown));
     }
-
     private boolean isHot(BlockState blockState) {
-        boolean flag = false;
-        if(blockState.is(MoeTags.moeBlockTags.HOT_BLOCK)) flag = true;
-        else if(blockState.getBlock() instanceof AbstractFurnaceBlock && blockState.getValue(AbstractFurnaceBlock.LIT)) flag = true;
-        return flag;
+        return blockState.is(MoeTags.moeBlockTags.HOT_BLOCK) || (blockState.getBlock() instanceof AbstractFurnaceBlock && blockState.getValue(AbstractFurnaceBlock.LIT));
     }
 
     private boolean isCold(BlockState blockState) {
