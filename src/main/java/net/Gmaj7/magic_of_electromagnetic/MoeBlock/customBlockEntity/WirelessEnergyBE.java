@@ -16,11 +16,12 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 public class WirelessEnergyBE extends BlockEntity {
-    private static final int maxSend = 64;
+    private static final int maxSend = 1024;
     private List<BlockPos> receivePos = new ArrayList<>();
 
     public WirelessEnergyBE(BlockPos pos, BlockState blockState) {
@@ -31,17 +32,27 @@ public class WirelessEnergyBE extends BlockEntity {
     public static void tick(Level level, BlockPos pos, BlockState state, WirelessEnergyBE wirelessEnergyBE){
         IEnergyStorage energyStorage = wirelessEnergyBE.getLinkStorage();
         if(energyStorage != null){
-            if(state.getValue(WirelessEnergyBlock.SEND)){
-                for (BlockPos target : wirelessEnergyBE.getReceivePos()){
+            if(state.getValue(WirelessEnergyBlock.SEND) && !wirelessEnergyBE.getReceivePos().isEmpty()){
+                Iterator<BlockPos> iterator = wirelessEnergyBE.getReceivePos().iterator();
+                while (iterator.hasNext()){
+                    BlockPos target = iterator.next();
                     BlockEntity blockEntity = level.getBlockEntity(target);
-                    if(blockEntity instanceof WirelessEnergyBE) {
+                    if(blockEntity instanceof WirelessEnergyBE && !level.getBlockState(target).getValue(WirelessEnergyBlock.SEND)) {
                         IEnergyStorage targetStorage = ((WirelessEnergyBE) blockEntity).getLinkStorage();
-                        if (energyStorage == targetStorage) continue;
-                        if (energyStorage.getEnergyStored() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
-                            targetStorage.receiveEnergy(Math.min(energyStorage.getEnergyStored(), maxSend), false);
-                            energyStorage.extractEnergy(Math.min(energyStorage.getEnergyStored(), maxSend), false);
+                        if(targetStorage != null) {
+                            if (energyStorage == targetStorage) continue;
+                            if (energyStorage.getEnergyStored() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
+                                int trans= Math.min(energyStorage.getEnergyStored(), maxSend);
+                                int a = targetStorage.receiveEnergy(trans, true);
+                                int b = energyStorage.extractEnergy(trans, true);
+                                if(a != 0 && b != 0){
+                                    targetStorage.receiveEnergy(trans, false);
+                                    energyStorage.extractEnergy(trans, false);
+                                }
+                            }
                         }
                     }
+                    else iterator.remove();
                 }
             }
         }
@@ -49,32 +60,14 @@ public class WirelessEnergyBE extends BlockEntity {
 
     public IEnergyStorage getLinkStorage(){
         BlockPos blockPos = null;
-        Direction direction = null;
-        switch (this.getBlockState().getValue(BlockStateProperties.FACING)){
-            case UP -> {
-                blockPos = getBlockPos().below();
-                direction = Direction.DOWN;
-            }
-            case DOWN -> {
-                blockPos = getBlockPos().above();
-                direction = Direction.UP;
-            }
-            case EAST -> {
-                blockPos = getBlockPos().west();
-                direction = Direction.WEST;
-            }
-            case WEST -> {
-                blockPos = getBlockPos().east();
-                direction = Direction.EAST;
-            }
-            case NORTH -> {
-                blockPos = getBlockPos().south();
-                direction = Direction.SOUTH;
-            }
-            case SOUTH -> {
-                blockPos = getBlockPos().north();
-                direction = Direction.NORTH;
-            }
+        Direction direction = this.getBlockState().getValue(BlockStateProperties.FACING);
+        switch (direction){
+            case UP -> blockPos = getBlockPos().below();
+            case DOWN -> blockPos = getBlockPos().above();
+            case EAST -> blockPos = getBlockPos().west();
+            case WEST -> blockPos = getBlockPos().east();
+            case NORTH -> blockPos = getBlockPos().south();
+            case SOUTH -> blockPos = getBlockPos().north();
         }
         return level.getCapability(Capabilities.EnergyStorage.BLOCK, blockPos, direction);
     }

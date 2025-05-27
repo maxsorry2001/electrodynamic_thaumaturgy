@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
 import com.mojang.serialization.Codec;
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -25,6 +26,9 @@ public class MoeDataComponentTypes {
             MOE_DATA_COMPONENT_TYPE.register("moe_enhancement_data",
                     () -> DataComponentType.<EnhancementData>builder().persistent(EnhancementData.CODEC).build());
 
+    public static final Supplier<DataComponentType<BlockPos>> LINK_POS =
+            MOE_DATA_COMPONENT_TYPE.register("moe_link_pos",
+                    () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).build());
 
     public static void register(IEventBus eventBus){
         MOE_DATA_COMPONENT_TYPE.register(eventBus);
