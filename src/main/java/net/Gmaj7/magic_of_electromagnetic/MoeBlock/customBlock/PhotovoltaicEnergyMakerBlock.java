@@ -3,7 +3,6 @@ package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.PhotovoltaicEnergyMakerBE;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.WirelessEnergySendBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;

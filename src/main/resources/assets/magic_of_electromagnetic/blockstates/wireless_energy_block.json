@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,send=true": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_send_block",
+      "x": 180
+    },
+    "facing=east,send=true": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_send_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,send=true": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_send_block",
+      "x": 90
+    },
+    "facing=south,send=true": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_send_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,send=true": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_send_block"
+    },
+    "facing=west,send=true": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_send_block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,send=false": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_receive_block",
+      "x": 180
+    },
+    "facing=east,send=false": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_receive_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,send=false": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_receive_block",
+      "x": 90
+    },
+    "facing=south,send=false": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_receive_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,send=false": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_receive_block"
+    },
+    "facing=west,send=false": {
+      "model": "magic_of_electromagnetic:block/wireless_energy_receive_block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

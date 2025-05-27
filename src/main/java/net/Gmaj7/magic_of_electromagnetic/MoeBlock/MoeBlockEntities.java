@@ -4,7 +4,7 @@ import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.PhotovoltaicEnergyMakerBE;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.TemperatureEnergyMakerBE;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.WirelessEnergySendBE;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.WirelessEnergyBE;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -28,9 +28,9 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("photovoltaic_energy_maker_be", () -> BlockEntityType.Builder.of(
                     PhotovoltaicEnergyMakerBE::new, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<WirelessEnergySendBE>> WIRELESS_ENERGY_SEND_BE =
+    public static final Supplier<BlockEntityType<WirelessEnergyBE>> WIRELESS_ENERGY_BE =
             MOE_BLOCK_ENTITY.register("wireless_energy_send_be", () -> BlockEntityType.Builder.of(
-                    WirelessEnergySendBE::new, MoeBlocks.WIRELESS_ENERGY_SEND_BLOCK.get()).build(null));
+                    WirelessEnergyBE::new, MoeBlocks.WIRELESS_ENERGY_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);
