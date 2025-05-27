@@ -31,11 +31,12 @@ public class MoeEnergyBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (EnergyBlockEntity) blockEntity;
         this.level = inventory.player.level();
 
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 1, 100, 35));
+
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 1, 100, 35));
     }
 
     @Override

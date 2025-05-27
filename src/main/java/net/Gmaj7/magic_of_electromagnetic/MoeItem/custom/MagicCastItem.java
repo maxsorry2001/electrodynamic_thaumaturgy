@@ -1,8 +1,8 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.WirelessEnergyBlock;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.WirelessEnergyBE;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyTransmissionAntennaBE;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
@@ -25,7 +25,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
@@ -67,23 +66,23 @@ public class MagicCastItem extends Item {
         BlockPos blockPos = context.getClickedPos();
         ItemStack itemStack = context.getItemInHand();
         BlockState blockState = context.getLevel().getBlockState(blockPos);
-        if(blockState.is(MoeBlocks.WIRELESS_ENERGY_BLOCK)) {
-            if (!itemStack.has(MoeDataComponentTypes.LINK_POS) || !context.getLevel().getBlockState(itemStack.get(MoeDataComponentTypes.LINK_POS)).is(MoeBlocks.WIRELESS_ENERGY_BLOCK))
+        if(blockState.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)) {
+            if (!itemStack.has(MoeDataComponentTypes.LINK_POS) || !context.getLevel().getBlockState(itemStack.get(MoeDataComponentTypes.LINK_POS)).is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK))
                 itemStack.set(MoeDataComponentTypes.LINK_POS, blockPos);
             else {
                 BlockPos targetPos = itemStack.get(MoeDataComponentTypes.LINK_POS);
                 if(targetPos == blockPos) itemStack.remove(MoeDataComponentTypes.LINK_POS);
                 else {
                     BlockState targetState = context.getLevel().getBlockState(targetPos);
-                    if(targetState.is(MoeBlocks.WIRELESS_ENERGY_BLOCK)){
-                        if(blockState.getValue(WirelessEnergyBlock.SEND) && !targetState.getValue(WirelessEnergyBlock.SEND)){
+                    if(targetState.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)){
+                        if(blockState.getValue(EnergyTransmissionAtennaBlock.SEND) && !targetState.getValue(EnergyTransmissionAtennaBlock.SEND)){
                             BlockEntity blockEntity = context.getLevel().getBlockEntity(blockPos);
-                            ((WirelessEnergyBE)blockEntity).getReceivePos().add(targetPos);
+                            ((EnergyTransmissionAntennaBE)blockEntity).getReceivePos().add(targetPos);
                             itemStack.remove(MoeDataComponentTypes.LINK_POS);
                         }
-                        else if (!blockState.getValue(WirelessEnergyBlock.SEND) && targetState.getValue(WirelessEnergyBlock.SEND)){
+                        else if (!blockState.getValue(EnergyTransmissionAtennaBlock.SEND) && targetState.getValue(EnergyTransmissionAtennaBlock.SEND)){
                             BlockEntity blockEntity = context.getLevel().getBlockEntity(targetPos);
-                            ((WirelessEnergyBE)blockEntity).getReceivePos().add(blockPos);
+                            ((EnergyTransmissionAntennaBE)blockEntity).getReceivePos().add(blockPos);
                             itemStack.remove(MoeDataComponentTypes.LINK_POS);
                         }
                     }

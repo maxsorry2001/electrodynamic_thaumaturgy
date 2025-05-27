@@ -57,12 +57,15 @@ public class EnergyBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if(blockEntity instanceof EnergyBlockEntity energyBlockEntity && !level.isClientSide()){
-            ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("moe_energy_block")), pos);
-            return ItemInteractionResult.SUCCESS.result();
+        if(level.isClientSide())
+            return InteractionResult.SUCCESS;
+        else {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof EnergyBlockEntity energyBlockEntity && !level.isClientSide()) {
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.magic_of_electromagnetic.energy_block")), pos);
+            }
+            return InteractionResult.CONSUME;
         }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     @Override

@@ -45,8 +45,8 @@ public class MoeModemTableMenu extends AbstractContainerMenu {
             }
         };
         for (int i = enhanceStartNum; i < enhanceEndNum; i++) {
-            if(i < 4) this.addSlot(new Slot(this.container, i, 18 * i + 16, 40));
-            else this.addSlot(new Slot(this.container, i , 18 * i - 56, 58));
+            if(i < 4) this.addSlot(new Slot(this.container, i, 18 * i + 52, 30));
+            else this.addSlot(new Slot(this.container, i , 18 * i - 20, 48));
         }
         this.addSlot(new Slot(this.container, toolSlotNum, 20, 10));
         addPlayerInventory(inventory);

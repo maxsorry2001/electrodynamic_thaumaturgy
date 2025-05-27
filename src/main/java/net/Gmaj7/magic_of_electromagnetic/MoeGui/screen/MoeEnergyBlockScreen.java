@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MoeEnergyBlockScreen extends AbstractContainerScreen<MoeEnergyBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_assembly_table.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_energy_block.png");
 
     public MoeEnergyBlockScreen(MoeEnergyBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

@@ -27,6 +27,6 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("photovoltaic_energy_maker_block",
             () ->  new PhotovoltaicEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> WIRELESS_ENERGY_BLOCK = MOE_BLOCKS.register("wireless_energy_block",
-            () ->  new WirelessEnergyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
+    public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = MOE_BLOCKS.register("energy_transmission_antenna_block",
+            () ->  new EnergyTransmissionAtennaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
 }

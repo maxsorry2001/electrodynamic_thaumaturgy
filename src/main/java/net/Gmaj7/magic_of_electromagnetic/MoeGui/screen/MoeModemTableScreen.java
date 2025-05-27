@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMenu> {
     Button button;
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_assembly_table.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_modem_table.png");
 
     public MoeModemTableScreen(MoeModemTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

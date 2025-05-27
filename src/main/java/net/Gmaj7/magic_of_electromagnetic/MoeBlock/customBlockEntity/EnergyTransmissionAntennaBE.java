@@ -1,13 +1,11 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.WirelessEnergyBlock;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,25 +18,25 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class WirelessEnergyBE extends BlockEntity {
+public class EnergyTransmissionAntennaBE extends BlockEntity {
     private static final int maxSend = 1024;
     private List<BlockPos> receivePos = new ArrayList<>();
 
-    public WirelessEnergyBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.WIRELESS_ENERGY_BE.get(), pos, blockState);
+    public EnergyTransmissionAntennaBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.ENERGY_TRANSMISSION_ANTENNA_BE.get(), pos, blockState);
     }
 
 
-    public static void tick(Level level, BlockPos pos, BlockState state, WirelessEnergyBE wirelessEnergyBE){
-        IEnergyStorage energyStorage = wirelessEnergyBE.getLinkStorage();
+    public static void tick(Level level, BlockPos pos, BlockState state, EnergyTransmissionAntennaBE energyTransmissionAntennaBE){
+        IEnergyStorage energyStorage = energyTransmissionAntennaBE.getLinkStorage();
         if(energyStorage != null){
-            if(state.getValue(WirelessEnergyBlock.SEND) && !wirelessEnergyBE.getReceivePos().isEmpty()){
-                Iterator<BlockPos> iterator = wirelessEnergyBE.getReceivePos().iterator();
+            if(state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
+                Iterator<BlockPos> iterator = energyTransmissionAntennaBE.getReceivePos().iterator();
                 while (iterator.hasNext()){
                     BlockPos target = iterator.next();
                     BlockEntity blockEntity = level.getBlockEntity(target);
-                    if(blockEntity instanceof WirelessEnergyBE && !level.getBlockState(target).getValue(WirelessEnergyBlock.SEND)) {
-                        IEnergyStorage targetStorage = ((WirelessEnergyBE) blockEntity).getLinkStorage();
+                    if(blockEntity instanceof EnergyTransmissionAntennaBE && !level.getBlockState(target).getValue(EnergyTransmissionAtennaBlock.SEND)) {
+                        IEnergyStorage targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
                         if(targetStorage != null) {
                             if (energyStorage == targetStorage) continue;
                             if (energyStorage.getEnergyStored() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
