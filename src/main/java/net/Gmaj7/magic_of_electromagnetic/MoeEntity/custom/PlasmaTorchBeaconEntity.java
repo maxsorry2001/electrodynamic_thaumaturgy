@@ -53,7 +53,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
         super.tick();
         if(start){
             this.startTime++;
-            if(startTime > 100){
+            if(startTime == 100){
                 List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
                 for (LivingEntity target : list){
                     if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
@@ -61,8 +61,11 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
                         MoeFunction.checkTargetEnhancement(itemStack, target);
                     }
                 }
-                this.discard();
             }
+            else if(startTime >= 120) this.discard();
+        }
+        else if (this.inGround){
+            this.start = true;
         }
     }
 
@@ -109,5 +112,9 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public int getStartTime() {
+        return startTime;
     }
 }

@@ -16,7 +16,7 @@ public class PlasmaTorch implements IMoeMagic{
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         PlasmaTorchBeaconEntity plasmaTorchBeaconEntity = new PlasmaTorchBeaconEntity(livingEntity.level(), livingEntity, itemStack);
         plasmaTorchBeaconEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 1.5F, 1.0F);
-        plasmaTorchBeaconEntity.setDamage((int) MoeFunction.getMagicAmount(itemStack) * 3);
+        plasmaTorchBeaconEntity.setDamage((int) MoeFunction.getMagicAmount(itemStack) * 10);
         livingEntity.level().addFreshEntity(plasmaTorchBeaconEntity);
     }
 
