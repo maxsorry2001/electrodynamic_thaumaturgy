@@ -47,6 +47,11 @@ public class Chain implements IMoeMagic{
         return 80;
     }
 
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
+
     private void addParticle(LivingEntity livingEntityStart, LivingEntity livingEntityEnd){
         Vec3 vec3Start = livingEntityStart.getEyePosition().add(0, (livingEntityStart.getY() - livingEntityStart.getEyeY()) / 2, 0);
         Vec3 vec3End = livingEntityEnd.getEyePosition().add(0, (livingEntityEnd.getY() - livingEntityEnd.getEyeY()) / 2, 0);

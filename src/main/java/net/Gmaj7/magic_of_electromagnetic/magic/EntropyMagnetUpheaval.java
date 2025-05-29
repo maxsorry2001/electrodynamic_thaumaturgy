@@ -48,4 +48,9 @@ public class EntropyMagnetUpheaval implements IMoeMagic{
     public int getBaseCooldown() {
         return 20;
     }
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
 }

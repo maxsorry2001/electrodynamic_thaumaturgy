@@ -54,4 +54,9 @@ public class ElectromagneticAssault implements IMoeMagic{
     public int getBaseCooldown() {
         return 60;
     }
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
 }

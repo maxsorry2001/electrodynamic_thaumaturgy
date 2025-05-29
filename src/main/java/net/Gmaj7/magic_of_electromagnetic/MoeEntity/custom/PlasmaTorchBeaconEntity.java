@@ -25,7 +25,6 @@ import java.util.List;
 
 public class PlasmaTorchBeaconEntity extends AbstractArrow {
     private int startTime;
-    private boolean start = false;
     private float damage;
     private ItemStack itemStack;
     public PlasmaTorchBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
@@ -51,22 +50,17 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        if(start){
-            this.startTime++;
-            if(startTime == 100){
-                List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
-                for (LivingEntity target : list){
-                    if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
-                        target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), damage);
-                        MoeFunction.checkTargetEnhancement(itemStack, target);
-                    }
+        this.startTime++;
+        if(startTime == 100){
+            List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
+            for (LivingEntity target : list){
+                if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
+                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), damage);
+                    MoeFunction.checkTargetEnhancement(itemStack, target);
                 }
             }
-            else if(startTime >= 120) this.discard();
         }
-        else if (this.inGround){
-            this.start = true;
-        }
+        else if(startTime >= 120) this.discard();
     }
 
     @Override
@@ -81,9 +75,6 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.start = true;
-        if(level() instanceof ServerLevel)
-            ((ServerLevel) level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), getX(), getY(), getZ(), 1, 0, 0, 0, 0);
     }
 
     @Override

@@ -45,4 +45,9 @@ public class Exciting implements IMoeMagic{
     public int getBaseCooldown() {
         return 80;
     }
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
 }

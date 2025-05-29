@@ -12,4 +12,6 @@ public interface IMoeMagic {
     int getBaseEnergyCost();
 
     int getBaseCooldown();
+
+    boolean success(LivingEntity livingEntity, ItemStack itemStack);
 }

@@ -109,10 +109,14 @@ public class MoeFunction {
     public static <T> Holder<T> getHolder(Level level, ResourceKey<Registry<T>> registry, ResourceKey<T> resourceKey){
         return level.registryAccess().registryOrThrow(registry).getHolderOrThrow(resourceKey);
     }
+
+    public static BlockHitResult getHitBlock(Level level, Entity source, Vec3 start, Vec3 end){
+        return level.clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, source));
+    }
     public static RayHitResult getLineHitResult(Level level, Entity source, Vec3 start, Vec3 end, boolean checkForBlocks, float bbInflation) {
         BlockHitResult blockHitResult;
         if (checkForBlocks) {
-            blockHitResult = level.clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, source));
+            blockHitResult = getHitBlock(level, source, start, end);
             end = blockHitResult.getLocation();
         }
         AABB range = source.getBoundingBox().expandTowards(end.subtract(start));

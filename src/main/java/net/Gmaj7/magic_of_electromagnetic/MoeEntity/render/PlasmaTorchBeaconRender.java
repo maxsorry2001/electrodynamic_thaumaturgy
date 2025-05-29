@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PlasmaTorchBeaconEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -15,11 +14,10 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 public class PlasmaTorchBeaconRender extends ArrowRenderer<PlasmaTorchBeaconEntity> {
     public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moe_ray_entity_model"), "main");
-    private static final ResourceLocation CORE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_entity.png");
+    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_entity.png");
     private final ModelPart body;
     public PlasmaTorchBeaconRender(EntityRendererProvider.Context context) {
         super(context);
@@ -29,7 +27,7 @@ public class PlasmaTorchBeaconRender extends ArrowRenderer<PlasmaTorchBeaconEnti
 
     @Override
     public ResourceLocation getTextureLocation(PlasmaTorchBeaconEntity plasmaTorchBeaconEntity) {
-        if(plasmaTorchBeaconEntity.getStartTime() > 100) return CORE;
+        if(plasmaTorchBeaconEntity.getStartTime() > 100) return LIGHT;
         return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 
@@ -47,7 +45,7 @@ public class PlasmaTorchBeaconRender extends ArrowRenderer<PlasmaTorchBeaconEnti
 
             for (float i = 0; i < 20 * 4; i += length) {
                 poseStack.translate(0, length, 0);
-                VertexConsumer consumer = buffer.getBuffer(RenderType.energySwirl(CORE, 0, 0));
+                VertexConsumer consumer = buffer.getBuffer(RenderType.energySwirl(LIGHT, 0, 0));
                 {
                     poseStack.pushPose();
                     float expansion = (float) Math.min(10 * Math.log(lifetime), 30);

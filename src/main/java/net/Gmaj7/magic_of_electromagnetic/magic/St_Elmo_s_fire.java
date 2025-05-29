@@ -27,4 +27,9 @@ public class St_Elmo_s_fire implements IMoeMagic{
     public int getBaseCooldown() {
         return 70;
     }
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
 }

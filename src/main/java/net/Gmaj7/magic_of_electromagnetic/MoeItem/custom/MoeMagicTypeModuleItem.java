@@ -35,4 +35,6 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     public int getBaseCooldown(){
         return this.magic.getBaseCooldown();
     }
+
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack){return magic.success(livingEntity, itemStack);}
 }

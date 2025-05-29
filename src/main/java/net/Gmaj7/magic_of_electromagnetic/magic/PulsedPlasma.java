@@ -30,4 +30,9 @@ public class PulsedPlasma implements IMoeMagic{
     public int getBaseCooldown() {
         return 40;
     }
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
 }

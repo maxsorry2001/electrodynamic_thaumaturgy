@@ -20,6 +20,7 @@ public class TorchParticle extends TextureSheetParticle {
         this.lifetime = 100;
         this.rCol = 0.8F;
         this.alpha = 0.75F;
+        this.quadSize = 0.2F;
     }
 
     @Override
@@ -30,13 +31,15 @@ public class TorchParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return this.quadSize * (101 - this.age) / 3;
+        if(age < 90) return this.quadSize * Math.min(this.age, 30);
+        else return this.quadSize * (this.lifetime - this.age) * 3;
     }
 
     @Override
     public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
         Quaternionf quaternionf = new Quaternionf();
-        quaternionf.rotationX((float) (- Math.PI / 2));
+        if(this.age >= 90) quaternionf.rotationXYZ((float) (- Math.PI / 2), 0, (float) ((this.age - 50) * Math.PI / 5));
+        else quaternionf.rotationX((float) (- Math.PI / 2));
         this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 

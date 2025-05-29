@@ -27,4 +27,9 @@ public class MagmaLighting implements IMoeMagic{
     public int getBaseCooldown() {
         return 30;
     }
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
 }
