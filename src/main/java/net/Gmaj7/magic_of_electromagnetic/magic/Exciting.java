@@ -3,7 +3,9 @@ package net.Gmaj7.magic_of_electromagnetic.magic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -28,11 +30,8 @@ public class Exciting implements IMoeMagic{
                 MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
             }
         }
-        if(livingEntity.level().isClientSide()){
-            for (int j = 1; j < 90; j++){
-                double theta = j * 2 *Math.PI / 90;
-                livingEntity.level().addParticle(ParticleTypes.ELECTRIC_SPARK, livingEntity.getX() + 2 * Math.sin(theta), livingEntity.getY() + 1, livingEntity.getZ() + 2 * Math.cos(theta), Math.sin(theta) * 10, 0, Math.cos(theta) * 10);
-            }
+        if(livingEntity.level() instanceof ServerLevel){
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
         }
     }
 

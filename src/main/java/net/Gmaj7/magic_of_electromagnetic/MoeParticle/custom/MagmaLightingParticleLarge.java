@@ -9,10 +9,11 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
-public class MagmaLightingParticle extends TextureSheetParticle {
+public class MagmaLightingParticleLarge extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    public MagmaLightingParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public MagmaLightingParticleLarge(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 0;
@@ -21,6 +22,7 @@ public class MagmaLightingParticle extends TextureSheetParticle {
         this.bCol = 0.9F;
         this.gCol = 0.8F;
         this.alpha = 0.5F;
+        this.quadSize = 0.2F;
     }
 
     @Override
@@ -31,19 +33,22 @@ public class MagmaLightingParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return this.quadSize *(21 - this.age);
+        return this.quadSize * Math.min(this.age * 3, 30);
     }
 
     @Override
     public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
         Quaternionf quaternionf = new Quaternionf();
-        quaternionf.rotationX((float) (- Math.PI / 2));
+        Vector3f vector3f = renderInfo.getLookVector();
+        float theta = (float) Math.PI / 2;
+        if(vector3f.y() < 0) theta = - theta;
+        quaternionf.rotationX(theta);
         this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return ParticleRenderType.PARTICLE_SHEET_LIT;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -57,7 +62,7 @@ public class MagmaLightingParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new MagmaLightingParticle(clientLevel, x, y, z, spriteSet);
+            return new MagmaLightingParticleLarge(clientLevel, x, y, z, spriteSet);
         }
     }
 }

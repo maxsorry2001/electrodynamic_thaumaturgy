@@ -11,16 +11,17 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class TorchParticle extends TextureSheetParticle {
+public class MagmaLightingParticleMiddle extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    public TorchParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public MagmaLightingParticleMiddle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 0;
         this.setSpriteFromAge(spriteSet);
-        this.lifetime = 100;
-        this.rCol = 0.8F;
-        this.alpha = 0.75F;
+        this.lifetime = 20;
+        this.bCol = 0.9F;
+        this.gCol = 0.8F;
+        this.alpha = 0.5F;
         this.quadSize = 0.2F;
     }
 
@@ -32,8 +33,7 @@ public class TorchParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        if(age < 90) return this.quadSize * Math.min(this.age, 30);
-        else return this.quadSize * (this.lifetime - this.age) * 3;
+        return this.quadSize * Math.min(this.age * 2, 20);
     }
 
     @Override
@@ -42,8 +42,7 @@ public class TorchParticle extends TextureSheetParticle {
         Vector3f vector3f = renderInfo.getLookVector();
         float theta = (float) Math.PI / 2;
         if(vector3f.y() < 0) theta = - theta;
-        if(this.age >= 90) quaternionf.rotationXYZ(theta, 0, (float) ((this.age - 50) * Math.PI / 5));
-        else quaternionf.rotationX(theta);
+        quaternionf.rotationX(theta);
         this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 
@@ -63,7 +62,7 @@ public class TorchParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new TorchParticle(clientLevel, x, y, z, spriteSet);
+            return new MagmaLightingParticleMiddle(clientLevel, x, y, z, spriteSet);
         }
     }
 }

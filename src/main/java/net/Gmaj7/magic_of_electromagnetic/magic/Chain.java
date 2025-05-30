@@ -2,8 +2,10 @@ package net.Gmaj7.magic_of_electromagnetic.magic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -58,9 +60,12 @@ public class Chain implements IMoeMagic{
         Vec3 vec3Throw = vec3Start.vectorTo(vec3End);
         Vec3 vec3Per = vec3Throw.normalize();
         int x = Mth.floor(vec3Throw.length());
-        for (float j = 0.2F; j < x; j += 0.2F){
-            Vec3 vec3Point = vec3Start.add(vec3Per.scale(j));
-            livingEntityStart.level().addParticle(ParticleTypes.ELECTRIC_SPARK, vec3Point.x, vec3Point.y, vec3Point.z, 0, 0, 0);
+        if(livingEntityStart.level() instanceof ServerLevel) {
+            ((ServerLevel) livingEntityStart.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
+            for (float j = 0.2F; j < x; j += 0.2F) {
+                Vec3 vec3Point = vec3Start.add(vec3Per.scale(j));
+                ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, vec3Point.x, vec3Point.y, vec3Point.z, 1, 0, 0, 0, 0);
+            }
         }
     }
 }

@@ -1,9 +1,16 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MagmaLightingBeaconEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class MagmaLighting implements IMoeMagic{
     @Override
@@ -13,9 +20,17 @@ public class MagmaLighting implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+        BlockHitResult blockHitResult = getBlock(livingEntity);
+        BlockPos blockPos = blockHitResult.getBlockPos();
+        Vec3 vec3 = blockPos.getCenter();
         MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(livingEntity.level(), livingEntity, itemStack);
-        magmaLightingBeaconEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 2F, 0);
+        magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         livingEntity.level().addFreshEntity(magmaLightingBeaconEntity);
+        if(livingEntity.level() instanceof ServerLevel) {
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 4, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 9, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 14, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override
@@ -30,6 +45,12 @@ public class MagmaLighting implements IMoeMagic{
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
+        return getBlock(livingEntity).getType() != HitResult.Type.MISS;
+    }
+
+    private BlockHitResult getBlock(LivingEntity livingEntity){
+        Vec3 start = livingEntity.getEyePosition().subtract(0, 0.3, 0);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
+        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 }

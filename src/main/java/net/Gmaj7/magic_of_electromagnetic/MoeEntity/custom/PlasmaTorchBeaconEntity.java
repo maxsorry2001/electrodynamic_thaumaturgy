@@ -25,7 +25,6 @@ import java.util.List;
 
 public class PlasmaTorchBeaconEntity extends AbstractArrow {
     private int startTime;
-    private float damage;
     private ItemStack itemStack;
     public PlasmaTorchBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -55,7 +54,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
             List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
             for (LivingEntity target : list){
                 if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), damage);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), (int) MoeFunction.getMagicAmount(itemStack) * 10);
                     MoeFunction.checkTargetEnhancement(itemStack, target);
                 }
             }
@@ -98,11 +97,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
 
     @Override
     public boolean isNoGravity() {
-        return true;
-    }
-
-    public void setDamage(float damage) {
-        this.damage = damage;
+        return false;
     }
 
     public int getStartTime() {

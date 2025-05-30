@@ -3,7 +3,9 @@ package net.Gmaj7.magic_of_electromagnetic.magic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,6 +31,8 @@ public class ElectricEnergyRelease implements IMoeMagic{
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
             target.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
+        if(livingEntity.level() instanceof ServerLevel)
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
     }
 
     @Override

@@ -11,8 +11,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
-import net.Gmaj7.magic_of_electromagnetic.MoeParticle.custom.MagmaLightingParticle;
-import net.Gmaj7.magic_of_electromagnetic.MoeParticle.custom.TorchParticle;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.custom.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -98,8 +97,13 @@ public class MagicOfElectromagnetic
 
         @SubscribeEvent
         public static void registerParticleProviders(RegisterParticleProvidersEvent event){
-            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE.get(), MagmaLightingParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), MagmaLightingParticleMiddle.Provider::new);
+            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), MagmaLightingParticleSmall.Provider::new);
+            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), MagmaLightingParticleLarge.Provider::new);
             event.registerSpriteSet(MoeParticles.TORCH_PARTICLE.get(), TorchParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), SelfMagicCircleParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), WildMagicCircleParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.NORMAL_CIRCLE_PARTICLE.get(), NormalCircleParticle.Provider::new);
         }
     }
 }

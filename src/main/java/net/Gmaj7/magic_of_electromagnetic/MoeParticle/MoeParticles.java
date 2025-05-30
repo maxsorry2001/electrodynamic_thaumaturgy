@@ -11,9 +11,19 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class MoeParticles {
     public static final DeferredRegister<ParticleType<?>> MOE_PARTICLE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MagicOfElectromagnetic.MODID);
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE = MOE_PARTICLE.register("magma_lighting_particle",
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_MIDDLE = MOE_PARTICLE.register("magma_lighting_middle_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_SMALL = MOE_PARTICLE.register("magma_lighting_small_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_LARGE = MOE_PARTICLE.register("magma_lighting_large_particle",
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TORCH_PARTICLE = MOE_PARTICLE.register("torch_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SELF_MAGIC_CIRCLE_PARTICLE = MOE_PARTICLE.register("self_magic_circle_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WILD_MAGIC_CIRCLE_PARTICLE = MOE_PARTICLE.register("wild_magic_circle_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NORMAL_CIRCLE_PARTICLE = MOE_PARTICLE.register("normal_circle_particle",
             () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus){MOE_PARTICLE.register(eventBus);}
