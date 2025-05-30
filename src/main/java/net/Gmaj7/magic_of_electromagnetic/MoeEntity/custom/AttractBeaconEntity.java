@@ -53,7 +53,7 @@ public class AttractBeaconEntity extends AbstractArrow {
         }
         if(this.level() instanceof ServerLevel serverLevel && tickCount % 20 == 0){
             BlockPos blockPos = this.getOnPos().above();
-            serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> serverLevel.sendParticles(player, MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), false, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0D, 0D, 0D, 0D));
+            serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> serverLevel.sendParticles(player, MoeParticles.NORMAL_SHRINK_CIRCLE_PARTICLE.get(), false, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0D, 0D, 0D, 0D));
         }
     }
 
@@ -86,6 +86,11 @@ public class AttractBeaconEntity extends AbstractArrow {
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.liveTime = compound.getInt("moe_live_time");
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
     }
 
     public void setLiveTime(int liveTime) {

@@ -37,6 +37,9 @@ public class Chain implements IMoeMagic{
                 MoeFunction.checkTargetEnhancement(itemStack, target1);
             }
         }
+        Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
+        if(livingEntity.level() instanceof ServerLevel)
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
     }
 
     @Override

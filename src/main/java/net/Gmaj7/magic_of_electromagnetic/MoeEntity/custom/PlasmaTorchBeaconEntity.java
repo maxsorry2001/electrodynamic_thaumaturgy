@@ -97,7 +97,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
 
     @Override
     public boolean isNoGravity() {
-        return false;
+        return true;
     }
 
     public int getStartTime() {

@@ -3,6 +3,8 @@ package net.Gmaj7.magic_of_electromagnetic.magic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,6 +39,9 @@ public class EntropyMagnetUpheaval implements IMoeMagic{
                 }
             }
         }
+        Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
+        if(level instanceof ServerLevel)
+            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
     }
 
     @Override
