@@ -27,9 +27,12 @@ public class MagmaLighting implements IMoeMagic{
         magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         livingEntity.level().addFreshEntity(magmaLightingBeaconEntity);
         if(livingEntity.level() instanceof ServerLevel) {
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 4, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 9, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 14, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
         }
     }
 

@@ -47,6 +47,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
             level().setBlockAndUpdate(getOnPos(), Blocks.LAVA.defaultBlockState());
             LightningBolt lightningBolt1 = EntityType.LIGHTNING_BOLT.create(level());
             lightningBolt1.teleportTo(this.getX(), this.getY(), this.getZ());
+            lightningBolt1.setVisualOnly(true);
             level().addFreshEntity(lightningBolt1);
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(5));
             for (LivingEntity target : list){
@@ -55,6 +56,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
                     MoeFunction.checkTargetEnhancement(magicItem, target);
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
                     lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
+                    lightningBolt.setVisualOnly(true);
                     level().addFreshEntity(lightningBolt);
                 }
             }

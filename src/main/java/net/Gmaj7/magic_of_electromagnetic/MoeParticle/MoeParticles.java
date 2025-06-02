@@ -17,13 +17,27 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_LARGE = MOE_PARTICLE.register("magma_lighting_large_particle",
             () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_MIDDLE_IN = MOE_PARTICLE.register("magma_lighting_middle_particle_in",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_SMALL_IN = MOE_PARTICLE.register("magma_lighting_small_particle_in",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_LARGE_IN = MOE_PARTICLE.register("magma_lighting_large_particle_in",
+            () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TORCH_PARTICLE = MOE_PARTICLE.register("torch_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TORCH_PARTICLE_IN = MOE_PARTICLE.register("torch_particle_in",
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SELF_MAGIC_CIRCLE_PARTICLE = MOE_PARTICLE.register("self_magic_circle_particle",
             () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SELF_MAGIC_CIRCLE_PARTICLE_IN = MOE_PARTICLE.register("self_magic_circle_particle_in",
+            () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WILD_MAGIC_CIRCLE_PARTICLE = MOE_PARTICLE.register("wild_magic_circle_particle",
             () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WILD_MAGIC_CIRCLE_PARTICLE_IN = MOE_PARTICLE.register("wild_magic_circle_particle_in",
+            () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FRONT_MAGIC_CIRCLE_PARTICLE = MOE_PARTICLE.register("front_magic_circle_particle",
+            () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FRONT_MAGIC_CIRCLE_PARTICLE_IN = MOE_PARTICLE.register("front_magic_circle_particle_in",
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NORMAL_CIRCLE_PARTICLE = MOE_PARTICLE.register("normal_circle_particle",
             () -> new SimpleParticleType(true));

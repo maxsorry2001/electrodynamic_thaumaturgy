@@ -11,17 +11,17 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class FrontMagicCircleParticle extends TextureSheetParticle {
+public class WildMagicCircleParticleIn extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    public FrontMagicCircleParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public WildMagicCircleParticleIn(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 0;
         this.setSpriteFromAge(spriteSet);
-        this.lifetime = 2;
+        this.lifetime = 5;
         this.rCol = 0.8F;
         this.alpha = 0.75F;
-        this.quadSize = 0.5F;
+        this.quadSize = 0.2F;
     }
 
     @Override
@@ -32,12 +32,17 @@ public class FrontMagicCircleParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return this.quadSize;
+        return Math.min(20F, this.age * 8);
     }
 
     @Override
     public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-        super.render(buffer, renderInfo, partialTicks);
+        Quaternionf quaternionf = new Quaternionf();
+        Vector3f vector3f = renderInfo.getLookVector();
+        float theta = (float) Math.PI / 2;
+        if(vector3f.y() < 0) theta = - theta;
+        quaternionf.rotationX(theta);
+        this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 
     @Override
@@ -56,7 +61,7 @@ public class FrontMagicCircleParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new FrontMagicCircleParticle(clientLevel, x, y, z, spriteSet);
+            return new WildMagicCircleParticleIn(clientLevel, x, y, z, spriteSet);
         }
     }
 }

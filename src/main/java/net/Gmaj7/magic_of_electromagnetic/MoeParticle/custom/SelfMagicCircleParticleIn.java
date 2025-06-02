@@ -11,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class FrontMagicCircleParticle extends TextureSheetParticle {
+public class SelfMagicCircleParticleIn extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    public FrontMagicCircleParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public SelfMagicCircleParticleIn(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 0;
@@ -21,7 +21,8 @@ public class FrontMagicCircleParticle extends TextureSheetParticle {
         this.lifetime = 2;
         this.rCol = 0.8F;
         this.alpha = 0.75F;
-        this.quadSize = 0.5F;
+        this.quadSize = 0.2F;
+        this.setParticleSpeed(0, 1.25, 0);
     }
 
     @Override
@@ -32,12 +33,17 @@ public class FrontMagicCircleParticle extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return this.quadSize;
+        return 1.5F;
     }
 
     @Override
     public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-        super.render(buffer, renderInfo, partialTicks);
+        Quaternionf quaternionf = new Quaternionf();
+        Vector3f vector3f = renderInfo.getLookVector();
+        float theta = (float) Math.PI / 2;
+        if(vector3f.y() < 0) theta = - theta;
+        quaternionf.rotationX(theta);
+        this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class FrontMagicCircleParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new FrontMagicCircleParticle(clientLevel, x, y, z, spriteSet);
+            return new SelfMagicCircleParticleIn(clientLevel, x, y, z, spriteSet);
         }
     }
 }

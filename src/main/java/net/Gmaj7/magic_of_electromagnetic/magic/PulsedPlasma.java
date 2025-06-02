@@ -22,7 +22,7 @@ public class PulsedPlasma implements IMoeMagic{
         pulsedPlasmaEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 5, 1.5F);
         pulsedPlasmaEntity.setPlasmaDamage(MoeFunction.getMagicAmount(itemStack));
         livingEntity.level().addFreshEntity(pulsedPlasmaEntity);
-        Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
+        Vec3 vec3 = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
         if(livingEntity.level() instanceof ServerLevel)
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
     }

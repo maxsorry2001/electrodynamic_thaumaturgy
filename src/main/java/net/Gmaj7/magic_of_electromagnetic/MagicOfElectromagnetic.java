@@ -100,10 +100,17 @@ public class MagicOfElectromagnetic
             event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), MagmaLightingParticleMiddle.Provider::new);
             event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), MagmaLightingParticleSmall.Provider::new);
             event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), MagmaLightingParticleLarge.Provider::new);
+            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE_IN.get(), MagmaLightingParticleMiddleIn.Provider::new);
+            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL_IN.get(), MagmaLightingParticleSmallIn.Provider::new);
+            event.registerSpriteSet(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE_IN.get(), MagmaLightingParticleLargeIn.Provider::new);
             event.registerSpriteSet(MoeParticles.TORCH_PARTICLE.get(), TorchParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.TORCH_PARTICLE_IN.get(), TorchParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), SelfMagicCircleParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), SelfMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), WildMagicCircleParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), WildMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), FrontMagicCircleParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), FrontMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.NORMAL_CIRCLE_PARTICLE.get(), NormalCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.NORMAL_SHRINK_CIRCLE_PARTICLE.get(), NormalShrinkCircleParticle.Provider::new);
         }

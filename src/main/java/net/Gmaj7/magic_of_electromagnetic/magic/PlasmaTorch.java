@@ -26,8 +26,10 @@ public class PlasmaTorch implements IMoeMagic{
         PlasmaTorchBeaconEntity plasmaTorchBeaconEntity = new PlasmaTorchBeaconEntity(livingEntity.level(), livingEntity, itemStack);
         plasmaTorchBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         livingEntity.level().addFreshEntity(plasmaTorchBeaconEntity);
-        if(livingEntity.level() instanceof ServerLevel)
+        if(livingEntity.level() instanceof ServerLevel) {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), plasmaTorchBeaconEntity.getX(), plasmaTorchBeaconEntity.getY() + 0.1, plasmaTorchBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), plasmaTorchBeaconEntity.getX(), plasmaTorchBeaconEntity.getY() + 0.1, plasmaTorchBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

@@ -31,8 +31,8 @@ public class Exciting implements IMoeMagic{
                 MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
             }
         }
-        Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
         if(livingEntity.level() instanceof ServerLevel){
+            Vec3 vec3 = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
         }

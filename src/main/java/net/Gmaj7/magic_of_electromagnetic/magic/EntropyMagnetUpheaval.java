@@ -39,7 +39,7 @@ public class EntropyMagnetUpheaval implements IMoeMagic{
                 }
             }
         }
-        Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
+        Vec3 vec3 = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
         if(level instanceof ServerLevel)
             ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
     }

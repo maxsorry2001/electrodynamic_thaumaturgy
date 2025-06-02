@@ -42,7 +42,7 @@ public class MagmaLightingParticleMiddle extends TextureSheetParticle {
         Vector3f vector3f = renderInfo.getLookVector();
         float theta = (float) Math.PI / 2;
         if(vector3f.y() < 0) theta = - theta;
-        quaternionf.rotationX(theta);
+        quaternionf.rotationXYZ(theta, 0, (float) (this.age * Math.PI / 10));
         this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 

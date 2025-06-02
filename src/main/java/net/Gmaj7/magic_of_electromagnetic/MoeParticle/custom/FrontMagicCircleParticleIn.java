@@ -8,12 +8,10 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
-public class FrontMagicCircleParticle extends TextureSheetParticle {
+public class FrontMagicCircleParticleIn extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    public FrontMagicCircleParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public FrontMagicCircleParticleIn(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 0;
@@ -56,7 +54,7 @@ public class FrontMagicCircleParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new FrontMagicCircleParticle(clientLevel, x, y, z, spriteSet);
+            return new FrontMagicCircleParticleIn(clientLevel, x, y, z, spriteSet);
         }
     }
 }
