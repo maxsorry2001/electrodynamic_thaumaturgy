@@ -8,8 +8,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 public class FrontMagicCircleParticle extends TextureSheetParticle {
     private final SpriteSet spriteSet;

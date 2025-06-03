@@ -36,7 +36,6 @@ public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
     }
 
 
-
     @Override
     public IEnergyStorage getEnergy() {
         return energy;

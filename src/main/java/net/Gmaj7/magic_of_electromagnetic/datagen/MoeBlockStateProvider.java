@@ -16,6 +16,10 @@ public class MoeBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         blockWithItem(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
         blockWithItem(MoeBlocks.ENERGY_BLOCK);
+        blockWithItem(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
+        blockWithItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+        blockWithItem(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
+        blockWithItem(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
     }
 
     private  void blockWithItem(DeferredBlock<?> deferredBlock){

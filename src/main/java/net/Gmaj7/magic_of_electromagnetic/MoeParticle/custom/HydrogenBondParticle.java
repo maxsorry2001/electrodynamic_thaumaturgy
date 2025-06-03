@@ -5,9 +5,7 @@ import net.minecraft.client.particle.BubbleParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.tags.FluidTags;
 
 public class HydrogenBondParticle extends BubbleParticle {
     protected HydrogenBondParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {

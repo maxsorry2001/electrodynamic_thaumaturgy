@@ -18,11 +18,10 @@ public class SelfMagicCircleParticle extends TextureSheetParticle {
         this.spriteSet = spriteSet;
         this.gravity = 0;
         this.setSpriteFromAge(spriteSet);
-        this.lifetime = 2;
+        this.lifetime = 5;
         this.rCol = 0.8F;
         this.alpha = 0.75F;
         this.quadSize = 0.2F;
-        this.setParticleSpeed(0, 1.25, 0);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class SelfMagicCircleParticle extends TextureSheetParticle {
         Vector3f vector3f = renderInfo.getLookVector();
         float theta = (float) Math.PI / 2;
         if(vector3f.y() < 0) theta = - theta;
-        quaternionf.rotationX(theta);
+        quaternionf.rotationXYZ(theta, 0, (float) (this.age * Math.PI / 3));
         this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 

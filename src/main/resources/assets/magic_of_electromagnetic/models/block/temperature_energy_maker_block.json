@@ -1,8 +1,7 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "bottom": "magic_of_electromagnetic:block/electromagnetic_assembly_table_bottom",
-    "side": "minecraft:block/gold_block",
-    "top": "magic_of_electromagnetic:block/electromagnetic_assembly_table_top"
+    "end": "magic_of_electromagnetic:block/temperature_energy_maker_block_top",
+    "side": "magic_of_electromagnetic:block/temperature_energy_maker_block_side"
   }
 }

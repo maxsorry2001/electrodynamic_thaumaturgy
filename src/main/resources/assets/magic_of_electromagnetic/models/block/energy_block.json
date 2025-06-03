@@ -1,8 +1,6 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "bottom": "magic_of_electromagnetic:block/electromagnetic_assembly_table_bottom",
-    "side": "minecraft:block/iron_block",
-    "top": "magic_of_electromagnetic:block/electromagnetic_assembly_table_top"
+    "all": "magic_of_electromagnetic:block/energy_block"
   }
 }

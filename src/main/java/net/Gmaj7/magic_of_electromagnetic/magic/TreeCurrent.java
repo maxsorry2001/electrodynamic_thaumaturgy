@@ -1,5 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
@@ -7,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,15 +33,9 @@ public class TreeCurrent implements IMoeMagic{
             for (LivingEntity target1 : list) {
                 if (target1 == target || target1 == livingEntity) continue;
                 addParticle(target, target1);
-                float b = MoeFunction.getMagicAmount(itemStack) / 5;
-                target1.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), b);
+                target1.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 3);
                 MoeFunction.checkTargetEnhancement(itemStack, target1);
             }
-        }
-        Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
-        if(livingEntity.level() instanceof ServerLevel) {
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0 ,0);
         }
     }
 
@@ -59,16 +55,20 @@ public class TreeCurrent implements IMoeMagic{
     }
 
     private void addParticle(LivingEntity livingEntityStart, LivingEntity livingEntityEnd){
-        Vec3 vec3Start = livingEntityStart.getEyePosition().add(0, (livingEntityStart.getY() - livingEntityStart.getEyeY()) / 2, 0);
-        Vec3 vec3End = livingEntityEnd.getEyePosition().add(0, (livingEntityEnd.getY() - livingEntityEnd.getEyeY()) / 2, 0);
+        Vec3 vec3Start = livingEntityStart.getEyePosition().subtract(0, 0.25, 0);
+        Vec3 vec3End = livingEntityEnd.getEyePosition().subtract(0, 0.25, 0);
         Vec3 vec3Throw = vec3Start.vectorTo(vec3End);
         Vec3 vec3Per = vec3Throw.normalize();
         int x = Mth.floor(vec3Throw.length());
         if(livingEntityStart.level() instanceof ServerLevel) {
+            MoeRayEntity moeRayEntity = new MoeRayEntity(livingEntityStart.level(), vec3Start, vec3End, livingEntityStart);
+            livingEntityStart.level().addFreshEntity(moeRayEntity);
+            RandomSource randomSource = RandomSource.create();
             ((ServerLevel) livingEntityStart.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntityStart.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
             for (float j = 0.2F; j < x; j += 0.2F) {
                 Vec3 vec3Point = vec3Start.add(vec3Per.scale(j));
-                ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.BUBBLE, vec3Point.x, vec3Point.y, vec3Point.z, 1, 0, 0, 0, 0);
+                ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, vec3Point.x + randomSource.nextFloat(), vec3Point.y + randomSource.nextFloat(), vec3Point.z + randomSource.nextFloat(), 1, 0, 0, 0, 0);
             }
         }
     }

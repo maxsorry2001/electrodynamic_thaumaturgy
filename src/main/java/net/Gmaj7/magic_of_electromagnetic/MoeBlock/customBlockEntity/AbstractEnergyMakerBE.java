@@ -12,8 +12,9 @@ public abstract class AbstractEnergyMakerBE extends BlockEntity implements IMoeE
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, AbstractEnergyMakerBE abstractEnergyMakerBE){
-        if(abstractEnergyMakerBE.canEnergyMake())
+        if(abstractEnergyMakerBE.canEnergyMake()) {
             abstractEnergyMakerBE.energyMake(abstractEnergyMakerBE);
+        }
     }
 
     protected abstract void energyMake(AbstractEnergyMakerBE blockEntity);

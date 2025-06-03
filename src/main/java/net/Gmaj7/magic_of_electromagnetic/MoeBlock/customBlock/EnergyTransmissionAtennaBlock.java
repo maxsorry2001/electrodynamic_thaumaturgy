@@ -40,7 +40,7 @@ public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 6.0, 6.0, 16.0, 10.0, 10.0);
     public EnergyTransmissionAtennaBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)this.defaultBlockState().setValue(FACING, Direction.UP)).setValue(SEND, true));
+        this.registerDefaultState((BlockState) this.defaultBlockState().setValue(FACING, Direction.UP).setValue(SEND, true));
     }
 
     @Override
