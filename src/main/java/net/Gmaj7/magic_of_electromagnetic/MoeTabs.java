@@ -76,6 +76,7 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
                         output.accept(MoeBlocks.ENERGY_BLOCK);
+                        output.accept(setFullEnergyItem(new ItemStack(MoeItems.ENERGY_BLOCK.get())));
                         output.accept(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
