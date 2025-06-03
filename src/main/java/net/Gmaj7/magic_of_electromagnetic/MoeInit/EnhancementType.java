@@ -6,5 +6,6 @@ public enum EnhancementType {
     EFFICIENCY,
     POTENTIAL_DIFFERENCE,
     BIOELECTRIC_STOP,
+    ENTROPY,
     EMPTY;
 }

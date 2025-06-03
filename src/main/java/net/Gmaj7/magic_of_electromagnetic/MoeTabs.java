@@ -37,20 +37,21 @@ public class MoeTabs {
                         output.accept(MoeItems.PROTECT_MODULE.get());
                         output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
                         output.accept(MoeItems.ATTRACT_MODULE.get());
-                        output.accept(MoeItems.CHAIN_MODULE.get());
+                        output.accept(MoeItems.TREE_CURRENT_MODULE.get());
                         output.accept(MoeItems.REFRACTION_MODULE.get());
                         output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
                         output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
                         output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
-                        output.accept(MoeItems.ENTROPY_MAGNET_UPHEAVAL_MODULE.get());
                         output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
                         output.accept(MoeItems.MAGMA_LIGHTING_MODULE.get());
+                        output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
 
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());
                         output.accept(MoeItems.STRENGTH_ENHANCE.get());
                         output.accept(MoeItems.EFFICIENCY_ENHANCE.get());
                         output.accept(MoeItems.POTENTIAL_DIFFERENCE_ENHANCE.get());
                         output.accept(MoeItems.BIOELECTRIC_STOP_ENHANCE.get());
+                        output.accept(MoeItems.ENTROPY_ENHANCE.get());
 
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());

@@ -16,12 +16,12 @@ public class WildMagicCircleParticleIn extends TextureSheetParticle {
     public WildMagicCircleParticleIn(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
-        this.gravity = 0;
+        this.gravity = 1;
         this.setSpriteFromAge(spriteSet);
-        this.lifetime = 5;
+        this.lifetime = 10;
         this.rCol = 0.8F;
         this.alpha = 0.75F;
-        this.quadSize = 0.2F;
+        this.quadSize = 30F;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class WildMagicCircleParticleIn extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return Math.min(20F, this.age * 8);
+        return this.quadSize;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class WildMagicCircleParticleIn extends TextureSheetParticle {
         Vector3f vector3f = renderInfo.getLookVector();
         float theta = (float) Math.PI / 2;
         if(vector3f.y() < 0) theta = - theta;
-        quaternionf.rotationX(theta);
+        quaternionf.rotationXYZ(theta, 0, (float) (this.age * Math.PI / 10));
         this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
     }
 

@@ -43,6 +43,8 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NORMAL_SHRINK_CIRCLE_PARTICLE = MOE_PARTICLE.register("normal_shrink_circle_particle",
             () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HYDROGEN_BOND_PARTICLE = MOE_PARTICLE.register("hydrogen_bond_particle",
+            () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus){MOE_PARTICLE.register(eventBus);}
 }

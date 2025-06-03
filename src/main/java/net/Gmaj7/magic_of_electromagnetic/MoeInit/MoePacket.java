@@ -91,6 +91,7 @@ public class MoePacket{
                 if(context.player() instanceof ServerPlayer serverPlayer){
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverPlayer.level());
                     lightningBolt.teleportTo(packet.x, packet.y, packet.z);
+                    lightningBolt.setVisualOnly(true);
                     serverPlayer.level().addFreshEntity(lightningBolt);
                 }
             });

@@ -43,8 +43,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ATTRACT_MODULE = MOE_ITEM.register("attract_module",
             () -> new MoeMagicTypeModuleItem(new Attract(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> CHAIN_MODULE = MOE_ITEM.register("chain_module",
-            () -> new MoeMagicTypeModuleItem(new Chain(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> TREE_CURRENT_MODULE = MOE_ITEM.register("tree_current_module",
+            () -> new MoeMagicTypeModuleItem(new TreeCurrent(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> REFRACTION_MODULE = MOE_ITEM.register("refraction_module",
             () -> new MoeMagicTypeModuleItem(new Refraction(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTRIC_ENERGY_RELEASE_MODULE = MOE_ITEM.register("electric_energy_release_module",
@@ -57,8 +57,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new MagmaLighting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ST_ELMO_S_FIRE_MODULE = MOE_ITEM.register("st_elmo_s_fire_module",
             () -> new MoeMagicTypeModuleItem(new St_Elmo_s_fire(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> ENTROPY_MAGNET_UPHEAVAL_MODULE = MOE_ITEM.register("entropy_magnet_upheaval_module",
-            () -> new MoeMagicTypeModuleItem(new EntropyMagnetUpheaval(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> HYDROGEN_BOND_FRACTURE_MODULE = MOE_ITEM.register("hydrogen_bond_fracture_module",
+            () -> new MoeMagicTypeModuleItem(new HydrogenBondFracture(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 
@@ -90,10 +90,12 @@ public class MoeItems {
             () -> new EnhancementModulateItem(EnhancementType.COOLDOWN, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EFFICIENCY_ENHANCE = MOE_ITEM.register("efficiency_enhance",
             () -> new EnhancementModulateItem(EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> POTENTIAL_DIFFERENCE_ENHANCE = MOE_ITEM.register("potential_difference",
+    public static final Supplier<Item> POTENTIAL_DIFFERENCE_ENHANCE = MOE_ITEM.register("potential_difference_enhance",
             () -> new EnhancementModulateItem(EnhancementType.POTENTIAL_DIFFERENCE, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> BIOELECTRIC_STOP_ENHANCE = MOE_ITEM.register("bioelectric_stop_difference",
+    public static final Supplier<Item> BIOELECTRIC_STOP_ENHANCE = MOE_ITEM.register("bioelectric_stop_enhance",
             () -> new EnhancementModulateItem(EnhancementType.BIOELECTRIC_STOP, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ENTROPY_ENHANCE = MOE_ITEM.register("entropy_enhance",
+            () -> new EnhancementModulateItem(EnhancementType.ENTROPY, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");

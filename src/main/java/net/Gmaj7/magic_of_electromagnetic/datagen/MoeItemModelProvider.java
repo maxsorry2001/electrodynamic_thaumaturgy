@@ -19,7 +19,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.EXCITING_MODULE.get());
         basicItem(MoeItems.PROTECT_MODULE.get());
         basicItem(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
-        basicItem(MoeItems.CHAIN_MODULE.get());
+        basicItem(MoeItems.TREE_CURRENT_MODULE.get());
         basicItem(MoeItems.ATTRACT_MODULE.get());
         basicItem(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
         basicItem(MoeItems.REFRACTION_MODULE.get());

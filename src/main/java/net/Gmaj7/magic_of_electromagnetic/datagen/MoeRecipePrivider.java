@@ -112,7 +112,7 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('b', Items.REDSTONE)
                 .define('c', Blocks.GLASS)
                 .unlockedBy("has_redstone", has(Items.REDSTONE)).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.CHAIN_MODULE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.TREE_CURRENT_MODULE.get())
                 .pattern("   ")
                 .pattern("abc")
                 .pattern("   ")

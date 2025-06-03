@@ -69,6 +69,7 @@ public class MoeFunction {
         EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
         int protentialDifference = enhancementData.potential_difference();
         int bioelectricStop = enhancementData.bioelectricStop();
+        int entropy = enhancementData.entropy();
         if(protentialDifference > 0 && livingEntity.level().isClientSide()){
             if(livingEntity.hasEffect(MoeEffects.POTENTIAL_DIFFERENCE)){
                 protentialDifference = livingEntity.getEffect(MoeEffects.POTENTIAL_DIFFERENCE).getAmplifier() + protentialDifference;
@@ -83,6 +84,9 @@ public class MoeFunction {
         }
         if(bioelectricStop > 0){
             livingEntity.addEffect(new MobEffectInstance(MoeEffects.BIOELECTRIC_STOP, (int) (20 * getEfficiency(itemStack)), bioelectricStop - 1));
+        }
+        if(entropy > 0){
+            livingEntity.igniteForTicks(entropy * 20);
         }
     }
 
@@ -129,6 +133,19 @@ public class MoeFunction {
             }
         }
         return new RayHitResult(end, hits);
+    }
+
+    public static LivingEntity getNearestFrontTarget(LivingEntity livingEntity, double length){
+        Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(length).add(start);
+        MoeFunction.RayHitResult result = MoeFunction.getLineHitResult(livingEntity.level(), livingEntity, start, end, false, 0.5F);
+        HitResult hitResult = result.getNearest(livingEntity);
+        if(hitResult instanceof EntityHitResult){
+            Entity entity = ((EntityHitResult) hitResult).getEntity();
+            if(entity instanceof LivingEntity) return (LivingEntity) entity;
+            else return null;
+        }
+        else return null;
     }
 
     public static class RayHitResult{

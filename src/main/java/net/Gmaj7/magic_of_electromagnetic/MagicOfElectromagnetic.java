@@ -113,6 +113,7 @@ public class MagicOfElectromagnetic
             event.registerSpriteSet(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), FrontMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.NORMAL_CIRCLE_PARTICLE.get(), NormalCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.NORMAL_SHRINK_CIRCLE_PARTICLE.get(), NormalShrinkCircleParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), HydrogenBondParticle.Provider::new);
         }
     }
 }

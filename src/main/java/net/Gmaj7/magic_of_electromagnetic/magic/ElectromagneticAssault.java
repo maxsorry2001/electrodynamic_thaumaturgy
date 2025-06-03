@@ -33,7 +33,7 @@ public class ElectromagneticAssault implements IMoeMagic{
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.75F);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.5F);
                     MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
@@ -45,8 +45,10 @@ public class ElectromagneticAssault implements IMoeMagic{
             blockState = level.getBlockState(blockPos);
         }
         Vec3 vec3 = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
-        if(level instanceof ServerLevel)
+        if(level instanceof ServerLevel) {
             ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0 ,0);
+        }
         livingEntity.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
     }
 

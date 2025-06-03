@@ -31,8 +31,9 @@ public class ElectricEnergyRelease implements IMoeMagic{
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
             target.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
-        if(livingEntity.level() instanceof ServerLevel)
+        if(livingEntity.level() instanceof ServerLevel) {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

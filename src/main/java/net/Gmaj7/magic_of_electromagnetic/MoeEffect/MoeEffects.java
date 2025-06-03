@@ -3,7 +3,6 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEffect;
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.ElectricFieldDomainEffect;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.ExcitingEffect;
-import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.LowEntropy;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.custom.StElmo_sFireEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -28,9 +27,6 @@ public class MoeEffects {
             () -> new MoeEffect(MobEffectCategory.BENEFICIAL, 0x666666)
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.emspeed"), 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
                     .addAttributeModifier(Attributes.ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.easpeed"), 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-    public static final DeferredHolder<MobEffect, MobEffect> LOW_ENTROPY = MOE_EFFECTS.register("low_entropy",
-            () -> new LowEntropy(MobEffectCategory.HARMFUL, 0xFF0000)
-                    .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.lespeed"), -0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> ST_ELMO_S_FIRE = MOE_EFFECTS.register("st_elmo_s_fire",
             () -> new StElmo_sFireEffect(MobEffectCategory.BENEFICIAL, 0xAA0000));
     public static final DeferredHolder<MobEffect, MobEffect> BIOELECTRIC_STOP = MOE_EFFECTS.register("bioelectric_stop",

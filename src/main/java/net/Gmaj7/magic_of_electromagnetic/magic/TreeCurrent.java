@@ -10,21 +10,20 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class Chain implements IMoeMagic{
+public class TreeCurrent implements IMoeMagic{
     @Override
     public MoeMagicType getType() {
-        return MoeMagicType.CHAIN;
+        return MoeMagicType.TREE_CURRENT;
     }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        LivingEntity target = livingEntity.level().getNearestEntity(LivingEntity.class, TargetingConditions.forCombat(), livingEntity, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), livingEntity.getBoundingBox().inflate(6, 2, 6));
+        LivingEntity target = MoeFunction.getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack));
             addParticle(livingEntity, target);
@@ -38,8 +37,10 @@ public class Chain implements IMoeMagic{
             }
         }
         Vec3 vec3 = livingEntity.getLookAngle().normalize().add(livingEntity.getEyePosition());
-        if(livingEntity.level() instanceof ServerLevel)
+        if(livingEntity.level() instanceof ServerLevel) {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0 ,0);
+        }
     }
 
     @Override
@@ -54,7 +55,7 @@ public class Chain implements IMoeMagic{
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
+        return MoeFunction.getNearestFrontTarget(livingEntity, 20) != null;
     }
 
     private void addParticle(LivingEntity livingEntityStart, LivingEntity livingEntityEnd){
@@ -67,7 +68,7 @@ public class Chain implements IMoeMagic{
             ((ServerLevel) livingEntityStart.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
             for (float j = 0.2F; j < x; j += 0.2F) {
                 Vec3 vec3Point = vec3Start.add(vec3Per.scale(j));
-                ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, vec3Point.x, vec3Point.y, vec3Point.z, 1, 0, 0, 0, 0);
+                ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.BUBBLE, vec3Point.x, vec3Point.y, vec3Point.z, 1, 0, 0, 0, 0);
             }
         }
     }

@@ -22,8 +22,10 @@ public class Protecting implements IMoeMagic{
             float p = MoeFunction.getMagicAmount(itemStack);
             ((MoeDataGet) livingEntity).getProtective().setProtecting(p);
             PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(p));
-            if(livingEntity.level() instanceof ServerLevel)
+            if(livingEntity.level() instanceof ServerLevel) {
                 ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
+                ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0,0);
+            }
         }
     }
 
