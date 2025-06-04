@@ -3,22 +3,22 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:redstone"
+      "item": "magic_of_electromagnetic:copper_sheet"
     },
     "b": {
-      "item": "magic_of_electromagnetic:iron_sheet"
+      "item": "magic_of_electromagnetic:capacitor"
     },
     "c": {
       "item": "magic_of_electromagnetic:energy_core"
     }
   },
   "pattern": [
-    " a ",
-    " b ",
-    " c "
+    "aba",
+    "aca",
+    "aba"
   ],
   "result": {
     "count": 1,
-    "id": "magic_of_electromagnetic:bjt"
+    "id": "magic_of_electromagnetic:energy_block"
   }
 }

@@ -3,22 +3,25 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:lapis_lazuli"
     },
     "b": {
-      "item": "magic_of_electromagnetic:iron_sheet"
+      "item": "minecraft:copper_ingot"
     },
     "c": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "d": {
       "item": "magic_of_electromagnetic:energy_core"
     }
   },
   "pattern": [
-    " a ",
-    " b ",
-    " c "
+    "aaa",
+    "bdb",
+    "ccc"
   ],
   "result": {
     "count": 1,
-    "id": "magic_of_electromagnetic:bjt"
+    "id": "magic_of_electromagnetic:temperature_energy_maker"
   }
 }

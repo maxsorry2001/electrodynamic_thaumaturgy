@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:copper_sheet"
+    },
+    "b": {
+      "item": "minecraft:smithing_table"
+    }
+  },
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:electromagnetic_modem_table"
+  }
+}

@@ -3,22 +3,19 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:copper_ingot"
     },
     "b": {
-      "item": "magic_of_electromagnetic:iron_sheet"
-    },
-    "c": {
       "item": "magic_of_electromagnetic:energy_core"
     }
   },
   "pattern": [
-    " a ",
-    " b ",
-    " c "
+    "a",
+    "a",
+    "b"
   ],
   "result": {
-    "count": 1,
-    "id": "magic_of_electromagnetic:bjt"
+    "count": 2,
+    "id": "magic_of_electromagnetic:energy_transmission_antenna"
   }
 }

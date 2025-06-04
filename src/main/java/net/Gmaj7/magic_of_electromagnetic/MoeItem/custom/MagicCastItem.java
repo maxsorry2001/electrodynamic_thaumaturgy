@@ -99,14 +99,7 @@ public class MagicCastItem extends Item {
         tooltipComponents.add(MoeMagicType.getTranslate(getType(stack)));
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
-        if(i < j){
-            tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
-        }
-        EnhancementData enhancementData = stack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-        tooltipComponents.add(Component.literal("cooldown:").append(String.valueOf(enhancementData.coolDown())));
-        tooltipComponents.add(Component.literal("strength:").append(String.valueOf(enhancementData.strength())));
-        tooltipComponents.add(Component.literal("efficiency:").append(String.valueOf(enhancementData.efficiency())));
-        tooltipComponents.add(Component.literal("potential_difference:").append(String.valueOf(enhancementData.potential_difference())));
+        tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
     }
 
     @Override

@@ -26,6 +26,42 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('a', MoeItems.IRON_SHEET.get())
                 .define('b', Blocks.CRAFTING_TABLE)
                 .unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get())
+                .pattern(" a ")
+                .pattern("aba")
+                .pattern(" a ")
+                .define('a', MoeItems.COPPER_SHEET.get())
+                .define('b', Blocks.SMITHING_TABLE)
+                .unlockedBy("has_smithing_table", has(Blocks.SMITHING_TABLE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.ENERGY_BLOCK.get())
+                .pattern("aba")
+                .pattern("aca")
+                .pattern("aba").define('a', MoeItems.COPPER_SHEET.get())
+                .define('b', MoeItems.CAPACITOR.get())
+                .define('c', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), 2)
+                .pattern("a")
+                .pattern("a")
+                .pattern("b").define('a', Items.COPPER_INGOT)
+                .define('b', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get())
+                .pattern("aaa")
+                .pattern("bdb")
+                .pattern("ccc").define('a', Items.GLASS)
+                .define('b', Items.COPPER_INGOT)
+                .define('c', Items.IRON_INGOT)
+                .define('d', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get())
+                .pattern("aaa")
+                .pattern("bdb")
+                .pattern("ccc").define('a', Items.LAPIS_LAZULI)
+                .define('b', Items.COPPER_INGOT)
+                .define('c', Items.AMETHYST_SHARD)
+                .define('d', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_SHEET.get(), 16)
                 .pattern("aa ")
                 .pattern("   ")
@@ -51,7 +87,7 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .pattern(" c ")
                 .define('a', Items.REDSTONE)
                 .define('b', MoeItems.IRON_SHEET.get())
-                .define('c', Items.LAPIS_LAZULI)
+                .define('c', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_iron_sheet", has(MoeItems.IRON_SHEET.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.BOARD.get(), 16)
                 .pattern(" a ")
@@ -65,13 +101,12 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .pattern("   ")
                 .define('a', Items.COPPER_INGOT)
                 .unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT)).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ENERGY_CORE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ENERGY_CORE.get(), 8)
                 .pattern(" a ")
                 .pattern("aba")
-                .pattern("   ")
-                .define('a', Items.LAPIS_LAZULI)
-                .define('b', Items.COPPER_INGOT)
-                .unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .define('a', Items.COPPER_INGOT)
+                .define('b', Items.LODESTONE)
+                .unlockedBy("has_copper_ingot", has(Items.LODESTONE)).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ELECTROMAGNETIC_BOOK.get())
                 .pattern(" a ")
                 .pattern(" b ")
@@ -88,7 +123,7 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('b', Items.IRON_INGOT)
                 .define('c', Tags.Items.STONES)
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.PULSED_PLASMA_MODULE.get())
+        /*ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.PULSED_PLASMA_MODULE.get())
                 .pattern("   ")
                 .pattern("abc")
                 .pattern("   ")
@@ -153,7 +188,7 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('a', MoeItems.IRON_SHEET.get())
                 .define('b', Items.REDSTONE)
                 .define('c', Items.GLASS)
-                .unlockedBy("has_redstone", has(Items.REDSTONE)).save(recipeOutput);
+                .unlockedBy("has_redstone", has(Items.REDSTONE)).save(recipeOutput);*/
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_LC.get())

@@ -3,19 +3,18 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:lapis_lazuli"
+      "item": "minecraft:copper_ingot"
     },
     "b": {
-      "item": "minecraft:copper_ingot"
+      "item": "minecraft:lodestone"
     }
   },
   "pattern": [
     " a ",
-    "aba",
-    "   "
+    "aba"
   ],
   "result": {
-    "count": 1,
+    "count": 8,
     "id": "magic_of_electromagnetic:energy_core"
   }
 }
