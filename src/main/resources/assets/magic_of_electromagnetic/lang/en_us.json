@@ -43,6 +43,7 @@
   "item.magic_of_electromagnetic.potential_difference_enhance": "Potential Difference Up",
   "item.magic_of_electromagnetic.bioelectric_stop_enhance": "Bioelectric Stopping",
   "item.magic_of_electromagnetic.entropy_enhance": "Entropy Increase Curse",
+  "item.magic_of_electromagnetic.enhance_modem_baseboard": "Enhance Modem Baseboard",
 
   "effect.magic_of_electromagnetic.exciting": "Exciting",
   "effect.magic_of_electromagnetic.protecting": "Magnetic Protection",
@@ -55,6 +56,7 @@
   "block.magic_of_electromagnetic.temperature_energy_maker_block": "Temperature Difference Energy Maker",
   "block.magic_of_electromagnetic.photovoltaic_energy_maker_block": "Photovoltaic Energy Maker",
   "block.magic_of_electromagnetic.energy_transmission_antenna_block": "Energy Transmission Antenna",
+  "block.magic_of_electromagnetic.magic_lithography_table_block": "Magic Lithography Table",
 
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "Electromagnetic Ray",

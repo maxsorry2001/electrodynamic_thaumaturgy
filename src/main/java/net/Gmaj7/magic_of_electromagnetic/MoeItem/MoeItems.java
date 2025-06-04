@@ -98,6 +98,8 @@ public class MoeItems {
             () -> new EnhancementModulateItem(EnhancementType.BIOELECTRIC_STOP, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENTROPY_ENHANCE = MOE_ITEM.register("entropy_enhance",
             () -> new EnhancementModulateItem(EnhancementType.ENTROPY, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ENHANCE_MODEM_BASEBOARD = MOE_ITEM.register("enhance_modem_baseboard",
+            () -> new EnhancementModulateItem(EnhancementType.EMPTY, new Item.Properties()));
 
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "magic_of_electromagnetic:enhance_modem_baseboard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:cooldown_enhance"
+  }
+}

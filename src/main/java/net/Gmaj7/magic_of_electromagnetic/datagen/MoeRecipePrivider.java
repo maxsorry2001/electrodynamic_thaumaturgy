@@ -252,6 +252,40 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('d', Items.NETHERITE_INGOT)
                 .unlockedBy("has_nether_star", has(Items.NETHER_STAR)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ENHANCE_MODEM_BASEBOARD.get(), 4)
+                .pattern("aba")
+                .pattern("ccc")
+                .define('a', Items.COPPER_INGOT)
+                .define('b', MoeItems.ENERGY_CORE.get())
+                .define('c', Items.REDSTONE)
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.STRENGTH_ENHANCE.get())
+                .requires(Items.GLOWSTONE_DUST)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get()))
+                .save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.COOLDOWN_ENHANCE.get())
+                .requires(Items.ENDER_PEARL)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EFFICIENCY_ENHANCE.get())
+                .requires(Items.AMETHYST_SHARD)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.ENTROPY_ENHANCE.get())
+                .requires(Items.FLINT_AND_STEEL)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.POTENTIAL_DIFFERENCE_ENHANCE.get())
+                .requires(Items.LIGHTNING_ROD)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.BIOELECTRIC_STOP_ENHANCE.get())
+                .requires(Items.ROTTEN_FLESH)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.FE_CU_CARROT_BATTERY.get())
                 .requires(MoeItems.IRON_SHEET.get())
                 .requires(MoeItems.COPPER_SHEET.get())

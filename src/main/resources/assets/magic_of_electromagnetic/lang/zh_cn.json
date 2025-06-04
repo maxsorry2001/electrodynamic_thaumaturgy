@@ -43,6 +43,7 @@
   "item.magic_of_electromagnetic.potential_difference_enhance": "电势差放大",
   "item.magic_of_electromagnetic.bioelectric_stop_enhance": "生物电阻隔",
   "item.magic_of_electromagnetic.entropy_enhance": "熵增诅咒",
+  "item.magic_of_electromagnetic.enhance_modem_baseboard": "强化调制底板",
 
   "effect.magic_of_electromagnetic.exciting": "激发",
   "effect.magic_of_electromagnetic.protecting": "磁力保护",
@@ -55,6 +56,7 @@
   "block.magic_of_electromagnetic.temperature_energy_maker_block": "温差发电机",
   "block.magic_of_electromagnetic.photovoltaic_energy_maker_block": "光伏发电机",
   "block.magic_of_electromagnetic.energy_transmission_antenna_block": "能量传输天线",
+  "block.magic_of_electromagnetic.magic_lithography_table_block": "法术光刻台",
 
   "entity.magic_of_electromagnetic.moe_ray_entity": "电磁射线",
   "entity.magic_of_electromagnetic.pulsed_plasma_entity": "脉冲等离子体",

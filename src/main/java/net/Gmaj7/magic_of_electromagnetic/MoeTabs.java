@@ -80,6 +80,7 @@ public class MoeTabs {
                         output.accept(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+                        output.accept(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
                     }))
                     .build());
 
