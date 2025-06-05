@@ -1,25 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": {
-      "item": "magic_of_electromagnetic:iron_sheet"
-    },
-    "b": {
-      "item": "minecraft:redstone"
-    },
-    "c": {
-      "item": "minecraft:iron_ingot"
-    },
-    "d": {
-      "item": "minecraft:copper_ingot"
-    }
+  "type": "magic_of_electromagnetic:magic_lithography",
+  "baseboard": {
+    "item": "magic_of_electromagnetic:empty_module"
   },
-  "pattern": [
-    "  d",
-    "abc",
-    "  d"
-  ],
   "result": {
     "count": 1,
     "id": "magic_of_electromagnetic:attract_module"

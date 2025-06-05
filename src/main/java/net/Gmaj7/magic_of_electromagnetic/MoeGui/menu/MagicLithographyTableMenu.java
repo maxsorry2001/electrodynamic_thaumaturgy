@@ -1,26 +1,43 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeGui.menu;
 
+import com.google.common.collect.Lists;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MagicLithographyRecipe;
+import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MagicLithographyRecipeInput;
+import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MoeRecipes;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
+import java.util.Optional;
 
 public class MagicLithographyTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
+    final ResultContainer resultContainer;
     private final ContainerLevelAccess access;
     private final int outNum = 1;
     private final int inNum = 0;
+    private ItemStack input;
+    final Slot inputSlot;
+    final Slot resultSlot;
+    private List<RecipeHolder<MagicLithographyRecipe>> recipes;
     Runnable slotUpdateListener;
 
     public MagicLithographyTableMenu(int containerId, Inventory inventory){
@@ -30,9 +47,11 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     public MagicLithographyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
         super(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), containerId);
         this.access = access;
-        checkContainerSize(inventory, outNum + 1);
+        checkContainerSize(inventory, 1);
         this.level = inventory.player.level();
         this.slotUpdateListener = () -> {};
+        this.recipes = Lists.newArrayList();
+        this.input = ItemStack.EMPTY;
         this.container = new SimpleContainer(outNum + 1){
             @Override
             public void setChanged() {
@@ -41,23 +60,30 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
                 MagicLithographyTableMenu.this.slotUpdateListener.run();
             }
         };
-        this.addSlot(new Slot(this.container, inNum, 20, 17){
+        this.resultContainer = new ResultContainer();
+        this.inputSlot = this.addSlot(new Slot(this.container, inNum, 20, 33){
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(MoeItems.EMPTY_MODULE.get());
             }
         });
-        this.addSlot(new Slot(this.container, outNum, 60, 17){
-            @Override
-            public boolean mayPlace(ItemStack stack) {
+        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 1, 143, 33) {
+            public boolean mayPlace(ItemStack p_40362_) {
                 return false;
             }
 
-            @Override
-            public void onTake(Player player, ItemStack stack) {
-                if(!container.getItem(inNum).isEmpty())
-                    container.getItem(inNum).shrink(1);
-                super.onTake(player, stack);
+            public void onTake(Player p_150672_, ItemStack p_150673_) {
+                p_150673_.onCraftedBy(p_150672_.level(), p_150672_, p_150673_.getCount());
+                MagicLithographyTableMenu.this.resultContainer.awardUsedRecipes(p_150672_, this.getRelevantItems());
+                ItemStack itemstack = MagicLithographyTableMenu.this.inputSlot.remove(1);
+                if (!itemstack.isEmpty()) {
+                    MagicLithographyTableMenu.this.setupResultSlot();
+                };
+                super.onTake(p_150672_, p_150673_);
+            }
+
+            private List<ItemStack> getRelevantItems() {
+                return List.of(MagicLithographyTableMenu.this.inputSlot.getItem());
             }
         });
         addPlayerInventory(inventory);
@@ -117,36 +143,63 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         this.access.execute(((level1, blockPos) -> {
-            this.clearContainer(player, this.container);
+            Inventory inventory = player.getInventory();
+            if (inventory.player instanceof ServerPlayer) {
+                inventory.placeItemBackInInventory(container.removeItemNoUpdate(inNum));
+            }
         }));
     }
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        ItemStack outSlot = this.slots.get(outNum).getItem();
-        this.access.execute((level1, blockPos) -> {
-            
-        });
+        this.setupResultSlot();
         return true;
     }
 
     @Override
     public void slotsChanged(Container container) {
-        super.slotsChanged(container);
-        if (container == this.container){
-            ItemStack itemstack = container.getItem(inNum);
-            ItemStack out = container.getItem(outNum);
-            if(!itemstack.isEmpty() && out.isEmpty()){
-                this.access.execute((level1, blockPos) -> {
-                    this.getSlot(outNum).set(new ItemStack(MoeItems.MAGMA_LIGHTING_MODULE.get()));
-                });
-            }
-            if(itemstack.isEmpty() && !out.isEmpty()){
-                this.access.execute((level1, blockPos) -> {
-                    this.getSlot(outNum).set(ItemStack.EMPTY);
-                });
-            }
+        ItemStack itemstack = this.inputSlot.getItem();
+        if (!itemstack.is(this.input.getItem())) {
+            this.input = itemstack.copy();
+            this.setupRecipeList(container, itemstack);
         }
+    }
+    private boolean isValidRecipeIndex(int recipeIndex) {
+        return recipeIndex >= 0 && recipeIndex < this.recipes.size();
+    }
+
+    private static MagicLithographyRecipeInput createRecipeInput(Container container) {
+        return new MagicLithographyRecipeInput(container.getItem(0));
+    }
+
+    void setupResultSlot() {
+        if (!this.recipes.isEmpty() && this.isValidRecipeIndex(0)) {
+            RecipeHolder<MagicLithographyRecipe> recipeholder = (RecipeHolder)this.recipes.get(0);
+            ItemStack itemstack = ((MagicLithographyRecipe)recipeholder.value()).assemble(createRecipeInput(this.container), this.level.registryAccess());
+            if (itemstack.isItemEnabled(this.level.enabledFeatures())) {
+                this.resultContainer.setRecipeUsed(recipeholder);
+                this.resultSlot.set(itemstack);
+            } else {
+                this.resultSlot.set(ItemStack.EMPTY);
+            }
+        } else {
+            this.resultSlot.set(ItemStack.EMPTY);
+        }
+
+        this.broadcastChanges();
+    }
+
+    private List<RecipeHolder<MagicLithographyRecipe>> getRecipe() {
+        return this.level.getRecipeManager().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), new MagicLithographyRecipeInput(container.getItem(inNum)), level);
+    }
+
+    private void setupRecipeList(Container container, ItemStack stack) {
+        this.recipes.clear();
+        this.resultSlot.set(ItemStack.EMPTY);
+        if (!stack.isEmpty()) {
+            this.recipes = this.level.getRecipeManager().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), createRecipeInput(container), this.level);
+        }
+
     }
 
     private void addPlayerInventory(Inventory inventory){
@@ -159,5 +212,9 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+
+    public Slot getInputSlot() {
+        return inputSlot;
     }
 }

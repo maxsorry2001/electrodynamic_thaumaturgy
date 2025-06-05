@@ -35,16 +35,16 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        //if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
-        //    double d0 = mouseX - this.width / 2 - this.imageWidth / 4;
-        //    double d1 = mouseY - this.height / 2 + this.imageHeight / 3;
-        //    if(d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20){
-        //        if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
-        //            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
-        //            return true;
-        //        }
-        //    }
-        //}
+        if(this.menu.getInputSlot().hasItem()) {
+            double d0 = mouseX - this.width / 2 - this.imageWidth / 4;
+            double d1 = mouseY - this.height / 2 + this.imageHeight / 3;
+            if(d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20){
+                if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
+                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
+                    return true;
+                }
+            }
+        }
         return super.mouseClicked(mouseX, mouseY, button);
     }
 

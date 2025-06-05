@@ -12,6 +12,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.custom.*;
+import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MoeRecipes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -61,6 +62,7 @@ public class MagicOfElectromagnetic
         MoeMenuType.register(modEventBus);
         MoeParticles.register(modEventBus);
         MoeBlockEntities.register(modEventBus);
+        MoeRecipes.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
