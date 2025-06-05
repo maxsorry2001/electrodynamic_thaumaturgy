@@ -49,13 +49,41 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
                 MoeAssemblyTableMenu.this.slotUpdateListener.run();
             }
         };
-        this.addSlot(new Slot(this.container, powerSlotNum, 70, 20));
-        this.addSlot(new Slot(this.container, lcSlotNum, 88, 20));
+        this.addSlot(new Slot(this.container, powerSlotNum, 70, 20){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() instanceof PowerAmplifierItem;
+            }
+        });
+        this.addSlot(new Slot(this.container, lcSlotNum, 88, 20){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() instanceof LcOscillatorModuleItem;
+            }
+        });
         for (int i = typeSlotStartNum; i < typeSlotEndNum; i++) {
-            if(i < 6) this.addSlot(new Slot(this.container, i, 18 * i + 16, 40));
-            else this.addSlot(new Slot(this.container, i , 18 * i - 56, 58));
+            int dx, dy;
+            if(i < 6) {
+                dx = 18 * i + 16;
+                dy = 40;
+            }
+            else {
+                dx = 18 * i - 56;
+                dy = 58;
+            }
+            this.addSlot(new Slot(this.container, i , dx, dy){
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return stack.getItem() instanceof MoeMagicTypeModuleItem;
+                }
+            });
         }
-        this.addSlot(new Slot(this.container, toolSlotNum, 20, 10));
+        this.addSlot(new Slot(this.container, toolSlotNum, 20, 10){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() instanceof MagicCastItem;
+            }
+        });
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
     }

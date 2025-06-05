@@ -45,10 +45,27 @@ public class MoeModemTableMenu extends AbstractContainerMenu {
             }
         };
         for (int i = enhanceStartNum; i < enhanceEndNum; i++) {
-            if(i < 4) this.addSlot(new Slot(this.container, i, 18 * i + 52, 30));
-            else this.addSlot(new Slot(this.container, i , 18 * i - 20, 48));
+            int dx, dy;
+            if(i < 4) {
+                dx = 18 * i + 52;
+                dy = 30;
+            }
+            else {
+                dx = 18 * i - 20;
+                dy = 48;
+            }this.addSlot(new Slot(this.container, i , dx, dy){
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return stack.getItem() instanceof EnhancementModulateItem;
+                }
+            });
         }
-        this.addSlot(new Slot(this.container, toolSlotNum, 20, 10));
+        this.addSlot(new Slot(this.container, toolSlotNum, 20, 10){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() instanceof MagicCastItem;
+            }
+        });
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
     }

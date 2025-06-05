@@ -2,9 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeGui.menu;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.EnhancementModulateItem;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -21,9 +19,8 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     private final ContainerLevelAccess access;
-    private final int toolSlotNum = 8;
-    private final int magicStartNum = 0;
-    private final int magicEndNum = 8;
+    private final int outNum = 1;
+    private final int inNum = 0;
     Runnable slotUpdateListener;
 
     public MagicLithographyTableMenu(int containerId, Inventory inventory){
@@ -31,12 +28,12 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     }
 
     public MagicLithographyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
-        super(MoeMenuType.MODEM_TABLE_MENU.get(), containerId);
+        super(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), containerId);
         this.access = access;
-        checkContainerSize(inventory, toolSlotNum + 1);
+        checkContainerSize(inventory, outNum + 1);
         this.level = inventory.player.level();
         this.slotUpdateListener = () -> {};
-        this.container = new SimpleContainer(toolSlotNum + 1){
+        this.container = new SimpleContainer(outNum + 1){
             @Override
             public void setChanged() {
                 super.setChanged();
@@ -44,11 +41,25 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
                 MagicLithographyTableMenu.this.slotUpdateListener.run();
             }
         };
-        for (int i = magicStartNum; i < magicEndNum; i++) {
-            if(i < 4) this.addSlot(new Slot(this.container, i, 18 * i + 52, 30));
-            else this.addSlot(new Slot(this.container, i , 18 * i - 20, 48));
-        }
-        this.addSlot(new Slot(this.container, toolSlotNum, 20, 10));
+        this.addSlot(new Slot(this.container, inNum, 20, 17){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(MoeItems.EMPTY_MODULE.get());
+            }
+        });
+        this.addSlot(new Slot(this.container, outNum, 60, 17){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+
+            @Override
+            public void onTake(Player player, ItemStack stack) {
+                if(!container.getItem(inNum).isEmpty())
+                    container.getItem(inNum).shrink(1);
+                super.onTake(player, stack);
+            }
+        });
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
     }
@@ -61,23 +72,23 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index < toolSlotNum + 1) {
-                if (!this.moveItemStackTo(itemstack1, toolSlotNum + 1, toolSlotNum + 37, false)) {
+            if (index < outNum + 1) {
+                if (!this.moveItemStackTo(itemstack1, outNum + 1, outNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
+            else if (!this.slots.get(outNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, outNum, outNum + 1, false)){
                 return ItemStack.EMPTY;
             }
-            else if (item instanceof EnhancementModulateItem){
-                boolean flag = moveModuleItem(magicStartNum, magicEndNum, itemstack1);
+            else if (item == MoeItems.EMPTY_MODULE.get()) {
+                boolean flag = this.moveItemStackTo(itemstack1, inNum, outNum, false);
                 if (flag) return ItemStack.EMPTY;
             }
-            else if (index >= toolSlotNum + 1 && index < toolSlotNum + 28) {
-                if (!this.moveItemStackTo(itemstack1, toolSlotNum + 28, toolSlotNum + 37, false)) {
+            else if (index >= outNum + 1 && index < outNum + 28) {
+                if (!this.moveItemStackTo(itemstack1, outNum + 28, outNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= toolSlotNum + 28 && index < toolSlotNum + 37 && !this.moveItemStackTo(itemstack1, toolSlotNum + 1, toolSlotNum + 28, false)) {
+            } else if (index >= outNum + 28 && index < outNum + 37 && !this.moveItemStackTo(itemstack1, outNum + 1, outNum + 28, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -99,7 +110,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get());
+        return stillValid(this.access, player, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get());
     }
 
     @Override
@@ -112,18 +123,9 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
+        ItemStack outSlot = this.slots.get(outNum).getItem();
         this.access.execute((level1, blockPos) -> {
-            if(toolSlot.getItem() instanceof MagicCastItem) {
-                EnhancementData enhancementData = EnhancementData.defaultData;
-                for (int i = magicStartNum; i < magicEndNum; i++){
-                    ItemStack itemStack = this.slots.get(i).getItem();
-                    if(itemStack.getItem() instanceof EnhancementModulateItem item){
-                        enhancementData = item.modemEnhancementData(enhancementData);
-                    }
-                }
-                toolSlot.set(MoeDataComponentTypes.ENHANCEMENT_DATA, enhancementData);
-            }
+            
         });
         return true;
     }
@@ -132,10 +134,16 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     public void slotsChanged(Container container) {
         super.slotsChanged(container);
         if (container == this.container){
-            ItemStack itemstack = container.getItem(toolSlotNum);
-            if(!itemstack.isEmpty()){
+            ItemStack itemstack = container.getItem(inNum);
+            ItemStack out = container.getItem(outNum);
+            if(!itemstack.isEmpty() && out.isEmpty()){
                 this.access.execute((level1, blockPos) -> {
-
+                    this.getSlot(outNum).set(new ItemStack(MoeItems.MAGMA_LIGHTING_MODULE.get()));
+                });
+            }
+            if(itemstack.isEmpty() && !out.isEmpty()){
+                this.access.execute((level1, blockPos) -> {
+                    this.getSlot(outNum).set(ItemStack.EMPTY);
                 });
             }
         }
@@ -151,20 +159,5 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
-    }
-
-    public Slot getToolSlot(){
-        return this.slots.get(toolSlotNum);
-    }
-
-    private boolean moveModuleItem(int start, int end, ItemStack itemStack){
-        boolean flag = true;
-        for (int i = start; i < end; i++){
-            if(!this.slots.get(i).hasItem() && this.moveItemStackTo(itemStack, i, i + 1, false)){
-                flag = false;
-                break;
-            }
-        }
-        return flag;
     }
 }

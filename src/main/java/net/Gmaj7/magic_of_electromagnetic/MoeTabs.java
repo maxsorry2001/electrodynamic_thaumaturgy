@@ -31,6 +31,7 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get()));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get())));
+                        output.accept(MoeItems.EMPTY_MODULE.get());
                         output.accept(MoeItems.RAY_MODULE.get());
                         output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
                         output.accept(MoeItems.EXCITING_MODULE.get());
@@ -79,8 +80,8 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(new ItemStack(MoeItems.ENERGY_BLOCK.get())));
                         output.accept(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
-                        output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                         output.accept(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
+                        output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                     }))
                     .build());
 

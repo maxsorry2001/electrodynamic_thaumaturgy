@@ -9,6 +9,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.hud.MoeMagicWheelHud;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.hud.MoeShowMagicHud;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MagicLithographyTableScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeAssemblyTableScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeEnergyBlockScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeModemTableScreen;
@@ -42,6 +43,7 @@ public class ClientEventHandler {
             event.register(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), MoeAssemblyTableScreen::new);
             event.register(MoeMenuType.MODEM_TABLE_MENU.get(), MoeModemTableScreen::new);
             event.register(MoeMenuType.ENERGY_BLOCK_MENU.get(), MoeEnergyBlockScreen::new);
+            event.register(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), MagicLithographyTableScreen::new);
         }
 
         @SubscribeEvent
