@@ -24,9 +24,6 @@ public record MagicLithographyRecipe(Ingredient inputItem, ItemStack output) imp
 
     @Override
     public boolean matches(MagicLithographyRecipeInput magicLithographyRecipeInput, Level level) {
-        if(level.isClientSide()){
-            return false;
-        }
         return inputItem.test(magicLithographyRecipeInput.getItem(0));
     }
 

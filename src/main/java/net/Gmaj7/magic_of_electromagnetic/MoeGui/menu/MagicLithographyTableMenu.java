@@ -39,6 +39,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     final Slot resultSlot;
     private List<RecipeHolder<MagicLithographyRecipe>> recipes;
     Runnable slotUpdateListener;
+    private final DataSlot selectedRecipeIndex;
 
     public MagicLithographyTableMenu(int containerId, Inventory inventory){
         this(containerId, inventory, ContainerLevelAccess.NULL);
@@ -46,6 +47,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
     public MagicLithographyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
         super(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), containerId);
+        this.selectedRecipeIndex = DataSlot.standalone();
         this.access = access;
         checkContainerSize(inventory, 1);
         this.level = inventory.player.level();
@@ -88,6 +90,20 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
         });
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
+
+        this.addDataSlot(selectedRecipeIndex);
+    }
+
+    public List<RecipeHolder<MagicLithographyRecipe>> getRecipes() {
+        return this.recipes;
+    }
+
+    public int getSelectedRecipeIndex(){
+        return this.selectedRecipeIndex.get();
+    }
+
+    public boolean hasInputItem() {
+        return this.inputSlot.hasItem() && !this.recipes.isEmpty();
     }
 
     @Override
@@ -152,7 +168,10 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        this.setupResultSlot();
+        if (this.isValidRecipeIndex(id)) {
+            this.selectedRecipeIndex.set(id);
+            this.setupResultSlot();
+        }
         return true;
     }
 
@@ -164,6 +183,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
             this.setupRecipeList(container, itemstack);
         }
     }
+
     private boolean isValidRecipeIndex(int recipeIndex) {
         return recipeIndex >= 0 && recipeIndex < this.recipes.size();
     }
@@ -173,8 +193,8 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     }
 
     void setupResultSlot() {
-        if (!this.recipes.isEmpty() && this.isValidRecipeIndex(0)) {
-            RecipeHolder<MagicLithographyRecipe> recipeholder = (RecipeHolder)this.recipes.get(0);
+        if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
+            RecipeHolder<MagicLithographyRecipe> recipeholder = (RecipeHolder)this.recipes.get(this.selectedRecipeIndex.get());
             ItemStack itemstack = ((MagicLithographyRecipe)recipeholder.value()).assemble(createRecipeInput(this.container), this.level.registryAccess());
             if (itemstack.isItemEnabled(this.level.enabledFeatures())) {
                 this.resultContainer.setRecipeUsed(recipeholder);
@@ -195,6 +215,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
     private void setupRecipeList(Container container, ItemStack stack) {
         this.recipes.clear();
+        this.selectedRecipeIndex.set(-1);
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
             this.recipes = this.level.getRecipeManager().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), createRecipeInput(container), this.level);
@@ -216,5 +237,13 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
     public Slot getInputSlot() {
         return inputSlot;
+    }
+
+    public int getNumRecipes() {
+        return this.recipes.size();
+    }
+
+    public void registerUpdateListener(Runnable listener) {
+        this.slotUpdateListener = listener;
     }
 }
