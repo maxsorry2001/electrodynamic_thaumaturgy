@@ -1,25 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": {
-      "item": "magic_of_electromagnetic:iron_sheet"
-    },
-    "b": {
-      "item": "minecraft:redstone"
-    },
-    "c": {
-      "item": "minecraft:heavy_weighted_pressure_plate"
-    },
-    "d": {
-      "item": "minecraft:glass"
-    }
+  "type": "magic_of_electromagnetic:magic_lithography",
+  "baseboard": {
+    "item": "magic_of_electromagnetic:empty_module"
   },
-  "pattern": [
-    "  d",
-    "abc",
-    "  d"
-  ],
   "result": {
     "count": 1,
     "id": "magic_of_electromagnetic:protecting_module"
