@@ -20,7 +20,7 @@ import net.minecraft.world.item.crafting.StonecutterRecipe;
 import java.util.List;
 
 public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLithographyTableMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_assembly_table.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/magic_lithography_table.png");
     private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller");
     private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller_disabled");
     private static final ResourceLocation RECIPE_SELECTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_selected");

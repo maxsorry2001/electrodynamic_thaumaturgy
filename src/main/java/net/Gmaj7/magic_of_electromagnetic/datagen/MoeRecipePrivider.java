@@ -26,6 +26,14 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('a', MoeItems.IRON_SHEET.get())
                 .define('b', Blocks.CRAFTING_TABLE)
                 .unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get())
+                .pattern(" c ")
+                .pattern("aba")
+                .pattern(" a ")
+                .define('a', MoeItems.IRON_SHEET.get())
+                .define('b', MoeItems.ENERGY_CORE.get())
+                .define('c', Blocks.GLASS_PANE)
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get())
                 .pattern(" a ")
                 .pattern("aba")
@@ -185,6 +193,10 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.ICE)
                 .define('d', Items.NETHERITE_INGOT)
                 .unlockedBy("has_nether_star", has(Items.NETHER_STAR)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.EMPTY_MODULE.get())
+                .pattern("ccc")
+                .define('c', MoeItems.COPPER_SHEET.get())
+                .unlockedBy("has_copper_sheet", has(MoeItems.COPPER_SHEET.get())).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ENHANCE_MODEM_BASEBOARD.get(), 4)
                 .pattern("aba")
@@ -205,16 +217,6 @@ public class MoeRecipePrivider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EFFICIENCY_ENHANCE.get())
                 .requires(Items.AMETHYST_SHARD)
                 .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
-                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.ENTROPY_ENHANCE.get())
-                .requires(Items.FLINT_AND_STEEL)
-                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
-                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.POTENTIAL_DIFFERENCE_ENHANCE.get())
-                .requires(Items.LIGHTNING_ROD)
-                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
-                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.BIOELECTRIC_STOP_ENHANCE.get())
                 .requires(Items.ROTTEN_FLESH)
                 .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
                 .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);

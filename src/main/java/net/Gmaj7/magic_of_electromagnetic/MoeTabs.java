@@ -33,6 +33,8 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get())));
                         output.accept(MoeItems.EMPTY_MODULE.get());
                         output.accept(MoeItems.RAY_MODULE.get());
+                        output.accept(MoeItems.LIGHTING_STRIKE_MODULE.get());
+                        output.accept(MoeItems.BLOCK_NERVE_MODULE.get());
                         output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
                         output.accept(MoeItems.EXCITING_MODULE.get());
                         output.accept(MoeItems.PROTECT_MODULE.get());
@@ -47,11 +49,10 @@ public class MoeTabs {
                         output.accept(MoeItems.MAGMA_LIGHTING_MODULE.get());
                         output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
 
+                        output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD.get());
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());
                         output.accept(MoeItems.STRENGTH_ENHANCE.get());
                         output.accept(MoeItems.EFFICIENCY_ENHANCE.get());
-                        output.accept(MoeItems.POTENTIAL_DIFFERENCE_ENHANCE.get());
-                        output.accept(MoeItems.BIOELECTRIC_STOP_ENHANCE.get());
                         output.accept(MoeItems.ENTROPY_ENHANCE.get());
 
                         output.accept(MoeItems.IRON_LC.get());

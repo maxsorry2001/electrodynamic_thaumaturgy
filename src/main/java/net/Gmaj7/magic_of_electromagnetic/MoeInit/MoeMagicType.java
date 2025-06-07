@@ -5,9 +5,11 @@ import net.minecraft.network.chat.Component;
 public enum MoeMagicType {
     RAY,
     ATTRACT,
+    LIGHTING_STRIKE,
     PULSED_PLASMA,
     ELECTRIC_FIELD_DOMAIN,
     ELECTRIC_ENERGY_RELEASE,
+    NERVE_BLOCKING,
     EXCITING,
     PROTECT,
     TREE_CURRENT,
@@ -28,11 +30,13 @@ public enum MoeMagicType {
         switch (type){
             case RAY -> translate = "moe_ray";
             case ATTRACT -> translate = "moe_attract";
+            case LIGHTING_STRIKE -> translate = "moe_lighting_strike";
             case PULSED_PLASMA -> translate = "moe_pulsed_plasma";
-            case ELECTRIC_FIELD_DOMAIN -> translate = "electric_field_domain";
+            case ELECTRIC_FIELD_DOMAIN -> translate = "moe_electric_field_domain";
             case EXCITING -> translate = "moe_exciting";
             case PROTECT -> translate = "moe_protecting";
             case TREE_CURRENT -> translate = "moe_tree_current";
+            case NERVE_BLOCKING -> translate = "moe_nerve_blocking";
             case ELECTRIC_ENERGY_RELEASE -> translate = "moe_electric_energy_release";
             case REFRACTION -> translate = "moe_refraction";
             case PLASMA_TORCH -> translate = "moe_plasma_torch";

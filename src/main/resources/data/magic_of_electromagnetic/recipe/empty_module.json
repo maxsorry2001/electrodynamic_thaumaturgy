@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "magic_of_electromagnetic:copper_sheet"
+    }
+  },
+  "pattern": [
+    "ccc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:empty_module"
+  }
+}

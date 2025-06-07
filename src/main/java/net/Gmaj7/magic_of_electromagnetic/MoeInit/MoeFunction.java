@@ -67,24 +67,7 @@ public class MoeFunction {
 
     public static void checkTargetEnhancement(ItemStack itemStack, LivingEntity livingEntity){
         EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-        int protentialDifference = enhancementData.potential_difference();
-        int bioelectricStop = enhancementData.bioelectricStop();
         int entropy = enhancementData.entropy();
-        if(protentialDifference > 0 && livingEntity.level().isClientSide()){
-            if(livingEntity.hasEffect(MoeEffects.POTENTIAL_DIFFERENCE)){
-                protentialDifference = livingEntity.getEffect(MoeEffects.POTENTIAL_DIFFERENCE).getAmplifier() + protentialDifference;
-                if(protentialDifference >= 4) {
-                    PacketDistributor.sendToServer(new MoePacket.LightingPacket(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), getMagicAmount(itemStack)));
-                    protentialDifference = protentialDifference - 5;
-                    livingEntity.removeEffect(MoeEffects.POTENTIAL_DIFFERENCE);
-                }
-                if(protentialDifference > -1) livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, 200, protentialDifference));
-            }
-            else livingEntity.addEffect(new MobEffectInstance(MoeEffects.POTENTIAL_DIFFERENCE, protentialDifference - 1));
-        }
-        if(bioelectricStop > 0){
-            livingEntity.addEffect(new MobEffectInstance(MoeEffects.BIOELECTRIC_STOP, (int) (20 * getEfficiency(itemStack)), bioelectricStop - 1));
-        }
         if(entropy > 0){
             livingEntity.igniteForTicks(entropy * 20);
         }

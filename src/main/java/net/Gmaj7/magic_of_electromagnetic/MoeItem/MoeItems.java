@@ -61,6 +61,10 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new St_Elmo_s_fire(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> HYDROGEN_BOND_FRACTURE_MODULE = MOE_ITEM.register("hydrogen_bond_fracture_module",
             () -> new MoeMagicTypeModuleItem(new HydrogenBondFracture(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> LIGHTING_STRIKE_MODULE = MOE_ITEM.register("lighting_strike_module",
+            () -> new MoeMagicTypeModuleItem(new LightingStrike(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> BLOCK_NERVE_MODULE = MOE_ITEM.register("block_nerve_module",
+            () -> new MoeMagicTypeModuleItem(new NerveBlocking(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
 
@@ -92,10 +96,6 @@ public class MoeItems {
             () -> new EnhancementModulateItem(EnhancementType.COOLDOWN, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EFFICIENCY_ENHANCE = MOE_ITEM.register("efficiency_enhance",
             () -> new EnhancementModulateItem(EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> POTENTIAL_DIFFERENCE_ENHANCE = MOE_ITEM.register("potential_difference_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.POTENTIAL_DIFFERENCE, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> BIOELECTRIC_STOP_ENHANCE = MOE_ITEM.register("bioelectric_stop_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.BIOELECTRIC_STOP, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENTROPY_ENHANCE = MOE_ITEM.register("entropy_enhance",
             () -> new EnhancementModulateItem(EnhancementType.ENTROPY, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENHANCE_MODEM_BASEBOARD = MOE_ITEM.register("enhance_modem_baseboard",
