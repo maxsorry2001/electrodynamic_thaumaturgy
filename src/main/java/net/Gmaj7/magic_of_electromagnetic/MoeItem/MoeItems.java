@@ -66,7 +66,7 @@ public class MoeItems {
     public static final Supplier<Item> BLOCK_NERVE_MODULE = MOE_ITEM.register("block_nerve_module",
             () -> new MoeMagicTypeModuleItem(new NerveBlocking(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_MODULE = MOE_ITEM.register("empty_module",
-            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(1)));
+            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
 
     public static final Supplier<Item> IRON_LC = MOE_ITEM.register("iron_lc",
             () -> new LcOscillatorModuleItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));

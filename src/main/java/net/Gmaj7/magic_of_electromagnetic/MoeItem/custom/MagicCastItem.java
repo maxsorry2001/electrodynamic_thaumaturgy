@@ -3,7 +3,6 @@ package net.Gmaj7.magic_of_electromagnetic.MoeItem.custom;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyTransmissionAntennaBE;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.EnhancementData;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;

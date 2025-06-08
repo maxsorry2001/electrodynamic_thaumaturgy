@@ -9,8 +9,6 @@ import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MagicLithographyRecipe;
 import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MagicLithographyRecipeInput;
 import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MoeRecipes;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,13 +17,9 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
-import java.util.Optional;
 
 public class MagicLithographyTableMenu extends AbstractContainerMenu {
     private final Level level;

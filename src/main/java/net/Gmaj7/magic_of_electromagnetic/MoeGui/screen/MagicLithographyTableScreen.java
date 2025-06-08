@@ -5,7 +5,6 @@ import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MagicLithographyTableMenu;
 import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MagicLithographyRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
@@ -13,9 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.StonecutterMenu;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
 
 import java.util.List;
 
@@ -23,9 +20,6 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
     ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/magic_lithography_table.png");
     private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller");
     private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller_disabled");
-    private static final ResourceLocation RECIPE_SELECTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_selected");
-    private static final ResourceLocation RECIPE_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_highlighted");
-    private static final ResourceLocation RECIPE_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe");
     private static final int SCROLLER_WIDTH = 12;
     private static final int SCROLLER_HEIGHT = 15;
     private static final int RECIPES_COLUMNS = 4;
@@ -132,7 +126,6 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
         int j1 = this.startIndex + 12;
-        this.renderButtons(guiGraphics, mouseX, mouseY, l, i1, j1);
         this.renderRecipes(guiGraphics, l, i1, j1);
     }
 
@@ -145,26 +138,6 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
             int l = j / 4;
             int i1 = y + l * 18 + 2;
             guiGraphics.renderItem(((MagicLithographyRecipe)((RecipeHolder)list.get(i)).value()).getResultItem(this.minecraft.level.registryAccess()), k, i1);
-        }
-
-    }
-
-    private void renderButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
-        for(int i = this.startIndex; i < lastVisibleElementIndex && i < ((MagicLithographyTableMenu)this.menu).getNumRecipes(); ++i) {
-            int j = i - this.startIndex;
-            int k = x + j % 4 * 16;
-            int l = j / 4;
-            int i1 = y + l * 18 + 2;
-            ResourceLocation resourcelocation;
-            if (i == ((MagicLithographyTableMenu)this.menu).getSelectedRecipeIndex()) {
-                resourcelocation = RECIPE_SELECTED_SPRITE;
-            } else if (mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18) {
-                resourcelocation = RECIPE_HIGHLIGHTED_SPRITE;
-            } else {
-                resourcelocation = RECIPE_SPRITE;
-            }
-
-            guiGraphics.blitSprite(resourcelocation, k, i1 - 1, 16, 18);
         }
 
     }

@@ -10,8 +10,6 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
-
 public class LightingStrike implements IMoeMagic {
     @Override
     public MoeMagicType getType() {
@@ -22,7 +20,7 @@ public class LightingStrike implements IMoeMagic {
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = MoeFunction.getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
-            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 5);
+            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 2);
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
