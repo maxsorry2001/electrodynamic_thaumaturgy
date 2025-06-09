@@ -1,0 +1,33 @@
+{
+  "parent": "magic_of_electromagnetic:normal/energy_core",
+  "criteria": {
+    "has_modem_block_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "magic_of_electromagnetic:electromagnetic_modem_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.magic_of_electromagnetic.modem_table.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "magic_of_electromagnetic:electromagnetic_modem_table"
+    },
+    "title": {
+      "translate": "advancements.magic_of_electromagnetic.modem_table.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_modem_block_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

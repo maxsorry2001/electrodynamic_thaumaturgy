@@ -99,24 +99,10 @@ public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(state.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)) {
-            if(player.isShiftKeyDown())
-                level.setBlockAndUpdate(pos, state.setValue(SEND, !state.getValue(SEND)));
-            else {
-                BlockEntity blockEntity = level.getBlockEntity(pos);
-                if(blockEntity instanceof EnergyTransmissionAntennaBE)
-                    for (int dx = -16; dx <= 16; dx++){
-                        for (int dy = -16; dy <= 16; dy++){
-                            for (int dz = -16; dz <= 16; dz++){
-                                BlockPos blockPos = new BlockPos(pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz);
-                                BlockState blockState = level.getBlockState(blockPos);
-                                if(blockState.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK) && !blockState.getValue(EnergyTransmissionAtennaBlock.SEND))
-                                    ((EnergyTransmissionAntennaBE) blockEntity).getReceivePos().add(blockPos);
-                            }
-                        }
-                    }
-                }
-            }
-        return InteractionResult.SUCCESS;
+            level.setBlockAndUpdate(pos, state.setValue(SEND, !state.getValue(SEND)));
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.CONSUME;
     }
 
     @Override

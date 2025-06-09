@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.datagen;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -47,6 +48,14 @@ public class MoeAdvancementProvider extends AdvancementProvider {
 
             register(MoeItems.ENERGY_CORE.get(), MagicOfElectromagnetic.MODID, "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
             register(MoeItems.ELECTROMAGNETIC_ROD.get(), MagicOfElectromagnetic.MODID, "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get(), MoeItems.ELECTROMAGNETIC_BOOK.get());
+            register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE, MagicOfElectromagnetic.MODID, "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
+            register(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE, MagicOfElectromagnetic.MODID, "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
+            register(MoeItems.EMPTY_MODULE.get(), MagicOfElectromagnetic.MODID, "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.EMPTY_MODULE.get());
+            register(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK, MagicOfElectromagnetic.MODID, "normal", "energy_core", "energy_maker", "has_energy_maker", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
+            register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK, MagicOfElectromagnetic.MODID, "normal", "energy_maker", "energy_send", "has_energy_antenna", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+            register(MoeBlocks.ENERGY_BLOCK, MagicOfElectromagnetic.MODID, "normal", "energy_maker", "energy_save", "has_energy_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_BLOCK);
+            register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE, MagicOfElectromagnetic.MODID, "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
+            register(MoeItems.EFFICIENCY_ENHANCE.get(), MagicOfElectromagnetic.MODID, "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
 
         }
 

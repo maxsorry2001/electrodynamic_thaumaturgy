@@ -1,0 +1,44 @@
+{
+  "parent": "magic_of_electromagnetic:normal/energy_core",
+  "criteria": {
+    "has_energy_maker_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "magic_of_electromagnetic:photovoltaic_energy_maker"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_energy_maker_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "magic_of_electromagnetic:temperature_energy_maker"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.magic_of_electromagnetic.energy_maker.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "magic_of_electromagnetic:photovoltaic_energy_maker"
+    },
+    "title": {
+      "translate": "advancements.magic_of_electromagnetic.energy_maker.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_energy_maker_0",
+      "has_energy_maker_1"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
