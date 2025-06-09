@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLithographyRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "magic_lithography");
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/magic_lithography/magic_lithography_gui.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/magic_lithography_gui.png");
     public static final RecipeType<MagicLithographyRecipe> RECIPE_TYPE = new RecipeType<>(UID, MagicLithographyRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;

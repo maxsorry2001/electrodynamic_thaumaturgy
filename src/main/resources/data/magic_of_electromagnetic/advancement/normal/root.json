@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "has_crafting_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:crafting_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "magic_of_electromagnetic:textures/gui/advancement.png",
+    "description": {
+      "translate": "advancements.magic_of_electromagnetic.root.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "magic_of_electromagnetic:electromagnetic_rod"
+    },
+    "title": {
+      "translate": "advancements.magic_of_electromagnetic.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_crafting_table"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "magic_of_electromagnetic:lodestone"
+    ]
+  },
+  "sends_telemetry_event": true
+}

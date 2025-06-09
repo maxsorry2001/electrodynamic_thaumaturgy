@@ -12,8 +12,8 @@ import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import java.util.concurrent.CompletableFuture;
 
-public class MoeRecipePrivider extends RecipeProvider implements IConditionBuilder {
-    public MoeRecipePrivider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+public class MoeRecipeProvider extends RecipeProvider implements IConditionBuilder {
+    public MoeRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
 

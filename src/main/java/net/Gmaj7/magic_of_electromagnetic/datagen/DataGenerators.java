@@ -29,6 +29,7 @@ public class DataGenerators {
 
         dataGenerator.addProvider(event.includeClient(), new MoeItemModelProvider(packOutput, existingFileHelper));
         //dataGenerator.addProvider(event.includeClient(), new MoeBlockStateProvider(packOutput, existingFileHelper));
-        dataGenerator.addProvider(event.includeClient(), new MoeRecipePrivider(packOutput, lookupProvider));
+        dataGenerator.addProvider(event.includeClient(), new MoeRecipeProvider(packOutput, lookupProvider));
+        dataGenerator.addProvider(event.includeServer(), new MoeAdvancementProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }
