@@ -52,51 +52,6 @@ public class MoePacket{
             return TYPE;
         }
     }
-    public static class LightingPacket implements CustomPacketPayload{
-        private final double x;
-        private final double y;
-        private final double z;
-        private final float damage;
-        public static final CustomPacketPayload.Type<LightingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lighting"));
-        public static final StreamCodec<RegistryFriendlyByteBuf, LightingPacket> STREAM_CODEC = CustomPacketPayload.codec(LightingPacket::write, LightingPacket::new);
-
-        public LightingPacket(double x, double y, double z, float damage){
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.damage = damage;
-        }
-
-        public LightingPacket(FriendlyByteBuf buf){
-            this.x = buf.readDouble();
-            this.y = buf.readDouble();
-            this.z = buf.readDouble();
-            this.damage = buf.readFloat();
-        }
-
-        public void write(FriendlyByteBuf buf){
-            buf.writeDouble(x);
-            buf.writeDouble(y);
-            buf.writeDouble(z);
-            buf.writeFloat(damage);
-        }
-
-        @Override
-        public Type<? extends CustomPacketPayload> type() {
-            return TYPE;
-        }
-
-        public static void handle(LightingPacket packet, IPayloadContext context){
-            context.enqueueWork(() -> {
-                if(context.player() instanceof ServerPlayer serverPlayer){
-                    LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverPlayer.level());
-                    lightningBolt.teleportTo(packet.x, packet.y, packet.z);
-                    lightningBolt.setVisualOnly(true);
-                    serverPlayer.level().addFreshEntity(lightningBolt);
-                }
-            });
-        }
-    }
 
     public static class ProtectingPacket implements CustomPacketPayload{
         float protectNum;

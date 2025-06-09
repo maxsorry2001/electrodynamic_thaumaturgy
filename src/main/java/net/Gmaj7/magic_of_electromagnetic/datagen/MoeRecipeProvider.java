@@ -65,7 +65,8 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get())
                 .pattern("aaa")
                 .pattern("bdb")
-                .pattern("ccc").define('a', Items.LAPIS_LAZULI)
+                .pattern("ccc")
+                .define('a', Items.LAPIS_LAZULI)
                 .define('b', Items.COPPER_INGOT)
                 .define('c', Items.AMETHYST_SHARD)
                 .define('d', MoeItems.ENERGY_CORE.get())
@@ -159,6 +160,10 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('d', Items.COPPER_INGOT)
                 .define('e', Items.END_ROD)
                 .unlockedBy("has_gold_sheet", has(MoeItems.GOLD_LC.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_LC.get())
+                .requires(MoeItems.SUPERCONDUCTING_UPDATE.get())
+                .requires(MoeItems.COPPER_LC.get())
+                .unlockedBy("has_update", has(MoeItems.SUPERCONDUCTING_UPDATE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_POWER.get())
                 .pattern(" a ")
                 .pattern("dbe")
@@ -184,7 +189,11 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('d', Items.COPPER_INGOT)
                 .define('e', Items.END_ROD)
                 .unlockedBy("has_gold_power", has(MoeItems.GOLD_POWER.get())).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_UPDATE.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_POWER.get())
+                .requires(MoeItems.SUPERCONDUCTING_UPDATE.get())
+                .requires(MoeItems.COPPER_LC.get())
+                .unlockedBy("has_update", has(MoeItems.SUPERCONDUCTING_UPDATE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_UPDATE.get(), 2)
                 .pattern("ccc")
                 .pattern("abd")
                 .pattern("ccc")

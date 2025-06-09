@@ -37,7 +37,7 @@ public class Exciting implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 200;
+        return 256;
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyTransmissionAntennaBE;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
+import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -98,11 +100,11 @@ public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if(state.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)) {
+        if(state.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK) && !(player.getMainHandItem().getItem() instanceof MagicCastItem)) {
             level.setBlockAndUpdate(pos, state.setValue(SEND, !state.getValue(SEND)));
             return InteractionResult.SUCCESS;
         }
-        return InteractionResult.CONSUME;
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class HydrogenBondFracture implements IMoeMagic {
 
     @Override
     public int getBaseEnergyCost() {
-        return 200;
+        return 512;
     }
 
     @Override

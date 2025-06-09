@@ -34,7 +34,7 @@ public class PlasmaTorch implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 500;
+        return 512;
     }
 
     @Override

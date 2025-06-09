@@ -42,7 +42,7 @@ public class ElectromagneticRay implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 400;
+        return 128;
     }
 
     @Override

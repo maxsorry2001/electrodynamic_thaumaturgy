@@ -3,6 +3,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyBlockEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public class EnergyBlock extends BaseEntityBlock {
@@ -63,6 +66,8 @@ public class EnergyBlock extends BaseEntityBlock {
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof EnergyBlockEntity energyBlockEntity && !level.isClientSide()) {
+                IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), energyBlockEntity.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.magic_of_electromagnetic.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

@@ -66,12 +66,19 @@ public class MagicCastItem extends Item {
         BlockPos blockPos = context.getClickedPos();
         ItemStack itemStack = context.getItemInHand();
         BlockState blockState = context.getLevel().getBlockState(blockPos);
+        Player player = context.getPlayer();
         if(blockState.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)) {
-            if (!itemStack.has(MoeDataComponentTypes.LINK_POS) || !context.getLevel().getBlockState(itemStack.get(MoeDataComponentTypes.LINK_POS)).is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK))
+            if (!itemStack.has(MoeDataComponentTypes.LINK_POS) || !context.getLevel().getBlockState(itemStack.get(MoeDataComponentTypes.LINK_POS)).is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)) {
                 itemStack.set(MoeDataComponentTypes.LINK_POS, blockPos);
+                player.swing(context.getHand());
+                return InteractionResult.SUCCESS;
+            }
             else {
                 BlockPos targetPos = itemStack.get(MoeDataComponentTypes.LINK_POS);
-                if(targetPos == blockPos) itemStack.remove(MoeDataComponentTypes.LINK_POS);
+                if(targetPos == blockPos) {
+                    itemStack.remove(MoeDataComponentTypes.LINK_POS);
+                    player.swing(context.getHand());
+                }
                 else {
                     BlockState targetState = context.getLevel().getBlockState(targetPos);
                     if(targetState.is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK)){
@@ -79,11 +86,15 @@ public class MagicCastItem extends Item {
                             BlockEntity blockEntity = context.getLevel().getBlockEntity(blockPos);
                             ((EnergyTransmissionAntennaBE)blockEntity).getReceivePos().add(targetPos);
                             itemStack.remove(MoeDataComponentTypes.LINK_POS);
+                            player.swing(context.getHand());
+                            return InteractionResult.SUCCESS;
                         }
                         else if (!blockState.getValue(EnergyTransmissionAtennaBlock.SEND) && targetState.getValue(EnergyTransmissionAtennaBlock.SEND)){
                             BlockEntity blockEntity = context.getLevel().getBlockEntity(targetPos);
                             ((EnergyTransmissionAntennaBE)blockEntity).getReceivePos().add(blockPos);
                             itemStack.remove(MoeDataComponentTypes.LINK_POS);
+                            player.swing(context.getHand());
+                            return InteractionResult.SUCCESS;
                         }
                     }
                 }
@@ -99,6 +110,10 @@ public class MagicCastItem extends Item {
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+        if(stack.has(MoeDataComponentTypes.LINK_POS)){
+            BlockPos blockPos = stack.get(MoeDataComponentTypes.LINK_POS);
+            tooltipComponents.add(Component.translatable("binding").append(blockPos.getX() + "," + blockPos.getY() + "," + blockPos.getZ()));
+        }
     }
 
     @Override

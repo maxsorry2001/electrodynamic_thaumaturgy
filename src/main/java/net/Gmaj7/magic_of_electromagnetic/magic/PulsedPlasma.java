@@ -23,7 +23,7 @@ public class PulsedPlasma implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 600;
+        return 128;
     }
 
     @Override

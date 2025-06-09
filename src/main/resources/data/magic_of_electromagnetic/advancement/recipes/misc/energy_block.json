@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_ingot": {
+    "has_energy_core": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:lodestone"
+            "items": "magic_of_electromagnetic:energy_core"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "magic_of_electromagnetic:energy_core"
+        "recipe": "magic_of_electromagnetic:energy_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper_ingot"
+      "has_energy_core"
     ]
   ],
   "rewards": {
     "recipes": [
-      "magic_of_electromagnetic:energy_core"
+      "magic_of_electromagnetic:energy_block"
     ]
   }
 }

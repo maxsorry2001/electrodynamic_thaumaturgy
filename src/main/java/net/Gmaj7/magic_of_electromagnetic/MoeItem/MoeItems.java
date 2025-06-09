@@ -109,7 +109,7 @@ public class MoeItems {
     public static final Supplier<Item> BOARD = MOE_ITEM.registerSimpleItem("board", new Item.Properties());
     public static final Supplier<Item> BJT = MOE_ITEM.registerSimpleItem("bjt", new Item.Properties().stacksTo(1));
     public static final Supplier<Item> SUPERCONDUCTING_UPDATE = MOE_ITEM.register("superconducting_update",
-            () -> new SuperconductingUpdateItem(new Item.Properties().stacksTo(1)));
+            () -> new SuperconductingUpdateItem(new Item.Properties()));
     public static final Supplier<Item> FE_CU_POTATO_BATTERY = MOE_ITEM.register("fe_cu_potato_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
     public static final Supplier<Item> FE_CU_CARROT_BATTERY = MOE_ITEM.register("fe_cu_carrot_battery",

@@ -31,7 +31,7 @@ public class Protecting implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 300;
+        return 384;
     }
 
     @Override

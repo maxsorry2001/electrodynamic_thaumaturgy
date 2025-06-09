@@ -38,7 +38,7 @@ public class MagmaLighting implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 600;
+        return 512;
     }
 
     @Override

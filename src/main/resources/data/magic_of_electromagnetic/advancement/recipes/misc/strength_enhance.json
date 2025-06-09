@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_ingot": {
+    "has_enhance_baseboard": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:lodestone"
+            "items": "magic_of_electromagnetic:enhance_modem_baseboard"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "magic_of_electromagnetic:energy_core"
+        "recipe": "magic_of_electromagnetic:strength_enhance"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper_ingot"
+      "has_enhance_baseboard"
     ]
   ],
   "rewards": {
     "recipes": [
-      "magic_of_electromagnetic:energy_core"
+      "magic_of_electromagnetic:strength_enhance"
     ]
   }
 }
