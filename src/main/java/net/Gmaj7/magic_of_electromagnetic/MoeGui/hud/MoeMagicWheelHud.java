@@ -38,7 +38,7 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
             return;
         }
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
-        int r = centerY * 2 / 3;
+        int r = centerY / 2;
         double alpha = - 0.375 * Math.PI;
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
         for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
