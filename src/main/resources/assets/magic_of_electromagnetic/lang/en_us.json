@@ -100,12 +100,13 @@
   "moe_magma_lighting": "Magma Lighting",
   "moe_lighting_strike": "Lighting Strike",
   "moe_nerve_blocking": "Nerve Blocking",
-  "moe_assemble": "Assemble",
   "moe_plasma_torch": "Magnetic Reconnection Torch",
   "moe_hydrogen_bond_fracture": "Hydrogen Bond Fracture",
 
   "moe_tab": "Magic of Electromagnetic",
   "moe_show_energy": "Energy:",
+  "moe_modem": "Modem",
+  "moe_assemble": "Assemble",
 
   "key.category.magic_of_electromagnetic.moe": "The Rule of Electromagnetic Magic",
   "key.magic_of_electromagnetic.switch_magic": "Switch magic",

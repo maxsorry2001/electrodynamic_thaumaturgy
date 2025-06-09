@@ -5,6 +5,7 @@ import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeModemTableMenu;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.player.Inventory;
 public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMenu> {
     Button button;
     ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_modem_table.png");
+    protected static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "widget/button"), ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "widget/button_disabled"), ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "widget/button_highlighted"));
 
     public MoeModemTableScreen(MoeModemTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -20,8 +22,6 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
 
     @Override
     protected void init() {
-        this.button = this.addRenderableWidget(Button.builder(Component.translatable("moe_assemble"), (p) -> { })
-                .bounds(this.width / 2 + this.imageWidth / 4, this.height / 2 - this.imageHeight / 3, 30, 20).build());
         this.inventoryLabelY = 1000;
         this.titleLabelX = this.imageWidth / 3;
         super.init();
@@ -30,16 +30,23 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.button.render(guiGraphics, mouseX, mouseY, partialTick);
+        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + this.imageWidth * 3 / 4, y + this.imageHeight / 4, 30, 20);
+        guiGraphics.drawString(this.font, Component.translatable("moe_modem"), x + this.imageWidth * 3 / 4 + 7, y + this.imageHeight / 4 + 5, 0xFFFFFF);
         renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    private boolean isMouseFocused(double mouseX, double mouseY){
+        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
+        double d0 = mouseX - x - this.imageWidth * 3 / 4;
+        double d1 = mouseY - y - this.imageHeight / 4;
+        return d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20;
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
-            double d0 = mouseX - this.width / 2 - this.imageWidth / 4;
-            double d1 = mouseY - this.height / 2 + this.imageHeight / 3;
-            if(d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20){
+            if(isMouseFocused(mouseX, mouseY)){
                 if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
                     this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
                     return true;
