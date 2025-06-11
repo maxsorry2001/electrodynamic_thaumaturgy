@@ -23,6 +23,7 @@ public class MoeBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get());
         dropSelf(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get());
         dropSelf(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get());
+        dropSelf(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get());
         //add(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), block -> createOreDrop(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), MoeItems.EMPTY_MODULE.get()))
     }
 

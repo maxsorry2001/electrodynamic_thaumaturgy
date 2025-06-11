@@ -28,6 +28,8 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_ITEM.register("photovoltaic_energy_maker",
             () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<BlockItem> THERMAL_ENERGY_MAKER_BLOCK = MOE_ITEM.register("thermal_energy_maker",
+            () -> new BlockItem(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
             () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
     public static final Supplier<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.register("magic_lithography_table",

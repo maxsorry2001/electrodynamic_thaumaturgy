@@ -20,6 +20,7 @@ public class MoeBlockStateProvider extends BlockStateProvider {
         blockWithItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
         blockWithItem(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
         blockWithItem(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
+        blockWithItem(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK);
     }
 
     private  void blockWithItem(DeferredBlock<?> deferredBlock){

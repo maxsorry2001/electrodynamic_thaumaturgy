@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true": {
+      "model": "magic_of_electromagnetic:block/thermal_energy_maker_block_true"
+    },
+    "lit=false":{
+      "model": "magic_of_electromagnetic:block/thermal_energy_maker_block_false"
+    }
+  }
+}

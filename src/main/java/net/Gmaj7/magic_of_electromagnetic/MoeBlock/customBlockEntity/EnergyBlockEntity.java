@@ -40,10 +40,6 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
         }
     };
     private final ItemStackHandler itemHandler = new ItemStackHandler(2){
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack) {
-            return 2;
-        }
 
         @Override
         protected void onContentsChanged(int slot) {

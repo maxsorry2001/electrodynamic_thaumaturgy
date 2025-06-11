@@ -24,6 +24,9 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("temperature_energy_maker_block",
             () ->  new TemperatureEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
+    public static final DeferredBlock<Block> THERMAL_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("thermal_energy_maker_block",
+            () ->  new ThermalEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
+
     public static final DeferredBlock<Block> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("photovoltaic_energy_maker_block",
             () ->  new PhotovoltaicEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
 

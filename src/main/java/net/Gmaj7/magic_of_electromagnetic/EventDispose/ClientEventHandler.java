@@ -1,9 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.EventDispose;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.IMoeItemBlockEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
@@ -13,10 +10,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MagicLithographyTableScr
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeAssemblyTableScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeEnergyBlockScreen;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.screen.MoeModemTableScreen;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyMapping;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeKeyState;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -24,10 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.energy.ComponentEnergyStorage;
 
 
 public class ClientEventHandler {
@@ -46,26 +38,6 @@ public class ClientEventHandler {
             event.register(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), MagicLithographyTableScreen::new);
         }
 
-        @SubscribeEvent
-        public static void registerCapabilities(RegisterCapabilitiesEvent event){
-            event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 32768)),
-                    MoeItems.ELECTROMAGNETIC_ROD.get(),
-                    MoeItems.ELECTROMAGNETIC_BOOK.get());
-            event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
-                    MoeItems.FE_CU_POTATO_BATTERY.get(),
-                    MoeItems.FE_CU_CARROT_BATTERY.get(),
-                    MoeItems.FE_CU_SOLUTION_BATTERY.get());
-            event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
-                    MoeItems.ENERGY_BLOCK.get());
-            event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
-                    blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
-                    MoeBlocks.ENERGY_BLOCK.get(),
-                    MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get(),
-                    MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get());
-            event.registerBlock(Capabilities.ItemHandler.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
-                    blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
-                    MoeBlocks.ENERGY_BLOCK.get());
-        }
 
         @SubscribeEvent
         public static void registerKey(RegisterKeyMappingsEvent event){
