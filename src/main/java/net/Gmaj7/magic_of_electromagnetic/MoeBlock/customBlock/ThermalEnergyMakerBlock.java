@@ -3,7 +3,13 @@ package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.ThermalEnergyMakerBE;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public class ThermalEnergyMakerBlock extends AbstractEnergyMakerBlock {
@@ -44,6 +53,21 @@ public class ThermalEnergyMakerBlock extends AbstractEnergyMakerBlock {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if(level.isClientSide())
+            return InteractionResult.SUCCESS;
+        else {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ThermalEnergyMakerBE thermalEnergyMakerBE && !level.isClientSide()) {
+                IEnergyStorage energyStorage = thermalEnergyMakerBE.getEnergy();
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), thermalEnergyMakerBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(thermalEnergyMakerBE, Component.translatable("block.magic_of_electromagnetic.energy_block")), pos);
+            }
+            return InteractionResult.CONSUME;
+        }
     }
 
     @Nullable

@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
+import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.ThermalEnergyMakerBE;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -114,6 +115,49 @@ public class MoePacket{
                     BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
                     if(blockEntity instanceof IMoeEnergyBlockEntity) {
                         ((IMoeEnergyBlockEntity) blockEntity).setEnergy(packet.energy);
+                    }
+                }
+            });
+        }
+    }
+
+    public static class ThermalSetPacket implements CustomPacketPayload{
+        int tick;
+        int burn;
+        BlockPos blockPos;
+        public static final CustomPacketPayload.Type<ThermalSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "thermal_set"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, ThermalSetPacket> STREAM_CODEC = CustomPacketPayload.codec(ThermalSetPacket::write, ThermalSetPacket::new);
+
+        public ThermalSetPacket(int energy, int burn, BlockPos blockPos){
+            this.tick = energy;
+            this.burn = burn;
+            this.blockPos = blockPos;
+        }
+
+        public ThermalSetPacket(FriendlyByteBuf buf){
+            this.tick = buf.readInt();
+            this.burn = buf.readInt();
+            this.blockPos = buf.readBlockPos();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeInt(tick);
+            buf.writeInt(burn);
+            buf.writeBlockPos(blockPos);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(ThermalSetPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if(context.player().level().isClientSide()){
+                    BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
+                    if(blockEntity instanceof ThermalEnergyMakerBE) {
+                        ((ThermalEnergyMakerBE) blockEntity).setBurnTime(packet.tick);
+                        ((ThermalEnergyMakerBE) blockEntity).setFullBurnTime(packet.burn);
                     }
                 }
             });

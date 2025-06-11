@@ -1,6 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlock;
 
-import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MagicLithographyTableMenu;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeMagicLithographyTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -35,7 +35,7 @@ public class MagicLithographyTableBlock extends Block {
     @Override
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((id, inventory, player) -> {
-            return new MagicLithographyTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
+            return new MoeMagicLithographyTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
         }, Component.translatable("block.magic_of_electromagnetic.magic_lithography_table_block"));
     }
 }

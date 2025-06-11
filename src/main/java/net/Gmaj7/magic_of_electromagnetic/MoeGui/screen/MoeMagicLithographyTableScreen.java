@@ -1,7 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeGui.screen;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
-import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MagicLithographyTableMenu;
+import net.Gmaj7.magic_of_electromagnetic.MoeGui.menu.MoeMagicLithographyTableMenu;
 import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MagicLithographyRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,7 +16,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.List;
 
-public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLithographyTableMenu> {
+public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeMagicLithographyTableMenu> {
     ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/magic_lithography_table.png");
     private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "container/lithography_table/scroller");
     private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "container/lithography_table/scroller_disabled");
@@ -34,7 +34,7 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
     private int startIndex;
     private boolean displayRecipes;
 
-    public MagicLithographyTableScreen(MagicLithographyTableMenu menu, Inventory playerInventory, Component title) {
+    public MoeMagicLithographyTableScreen(MoeMagicLithographyTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         menu.registerUpdateListener(this::containerChanged);
     }
@@ -58,9 +58,9 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<RecipeHolder<MagicLithographyRecipe>> list = ((MagicLithographyTableMenu)this.menu).getRecipes();
+            List<RecipeHolder<MagicLithographyRecipe>> list = ((MoeMagicLithographyTableMenu)this.menu).getRecipes();
 
-            for(int l = this.startIndex; l < k && l < ((MagicLithographyTableMenu)this.menu).getNumRecipes(); ++l) {
+            for(int l = this.startIndex; l < k && l < ((MoeMagicLithographyTableMenu)this.menu).getNumRecipes(); ++l) {
                 int i1 = l - this.startIndex;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
@@ -84,9 +84,9 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
                 int i1 = l - this.startIndex;
                 double d0 = mouseX - (double)(i + i1 % 4 * 16);
                 double d1 = mouseY - (double)(j + i1 / 4 * 18);
-                if (d0 >= 0.0 && d1 >= 0.0 && d0 < 16.0 && d1 < 18.0 && ((MagicLithographyTableMenu)this.menu).clickMenuButton(this.minecraft.player, l)) {
+                if (d0 >= 0.0 && d1 >= 0.0 && d0 < 16.0 && d1 < 18.0 && ((MoeMagicLithographyTableMenu)this.menu).clickMenuButton(this.minecraft.player, l)) {
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    this.minecraft.gameMode.handleInventoryButtonClick(((MagicLithographyTableMenu)this.menu).containerId, l);
+                    this.minecraft.gameMode.handleInventoryButtonClick(((MoeMagicLithographyTableMenu)this.menu).containerId, l);
                     return true;
                 }
             }
@@ -130,9 +130,9 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
     }
 
     private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
-        List<RecipeHolder<MagicLithographyRecipe>> list = ((MagicLithographyTableMenu)this.menu).getRecipes();
+        List<RecipeHolder<MagicLithographyRecipe>> list = ((MoeMagicLithographyTableMenu)this.menu).getRecipes();
 
-        for(int i = this.startIndex; i < startIndex && i < ((MagicLithographyTableMenu)this.menu).getNumRecipes(); ++i) {
+        for(int i = this.startIndex; i < startIndex && i < ((MoeMagicLithographyTableMenu)this.menu).getNumRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = x + j % 4 * 16;
             int l = j / 4;
@@ -154,11 +154,11 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
     }
 
     private boolean isScrollBarActive() {
-        return this.displayRecipes && ((MagicLithographyTableMenu)this.menu).getNumRecipes() > 12;
+        return this.displayRecipes && ((MoeMagicLithographyTableMenu)this.menu).getNumRecipes() > 12;
     }
 
     private void containerChanged() {
-        this.displayRecipes = ((MagicLithographyTableMenu)this.menu).hasInputItem();
+        this.displayRecipes = ((MoeMagicLithographyTableMenu)this.menu).hasInputItem();
         if (!this.displayRecipes) {
             this.scrollOffs = 0.0F;
             this.startIndex = 0;
@@ -167,6 +167,6 @@ public class MagicLithographyTableScreen extends AbstractContainerScreen<MagicLi
     }
 
     protected int getOffscreenRows() {
-        return (((MagicLithographyTableMenu)this.menu).getNumRecipes() + 4 - 1) / 4 - 3;
+        return (((MoeMagicLithographyTableMenu)this.menu).getNumRecipes() + 4 - 1) / 4 - 3;
     }
 }

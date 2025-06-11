@@ -21,7 +21,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class MagicLithographyTableMenu extends AbstractContainerMenu {
+public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     final ResultContainer resultContainer;
@@ -35,11 +35,11 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
     Runnable slotUpdateListener;
     private final DataSlot selectedRecipeIndex;
 
-    public MagicLithographyTableMenu(int containerId, Inventory inventory){
+    public MoeMagicLithographyTableMenu(int containerId, Inventory inventory){
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
 
-    public MagicLithographyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
+    public MoeMagicLithographyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
         super(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), containerId);
         this.selectedRecipeIndex = DataSlot.standalone();
         this.access = access;
@@ -52,8 +52,8 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
             @Override
             public void setChanged() {
                 super.setChanged();
-                MagicLithographyTableMenu.this.slotsChanged(this);
-                MagicLithographyTableMenu.this.slotUpdateListener.run();
+                MoeMagicLithographyTableMenu.this.slotsChanged(this);
+                MoeMagicLithographyTableMenu.this.slotUpdateListener.run();
             }
         };
         this.resultContainer = new ResultContainer();
@@ -70,16 +70,16 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
 
             public void onTake(Player p_150672_, ItemStack p_150673_) {
                 p_150673_.onCraftedBy(p_150672_.level(), p_150672_, p_150673_.getCount());
-                MagicLithographyTableMenu.this.resultContainer.awardUsedRecipes(p_150672_, this.getRelevantItems());
-                ItemStack itemstack = MagicLithographyTableMenu.this.inputSlot.remove(1);
+                MoeMagicLithographyTableMenu.this.resultContainer.awardUsedRecipes(p_150672_, this.getRelevantItems());
+                ItemStack itemstack = MoeMagicLithographyTableMenu.this.inputSlot.remove(1);
                 if (!itemstack.isEmpty()) {
-                    MagicLithographyTableMenu.this.setupResultSlot();
+                    MoeMagicLithographyTableMenu.this.setupResultSlot();
                 }
                 super.onTake(p_150672_, p_150673_);
             }
 
             private List<ItemStack> getRelevantItems() {
-                return List.of(MagicLithographyTableMenu.this.inputSlot.getItem());
+                return List.of(MoeMagicLithographyTableMenu.this.inputSlot.getItem());
             }
         });
         addPlayerInventory(inventory);

@@ -128,7 +128,7 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("moe_energy_block");
+        return Component.translatable("block.magic_of_electromagnetic.energy_block");
     }
 
     @Nullable

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "magic_of_electromagnetic:block/electromagnetic_assembly_table_bottom",
-    "side": "magic_of_electromagnetic:block/temperature_energy_maker_block_side",
-    "top": "magic_of_electromagnetic:block/photovoltaic_energy_maker_block_top"
+    "side": "magic_of_electromagnetic:block/thermal_energy_maker_block_false_side",
+    "top": "magic_of_electromagnetic:block/thermal_energy_maker_block_top"
   }
 }
