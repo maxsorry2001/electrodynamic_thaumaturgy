@@ -60,7 +60,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
         this.inputSlot = this.addSlot(new Slot(this.container, inNum, 20, 33){
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(MoeItems.EMPTY_MODULE.get());
+                return stack.is(MoeItems.EMPTY_PRIMARY_MODULE.get());
             }
         });
         this.resultSlot = this.addSlot(new Slot(this.resultContainer, 1, 143, 33) {
@@ -74,7 +74,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
                 ItemStack itemstack = MagicLithographyTableMenu.this.inputSlot.remove(1);
                 if (!itemstack.isEmpty()) {
                     MagicLithographyTableMenu.this.setupResultSlot();
-                };
+                }
                 super.onTake(p_150672_, p_150673_);
             }
 
@@ -116,7 +116,7 @@ public class MagicLithographyTableMenu extends AbstractContainerMenu {
             else if (!this.slots.get(outNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, outNum, outNum + 1, false)){
                 return ItemStack.EMPTY;
             }
-            else if (item == MoeItems.EMPTY_MODULE.get()) {
+            else if (item == MoeItems.EMPTY_PRIMARY_MODULE.get()) {
                 boolean flag = this.moveItemStackTo(itemstack1, inNum, outNum, false);
                 if (flag) return ItemStack.EMPTY;
             }

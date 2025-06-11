@@ -8,12 +8,15 @@ import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.render.*;
 import net.Gmaj7.magic_of_electromagnetic.MoeGui.MoeMenuType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeAttachmentType;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDataComponentTypes;
+import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoePacket;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.Gmaj7.magic_of_electromagnetic.MoeParticle.custom.*;
 import net.Gmaj7.magic_of_electromagnetic.MoeRecipe.MoeRecipes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -26,7 +29,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -81,6 +86,13 @@ public class MagicOfElectromagnetic
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
+    }
+
+    @SubscribeEvent
+    public void entityJoin(EntityJoinLevelEvent event){
+        if(!event.getLevel().isClientSide() && event.getEntity() instanceof Player player){
+            PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(((MoeDataGet)player).getProtective().getProtecting()));
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

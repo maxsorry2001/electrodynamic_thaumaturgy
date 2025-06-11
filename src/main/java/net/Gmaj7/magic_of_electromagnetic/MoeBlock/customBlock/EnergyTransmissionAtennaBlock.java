@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.MoeBlocks;
 import net.Gmaj7.magic_of_electromagnetic.MoeBlock.customBlockEntity.EnergyTransmissionAntennaBE;
-import net.Gmaj7.magic_of_electromagnetic.MoeItem.MoeItems;
 import net.Gmaj7.magic_of_electromagnetic.MoeItem.custom.MagicCastItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

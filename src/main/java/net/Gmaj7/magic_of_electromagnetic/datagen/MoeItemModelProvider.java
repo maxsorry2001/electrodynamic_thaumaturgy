@@ -13,7 +13,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(MoeItems.EMPTY_MODULE.get());
+        basicItem(MoeItems.EMPTY_PRIMARY_MODULE.get());
         basicItem(MoeItems.RAY_MODULE.get());
         basicItem(MoeItems.PULSED_PLASMA_MODULE.get());
         basicItem(MoeItems.EXCITING_MODULE.get());
@@ -49,6 +49,8 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.BJT.get());
         basicItem(MoeItems.BOARD.get());
         basicItem(MoeItems.SUPERCONDUCTING_UPDATE.get());
+        basicItem(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
+        basicItem(MoeItems.EMPTY_ADVANCED_MODULE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

@@ -1,7 +1,7 @@
 {
   "type": "magic_of_electromagnetic:magic_lithography",
   "baseboard": {
-    "item": "magic_of_electromagnetic:empty_module"
+    "item": "magic_of_electromagnetic:empty_intermediate_module"
   },
   "result": {
     "count": 1,

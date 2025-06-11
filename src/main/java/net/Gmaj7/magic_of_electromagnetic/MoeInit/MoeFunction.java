@@ -166,7 +166,7 @@ public class MoeFunction {
         list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
         list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
         for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i ++)
-            list.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+            list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
         return ItemContainerContents.fromItems(list);
     }
 }

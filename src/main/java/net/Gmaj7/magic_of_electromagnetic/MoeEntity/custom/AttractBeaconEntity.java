@@ -73,7 +73,7 @@ public class AttractBeaconEntity extends AbstractArrow {
 
     @Override
     protected ItemStack getDefaultPickupItem() {
-        return new ItemStack(MoeItems.EMPTY_MODULE.get());
+        return new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get());
     }
 
     @Override

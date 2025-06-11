@@ -202,10 +202,20 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.ICE)
                 .define('d', Items.NETHERITE_INGOT)
                 .unlockedBy("has_nether_star", has(Items.NETHER_STAR)).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.EMPTY_MODULE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.EMPTY_PRIMARY_MODULE.get())
                 .pattern("ccc")
-                .define('c', MoeItems.COPPER_SHEET.get())
-                .unlockedBy("has_copper_sheet", has(MoeItems.COPPER_SHEET.get())).save(recipeOutput);
+                .define('c', MoeItems.IRON_SHEET.get())
+                .unlockedBy("has_iron_sheet", has(MoeItems.IRON_SHEET.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EMPTY_INTERMEDIATE_MODULE.get())
+                .requires(MoeItems.EMPTY_PRIMARY_MODULE.get())
+                .requires(Items.GOLD_INGOT)
+                .requires(Items.QUARTZ)
+                .unlockedBy("has_primary_module", has(MoeItems.EMPTY_PRIMARY_MODULE.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EMPTY_ADVANCED_MODULE.get())
+                .requires(MoeItems.EMPTY_INTERMEDIATE_MODULE.get())
+                .requires(Items.COPPER_INGOT)
+                .requires(Items.END_ROD)
+                .unlockedBy("has_intermediate_module", has(MoeItems.EMPTY_INTERMEDIATE_MODULE.get())).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ENHANCE_MODEM_BASEBOARD.get(), 4)
                 .pattern("aba")

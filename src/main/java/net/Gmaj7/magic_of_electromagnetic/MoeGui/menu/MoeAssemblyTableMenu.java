@@ -164,7 +164,7 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
                     if(itemStack.isEmpty()){
                         if(i == powerSlotNum) newList.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
                         else if (i == lcSlotNum) newList.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-                        else newList.add(new ItemStack(MoeItems.EMPTY_MODULE.get()));
+                        else newList.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
                     }
                     else newList.add(itemStack);
                     this.container.setItem(i, menuSlot);
