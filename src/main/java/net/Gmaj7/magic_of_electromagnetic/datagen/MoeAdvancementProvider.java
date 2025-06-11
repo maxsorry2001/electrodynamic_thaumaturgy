@@ -46,22 +46,22 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lodestone")));
             builder.save(consumer, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "normal/root"), existingFileHelper);
 
-            register(MoeItems.ENERGY_CORE.get(), MagicOfElectromagnetic.MODID, "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
-            register(MoeItems.ELECTROMAGNETIC_ROD.get(), MagicOfElectromagnetic.MODID, "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get(), MoeItems.ELECTROMAGNETIC_BOOK.get());
-            register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE, MagicOfElectromagnetic.MODID, "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
-            register(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE, MagicOfElectromagnetic.MODID, "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
-            register(MoeItems.EMPTY_PRIMARY_MODULE.get(), MagicOfElectromagnetic.MODID, "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.EMPTY_PRIMARY_MODULE.get());
-            register(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK, MagicOfElectromagnetic.MODID, "normal", "energy_core", "energy_maker", "has_energy_maker", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
-            register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK, MagicOfElectromagnetic.MODID, "normal", "energy_maker", "energy_send", "has_energy_antenna", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
-            register(MoeBlocks.ENERGY_BLOCK, MagicOfElectromagnetic.MODID, "normal", "energy_maker", "energy_save", "has_energy_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_BLOCK);
-            register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE, MagicOfElectromagnetic.MODID, "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
-            register(MoeItems.EFFICIENCY_ENHANCE.get(), MagicOfElectromagnetic.MODID, "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
+            register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
+            register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get(), MoeItems.ELECTROMAGNETIC_BOOK.get());
+            register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE, "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
+            register(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE, "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
+            register(MoeItems.EMPTY_PRIMARY_MODULE.get(), "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.EMPTY_PRIMARY_MODULE.get());
+            register(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK, "normal", "energy_core", "energy_maker", "has_energy_maker", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
+            register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK, "normal", "energy_maker", "energy_send", "has_energy_antenna", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+            register(MoeBlocks.ENERGY_BLOCK, "normal", "energy_maker", "energy_save", "has_energy_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_BLOCK);
+            register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE, "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
+            register(MoeItems.EFFICIENCY_ENHANCE.get(), "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
 
         }
 
-        private void register(ItemLike itemLike, String id, String nameSpace, String parent, String name, String criterion, AdvancementType type, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper, ItemLike... criterionItem){
+        private void register(ItemLike itemLike, String nameSpace, String parent, String name, String criterion, AdvancementType type, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper, ItemLike... criterionItem){
             Advancement.Builder builder = Advancement.Builder.advancement();
-            builder.parent(AdvancementSubProvider.createPlaceholder( id + ":" + nameSpace + "/" + parent));
+            builder.parent(AdvancementSubProvider.createPlaceholder( MagicOfElectromagnetic.MODID + ":" + nameSpace + "/" + parent));
             builder.display(
                     new ItemStack(itemLike),
                     Component.translatable("advancements." + MagicOfElectromagnetic.MODID + "." + name + ".title"),
@@ -78,7 +78,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                 list.add(criterion + "_" + i);
             }
             builder.requirements(AdvancementRequirements.anyOf(list));
-            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(id, nameSpace + "/" + name), existingFileHelper);
+            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, nameSpace + "/" + name), existingFileHelper);
         }
 
     }

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:iron_ingot"
+    },
+    "b": {
+      "item": "magic_of_electromagnetic:energy_core"
+    },
+    "c": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "pattern": [
+    " a ",
+    "aba",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:thermal_energy_maker"
+  }
+}

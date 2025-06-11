@@ -71,6 +71,14 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.AMETHYST_SHARD)
                 .define('d', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get())
+                .pattern(" a ")
+                .pattern("aba")
+                .pattern(" c ")
+                .define('a', Items.IRON_INGOT)
+                .define('b', MoeItems.ENERGY_CORE.get())
+                .define('c', Items.FURNACE)
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_SHEET.get(), 16)
                 .pattern("aa ")
                 .pattern("   ")
