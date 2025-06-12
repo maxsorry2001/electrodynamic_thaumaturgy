@@ -20,17 +20,17 @@ import net.minecraft.world.phys.EntityHitResult;
 
 import java.util.List;
 
-public class MagmaLightingBeaconEntity extends AbstractArrow {
+public class CoulombDomainBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
-    private int opentick = 0;
+    private int liveTick = 100;
 
 
-    public MagmaLightingBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+    public CoulombDomainBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
 
-    public MagmaLightingBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack) {
-        super(MoeEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), level);
+    public CoulombDomainBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack) {
+        super(MoeEntities.COULOMB_DOMAIN_BEACON_ENTITY.get(), level);
         this.magicItem = itemStack.copy();
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
@@ -39,17 +39,12 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        opentick++;
-        if(opentick == 20){
-            level().setBlockAndUpdate(getOnPos(), Blocks.LAVA.defaultBlockState());
-            LightningBolt lightningBolt1 = EntityType.LIGHTNING_BOLT.create(level());
-            lightningBolt1.teleportTo(this.getX(), this.getY(), this.getZ());
-            lightningBolt1.setVisualOnly(true);
-            level().addFreshEntity(lightningBolt1);
-            List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(5));
+        liveTick--;
+        if(liveTick % 20 == 0){
+            List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(7));
             for (LivingEntity target : list){
                 if(target != getOwner() && magicItem != null){
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), getOwner()), MoeFunction.getMagicAmount(magicItem));
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), getOwner()), MoeFunction.getMagicAmount(magicItem) / 3);
                     MoeFunction.checkTargetEnhancement(magicItem, target);
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
                     lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -58,8 +53,6 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
                 }
             }
         }
-        if(opentick > 20)
-            this.discard();
     }
 
     @Override
@@ -90,14 +83,14 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putInt("open_tick", opentick);
+        compound.putInt("live_tick", liveTick);
         compound.put("moe_magic_item", this.magicItem.save(this.registryAccess()));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.opentick = compound.getInt("open_tick");
+        this.liveTick = compound.getInt("live_tick");
         this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
     }
 }
