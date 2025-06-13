@@ -65,6 +65,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new HydrogenBondFracture(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> LIGHTING_STRIKE_MODULE = MOE_ITEM.register("lighting_strike_module",
             () -> new MoeMagicTypeModuleItem(new LightingStrike(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> MAGNET_RESONANCE_MODULE = MOE_ITEM.register("magnet_resonance_module",
+            () -> new MoeMagicTypeModuleItem(new MagnetResonance(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BLOCK_NERVE_MODULE = MOE_ITEM.register("block_nerve_module",
             () -> new MoeMagicTypeModuleItem(new NerveBlocking(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",

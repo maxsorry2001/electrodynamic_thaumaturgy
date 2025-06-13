@@ -52,7 +52,7 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
 
     @Override
     protected void energyMake(AbstractEnergyMakerBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(1, false);
+        blockEntity.getEnergy().receiveEnergy(32, false);
     }
 
     @Override

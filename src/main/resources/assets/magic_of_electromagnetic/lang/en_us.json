@@ -15,6 +15,7 @@
   "item.magic_of_electromagnetic.plasma_torch_module": "Plasma Torch Module",
   "item.magic_of_electromagnetic.electromagnetic_assault_module": "Electromagnetic Assault Module",
   "item.magic_of_electromagnetic.st_elmo_s_fire_module": "St.Elmo's Fire",
+  "item.magic_of_electromagnetic.magnet_resonance_module": "Magnet Resonance",
   "item.magic_of_electromagnetic.magma_lighting_module": "Magma Lighting",
   "item.magic_of_electromagnetic.hydrogen_bond_fracture_module": "Hydrogen Bond Fracture",
   "item.magic_of_electromagnetic.empty_primary_module": "Empty Primary Module",
@@ -52,6 +53,7 @@
   "effect.magic_of_electromagnetic.electric_energy_release" : "Electric Energy Release",
   "effect.magic_of_electromagnetic.electric_field_domain" : "Electric Field Domain",
   "effect.magic_of_electromagnetic.block_nerve" : "Nerve Blocking",
+  "effect.magic_of_electromagnetic.magnet_resonance" : "Magnet Resonance",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
   "block.magic_of_electromagnetic.electromagnetic_modem_table": "Enhancement Modem Table",

@@ -29,6 +29,8 @@ public class MoeEffects {
                     .addAttributeModifier(Attributes.ATTACK_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.easpeed"), 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> ST_ELMO_S_FIRE = MOE_EFFECTS.register("st_elmo_s_fire",
             () -> new StElmo_sFireEffect(MobEffectCategory.BENEFICIAL, 0xAA0000));
+    public static final DeferredHolder<MobEffect, MobEffect> MAGNET_RESONANCE = MOE_EFFECTS.register("magnet_resonance",
+            () -> new MoeEffect(MobEffectCategory.HARMFUL, 0x0099B6));
     public static final DeferredHolder<MobEffect, MobEffect> NERVE_BLOCKING = MOE_EFFECTS.register("block_nerve",
             () -> new MoeEffect(MobEffectCategory.HARMFUL, 0x0078AA)
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.bsspeed"), -0.15000000596046448, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

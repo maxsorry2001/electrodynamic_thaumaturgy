@@ -50,6 +50,7 @@ public class MoeTabs {
                         output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
                         output.accept(MoeItems.MAGMA_LIGHTING_MODULE.get());
                         output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
+                        output.accept(MoeItems.MAGNET_RESONANCE_MODULE.get());
 
                         output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD.get());
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());

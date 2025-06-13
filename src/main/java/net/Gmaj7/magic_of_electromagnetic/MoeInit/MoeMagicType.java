@@ -19,6 +19,7 @@ public enum MoeMagicType {
     ST_ELMO_S_FIRE,
     MAGMA_LIGHTING,
     HYDROGEN_BOND_FRACTURE,
+    MAGNET_RESONANCE,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -43,7 +44,9 @@ public enum MoeMagicType {
             case ELECTROMAGNETIC_ASSAULT -> translate = "moe_electromagnetic_assault";
             case ST_ELMO_S_FIRE -> translate = "moe_st_elmo_s_fire";
             case MAGMA_LIGHTING -> translate = "moe_magma_lighting";
+            case MAGNET_RESONANCE -> translate = "item.magic_of_electromagnetic.magnet_resonance_module";
             case HYDROGEN_BOND_FRACTURE -> translate = "moe_hydrogen_bond_fracture";
+
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

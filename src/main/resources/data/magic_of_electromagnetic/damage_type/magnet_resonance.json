@@ -1,0 +1,6 @@
+{
+  "message_id": "magnet_resonance",
+  "effects": "hurt",
+  "exhaustion": 0.2,
+  "scaling": "never"
+}

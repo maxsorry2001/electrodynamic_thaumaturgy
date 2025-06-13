@@ -17,6 +17,7 @@
   "item.magic_of_electromagnetic.st_elmo_s_fire_module": "圣艾尔摩之火",
   "item.magic_of_electromagnetic.magma_lighting_module": "熔岩雷劫",
   "item.magic_of_electromagnetic.hydrogen_bond_fracture_module": "氢键崩裂",
+  "item.magic_of_electromagnetic.magnet_resonance_module": "磁感共振",
   "item.magic_of_electromagnetic.empty_primary_module": "初级光刻板",
   "item.magic_of_electromagnetic.empty_intermediate_module": "中级光刻板",
   "item.magic_of_electromagnetic.empty_advanced_module": "高级光刻板",
@@ -52,6 +53,7 @@
   "effect.magic_of_electromagnetic.electric_energy_release" : "电能释放",
   "effect.magic_of_electromagnetic.electric_field_domain" : "强电领域",
   "effect.magic_of_electromagnetic.block_nerve" : "神经阻碍",
+  "effect.magic_of_electromagnetic.magnet_resonance" : "磁感共振",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "电磁装配台",
   "block.magic_of_electromagnetic.electromagnetic_modem_table": "强化调制台",
