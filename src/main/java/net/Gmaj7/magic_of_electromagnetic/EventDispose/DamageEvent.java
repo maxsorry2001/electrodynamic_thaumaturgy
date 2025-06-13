@@ -46,9 +46,10 @@ public class DamageEvent {
             int l = livingEntity.getEffect(MoeEffects.MAGNET_RESONANCE).getAmplifier();
             List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(5, 2, 5));
             list.remove(livingEntity);
+            list.remove(sourceEntity);
             for(LivingEntity target : list){
                 if((target instanceof Mob && ((Mob) target).getTarget() == livingEntity) || target instanceof Enemy)
-                    target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance)), event.getNewDamage() * l / (l + 2));
+                    target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
             }
         }
     }

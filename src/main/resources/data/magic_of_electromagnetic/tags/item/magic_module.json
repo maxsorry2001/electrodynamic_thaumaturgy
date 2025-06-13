@@ -15,6 +15,9 @@
     "magic_of_electromagnetic:st_elmo_s_fire_module",
     "magic_of_electromagnetic:hydrogen_bond_fracture_module",
     "magic_of_electromagnetic:lighting_strike_module",
-    "magic_of_electromagnetic:block_nerve_module"
+    "magic_of_electromagnetic:block_nerve_module",
+    "magic_of_electromagnetic:magnet_resonance_module",
+    "magic_of_electromagnetic:disturbing_by_high_intensity_magnetic_module",
+    "magic_of_electromagnetic:coulomb_domain_module"
   ]
 }
