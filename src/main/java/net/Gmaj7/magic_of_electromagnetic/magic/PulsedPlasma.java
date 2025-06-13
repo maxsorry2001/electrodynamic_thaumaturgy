@@ -1,7 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.PulsedPlasmaEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -15,9 +14,8 @@ public class PulsedPlasma implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(livingEntity, livingEntity.level());
+        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(livingEntity, livingEntity.level(), itemStack);
         pulsedPlasmaEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 5, 1.5F);
-        pulsedPlasmaEntity.setPlasmaDamage(MoeFunction.getMagicAmount(itemStack));
         livingEntity.level().addFreshEntity(pulsedPlasmaEntity);
         }
 

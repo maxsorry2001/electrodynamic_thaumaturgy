@@ -41,6 +41,11 @@ public class MoeEntities {
                     .sized(0.98F, 0.98F)
                     .eyeHeight(0.13F)
                     .build("magma_lighting_entity"));
+    public static final Supplier<EntityType<CoulombDomainBeaconEntity>> COULOMB_DOMAIN_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("coulomb_domain_entity", () -> EntityType.Builder.<CoulombDomainBeaconEntity>of(CoulombDomainBeaconEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .eyeHeight(0.13F)
+                    .build("coulomb_domain_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

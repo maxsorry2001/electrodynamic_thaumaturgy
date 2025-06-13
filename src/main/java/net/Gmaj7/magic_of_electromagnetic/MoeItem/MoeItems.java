@@ -39,7 +39,7 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PULSED_PLASMA_MODULE = MOE_ITEM.register("pulsed_plasma_module",
             () -> new MoeMagicTypeModuleItem(new PulsedPlasma(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protecting_module",
+    public static final Supplier<Item> PROTECTING_MODULE = MOE_ITEM.register("protecting_module",
             () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EXCITING_MODULE = MOE_ITEM.register("exciting_module",
             () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
@@ -69,6 +69,10 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new MagnetResonance(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BLOCK_NERVE_MODULE = MOE_ITEM.register("block_nerve_module",
             () -> new MoeMagicTypeModuleItem(new NerveBlocking(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE = MOE_ITEM.register("disturbing_by_high_intensity_magnetic_module",
+            () -> new MoeMagicTypeModuleItem(new DisturbingByHighIntensityMagnetic(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> COULOMB_DOMAIN_MODULE = MOE_ITEM.register("coulomb_domain_module",
+            () -> new MoeMagicTypeModuleItem(new CoulombDomain(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.register("empty_intermediate_module",

@@ -15,13 +15,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class PulsedPlasmaEntity extends AbstractArrow {
-    private float plasmaDamage;
+    private ItemStack magicItem;
     public PulsedPlasmaEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
@@ -29,16 +30,20 @@ public class PulsedPlasmaEntity extends AbstractArrow {
     public PulsedPlasmaEntity(Level pLevel) {
         super(MoeEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
     }
-    public PulsedPlasmaEntity(LivingEntity pOwner, Level pLevel) {
+    public PulsedPlasmaEntity(LivingEntity pOwner, Level pLevel, ItemStack itemStack) {
         super(MoeEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
         this.setOwner(pOwner);
         this.setPos(pOwner.getX(), pOwner.getEyeY() - 0.1, pOwner.getZ());
+        this.magicItem = itemStack.copy();
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        entity.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), 12);
+        if(entity instanceof LivingEntity) {
+            entity.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), MoeFunction.getMagicAmount(magicItem));
+            MoeFunction.checkTargetEnhancement(magicItem, (LivingEntity) entity);
+        }
     }
 
     @Override
@@ -68,7 +73,7 @@ public class PulsedPlasmaEntity extends AbstractArrow {
 
     @Override
     protected ItemStack getDefaultPickupItem() {
-        return ItemStack.EMPTY;
+        return new ItemStack(Items.ARROW);
     }
 
     @Override
@@ -86,20 +91,12 @@ public class PulsedPlasmaEntity extends AbstractArrow {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putFloat("plasma_damage", this.plasmaDamage);
+        compound.put("moe_magic_item", this.magicItem.save(this.registryAccess()));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.plasmaDamage = compound.getFloat("plasma_damage");
-    }
-
-    public void setPlasmaDamage(float plasmaDamage) {
-        this.plasmaDamage = plasmaDamage;
-    }
-
-    public float getPlasmaDamage() {
-        return plasmaDamage;
+        this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
     }
 }

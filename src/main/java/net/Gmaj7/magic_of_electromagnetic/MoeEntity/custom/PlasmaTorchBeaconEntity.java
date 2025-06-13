@@ -41,7 +41,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.pickup = Pickup.DISALLOWED;
-        this.itemStack = itemStack;
+        this.itemStack = itemStack.copy();
     }
 
     @Override

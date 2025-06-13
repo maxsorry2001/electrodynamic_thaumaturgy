@@ -34,21 +34,27 @@ public class MoeTabs {
                         output.accept(MoeItems.EMPTY_PRIMARY_MODULE.get());
                         output.accept(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
                         output.accept(MoeItems.EMPTY_ADVANCED_MODULE.get());
+
+
                         output.accept(MoeItems.RAY_MODULE.get());
-                        output.accept(MoeItems.LIGHTING_STRIKE_MODULE.get());
-                        output.accept(MoeItems.BLOCK_NERVE_MODULE.get());
-                        output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
-                        output.accept(MoeItems.EXCITING_MODULE.get());
-                        output.accept(MoeItems.PROTECT_MODULE.get());
-                        output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
                         output.accept(MoeItems.ATTRACT_MODULE.get());
-                        output.accept(MoeItems.TREE_CURRENT_MODULE.get());
-                        output.accept(MoeItems.REFRACTION_MODULE.get());
+                        output.accept(MoeItems.LIGHTING_STRIKE_MODULE.get());
+                        output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
                         output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
-                        output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
+                        output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
                         output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
-                        output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
+                        output.accept(MoeItems.PROTECTING_MODULE.get());
+                        output.accept(MoeItems.TREE_CURRENT_MODULE.get());
+
+                        output.accept(MoeItems.EXCITING_MODULE.get());
+                        output.accept(MoeItems.DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE.get());
+                        output.accept(MoeItems.COULOMB_DOMAIN_MODULE.get());
                         output.accept(MoeItems.MAGMA_LIGHTING_MODULE.get());
+                        output.accept(MoeItems.REFRACTION_MODULE.get());
+
+                        output.accept(MoeItems.BLOCK_NERVE_MODULE.get());
+                        output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
+                        output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
                         output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
                         output.accept(MoeItems.MAGNET_RESONANCE_MODULE.get());
 
@@ -85,8 +91,8 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(new ItemStack(MoeItems.ENERGY_BLOCK.get())));
                         output.accept(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
-                        output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                         output.accept(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK);
+                        output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                     }))
                     .build());
 

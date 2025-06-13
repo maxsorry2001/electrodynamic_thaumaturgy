@@ -20,6 +20,8 @@ public enum MoeMagicType {
     MAGMA_LIGHTING,
     HYDROGEN_BOND_FRACTURE,
     MAGNET_RESONANCE,
+    DISTURBING_BY_HIGH_INTENSITY_MAGNETIC,
+    COULOMB_DOMAIN,
     ERROR,
     EMPTY;
     private MoeMagicType(){
