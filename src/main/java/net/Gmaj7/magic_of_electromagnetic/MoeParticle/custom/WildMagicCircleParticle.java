@@ -21,7 +21,7 @@ public class WildMagicCircleParticle extends TextureSheetParticle {
         this.lifetime = 10;
         this.rCol = 0.8F;
         this.alpha = 0.75F;
-        this.quadSize = 30F;
+        this.quadSize = 20F;
     }
 
     @Override

@@ -21,8 +21,6 @@ public class MoeEffects {
             () -> new ExcitingEffect(MobEffectCategory.HARMFUL, 0xFFFFFF));
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_FIELD_DOMAIN = MOE_EFFECTS.register("electric_field_domain",
             () -> new ElectricFieldDomainEffect(MobEffectCategory.BENEFICIAL, 0x00ED73));
-    public static final DeferredHolder<MobEffect, MobEffect> POTENTIAL_DIFFERENCE = MOE_EFFECTS.register("potential_difference",
-            () -> new MoeEffect(MobEffectCategory.HARMFUL, 0x22CFDE));
     public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_ELECTRIC_RELEASE = MOE_EFFECTS.register("electric_energy_release",
             () -> new MoeEffect(MobEffectCategory.BENEFICIAL, 0x666666)
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.emspeed"), 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)

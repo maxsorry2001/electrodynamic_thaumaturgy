@@ -11,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class WildMagicCircleParticleIn extends TextureSheetParticle {
+public class DisturbingByHighIntensityMagneticParticleIn extends TextureSheetParticle {
     private final SpriteSet spriteSet;
-    public WildMagicCircleParticleIn(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
+    public DisturbingByHighIntensityMagneticParticleIn(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
         this.spriteSet = spriteSet;
         this.gravity = 1;
@@ -61,7 +61,7 @@ public class WildMagicCircleParticleIn extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            return new WildMagicCircleParticleIn(clientLevel, x, y, z, spriteSet);
+            return new DisturbingByHighIntensityMagneticParticleIn(clientLevel, x, y, z, spriteSet);
         }
     }
 }

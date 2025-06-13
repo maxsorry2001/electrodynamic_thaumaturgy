@@ -17,7 +17,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.RAY_MODULE.get());
         basicItem(MoeItems.PULSED_PLASMA_MODULE.get());
         basicItem(MoeItems.EXCITING_MODULE.get());
-        basicItem(MoeItems.PROTECT_MODULE.get());
+        basicItem(MoeItems.PROTECTING_MODULE.get());
         basicItem(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
         basicItem(MoeItems.TREE_CURRENT_MODULE.get());
         basicItem(MoeItems.ATTRACT_MODULE.get());
@@ -51,6 +51,8 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.SUPERCONDUCTING_UPDATE.get());
         basicItem(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
         basicItem(MoeItems.EMPTY_ADVANCED_MODULE.get());
+        basicItem(MoeItems.DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE.get());
+        basicItem(MoeItems.COULOMB_DOMAIN_MODULE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

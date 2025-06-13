@@ -2,8 +2,10 @@ package net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.MoeEntities;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
@@ -13,7 +15,6 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class CoulombDomainBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
-    private int liveTick = 100;
+    private int liveTick = 101;
 
 
     public CoulombDomainBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
@@ -40,7 +41,13 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         liveTick--;
+        if(liveTick <= 0){
+            this.discard();
+            return;
+        }
         if(liveTick % 20 == 0){
+            if(!level().isClientSide())
+                ((ServerLevel) level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), getX(), getY()+ 1, getZ(), 1, 0, 0, 0, 0);
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(7));
             for (LivingEntity target : list){
                 if(target != getOwner() && magicItem != null){

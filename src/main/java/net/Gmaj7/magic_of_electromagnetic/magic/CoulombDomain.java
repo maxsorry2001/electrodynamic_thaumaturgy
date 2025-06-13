@@ -1,7 +1,6 @@
 package net.Gmaj7.magic_of_electromagnetic.magic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.CoulombDomainBeaconEntity;
-import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MagmaLightingBeaconEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.core.BlockPos;
@@ -30,12 +29,12 @@ public class CoulombDomain implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 0;
+        return 384;
     }
 
     @Override
     public int getBaseCooldown() {
-        return 0;
+        return 10;
     }
 
     @Override

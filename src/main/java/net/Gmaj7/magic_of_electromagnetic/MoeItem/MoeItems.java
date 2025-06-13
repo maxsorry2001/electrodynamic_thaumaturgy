@@ -39,7 +39,7 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PULSED_PLASMA_MODULE = MOE_ITEM.register("pulsed_plasma_module",
             () -> new MoeMagicTypeModuleItem(new PulsedPlasma(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> PROTECT_MODULE = MOE_ITEM.register("protecting_module",
+    public static final Supplier<Item> PROTECTING_MODULE = MOE_ITEM.register("protecting_module",
             () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EXCITING_MODULE = MOE_ITEM.register("exciting_module",
             () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
