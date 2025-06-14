@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class TreeCurrent implements IMoeMagic{
+public class TreeCurrent extends AbstractFrontEntityMagic {
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.TREE_CURRENT;
@@ -25,7 +25,7 @@ public class TreeCurrent implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        LivingEntity target = MoeFunction.getNearestFrontTarget(livingEntity, 20);
+        LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack));
             addParticle(livingEntity, target);
@@ -51,7 +51,7 @@ public class TreeCurrent implements IMoeMagic{
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return MoeFunction.getNearestFrontTarget(livingEntity, 20) != null;
+        return getNearestFrontTarget(livingEntity, 20) != null;
     }
 
     private void addParticle(LivingEntity livingEntityStart, LivingEntity livingEntityEnd){

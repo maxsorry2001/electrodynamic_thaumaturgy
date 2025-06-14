@@ -22,6 +22,7 @@ public enum MoeMagicType {
     MAGNET_RESONANCE,
     DISTURBING_BY_HIGH_INTENSITY_MAGNETIC,
     COULOMB_DOMAIN,
+    DOMAIN_RECONSTRUCTION,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -31,24 +32,26 @@ public enum MoeMagicType {
     public static Component getTranslate(MoeMagicType type){
         String translate;
         switch (type){
-            case RAY -> translate = "moe_ray";
-            case ATTRACT -> translate = "moe_attract";
-            case LIGHTING_STRIKE -> translate = "moe_lighting_strike";
-            case PULSED_PLASMA -> translate = "moe_pulsed_plasma";
-            case ELECTRIC_FIELD_DOMAIN -> translate = "moe_electric_field_domain";
-            case EXCITING -> translate = "moe_exciting";
-            case PROTECT -> translate = "moe_protecting";
-            case TREE_CURRENT -> translate = "moe_tree_current";
-            case NERVE_BLOCKING -> translate = "moe_nerve_blocking";
-            case ELECTRIC_ENERGY_RELEASE -> translate = "moe_electric_energy_release";
-            case REFRACTION -> translate = "moe_refraction";
-            case PLASMA_TORCH -> translate = "moe_plasma_torch";
-            case ELECTROMAGNETIC_ASSAULT -> translate = "moe_electromagnetic_assault";
-            case ST_ELMO_S_FIRE -> translate = "moe_st_elmo_s_fire";
-            case MAGMA_LIGHTING -> translate = "moe_magma_lighting";
+            case RAY -> translate = "item.magic_of_electromagnetic.ray_module";
+            case ATTRACT -> translate = "item.magic_of_electromagnetic.attract_module";
+            case LIGHTING_STRIKE -> translate = "item.magic_of_electromagnetic.lighting_strike_module";
+            case PULSED_PLASMA -> translate = "item.magic_of_electromagnetic.pulsed_plasma_module";
+            case ELECTRIC_FIELD_DOMAIN -> translate = "item.magic_of_electromagnetic.electric_field_domain_module";
+            case EXCITING -> translate = "item.magic_of_electromagnetic.exciting_module";
+            case PROTECT -> translate = "item.magic_of_electromagnetic.protecting_module";
+            case TREE_CURRENT -> translate = "item.magic_of_electromagnetic.tree_current_module";
+            case NERVE_BLOCKING -> translate = "item.magic_of_electromagnetic.block_nerve_module";
+            case ELECTRIC_ENERGY_RELEASE -> translate = "item.magic_of_electromagnetic.electric_energy_release_module";
+            case REFRACTION -> translate = "item.magic_of_electromagnetic.refraction_module";
+            case PLASMA_TORCH -> translate = "item.magic_of_electromagnetic.plasma_torch_module";
+            case ELECTROMAGNETIC_ASSAULT -> translate = "item.magic_of_electromagnetic.electromagnetic_assault_module";
+            case ST_ELMO_S_FIRE -> translate = "item.magic_of_electromagnetic.st_elmo_s_fire_module";
+            case MAGMA_LIGHTING -> translate = "item.magic_of_electromagnetic.magma_lighting_module";
+            case HYDROGEN_BOND_FRACTURE -> translate = "item.magic_of_electromagnetic.hydrogen_bond_fracture_module";
+            case DISTURBING_BY_HIGH_INTENSITY_MAGNETIC -> translate = "item.magic_of_electromagnetic.disturbing_by_high_intensity_magnetic_module";
+            case COULOMB_DOMAIN -> translate = "item.magic_of_electromagnetic.coulomb_domain_module";
             case MAGNET_RESONANCE -> translate = "item.magic_of_electromagnetic.magnet_resonance_module";
-            case HYDROGEN_BOND_FRACTURE -> translate = "moe_hydrogen_bond_fracture";
-
+            case DOMAIN_RECONSTRUCTION -> translate = "item.magic_of_electromagnetic.domain_reconstruction_module";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

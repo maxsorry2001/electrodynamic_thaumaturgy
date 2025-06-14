@@ -20,6 +20,7 @@
   "item.magic_of_electromagnetic.magnet_resonance_module": "磁感共振",
   "item.magic_of_electromagnetic.coulomb_domain_module": "库伦领域",
   "item.magic_of_electromagnetic.disturbing_by_high_intensity_magnetic_module": "强磁扰乱",
+  "item.magic_of_electromagnetic.domain_reconstruction_module": "磁畴重组",
   "item.magic_of_electromagnetic.empty_primary_module": "初级光刻板",
   "item.magic_of_electromagnetic.empty_intermediate_module": "中级光刻板",
   "item.magic_of_electromagnetic.empty_advanced_module": "高级光刻板",
@@ -104,7 +105,7 @@
   "moe_show_energy": "能量:",
 
   "key.category.magic_of_electromagnetic.moe": "电磁导魔法则",
-  "key.magic_of_electromagnetic.switch_magic": "调整法术",
+  "key.magic_of_electromagnetic.switch_magic": "法术切换",
   "magic_lithography": "魔法光刻",
   "binding": "绑定："
 }

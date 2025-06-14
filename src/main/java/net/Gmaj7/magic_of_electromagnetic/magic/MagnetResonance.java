@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class MagnetResonance implements IMoeMagic{
+public class MagnetResonance extends AbstractFrontEntityMagic {
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.MAGNET_RESONANCE;
@@ -17,7 +17,7 @@ public class MagnetResonance implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        LivingEntity target = MoeFunction.getNearestFrontTarget(livingEntity, 20);
+        LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) MoeFunction.getMagicAmount(itemStack) / 3));
         if(!livingEntity.level().isClientSide()) {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
@@ -37,6 +37,6 @@ public class MagnetResonance implements IMoeMagic{
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return MoeFunction.getNearestFrontTarget(livingEntity, 20) != null;
+        return getNearestFrontTarget(livingEntity, 20) != null;
     }
 }

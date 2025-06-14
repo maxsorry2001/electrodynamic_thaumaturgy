@@ -12,7 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class HydrogenBondFracture implements IMoeMagic {
+public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.HYDROGEN_BOND_FRACTURE;
@@ -20,7 +20,7 @@ public class HydrogenBondFracture implements IMoeMagic {
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        LivingEntity target = MoeFunction.getNearestFrontTarget(livingEntity, 20);
+        LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         Level level = livingEntity.level();
         target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT)), MoeFunction.getMagicAmount(itemStack) * 6);
         if(level instanceof ServerLevel){
@@ -45,6 +45,6 @@ public class HydrogenBondFracture implements IMoeMagic {
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return MoeFunction.getNearestFrontTarget(livingEntity, 20) != null;
+        return getNearestFrontTarget(livingEntity, 20) != null;
     }
 }

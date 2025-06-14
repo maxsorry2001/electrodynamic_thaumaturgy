@@ -7,10 +7,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class CoulombDomain implements IMoeMagic{
+public class CoulombDomain extends AbstractBlockBeaconMagic {
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.COULOMB_DOMAIN;
@@ -38,11 +37,7 @@ public class CoulombDomain implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return getBlock(livingEntity).getType() != HitResult.Type.MISS;
-    }
-
-    private BlockHitResult getBlock(LivingEntity livingEntity){
+    protected BlockHitResult getBlock(LivingEntity livingEntity){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.3, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);

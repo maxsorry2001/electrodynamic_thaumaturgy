@@ -10,7 +10,7 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class LightingStrike implements IMoeMagic {
+public class LightingStrike extends AbstractFrontEntityMagic {
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.LIGHTING_STRIKE;
@@ -18,7 +18,7 @@ public class LightingStrike implements IMoeMagic {
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        LivingEntity target = MoeFunction.getNearestFrontTarget(livingEntity, 20);
+        LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 2);
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
@@ -40,6 +40,6 @@ public class LightingStrike implements IMoeMagic {
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return MoeFunction.getNearestFrontTarget(livingEntity, 20) != null;
+        return getNearestFrontTarget(livingEntity, 20) != null;
     }
 }

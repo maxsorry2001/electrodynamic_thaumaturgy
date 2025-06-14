@@ -73,6 +73,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new DisturbingByHighIntensityMagnetic(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COULOMB_DOMAIN_MODULE = MOE_ITEM.register("coulomb_domain_module",
             () -> new MoeMagicTypeModuleItem(new CoulombDomain(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> DOMAIN_RECONSTRUCTION_MODULE = MOE_ITEM.register("domain_reconstruction_module",
+            () -> new MoeMagicTypeModuleItem(new DomainReconstruction(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.register("empty_intermediate_module",

@@ -9,10 +9,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class PlasmaTorch implements IMoeMagic{
+public class PlasmaTorch extends AbstractBlockBeaconMagic {
     @Override
     public MoeMagicType getType() {
         return MoeMagicType.PLASMA_TORCH;
@@ -42,12 +41,7 @@ public class PlasmaTorch implements IMoeMagic{
         return 120;
     }
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return getBlock(livingEntity).getType() != HitResult.Type.MISS;
-    }
-
-    private BlockHitResult getBlock(LivingEntity livingEntity){
+    protected BlockHitResult getBlock(LivingEntity livingEntity){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
