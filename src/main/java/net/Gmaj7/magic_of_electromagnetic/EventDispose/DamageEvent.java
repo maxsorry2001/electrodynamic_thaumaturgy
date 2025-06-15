@@ -2,6 +2,7 @@ package net.Gmaj7.magic_of_electromagnetic.EventDispose;
 
 import net.Gmaj7.magic_of_electromagnetic.MagicOfElectromagnetic;
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MirageEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeDamageType;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeFunction;
@@ -51,6 +52,10 @@ public class DamageEvent {
                 if((target instanceof Mob && ((Mob) target).getTarget() == livingEntity) || target instanceof Enemy)
                     target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
             }
+        }
+        if(((MoeDataGet)livingEntity).hasMirageEntity() && !source.is(MoeDamageType.magnet_resonance)){
+            MirageEntity.CastTarget castTarget = new MirageEntity.CastTarget(event.getNewDamage(), livingEntity);
+            ((MoeDataGet)livingEntity).getMirageEntity().addTarget(castTarget);
         }
     }
 }

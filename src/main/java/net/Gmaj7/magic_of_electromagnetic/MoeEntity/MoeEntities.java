@@ -46,6 +46,12 @@ public class MoeEntities {
                     .sized(0.98F, 0.98F)
                     .eyeHeight(0.13F)
                     .build("coulomb_domain_entity"));
+    public static final Supplier<EntityType<MirageEntity>> MIRAGE_ENTITY =
+            MOE_ENTITY_TYPES.register("mirage_entity", () -> EntityType.Builder.<MirageEntity>of(MirageEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .eyeHeight(0.13F)
+                    .noSave()
+                    .build("mirage_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

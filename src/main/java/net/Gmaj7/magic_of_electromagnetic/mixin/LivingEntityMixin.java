@@ -1,6 +1,7 @@
 package net.Gmaj7.magic_of_electromagnetic.mixin;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEffect.MoeEffects;
+import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MirageEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeData.MoeProtective;
 import net.minecraft.core.Holder;
@@ -26,6 +27,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     }
 
     @Unique private MoeProtective protective = new MoeProtective(0);
+    @Unique private MirageEntity mirageEntity = null;
 
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> effect);
 
@@ -50,5 +52,20 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         if (compound.contains("moe_protecting")) {
             this.protective.setProtecting(compound.getFloat("moe_protecting"));
         }
+    }
+
+    @Override
+    public void setMirageEntity(MirageEntity mirageEntity) {
+        this.mirageEntity = mirageEntity;
+    }
+
+    @Override
+    public boolean hasMirageEntity() {
+        return this.mirageEntity != null;
+    }
+
+    @Override
+    public MirageEntity getMirageEntity() {
+        return mirageEntity;
     }
 }

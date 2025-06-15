@@ -23,6 +23,7 @@ public enum MoeMagicType {
     DISTURBING_BY_HIGH_INTENSITY_MAGNETIC,
     COULOMB_DOMAIN,
     DOMAIN_RECONSTRUCTION,
+    MIRAGE_PURSUIT,
     ERROR,
     EMPTY;
     private MoeMagicType(){
@@ -52,6 +53,7 @@ public enum MoeMagicType {
             case COULOMB_DOMAIN -> translate = "item.magic_of_electromagnetic.coulomb_domain_module";
             case MAGNET_RESONANCE -> translate = "item.magic_of_electromagnetic.magnet_resonance_module";
             case DOMAIN_RECONSTRUCTION -> translate = "item.magic_of_electromagnetic.domain_reconstruction_module";
+            case MIRAGE_PURSUIT -> translate = "item.magic_of_electromagnetic.mirage_pursuit_module";
             default -> translate = "moe_no_magic";
         }
         return Component.translatable(translate);

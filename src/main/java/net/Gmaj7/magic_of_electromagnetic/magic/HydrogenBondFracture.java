@@ -28,7 +28,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
             ((ServerLevel) level).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
             for (int i = 0; i < 10; i++){
                 RandomSource randomSource = RandomSource.create();
-                ((ServerLevel) level).sendParticles(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 1 + randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 5, 0, 0, 0, 0);
+                ((ServerLevel) level).sendParticles(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
             }
         }
     }
