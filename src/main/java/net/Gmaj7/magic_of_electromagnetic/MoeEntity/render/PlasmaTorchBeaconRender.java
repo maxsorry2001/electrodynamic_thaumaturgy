@@ -57,6 +57,5 @@ public class PlasmaTorchBeaconRender extends ArrowRenderer<PlasmaTorchBeaconEnti
             }
             poseStack.popPose();
         }
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 }

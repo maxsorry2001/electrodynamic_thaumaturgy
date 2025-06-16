@@ -58,6 +58,7 @@ public class MoeTabs {
                         output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
                         output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
                         output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
+                        output.accept(MoeItems.MIRAGE_PURSUIT_MODULE.get());
 
                         output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD.get());
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());

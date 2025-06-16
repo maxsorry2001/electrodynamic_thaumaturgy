@@ -53,6 +53,9 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.EMPTY_ADVANCED_MODULE.get());
         basicItem(MoeItems.DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE.get());
         basicItem(MoeItems.COULOMB_DOMAIN_MODULE.get());
+        basicItem(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get());
+        basicItem(MoeItems.MIRAGE_PURSUIT_MODULE.get());
+        basicItem(MoeItems.MAGNET_RESONANCE_MODULE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

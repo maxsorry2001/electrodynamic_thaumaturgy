@@ -26,36 +26,42 @@ public class DamageEvent {
 
     @SubscribeEvent
     public static void damageDeal(LivingDamageEvent.Pre event){
-        LivingEntity livingEntity = event.getEntity();
+        LivingEntity eventTarget = event.getEntity();
         DamageSource source = event.getSource();
         Entity sourceEntity = source.getEntity();
-        float protecting = ((MoeDataGet)livingEntity).getProtective().getProtecting();
+        float protecting = ((MoeDataGet)eventTarget).getProtective().getProtecting();
         if (protecting > 0){
             float damage = event.getNewDamage();
             if(protecting > damage){
                 float newProtecting = protecting - damage;
-                ((MoeDataGet)livingEntity).getProtective().setProtecting(newProtecting);
+                ((MoeDataGet)eventTarget).getProtective().setProtecting(newProtecting);
                 PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(newProtecting));
                 event.setNewDamage(0);
             }
             else {
-                ((MoeDataGet)livingEntity).getProtective().setProtecting(0);
+                ((MoeDataGet)eventTarget).getProtective().setProtecting(0);
                 event.setNewDamage(damage - protecting);
             }
         }
-        if(livingEntity.hasEffect(MoeEffects.MAGNET_RESONANCE) && sourceEntity instanceof Player && !source.is(MoeDamageType.magnet_resonance)){
-            int l = livingEntity.getEffect(MoeEffects.MAGNET_RESONANCE).getAmplifier();
-            List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(5, 2, 5));
-            list.remove(livingEntity);
+        if(eventTarget.hasEffect(MoeEffects.MAGNET_RESONANCE) && sourceEntity instanceof Player && !source.is(MoeDamageType.magnet_resonance)){
+            int l = eventTarget.getEffect(MoeEffects.MAGNET_RESONANCE).getAmplifier();
+            List<LivingEntity> list = eventTarget.level().getEntitiesOfClass(LivingEntity.class, eventTarget.getBoundingBox().inflate(5, 2, 5));
+            list.remove(eventTarget);
             list.remove(sourceEntity);
             for(LivingEntity target : list){
-                if((target instanceof Mob && ((Mob) target).getTarget() == livingEntity) || target instanceof Enemy)
-                    target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
+                if((target instanceof Mob && ((Mob) target).getTarget() == eventTarget) || target instanceof Enemy)
+                    target.hurt(new DamageSource(MoeFunction.getHolder(eventTarget.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
             }
         }
-        if(((MoeDataGet)livingEntity).hasMirageEntity() && !source.is(MoeDamageType.magnet_resonance)){
-            MirageEntity.CastTarget castTarget = new MirageEntity.CastTarget(event.getNewDamage(), livingEntity);
-            ((MoeDataGet)livingEntity).getMirageEntity().addTarget(castTarget);
+        if(sourceEntity != null){
+            List<MirageEntity> list = eventTarget.level().getEntitiesOfClass(MirageEntity.class, sourceEntity.getBoundingBox().inflate(0, 3, 0));
+            if (!list.isEmpty()) {
+                for (MirageEntity mirage : list) {
+                    if (mirage.getOwner() == sourceEntity) {
+                        mirage.addTarget(new MirageEntity.CastTarget(event.getNewDamage(), eventTarget));
+                    }
+                }
+            }
         }
     }
 }

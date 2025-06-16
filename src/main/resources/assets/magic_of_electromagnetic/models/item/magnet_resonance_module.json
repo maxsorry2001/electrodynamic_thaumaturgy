@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "magic_of_electromagnetic:item/magnet_resonance_module"
+  }
+}

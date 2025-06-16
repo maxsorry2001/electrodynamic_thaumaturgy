@@ -30,10 +30,10 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> THERMAL_ENERGY_MAKER_BLOCK = MOE_ITEM.register("thermal_energy_maker",
             () -> new BlockItem(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
-            () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
     public static final Supplier<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.register("magic_lithography_table",
             () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
+            () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
@@ -75,6 +75,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new CoulombDomain(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> DOMAIN_RECONSTRUCTION_MODULE = MOE_ITEM.register("domain_reconstruction_module",
             () -> new MoeMagicTypeModuleItem(new DomainReconstruction(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> MIRAGE_PURSUIT_MODULE = MOE_ITEM.register("mirage_pursuit_module",
+            () -> new MoeMagicTypeModuleItem(new MiragePursuit(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.register("empty_intermediate_module",

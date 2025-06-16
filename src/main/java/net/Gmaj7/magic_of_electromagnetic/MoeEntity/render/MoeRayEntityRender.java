@@ -71,8 +71,6 @@ public class MoeRayEntityRender extends EntityRenderer<MoeRayEntity> {
             }
         }
         poseStack.popPose();
-
-        super.render(p_entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
     @Override
