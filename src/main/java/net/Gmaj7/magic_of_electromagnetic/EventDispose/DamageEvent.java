@@ -53,7 +53,7 @@ public class DamageEvent {
                     target.hurt(new DamageSource(MoeFunction.getHolder(eventTarget.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
             }
         }
-        if(sourceEntity != null){
+        if(sourceEntity != null && !source.is(MoeDamageType.mirage)){
             List<MirageEntity> list = eventTarget.level().getEntitiesOfClass(MirageEntity.class, sourceEntity.getBoundingBox().inflate(0, 3, 0));
             if (!list.isEmpty()) {
                 for (MirageEntity mirage : list) {

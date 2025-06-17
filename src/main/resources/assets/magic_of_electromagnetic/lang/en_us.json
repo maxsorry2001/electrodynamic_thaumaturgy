@@ -57,6 +57,7 @@
   "effect.magic_of_electromagnetic.electric_field_domain" : "Electric Field Domain",
   "effect.magic_of_electromagnetic.block_nerve" : "Nerve Blocking",
   "effect.magic_of_electromagnetic.magnet_resonance" : "Magnet Resonance",
+  "effect.magic_of_electromagnetic.st_elmo_s_fire" : "St.Elmo's Fire",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
   "block.magic_of_electromagnetic.electromagnetic_modem_table": "Enhancement Modem Table",
@@ -73,6 +74,7 @@
   "entity.magic_of_electromagnetic.plasma_torch_beacon_entity": "Plasma Torch Beacon",
   "entity.magic_of_electromagnetic.magma_lighting_entity": "Magma Lighting Beacon",
   "entity.magic_of_electromagnetic.coulomb_domain_entity": "Coulomb Domain Core",
+  "entity.magic_of_electromagnetic.mirage_entity": "Mirage",
 
   "advancements.magic_of_electromagnetic.root.title": "Magic Of Electromagnetic",
   "advancements.magic_of_electromagnetic.root.description": "",
@@ -96,6 +98,12 @@
   "advancements.magic_of_electromagnetic.modem_table.description": "Enhance your tool",
   "advancements.magic_of_electromagnetic.enhance_module.title": "Enhance Module",
   "advancements.magic_of_electromagnetic.enhance_module.description": "put it in modem table",
+
+
+  "death.attack.magnet_resonance" : "%1$s dies of resonance",
+  "death.attack.magnet_resonance.player" : "%1$s dies of resonance by %s$2",
+  "death.attack.mirage" : "%1$s was bewitched by the mirage",
+  "death.attack.mirage.player" : "%1$s was bewitched by %s$2's mirage",
 
   "moe_no_magic": "No magic",
 

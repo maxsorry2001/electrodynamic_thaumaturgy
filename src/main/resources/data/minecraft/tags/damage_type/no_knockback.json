@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "magic_of_electromagnetic:magnet_resonance"
+    "magic_of_electromagnetic:magnet_resonance",
+    "magic_of_electromagnetic:mirage"
   ]
 }

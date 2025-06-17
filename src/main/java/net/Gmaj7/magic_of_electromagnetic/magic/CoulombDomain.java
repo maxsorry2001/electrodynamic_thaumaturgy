@@ -33,7 +33,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 10;
+        return 100;
     }
 
     @Override

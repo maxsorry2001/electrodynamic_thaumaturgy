@@ -47,7 +47,7 @@ public class ElectromagneticRay implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 40;
+        return 80;
     }
 
     @Override

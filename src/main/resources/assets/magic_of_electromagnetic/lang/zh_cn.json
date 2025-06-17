@@ -57,6 +57,7 @@
   "effect.magic_of_electromagnetic.electric_field_domain" : "强电领域",
   "effect.magic_of_electromagnetic.block_nerve" : "神经阻碍",
   "effect.magic_of_electromagnetic.magnet_resonance" : "磁感共振",
+  "effect.magic_of_electromagnetic.st_elmo_s_fire" : "圣艾尔摩之火",
 
   "block.magic_of_electromagnetic.electromagnetic_assembly_table": "电磁装配台",
   "block.magic_of_electromagnetic.electromagnetic_modem_table": "强化调制台",
@@ -73,6 +74,7 @@
   "entity.magic_of_electromagnetic.plasma_torch_beacon_entity": "磁重联信标",
   "entity.magic_of_electromagnetic.magma_lighting_entity": "熔岩雷劫信标",
   "entity.magic_of_electromagnetic.coulomb_domain_entity": "库伦领域核心",
+  "entity.magic_of_electromagnetic.mirage_entity": "蜃气",
 
   "advancements.magic_of_electromagnetic.root.title": "电磁导魔法则",
   "advancements.magic_of_electromagnetic.root.description": "",
@@ -96,6 +98,11 @@
   "advancements.magic_of_electromagnetic.modem_table.description": "给你的施法媒介升个级",
   "advancements.magic_of_electromagnetic.enhance_module.title": "升级模块",
   "advancements.magic_of_electromagnetic.enhance_module.description": "放进调制台就好",
+
+  "death.attack.magnet_resonance" : "%1$s死于共振",
+  "death.attack.magnet_resonance.player" : "%1$s死于因%s$2的攻击产生的共振",
+  "death.attack.mirage" : "%1$s陷入了蜃气幻觉",
+  "death.attack.mirage.player" : "%1$s陷入了%s$2的蜃气幻觉",
 
   "moe_no_magic": "空",
 

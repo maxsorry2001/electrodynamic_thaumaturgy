@@ -5,6 +5,8 @@ import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
+
 public class MiragePursuit implements IMoeMagic{
     @Override
     public MoeMagicType getType() {
@@ -19,16 +21,24 @@ public class MiragePursuit implements IMoeMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 0;
+        return 512;
     }
 
     @Override
     public int getBaseCooldown() {
-        return 0;
+        return 400;
     }
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
+        boolean flag = true;
+        List<MirageEntity> list = livingEntity.level().getEntitiesOfClass(MirageEntity.class, livingEntity.getBoundingBox().inflate(0, 3, 0));
+        for (MirageEntity mirage : list){
+            if(mirage.getOwner() == livingEntity) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 }

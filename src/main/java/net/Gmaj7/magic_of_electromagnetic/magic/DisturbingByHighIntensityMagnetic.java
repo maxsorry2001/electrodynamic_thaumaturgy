@@ -39,7 +39,7 @@ public class DisturbingByHighIntensityMagnetic implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 30;
+        return 70;
     }
 
     @Override

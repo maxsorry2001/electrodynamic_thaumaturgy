@@ -52,7 +52,7 @@ public class MirageEntity extends AbstractArrow {
                 Iterator<CastTarget> iterator = list1.iterator();
                 while (iterator.hasNext()){
                     CastTarget castTarget = iterator.next();
-                    castTarget.getTarget().hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), getOwner()), castTarget.getDamage());
+                    castTarget.getTarget().hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.mirage), getOwner()), castTarget.getDamage());
                 }
                 list = new ArrayList<>();
                 castTick = 10;

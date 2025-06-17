@@ -56,6 +56,7 @@ public class MagicCastItem extends Item {
             item.cast(player, itemStack);
             itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - (int)(item.getBaseEnergyCost() * MoeFunction.getEfficiency(itemStack)));
             player.getCooldowns().addCooldown(item, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
+            player.swing(usedHand);
             return InteractionResultHolder.consume(itemStack);
         }
         else return InteractionResultHolder.fail(itemStack);
