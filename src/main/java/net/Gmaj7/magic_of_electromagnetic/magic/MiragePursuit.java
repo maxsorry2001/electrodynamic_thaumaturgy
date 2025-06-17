@@ -2,6 +2,8 @@ package net.Gmaj7.magic_of_electromagnetic.magic;
 
 import net.Gmaj7.magic_of_electromagnetic.MoeEntity.custom.MirageEntity;
 import net.Gmaj7.magic_of_electromagnetic.MoeInit.MoeMagicType;
+import net.Gmaj7.magic_of_electromagnetic.MoeParticle.MoeParticles;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,6 +19,10 @@ public class MiragePursuit implements IMoeMagic{
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         MirageEntity mirageEntity = new MirageEntity(livingEntity.level(), livingEntity);
         livingEntity.level().addFreshEntity(mirageEntity);
+        if(livingEntity.level() instanceof ServerLevel) {
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

@@ -39,7 +39,7 @@ public class DataLoadHandler {
                 MoeItems.FE_CU_POTATO_BATTERY.get(),
                 MoeItems.FE_CU_CARROT_BATTERY.get(),
                 MoeItems.FE_CU_SOLUTION_BATTERY.get());
-        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
+        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
                 MoeItems.ENERGY_BLOCK.get());
         event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),

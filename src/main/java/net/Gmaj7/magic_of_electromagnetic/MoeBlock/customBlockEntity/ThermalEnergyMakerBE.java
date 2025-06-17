@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeItemBlockEntity, MenuProvider {
     private int burnTime = 0;
     private int fullBurnTime = 0;
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16384) {
+    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
             if(!level.isClientSide()){
