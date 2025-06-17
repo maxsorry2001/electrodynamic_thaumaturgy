@@ -48,7 +48,7 @@ public class MoeThermalEnergyMakerScreen extends AbstractContainerScreen<MoeTher
 
     private void renderEnergy(GuiGraphics guiGraphics, int x, int y){
         IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  150 * iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored(), 7, 150, 7);
+        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored()), 7, 150, 7);
         guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime(), 7, 150, 7);
     }
 }

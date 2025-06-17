@@ -47,6 +47,6 @@ public class MoeEnergyBlockScreen extends AbstractContainerScreen<MoeEnergyBlock
 
     private void renderEnergy(GuiGraphics guiGraphics, int x, int y){
         IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  150 * iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored(), 7, 150, 7);
+        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0, (int) (150 * (float) iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored()), 7, 150, 7);
     }
 }

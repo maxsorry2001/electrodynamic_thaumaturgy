@@ -12,7 +12,7 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16384) {
+    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
             if(!level.isClientSide()){
