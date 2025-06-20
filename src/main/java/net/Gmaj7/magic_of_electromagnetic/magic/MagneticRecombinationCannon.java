@@ -11,10 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class PlasmaTorch extends AbstractBlockBeaconMagic {
+public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
     @Override
     public MoeMagicType getType() {
-        return MoeMagicType.PLASMA_TORCH;
+        return MoeMagicType.MAGNETIC_RECOMBINATION_CANNON;
     }
 
     @Override

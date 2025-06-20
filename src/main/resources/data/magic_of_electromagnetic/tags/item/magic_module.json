@@ -9,7 +9,7 @@
     "magic_of_electromagnetic:tree_current_module",
     "magic_of_electromagnetic:refraction_module",
     "magic_of_electromagnetic:electric_energy_release_module",
-    "magic_of_electromagnetic:plasma_torch_module",
+    "magic_of_electromagnetic:magnetic_recombination_cannon_module",
     "magic_of_electromagnetic:electromagnetic_assault_module",
     "magic_of_electromagnetic:magma_lighting_module",
     "magic_of_electromagnetic:st_elmo_s_fire_module",
@@ -18,6 +18,8 @@
     "magic_of_electromagnetic:block_nerve_module",
     "magic_of_electromagnetic:magnet_resonance_module",
     "magic_of_electromagnetic:disturbing_by_high_intensity_magnetic_module",
-    "magic_of_electromagnetic:coulomb_domain_module"
+    "magic_of_electromagnetic:coulomb_domain_module",
+    "magic_of_electromagnetic:domain_reconstruction_module",
+    "magic_of_electromagnetic:mirage_pursuit_module"
   ]
 }

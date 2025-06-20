@@ -55,7 +55,7 @@ public class MoeTabs {
                         output.accept(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get());
 
                         output.accept(MoeItems.MAGNET_RESONANCE_MODULE.get());
-                        output.accept(MoeItems.PLASMA_TORCH_MODULE.get());
+                        output.accept(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE.get());
                         output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
                         output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
                         output.accept(MoeItems.MIRAGE_PURSUIT_MODULE.get());

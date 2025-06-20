@@ -107,7 +107,7 @@ public class MagicCastItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(MoeMagicType.getTranslate(getType(stack)));
+        tooltipComponents.add(Component.translatable(MoeMagicType.getTranslate(getType(stack))));
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));

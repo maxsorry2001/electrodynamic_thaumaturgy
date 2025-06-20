@@ -23,7 +23,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.ATTRACT_MODULE.get());
         basicItem(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
         basicItem(MoeItems.REFRACTION_MODULE.get());
-        basicItem(MoeItems.PLASMA_TORCH_MODULE.get());
+        basicItem(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE.get());
         basicItem(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
         basicItem(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
         basicItem(MoeItems.MAGMA_LIGHTING_MODULE.get());
