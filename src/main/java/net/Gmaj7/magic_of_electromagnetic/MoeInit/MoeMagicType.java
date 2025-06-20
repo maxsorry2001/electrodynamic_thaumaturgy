@@ -1,7 +1,5 @@
 package net.Gmaj7.magic_of_electromagnetic.MoeInit;
 
-import net.minecraft.network.chat.Component;
-
 public enum MoeMagicType {
     RAY,
     ATTRACT,
@@ -14,7 +12,7 @@ public enum MoeMagicType {
     PROTECT,
     TREE_CURRENT,
     REFRACTION,
-    PLASMA_TORCH,
+    MAGNETIC_RECOMBINATION_CANNON,
     ELECTROMAGNETIC_ASSAULT,
     ST_ELMO_S_FIRE,
     MAGMA_LIGHTING,
@@ -30,7 +28,7 @@ public enum MoeMagicType {
 
     }
 
-    public static Component getTranslate(MoeMagicType type){
+    public static String getTranslate(MoeMagicType type){
         String translate;
         switch (type){
             case RAY -> translate = "item.magic_of_electromagnetic.ray_module";
@@ -44,7 +42,7 @@ public enum MoeMagicType {
             case NERVE_BLOCKING -> translate = "item.magic_of_electromagnetic.block_nerve_module";
             case ELECTRIC_ENERGY_RELEASE -> translate = "item.magic_of_electromagnetic.electric_energy_release_module";
             case REFRACTION -> translate = "item.magic_of_electromagnetic.refraction_module";
-            case PLASMA_TORCH -> translate = "item.magic_of_electromagnetic.plasma_torch_module";
+            case MAGNETIC_RECOMBINATION_CANNON -> translate = "item.magic_of_electromagnetic.magnetic_recombination_cannon_module";
             case ELECTROMAGNETIC_ASSAULT -> translate = "item.magic_of_electromagnetic.electromagnetic_assault_module";
             case ST_ELMO_S_FIRE -> translate = "item.magic_of_electromagnetic.st_elmo_s_fire_module";
             case MAGMA_LIGHTING -> translate = "item.magic_of_electromagnetic.magma_lighting_module";
@@ -56,7 +54,11 @@ public enum MoeMagicType {
             case MIRAGE_PURSUIT -> translate = "item.magic_of_electromagnetic.mirage_pursuit_module";
             default -> translate = "moe_no_magic";
         }
-        return Component.translatable(translate);
+        return translate;
+    }
+
+    public static String getDescription(MoeMagicType type){
+        return getTranslate(type) + ".description";
     }
 
     public static boolean isEmpty(MoeMagicType type){

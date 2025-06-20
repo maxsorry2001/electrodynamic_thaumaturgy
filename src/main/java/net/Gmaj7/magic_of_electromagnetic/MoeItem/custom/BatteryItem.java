@@ -40,8 +40,8 @@ public class BatteryItem extends Item {
             IEnergyStorage iEnergyStorage1 = livingEntity.getOffhandItem().getCapability(Capabilities.EnergyStorage.ITEM);
             IEnergyStorage iEnergyStorage2 = stack.getCapability(Capabilities.EnergyStorage.ITEM);
             if (iEnergyStorage2.getEnergyStored() > 0 && iEnergyStorage1.getEnergyStored() < iEnergyStorage1.getMaxEnergyStored()) {
-                iEnergyStorage1.receiveEnergy(1024, false);
-                iEnergyStorage2.extractEnergy(1024, false);
+                iEnergyStorage1.receiveEnergy(4096, false);
+                iEnergyStorage2.extractEnergy(4096, false);
             } else livingEntity.stopUsingItem();
         }
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
