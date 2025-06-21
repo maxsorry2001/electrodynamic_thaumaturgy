@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "b": {
+      "item": "minecraft:copper_ingot"
+    },
+    "c": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "d": {
+      "item": "electrofynamic_thaumatury:energy_core"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "bdb",
+    "ccc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:temperature_energy_maker"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "electrofynamic_thaumatury:superconducting_update"
+    },
+    {
+      "item": "electrofynamic_thaumatury:copper_lc"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:superconducting_lc"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "electrofynamic_thaumatury:magic_lithography",
+  "baseboard": {
+    "item": "electrofynamic_thaumatury:empty_primary_module"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:electromagnetic_assault_module"
+  }
+}

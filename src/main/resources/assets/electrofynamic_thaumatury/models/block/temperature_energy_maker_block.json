@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "electrofynamic_thaumatury:block/temperature_energy_maker_block_top",
+    "side": "electrofynamic_thaumatury:block/temperature_energy_maker_block_side"
+  }
+}

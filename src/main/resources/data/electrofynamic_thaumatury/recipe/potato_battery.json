@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "electrofynamic_thaumatury:iron_sheet"
+    },
+    {
+      "item": "electrofynamic_thaumatury:copper_sheet"
+    },
+    {
+      "item": "minecraft:potato"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:potato_battery"
+  }
+}

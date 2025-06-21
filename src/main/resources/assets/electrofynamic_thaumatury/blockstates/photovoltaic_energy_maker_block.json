@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "electrofynamic_thaumatury:block/photovoltaic_energy_maker_block"
+    }
+  }
+}

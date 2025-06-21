@@ -1,0 +1,44 @@
+{
+  "parent": "electrofynamic_thaumatury:normal/energy_core",
+  "criteria": {
+    "has_magic_cast_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrofynamic_thaumatury:electromagnetic_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_magic_cast_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrofynamic_thaumatury:electromagnetic_book"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrofynamic_thaumatury.magic_cast.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrofynamic_thaumatury:electromagnetic_rod"
+    },
+    "title": {
+      "translate": "advancements.electrofynamic_thaumatury.magic_cast.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_magic_cast_0",
+      "has_magic_cast_1"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

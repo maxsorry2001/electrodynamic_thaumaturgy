@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "electrofynamic_thaumatury:copper_sheet"
+    }
+  },
+  "pattern": [
+    "b  ",
+    " b ",
+    "b  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:inductance"
+  }
+}

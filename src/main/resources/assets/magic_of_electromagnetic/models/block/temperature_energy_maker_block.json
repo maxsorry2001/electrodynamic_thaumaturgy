@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "magic_of_electromagnetic:block/temperature_energy_maker_block_top",
-    "side": "magic_of_electromagnetic:block/temperature_energy_maker_block_side"
-  }
-}

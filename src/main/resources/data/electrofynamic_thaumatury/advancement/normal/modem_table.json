@@ -1,0 +1,33 @@
+{
+  "parent": "electrofynamic_thaumatury:normal/energy_core",
+  "criteria": {
+    "has_modem_block_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrofynamic_thaumatury:electromagnetic_modem_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrofynamic_thaumatury.modem_table.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrofynamic_thaumatury:electromagnetic_modem_table"
+    },
+    "title": {
+      "translate": "advancements.electrofynamic_thaumatury.modem_table.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_modem_block_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

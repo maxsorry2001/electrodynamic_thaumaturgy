@@ -1,0 +1,33 @@
+{
+  "parent": "electrofynamic_thaumatury:normal/root",
+  "criteria": {
+    "has_energy_core_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrofynamic_thaumatury:energy_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrofynamic_thaumatury.energy_core.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrofynamic_thaumatury:energy_core"
+    },
+    "title": {
+      "translate": "advancements.electrofynamic_thaumatury.energy_core.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_energy_core_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

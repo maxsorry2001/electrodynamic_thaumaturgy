@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:redstone"
+    },
+    "b": {
+      "item": "electrofynamic_thaumatury:iron_sheet"
+    },
+    "c": {
+      "item": "electrofynamic_thaumatury:energy_core"
+    }
+  },
+  "pattern": [
+    " a ",
+    " b ",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:bjt"
+  }
+}

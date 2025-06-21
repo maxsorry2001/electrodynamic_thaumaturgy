@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrofynamic_thaumatury:energy_core"
+    },
+    "b": {
+      "item": "minecraft:iron_ingot"
+    },
+    "c": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "  a",
+    " b ",
+    "c  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:electromagnetic_rod"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true": {
+      "model": "electrofynamic_thaumatury:block/thermal_energy_maker_block_true"
+    },
+    "lit=false":{
+      "model": "electrofynamic_thaumatury:block/thermal_energy_maker_block_false"
+    }
+  }
+}

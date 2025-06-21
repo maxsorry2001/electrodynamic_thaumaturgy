@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,send=true": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_send_block",
+      "x": 180
+    },
+    "facing=east,send=true": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_send_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,send=true": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_send_block",
+      "x": 90
+    },
+    "facing=south,send=true": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_send_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,send=true": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_send_block"
+    },
+    "facing=west,send=true": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_send_block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,send=false": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_receive_block",
+      "x": 180
+    },
+    "facing=east,send=false": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_receive_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,send=false": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_receive_block",
+      "x": 90
+    },
+    "facing=south,send=false": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_receive_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,send=false": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_receive_block"
+    },
+    "facing=west,send=false": {
+      "model": "electrofynamic_thaumatury:block/energy_transmission_antenna_receive_block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

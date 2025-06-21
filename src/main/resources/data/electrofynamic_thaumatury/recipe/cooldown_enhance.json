@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "electrofynamic_thaumatury:enhance_modem_baseboard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:cooldown_enhance"
+  }
+}

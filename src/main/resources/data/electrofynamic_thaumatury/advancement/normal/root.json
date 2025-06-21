@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "has_crafting_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:crafting_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "electrofynamic_thaumatury:textures/gui/advancement.png",
+    "description": {
+      "translate": "advancements.electrofynamic_thaumatury.root.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "electrofynamic_thaumatury:electromagnetic_rod"
+    },
+    "title": {
+      "translate": "advancements.electrofynamic_thaumatury.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_crafting_table"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "electrofynamic_thaumatury:lodestone"
+    ]
+  },
+  "sends_telemetry_event": true
+}

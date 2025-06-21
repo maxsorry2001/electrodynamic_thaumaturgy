@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrofynamic_thaumatury:capacitor"
+    },
+    "b": {
+      "item": "electrofynamic_thaumatury:board"
+    },
+    "c": {
+      "item": "electrofynamic_thaumatury:inductance"
+    },
+    "d": {
+      "item": "minecraft:iron_ingot"
+    },
+    "e": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " a ",
+    "dbe",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:iron_lc"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "electrofynamic_thaumatury:magic_lithography",
+  "baseboard": {
+    "item": "electrofynamic_thaumatury:empty_advanced_module"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:magnet_resonance_module"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "aa ",
+    "   ",
+    "   "
+  ],
+  "result": {
+    "count": 16,
+    "id": "electrofynamic_thaumatury:copper_sheet"
+  }
+}

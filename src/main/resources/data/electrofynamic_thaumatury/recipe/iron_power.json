@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrofynamic_thaumatury:bjt"
+    },
+    "b": {
+      "item": "electrofynamic_thaumatury:board"
+    },
+    "d": {
+      "item": "minecraft:iron_ingot"
+    },
+    "e": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " a ",
+    "dbe",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrofynamic_thaumatury:iron_power"
+  }
+}
