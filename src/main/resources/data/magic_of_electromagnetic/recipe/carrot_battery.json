@@ -9,11 +9,11 @@
       "item": "magic_of_electromagnetic:copper_sheet"
     },
     {
-      "item": "minecraft:potion"
+      "item": "minecraft:carrot"
     }
   ],
   "result": {
     "count": 1,
-    "id": "magic_of_electromagnetic:fe_cu_solution_battery"
+    "id": "magic_of_electromagnetic:carrot_battery"
   }
 }

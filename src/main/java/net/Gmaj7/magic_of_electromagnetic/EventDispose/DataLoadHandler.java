@@ -36,9 +36,11 @@ public class DataLoadHandler {
                 MoeItems.ELECTROMAGNETIC_ROD.get(),
                 MoeItems.ELECTROMAGNETIC_BOOK.get());
         event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
-                MoeItems.FE_CU_POTATO_BATTERY.get(),
-                MoeItems.FE_CU_CARROT_BATTERY.get(),
-                MoeItems.FE_CU_SOLUTION_BATTERY.get());
+                MoeItems.POTATO_BATTERY.get(),
+                MoeItems.CARROT_BATTERY.get(),
+                MoeItems.SOLUTION_BATTERY.get());
+        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
+                MoeItems.POWER_BANK.get());
         event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
                 MoeItems.ENERGY_BLOCK.get());
         event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->

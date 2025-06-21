@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "magic_of_electromagnetic:iron_sheet"
+    },
+    "b": {
+      "item": "magic_of_electromagnetic:energy_core"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "bbb",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magic_of_electromagnetic:power_bank"
+  }
+}

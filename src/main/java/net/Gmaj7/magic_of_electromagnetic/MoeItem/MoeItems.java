@@ -126,12 +126,14 @@ public class MoeItems {
     public static final Supplier<Item> BJT = MOE_ITEM.registerSimpleItem("bjt", new Item.Properties().stacksTo(1));
     public static final Supplier<Item> SUPERCONDUCTING_UPDATE = MOE_ITEM.register("superconducting_update",
             () -> new SuperconductingUpdateItem(new Item.Properties()));
-    public static final Supplier<Item> FE_CU_POTATO_BATTERY = MOE_ITEM.register("fe_cu_potato_battery",
+    public static final Supplier<Item> POTATO_BATTERY = MOE_ITEM.register("potato_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
-    public static final Supplier<Item> FE_CU_CARROT_BATTERY = MOE_ITEM.register("fe_cu_carrot_battery",
+    public static final Supplier<Item> CARROT_BATTERY = MOE_ITEM.register("carrot_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
-    public static final Supplier<Item> FE_CU_SOLUTION_BATTERY = MOE_ITEM.register("fe_cu_solution_battery",
+    public static final Supplier<Item> SOLUTION_BATTERY = MOE_ITEM.register("solution_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
+    public static final Supplier<Item> POWER_BANK = MOE_ITEM.register("power_bank",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 65536)));
 
     public static final Supplier<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)

@@ -74,9 +74,10 @@ public class MoeTabs {
                         output.accept(MoeItems.GOLD_POWER.get());
                         output.accept(MoeItems.COPPER_POWER.get());
                         output.accept(MoeItems.SUPERCONDUCTING_POWER.get());
-                        output.accept(MoeItems.FE_CU_CARROT_BATTERY.get());
-                        output.accept(MoeItems.FE_CU_POTATO_BATTERY.get());
-                        output.accept(MoeItems.FE_CU_SOLUTION_BATTERY.get());
+                        output.accept(MoeItems.CARROT_BATTERY.get());
+                        output.accept(MoeItems.POTATO_BATTERY.get());
+                        output.accept(MoeItems.SOLUTION_BATTERY.get());
+                        output.accept(MoeItems.POWER_BANK.get());
                         output.accept(MoeItems.ENERGY_CORE.get());
                         output.accept(MoeItems.IRON_SHEET.get());
                         output.accept(MoeItems.COPPER_SHEET.get());

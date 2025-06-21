@@ -249,20 +249,27 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
 
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.FE_CU_CARROT_BATTERY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.CARROT_BATTERY.get())
                 .requires(MoeItems.IRON_SHEET.get())
                 .requires(MoeItems.COPPER_SHEET.get())
                 .requires(Items.CARROT)
                 .unlockedBy("has_carrot", has(Items.CARROT)).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.FE_CU_POTATO_BATTERY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.POTATO_BATTERY.get())
                 .requires(MoeItems.IRON_SHEET.get())
                 .requires(MoeItems.COPPER_SHEET.get())
                 .requires(Items.POTATO)
                 .unlockedBy("has_potato", has(Items.POTATO)).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.FE_CU_SOLUTION_BATTERY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.SOLUTION_BATTERY.get())
                 .requires(MoeItems.IRON_SHEET.get())
                 .requires(MoeItems.COPPER_SHEET.get())
                 .requires(Items.POTION)
                 .unlockedBy("has_potion", has(Items.POTION)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.POWER_BANK.get())
+                .pattern("aaa")
+                .pattern("bbb")
+                .pattern("aaa")
+                .define('a', MoeItems.IRON_SHEET.get())
+                .define('b', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
     }
 }

@@ -50,7 +50,8 @@ public class BatteryItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         if (usedHand == InteractionHand.MAIN_HAND && player.getOffhandItem().getCapability(Capabilities.EnergyStorage.ITEM) != null
-                && player.getOffhandItem().getCapability(Capabilities.EnergyStorage.ITEM).canReceive()){
+                && player.getOffhandItem().getCapability(Capabilities.EnergyStorage.ITEM).canReceive()
+                && player.getMainHandItem().getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored() > 0){
             player.startUsingItem(usedHand);
         }
         return super.use(level, player, usedHand);
@@ -59,7 +60,7 @@ public class BatteryItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
-        if(energyStorage.getEnergyStored() <= 0){
+        if(energyStorage.getEnergyStored() <= 0 && !stack.is(MoeItems.POWER_BANK.get())){
             stack.shrink(1);
             level.addFreshEntity(new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(MoeItems.COPPER_SHEET.get())));
         }
