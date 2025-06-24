@@ -57,6 +57,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get());
         basicItem(MoeItems.MIRAGE_PURSUIT_MODULE.get());
         basicItem(MoeItems.MAGNET_RESONANCE_MODULE.get());
+        basicItem(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
         handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());

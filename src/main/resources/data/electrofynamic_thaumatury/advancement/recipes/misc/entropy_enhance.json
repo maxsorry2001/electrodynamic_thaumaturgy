@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_enhance_baseboard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrofynamic_thaumatury:enhance_modem_baseboard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "electrofynamic_thaumatury:entropy_enhance"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_enhance_baseboard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "electrofynamic_thaumatury:entropy_enhance"
+    ]
+  }
+}

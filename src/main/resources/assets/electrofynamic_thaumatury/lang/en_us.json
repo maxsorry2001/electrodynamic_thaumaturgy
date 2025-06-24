@@ -13,6 +13,7 @@
   "item.electrofynamic_thaumatury.tree_current_module": "Lighting Chain",
   "item.electrofynamic_thaumatury.refraction_module": "Refraction Module",
   "item.electrofynamic_thaumatury.magnetic_recombination_cannon_module": "Magnetic Recombination Cannon",
+  "item.electrofynamic_thaumatury.domain_reconstruction_module": "Domain Reconstruction",
   "item.electrofynamic_thaumatury.electromagnetic_assault_module": "Electromagnetic Assault",
   "item.electrofynamic_thaumatury.st_elmo_s_fire_module": "St.Elmo's Fire",
   "item.electrofynamic_thaumatury.magnet_resonance_module": "Magnet Resonance",
@@ -50,8 +51,8 @@
   "item.electrofynamic_thaumatury.strength_enhance": "Strength",
   "item.electrofynamic_thaumatury.efficiency_enhance": "Efficiency",
   "item.electrofynamic_thaumatury.entropy_enhance": "Entropy Increase Curse",
+  "item.electrofynamic_thaumatury.life_extraction_enhance": "Life Extraction",
   "item.electrofynamic_thaumatury.enhance_modem_baseboard": "Enhance Modem Baseboard",
-  "item.electrofynamic_thaumatury.domain_reconstruction_module": "Domain Reconstruction",
 
   "item.electrofynamic_thaumatury.ray_module.description": "Fire a laser beam forward",
   "item.electrofynamic_thaumatury.pulsed_plasma_module.description": "Shoot a pulse of plasma",

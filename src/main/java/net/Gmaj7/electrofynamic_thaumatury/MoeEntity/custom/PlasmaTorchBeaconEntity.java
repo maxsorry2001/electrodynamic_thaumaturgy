@@ -1,6 +1,7 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
@@ -9,7 +10,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -52,7 +52,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
             List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
             for (LivingEntity target : list){
                 if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), (int) MoeFunction.getMagicAmount(itemStack) * 10);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), this.getOwner()), (int) MoeFunction.getMagicAmount(itemStack) * 10);
                     MoeFunction.checkTargetEnhancement(itemStack, target);
                 }
             }

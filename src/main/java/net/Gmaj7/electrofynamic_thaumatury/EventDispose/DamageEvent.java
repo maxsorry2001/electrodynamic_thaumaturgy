@@ -3,10 +3,8 @@ package net.Gmaj7.electrofynamic_thaumatury.EventDispose;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MirageEntity;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.*;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeData.MoeDataGet;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -62,6 +60,11 @@ public class DamageEvent {
                     }
                 }
             }
+        }
+        if(source.is(MoeDamageType.origin_thaumatury) && sourceEntity instanceof LivingEntity livingEntity){
+            EnhancementData enhancementData = livingEntity.getMainHandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+            if(enhancementData == null) enhancementData = livingEntity.getOffhandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+            if(enhancementData != null) livingEntity.heal(event.getNewDamage() * 0.2F * enhancementData.lifeExtraction());
         }
     }
 }

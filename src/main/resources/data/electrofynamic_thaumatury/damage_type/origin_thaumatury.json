@@ -1,0 +1,6 @@
+{
+  "message_id": "origin_thaumatury",
+  "effects": "hurt",
+  "exhaustion": 0.2,
+  "scaling": "never"
+}

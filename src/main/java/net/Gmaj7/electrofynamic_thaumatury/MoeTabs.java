@@ -65,6 +65,7 @@ public class MoeTabs {
                         output.accept(MoeItems.STRENGTH_ENHANCE.get());
                         output.accept(MoeItems.EFFICIENCY_ENHANCE.get());
                         output.accept(MoeItems.ENTROPY_ENHANCE.get());
+                        output.accept(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
 
                         output.accept(MoeItems.IRON_LC.get());
                         output.accept(MoeItems.GOLD_LC.get());

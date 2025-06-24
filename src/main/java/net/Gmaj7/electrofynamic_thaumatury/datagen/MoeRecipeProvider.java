@@ -244,7 +244,13 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EFFICIENCY_ENHANCE.get())
                 .requires(Items.AMETHYST_SHARD)
                 .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
-                .requires(Items.ROTTEN_FLESH)
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.ENTROPY_ENHANCE.get())
+                .requires(Items.FLINT_AND_STEEL)
+                .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
+                .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.LIFE_EXTRACTION_ENHANCE.get())
+                .requires(Items.GOLDEN_CARROT)
                 .requires(MoeItems.ENHANCE_MODEM_BASEBOARD.get())
                 .unlockedBy("has_enhance_baseboard", has(MoeItems.ENHANCE_MODEM_BASEBOARD.get())).save(recipeOutput);
 

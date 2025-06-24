@@ -31,8 +31,8 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        guiGraphics.blitSprite(SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + this.imageWidth * 3 / 4, y + this.imageHeight / 4, 30, 20);
-        guiGraphics.drawString(this.font, Component.translatable("moe_modem"), x + this.imageWidth * 3 / 4 + 7, y + this.imageHeight / 4 + 5, 0xFFFFFF);
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
+        guiGraphics.drawString(this.font, Component.translatable("moe_modem"), x + 145, y + 40, 0xFFFFFF);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
 

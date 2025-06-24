@@ -1,10 +1,10 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +20,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
-            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), livingEntity), MoeFunction.getMagicAmount(itemStack) / 2);
+            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack) / 2);
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

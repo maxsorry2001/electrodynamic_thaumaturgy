@@ -1,11 +1,11 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,7 +49,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(5));
             for (LivingEntity target : list){
                 if(target != getOwner() && magicItem != null){
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), getOwner()), MoeFunction.getMagicAmount(magicItem));
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), getOwner()), MoeFunction.getMagicAmount(magicItem));
                     MoeFunction.checkTargetEnhancement(magicItem, target);
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
                     lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

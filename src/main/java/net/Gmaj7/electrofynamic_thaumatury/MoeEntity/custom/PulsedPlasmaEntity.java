@@ -1,6 +1,7 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -9,7 +10,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,7 +41,7 @@ public class PulsedPlasmaEntity extends AbstractArrow {
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity) {
-            entity.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.LIGHTNING_BOLT), this.getOwner()), MoeFunction.getMagicAmount(magicItem));
+            entity.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), this.getOwner()), MoeFunction.getMagicAmount(magicItem));
             MoeFunction.checkTargetEnhancement(magicItem, (LivingEntity) entity);
         }
     }

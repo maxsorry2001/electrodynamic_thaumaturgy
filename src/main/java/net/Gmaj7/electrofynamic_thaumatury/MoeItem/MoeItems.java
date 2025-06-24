@@ -4,7 +4,6 @@ import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.ElectromagneticTier;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.EnhancementData;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.EnhancementType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.*;
 import net.Gmaj7.electrofynamic_thaumatury.magic.*;
@@ -107,15 +106,17 @@ public class MoeItems {
             () -> new PowerAmplifierItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> STRENGTH_ENHANCE = MOE_ITEM.register("strength_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.STRENGTH, new Item.Properties().stacksTo(1)));
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.STRENGTH, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> COOLDOWN_ENHANCE = MOE_ITEM.register("cooldown_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.COOLDOWN, new Item.Properties().stacksTo(1)));
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.COOLDOWN, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EFFICIENCY_ENHANCE = MOE_ITEM.register("efficiency_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENTROPY_ENHANCE = MOE_ITEM.register("entropy_enhance",
-            () -> new EnhancementModulateItem(EnhancementType.ENTROPY, new Item.Properties().stacksTo(1)));
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.ENTROPY, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> LIFE_EXTRACTION_ENHANCE = MOE_ITEM.register("life_extraction_enhance",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.LIFE_EXTRACTION, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ENHANCE_MODEM_BASEBOARD = MOE_ITEM.register("enhance_modem_baseboard",
-            () -> new EnhancementModulateItem(EnhancementType.EMPTY, new Item.Properties()));
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.EMPTY, new Item.Properties()));
 
     public static final Supplier<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
     public static final Supplier<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");
