@@ -42,7 +42,7 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
     @Override
     protected void init() {
         this.inventoryLabelY = 1000;
-        this.titleLabelX = this.imageWidth / 3;
+        this.titleLabelY = 10000;
         super.init();
     }
 

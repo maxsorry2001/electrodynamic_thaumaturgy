@@ -32,7 +32,7 @@ public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
 
     protected boolean canEnergyMake() {
         int blockLight = level.getBrightness(LightLayer.BLOCK, getBlockPos().above());
-        return (level.isDay() && level.canSeeSky(this.getBlockPos())) || blockLight > 0;
+        return (level.isDay() && level.canSeeSky(this.getBlockPos().above())) || blockLight > 0;
     }
 
 

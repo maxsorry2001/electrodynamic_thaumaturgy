@@ -23,7 +23,7 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
     @Override
     protected void init() {
         this.inventoryLabelY = 1000;
-        this.titleLabelX = this.imageWidth / 3;
+        this.titleLabelY = 10000;
         super.init();
     }
 
@@ -38,8 +38,8 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
 
     private boolean isMouseFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - this.imageWidth * 3 / 4;
-        double d1 = mouseY - y - this.imageHeight / 4;
+        double d0 = mouseX - x - 138;
+        double d1 = mouseY - y - 35;
         return d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20;
     }
 

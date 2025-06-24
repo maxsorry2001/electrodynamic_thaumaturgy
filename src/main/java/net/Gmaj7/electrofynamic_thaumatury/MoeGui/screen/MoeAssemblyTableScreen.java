@@ -21,7 +21,7 @@ public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyT
     @Override
     protected void init() {
         this.inventoryLabelY = 1000;
-        this.titleLabelX = this.imageWidth / 3;
+        this.titleLabelY = 10000;
         super.init();
     }
 
@@ -29,15 +29,15 @@ public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyT
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        guiGraphics.blitSprite(SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + this.imageWidth * 3 / 4, y + this.imageHeight / 4, 30, 20);
-        guiGraphics.drawString(this.font, Component.translatable("moe_assemble"), x + this.imageWidth * 3 / 4 + 7, y + this.imageHeight / 4 + 5, 0xFFFFFF);
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
+        guiGraphics.drawString(this.font, Component.translatable("moe_assemble"), x + 145, y + 40, 0xFFFFFF);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     private boolean isMouseFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - this.imageWidth * 3 / 4;
-        double d1 = mouseY - y - this.imageHeight / 4;
+        double d0 = mouseX - x - 138;
+        double d1 = mouseY - y - 35;
         return d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20;
     }
 

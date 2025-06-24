@@ -3,6 +3,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.EnergyTransmissionAntennaBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.EnhancementData;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
@@ -115,6 +116,12 @@ public class MagicCastItem extends Item {
             BlockPos blockPos = stack.get(MoeDataComponentTypes.LINK_POS);
             tooltipComponents.add(Component.translatable("binding").append(blockPos.getX() + "," + blockPos.getY() + "," + blockPos.getZ()));
         }
+        EnhancementData enhancementData = stack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        tooltipComponents.add(Component.translatable("item.electrofynamic_thaumatury.cooldown_enhance").append(":" + enhancementData.coolDown()));
+        tooltipComponents.add(Component.translatable("item.electrofynamic_thaumatury.strength_enhance").append(":" + enhancementData.strength()));
+        tooltipComponents.add(Component.translatable("item.electrofynamic_thaumatury.efficiency_enhance").append(":" + enhancementData.efficiency()));
+        tooltipComponents.add(Component.translatable("item.electrofynamic_thaumatury.entropy_enhance").append(":" + enhancementData.entropy()));
+        tooltipComponents.add(Component.translatable("item.electrofynamic_thaumatury.life_extraction_enhance").append(":" + enhancementData.lifeExtraction()));
     }
 
     @Override

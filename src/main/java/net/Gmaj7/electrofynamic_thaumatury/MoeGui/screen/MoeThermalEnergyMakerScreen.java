@@ -32,7 +32,7 @@ public class MoeThermalEnergyMakerScreen extends AbstractContainerScreen<MoeTher
     @Override
     protected void init() {
         this.inventoryLabelY = 1000;
-        this.titleLabelX = 5000;
+        this.titleLabelY = 10000;
         super.init();
     }
 
