@@ -140,5 +140,7 @@
   "magic_lithography": "魔法光刻",
   "binding": "绑定：",
 
-  "patchouli.gui.et_start_book": "电磁导能书"
+  "patchouli.gui.et_start_book": "电磁导能书",
+  "patchouli.start_entries": "如何开始",
+  "patchouli.et_books.start_page": "首先你需要合成一把导能杖"
 }

@@ -1,0 +1,16 @@
+{
+  "name": "patchouli.start_entries",
+  "category": "electrofynamic_thaumatury:category_1",
+  "icon": "electrofynamic_thaumatury:energy_core",
+  "pages": [
+    {
+      "type": "text",
+      "text": "patchouli.et_books.start_page"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:electromagnetic_rod",
+      "recipe2": "electrofynamic_thaumatury:energy_core"
+    }
+  ]
+}

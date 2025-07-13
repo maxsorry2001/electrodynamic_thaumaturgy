@@ -141,5 +141,7 @@
   "binding": "binding:",
 
 
-  "patchouli.gui.et_start_book": "Electromagnetic Book"
+  "patchouli.gui.et_start_book": "Electromagnetic Book",
+  "patchouli.start_entries": "How to start",
+  "patchouli.et_books.start_page": "aaa"
 }
