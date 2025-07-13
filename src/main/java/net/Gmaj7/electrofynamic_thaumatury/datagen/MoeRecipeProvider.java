@@ -212,8 +212,8 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_nether_star", has(Items.NETHER_STAR)).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.EMPTY_PRIMARY_MODULE.get())
                 .pattern("ccc")
-                .define('c', MoeItems.IRON_SHEET.get())
-                .unlockedBy("has_iron_sheet", has(MoeItems.IRON_SHEET.get())).save(recipeOutput);
+                .define('c', MoeItems.COPPER_SHEET.get())
+                .unlockedBy("has_iron_sheet", has(MoeItems.COPPER_SHEET.get())).save(recipeOutput);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EMPTY_INTERMEDIATE_MODULE.get())
                 .requires(MoeItems.EMPTY_PRIMARY_MODULE.get())
                 .requires(Items.GOLD_INGOT)

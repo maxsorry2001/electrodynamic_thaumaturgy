@@ -52,7 +52,7 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
 
     @Override
     protected void energyMake(AbstractEnergyMakerBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(32, false);
+        blockEntity.getEnergy().receiveEnergy(512, false);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
             if (burnTime > 0) burnTime--;
             if (burnTime <= 0) {
                 if (!itemHandler.getStackInSlot(0).isEmpty()) {
-                    int time = itemHandler.getStackInSlot(0).getBurnTime(null);
+                    int time = itemHandler.getStackInSlot(0).getBurnTime(null) / 4;
                     if (time > 0) {
                         burnTime = time;
                         fullBurnTime = time;

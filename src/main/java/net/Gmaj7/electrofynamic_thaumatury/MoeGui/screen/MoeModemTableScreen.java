@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMenu> {
-    Button button;
     ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_modem_table.png");
     protected static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "widget/button"), ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "widget/button_disabled"), ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "widget/button_highlighted"));
 

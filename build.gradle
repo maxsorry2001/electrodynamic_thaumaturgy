@@ -19,6 +19,7 @@ group = mod_group_id
 repositories {
     maven {url = "https://modmaven.dev"}
     maven {url = "https://api.modrinth.com/maven"}
+    maven { url = "https://maven.blamejared.com"}
     mavenLocal()
 }
 
@@ -127,6 +128,9 @@ dependencies {
 
     compileOnly "mekanism:Mekanism:${mek_version}:api"
 
+    compileOnly ("vazkii.patchouli:Patchouli:${patchouli_verson}:api")
+    runtimeOnly ("vazkii.patchouli:Patchouli:${patchouli_verson}")
+
     // If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
     runtimeOnly("mekanism:Mekanism:${mek_version}")// Mekanism
     runtimeOnly("mekanism:Mekanism:${mek_version}:additions")// Mekanism: Additions
@@ -155,6 +159,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
+            patchouli_version_range: patchouli_version_range,
             neo_version            : neo_version,
             neo_version_range      : neo_version_range,
             loader_version_range   : loader_version_range,
