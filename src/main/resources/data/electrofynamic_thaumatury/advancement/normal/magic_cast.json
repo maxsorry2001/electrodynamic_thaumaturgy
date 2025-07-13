@@ -10,16 +10,6 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_magic_cast_1": {
-      "conditions": {
-        "items": [
-          {
-            "items": "electrofynamic_thaumatury:electromagnetic_book"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -36,8 +26,7 @@
   },
   "requirements": [
     [
-      "has_magic_cast_0",
-      "has_magic_cast_1"
+      "has_magic_cast_0"
     ]
   ],
   "sends_telemetry_event": true

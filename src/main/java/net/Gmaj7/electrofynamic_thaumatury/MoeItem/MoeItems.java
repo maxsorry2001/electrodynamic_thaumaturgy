@@ -142,6 +142,4 @@ public class MoeItems {
                     .component(DataComponents.CONTAINER, setEmpty())
                     .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
-    public static final Supplier<Item> ELECTROMAGNETIC_BOOK = MOE_ITEM.register("electromagnetic_book",
-            () -> new MoeBookItem(new Item.Properties().stacksTo(1)));
 }

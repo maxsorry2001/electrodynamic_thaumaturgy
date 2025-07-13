@@ -1,6 +1,5 @@
 {
   "item.electrofynamic_thaumatury.electromagnetic_rod": "Electromagnetic Rod",
-  "item.electrofynamic_thaumatury.electromagnetic_book": "Electromagnetic Book",
   "item.electrofynamic_thaumatury.ray_module": "Ray Shoot",
   "item.electrofynamic_thaumatury.pulsed_plasma_module": "Pulsed Plasma",
   "item.electrofynamic_thaumatury.lighting_strike_module": "Lighting Strike",
@@ -139,5 +138,8 @@
   "key.category.electrofynamic_thaumatury.moe": "Electrodynamic Thaumatury",
   "key.electrofynamic_thaumatury.switch_magic": "Switch magic",
   "magic_lithography": "Magic Lithography",
-  "binding": "binding:"
+  "binding": "binding:",
+
+
+  "patchouli.gui.et_start_book": "Electromagnetic Book"
 }

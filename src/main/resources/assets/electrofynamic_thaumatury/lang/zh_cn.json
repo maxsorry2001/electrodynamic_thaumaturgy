@@ -1,6 +1,5 @@
 {
   "item.electrofynamic_thaumatury.electromagnetic_rod": "电磁导能杖",
-  "item.electrofynamic_thaumatury.electromagnetic_book": "电磁导能书",
   "item.electrofynamic_thaumatury.ray_module": "激光点发",
   "item.electrofynamic_thaumatury.pulsed_plasma_module": "高能脉冲",
   "item.electrofynamic_thaumatury.lighting_strike_module": "落雷打击",
@@ -139,5 +138,7 @@
   "key.category.electrofynamic_thaumatury.moe": "电磁奇术",
   "key.electrofynamic_thaumatury.switch_magic": "法术切换",
   "magic_lithography": "魔法光刻",
-  "binding": "绑定："
+  "binding": "绑定：",
+
+  "patchouli.gui.et_start_book": "电磁导能书"
 }

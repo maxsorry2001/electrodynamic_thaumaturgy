@@ -60,6 +60,5 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
-        handheldItem(MoeItems.ELECTROMAGNETIC_BOOK.get());
     }
 }

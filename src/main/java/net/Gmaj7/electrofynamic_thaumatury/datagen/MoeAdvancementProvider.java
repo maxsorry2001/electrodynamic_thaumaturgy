@@ -47,7 +47,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             builder.save(consumer, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "normal/root"), existingFileHelper);
 
             register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
-            register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get(), MoeItems.ELECTROMAGNETIC_BOOK.get());
+            register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get());
             register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE, "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
             register(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE, "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
             register(MoeItems.EMPTY_PRIMARY_MODULE.get(), "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.EMPTY_PRIMARY_MODULE.get());

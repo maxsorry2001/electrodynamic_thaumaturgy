@@ -1,0 +1,8 @@
+{
+  "name": "patchouli.gui.et_start_book",
+  "loading_text": "tt",
+  "version": 1,
+  "creative_tab": "electrofynamic_thaumatury:moe_tab",
+  "use_resource_pack": true,
+  "model": "electrofynamic_thaumatury:electromagnetic_book"
+}

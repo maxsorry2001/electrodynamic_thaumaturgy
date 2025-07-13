@@ -124,14 +124,6 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('a', Items.COPPER_INGOT)
                 .define('b', Items.LODESTONE)
                 .unlockedBy("has_copper_ingot", has(Items.LODESTONE)).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ELECTROMAGNETIC_BOOK.get())
-                .pattern(" a ")
-                .pattern(" b ")
-                .pattern(" c ")
-                .define('a', MoeItems.ENERGY_CORE.get())
-                .define('b', Items.BOOK)
-                .define('c', Items.IRON_INGOT)
-                .unlockedBy("has_book", has(Items.BOOK)).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ELECTROMAGNETIC_ROD.get())
                 .pattern("  a")
                 .pattern(" b ")

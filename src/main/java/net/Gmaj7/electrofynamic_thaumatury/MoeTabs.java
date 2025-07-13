@@ -29,8 +29,6 @@ public class MoeTabs {
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));
-                        output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get()));
-                        output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_BOOK.get())));
                         output.accept(MoeItems.EMPTY_PRIMARY_MODULE.get());
                         output.accept(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
                         output.accept(MoeItems.EMPTY_ADVANCED_MODULE.get());
