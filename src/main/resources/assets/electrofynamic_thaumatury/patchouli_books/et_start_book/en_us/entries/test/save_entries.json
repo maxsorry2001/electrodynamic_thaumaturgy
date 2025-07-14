@@ -1,0 +1,17 @@
+{
+  "name": "patchouli.et.generator_entries",
+  "category": "electrofynamic_thaumatury:category_energy_save",
+  "icon": "electrofynamic_thaumatury:energy_block",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:energy_block",
+      "text": "patchouli.et.generator_entries.energy_block"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:energy_transmission_antenna",
+      "text": "patchouli.et.generator_entries.energy_transmission_antenna"
+    }
+  ]
+}

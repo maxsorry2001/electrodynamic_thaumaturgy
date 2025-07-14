@@ -140,8 +140,9 @@
   "magic_lithography": "Magic Lithography",
   "binding": "binding:",
 
-
+  "patchouli.et.how_start": "start",
   "patchouli.gui.et_start_book": "Electromagnetic Book",
-  "patchouli.start_entries": "How to start",
-  "patchouli.et_books.start_page": "aaa"
+  "patchouli.et.start_entries": "How to start",
+  "patchouli.et_books.start_page": "aaa",
+  "patchouli.et.energy": "Production, transmission, and storage of energy"
 }

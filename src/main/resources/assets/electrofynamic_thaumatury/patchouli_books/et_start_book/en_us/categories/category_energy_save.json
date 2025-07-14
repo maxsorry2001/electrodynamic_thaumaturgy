@@ -1,0 +1,7 @@
+{
+  "name": "patchouli.et.energy.save",
+  "description": "patchouli.et.energy.save.description",
+  "icon": "electrofynamic_thaumatury:energy_block",
+  "parent": "electrofynamic_thaumatury:category_energy",
+  "sortnum": 4
+}

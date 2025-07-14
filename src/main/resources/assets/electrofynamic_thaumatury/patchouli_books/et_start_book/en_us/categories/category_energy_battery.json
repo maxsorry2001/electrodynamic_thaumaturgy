@@ -1,0 +1,7 @@
+{
+  "name": "patchouli.et.energy.battery",
+  "description": "patchouli.et.energy.battery.description",
+  "icon": "electrofynamic_thaumatury:potato_battery",
+  "parent": "electrofynamic_thaumatury:category_energy",
+  "sortnum": 2
+}

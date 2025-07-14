@@ -1,0 +1,17 @@
+{
+  "name": "patchouli.et.battery_entries",
+  "category": "electrofynamic_thaumatury:category_energy_battery",
+  "icon": "electrofynamic_thaumatury:potato_battery",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:carrot_battery",
+      "recipe2": "electrofynamic_thaumatury:potato_battery"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:solution_battery",
+      "text": "patchouli.battery"
+    }
+  ]
+}
