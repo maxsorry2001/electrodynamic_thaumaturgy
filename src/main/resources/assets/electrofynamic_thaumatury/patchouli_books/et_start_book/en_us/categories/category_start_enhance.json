@@ -1,0 +1,7 @@
+{
+  "name": "patchouli.et.start.enhance",
+  "description": "patchouli.et.start.enhance.description",
+  "icon": "electrofynamic_thaumatury:electromagnetic_modem_table",
+  "parent": "electrofynamic_thaumatury:category_start",
+  "sortnum": 4
+}

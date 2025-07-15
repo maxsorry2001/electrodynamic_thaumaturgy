@@ -1,0 +1,7 @@
+{
+  "name": "patchouli.et.start.magic",
+  "description": "patchouli.et.start.magic.description",
+  "icon": "electrofynamic_thaumatury:magic_lithography_table",
+  "parent": "electrofynamic_thaumatury:category_start",
+  "sortnum": 3
+}

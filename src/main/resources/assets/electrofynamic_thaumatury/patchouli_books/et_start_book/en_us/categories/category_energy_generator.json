@@ -3,5 +3,5 @@
   "description": "patchouli.et.energy.generator.description",
   "icon": "electrofynamic_thaumatury:thermal_energy_maker",
   "parent": "electrofynamic_thaumatury:category_energy",
-  "sortnum": 3
+  "sortnum": 12
 }

@@ -1,0 +1,42 @@
+{
+  "name": "patchouli.et.enhance_entries",
+  "category": "electrofynamic_thaumatury:category_start_enhance",
+  "icon": "electrofynamic_thaumatury:electromagnetic_modem_table",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:electromagnetic_modem_table",
+      "text": "patchouli.et.enhance_entries"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:enhance_modem_baseboard",
+      "text": "patchouli.et.baseboard"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:strength_enhance",
+      "text": "patchouli.et.strength_enhance"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:cooldown_enhance",
+      "text": "patchouli.et.cooldown_enhance"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:efficiency_enhance",
+      "text": "patchouli.et.efficiency_enhance"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:entropy_enhance",
+      "text": "patchouli.et.bioelectric_stop_enhance"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:life_extraction_enhance",
+      "text": "patchouli.et.life_extraction_enhance"
+    }
+  ]
+}

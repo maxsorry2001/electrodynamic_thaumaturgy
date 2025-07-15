@@ -1,0 +1,42 @@
+{
+  "name": "patchouli.et.rod_entries",
+  "category": "electrofynamic_thaumatury:category_start_rod",
+  "icon": "electrofynamic_thaumatury:electromagnetic_rod",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:lodestone",
+      "recipe2": "electrofynamic_thaumatury:energy_core"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:electromagnetic_rod",
+      "text": "patchouli.et_books.start_page"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:electromagnetic_assembly_table",
+      "text": "patchouli.et.rod_use"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:iron_lc",
+      "recipe2": "electrofynamic_thaumatury:iron_power"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:gold_lc",
+      "recipe2": "electrofynamic_thaumatury:gold_power"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:copper_lc",
+      "recipe2": "electrofynamic_thaumatury:copper_power"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:superconducting_lc",
+      "recipe2": "electrofynamic_thaumatury:superconducting_power"
+    }
+  ]
+}
