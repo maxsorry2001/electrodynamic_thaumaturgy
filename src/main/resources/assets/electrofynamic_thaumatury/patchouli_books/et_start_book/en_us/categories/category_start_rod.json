@@ -1,7 +1,0 @@
-{
-  "name": "patchouli.et.start.rod",
-  "description": "patchouli.et.start.rod.description",
-  "icon": "electrofynamic_thaumatury:electromagnetic_rod",
-  "parent": "electrofynamic_thaumatury:category_start",
-  "sortnum": 2
-}

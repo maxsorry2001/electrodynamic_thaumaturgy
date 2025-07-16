@@ -1,6 +1,6 @@
 {
   "name": "patchouli.et.battery_entries",
-  "category": "electrofynamic_thaumatury:category_energy_battery",
+  "category": "electrofynamic_thaumatury:category_energy",
   "icon": "electrofynamic_thaumatury:potato_battery",
   "pages": [
     {
