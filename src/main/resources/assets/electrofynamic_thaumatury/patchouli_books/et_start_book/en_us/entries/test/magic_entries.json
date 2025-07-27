@@ -1,12 +1,12 @@
 {
   "name": "patchouli.et.magic_entries",
-  "category": "electrofynamic_thaumatury:category_start",
+  "category": "electrofynamic_thaumatury:category_magic",
   "icon": "electrofynamic_thaumatury:magic_lithography_table",
   "pages": [
     {
       "type": "patchouli:crafting",
-      "recipe": "electrofynamic_thaumatury:category_start_magic",
-      "text": "patchouli.et.magic_entries"
+      "recipe": "electrofynamic_thaumatury:magic_lithography_table",
+      "text": "patchouli.et.magic_entries.start"
     },
     {
       "type": "patchouli:crafting",

@@ -14,9 +14,19 @@
       "text": "patchouli.et_books.start_page"
     },
     {
+      "type": "text",
+      "text": "patchouli.et.rod_use"
+    },
+    {
       "type": "patchouli:crafting",
       "recipe": "electrofynamic_thaumatury:electromagnetic_assembly_table",
+      "recipe2": "electrofynamic_thaumatury:inductance",
       "text": "patchouli.et.rod_use"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:bjt",
+      "recipe2": "electrofynamic_thaumatury:capacitor"
     },
     {
       "type": "patchouli:crafting",

@@ -11,7 +11,12 @@
     {
       "type": "patchouli:crafting",
       "recipe": "electrofynamic_thaumatury:solution_battery",
-      "text": "patchouli.battery"
+      "text": "patchouli.et.battery.show"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:power_bank",
+      "text": "patchouli.et.battery.power_bank"
     }
   ]
 }

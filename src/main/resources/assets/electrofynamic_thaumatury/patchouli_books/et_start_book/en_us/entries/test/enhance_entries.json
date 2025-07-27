@@ -6,7 +6,7 @@
     {
       "type": "patchouli:crafting",
       "recipe": "electrofynamic_thaumatury:electromagnetic_modem_table",
-      "text": "patchouli.et.enhance_entries"
+      "text": "patchouli.et.enhance_entries.start"
     },
     {
       "type": "patchouli:crafting",
@@ -31,7 +31,7 @@
     {
       "type": "patchouli:crafting",
       "recipe": "electrofynamic_thaumatury:entropy_enhance",
-      "text": "patchouli.et.bioelectric_stop_enhance"
+      "text": "patchouli.et.entropy_enhance"
     },
     {
       "type": "patchouli:crafting",
