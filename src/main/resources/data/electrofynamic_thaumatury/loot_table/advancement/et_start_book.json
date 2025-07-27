@@ -1,0 +1,19 @@
+{
+  "pools": [{
+    "rolls": 1.0,
+    "entries": [
+      {
+        "type": "item",
+        "functions": [
+          {
+            "function": "set_components",
+            "components": {
+              "patchouli:book": "electrofynamic_thaumatury:et_start_book"
+            }
+          }
+        ],
+        "name": "patchouli:guide_book"
+      }
+    ]
+  }]
+}

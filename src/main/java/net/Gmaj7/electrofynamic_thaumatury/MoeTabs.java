@@ -33,7 +33,6 @@ public class MoeTabs {
                         output.accept(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
                         output.accept(MoeItems.EMPTY_ADVANCED_MODULE.get());
 
-
                         output.accept(MoeItems.RAY_MODULE.get());
                         output.accept(MoeItems.ATTRACT_MODULE.get());
                         output.accept(MoeItems.LIGHTING_STRIKE_MODULE.get());

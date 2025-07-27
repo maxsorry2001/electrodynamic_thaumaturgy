@@ -31,6 +31,9 @@
     ]
   ],
   "rewards": {
+    "loot": [
+      "electrofynamic_thaumatury:advancement/et_start_book"
+    ],
     "recipes": [
       "electrofynamic_thaumatury:lodestone"
     ]

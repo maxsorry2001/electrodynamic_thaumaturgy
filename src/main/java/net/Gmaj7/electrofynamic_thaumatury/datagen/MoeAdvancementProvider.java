@@ -6,9 +6,11 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -43,7 +45,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             );
             builder.addCriterion("has_crafting_table", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CRAFTING_TABLE));
             builder.requirements(AdvancementRequirements.anyOf(List.of("has_crafting_table")));
-            builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lodestone")));
+            builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "advancement/et_start_book"))));
             builder.save(consumer, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "normal/root"), existingFileHelper);
 
             register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
