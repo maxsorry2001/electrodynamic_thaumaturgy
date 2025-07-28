@@ -156,7 +156,7 @@
   "patchouli.et.battery.power_bank": "充电宝可以储存65536FE，使用方式和上文的一次性电池一样，不同的只是充电宝可重复使用",
   "patchouli.et.generator_entries": "发电机",
   "patchouli.et.generator_entries.thermal_energy_maker": "扔燃料进去就行了，简单粗暴",
-  "patchouli.et.generator_entries.temperature_energy_maker": "上表面和下表面分别放置热方块和冷方块就行了，最简单的是篝火和水。",
+  "patchouli.et.generator_entries.temperature_energy_maker": "在上下表面分别放置一个热方块和一个冷方块即可发电，位置可互换（如：上表面放水，下表面放篝火；或上表面放篝火，下表面放水）",
   "patchouli.et.generator_entries.photovoltaic_energy_maker": "有光照即可发电，根据光照强度发电量会有所不同。插根火把就能稳定发电",
   "patchouli.et.save_entries": "能量储存与传输",
   "patchouli.et.generator_entries.energy_block": "用于储存能量，六个面都可以接受或释放能量。当然也可以右键打开GUI，吸收物品中的能量或给物品充能",
