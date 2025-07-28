@@ -136,13 +136,12 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_LC.get())
                 .pattern(" a ")
-                .pattern("dbe")
+                .pattern("db ")
                 .pattern(" c ")
                 .define('a', MoeItems.CAPACITOR.get())
                 .define('b', MoeItems.BOARD.get())
                 .define('c', MoeItems.INDUCTANCE.get())
                 .define('d', Items.IRON_INGOT)
-                .define('e', Items.REDSTONE)
                 .unlockedBy("has_board", has(MoeItems.BOARD.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.GOLD_LC.get())
                 .pattern("   ")
@@ -166,12 +165,11 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_update", has(MoeItems.SUPERCONDUCTING_UPDATE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_POWER.get())
                 .pattern(" a ")
-                .pattern("dbe")
+                .pattern("db ")
                 .pattern("   ")
                 .define('a', MoeItems.BJT.get())
                 .define('b', MoeItems.BOARD.get())
                 .define('d', Items.IRON_INGOT)
-                .define('e', Items.REDSTONE)
                 .unlockedBy("has_board", has(MoeItems.BOARD.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.GOLD_POWER.get())
                 .pattern("   ")

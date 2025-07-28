@@ -149,7 +149,7 @@
   "patchouli.et.start_entries": "Getting Started",
   "patchouli.et.rod_entries": "Electromagnetic Rod",
   "patchouli.et_books.start_page": "The Electromagnetic Rod is the medium for casting spells and also a configurator for certain machines. Crafting recipes are shown above.",
-  "patchouli.et.rod_use": "The Electromagnetic Assembly Table configures the rod. Configuration slots include an Oscillator, Amplifier, and 8 spell slots. The Oscillator determines base spell damage, the Amplifier sets the damage multiplier. If either is empty, spells deal no damage. Both have Iron, Gold, Copper, and Superconductor tiers.",
+  "patchouli.et.rod_use": "The Electromagnetic Assembly Table configures the rod. Configuration slots include an Oscillator, Amplifier, and 8 spell slots. The Oscillator determines base spell damage, the Amplifier sets the damage multiplier. If oscillator is empty, spells deal no damage. Both have Iron, Gold, Copper, and Superconductor tiers.",
   "patchouli.et.energy": "Energy Production, Transmission & Storage",
   "patchouli.et.battery_entries": "Batteries",
   "patchouli.et.battery.show": "Basic disposable battery providing 16,384 FE. Hold in main hand with chargeable item in offhand, then use the item to charge.",

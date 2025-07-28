@@ -10,14 +10,11 @@
     },
     "d": {
       "item": "minecraft:iron_ingot"
-    },
-    "e": {
-      "item": "minecraft:redstone"
     }
   },
   "pattern": [
     " a ",
-    "dbe",
+    "db ",
     "   "
   ],
   "result": {
