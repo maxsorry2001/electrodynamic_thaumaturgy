@@ -80,7 +80,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.FURNACE)
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_SHEET.get(), 16)
-                .pattern("aa ")
+                .pattern("aaa")
                 .pattern("   ")
                 .pattern("   ")
                 .define('a', Items.IRON_INGOT)
@@ -113,7 +113,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('a', Tags.Items.STONES)
                 .unlockedBy("has_stone", has(Tags.Items.STONES)).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.COPPER_SHEET.get(), 16)
-                .pattern("aa ")
+                .pattern("aaa")
                 .pattern("   ")
                 .pattern("   ")
                 .define('a', Items.COPPER_INGOT)
@@ -214,7 +214,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.EMPTY_ADVANCED_MODULE.get())
                 .requires(MoeItems.EMPTY_INTERMEDIATE_MODULE.get())
                 .requires(Items.COPPER_INGOT)
-                .requires(Items.END_ROD)
+                .requires(Items.POPPED_CHORUS_FRUIT)
                 .unlockedBy("has_intermediate_module", has(MoeItems.EMPTY_INTERMEDIATE_MODULE.get())).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ENHANCE_MODEM_BASEBOARD.get(), 4)
