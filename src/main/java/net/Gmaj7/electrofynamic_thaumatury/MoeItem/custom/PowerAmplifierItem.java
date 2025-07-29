@@ -10,11 +10,11 @@ public class PowerAmplifierItem extends ElectromagneticTierItem{
     public float getMagnification(){
         float result;
         switch (this.getTier()){
-            case IRON -> result = 1.0F;
-            case GOLD -> result = 1.33F;
-            case COPPER -> result = 1.66F;
-            case SUPERCONDUCTING -> result = 2.0F;
-            default -> result = 0F;
+            case IRON -> result = 1.33F;
+            case GOLD -> result = 1.66F;
+            case COPPER -> result = 2.0F;
+            case SUPERCONDUCTING -> result = 2.33F;
+            default -> result = 1.0F;
         }
         return result;
     }
