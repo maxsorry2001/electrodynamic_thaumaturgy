@@ -30,6 +30,6 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
             }
         }
         float protect = ((MoeDataGet)player).getProtective().getProtecting();
-        if(protect > 0 && !player.isCreative()) guiGraphics.drawString(Minecraft.getInstance().font, String.valueOf(protect), screenWidth / 2 - 91, screenHeight * 25 / 32, 0x0000FF);
+        if(protect > 0 && !player.isCreative()) guiGraphics.drawString(Minecraft.getInstance().font, String.valueOf(protect), screenWidth / 2 - 91, screenHeight * 25 / 32, 0x6091EC);
     }
 }

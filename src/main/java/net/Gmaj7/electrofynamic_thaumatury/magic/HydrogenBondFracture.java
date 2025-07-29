@@ -22,7 +22,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         Level level = livingEntity.level();
-        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack) * 6);
+        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack) * 2);
         if(level instanceof ServerLevel){
             ((ServerLevel) level).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
             ((ServerLevel) level).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);

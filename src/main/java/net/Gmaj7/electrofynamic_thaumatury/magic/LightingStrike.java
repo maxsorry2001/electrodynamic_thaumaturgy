@@ -20,7 +20,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
-            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack) / 2);
+            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack));
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

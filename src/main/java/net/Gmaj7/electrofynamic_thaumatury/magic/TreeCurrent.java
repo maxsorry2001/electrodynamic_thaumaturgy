@@ -33,7 +33,7 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
             for (LivingEntity target1 : list) {
                 if (target1 == target || target1 == livingEntity) continue;
                 addParticle(target, target1);
-                target1.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack) / 3);
+                target1.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack));
                 MoeFunction.checkTargetEnhancement(itemStack, target1);
             }
         }

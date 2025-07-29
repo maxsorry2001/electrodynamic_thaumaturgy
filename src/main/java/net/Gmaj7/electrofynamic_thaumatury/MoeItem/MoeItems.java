@@ -134,7 +134,7 @@ public class MoeItems {
     public static final Supplier<Item> SOLUTION_BATTERY = MOE_ITEM.register("solution_battery",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
     public static final Supplier<Item> POWER_BANK = MOE_ITEM.register("power_bank",
-            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 65536)));
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
 
     public static final Supplier<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)

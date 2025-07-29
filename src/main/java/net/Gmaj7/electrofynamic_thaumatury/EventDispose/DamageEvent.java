@@ -38,6 +38,7 @@ public class DamageEvent {
             }
             else {
                 ((MoeDataGet)eventTarget).getProtective().setProtecting(0);
+                PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(0));
                 event.setNewDamage(damage - protecting);
             }
         }
