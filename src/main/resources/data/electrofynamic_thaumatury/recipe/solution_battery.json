@@ -9,7 +9,10 @@
       "item": "electrofynamic_thaumatury:copper_sheet"
     },
     {
-      "item": "minecraft:potion"
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:water_bucket"
     }
   ],
   "result": {

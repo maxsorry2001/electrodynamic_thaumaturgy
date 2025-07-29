@@ -258,8 +258,9 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.SOLUTION_BATTERY.get())
                 .requires(MoeItems.IRON_SHEET.get())
                 .requires(MoeItems.COPPER_SHEET.get())
-                .requires(Items.POTION)
-                .unlockedBy("has_potion", has(Items.POTION)).save(recipeOutput);
+                .requires(Items.GLASS_BOTTLE)
+                .requires(Items.WATER_BUCKET)
+                .unlockedBy("has_potion", has(Items.GLASS_BOTTLE)).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.POWER_BANK.get())
                 .pattern("aaa")
                 .pattern("bbb")
