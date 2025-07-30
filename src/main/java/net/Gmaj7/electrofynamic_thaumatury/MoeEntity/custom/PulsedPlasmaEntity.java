@@ -40,7 +40,7 @@ public class PulsedPlasmaEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        if(entity instanceof LivingEntity) {
+        if(entity instanceof LivingEntity && magicItem != null) {
             entity.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), this.getOwner()), MoeFunction.getMagicAmount(magicItem));
             MoeFunction.checkTargetEnhancement(magicItem, (LivingEntity) entity);
         }

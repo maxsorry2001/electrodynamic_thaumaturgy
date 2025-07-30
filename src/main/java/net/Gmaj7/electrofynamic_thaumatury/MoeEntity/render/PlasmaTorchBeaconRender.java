@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.PlasmaTorchBeaconEntity;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MagneticRecombinationCannonBeaconEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.LightTexture;
@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class PlasmaTorchBeaconRender extends ArrowRenderer<PlasmaTorchBeaconEntity> {
+public class PlasmaTorchBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity> {
     public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moe_ray_entity_model"), "main");
     private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_entity.png");
     private final ModelPart body;
@@ -26,13 +26,13 @@ public class PlasmaTorchBeaconRender extends ArrowRenderer<PlasmaTorchBeaconEnti
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PlasmaTorchBeaconEntity plasmaTorchBeaconEntity) {
-        if(plasmaTorchBeaconEntity.getStartTime() > 100) return LIGHT;
+    public ResourceLocation getTextureLocation(MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity) {
+        if(magneticRecombinationCannonBeaconEntity.getStartTime() > 100) return LIGHT;
         return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 
     @Override
-    public void render(PlasmaTorchBeaconEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(MagneticRecombinationCannonBeaconEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         if(entity.getStartTime() > 100 && entity.getStartTime() <= 120){
             poseStack.pushPose();
             float lifetime = entity.getStartTime() - 100;

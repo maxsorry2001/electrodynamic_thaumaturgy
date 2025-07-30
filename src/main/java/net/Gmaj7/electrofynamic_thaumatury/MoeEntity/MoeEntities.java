@@ -30,8 +30,8 @@ public class MoeEntities {
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)
                     .build("attract_beacon_entity"));
-    public static final Supplier<EntityType<PlasmaTorchBeaconEntity>> PLASMA_TORCH_BEACON_ENTITY =
-            MOE_ENTITY_TYPES.register("plasma_torch_beacon_entity", () -> EntityType.Builder.<PlasmaTorchBeaconEntity>of(PlasmaTorchBeaconEntity::new, MobCategory.MISC)
+    public static final Supplier<EntityType<MagneticRecombinationCannonBeaconEntity>> MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("magnetic_recombination_cannon_beacon_entity", () -> EntityType.Builder.<MagneticRecombinationCannonBeaconEntity>of(MagneticRecombinationCannonBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)

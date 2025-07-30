@@ -21,23 +21,23 @@ import net.minecraft.world.phys.EntityHitResult;
 
 import java.util.List;
 
-public class PlasmaTorchBeaconEntity extends AbstractArrow {
+public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
     private int startTime;
     private ItemStack itemStack;
-    public PlasmaTorchBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+    public MagneticRecombinationCannonBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
         this.itemStack = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     }
 
-    public PlasmaTorchBeaconEntity(Level level){
-        super(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), level);
+    public MagneticRecombinationCannonBeaconEntity(Level level){
+        super(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
         this.itemStack = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     }
 
-    public PlasmaTorchBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack){
-        super(MoeEntities.PLASMA_TORCH_BEACON_ENTITY.get(), level);
+    public MagneticRecombinationCannonBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack){
+        super(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.pickup = Pickup.DISALLOWED;
@@ -48,7 +48,7 @@ public class PlasmaTorchBeaconEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         this.startTime++;
-        if(startTime == 100){
+        if(startTime == 100 && itemStack != null){
             List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
             for (LivingEntity target : list){
                 if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
