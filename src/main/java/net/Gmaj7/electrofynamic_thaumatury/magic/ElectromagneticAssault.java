@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -38,18 +39,18 @@ public class ElectromagneticAssault implements IMoeMagic{
                 }
             }
         }
-        BlockPos blockPos = new BlockPos((int) end.x(), (int) end.y(), (int) end.z());
-        BlockState blockState = level.getBlockState(blockPos);
-        while (!blockState.isEmpty()){
-            blockPos = blockPos.above();
-            blockState = level.getBlockState(blockPos);
-        }
-        Vec3 vec3 = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
+        BlockHitResult blockHitResult = MoeFunction.getHitBlock(level, livingEntity, start, end);
+        BlockPos blockPos = blockHitResult.getBlockPos();
+        Vec3 vec3 = new Vec3(end.x() - livingEntity.getX(), end.y() - livingEntity.getY(), end.z() - livingEntity.getZ()).normalize();
+        if (blockHitResult.getType() != HitResult.Type.MISS)
+            livingEntity.teleportTo(blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z());
+        else
+            livingEntity.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+        Vec3 vec3p = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
         if(level instanceof ServerLevel) {
-            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
-            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0 ,0);
+            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0 ,0);
         }
-        livingEntity.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
     }
 
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 public class MoeTags {
     public class moeItemTags{
         public static final TagKey<Item> MAGIC_MODULE = creat("magic_module");
+        public static final TagKey<Item> EMPTY_MAGIC_MODULE = creat("empty_magic_module");
         public static TagKey<Item> creat(String name){
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, name));
         }

@@ -3,6 +3,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu;
 import com.google.common.collect.Lists;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeTags;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.electrofynamic_thaumatury.MoeRecipe.MagicLithographyRecipe;
@@ -60,7 +61,7 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
         this.inputSlot = this.addSlot(new Slot(this.container, inNum, 20, 33){
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(MoeItems.EMPTY_PRIMARY_MODULE.get());
+                return stack.is(MoeTags.moeItemTags.EMPTY_MAGIC_MODULE);
             }
         });
         this.resultSlot = this.addSlot(new Slot(this.resultContainer, 1, 143, 33) {
@@ -106,17 +107,16 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
-            Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
             if (index < outNum + 1) {
                 if (!this.moveItemStackTo(itemstack1, outNum + 1, outNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.slots.get(outNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, outNum, outNum + 1, false)){
+            else if (!this.slots.get(outNum).hasItem() && itemstack1.getItem() instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, outNum, outNum + 1, false)){
                 return ItemStack.EMPTY;
             }
-            else if (item == MoeItems.EMPTY_PRIMARY_MODULE.get()) {
+            else if (itemstack1.is(MoeTags.moeItemTags.EMPTY_MAGIC_MODULE)) {
                 boolean flag = this.moveItemStackTo(itemstack1, inNum, outNum, false);
                 if (flag) return ItemStack.EMPTY;
             }
