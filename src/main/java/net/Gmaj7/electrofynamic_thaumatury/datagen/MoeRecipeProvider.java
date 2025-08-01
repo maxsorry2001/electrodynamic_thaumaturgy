@@ -157,7 +157,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("   ")
                 .define('b', MoeItems.GOLD_LC.get())
                 .define('d', Items.COPPER_INGOT)
-                .define('e', Items.END_ROD)
+                .define('e', Items.POPPED_CHORUS_FRUIT)
                 .unlockedBy("has_gold_sheet", has(MoeItems.GOLD_LC.get())).save(recipeOutput);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_LC.get())
                 .requires(MoeItems.SUPERCONDUCTING_UPDATE.get())
@@ -185,7 +185,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("   ")
                 .define('b', MoeItems.GOLD_POWER.get())
                 .define('d', Items.COPPER_INGOT)
-                .define('e', Items.END_ROD)
+                .define('e', Items.POPPED_CHORUS_FRUIT)
                 .unlockedBy("has_gold_power", has(MoeItems.GOLD_POWER.get())).save(recipeOutput);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_POWER.get())
                 .requires(MoeItems.SUPERCONDUCTING_UPDATE.get())

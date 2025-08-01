@@ -77,7 +77,7 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
             level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalEnergyMakerBlock.LIT, burnTime > 0));
             PacketDistributor.sendToAllPlayers(new MoePacket.ThermalSetPacket(burnTime, fullBurnTime, getBlockPos()));
         }
-        return level.getBlockState(getBlockPos()).getValue(ThermalEnergyMakerBlock.LIT);
+        return burnTime > 0;
     }
 
     @Override
