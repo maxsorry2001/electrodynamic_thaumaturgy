@@ -25,7 +25,7 @@ public class Exciting implements IMoeMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(Math.sqrt(Math.pow(target.getX() - livingEntity.getX(), 2) + Math.pow(target.getZ() - livingEntity.getZ(), 2)) < 10 && (target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity))) {
-                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (1 * MoeFunction.getStrengthRate(itemStack))));
+                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
                 MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
             }
         }

@@ -12,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -27,7 +26,7 @@ public class ElectromagneticAssault implements IMoeMagic{
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = livingEntity.getLookAngle().normalize().scale(10).add(start);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(MoeFunction.getMagicAmount(itemStack) * 2).add(start);
         Level level = livingEntity.level();
         MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
         for (HitResult result : hitResult.getTargets()) {

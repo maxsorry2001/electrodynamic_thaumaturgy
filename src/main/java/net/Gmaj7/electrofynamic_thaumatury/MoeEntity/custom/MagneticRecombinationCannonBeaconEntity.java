@@ -49,7 +49,7 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
         super.tick();
         this.startTime++;
         if(startTime == 100 && itemStack != null){
-            List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(5));
+            List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(7));
             for (LivingEntity target : list){
                 if(target != this.getOwner() && Math.sqrt(Math.pow(target.getX() - this.getX(), 2) + Math.pow(target.getZ() - this.getZ(), 2)) <= 4.5 && target.getY() >= this.getBlockY()) {
                     target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), this.getOwner()), (int) MoeFunction.getMagicAmount(itemStack) * 2);

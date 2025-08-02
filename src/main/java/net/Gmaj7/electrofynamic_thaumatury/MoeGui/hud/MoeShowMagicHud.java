@@ -1,6 +1,5 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MagicCastItem;
@@ -29,7 +28,5 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
                 guiGraphics.renderItemDecorations(Minecraft.getInstance().font, typeStack, screenWidth / 6, screenHeight * 7 / 8);
             }
         }
-        float protect = ((MoeDataGet)player).getProtective().getProtecting();
-        if(protect > 0 && !player.isCreative()) guiGraphics.drawString(Minecraft.getInstance().font, String.valueOf(protect), screenWidth / 2 - 91, screenHeight * 25 / 32, 0x6091EC);
     }
 }

@@ -4,7 +4,6 @@ import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu.MoeModemTableMenu;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;

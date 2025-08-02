@@ -5,6 +5,7 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model.PulsedPlasmaEntityMod
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud.MoeMagicWheelHud;
+import net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud.MoeProtectHud;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud.MoeShowMagicHud;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.screen.*;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeKeyMapping;
@@ -46,6 +47,7 @@ public class ClientEventHandler {
         public static void registerHud(RegisterGuiLayersEvent event){
             event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "type_show"), new MoeShowMagicHud());
             event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "magic_select"), MoeMagicWheelHud.instance);
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "protect_show"), new MoeProtectHud());
         }
     }
 

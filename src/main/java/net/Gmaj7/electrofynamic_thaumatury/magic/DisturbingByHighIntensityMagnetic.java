@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +19,7 @@ public class DisturbingByHighIntensityMagnetic implements IMoeMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
-        List<Mob> list = livingEntity.level().getEntitiesOfClass(Mob.class, livingEntity.getBoundingBox().inflate(7, 2, 7));
+        List<Mob> list = livingEntity.level().getEntitiesOfClass(Mob.class, livingEntity.getBoundingBox().inflate(MoeFunction.getMagicAmount(itemStack)));
         list.remove(livingEntity);
         for (int i = 0; i < list.size(); i++){
             Mob target = list.get(i);
