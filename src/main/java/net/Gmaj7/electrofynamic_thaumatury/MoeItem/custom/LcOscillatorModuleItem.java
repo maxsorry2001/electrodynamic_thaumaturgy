@@ -12,8 +12,8 @@ public class LcOscillatorModuleItem extends ElectromagneticTierItem {
         switch (this.getTier()){
             case IRON -> amount = 7F;
             case GOLD -> amount = 8F;
-            case COPPER -> amount = 9F;
-            case SUPERCONDUCTING -> amount = 10F;
+            case COPPER -> amount = 9.5F;
+            case SUPERCONDUCTING -> amount = 11F;
             default -> amount = 0F;
         }
         return amount;
