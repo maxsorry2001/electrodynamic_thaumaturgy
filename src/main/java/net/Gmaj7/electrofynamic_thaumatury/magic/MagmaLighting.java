@@ -5,6 +5,7 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -20,10 +21,12 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
+        Direction direction = blockHitResult.getDirection();
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
         MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(livingEntity.level(), livingEntity, itemStack);
         magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        magmaLightingBeaconEntity.setDirection(direction);
         livingEntity.level().addFreshEntity(magmaLightingBeaconEntity);
         if(livingEntity.level() instanceof ServerLevel) {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);

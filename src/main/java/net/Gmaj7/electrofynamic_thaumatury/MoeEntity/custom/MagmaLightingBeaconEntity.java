@@ -3,6 +3,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -23,7 +25,7 @@ import java.util.List;
 public class MagmaLightingBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
     private int opentick = 0;
-
+    private Direction direction = Direction.UP;
 
     public MagmaLightingBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -40,8 +42,8 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         opentick++;
-        if(opentick == 20){
-            level().setBlockAndUpdate(getOnPos(), Blocks.LAVA.defaultBlockState());
+        if(opentick == 20 && !level().isClientSide()){
+            level().setBlockAndUpdate(getOnPos().relative(direction), Fluids.FLOWING_LAVA.defaultFluidState().createLegacyBlock());
             LightningBolt lightningBolt1 = EntityType.LIGHTNING_BOLT.create(level());
             lightningBolt1.teleportTo(this.getX(), this.getY(), this.getZ());
             lightningBolt1.setVisualOnly(true);
@@ -87,11 +89,21 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
         return new ItemStack(Items.ARROW);
     }
 
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    @Override
+    public Direction getDirection() {
+        return direction;
+    }
+
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("open_tick", opentick);
         compound.put("moe_magic_item", this.magicItem.save(this.registryAccess()));
+        compound.putString("moe_ml_direction", this.direction.toString());
     }
 
     @Override
@@ -99,5 +111,6 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
         super.readAdditionalSaveData(compound);
         this.opentick = compound.getInt("open_tick");
         this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
+        this.direction = Direction.byName(compound.getString("moe_ml_direction"));
     }
 }
