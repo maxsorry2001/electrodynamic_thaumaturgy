@@ -1,5 +1,5 @@
 {
-  "parent": "electrofynamic_thaumatury:normal/energy_maker",
+  "parent": "electrofynamic_thaumatury:normal/generator",
   "criteria": {
     "has_energy_block_0": {
       "conditions": {

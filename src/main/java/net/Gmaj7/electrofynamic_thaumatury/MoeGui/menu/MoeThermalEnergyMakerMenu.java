@@ -1,7 +1,7 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalEnergyMakerBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalGeneratorBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class MoeThermalEnergyMakerMenu extends AbstractContainerMenu {
     private final Level level;
     private final int inSlot = 0;
-    public  final ThermalEnergyMakerBE blockEntity;
+    public  final ThermalGeneratorBE blockEntity;
 
     public MoeThermalEnergyMakerMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -27,7 +27,7 @@ public class MoeThermalEnergyMakerMenu extends AbstractContainerMenu {
 
     public MoeThermalEnergyMakerMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.THERMAL_ENERGY_MAKER_MENU.get(), containerId);
-        this.blockEntity = (ThermalEnergyMakerBE) blockEntity;
+        this.blockEntity = (ThermalGeneratorBE) blockEntity;
         this.level = inventory.player.level();
 
         this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 44));
@@ -84,7 +84,7 @@ public class MoeThermalEnergyMakerMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "electrofynamic_thaumatury:block/electromagnetic_assembly_table_bottom",
+    "side": "electrofynamic_thaumatury:block/thermal_generator_block_false_side",
+    "top": "electrofynamic_thaumatury:block/thermal_generator_block_top"
+  }
+}

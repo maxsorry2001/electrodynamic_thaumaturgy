@@ -21,14 +21,14 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ENERGY_BLOCK = MOE_BLOCKS.register("energy_block",
             () ->  new EnergyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("temperature_energy_maker_block",
-            () ->  new TemperatureEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+    public static final DeferredBlock<Block> TEMPERATURE_GENERATOR_BLOCK = MOE_BLOCKS.register("temperature_generator_block",
+            () ->  new TemperatureGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
 
-    public static final DeferredBlock<Block> THERMAL_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("thermal_energy_maker_block",
-            () ->  new ThermalEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+    public static final DeferredBlock<Block> THERMAL_GENERATOR_BLOCK = MOE_BLOCKS.register("thermal_generator_block",
+            () ->  new ThermalGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
 
-    public static final DeferredBlock<Block> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_BLOCKS.register("photovoltaic_energy_maker_block",
-            () ->  new PhotovoltaicEnergyMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
+    public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_BLOCKS.register("photovoltaic_generator_block",
+            () ->  new PhotovoltaicGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
 
     public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = MOE_BLOCKS.register("energy_transmission_antenna_block",
             () ->  new EnergyTransmissionAtennaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));

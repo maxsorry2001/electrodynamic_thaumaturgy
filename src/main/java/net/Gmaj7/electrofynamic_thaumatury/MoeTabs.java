@@ -90,9 +90,9 @@ public class MoeTabs {
                         output.accept(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
                         output.accept(MoeBlocks.ENERGY_BLOCK);
                         output.accept(setFullEnergyItem(new ItemStack(MoeItems.ENERGY_BLOCK.get())));
-                        output.accept(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
-                        output.accept(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
-                        output.accept(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK);
+                        output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
+                        output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
+                        output.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                     }))
                     .build());

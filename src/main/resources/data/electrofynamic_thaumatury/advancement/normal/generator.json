@@ -1,31 +1,31 @@
 {
   "parent": "electrofynamic_thaumatury:normal/energy_core",
   "criteria": {
-    "has_energy_maker_0": {
+    "has_generator_0": {
       "conditions": {
         "items": [
           {
-            "items": "electrofynamic_thaumatury:photovoltaic_energy_maker"
+            "items": "electrofynamic_thaumatury:photovoltaic_generator"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_energy_maker_1": {
+    "has_generator_1": {
       "conditions": {
         "items": [
           {
-            "items": "electrofynamic_thaumatury:temperature_energy_maker"
+            "items": "electrofynamic_thaumatury:temperature_generator"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_energy_maker_2": {
+    "has_generator_2": {
       "conditions": {
         "items": [
           {
-            "items": "electrofynamic_thaumatury:thermal_energy_maker"
+            "items": "electrofynamic_thaumatury:thermal_generator"
           }
         ]
       },
@@ -34,21 +34,21 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.electrofynamic_thaumatury.energy_maker.description"
+      "translate": "advancements.electrofynamic_thaumatury.generator.description"
     },
     "icon": {
       "count": 1,
-      "id": "electrofynamic_thaumatury:photovoltaic_energy_maker"
+      "id": "electrofynamic_thaumatury:photovoltaic_generator"
     },
     "title": {
-      "translate": "advancements.electrofynamic_thaumatury.energy_maker.title"
+      "translate": "advancements.electrofynamic_thaumatury.generator.title"
     }
   },
   "requirements": [
     [
-      "has_energy_maker_0",
-      "has_energy_maker_1",
-      "has_energy_maker_2"
+      "has_generator_0",
+      "has_generator_1",
+      "has_generator_2"
     ]
   ],
   "sends_telemetry_event": true

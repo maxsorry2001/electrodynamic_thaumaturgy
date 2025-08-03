@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
+public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -20,12 +20,12 @@ public class PhotovoltaicEnergyMakerBE extends AbstractEnergyMakerBE {
             }
         }
     };
-    public PhotovoltaicEnergyMakerBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.PHOTOVOLTAIC_ENERGY_MAKER_BE.get(), pos, blockState);
+    public PhotovoltaicGeneratorBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.PHOTOVOLTAIC_GENERATOR_BE.get(), pos, blockState);
     }
 
     @Override
-    protected void energyMake(AbstractEnergyMakerBE blockEntity) {
+    protected void energyMake(AbstractGeneratorBE blockEntity) {
         int i = Math.max( level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above()));
         blockEntity.getEnergy().receiveEnergy(i * 64, false);
     }

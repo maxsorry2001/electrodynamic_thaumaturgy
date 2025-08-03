@@ -11,12 +11,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
-public class MoeThermalEnergyMakerScreen extends AbstractContainerScreen<MoeThermalEnergyMakerMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/thermal_energy_maker_block.png");
+public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeThermalEnergyMakerMenu> {
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/thermal_generator_block.png");
     ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/energy.png");
     ResourceLocation fireTexture = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/fire.png");
 
-    public MoeThermalEnergyMakerScreen(MoeThermalEnergyMakerMenu menu, Inventory playerInventory, Component title) {
+    public MoeThermalGeneratorScreen(MoeThermalEnergyMakerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
     @Override

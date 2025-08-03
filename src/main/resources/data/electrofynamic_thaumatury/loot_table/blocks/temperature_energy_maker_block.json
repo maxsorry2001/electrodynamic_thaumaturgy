@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrofynamic_thaumatury:temperature_energy_maker"
+          "name": "electrofynamic_thaumatury:temperature_generator"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrofynamic_thaumatury:blocks/temperature_energy_maker_block"
+  "random_sequence": "electrofynamic_thaumatury:blocks/temperature_generator_block"
 }

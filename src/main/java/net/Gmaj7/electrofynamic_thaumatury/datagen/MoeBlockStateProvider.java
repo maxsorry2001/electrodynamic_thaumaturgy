@@ -18,9 +18,9 @@ public class MoeBlockStateProvider extends BlockStateProvider {
         blockWithItem(MoeBlocks.ENERGY_BLOCK);
         blockWithItem(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
         blockWithItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
-        blockWithItem(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK);
-        blockWithItem(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK);
-        blockWithItem(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK);
+        blockWithItem(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
+        blockWithItem(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
+        blockWithItem(MoeBlocks.THERMAL_GENERATOR_BLOCK);
     }
 
     private  void blockWithItem(DeferredBlock<?> deferredBlock){

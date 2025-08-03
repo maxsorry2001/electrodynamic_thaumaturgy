@@ -2,7 +2,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.TemperatureEnergyMakerBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.TemperatureGeneratorBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -16,9 +16,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class TemperatureEnergyMakerBlock extends AbstractEnergyMakerBlock {
-    public static final MapCodec<TemperatureEnergyMakerBlock> CODEC = simpleCodec(TemperatureEnergyMakerBlock::new);
-    public TemperatureEnergyMakerBlock(Properties properties) {
+public class TemperatureGeneratorBlock extends AbstractEnergyMakerBlock {
+    public static final MapCodec<TemperatureGeneratorBlock> CODEC = simpleCodec(TemperatureGeneratorBlock::new);
+    public TemperatureGeneratorBlock(Properties properties) {
         super(properties);
     }
 
@@ -40,12 +40,12 @@ public class TemperatureEnergyMakerBlock extends AbstractEnergyMakerBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.TEMPERATURE_ENERGY_MAKER_BLOCK_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.TEMPERATURE_ENERGY_MAKER_BLOCK_BE.get(), TemperatureEnergyMakerBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.TEMPERATURE_GENERATOR_BLOCK_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.TEMPERATURE_GENERATOR_BLOCK_BE.get(), TemperatureGeneratorBE::tick) : null;
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new TemperatureEnergyMakerBE(blockPos, blockState);
+        return new TemperatureGeneratorBE(blockPos, blockState);
     }
 }

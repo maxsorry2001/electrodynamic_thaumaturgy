@@ -2,7 +2,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeInit;
 
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalEnergyMakerBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalGeneratorBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -155,9 +155,9 @@ public class MoePacket{
             context.enqueueWork(() -> {
                 if(context.player().level().isClientSide()){
                     BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
-                    if(blockEntity instanceof ThermalEnergyMakerBE) {
-                        ((ThermalEnergyMakerBE) blockEntity).setBurnTime(packet.tick);
-                        ((ThermalEnergyMakerBE) blockEntity).setFullBurnTime(packet.burn);
+                    if(blockEntity instanceof ThermalGeneratorBE) {
+                        ((ThermalGeneratorBE) blockEntity).setBurnTime(packet.tick);
+                        ((ThermalGeneratorBE) blockEntity).setFullBurnTime(packet.burn);
                     }
                 }
             });

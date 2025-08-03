@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrofynamic_thaumatury:photovoltaic_energy_maker"
+        "recipe": "electrofynamic_thaumatury:photovoltaic_generator"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "electrofynamic_thaumatury:photovoltaic_energy_maker"
+      "electrofynamic_thaumatury:photovoltaic_generator"
     ]
   }
 }

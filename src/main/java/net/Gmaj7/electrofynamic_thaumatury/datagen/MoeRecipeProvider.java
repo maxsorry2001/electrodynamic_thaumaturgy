@@ -54,7 +54,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("b").define('a', Items.COPPER_INGOT)
                 .define('b', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get())
                 .pattern("aaa")
                 .pattern("bdb")
                 .pattern("ccc").define('a', Items.GLASS)
@@ -62,7 +62,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.IRON_INGOT)
                 .define('d', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get())
                 .pattern("aaa")
                 .pattern("bdb")
                 .pattern("ccc")
@@ -71,7 +71,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('c', Items.AMETHYST_SHARD)
                 .define('d', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.THERMAL_GENERATOR_BLOCK.get())
                 .pattern(" a ")
                 .pattern("aba")
                 .pattern(" c ")

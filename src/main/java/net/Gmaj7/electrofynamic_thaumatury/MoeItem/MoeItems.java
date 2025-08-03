@@ -23,12 +23,12 @@ public class MoeItems {
     public static final Supplier<BlockItem> ELECTROMAGNETIC_MODEM_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_modem_table", MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
     public static final Supplier<BlockItem> ENERGY_BLOCK = MOE_ITEM.register("energy_block",
             () -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
-    public static final Supplier<BlockItem> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_ITEM.register("temperature_energy_maker",
-            () -> new BlockItem(MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<BlockItem> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_ITEM.register("photovoltaic_energy_maker",
-            () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final Supplier<BlockItem> THERMAL_ENERGY_MAKER_BLOCK = MOE_ITEM.register("thermal_energy_maker",
-            () -> new BlockItem(MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<BlockItem> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_ITEM.register("temperature_generator",
+            () -> new BlockItem(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<BlockItem> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_ITEM.register("photovoltaic_generator",
+            () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<BlockItem> THERMAL_ENERGY_MAKER_BLOCK = MOE_ITEM.register("thermal_generator",
+            () -> new BlockItem(MoeBlocks.THERMAL_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.register("magic_lithography_table",
             () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",

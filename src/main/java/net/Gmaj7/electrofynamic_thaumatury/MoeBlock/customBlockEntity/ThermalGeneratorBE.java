@@ -1,7 +1,7 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock.ThermalEnergyMakerBlock;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu.MoeThermalEnergyMakerMenu;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
@@ -25,7 +25,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeItemBlockEntity, MenuProvider {
+public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
     private int burnTime = 0;
     private int fullBurnTime = 0;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
@@ -46,12 +46,12 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
             }
         }
     };
-    public ThermalEnergyMakerBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.THERMAL_ENERGY_MAKER_BE.get(), pos, blockState);
+    public ThermalGeneratorBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.THERMAL_GENERATOR_BE.get(), pos, blockState);
     }
 
     @Override
-    protected void energyMake(AbstractEnergyMakerBE blockEntity) {
+    protected void energyMake(AbstractGeneratorBE blockEntity) {
         blockEntity.getEnergy().receiveEnergy(512, false);
     }
 
@@ -74,7 +74,7 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
                     }
                 } else fullBurnTime = 0;
             }
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalEnergyMakerBlock.LIT, burnTime > 0));
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGeneratorBlock.LIT, burnTime > 0));
             PacketDistributor.sendToAllPlayers(new MoePacket.ThermalSetPacket(burnTime, fullBurnTime, getBlockPos()));
         }
         return burnTime > 0;
@@ -130,7 +130,7 @@ public class ThermalEnergyMakerBE extends AbstractEnergyMakerBE implements IMoeI
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.electrofynamic_thaumatury.thermal_energy_maker_block");
+        return Component.translatable("block.electrofynamic_thaumatury.thermal_generator_block");
     }
 
     public int getBurnTime() {

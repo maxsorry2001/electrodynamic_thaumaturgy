@@ -17,17 +17,17 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("energy_block_be", () -> BlockEntityType.Builder.of(
                     EnergyBlockEntity::new, MoeBlocks.ENERGY_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<TemperatureEnergyMakerBE>> TEMPERATURE_ENERGY_MAKER_BLOCK_BE =
-            MOE_BLOCK_ENTITY.register("temperature_energy_maker_block_be", () -> BlockEntityType.Builder.of(
-                    TemperatureEnergyMakerBE::new, MoeBlocks.TEMPERATURE_ENERGY_MAKER_BLOCK.get()).build(null));
+    public static final Supplier<BlockEntityType<TemperatureGeneratorBE>> TEMPERATURE_GENERATOR_BLOCK_BE =
+            MOE_BLOCK_ENTITY.register("temperature_generator_block_be", () -> BlockEntityType.Builder.of(
+                    TemperatureGeneratorBE::new, MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<PhotovoltaicEnergyMakerBE>> PHOTOVOLTAIC_ENERGY_MAKER_BE =
-            MOE_BLOCK_ENTITY.register("photovoltaic_energy_maker_be", () -> BlockEntityType.Builder.of(
-                    PhotovoltaicEnergyMakerBE::new, MoeBlocks.PHOTOVOLTAIC_ENERGY_MAKER_BLOCK.get()).build(null));
+    public static final Supplier<BlockEntityType<PhotovoltaicGeneratorBE>> PHOTOVOLTAIC_GENERATOR_BE =
+            MOE_BLOCK_ENTITY.register("photovoltaic_generator_be", () -> BlockEntityType.Builder.of(
+                    PhotovoltaicGeneratorBE::new, MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<ThermalEnergyMakerBE>> THERMAL_ENERGY_MAKER_BE =
-            MOE_BLOCK_ENTITY.register("thermal_energy_maker_be", () -> BlockEntityType.Builder.of(
-                    ThermalEnergyMakerBE::new, MoeBlocks.THERMAL_ENERGY_MAKER_BLOCK.get()).build(null));
+    public static final Supplier<BlockEntityType<ThermalGeneratorBE>> THERMAL_GENERATOR_BE =
+            MOE_BLOCK_ENTITY.register("thermal_generator_be", () -> BlockEntityType.Builder.of(
+                    ThermalGeneratorBE::new, MoeBlocks.THERMAL_GENERATOR_BLOCK.get()).build(null));
 
     public static final Supplier<BlockEntityType<EnergyTransmissionAntennaBE>> ENERGY_TRANSMISSION_ANTENNA_BE =
             MOE_BLOCK_ENTITY.register("energy_transmission_antenna_be", () -> BlockEntityType.Builder.of(

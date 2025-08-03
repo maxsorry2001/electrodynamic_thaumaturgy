@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:glass"
+      "item": "minecraft:lapis_lazuli"
     },
     "b": {
       "item": "minecraft:copper_ingot"
     },
     "c": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:amethyst_shard"
     },
     "d": {
       "item": "electrofynamic_thaumatury:energy_core"
@@ -22,6 +22,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "electrofynamic_thaumatury:photovoltaic_energy_maker"
+    "id": "electrofynamic_thaumatury:temperature_generator"
   }
 }

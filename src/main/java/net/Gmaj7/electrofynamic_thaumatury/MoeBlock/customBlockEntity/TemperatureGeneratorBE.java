@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class TemperatureEnergyMakerBE extends AbstractEnergyMakerBE {
+public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -21,8 +21,8 @@ public class TemperatureEnergyMakerBE extends AbstractEnergyMakerBE {
             }
         }
     };
-    public TemperatureEnergyMakerBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.TEMPERATURE_ENERGY_MAKER_BLOCK_BE.get(), pos, blockState);
+    public TemperatureGeneratorBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.TEMPERATURE_GENERATOR_BLOCK_BE.get(), pos, blockState);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TemperatureEnergyMakerBE extends AbstractEnergyMakerBE {
     }
 
     @Override
-    protected void energyMake(AbstractEnergyMakerBE blockEntity) {
+    protected void energyMake(AbstractGeneratorBE blockEntity) {
         blockEntity.getEnergy().receiveEnergy(128, false);
     }
 

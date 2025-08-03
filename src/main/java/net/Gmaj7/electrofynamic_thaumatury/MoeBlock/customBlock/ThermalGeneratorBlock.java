@@ -2,7 +2,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalEnergyMakerBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalGeneratorBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -26,10 +26,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class ThermalEnergyMakerBlock extends AbstractEnergyMakerBlock {
-    public static final MapCodec<ThermalEnergyMakerBlock> CODEC = simpleCodec(ThermalEnergyMakerBlock::new);
+public class ThermalGeneratorBlock extends AbstractEnergyMakerBlock {
+    public static final MapCodec<ThermalGeneratorBlock> CODEC = simpleCodec(ThermalGeneratorBlock::new);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    public ThermalEnergyMakerBlock(Properties properties) {
+    public ThermalGeneratorBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(LIT, false));
     }
@@ -47,7 +47,7 @@ public class ThermalEnergyMakerBlock extends AbstractEnergyMakerBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new ThermalEnergyMakerBE(blockPos, blockState);
+        return new ThermalGeneratorBE(blockPos, blockState);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ThermalEnergyMakerBlock extends AbstractEnergyMakerBlock {
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ThermalEnergyMakerBE thermalEnergyMakerBE && !level.isClientSide()) {
+            if (blockEntity instanceof ThermalGeneratorBE thermalEnergyMakerBE && !level.isClientSide()) {
                 IEnergyStorage energyStorage = thermalEnergyMakerBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), thermalEnergyMakerBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(thermalEnergyMakerBE, Component.translatable("block.electrofynamic_thaumatury.energy_block")), pos);
@@ -73,13 +73,13 @@ public class ThermalEnergyMakerBlock extends AbstractEnergyMakerBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.THERMAL_ENERGY_MAKER_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.THERMAL_ENERGY_MAKER_BE.get(), ThermalEnergyMakerBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.THERMAL_GENERATOR_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.THERMAL_GENERATOR_BE.get(), ThermalGeneratorBE::tick) : null;
     }
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof ThermalEnergyMakerBE blockEntity) {
+            if (level.getBlockEntity(pos) instanceof ThermalGeneratorBE blockEntity) {
                 blockEntity.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
