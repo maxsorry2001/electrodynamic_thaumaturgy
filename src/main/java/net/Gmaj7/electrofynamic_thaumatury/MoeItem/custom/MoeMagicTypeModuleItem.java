@@ -44,7 +44,5 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        if(magic != null)
-            tooltipComponents.add(Component.translatable(MoeMagicType.getDescription(magic.getType())));
     }
 }

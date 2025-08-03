@@ -22,9 +22,9 @@ public class MoeProtectHud implements LayeredDraw.Layer {
         float protect = ((MoeDataGet)player).getProtective().getProtecting();
         int p = Mth.floor(protect / 2);
         double q = protect % 2;
-        for (int k = 0; k < p; k++)
+        for (int k = 0; k < Math.min(p, 10); k++)
             guiGraphics.blitSprite(FULL, screenWidth / 2 - 91 + 8 * k, screenHeight - 39, 9, 9);
-        if(q > 0.5)
+        if(q > 0.5 && p < 10)
             guiGraphics.blitSprite(HALF, screenWidth / 2 - 91 + 8 * p, screenHeight - 39, 9, 9);
     }
 }
