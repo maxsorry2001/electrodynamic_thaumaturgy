@@ -145,7 +145,7 @@ public class MagicCastItem extends Item {
     private Component getTranslate(ItemStack itemStack){
         ItemStack typeStack = getMagic(itemStack);
         Item item = typeStack.getItem();
-        if(item instanceof MoeMagicTypeModuleItem) return ((MoeMagicTypeModuleItem) item).getTranslate();
+        if(item instanceof MoeMagicTypeModuleItem && !((MoeMagicTypeModuleItem) item).isEmpty()) return ((MoeMagicTypeModuleItem) item).getTranslate();
         return Component.translatable("moe_no_magic");
     }
 
