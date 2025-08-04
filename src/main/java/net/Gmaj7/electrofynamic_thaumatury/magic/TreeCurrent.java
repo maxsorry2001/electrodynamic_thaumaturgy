@@ -3,7 +3,6 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -18,10 +17,6 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class TreeCurrent extends AbstractFrontEntityMagic {
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.TREE_CURRENT;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -71,5 +66,10 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
                 ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, vec3Point.x + randomSource.nextFloat(), vec3Point.y + randomSource.nextFloat(), vec3Point.z + randomSource.nextFloat(), 1, 0, 0, 0, 0);
             }
         }
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.tree_current_module";
     }
 }

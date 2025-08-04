@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,10 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class MagnetResonance extends AbstractFrontEntityMagic {
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.MAGNET_RESONANCE;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -38,5 +33,10 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
         return getNearestFrontTarget(livingEntity, 20) != null;
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.magnet_resonance_module";
     }
 }

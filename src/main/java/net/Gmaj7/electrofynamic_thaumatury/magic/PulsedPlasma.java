@@ -1,16 +1,10 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.PulsedPlasmaEntity;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class PulsedPlasma implements IMoeMagic{
-    public PulsedPlasma(){}
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.PULSED_PLASMA;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -32,5 +26,10 @@ public class PulsedPlasma implements IMoeMagic{
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
         return true;
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.pulsed_plasma_module";
     }
 }

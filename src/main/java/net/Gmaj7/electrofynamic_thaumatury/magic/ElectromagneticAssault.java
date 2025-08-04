@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -18,10 +17,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ElectromagneticAssault implements IMoeMagic{
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.ELECTROMAGNETIC_ASSAULT;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -65,5 +60,10 @@ public class ElectromagneticAssault implements IMoeMagic{
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
         return true;
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.electromagnetic_assault_module";
     }
 }

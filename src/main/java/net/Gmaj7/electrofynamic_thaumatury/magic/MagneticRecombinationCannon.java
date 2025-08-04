@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MagneticRecombinationCannonBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -12,10 +11,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.MAGNETIC_RECOMBINATION_CANNON;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -45,5 +40,10 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.magnetic_recombination_cannon_module";
     }
 }

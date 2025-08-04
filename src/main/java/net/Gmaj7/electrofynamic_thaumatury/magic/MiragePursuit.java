@@ -1,7 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MirageEntity;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,10 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class MiragePursuit implements IMoeMagic{
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.MIRAGE_PURSUIT;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -46,5 +41,10 @@ public class MiragePursuit implements IMoeMagic{
             }
         }
         return flag;
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.mirage_pursuit_module";
     }
 }

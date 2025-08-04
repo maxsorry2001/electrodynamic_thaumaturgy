@@ -1,7 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,10 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class DomainReconstruction implements IMoeMagic{
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.DOMAIN_RECONSTRUCTION;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -48,5 +43,10 @@ public class DomainReconstruction implements IMoeMagic{
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
         return true;
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.domain_reconstruction_module";
     }
 }

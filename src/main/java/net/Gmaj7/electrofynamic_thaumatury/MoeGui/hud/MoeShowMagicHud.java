@@ -1,7 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.minecraft.client.DeltaTracker;
@@ -23,7 +22,7 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
         var screenHeight = guiGraphics.guiHeight();
         ItemStack typeStack = itemStack.get(DataComponents.CONTAINER).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item){
-            if (item.getMagicType() != MoeMagicType.EMPTY && item.getMagicType() != MoeMagicType.ERROR){
+            if (!item.isEmpty()){
                 guiGraphics.renderFakeItem(typeStack, screenWidth / 6, screenHeight * 7 / 8);
                 guiGraphics.renderItemDecorations(Minecraft.getInstance().font, typeStack, screenWidth / 6, screenHeight * 7 / 8);
             }

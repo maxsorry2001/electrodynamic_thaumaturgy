@@ -1,6 +1,5 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.magic.IMoeMagic;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,11 +15,6 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     public MoeMagicTypeModuleItem(@Nullable IMoeMagic magicType, Properties properties) {
         super(properties);
         this.magic = magicType;
-    }
-
-    public MoeMagicType getMagicType() {
-        if(!isEmpty()) return this.magic.getType();
-        else return MoeMagicType.EMPTY;
     }
 
     public boolean isEmpty(){
@@ -44,5 +38,9 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    public Component getTranslate(){
+        return Component.translatable(magic.getTranslate());
     }
 }

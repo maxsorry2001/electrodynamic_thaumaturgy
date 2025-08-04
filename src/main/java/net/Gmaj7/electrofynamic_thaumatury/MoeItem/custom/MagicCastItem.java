@@ -6,7 +6,6 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.EnergyTran
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.EnhancementData;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -48,9 +47,8 @@ public class MagicCastItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
         ItemStack typeStack = getMagic(itemStack);
-        MoeMagicType type = getType(itemStack);
         int energy = itemStack.get(MoeDataComponentTypes.MOE_ENERGY.get());
-        if(!MoeMagicType.isEmpty(type) && typeStack.getItem() instanceof MoeMagicTypeModuleItem item
+        if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()
                 && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(item)
                 && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)
                 && item.success(player, itemStack)) {
@@ -108,7 +106,7 @@ public class MagicCastItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(Component.translatable(MoeMagicType.getTranslate(getType(stack))));
+        tooltipComponents.add(getTranslate(stack));
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
@@ -144,12 +142,11 @@ public class MagicCastItem extends Item {
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
 
-    private MoeMagicType getType(ItemStack itemStack){
-        MoeMagicType result = MoeMagicType.EMPTY;
+    private Component getTranslate(ItemStack itemStack){
         ItemStack typeStack = getMagic(itemStack);
         Item item = typeStack.getItem();
-        if(item instanceof MoeMagicTypeModuleItem) result = ((MoeMagicTypeModuleItem) item).getMagicType();
-        return result;
+        if(item instanceof MoeMagicTypeModuleItem) return ((MoeMagicTypeModuleItem) item).getTranslate();
+        return Component.translatable("moe_no_magic");
     }
 
     private ItemStack getMagic(ItemStack itemStack){

@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
-import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeMagicType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
@@ -11,10 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class Protecting implements IMoeMagic{
-    @Override
-    public MoeMagicType getType() {
-        return MoeMagicType.PROTECT;
-    }
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -42,5 +37,10 @@ public class Protecting implements IMoeMagic{
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
         return true;
+    }
+
+    @Override
+    public String getTranslate() {
+        return "item.electrofynamic_thaumatury.protecting_module";
     }
 }
