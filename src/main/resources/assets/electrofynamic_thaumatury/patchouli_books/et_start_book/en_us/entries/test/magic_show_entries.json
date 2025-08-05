@@ -107,6 +107,11 @@
       "type": "patchouli:spotlight",
       "item": "electrofynamic_thaumatury:mirage_pursuit_module",
       "text": "patchouli.et.mirage_pursuit_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrofynamic_thaumatury:magnetic_flux_cascade_module",
+      "text": "patchouli.et.magnetic_flux_cascade_module.description"
     }
   ]
 }

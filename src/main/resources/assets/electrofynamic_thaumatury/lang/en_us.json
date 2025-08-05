@@ -21,6 +21,7 @@
   "item.electrofynamic_thaumatury.coulomb_domain_module": "Coulomb Domain",
   "item.electrofynamic_thaumatury.disturbing_by_high_intensity_magnetic_module": "Disturbing by High Intensity Magnetic",
   "item.electrofynamic_thaumatury.mirage_pursuit_module": "Mirage Pursuit",
+  "item.electrofynamic_thaumatury.magnetic_flux_cascade_module": "Magnetic Flux Cascade",
   "item.electrofynamic_thaumatury.empty_primary_module": "Primary Module",
   "item.electrofynamic_thaumatury.empty_intermediate_module": "Intermediate Module",
   "item.electrofynamic_thaumatury.empty_advanced_module": "Advanced Module",
@@ -59,6 +60,7 @@
   "effect.electrofynamic_thaumatury.block_nerve" : "Nerve Blocking",
   "effect.electrofynamic_thaumatury.magnet_resonance" : "Magnet Resonance",
   "effect.electrofynamic_thaumatury.st_elmo_s_fire" : "St.Elmo's Fire",
+  "effect.electrofynamic_thaumatury.magnetic_levitation" : "Magnetic Levitation",
 
   "block.electrofynamic_thaumatury.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
   "block.electrofynamic_thaumatury.electromagnetic_modem_table": "Enhancement Modem Table",
@@ -161,7 +163,7 @@
   "patchouli.et.refraction_module.description": "Bends light to grant invisibility",
   "patchouli.et.electric_energy_release_module.description": "Charges body for self-empowerment",
   "patchouli.et.magnetic_recombination_cannon_module.description": "Deploys beacon for delayed AoE blast",
-  "patchouli.et.electromagnetic_assault_module.description": "Teleports forward a short distance",
+  "patchouli.et.electromagnetic_assault_module.description": "Teleports forward a short distance and grants temporary flight ability.",
   "patchouli.et.magma_lighting_module.description": "Turns blocks into lava after delay + lightning strikes",
   "patchouli.et.st_elmo_s_fire_module.description": "Summons protective St. Elmo's Fire around self",
   "patchouli.et.hydrogen_bond_fracture_module.description": "Shatters target's hydrogen bonds for lethal damage",
@@ -171,5 +173,6 @@
   "patchouli.et.disturbing_by_high_intensity_magnetic_module.description": "Confuses hostile entities' targeting",
   "patchouli.et.coulomb_domain_module.description": "Generates charge accumulation field + lightning",
   "patchouli.et.domain_reconstruction_module.description": "Repairs self using magnetic forces",
-  "patchouli.et.mirage_pursuit_module.description": "Creates mirage that attacks targets after your spell hits"
+  "patchouli.et.mirage_pursuit_module.description": "Creates mirage that attacks targets after your spell hits",
+  "patchouli.et.magnetic_flux_cascade_module.description": "Locks onto a target, then triggers 4 additional chain jumps to nearby enemies via magnetic flux"
 }

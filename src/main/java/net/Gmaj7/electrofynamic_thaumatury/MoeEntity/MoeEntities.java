@@ -52,6 +52,12 @@ public class MoeEntities {
                     .eyeHeight(0.13F)
                     .noSave()
                     .build("mirage_entity"));
+    public static final Supplier<EntityType<MagneticFluxCascadeEntity>> MAGNETIC_FLUX_CASCADE_ENTITY =
+            MOE_ENTITY_TYPES.register("magnetic_levitation", () -> EntityType.Builder.<MagneticFluxCascadeEntity>of(MagneticFluxCascadeEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .eyeHeight(0.13F)
+                    .noSave()
+                    .build("magnetic_levitation"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

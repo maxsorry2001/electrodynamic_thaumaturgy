@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
@@ -7,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -40,6 +42,7 @@ public class ElectromagneticAssault implements IMoeMagic{
             livingEntity.teleportTo(blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z());
         else
             livingEntity.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+        livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 300));
         Vec3 vec3p = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
         if(level instanceof ServerLevel) {
             ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0, 0);

@@ -21,6 +21,7 @@
   "item.electrofynamic_thaumatury.disturbing_by_high_intensity_magnetic_module": "强磁扰乱",
   "item.electrofynamic_thaumatury.domain_reconstruction_module": "磁畴重组",
   "item.electrofynamic_thaumatury.mirage_pursuit_module": "蜃气追击",
+  "item.electrofynamic_thaumatury.magnetic_flux_cascade_module": "磁通连锁",
   "item.electrofynamic_thaumatury.empty_primary_module": "初级光刻板",
   "item.electrofynamic_thaumatury.empty_intermediate_module": "中级光刻板",
   "item.electrofynamic_thaumatury.empty_advanced_module": "高级光刻板",
@@ -59,6 +60,7 @@
   "effect.electrofynamic_thaumatury.block_nerve" : "神经阻碍",
   "effect.electrofynamic_thaumatury.magnet_resonance" : "磁感共振",
   "effect.electrofynamic_thaumatury.st_elmo_s_fire" : "圣艾尔摩之火",
+  "effect.electrofynamic_thaumatury.magnetic_levitation" : "磁力悬浮",
 
   "block.electrofynamic_thaumatury.electromagnetic_assembly_table": "电磁装配台",
   "block.electrofynamic_thaumatury.electromagnetic_modem_table": "强化调制台",
@@ -161,7 +163,7 @@
   "patchouli.et.refraction_module.description": "改变光的传输路径始你隐身",
   "patchouli.et.electric_energy_release_module.description": "将能量注入体内以强化自身",
   "patchouli.et.magnetic_recombination_cannon_module.description": "生成一个信标，并在一定时间后造成一次高能范围打击",
-  "patchouli.et.electromagnetic_assault_module.description": "向前闪现一段距离",
+  "patchouli.et.electromagnetic_assault_module.description": "向前闪现一段距离，并让你可以再一段时间内飞行",
   "patchouli.et.magma_lighting_module.description": "生成信标，一定事件后将附着的方块变为熔岩（所以别在基地用），并引雷打击附近的生物",
   "patchouli.et.st_elmo_s_fire_module.description": "用圣艾尔摩之火护卫自己，打击近身的敌人",
   "patchouli.et.hydrogen_bond_fracture_module.description": "注入能量使前方最近目标体内的氢键大量断裂以对其造成不可逆的打击",
@@ -171,5 +173,6 @@
   "patchouli.et.disturbing_by_high_intensity_magnetic_module.description": "使范围内的敌对生物发生混乱，改变其当前的攻击目标",
   "patchouli.et.coulomb_domain_module.description": "在目标方块上生成一个信标，使范围内的生物快速聚集电荷并引发雷击",
   "patchouli.et.domain_reconstruction_module.description": "使用磁力修复自身",
-  "patchouli.et.mirage_pursuit_module.description": "生成一团跟着自己的蜃气，在你使用法术造成伤害后对目标进行二次打击"
+  "patchouli.et.mirage_pursuit_module.description": "生成一团跟着自己的蜃气，在你使用法术造成伤害后对目标进行二次打击",
+  "patchouli.et.magnetic_flux_cascade_module.description": "锁定一个目标后，磁通量会跳跃攻击附近敌人，最多4次连锁跳跃"
 }

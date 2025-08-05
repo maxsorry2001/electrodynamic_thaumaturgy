@@ -109,6 +109,7 @@ public class MagicOfElectromagnetic
             EntityRenderers.register(MoeEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), MagmaLightingBeaconRender::new);
             EntityRenderers.register(MoeEntities.COULOMB_DOMAIN_BEACON_ENTITY.get(), CoulombDomainRender::new);
             EntityRenderers.register(MoeEntities.MIRAGE_ENTITY.get(), MirageEntityRender::new);
+            EntityRenderers.register(MoeEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), MagneticFluxCascadeRender::new);
         }
 
         @SubscribeEvent

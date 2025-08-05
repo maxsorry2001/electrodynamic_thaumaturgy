@@ -3,6 +3,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeEffect;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.custom.ElectricFieldDomainEffect;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.custom.ExcitingEffect;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.custom.MagneticLevitationEffect;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.custom.StElmo_sFireEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -32,5 +33,7 @@ public class MoeEffects {
     public static final DeferredHolder<MobEffect, MobEffect> NERVE_BLOCKING = MOE_EFFECTS.register("block_nerve",
             () -> new MoeEffect(MobEffectCategory.HARMFUL, 0x0078AA)
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moeeffect.bsspeed"), -0.15000000596046448, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> MAGNETIC_LEVITATION_EFFECT = MOE_EFFECTS.register("magnetic_levitation",
+            () -> new MagneticLevitationEffect(MobEffectCategory.BENEFICIAL, 0x9812DD));
     public static void register(IEventBus eventBus){MOE_EFFECTS.register(eventBus);}
 }

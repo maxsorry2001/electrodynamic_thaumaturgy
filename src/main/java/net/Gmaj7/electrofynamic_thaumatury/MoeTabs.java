@@ -50,6 +50,7 @@ public class MoeTabs {
                         output.accept(MoeItems.REFRACTION_MODULE.get());
                         output.accept(MoeItems.BLOCK_NERVE_MODULE.get());
                         output.accept(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get());
+                        output.accept(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get());
 
                         output.accept(MoeItems.MAGNET_RESONANCE_MODULE.get());
                         output.accept(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE.get());
