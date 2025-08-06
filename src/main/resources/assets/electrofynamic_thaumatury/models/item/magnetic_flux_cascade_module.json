@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "electrofynamic_thaumatury:item/magnetic_flux_cascade_module"
+  }
+}

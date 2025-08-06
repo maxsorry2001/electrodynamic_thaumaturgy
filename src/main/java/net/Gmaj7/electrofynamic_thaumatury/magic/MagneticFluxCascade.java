@@ -1,6 +1,8 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MagneticFluxCascadeEntity;
+import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,6 +15,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         livingEntity.level().addFreshEntity(magneticFluxCascadeEntity);
+        if(livingEntity.level() instanceof ServerLevel) ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
     }
 
     @Override
@@ -22,12 +25,12 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
 
     @Override
     public int getBaseEnergyCost() {
-        return 0;
+        return 256;
     }
 
     @Override
     public int getBaseCooldown() {
-        return 0;
+        return 100;
     }
 
     @Override

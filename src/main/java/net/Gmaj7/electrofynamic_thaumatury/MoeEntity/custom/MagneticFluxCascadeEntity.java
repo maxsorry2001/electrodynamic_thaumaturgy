@@ -3,7 +3,9 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
+import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -36,7 +38,8 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if(this.tickCount % hitTick == 0 && magicItem != null){
-            target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury)), MoeFunction.getMagicAmount(magicItem));
+            float damage = MoeFunction.getMagicAmount(magicItem);
+            target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury)), damage);
             hitTime --;
             if(hitTime == 0){
                 this.discard();
@@ -44,9 +47,17 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
             }
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(target.getOnPos()).inflate(7, 2, 7));
             LivingEntity newTarget = list.get(RandomSource.create().nextInt(list.size()));
-            while (newTarget == getOwner() && !newTarget.isAlive()) newTarget = list.get(RandomSource.create().nextInt(list.size()));
+            while (newTarget == getOwner() || !newTarget.isAlive()) {
+                list.remove(newTarget);
+                if(list.isEmpty()){
+                    this.discard();
+                    return;
+                }
+                newTarget = list.get(RandomSource.create().nextInt(list.size()));
+            }
             this.target = newTarget;
             this.teleportTo(newTarget.getX(), newTarget.getY(), newTarget.getZ());
+            if(this.level() instanceof ServerLevel) ((ServerLevel) this.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), newTarget.getX(),  (newTarget.getY() + newTarget.getEyeY()) / 2, newTarget.getZ(), 1, 0, 0, 0, 0);
         }
     }
 
