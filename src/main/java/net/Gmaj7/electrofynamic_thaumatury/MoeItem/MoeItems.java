@@ -78,6 +78,8 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new MiragePursuit(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> MAGNETIC_FLUX_CASCADE_MODULE = MOE_ITEM.register("magnetic_flux_cascade_module",
             () -> new MoeMagicTypeModuleItem(new MagneticFluxCascade(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> FREQUENCY_DIVISION_ARROW_RAIN = MOE_ITEM.register("frequency_division_arrow_rain",
+            () -> new MoeMagicTypeModuleItem(new FrequencyDivisionArrowRain(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.register("empty_intermediate_module",

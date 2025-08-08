@@ -38,26 +38,32 @@ public class MoeEntities {
                     .build("plasma_torch_beacon_entity"));
     public static final Supplier<EntityType<MagmaLightingBeaconEntity>> MAGMA_LIGHTING_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("magma_lighting_entity", () -> EntityType.Builder.<MagmaLightingBeaconEntity>of(MagmaLightingBeaconEntity::new, MobCategory.MISC)
-                    .sized(0.98F, 0.98F)
+                    .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .build("magma_lighting_entity"));
     public static final Supplier<EntityType<CoulombDomainBeaconEntity>> COULOMB_DOMAIN_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("coulomb_domain_entity", () -> EntityType.Builder.<CoulombDomainBeaconEntity>of(CoulombDomainBeaconEntity::new, MobCategory.MISC)
-                    .sized(0.98F, 0.98F)
+                    .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .build("coulomb_domain_entity"));
     public static final Supplier<EntityType<MirageEntity>> MIRAGE_ENTITY =
             MOE_ENTITY_TYPES.register("mirage_entity", () -> EntityType.Builder.<MirageEntity>of(MirageEntity::new, MobCategory.MISC)
-                    .sized(0.98F, 0.98F)
+                    .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .noSave()
                     .build("mirage_entity"));
     public static final Supplier<EntityType<MagneticFluxCascadeEntity>> MAGNETIC_FLUX_CASCADE_ENTITY =
             MOE_ENTITY_TYPES.register("magnetic_levitation", () -> EntityType.Builder.<MagneticFluxCascadeEntity>of(MagneticFluxCascadeEntity::new, MobCategory.MISC)
-                    .sized(0.98F, 0.98F)
+                    .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .noSave()
                     .build("magnetic_levitation"));
+    public static final Supplier<EntityType<FrequencyDivisionArrowEntity>> FREQUENCY_DIVISION_ARROW_ENTITY =
+            MOE_ENTITY_TYPES.register("frequency_division_arrow_entity", () -> EntityType.Builder.<FrequencyDivisionArrowEntity>of(FrequencyDivisionArrowEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .noSave()
+                    .build("frequency_division_arrow_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }
