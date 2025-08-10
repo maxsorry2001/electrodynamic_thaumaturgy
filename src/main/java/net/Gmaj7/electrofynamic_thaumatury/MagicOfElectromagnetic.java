@@ -105,12 +105,13 @@ public class MagicOfElectromagnetic
             EntityRenderers.register(MoeEntities.MOE_RAY_ENTITY.get(), MoeRayEntityRender::new);
             EntityRenderers.register(MoeEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
             EntityRenderers.register(MoeEntities.ATTRACT_BEACON_ENTITY.get(), MagnetArrowRender::new);
-            EntityRenderers.register(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), PlasmaTorchBeaconRender::new);
+            EntityRenderers.register(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), MagneticRecombinationCannonBeaconRender::new);
             EntityRenderers.register(MoeEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), MagmaLightingBeaconRender::new);
             EntityRenderers.register(MoeEntities.COULOMB_DOMAIN_BEACON_ENTITY.get(), CoulombDomainRender::new);
             EntityRenderers.register(MoeEntities.MIRAGE_ENTITY.get(), MirageEntityRender::new);
             EntityRenderers.register(MoeEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), MagneticFluxCascadeRender::new);
             EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), FrequencyDivisionArrowRender::new);
+            EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_BEACON_ENTITY.get(), FrequencyDivisionBeaconRender::new);
         }
 
         @SubscribeEvent

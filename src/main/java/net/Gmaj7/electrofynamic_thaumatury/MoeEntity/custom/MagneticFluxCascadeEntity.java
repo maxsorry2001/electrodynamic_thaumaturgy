@@ -27,11 +27,17 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
         super(entityType, level);
     }
 
+    public MagneticFluxCascadeEntity(Level level){
+        super(MoeEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), level);
+        this.pickup = Pickup.DISALLOWED;
+    }
+
     public MagneticFluxCascadeEntity(Level level, LivingEntity owner, ItemStack itemStack) {
         super(MoeEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), level);
         this.magicItem = itemStack.copy();
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.pickup = Pickup.DISALLOWED;
     }
 
     @Override

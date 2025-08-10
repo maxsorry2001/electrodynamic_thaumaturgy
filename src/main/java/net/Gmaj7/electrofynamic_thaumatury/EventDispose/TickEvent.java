@@ -3,7 +3,6 @@ package net.Gmaj7.electrofynamic_thaumatury.EventDispose;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
-import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;

@@ -37,6 +37,7 @@ public class MirageEntity extends AbstractArrow {
         super(MoeEntities.MIRAGE_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.pickup = Pickup.DISALLOWED;
     }
 
     @Override

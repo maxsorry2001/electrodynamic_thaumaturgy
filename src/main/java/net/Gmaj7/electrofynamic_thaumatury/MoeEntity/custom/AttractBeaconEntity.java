@@ -43,7 +43,7 @@ public class AttractBeaconEntity extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        if(++tickCount > liveTime && !this.level().isClientSide()) this.discard();
+        if(tickCount > liveTime && !this.level().isClientSide()) this.discard();
         List<Entity> list = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(15));
         for (Entity target : list){
             if (target == this.getOwner()) continue;

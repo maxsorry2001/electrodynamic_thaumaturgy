@@ -64,6 +64,12 @@ public class MoeEntities {
                     .clientTrackingRange(4)
                     .noSave()
                     .build("frequency_division_arrow_entity"));
+    public static final Supplier<EntityType<FrequencyDivisionBeaconEntity>> FREQUENCY_DIVISION_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("frequency_division_beacon_entity", () -> EntityType.Builder.<FrequencyDivisionBeaconEntity>of(FrequencyDivisionBeaconEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .noSave()
+                    .build("frequency_division_beacon_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

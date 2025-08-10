@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.FrequencyDivisionArrowEntity;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.FrequencyDivisionBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -19,8 +19,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         Vec3 vec3 = blockHitResult.getBlockPos().getCenter();
-        FrequencyDivisionArrowEntity frequencyDivisionArrowEntity = new FrequencyDivisionArrowEntity(livingEntity.level(), vec3.x(), vec3.y(), vec3.z(), itemStack, livingEntity);
-        frequencyDivisionArrowEntity.shoot(0, 1, 0, 2, 0);
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(livingEntity.level(), vec3.x(), vec3.y(), vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(frequencyDivisionArrowEntity);
     }
 

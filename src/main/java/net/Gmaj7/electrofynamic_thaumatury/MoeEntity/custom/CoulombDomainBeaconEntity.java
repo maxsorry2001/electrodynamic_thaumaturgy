@@ -35,6 +35,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
         this.magicItem = itemStack.copy();
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.pickup = Pickup.DISALLOWED;
     }
 
     @Override

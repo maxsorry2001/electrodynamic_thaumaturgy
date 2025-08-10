@@ -1,7 +1,9 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.render;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.FrequencyDivisionArrowEntity;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +14,12 @@ public class FrequencyDivisionArrowRender extends ArrowRenderer<FrequencyDivisio
     }
 
     @Override
+    public void render(FrequencyDivisionArrowEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+    }
+
+    @Override
     public ResourceLocation getTextureLocation(FrequencyDivisionArrowEntity frequencyDivisionArrowEntity) {
-        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/magnet_arrow_entity.png");
     }
 }
