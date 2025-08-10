@@ -49,6 +49,8 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGNETIC_FLUX_CASCADE_PARTICLE = MOE_PARTICLE.register("magnetic_flux_cascade_particle",
             () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE = MOE_PARTICLE.register("frequency_division_arrow_rain_particle",
+            () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus){MOE_PARTICLE.register(eventBus);}
 }

@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class PhotovoltaicGeneratorBlock extends AbstractEnergyMakerBlock {
+public class PhotovoltaicGeneratorBlock extends AbstractGeneratorBlock {
     public static final MapCodec<PhotovoltaicGeneratorBlock> CODEC = simpleCodec(PhotovoltaicGeneratorBlock::new);
     public PhotovoltaicGeneratorBlock(Properties properties) {
         super(properties);

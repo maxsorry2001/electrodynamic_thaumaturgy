@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class TemperatureGeneratorBlock extends AbstractEnergyMakerBlock {
+public class TemperatureGeneratorBlock extends AbstractGeneratorBlock {
     public static final MapCodec<TemperatureGeneratorBlock> CODEC = simpleCodec(TemperatureGeneratorBlock::new);
     public TemperatureGeneratorBlock(Properties properties) {
         super(properties);

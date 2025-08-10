@@ -20,6 +20,6 @@ public class FrequencyDivisionArrowRender extends ArrowRenderer<FrequencyDivisio
 
     @Override
     public ResourceLocation getTextureLocation(FrequencyDivisionArrowEntity frequencyDivisionArrowEntity) {
-        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/magnet_arrow_entity.png");
+        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/frequency_division_arrow_entity.png");
     }
 }

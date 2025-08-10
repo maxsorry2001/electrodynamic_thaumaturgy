@@ -21,7 +21,7 @@ import java.util.List;
 public class FrequencyDivisionArrowEntity extends Arrow {
     private ItemStack magicItem;
     private int maxTime;
-    private int explodeTime = 20;
+    private int explodeTime = 5;
     private Vec3 startPos;
     public FrequencyDivisionArrowEntity(EntityType<? extends Arrow> entityType, Level level) {
         super(entityType, level);

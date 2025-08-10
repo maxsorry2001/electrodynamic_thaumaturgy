@@ -59,6 +59,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.MAGNET_RESONANCE_MODULE.get());
         basicItem(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
         basicItem(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get());
+        basicItem(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
     }

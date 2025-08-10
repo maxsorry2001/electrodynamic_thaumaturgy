@@ -8,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -44,8 +43,8 @@ public class AttractBeaconEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if(tickCount > liveTime && !this.level().isClientSide()) this.discard();
-        List<Entity> list = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(15));
-        for (Entity target : list){
+        List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(15));
+        for (LivingEntity target : list){
             if (target == this.getOwner()) continue;
             Vec3 vec3 = new Vec3(this.getX() - target.getX(), this.getY() - target.getY(), this.getZ() - target.getZ());
             Vec3 vec31 = vec3.normalize().multiply(0.1, 0.1, 0.1);

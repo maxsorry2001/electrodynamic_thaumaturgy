@@ -26,7 +26,7 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class ThermalGeneratorBlock extends AbstractEnergyMakerBlock {
+public class ThermalGeneratorBlock extends AbstractGeneratorBlock {
     public static final MapCodec<ThermalGeneratorBlock> CODEC = simpleCodec(ThermalGeneratorBlock::new);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public ThermalGeneratorBlock(Properties properties) {
