@@ -1,7 +1,10 @@
 package net.Gmaj7.electrofynamic_thaumatury.EventDispose;
 
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.TTEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model.PulsedPlasmaEntityModel;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model.TTEntityModel;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud.MoeMagicWheelHud;
@@ -18,6 +21,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 
 public class ClientEventHandler {
@@ -27,7 +31,14 @@ public class ClientEventHandler {
         public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
             event.registerLayerDefinition(MoeRayEntityRender.MODEL_LAYER_LOCATION, MoeRayEntityRender::createBodyLayer);
             event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
+            event.registerLayerDefinition(TTEntityModel.LAYER_LOCATION, TTEntityModel::createBodyLayer);
         }
+
+        @SubscribeEvent
+        public static void registerAttributes(EntityAttributeCreationEvent event){
+            event.put(MoeEntities.TT_ENTITY.get(), TTEntity.createAttributes().build());
+        }
+
         @SubscribeEvent
         public static void registerScreen(RegisterMenuScreensEvent event){
             event.register(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), MoeAssemblyTableScreen::new);
