@@ -63,13 +63,4 @@ public class LightingStrike extends AbstractFrontEntityMagic {
             magicCastBlockBE.extractEnergy(getBaseEnergyCost());
         }
     }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        if(magicCastBlockBE.getEnergy().getEnergyStored() < getBaseEnergyCost() * 128) return false;
-        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
-        list.remove(magicCastBlockBE.getOwner());
-        if(list.isEmpty()) return false;
-        else return true;
-    }
 }

@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class DisturbingByHighIntensityMagnetic implements IMoeMagic{
+public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -39,10 +39,6 @@ public class DisturbingByHighIntensityMagnetic implements IMoeMagic{
         return 70;
     }
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
 
     @Override
     public String getTranslate() {
@@ -52,10 +48,5 @@ public class DisturbingByHighIntensityMagnetic implements IMoeMagic{
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

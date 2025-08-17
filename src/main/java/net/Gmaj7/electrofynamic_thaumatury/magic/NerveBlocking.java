@@ -14,7 +14,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class NerveBlocking implements IMoeMagic{
+public class NerveBlocking extends AbstractWideMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -42,11 +42,6 @@ public class NerveBlocking implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.block_nerve_module";
     }
@@ -54,10 +49,5 @@ public class NerveBlocking implements IMoeMagic{
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

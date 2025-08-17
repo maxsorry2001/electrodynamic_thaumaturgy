@@ -10,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class Protecting implements IMoeMagic{
+public class Protecting extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -36,22 +36,7 @@ public class Protecting implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.protecting_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

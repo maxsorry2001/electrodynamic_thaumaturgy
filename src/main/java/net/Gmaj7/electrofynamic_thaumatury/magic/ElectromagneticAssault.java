@@ -19,7 +19,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class ElectromagneticAssault implements IMoeMagic{
+public class ElectromagneticAssault extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -62,22 +62,7 @@ public class ElectromagneticAssault implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.electromagnetic_assault_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

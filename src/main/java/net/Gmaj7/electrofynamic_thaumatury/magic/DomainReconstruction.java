@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class DomainReconstruction implements IMoeMagic{
+public class DomainReconstruction extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -42,22 +42,7 @@ public class DomainReconstruction implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.domain_reconstruction_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class ElectricFieldDomain implements IMoeMagic{
+public class ElectricFieldDomain extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -31,22 +31,7 @@ public class ElectricFieldDomain implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.electric_field_domain_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

@@ -45,9 +45,4 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
     }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
-    }
 }

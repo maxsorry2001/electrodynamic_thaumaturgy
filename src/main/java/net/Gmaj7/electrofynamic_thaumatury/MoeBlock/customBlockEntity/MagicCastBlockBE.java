@@ -37,6 +37,7 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
+            setChanged();
             if(!level.isClientSide()){
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
             }
@@ -68,11 +69,11 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         return infinity <= 0 && itemHandler.getStackInSlot(0).getItem() instanceof MoeMagicTypeModuleItem
                 && !((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).isEmpty()
                 && ((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).canBlockCast(this);
-    };
+    }
 
     protected void cast(){
         ((MoeMagicTypeModuleItem)itemHandler.getStackInSlot(0).getItem()).blockCast(this);
-    };
+    }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
@@ -82,6 +83,7 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         }
         tag.putInt("infinity", infinity);
         tag.putInt("energy", energy.getEnergyStored());
+        System.out.println("+" + energy.getEnergyStored());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
     }
 
@@ -94,6 +96,7 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         }
         this.infinity = tag.getInt("infinity");
         setEnergy(tag.getInt("energy"));
+        System.out.println("-" + tag.getInt("energy"));
         itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
     }
 
@@ -103,8 +106,7 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         } else {
             if (this.ownerUUID != null) {
                 Level var2 = this.getLevel();
-                if (var2 instanceof ServerLevel) {
-                    ServerLevel serverlevel = (ServerLevel)var2;
+                if (var2 instanceof ServerLevel serverlevel) {
                     this.owner = serverlevel.getEntity(this.ownerUUID);
                     return this.owner;
                 }

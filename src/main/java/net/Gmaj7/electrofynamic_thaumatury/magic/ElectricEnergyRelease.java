@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class ElectricEnergyRelease implements IMoeMagic{
+public class ElectricEnergyRelease extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -43,23 +43,9 @@ public class ElectricEnergyRelease implements IMoeMagic{
         return 80;
     }
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
 
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.electric_energy_release_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

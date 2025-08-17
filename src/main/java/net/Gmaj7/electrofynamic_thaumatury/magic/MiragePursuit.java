@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class MiragePursuit implements IMoeMagic{
+public class MiragePursuit extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -28,34 +28,11 @@ public class MiragePursuit implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 400;
-    }
-
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        boolean flag = true;
-        List<MirageEntity> list = livingEntity.level().getEntitiesOfClass(MirageEntity.class, livingEntity.getBoundingBox().inflate(0, 3, 0));
-        for (MirageEntity mirage : list){
-            if(mirage.getOwner() == livingEntity) {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
+        return 600;
     }
 
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.mirage_pursuit_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

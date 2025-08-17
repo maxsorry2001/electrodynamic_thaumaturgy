@@ -52,9 +52,4 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
     }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
-    }
 }

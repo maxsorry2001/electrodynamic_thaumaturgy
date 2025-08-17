@@ -78,9 +78,4 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
     }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
-    }
 }

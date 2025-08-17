@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class St_Elmo_s_fire implements IMoeMagic{
+public class St_Elmo_s_fire extends AbstractSelfMagic{
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         livingEntity.addEffect(new MobEffectInstance(MoeEffects.ST_ELMO_S_FIRE, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) MoeFunction.getMagicAmount(itemStack)));
@@ -29,23 +29,9 @@ public class St_Elmo_s_fire implements IMoeMagic{
         return 70;
     }
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
 
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.st_elmo_s_fire_module";
-    }
-
-    @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

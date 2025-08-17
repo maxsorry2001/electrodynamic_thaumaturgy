@@ -10,11 +10,6 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class AbstractFrontEntityMagic implements IMoeMagic{
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return false;
-    }
-
     protected static LivingEntity getNearestFrontTarget(LivingEntity livingEntity, double length){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(length).add(start);

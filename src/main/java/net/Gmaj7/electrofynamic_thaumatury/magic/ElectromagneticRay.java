@@ -14,7 +14,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class ElectromagneticRay implements IMoeMagic{
+public class ElectromagneticRay extends AbstractWideMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -46,11 +46,6 @@ public class ElectromagneticRay implements IMoeMagic{
     }
 
     @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.ray_module";
     }
@@ -58,10 +53,5 @@ public class ElectromagneticRay implements IMoeMagic{
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
-    }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
     }
 }

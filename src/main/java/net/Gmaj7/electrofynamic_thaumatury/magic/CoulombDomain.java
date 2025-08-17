@@ -48,9 +48,4 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
 
     }
-
-    @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
-        return false;
-    }
 }

@@ -16,6 +16,7 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
+            setChanged();
             if(!level.isClientSide()){
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
             }
