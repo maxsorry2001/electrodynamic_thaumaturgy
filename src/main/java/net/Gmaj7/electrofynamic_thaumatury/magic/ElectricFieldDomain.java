@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
@@ -37,5 +38,15 @@ public class ElectricFieldDomain implements IMoeMagic{
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.electric_field_domain_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+
+    }
+
+    @Override
+    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
+        return false;
     }
 }

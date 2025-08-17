@@ -35,4 +35,7 @@ public class MoeBlocks {
 
     public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = MOE_BLOCKS.register("magic_lithography_table_block",
             () -> new MagicLithographyTableBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+
+    public static final DeferredBlock<Block> MAGIC_CAST_BLOCK = MOE_BLOCKS.register("magic_cast_block",
+            () -> new MagicCastBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 }

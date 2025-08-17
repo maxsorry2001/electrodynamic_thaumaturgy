@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.FrequencyDivisionBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
@@ -24,7 +25,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
         FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(livingEntity.level(), vec3.x(), vec3.y(), vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(frequencyDivisionArrowEntity);
         if(livingEntity.level() instanceof ServerLevel)
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 7, vec3.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 11, vec3.z(), 1, 0, 0, 0, 0);
     }
 
     @Override
@@ -40,5 +41,15 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.frequency_division_arrow_rain_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+
+    }
+
+    @Override
+    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
+        return false;
     }
 }

@@ -175,5 +175,6 @@
   "patchouli.et.coulomb_domain_module.description": "在目标方块上生成一个信标，使范围内的生物快速聚集电荷并引发雷击",
   "patchouli.et.domain_reconstruction_module.description": "使用磁力修复自身",
   "patchouli.et.mirage_pursuit_module.description": "生成一团跟着自己的蜃气，在你使用法术造成伤害后对目标进行二次打击",
-  "patchouli.et.magnetic_flux_cascade_module.description": "锁定一个目标后，磁通量会跳跃攻击附近敌人，最多4次连锁跳跃"
+  "patchouli.et.magnetic_flux_cascade_module.description": "锁定一个目标后，磁通量会跳跃攻击附近敌人，最多4次连锁跳跃",
+  "patchouli.et.frequency_division_arrow_rain_module.description": "在前方一定区域上空激发电磁波，并将振幅调制为箭以打击敌人"
 }

@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.magic.IMoeMagic;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,6 +39,14 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    public void blockCast(MagicCastBlockBE magicCastBlockBE){
+        magic.blockCast(magicCastBlockBE);
+    }
+
+    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE){
+        return magic.canBlockCast(magicCastBlockBE);
     }
 
     public Component getTranslate(){

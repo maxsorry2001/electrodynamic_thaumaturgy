@@ -23,6 +23,7 @@ public class MoeMenuType {
             () -> new MenuType<>(MoeMagicLithographyTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<MenuType<?>, MenuType<MoeEnergyBlockMenu>> ENERGY_BLOCK_MENU = registerMenuType("energy_block_menu", MoeEnergyBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<MoeThermalEnergyMakerMenu>> THERMAL_ENERGY_MAKER_MENU = registerMenuType("thermal_generator_menu", MoeThermalEnergyMakerMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<MoeMagicCastBlockMenu>> MAGIC_CAST_BLOCK_MENU = registerMenuType("magic_cast_menu", MoeMagicCastBlockMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory){
         return MENU_TYPE.register(name, () -> IMenuTypeExtension.create(factory));

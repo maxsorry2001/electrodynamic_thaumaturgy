@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
@@ -50,5 +51,15 @@ public class ElectricEnergyRelease implements IMoeMagic{
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.electric_energy_release_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+
+    }
+
+    @Override
+    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
+        return false;
     }
 }

@@ -33,6 +33,8 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
             () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> MAGIC_CAST_BLOCK = MOE_ITEM.register("magic_cast_block",
+            () -> new BlockItem(MoeBlocks.MAGIC_CAST_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));

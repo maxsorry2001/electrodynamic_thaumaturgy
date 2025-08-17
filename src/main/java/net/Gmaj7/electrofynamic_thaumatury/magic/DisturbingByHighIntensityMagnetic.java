@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
@@ -46,5 +47,15 @@ public class DisturbingByHighIntensityMagnetic implements IMoeMagic{
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.disturbing_by_high_intensity_magnetic_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+
+    }
+
+    @Override
+    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
+        return false;
     }
 }

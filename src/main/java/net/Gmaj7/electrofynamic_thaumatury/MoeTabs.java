@@ -96,6 +96,7 @@ public class MoeTabs {
                         output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+                        output.accept(MoeBlocks.MAGIC_CAST_BLOCK);
                     }))
                     .build());
 

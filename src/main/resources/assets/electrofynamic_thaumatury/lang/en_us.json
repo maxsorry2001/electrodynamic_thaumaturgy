@@ -175,5 +175,6 @@
   "patchouli.et.coulomb_domain_module.description": "Generates charge accumulation field + lightning",
   "patchouli.et.domain_reconstruction_module.description": "Repairs self using magnetic forces",
   "patchouli.et.mirage_pursuit_module.description": "Creates mirage that attacks targets after your spell hits",
-  "patchouli.et.magnetic_flux_cascade_module.description": "Locks onto a target, then triggers 4 additional chain jumps to nearby enemies via magnetic flux"
+  "patchouli.et.magnetic_flux_cascade_module.description": "Locks onto a target, then triggers 4 additional chain jumps to nearby enemies via magnetic flux",
+  "patchouli.et.frequency_division_arrow_rain_module.description": "Emits electromagnetic waves over a targeted area, modulating amplitude into arrows that strike enemies"
 }

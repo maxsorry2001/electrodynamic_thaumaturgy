@@ -35,6 +35,7 @@ public class ClientEventHandler {
             event.register(MoeMenuType.ENERGY_BLOCK_MENU.get(), MoeEnergyBlockScreen::new);
             event.register(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), MoeMagicLithographyTableScreen::new);
             event.register(MoeMenuType.THERMAL_ENERGY_MAKER_MENU.get(), MoeThermalGeneratorScreen::new);
+            event.register(MoeMenuType.MAGIC_CAST_BLOCK_MENU.get(), MoeMagicCastBlockScreen::new);
         }
 
 

@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
@@ -71,5 +72,15 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.tree_current_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+
+    }
+
+    @Override
+    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
+        return false;
     }
 }

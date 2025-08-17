@@ -4,6 +4,8 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -64,6 +66,11 @@ public class FrequencyDivisionArrowEntity extends Arrow {
     @Override
     public boolean isPickable() {
         return false;
+    }
+
+    @Override
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.BEACON_ACTIVATE;
     }
 
     @Override

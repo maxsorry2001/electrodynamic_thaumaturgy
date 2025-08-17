@@ -33,6 +33,10 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("energy_transmission_antenna_be", () -> BlockEntityType.Builder.of(
                     EnergyTransmissionAntennaBE::new, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get()).build(null));
 
+    public static final Supplier<BlockEntityType<MagicCastBlockBE>> MAGIC_CAST_BE =
+            MOE_BLOCK_ENTITY.register("magic_cast_be", () -> BlockEntityType.Builder.of(
+                    MagicCastBlockBE::new, MoeBlocks.MAGIC_CAST_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);
     }

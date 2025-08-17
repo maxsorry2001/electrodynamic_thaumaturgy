@@ -47,10 +47,12 @@ public class DataLoadHandler {
                 MoeBlocks.ENERGY_BLOCK.get(),
                 MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(),
                 MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(),
-                MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
+                MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
+                MoeBlocks.MAGIC_CAST_BLOCK.get());
         event.registerBlock(Capabilities.ItemHandler.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),
-                MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
+                MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
+                MoeBlocks.MAGIC_CAST_BLOCK.get());
     }
 }

@@ -35,7 +35,8 @@ public class FrequencyDivisionBeaconEntity extends Arrow {
     @Override
     public void tick() {
         super.tick();
-        FrequencyDivisionArrowEntity frequencyDivisionArrowEntity = new FrequencyDivisionArrowEntity(level(), this.getX() + dx, this.getY() + 6, this.getZ() + dz, magicItem, (LivingEntity) getOwner(), 60 - this.tickCount);
+        FrequencyDivisionArrowEntity frequencyDivisionArrowEntity = new FrequencyDivisionArrowEntity(level(), this.getX() + dx, this.getY() + 10, this.getZ() + dz, magicItem, (LivingEntity) getOwner(), 60 - this.tickCount);
+        frequencyDivisionArrowEntity.setDeltaMovement(0.0, -0.001, 0.0);
         this.level().addFreshEntity(frequencyDivisionArrowEntity);
         if(this.tickCount < maxTime){
             if (dx < right && dz == top) {
