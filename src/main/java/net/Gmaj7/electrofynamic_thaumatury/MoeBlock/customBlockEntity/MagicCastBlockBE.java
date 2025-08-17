@@ -1,11 +1,12 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu.MoeEnergyBlockMenu;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu.MoeMagicCastBlockMenu;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
+import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MoeMagicTypeModuleItem;
+import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -15,13 +16,12 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -33,7 +33,8 @@ import java.util.UUID;
 public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
     protected Entity owner;
     protected UUID ownerUUID;
-    protected int infinity = 0;
+    protected int cooldown = 0;
+    public static ItemStack magicItem = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -62,11 +63,11 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         if(magicCastBlockBE.canCast() && !level.isClientSide()) {
             magicCastBlockBE.cast();
         }
-        else if (magicCastBlockBE.infinity > 0) magicCastBlockBE.infinity --;
+        else if (magicCastBlockBE.cooldown > 0) magicCastBlockBE.cooldown--;
     }
 
     protected boolean canCast(){
-        return infinity <= 0 && itemHandler.getStackInSlot(0).getItem() instanceof MoeMagicTypeModuleItem
+        return cooldown <= 0 && itemHandler.getStackInSlot(0).getItem() instanceof MoeMagicTypeModuleItem
                 && !((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).isEmpty()
                 && ((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).canBlockCast(this);
     }
@@ -81,9 +82,8 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         if (this.ownerUUID != null) {
             tag.putUUID("Owner", this.ownerUUID);
         }
-        tag.putInt("infinity", infinity);
+        tag.putInt("cooldown", cooldown);
         tag.putInt("energy", energy.getEnergyStored());
-        System.out.println("+" + energy.getEnergyStored());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
     }
 
@@ -94,9 +94,8 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
             this.ownerUUID = tag.getUUID("Owner");
             this.owner = null;
         }
-        this.infinity = tag.getInt("infinity");
+        this.cooldown = tag.getInt("cooldown");
         setEnergy(tag.getInt("energy"));
-        System.out.println("-" + tag.getInt("energy"));
         itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
     }
 
@@ -156,8 +155,8 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
         return new MoeMagicCastBlockMenu(i, inventory, this);
     }
 
-    public void setInfinity(int infinity) {
-        this.infinity = infinity;
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
     }
 
     public void extractEnergy(int energy){

@@ -71,6 +71,7 @@
   "block.electrofynamic_thaumatury.thermal_generator_block": "Thermal Generator",
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "Energy Transmission Antenna",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "Magic Lithography Table",
+  "block.electrofynamic_thaumatury.magic_cast_block": "Electromagnetic Driver",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "Pulsed Plasma",

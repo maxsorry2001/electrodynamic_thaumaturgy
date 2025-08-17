@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeInit;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.LcOscillatorModuleItem;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.custom.MagicCastItem;
@@ -106,6 +107,20 @@ public class MoeFunction {
         AABB range = source.getBoundingBox().expandTowards(end.subtract(start));
         List<HitResult> hits = new ArrayList<>();
         List<? extends Entity> entities = level.getEntities(source, range);
+        for (Entity target : entities) {
+            HitResult hit = checkEntityIntersecting(target, start, end, bbInflation);
+            if (hit.getType() != HitResult.Type.MISS) {
+                hits.add(hit);
+            }
+        }
+        return new RayHitResult(end, hits);
+    }
+
+    public static RayHitResult getBlockLineHitResult(Level level, MagicCastBlockBE magicCastBlockBE, Vec3 start, Vec3 end, boolean checkForBlocks, float bbInflation) {
+        BlockHitResult blockHitResult;
+        AABB range = new AABB(magicCastBlockBE.getBlockPos()).expandTowards(end.subtract(start));
+        List<HitResult> hits = new ArrayList<>();
+        List<? extends Entity> entities = level.getEntities(magicCastBlockBE.getOwner(), range);
         for (Entity target : entities) {
             HitResult hit = checkEntityIntersecting(target, start, end, bbInflation);
             if (hit.getType() != HitResult.Type.MISS) {

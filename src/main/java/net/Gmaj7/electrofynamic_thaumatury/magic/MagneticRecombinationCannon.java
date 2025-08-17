@@ -50,6 +50,18 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
 
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
+        LivingEntity target = getBlockTarget(magicCastBlockBE);
+        if(target == null) return;
+        BlockPos blockPos = target.getOnPos();
+        Vec3 vec3 = blockPos.getCenter();
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(magicCastBlockBE.getLevel(), (LivingEntity) magicCastBlockBE.getOwner(), MagicCastBlockBE.magicItem);
+        magneticRecombinationCannonBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        magicCastBlockBE.getLevel().addFreshEntity(magneticRecombinationCannonBeaconEntity);
+        magicCastBlockBE.setCooldown(getBaseCooldown());
+        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        if(magicCastBlockBE.getLevel() instanceof ServerLevel) {
+            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 }

@@ -71,6 +71,7 @@
   "block.electrofynamic_thaumatury.thermal_generator_block": "火力发电机",
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "能量传输天线",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "法术光刻台",
+  "block.electrofynamic_thaumatury.magic_cast_block": "电磁驱动器",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "电磁射线",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "脉冲等离子体",

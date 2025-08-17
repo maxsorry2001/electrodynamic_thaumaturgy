@@ -27,5 +27,5 @@ public interface IMoeMagic {
         list.remove(magicCastBlockBE.getOwner());
         if(list.isEmpty()) return false;
         else return true;
-    };
+    }
 }

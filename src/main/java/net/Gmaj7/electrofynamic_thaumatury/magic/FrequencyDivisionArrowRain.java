@@ -3,7 +3,9 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.FrequencyDivisionBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
+import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
+import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +47,14 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
 
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
+        LivingEntity target = getBlockTarget(magicCastBlockBE);
+        if(target == null) return;
+        Vec3 vec3 = target.getOnPos().getCenter();
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(magicCastBlockBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), MagicCastBlockBE.magicItem, (LivingEntity) magicCastBlockBE.getOwner());
+        magicCastBlockBE.getLevel().addFreshEntity(frequencyDivisionArrowEntity);
+        magicCastBlockBE.setCooldown(getBaseCooldown());
+        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        if(magicCastBlockBE.getLevel() instanceof ServerLevel)
+            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 11, vec3.z(), 1, 0, 0, 0, 0);
     }
 }

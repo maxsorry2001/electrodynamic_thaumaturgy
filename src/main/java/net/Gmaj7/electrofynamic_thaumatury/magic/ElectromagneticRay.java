@@ -5,14 +5,18 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class ElectromagneticRay extends AbstractWideMagic{
 
@@ -22,7 +26,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         Level level = livingEntity.level();
         MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity);
+        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity, true);
         level.addFreshEntity(moeRayEntity);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
@@ -52,6 +56,26 @@ public class ElectromagneticRay extends AbstractWideMagic{
 
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
+        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
+        list.remove(magicCastBlockBE.getOwner());
+        if(list.isEmpty()) return;
+        LivingEntity lineTarget = list.get(RandomSource.create().nextInt(list.size()));
+        Vec3 start = new Vec3(magicCastBlockBE.getBlockPos().getX(), magicCastBlockBE.getBlockPos().getY() + 1, magicCastBlockBE.getBlockPos().getZ());
+        Vec3 end = new Vec3(lineTarget.getX(), (lineTarget.getY() + lineTarget.getEyeY()) / 2, lineTarget.getZ());
+        Level level = magicCastBlockBE.getLevel();
+        MoeFunction.RayHitResult hitResult = MoeFunction.getBlockLineHitResult(level, magicCastBlockBE, start, end, true, 0.5F);
+        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, (LivingEntity) magicCastBlockBE.getOwner(), false);
+        level.addFreshEntity(moeRayEntity);
+        for (HitResult result : hitResult.getTargets()) {
+            if (result instanceof EntityHitResult) {
+                Entity target = ((EntityHitResult) result).getEntity();
+                if (target instanceof LivingEntity) {
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastBlockBE.getOwner()), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
+                    MoeFunction.checkTargetEnhancement(MagicCastBlockBE.magicItem, (LivingEntity) target);
+                }
+            }
+        }
+        magicCastBlockBE.setCooldown(getBaseCooldown());
+        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
     }
 }

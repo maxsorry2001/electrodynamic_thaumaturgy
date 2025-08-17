@@ -20,7 +20,7 @@ public class Exciting extends AbstractWideMagic{
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(20));
         for (LivingEntity target : list){
-            if(Math.sqrt(Math.pow(target.getX() - livingEntity.getX(), 2) + Math.pow(target.getZ() - livingEntity.getZ(), 2)) < 10 && (target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity))) {
+            if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
                 MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
             }
@@ -48,6 +48,19 @@ public class Exciting extends AbstractWideMagic{
 
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
+        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(20));
+        list.remove(magicCastBlockBE.getOwner());
+        if(list.isEmpty()) return;
+        for (LivingEntity target : list){
+            if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == magicCastBlockBE.getOwner())) {
+                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(MagicCastBlockBE.magicItem)), (int) (MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem)) - 7));
+            }
+        }
+        magicCastBlockBE.setCooldown(getBaseCooldown());
+        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        if(magicCastBlockBE.getLevel() instanceof ServerLevel){
+            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), magicCastBlockBE.getBlockPos().getX(), magicCastBlockBE.getBlockPos().getY() + 1, magicCastBlockBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), magicCastBlockBE.getBlockPos().getX(), magicCastBlockBE.getBlockPos().getY() + 1, magicCastBlockBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
+        }
     }
 }

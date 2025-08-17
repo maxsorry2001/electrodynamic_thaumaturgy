@@ -51,6 +51,19 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
 
     @Override
     public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-
+        LivingEntity target = getBlockTarget(magicCastBlockBE);
+        if(target == null) return;
+        Level level = magicCastBlockBE.getLevel();
+        magicCastBlockBE.setCooldown(getBaseCooldown());
+        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastBlockBE.getOwner()), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem) * 2);
+        if(level instanceof ServerLevel){
+            ((ServerLevel) level).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) level).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
+            for (int i = 0; i < 10; i++){
+                RandomSource randomSource = RandomSource.create();
+                ((ServerLevel) level).sendParticles(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
+            }
+        }
     }
 }
