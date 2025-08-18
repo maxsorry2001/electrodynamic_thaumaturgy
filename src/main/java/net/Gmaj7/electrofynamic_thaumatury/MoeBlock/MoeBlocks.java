@@ -38,4 +38,7 @@ public class MoeBlocks {
 
     public static final DeferredBlock<Block> MAGIC_CAST_BLOCK = MOE_BLOCKS.register("magic_cast_block",
             () -> new MagicCastBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+
+    public static final DeferredBlock<Block> LIVING_ENTITY_CLONE_BLOCK = MOE_BLOCKS.register("living_entity_spawn_block",
+            () -> new LivingEntityCloneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 }

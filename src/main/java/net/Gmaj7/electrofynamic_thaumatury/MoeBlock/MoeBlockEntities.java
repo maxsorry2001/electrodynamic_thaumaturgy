@@ -37,6 +37,10 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("magic_cast_be", () -> BlockEntityType.Builder.of(
                     MagicCastBlockBE::new, MoeBlocks.MAGIC_CAST_BLOCK.get()).build(null));
 
+    public static final Supplier<BlockEntityType<LivingEntityCloneBE>> LIVING_ENTITY_CLONE_BE =
+            MOE_BLOCK_ENTITY.register("living_entity_clone_be", () -> BlockEntityType.Builder.of(
+                    LivingEntityCloneBE::new, MoeBlocks.LIVING_ENTITY_CLONE_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);
     }

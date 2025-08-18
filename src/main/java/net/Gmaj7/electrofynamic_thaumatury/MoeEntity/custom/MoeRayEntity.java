@@ -30,8 +30,8 @@ public class MoeRayEntity extends Entity implements IEntityWithComplexSpawn {
             this.setRot(owner.getYRot(), owner.getXRot());
         else {
             Vec3 vec3 = end.subtract(start);
-            this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0 / 3.1415927410125732));
-            this.setXRot((float)(Mth.atan2(vec3.y, vec3.length()) * 180.0 / 3.1415927410125732));
+            this.setYRot(- (float)(Mth.atan2(vec3.x, vec3.z) * 180.0 / 3.1415927410125732));
+            this.setXRot(- (float)(Mth.atan2(vec3.y, vec3.horizontalDistance()) * 180.0 / 3.1415927410125732));
             this.yRotO = this.getYRot();
             this.xRotO = this.getXRot();
         }
