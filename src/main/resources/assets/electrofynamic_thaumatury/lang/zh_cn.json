@@ -54,6 +54,7 @@
   "item.electrofynamic_thaumatury.entropy_enhance": "熵增诅咒",
   "item.electrofynamic_thaumatury.life_extraction_enhance": "生命萃取",
   "item.electrofynamic_thaumatury.enhance_modem_baseboard": "强化调制底板",
+  "item.electrofynamic_thaumatury.genetic_recorder": "基因刻录器",
 
   "effect.electrofynamic_thaumatury.exciting": "激发",
   "effect.electrofynamic_thaumatury.electric_energy_release" : "电能释放",
@@ -72,6 +73,7 @@
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "能量传输天线",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "法术光刻台",
   "block.electrofynamic_thaumatury.magic_cast_block": "电磁驱动器",
+  "block.electrofynamic_thaumatury.living_entity_clone_block": "生物克隆器",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "电磁射线",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "脉冲等离子体",

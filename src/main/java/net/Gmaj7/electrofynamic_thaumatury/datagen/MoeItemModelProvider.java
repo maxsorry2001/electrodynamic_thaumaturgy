@@ -60,6 +60,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
         basicItem(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get());
         basicItem(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN.get());
+        basicItem(MoeItems.GENETIC_RECORDER.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
     }

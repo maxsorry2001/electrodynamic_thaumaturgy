@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "electrofynamic_thaumatury:item/genetic_recorder"
+  }
+}

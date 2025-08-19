@@ -57,6 +57,7 @@ public class LivingEntityCloneBlock extends BaseEntityBlock {
             if (blockEntity instanceof LivingEntityCloneBE livingEntityCloneBE && !level.isClientSide()) {
                 IEnergyStorage energyStorage = livingEntityCloneBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), livingEntityCloneBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(livingEntityCloneBE, Component.translatable("block.electrofynamic_thaumatury.energy_block")), pos);
             }
             return InteractionResult.CONSUME;
         }

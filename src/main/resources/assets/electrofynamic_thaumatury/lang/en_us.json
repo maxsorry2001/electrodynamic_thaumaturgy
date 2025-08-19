@@ -54,6 +54,7 @@
   "item.electrofynamic_thaumatury.entropy_enhance": "Entropy Increase Curse",
   "item.electrofynamic_thaumatury.life_extraction_enhance": "Life Extraction",
   "item.electrofynamic_thaumatury.enhance_modem_baseboard": "Enhance Modem Baseboard",
+  "item.electrofynamic_thaumatury.genetic_recorder": "Genetic Recorder",
 
   "effect.electrofynamic_thaumatury.exciting": "Exciting",
   "effect.electrofynamic_thaumatury.electric_energy_release" : "Electric Energy Release",
@@ -72,6 +73,7 @@
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "Energy Transmission Antenna",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "Magic Lithography Table",
   "block.electrofynamic_thaumatury.magic_cast_block": "Electromagnetic Driver",
+  "block.electrofynamic_thaumatury.living_entity_clone_block": "Bio-Replication Vat",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "Pulsed Plasma",
