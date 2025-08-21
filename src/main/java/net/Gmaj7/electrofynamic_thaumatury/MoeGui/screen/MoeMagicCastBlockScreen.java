@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeGui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
-import net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu.MoeEnergyBlockMenu;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu.MoeMagicCastBlockMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class MoeMagicCastBlockScreen extends AbstractContainerScreen<MoeMagicCastBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/electromagnetic_energy_block.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/one_item_machine.png");
     ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/energy.png");
 
     public MoeMagicCastBlockScreen(MoeMagicCastBlockMenu menu, Inventory playerInventory, Component title) {

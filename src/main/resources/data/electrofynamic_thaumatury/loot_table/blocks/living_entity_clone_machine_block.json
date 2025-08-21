@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrofynamic_thaumatury:magic_cast_block"
+          "name": "electrofynamic_thaumatury:living_entity_clone_machine_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrofynamic_thaumatury:blocks/magic_cast_block"
+  "random_sequence": "electrofynamic_thaumatury:blocks/living_entity_clone_machine_block"
 }

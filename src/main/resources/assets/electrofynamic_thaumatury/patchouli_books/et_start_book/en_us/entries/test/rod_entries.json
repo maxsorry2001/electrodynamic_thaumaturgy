@@ -24,7 +24,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrofynamic_thaumatury:board",
+      "recipe": "electrofynamic_thaumatury:si",
       "recipe2": "electrofynamic_thaumatury:inductance"
     },
     {

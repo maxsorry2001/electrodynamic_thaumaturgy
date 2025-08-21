@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.LivingEntityCloneBE;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -31,7 +30,7 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (LivingEntityCloneBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -85,7 +84,7 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.LIVING_ENTITY_CLONE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

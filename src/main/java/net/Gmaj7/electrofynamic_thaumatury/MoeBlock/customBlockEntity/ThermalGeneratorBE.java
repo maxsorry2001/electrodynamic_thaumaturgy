@@ -53,7 +53,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(512, false);
+        blockEntity.getEnergy().receiveEnergy(2048, false);
     }
 
     @Override

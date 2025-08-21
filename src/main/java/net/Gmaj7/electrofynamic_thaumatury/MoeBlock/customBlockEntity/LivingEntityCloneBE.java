@@ -61,14 +61,14 @@ public class LivingEntityCloneBE extends BlockEntity implements IMoeEnergyBlockE
     public static void tick(Level level, BlockPos blockPos, BlockState state, LivingEntityCloneBE livingEntityCloneBE){
         if(livingEntityCloneBE.clone > 0) livingEntityCloneBE.clone--;
         if(livingEntityCloneBE.clone <= 0 && livingEntityCloneBE.canSpawn() && !level.isClientSide()){
-            livingEntityCloneBE.clone = 50;
             ItemStack itemStack = livingEntityCloneBE.getItemHandler().getStackInSlot(0);
             Entity entity =  BuiltInRegistries.ENTITY_TYPE.getOptional(itemStack.get(MoeDataComponentTypes.ENTITY_TYPE)).get().create(level);
             if(entity instanceof LivingEntity) {
                 ((LivingEntity) entity).readAdditionalSaveData(itemStack.get(MoeDataComponentTypes.ENTITY_DATA));
                 entity.teleportTo(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
                 level.addFreshEntity(entity);
-                livingEntityCloneBE.getEnergy().extractEnergy((int) (SPAWN_NEED * ((LivingEntity) entity).getMaxHealth()), false);
+                livingEntityCloneBE.clone = (int)((LivingEntity) entity).getMaxHealth();
+                livingEntityCloneBE.getEnergy().extractEnergy(SPAWN_NEED, false);
             }
         }
     }

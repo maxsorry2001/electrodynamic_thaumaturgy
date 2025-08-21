@@ -1,7 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeGui.menu;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,7 +30,7 @@ public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (MagicCastBlockBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -85,7 +84,7 @@ public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.MAGIC_CAST_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

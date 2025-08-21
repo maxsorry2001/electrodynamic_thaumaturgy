@@ -84,7 +84,7 @@ public class MoeTabs {
                         output.accept(MoeItems.CAPACITOR.get());
                         output.accept(MoeItems.INDUCTANCE.get());
                         output.accept(MoeItems.BJT.get());
-                        output.accept(MoeItems.BOARD.get());
+                        output.accept(MoeItems.SI.get());
                         output.accept(MoeItems.SUPERCONDUCTING_UPDATE.get());
                         output.accept(MoeItems.GENETIC_RECORDER.get());
 
@@ -96,8 +96,8 @@ public class MoeTabs {
                         output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK);
-                        output.accept(MoeBlocks.MAGIC_CAST_BLOCK);
-                        output.accept(MoeBlocks.LIVING_ENTITY_CLONE_BLOCK);
+                        output.accept(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK);
+                        output.accept(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                     }))
                     .build());

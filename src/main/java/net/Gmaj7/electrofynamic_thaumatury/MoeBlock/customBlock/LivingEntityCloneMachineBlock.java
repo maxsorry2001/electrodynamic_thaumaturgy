@@ -3,16 +3,13 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.LivingEntityCloneBE;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -27,10 +24,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class LivingEntityCloneBlock extends BaseEntityBlock {
-    public static final MapCodec<LivingEntityCloneBlock> CODEC = simpleCodec(LivingEntityCloneBlock::new);
+public class LivingEntityCloneMachineBlock extends BaseEntityBlock {
+    public static final MapCodec<LivingEntityCloneMachineBlock> CODEC = simpleCodec(LivingEntityCloneMachineBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public LivingEntityCloneBlock(Properties properties) {
+    public LivingEntityCloneMachineBlock(Properties properties) {
         super(properties);
     }
 

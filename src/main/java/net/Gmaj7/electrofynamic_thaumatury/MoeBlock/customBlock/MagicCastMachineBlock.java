@@ -2,7 +2,6 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
@@ -27,10 +26,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicCastBlock extends BaseEntityBlock {
-    public static final MapCodec<MagicCastBlock> CODEC = simpleCodec(MagicCastBlock::new);
+public class MagicCastMachineBlock extends BaseEntityBlock {
+    public static final MapCodec<MagicCastMachineBlock> CODEC = simpleCodec(MagicCastMachineBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public MagicCastBlock(Properties properties) {
+    public MagicCastMachineBlock(Properties properties) {
         super(properties);
     }
 

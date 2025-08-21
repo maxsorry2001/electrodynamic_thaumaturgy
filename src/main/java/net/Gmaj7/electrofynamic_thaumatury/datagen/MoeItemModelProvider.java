@@ -48,7 +48,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.CAPACITOR.get());
         basicItem(MoeItems.INDUCTANCE.get());
         basicItem(MoeItems.BJT.get());
-        basicItem(MoeItems.BOARD.get());
+        basicItem(MoeItems.SI.get());
         basicItem(MoeItems.SUPERCONDUCTING_UPDATE.get());
         basicItem(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
         basicItem(MoeItems.EMPTY_ADVANCED_MODULE.get());

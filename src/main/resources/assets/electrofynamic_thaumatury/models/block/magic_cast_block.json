@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "electrofynamic_thaumatury:block/machine_normal",
-    "side": "electrofynamic_thaumatury:block/machine_normal",
-    "top": "electrofynamic_thaumatury:block/magic_cast_block_top"
-  }
-}

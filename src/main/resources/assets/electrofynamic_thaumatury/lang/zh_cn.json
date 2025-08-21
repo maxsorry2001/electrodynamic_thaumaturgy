@@ -45,7 +45,7 @@
   "item.electrofynamic_thaumatury.energy_core": "导能核心",
   "item.electrofynamic_thaumatury.capacitor": "电容器",
   "item.electrofynamic_thaumatury.inductance": "电感器",
-  "item.electrofynamic_thaumatury.board": "组件底板",
+  "item.electrofynamic_thaumatury.si": "硅",
   "item.electrofynamic_thaumatury.bjt": "三极管",
   "item.electrofynamic_thaumatury.superconducting_update": "超导升级工具",
   "item.electrofynamic_thaumatury.cooldown_enhance": "冷却",
@@ -72,8 +72,8 @@
   "block.electrofynamic_thaumatury.thermal_generator_block": "火力发电机",
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "能量传输天线",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "法术光刻台",
-  "block.electrofynamic_thaumatury.magic_cast_block": "电磁驱动器",
-  "block.electrofynamic_thaumatury.living_entity_clone_block": "生物克隆器",
+  "block.electrofynamic_thaumatury.magic_cast_machine_block": "电磁驱动器",
+  "block.electrofynamic_thaumatury.living_entity_clone_machine_block": "生物克隆器",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "电磁射线",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "脉冲等离子体",
@@ -179,5 +179,9 @@
   "patchouli.et.domain_reconstruction_module.description": "使用磁力修复自身",
   "patchouli.et.mirage_pursuit_module.description": "生成一团跟着自己的蜃气，在你使用法术造成伤害后对目标进行二次打击",
   "patchouli.et.magnetic_flux_cascade_module.description": "锁定一个目标后，磁通量会跳跃攻击附近敌人，最多4次连锁跳跃",
-  "patchouli.et.frequency_division_arrow_rain_module.description": "在前方一定区域上空激发电磁波，并将振幅调制为箭以打击敌人"
+  "patchouli.et.frequency_division_arrow_rain_module.description": "在前方一定区域上空激发电磁波，并将振幅调制为箭以打击敌人",
+  "patchouli.et.machine_entries": "电磁器械",
+  "patchouli.et.generator_entries.magic_cast_machine_block": "提供能量，电磁驱动器会根据放入的法术模块自动索敌施法，不过消耗的能量会更高。注意：电磁驱动器无法施放强化自身类的法术",
+  "patchouli.et.generator_entries.living_entity_clone_machine_block": "消耗能量，生成机器中放入的基因刻录器中刻录的生物",
+  "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆"
 }

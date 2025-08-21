@@ -40,7 +40,7 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(128, false);
+        blockEntity.getEnergy().receiveEnergy(512, false);
     }
 
     protected boolean canEnergyMake() {
