@@ -64,12 +64,11 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get())
                 .pattern("aaa")
-                .pattern("bdb")
-                .pattern("ccc")
-                .define('a', Items.LAPIS_LAZULI)
+                .pattern("bcb")
+                .pattern("aaa")
+                .define('a', MoeItems.SI.get())
                 .define('b', Items.COPPER_INGOT)
-                .define('c', Items.AMETHYST_SHARD)
-                .define('d', MoeItems.ENERGY_CORE.get())
+                .define('c', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get())
                 .pattern("ada")
@@ -90,7 +89,6 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('c', MoeItems.ENERGY_CORE.get())
                 .define('d', MoeItems.IRON_SHEET.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.THERMAL_GENERATOR_BLOCK.get())
                 .pattern(" a ")
                 .pattern("aba")
@@ -99,6 +97,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('b', MoeItems.ENERGY_CORE.get())
                 .define('c', Items.FURNACE)
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_SHEET.get(), 16)
                 .pattern("aaa")
                 .pattern("   ")

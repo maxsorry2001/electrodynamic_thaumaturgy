@@ -105,6 +105,8 @@
   "advancements.electrofynamic_thaumatury.modem_table.description": "给你的施法媒介升个级",
   "advancements.electrofynamic_thaumatury.enhance_module.title": "升级模块",
   "advancements.electrofynamic_thaumatury.enhance_module.description": "放进调制台就好",
+  "advancements.electrofynamic_thaumatury.machine_block.title": "工程器械",
+  "advancements.electrofynamic_thaumatury.machine_block.description": "自动化工程",
 
   "death.attack.magnet_resonance" : "%1$s死于共振",
   "death.attack.magnet_resonance.player" : "%1$s死于因%s$2的攻击产生的共振",

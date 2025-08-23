@@ -105,6 +105,8 @@
   "advancements.electrofynamic_thaumatury.modem_table.description": "Enhance your tool",
   "advancements.electrofynamic_thaumatury.enhance_module.title": "Enhance Module",
   "advancements.electrofynamic_thaumatury.enhance_module.description": "put it in modem table",
+  "advancements.electrofynamic_thaumatury.machine_block.title": "Engineering Apparatus",
+  "advancements.electrofynamic_thaumatury.machine_block.description": "Automation Engineering",
 
 
   "death.attack.magnet_resonance" : "%1$s dies of resonance",
