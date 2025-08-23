@@ -132,7 +132,7 @@
   "patchouli.gui.et_text": "Welcome to Electromagical Thaumaturgy. This mod has no mana; it uses FE to manipulate electromagnetism to form spells",
   "patchouli.et.start_entries": "Getting Started",
   "patchouli.et.rod_entries": "Electromagnetic Rod",
-  "patchouli.et_books.start_page": "The Electromagnetic Rod is the medium for casting spells and also a configurator for certain machines. Crafting recipes are shown above.",
+  "patchouli.et_books.start_page": "The Electromagnetic Rod is the medium for casting spells and also a configurator for certain machines.  When held, press the Spell Switch key (default: V) to cycle between spells.",
   "patchouli.et.rod_use": "The Electromagnetic Assembly Table configures the rod. Configuration slots include an Oscillator, Amplifier, and 8 spell slots. The Oscillator determines base spell damage, the Amplifier sets the damage multiplier. If oscillator is empty, spells deal no damage. Both have Iron, Gold, Copper, and Superconductor tiers.",
   "patchouli.et.energy": "Energy Production, Transmission & Storage",
   "patchouli.et.battery_entries": "Batteries",

@@ -5,6 +5,7 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -43,8 +44,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                     true,
                     false
             );
-            builder.addCriterion("has_crafting_table", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CRAFTING_TABLE));
-            builder.requirements(AdvancementRequirements.anyOf(List.of("has_crafting_table")));
+            builder.addCriterion("join", PlayerTrigger.TriggerInstance.tick());
             builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "advancement/et_start_book"))));
             builder.save(consumer, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "normal/root"), existingFileHelper);
 

@@ -1,14 +1,7 @@
 {
   "criteria": {
-    "has_crafting_table": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:crafting_table"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "join": {
+      "trigger": "minecraft:tick"
     }
   },
   "display": {
@@ -27,7 +20,7 @@
   },
   "requirements": [
     [
-      "has_crafting_table"
+      "join"
     ]
   ],
   "rewards": {
