@@ -32,7 +32,7 @@ public class DataLoadHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 32768)),
+        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
                 MoeItems.ELECTROMAGNETIC_ROD.get());
         event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
                 MoeItems.POTATO_BATTERY.get(),

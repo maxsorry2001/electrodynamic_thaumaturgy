@@ -99,6 +99,8 @@ public class MoeTabs {
                         output.accept(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK);
                         output.accept(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+
+                        output.accept(MoeItems.HARMONIC_SOVEREIGN_SPAWN_EGG);
                     }))
                     .build());
 

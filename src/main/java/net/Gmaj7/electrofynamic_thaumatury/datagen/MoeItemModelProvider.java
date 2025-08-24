@@ -63,5 +63,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.GENETIC_RECORDER.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
+
+        withExistingParent(MoeItems.HARMONIC_SOVEREIGN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 }
