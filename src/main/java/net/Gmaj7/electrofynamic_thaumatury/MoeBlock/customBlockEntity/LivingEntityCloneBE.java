@@ -30,7 +30,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public class LivingEntityCloneBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity,MenuProvider {
-    private static final int SPAWN_NEED = 65536;
+    private static final int SPAWN_NEED = 16384;
     private int clone = 100;
 
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {

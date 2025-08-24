@@ -28,7 +28,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
         int i = Math.max( level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above()));
-        blockEntity.getEnergy().receiveEnergy(i * 256, false);
+        blockEntity.getEnergy().receiveEnergy(i * 64, false);
     }
 
     protected boolean canEnergyMake() {
