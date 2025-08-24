@@ -21,7 +21,7 @@ import net.minecraft.world.phys.Vec3;
 public class ElectromagneticAssault extends AbstractSelfMagic{
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(MoeFunction.getMagicAmount(itemStack) * 2).add(start);
         Level level = livingEntity.level();
@@ -48,6 +48,11 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0, 0);
             ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0 ,0);
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

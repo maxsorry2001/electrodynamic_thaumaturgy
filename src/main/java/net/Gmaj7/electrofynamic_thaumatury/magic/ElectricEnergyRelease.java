@@ -16,7 +16,7 @@ import java.util.List;
 public class ElectricEnergyRelease extends AbstractSelfMagic{
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(2));
         for (LivingEntity target : list){
             if(target == livingEntity) {
@@ -30,6 +30,11 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

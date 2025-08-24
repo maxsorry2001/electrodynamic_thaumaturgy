@@ -12,7 +12,7 @@ import net.minecraft.world.phys.Vec3;
 public class Attract extends AbstractBlockBeaconMagic {
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
@@ -20,6 +20,16 @@ public class Attract extends AbstractBlockBeaconMagic {
         attractBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
         livingEntity.level().addFreshEntity(attractBeaconEntity);
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+        BlockPos blockPos = target.getOnPos();
+        Vec3 vec3 = blockPos.getCenter();
+        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), source);
+        attractBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
+        target.level().addFreshEntity(attractBeaconEntity);
     }
 
     @Override

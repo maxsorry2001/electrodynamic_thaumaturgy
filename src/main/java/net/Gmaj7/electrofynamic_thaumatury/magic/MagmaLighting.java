@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 public class MagmaLighting extends AbstractBlockBeaconMagic {
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         Direction direction = blockHitResult.getDirection();
         BlockPos blockPos = blockHitResult.getBlockPos();
@@ -34,6 +34,11 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

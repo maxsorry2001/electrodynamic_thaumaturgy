@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
@@ -25,6 +25,11 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

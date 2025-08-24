@@ -119,8 +119,30 @@ public class MoeTabs {
         else {
             list.add(new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
         }
-        int i = 3;
-        for ( ; i < MagicCastItem.getMaxMagicSlots(); i ++){
+        for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
+            list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
+        }
+        itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
+        return itemStack;
+    }
+
+    public static final ItemStack getIronRod(){
+        return getRod(MoeItems.IRON_LC.get(), MoeItems.IRON_POWER.get());
+    }
+    public static final ItemStack getGoldRod(){
+        return getRod(MoeItems.GOLD_LC.get(), MoeItems.GOLD_POWER.get());
+    }public static final ItemStack getCopperRod(){
+        return getRod(MoeItems.COPPER_LC.get(), MoeItems.COPPER_POWER.get());
+    }public static final ItemStack getSuperconductingRod(){
+        return getRod(MoeItems.SUPERCONDUCTING_LC.get(), MoeItems.SUPERCONDUCTING_POWER.get());
+    }
+
+    public static final ItemStack getRod(ItemLike lc, ItemLike power){
+        ItemStack itemStack = new ItemStack(MoeItems.ELECTROMAGNETIC_ROD.get());
+        List<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(lc));
+        list.add(new ItemStack(power));
+        for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
             list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
         }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));

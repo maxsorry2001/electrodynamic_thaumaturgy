@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface IMoeMagic {
 
-    void cast(LivingEntity livingEntity, ItemStack itemStack);
+    void playerCast(LivingEntity livingEntity, ItemStack itemStack);
+
+    void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack);
 
     int getBaseEnergyCost();
 

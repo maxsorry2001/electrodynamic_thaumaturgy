@@ -70,10 +70,10 @@ public class MoeEntities {
                     .clientTrackingRange(4)
                     .noSave()
                     .build("frequency_division_beacon_entity"));
-    public static final Supplier<EntityType<TTEntity>> TT_ENTITY =
-            MOE_ENTITY_TYPES.register("tt_entity", () -> EntityType.Builder.<TTEntity>of(TTEntity::new, MobCategory.MISC)
+    public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
+            MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MISC)
                     .sized(0.98F, 0.98F)
-                    .build("tt_entity"));
+                    .build("harmonic_sovereign"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

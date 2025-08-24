@@ -3,6 +3,7 @@ package net.Gmaj7.electrofynamic_thaumatury.magic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.CoulombDomainBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
+import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -12,13 +13,22 @@ import net.minecraft.world.phys.Vec3;
 public class CoulombDomain extends AbstractBlockBeaconMagic {
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
         CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(livingEntity.level(), livingEntity, itemStack);
         coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         livingEntity.level().addFreshEntity(coulombDomainBeaconEntity);
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+        BlockPos blockPos = target.getOnPos();
+        Vec3 vec3 = blockPos.getCenter();
+        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), source, itemStack);
+        coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        target.level().addFreshEntity(coulombDomainBeaconEntity);
     }
 
     @Override

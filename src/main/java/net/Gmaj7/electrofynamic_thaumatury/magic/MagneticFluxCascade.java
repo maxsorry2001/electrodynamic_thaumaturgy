@@ -10,13 +10,18 @@ import net.minecraft.world.item.ItemStack;
 public class MagneticFluxCascade extends AbstractFrontEntityMagic{
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(livingEntity.level(), livingEntity, itemStack);
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         livingEntity.level().addFreshEntity(magneticFluxCascadeEntity);
         if(livingEntity.level() instanceof ServerLevel) ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

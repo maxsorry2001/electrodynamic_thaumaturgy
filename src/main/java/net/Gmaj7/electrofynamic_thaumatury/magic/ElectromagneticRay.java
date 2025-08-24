@@ -21,7 +21,7 @@ import java.util.List;
 public class ElectromagneticRay extends AbstractWideMagic{
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         Level level = livingEntity.level();
@@ -37,6 +37,11 @@ public class ElectromagneticRay extends AbstractWideMagic{
                 }
             }
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

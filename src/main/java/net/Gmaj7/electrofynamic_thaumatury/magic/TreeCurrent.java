@@ -20,7 +20,7 @@ import java.util.List;
 public class TreeCurrent extends AbstractFrontEntityMagic {
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target != null) {
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack));
@@ -33,6 +33,11 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
                 MoeFunction.checkTargetEnhancement(itemStack, target1);
             }
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

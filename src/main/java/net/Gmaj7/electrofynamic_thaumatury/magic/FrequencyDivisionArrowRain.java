@@ -19,13 +19,18 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         Vec3 vec3 = blockHitResult.getBlockPos().getCenter();
         FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(livingEntity.level(), vec3.x(), vec3.y(), vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(frequencyDivisionArrowEntity);
         if(livingEntity.level() instanceof ServerLevel)
             ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 11, vec3.z(), 1, 0, 0, 0, 0);
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

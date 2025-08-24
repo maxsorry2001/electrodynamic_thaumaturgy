@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target == null) return;
         target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack));
@@ -21,6 +21,11 @@ public class LightingStrike extends AbstractFrontEntityMagic {
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
         livingEntity.level().addFreshEntity(lightningBolt);
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

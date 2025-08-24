@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class Protecting extends AbstractSelfMagic{
 
     @Override
-    public void cast(LivingEntity livingEntity, ItemStack itemStack) {
+    public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
         if(!livingEntity.level().isClientSide()) {
             float p = MoeFunction.getMagicAmount(itemStack);
             ((MoeDataGet) livingEntity).getProtective().setProtecting(p);
@@ -22,6 +22,11 @@ public class Protecting extends AbstractSelfMagic{
                 ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0,0);
             }
         }
+    }
+
+    @Override
+    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+
     }
 
     @Override

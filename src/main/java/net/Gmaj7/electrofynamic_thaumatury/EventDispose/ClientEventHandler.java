@@ -2,9 +2,9 @@ package net.Gmaj7.electrofynamic_thaumatury.EventDispose;
 
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.TTEntity;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.HarmonicSovereignEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model.PulsedPlasmaEntityModel;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model.TTEntityModel;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model.HarmonicSovereignEntityModel;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.MoeMenuType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeGui.hud.MoeMagicWheelHud;
@@ -31,12 +31,12 @@ public class ClientEventHandler {
         public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
             event.registerLayerDefinition(MoeRayEntityRender.MODEL_LAYER_LOCATION, MoeRayEntityRender::createBodyLayer);
             event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
-            event.registerLayerDefinition(TTEntityModel.LAYER_LOCATION, TTEntityModel::createBodyLayer);
+            event.registerLayerDefinition(HarmonicSovereignEntityModel.LAYER_LOCATION, HarmonicSovereignEntityModel::createBodyLayer);
         }
 
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event){
-            event.put(MoeEntities.TT_ENTITY.get(), TTEntity.createAttributes().build());
+            event.put(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), HarmonicSovereignEntity.createAttributes().build());
         }
 
         @SubscribeEvent

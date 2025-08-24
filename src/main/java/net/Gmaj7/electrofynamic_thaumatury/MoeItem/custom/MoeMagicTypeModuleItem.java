@@ -23,7 +23,7 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
     }
 
     public void cast(LivingEntity livingEntity, ItemStack itemStack){
-        this.magic.cast(livingEntity, itemStack);
+        this.magic.playerCast(livingEntity, itemStack);
     }
 
     public int getBaseEnergyCost(){
