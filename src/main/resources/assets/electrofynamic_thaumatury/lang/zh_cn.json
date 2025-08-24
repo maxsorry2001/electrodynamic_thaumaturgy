@@ -45,7 +45,7 @@
   "item.electrofynamic_thaumatury.energy_core": "导能核心",
   "item.electrofynamic_thaumatury.capacitor": "电容器",
   "item.electrofynamic_thaumatury.inductance": "电感器",
-  "item.electrofynamic_thaumatury.board": "组件底板",
+  "item.electrofynamic_thaumatury.si": "硅",
   "item.electrofynamic_thaumatury.bjt": "三极管",
   "item.electrofynamic_thaumatury.superconducting_update": "超导升级工具",
   "item.electrofynamic_thaumatury.cooldown_enhance": "冷却",
@@ -54,6 +54,7 @@
   "item.electrofynamic_thaumatury.entropy_enhance": "熵增诅咒",
   "item.electrofynamic_thaumatury.life_extraction_enhance": "生命萃取",
   "item.electrofynamic_thaumatury.enhance_modem_baseboard": "强化调制底板",
+  "item.electrofynamic_thaumatury.genetic_recorder": "基因刻录器",
 
   "effect.electrofynamic_thaumatury.exciting": "激发",
   "effect.electrofynamic_thaumatury.electric_energy_release" : "电能释放",
@@ -71,6 +72,8 @@
   "block.electrofynamic_thaumatury.thermal_generator_block": "火力发电机",
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "能量传输天线",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "法术光刻台",
+  "block.electrofynamic_thaumatury.magic_cast_machine_block": "电磁驱动器",
+  "block.electrofynamic_thaumatury.living_entity_clone_machine_block": "生物克隆器",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "电磁射线",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "脉冲等离子体",
@@ -102,6 +105,8 @@
   "advancements.electrofynamic_thaumatury.modem_table.description": "给你的施法媒介升个级",
   "advancements.electrofynamic_thaumatury.enhance_module.title": "升级模块",
   "advancements.electrofynamic_thaumatury.enhance_module.description": "放进调制台就好",
+  "advancements.electrofynamic_thaumatury.machine_block.title": "工程器械",
+  "advancements.electrofynamic_thaumatury.machine_block.description": "自动化工程",
 
   "death.attack.magnet_resonance" : "%1$s死于共振",
   "death.attack.magnet_resonance.player" : "%1$s死于因%s$2的攻击产生的共振",
@@ -129,7 +134,7 @@
   "patchouli.gui.et_text": "欢迎来到电磁奇术。本模组没有法力值，使用FE操控电磁以形成法术",
   "patchouli.et.start_entries": "如何开始",
   "patchouli.et.rod_entries": "导能杖",
-  "patchouli.et_books.start_page": "电磁导能杖是释放法术的媒介，同时也是某些机器的配置器。合成导能杖相关配方如上。",
+  "patchouli.et_books.start_page": "电磁导能杖是释放法术的媒介，同时也是某些机器的配置器。在手持是可以按下法术切换键（默认为V）切换法术",
   "patchouli.et.rod_use": "电磁装配台可以配置导能杖。配置位有振荡器，放大器和8个法术槽位。振荡器决定了法术的基础伤害，放大器决定了伤害扩大倍率，若振荡器为空则法术无伤害，两者都有铁，金，铜，超导四个等级。",
   "patchouli.et.energy": "能量的生产、传输及存储",
   "patchouli.et.battery_entries": "电池",
@@ -175,5 +180,10 @@
   "patchouli.et.coulomb_domain_module.description": "在目标方块上生成一个信标，使范围内的生物快速聚集电荷并引发雷击",
   "patchouli.et.domain_reconstruction_module.description": "使用磁力修复自身",
   "patchouli.et.mirage_pursuit_module.description": "生成一团跟着自己的蜃气，在你使用法术造成伤害后对目标进行二次打击",
-  "patchouli.et.magnetic_flux_cascade_module.description": "锁定一个目标后，磁通量会跳跃攻击附近敌人，最多4次连锁跳跃"
+  "patchouli.et.magnetic_flux_cascade_module.description": "锁定一个目标后，磁通量会跳跃攻击附近敌人，最多4次连锁跳跃",
+  "patchouli.et.frequency_division_arrow_rain_module.description": "在前方一定区域上空激发电磁波，并将振幅调制为箭以打击敌人",
+  "patchouli.et.machine_entries": "电磁器械",
+  "patchouli.et.generator_entries.magic_cast_machine_block": "提供能量，电磁驱动器会根据放入的法术模块自动索敌施法，不过消耗的能量会更高。注意：电磁驱动器无法施放强化自身类的法术",
+  "patchouli.et.generator_entries.living_entity_clone_machine_block": "消耗能量，生成机器中放入的基因刻录器中刻录的生物",
+  "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆"
 }

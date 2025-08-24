@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
@@ -14,13 +15,12 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
-        if(target != null) {
-            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack));
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
-            lightningBolt.setVisualOnly(true);
-            lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
-            livingEntity.level().addFreshEntity(lightningBolt);
-        }
+        if(target == null) return;
+        target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack));
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
+        lightningBolt.setVisualOnly(true);
+        lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
+        livingEntity.level().addFreshEntity(lightningBolt);
     }
 
     @Override
@@ -41,5 +41,19 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.lighting_strike_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+        LivingEntity target = getBlockTarget(magicCastBlockBE);
+        if(target != null && !magicCastBlockBE.getLevel().isClientSide()) {
+            target.hurt(new DamageSource(MoeFunction.getHolder(magicCastBlockBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastBlockBE.getOwner()), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(magicCastBlockBE.getLevel());
+            lightningBolt.setVisualOnly(true);
+            lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
+            magicCastBlockBE.getLevel().addFreshEntity(lightningBolt);
+            magicCastBlockBE.setCooldown(getBaseCooldown());
+            magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        }
     }
 }

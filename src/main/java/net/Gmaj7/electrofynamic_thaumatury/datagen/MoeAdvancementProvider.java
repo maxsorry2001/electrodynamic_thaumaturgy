@@ -5,6 +5,7 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -43,8 +44,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                     true,
                     false
             );
-            builder.addCriterion("has_crafting_table", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CRAFTING_TABLE));
-            builder.requirements(AdvancementRequirements.anyOf(List.of("has_crafting_table")));
+            builder.addCriterion("join", PlayerTrigger.TriggerInstance.tick());
             builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "advancement/et_start_book"))));
             builder.save(consumer, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "normal/root"), existingFileHelper);
 
@@ -58,6 +58,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             register(MoeBlocks.ENERGY_BLOCK, "normal", "generator", "energy_save", "has_energy_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_BLOCK);
             register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE, "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
             register(MoeItems.EFFICIENCY_ENHANCE.get(), "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
+            register(MoeItems.MAGIC_CAST_MACHINE_BLOCK.get(), "normal", "energy_core", "machine_block", "has_machine", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.MAGIC_CAST_MACHINE_BLOCK, MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK);
 
         }
 

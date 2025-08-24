@@ -3,22 +3,19 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:lapis_lazuli"
+      "item": "electrofynamic_thaumatury:si"
     },
     "b": {
       "item": "minecraft:copper_ingot"
     },
     "c": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "d": {
       "item": "electrofynamic_thaumatury:energy_core"
     }
   },
   "pattern": [
     "aaa",
-    "bdb",
-    "ccc"
+    "bcb",
+    "aaa"
   ],
   "result": {
     "count": 1,

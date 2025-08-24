@@ -1,19 +1,18 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public abstract class AbstractFrontEntityMagic implements IMoeMagic{
+import java.util.List;
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return false;
-    }
+public abstract class AbstractFrontEntityMagic implements IMoeMagic{
 
     protected static LivingEntity getNearestFrontTarget(LivingEntity livingEntity, double length){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
@@ -26,5 +25,11 @@ public abstract class AbstractFrontEntityMagic implements IMoeMagic{
             else return null;
         }
         else return null;
+    }
+
+    protected LivingEntity getBlockTarget(MagicCastBlockBE magicCastBlockBE){
+        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
+        list.remove(magicCastBlockBE.getOwner());
+        return list.get(RandomSource.create().nextInt(list.size()));
     }
 }

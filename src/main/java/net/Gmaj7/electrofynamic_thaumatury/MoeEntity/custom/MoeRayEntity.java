@@ -4,6 +4,7 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,11 +22,19 @@ public class MoeRayEntity extends Entity implements IEntityWithComplexSpawn {
         super(entityType, level);
     }
 
-    public MoeRayEntity(Level level, Vec3 start, Vec3 end, LivingEntity owner) {
+    public MoeRayEntity(Level level, Vec3 start, Vec3 end, LivingEntity owner, boolean fromEntity) {
         super(MoeEntities.MOE_RAY_ENTITY.get(), level);
         this.setPos(start.subtract(0, .75f, 0));
         this.distance = (float) start.distanceTo(end);
-        this.setRot(owner.getYRot(), owner.getXRot());
+        if (fromEntity)
+            this.setRot(owner.getYRot(), owner.getXRot());
+        else {
+            Vec3 vec3 = end.subtract(start);
+            this.setYRot(- (float)(Mth.atan2(vec3.x, vec3.z) * 180.0 / 3.1415927410125732));
+            this.setXRot(- (float)(Mth.atan2(vec3.y, vec3.horizontalDistance()) * 180.0 / 3.1415927410125732));
+            this.yRotO = this.getYRot();
+            this.xRotO = this.getXRot();
+        }
     }
 
     @Override

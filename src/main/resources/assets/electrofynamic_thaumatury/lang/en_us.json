@@ -45,7 +45,7 @@
   "item.electrofynamic_thaumatury.energy_core": "Energy Core",
   "item.electrofynamic_thaumatury.capacitor": "Capacitor",
   "item.electrofynamic_thaumatury.inductance": "Inductor",
-  "item.electrofynamic_thaumatury.board": "Board",
+  "item.electrofynamic_thaumatury.si": "Silicon",
   "item.electrofynamic_thaumatury.bjt": "Bipolar Junction Transistor",
   "item.electrofynamic_thaumatury.superconducting_update": "Superconducting Updating Tool",
   "item.electrofynamic_thaumatury.cooldown_enhance": "Cooldown",
@@ -54,6 +54,7 @@
   "item.electrofynamic_thaumatury.entropy_enhance": "Entropy Increase Curse",
   "item.electrofynamic_thaumatury.life_extraction_enhance": "Life Extraction",
   "item.electrofynamic_thaumatury.enhance_modem_baseboard": "Enhance Modem Baseboard",
+  "item.electrofynamic_thaumatury.genetic_recorder": "Genetic Recorder",
 
   "effect.electrofynamic_thaumatury.exciting": "Exciting",
   "effect.electrofynamic_thaumatury.electric_energy_release" : "Electric Energy Release",
@@ -71,6 +72,8 @@
   "block.electrofynamic_thaumatury.thermal_generator_block": "Thermal Generator",
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "Energy Transmission Antenna",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "Magic Lithography Table",
+  "block.electrofynamic_thaumatury.magic_cast_machine_block": "Electromagnetic Driver",
+  "block.electrofynamic_thaumatury.living_entity_clone_machine_block": "Bio-Replication Vat",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "Pulsed Plasma",
@@ -102,6 +105,8 @@
   "advancements.electrofynamic_thaumatury.modem_table.description": "Enhance your tool",
   "advancements.electrofynamic_thaumatury.enhance_module.title": "Enhance Module",
   "advancements.electrofynamic_thaumatury.enhance_module.description": "put it in modem table",
+  "advancements.electrofynamic_thaumatury.machine_block.title": "Engineering Apparatus",
+  "advancements.electrofynamic_thaumatury.machine_block.description": "Automation Engineering",
 
 
   "death.attack.magnet_resonance" : "%1$s dies of resonance",
@@ -129,7 +134,7 @@
   "patchouli.gui.et_text": "Welcome to Electromagical Thaumaturgy. This mod has no mana; it uses FE to manipulate electromagnetism to form spells",
   "patchouli.et.start_entries": "Getting Started",
   "patchouli.et.rod_entries": "Electromagnetic Rod",
-  "patchouli.et_books.start_page": "The Electromagnetic Rod is the medium for casting spells and also a configurator for certain machines. Crafting recipes are shown above.",
+  "patchouli.et_books.start_page": "The Electromagnetic Rod is the medium for casting spells and also a configurator for certain machines.  When held, press the Spell Switch key (default: V) to cycle between spells.",
   "patchouli.et.rod_use": "The Electromagnetic Assembly Table configures the rod. Configuration slots include an Oscillator, Amplifier, and 8 spell slots. The Oscillator determines base spell damage, the Amplifier sets the damage multiplier. If oscillator is empty, spells deal no damage. Both have Iron, Gold, Copper, and Superconductor tiers.",
   "patchouli.et.energy": "Energy Production, Transmission & Storage",
   "patchouli.et.battery_entries": "Batteries",
@@ -175,5 +180,10 @@
   "patchouli.et.coulomb_domain_module.description": "Generates charge accumulation field + lightning",
   "patchouli.et.domain_reconstruction_module.description": "Repairs self using magnetic forces",
   "patchouli.et.mirage_pursuit_module.description": "Creates mirage that attacks targets after your spell hits",
-  "patchouli.et.magnetic_flux_cascade_module.description": "Locks onto a target, then triggers 4 additional chain jumps to nearby enemies via magnetic flux"
+  "patchouli.et.magnetic_flux_cascade_module.description": "Locks onto a target, then triggers 4 additional chain jumps to nearby enemies via magnetic flux",
+  "patchouli.et.frequency_division_arrow_rain_module.description": "Emits electromagnetic waves over a targeted area, modulating amplitude into arrows that strike enemies",
+  "patchouli.et.machine_entries": "Electromagnetic Apparatus",
+  "patchouli.et.generator_entries.magic_cast_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
+  "patchouli.et.generator_entries.living_entity_clone_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
+  "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes."
 }

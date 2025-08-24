@@ -112,6 +112,11 @@
       "type": "patchouli:spotlight",
       "item": "electrofynamic_thaumatury:magnetic_flux_cascade_module",
       "text": "patchouli.et.magnetic_flux_cascade_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrofynamic_thaumatury:frequency_division_arrow_rain_module",
+      "text": "patchouli.et.frequency_division_arrow_rain_module.description"
     }
   ]
 }

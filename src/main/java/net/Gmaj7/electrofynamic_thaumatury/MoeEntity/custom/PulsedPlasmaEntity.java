@@ -37,6 +37,13 @@ public class PulsedPlasmaEntity extends AbstractArrow {
         this.magicItem = itemStack.copy();
     }
 
+    public PulsedPlasmaEntity(LivingEntity pOwner, Vec3 start, Level pLevel, ItemStack itemStack) {
+        super(MoeEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
+        this.setOwner(pOwner);
+        this.setPos(start.x(), start.y(), start.z());
+        this.magicItem = itemStack.copy();
+    }
+
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();

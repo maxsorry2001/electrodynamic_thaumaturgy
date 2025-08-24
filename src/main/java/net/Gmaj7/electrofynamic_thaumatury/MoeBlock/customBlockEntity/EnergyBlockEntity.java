@@ -34,6 +34,7 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16777216) {
         @Override
         public void change(int i) {
+            setChanged();
             if(!level.isClientSide()){
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
             }

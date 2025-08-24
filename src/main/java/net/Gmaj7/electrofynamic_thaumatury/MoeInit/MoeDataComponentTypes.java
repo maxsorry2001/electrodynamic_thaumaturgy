@@ -5,6 +5,8 @@ import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -29,6 +31,13 @@ public class MoeDataComponentTypes {
     public static final Supplier<DataComponentType<BlockPos>> LINK_POS =
             MOE_DATA_COMPONENT_TYPE.register("moe_link_pos",
                     () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).build());
+
+    public static final Supplier<DataComponentType<CompoundTag>> ENTITY_DATA = MOE_DATA_COMPONENT_TYPE.register("entity_data",
+            () -> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).build());
+
+    public static final Supplier<DataComponentType<ResourceLocation>> ENTITY_TYPE = MOE_DATA_COMPONENT_TYPE.register("entity_type",
+            () -> DataComponentType.<ResourceLocation>builder().persistent(ResourceLocation.CODEC).build());
+
 
     public static void register(IEventBus eventBus){
         MOE_DATA_COMPONENT_TYPE.register(eventBus);

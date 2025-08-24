@@ -15,6 +15,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
+            setChanged();
             if(!level.isClientSide()){
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
             }
@@ -27,7 +28,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
         int i = Math.max( level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above()));
-        blockEntity.getEnergy().receiveEnergy(i * 64, false);
+        blockEntity.getEnergy().receiveEnergy(i * 256, false);
     }
 
     protected boolean canEnergyMake() {

@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class DomainReconstruction implements IMoeMagic{
+public class DomainReconstruction extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -38,11 +38,6 @@ public class DomainReconstruction implements IMoeMagic{
     @Override
     public int getBaseCooldown() {
         return 70;
-    }
-
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
     }
 
     @Override

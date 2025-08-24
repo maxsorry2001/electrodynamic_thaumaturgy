@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MirageEntity extends AbstractArrow {
-    private int livetick = 400;
+    private int livetick = 300;
     List<CastTarget> list = new ArrayList<>();
     private int castTick = 10;
     private RandomSource randomSource = RandomSource.create();

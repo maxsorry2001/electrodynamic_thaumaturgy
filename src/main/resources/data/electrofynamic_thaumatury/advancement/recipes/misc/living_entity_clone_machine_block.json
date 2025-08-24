@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stone": {
+    "has_energy_core": {
       "conditions": {
         "items": [
           {
-            "items": "#c:stones"
+            "items": "electrofynamic_thaumatury:energy_core"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrofynamic_thaumatury:board"
+        "recipe": "electrofynamic_thaumatury:living_entity_clone_machine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stone"
+      "has_energy_core"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrofynamic_thaumatury:board"
+      "electrofynamic_thaumatury:living_entity_clone_machine_block"
     ]
   }
 }

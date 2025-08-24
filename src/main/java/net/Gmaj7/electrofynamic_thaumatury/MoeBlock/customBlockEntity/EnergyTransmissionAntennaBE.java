@@ -19,7 +19,7 @@ import java.util.List;
 
 
 public class EnergyTransmissionAntennaBE extends BlockEntity {
-    private static final int maxSend = 1024;
+    private static final int maxSend = 65535;
     private List<BlockPos> receivePos = new ArrayList<>();
 
     public EnergyTransmissionAntennaBE(BlockPos pos, BlockState blockState) {

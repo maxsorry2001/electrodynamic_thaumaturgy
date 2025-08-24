@@ -35,4 +35,10 @@ public class MoeBlocks {
 
     public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = MOE_BLOCKS.register("magic_lithography_table_block",
             () -> new MagicLithographyTableBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+
+    public static final DeferredBlock<Block> MAGIC_CAST_MACHINE_BLOCK = MOE_BLOCKS.register("magic_cast_machine_block",
+            () -> new MagicCastMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+
+    public static final DeferredBlock<Block> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_BLOCKS.register("living_entity_clone_machine_block",
+            () -> new LivingEntityCloneMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 }

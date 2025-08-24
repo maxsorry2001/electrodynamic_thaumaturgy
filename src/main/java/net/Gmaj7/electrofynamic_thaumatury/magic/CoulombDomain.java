@@ -1,5 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.CoulombDomainBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.core.BlockPos;
@@ -18,7 +19,6 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(livingEntity.level(), livingEntity, itemStack);
         coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         livingEntity.level().addFreshEntity(coulombDomainBeaconEntity);
-
     }
 
     @Override
@@ -41,5 +41,18 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
     @Override
     public String getTranslate() {
         return "item.electrofynamic_thaumatury.coulomb_domain_module";
+    }
+
+    @Override
+    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+        LivingEntity target = getBlockTarget(magicCastBlockBE);
+        if(target == null) return;
+        BlockPos blockPos = target.getOnPos();
+        Vec3 vec3 = blockPos.getCenter();
+        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), (LivingEntity) magicCastBlockBE.getOwner(), MagicCastBlockBE.magicItem);
+        coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        target.level().addFreshEntity(coulombDomainBeaconEntity);
+        magicCastBlockBE.setCooldown(getBaseCooldown());
+        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
     }
 }

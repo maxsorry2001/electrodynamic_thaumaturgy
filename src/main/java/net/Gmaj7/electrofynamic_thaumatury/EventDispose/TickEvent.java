@@ -2,8 +2,10 @@ package net.Gmaj7.electrofynamic_thaumatury.EventDispose;
 
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
+import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,6 +23,8 @@ public class TickEvent {
         if(event.getItemStack().is(MoeItems.ENERGY_TRANSMISSION_ANTENNA.get())){
             event.getToolTip().add(Component.translatable("advancements.electrofynamic_thaumatury.energy_send.description"));
         }
+        if(event.getItemStack().is(MoeItems.GENETIC_RECORDER.get()) && event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE) != null && event.getItemStack().get(MoeDataComponentTypes.ENTITY_DATA) != null)
+            event.getToolTip().add(BuiltInRegistries.ENTITY_TYPE.getOptional(event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE)).get().getDescription());
     }
 
     @SubscribeEvent

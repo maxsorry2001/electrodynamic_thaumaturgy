@@ -18,7 +18,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class ElectromagneticAssault implements IMoeMagic{
+public class ElectromagneticAssault extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -42,7 +42,7 @@ public class ElectromagneticAssault implements IMoeMagic{
             livingEntity.teleportTo(blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z());
         else
             livingEntity.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-        livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 300));
+        livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 200));
         Vec3 vec3p = livingEntity.getLookAngle().normalize().scale(0.5).add(livingEntity.getEyePosition().add(0, -0.5, 0));
         if(level instanceof ServerLevel) {
             ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0, 0);
@@ -57,12 +57,7 @@ public class ElectromagneticAssault implements IMoeMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 60;
-    }
-
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
+        return 300;
     }
 
     @Override

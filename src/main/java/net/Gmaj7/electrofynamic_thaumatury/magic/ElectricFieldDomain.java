@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class ElectricFieldDomain implements IMoeMagic{
+public class ElectricFieldDomain extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -27,11 +27,6 @@ public class ElectricFieldDomain implements IMoeMagic{
     @Override
     public int getBaseCooldown() {
         return 80;
-    }
-
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
     }
 
     @Override

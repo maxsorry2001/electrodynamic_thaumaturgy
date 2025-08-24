@@ -33,6 +33,10 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
             () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
+    public static final Supplier<BlockItem> MAGIC_CAST_MACHINE_BLOCK = MOE_ITEM.register("magic_cast_machine_block",
+            () -> new BlockItem(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final Supplier<BlockItem> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_ITEM.register("living_entity_clone_machine_block",
+            () -> new  BlockItem(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
@@ -127,7 +131,7 @@ public class MoeItems {
     public static final Supplier<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core", new Item.Properties());
     public static final Supplier<Item> CAPACITOR = MOE_ITEM.registerSimpleItem("capacitor", new Item.Properties().stacksTo(1));
     public static final Supplier<Item> INDUCTANCE = MOE_ITEM.registerSimpleItem("inductance", new Item.Properties().stacksTo(1));
-    public static final Supplier<Item> BOARD = MOE_ITEM.registerSimpleItem("board", new Item.Properties());
+    public static final Supplier<Item> SI = MOE_ITEM.registerSimpleItem("si", new Item.Properties());
     public static final Supplier<Item> BJT = MOE_ITEM.registerSimpleItem("bjt", new Item.Properties().stacksTo(1));
     public static final Supplier<Item> SUPERCONDUCTING_UPDATE = MOE_ITEM.register("superconducting_update",
             () -> new SuperconductingUpdateItem(new Item.Properties()));
@@ -139,6 +143,8 @@ public class MoeItems {
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
     public static final Supplier<Item> POWER_BANK = MOE_ITEM.register("power_bank",
             () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
+    public static final Supplier<Item> GENETIC_RECORDER = MOE_ITEM.register("genetic_recorder",
+            () -> new Item(new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)

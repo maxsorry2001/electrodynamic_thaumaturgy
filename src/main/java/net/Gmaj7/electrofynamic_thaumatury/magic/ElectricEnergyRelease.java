@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class ElectricEnergyRelease implements IMoeMagic{
+public class ElectricEnergyRelease extends AbstractSelfMagic{
 
     @Override
     public void cast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -42,10 +42,6 @@ public class ElectricEnergyRelease implements IMoeMagic{
         return 80;
     }
 
-    @Override
-    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return true;
-    }
 
     @Override
     public String getTranslate() {

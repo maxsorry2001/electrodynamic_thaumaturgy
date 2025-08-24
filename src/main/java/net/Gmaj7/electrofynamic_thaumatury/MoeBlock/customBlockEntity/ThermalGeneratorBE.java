@@ -31,6 +31,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
+            setChanged();
             if(!level.isClientSide()){
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
             }
@@ -52,7 +53,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(512, false);
+        blockEntity.getEnergy().receiveEnergy(2048, false);
     }
 
     @Override
