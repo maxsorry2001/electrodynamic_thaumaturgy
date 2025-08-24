@@ -23,7 +23,7 @@ public class Attract extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), source);

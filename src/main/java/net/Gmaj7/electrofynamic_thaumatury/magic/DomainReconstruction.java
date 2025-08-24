@@ -31,7 +31,7 @@ public class DomainReconstruction extends AbstractSelfMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         if(!source.level().isClientSide()) {
             Collection<MobEffectInstance> collection = source.getActiveEffects();
             Iterator<MobEffectInstance> iterator = collection.iterator();

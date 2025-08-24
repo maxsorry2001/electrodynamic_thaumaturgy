@@ -30,7 +30,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         Level level = source.level();
         target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem) * 2);
         if(level instanceof ServerLevel){

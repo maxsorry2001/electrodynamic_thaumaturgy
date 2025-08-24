@@ -37,7 +37,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
         MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(source.level(), (LivingEntity) source, MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));

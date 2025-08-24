@@ -32,7 +32,7 @@ public class NerveBlocking extends AbstractWideMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(MoeFunction.getMagicAmount(itemStack) * 2));
         list.remove(source);
         list.add(target);

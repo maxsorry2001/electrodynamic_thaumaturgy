@@ -40,7 +40,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         Vec3 start = new Vec3(source.getX(), source.getY() + 1, source.getZ());
         Vec3 end = new Vec3(target.getX(), (target.getY() + target.getEyeY()) / 2, target.getZ());
         Level level = source.level();

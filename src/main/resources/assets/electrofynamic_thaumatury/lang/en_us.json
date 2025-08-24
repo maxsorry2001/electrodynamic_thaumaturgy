@@ -114,6 +114,8 @@
   "death.attack.magnet_resonance.player" : "%1$s dies of resonance by %s$2",
   "death.attack.mirage" : "%1$s was bewitched by the mirage",
   "death.attack.mirage.player" : "%1$s was bewitched by %s$2's mirage",
+  "death.attack.origin_thaumatury": "%1$s was disintegrated by an electromagnetic strike",
+  "death.attack.origin_thaumatury.player": "%1$s was disintegrated by %2$s's electromagnetic strike",
 
   "moe_no_magic": "No magic",
 

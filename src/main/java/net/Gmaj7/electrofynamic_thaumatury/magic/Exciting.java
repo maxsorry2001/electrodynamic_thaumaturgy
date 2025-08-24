@@ -32,7 +32,7 @@ public class Exciting extends AbstractWideMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity livingEntity, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity livingEntity, ItemStack itemStack) {
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {

@@ -20,7 +20,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(source.level(), source, MagicCastBlockBE.magicItem);
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());

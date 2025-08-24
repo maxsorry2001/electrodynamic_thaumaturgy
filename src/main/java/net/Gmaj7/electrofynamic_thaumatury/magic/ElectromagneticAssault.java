@@ -51,7 +51,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         Vec3 start = source.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = source.getLookAngle().normalize().scale(MoeFunction.getMagicAmount(itemStack) * 2).add(start);
         Level level = source.level();

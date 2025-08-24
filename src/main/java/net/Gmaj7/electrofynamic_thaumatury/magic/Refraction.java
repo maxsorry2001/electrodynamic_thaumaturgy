@@ -20,7 +20,7 @@ public class Refraction extends AbstractSelfMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         source.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) MoeFunction.getMagicAmount(itemStack) * 40));
         if(source.level() instanceof ServerLevel) {
             ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);

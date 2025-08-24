@@ -33,7 +33,7 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(2));
         for (LivingEntity livingEntity : list){
             if(livingEntity == source) {

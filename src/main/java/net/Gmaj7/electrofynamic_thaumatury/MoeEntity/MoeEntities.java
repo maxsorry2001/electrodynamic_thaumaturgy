@@ -71,7 +71,7 @@ public class MoeEntities {
                     .noSave()
                     .build("frequency_division_beacon_entity"));
     public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
-            MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MISC)
+            MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 0.98F)
                     .build("harmonic_sovereign"));
 

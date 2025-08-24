@@ -29,7 +29,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         Vec3 vec3 = target.getOnPos().getCenter();
         FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), MagicCastBlockBE.magicItem, source);
         source.level().addFreshEntity(frequencyDivisionArrowEntity);

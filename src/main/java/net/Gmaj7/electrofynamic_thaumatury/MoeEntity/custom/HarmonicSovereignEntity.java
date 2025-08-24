@@ -1,11 +1,13 @@
 package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeItem.MoeItems;
 import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
 import net.Gmaj7.electrofynamic_thaumatury.magic.IMoeMagic;
 import net.Gmaj7.electrofynamic_thaumatury.magic.LightingStrike;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -22,6 +24,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class HarmonicSovereignEntity extends Monster implements RangedAttackMob {
+    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.electrofynamic_thaumatury.harmonic_sovereign"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
     public HarmonicSovereignEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
@@ -48,21 +51,37 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 1000D)
+                .add(Attributes.MAX_HEALTH, 256D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.ATTACK_DAMAGE, 10F);
+                .add(Attributes.ATTACK_DAMAGE, 5F);
     }
 
     @Override
     public void tick() {
         super.tick();
-        Entity entity = this.getTarget();
-        int a = 1;
     }
 
     @Override
     public void performRangedAttack(LivingEntity target, float v) {
         IMoeMagic magic = new LightingStrike();
-        magic.playerCast(this, MoeTabs.setFullEnergyItem(MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));
+        magic.mobCast(this, target, MoeTabs.getGoldRod());
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer serverPlayer) {
+        super.startSeenByPlayer(serverPlayer);
+        this.bossEvent.addPlayer(serverPlayer);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer serverPlayer) {
+        super.stopSeenByPlayer(serverPlayer);
+        this.bossEvent.removePlayer(serverPlayer);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 }

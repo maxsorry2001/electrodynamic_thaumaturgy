@@ -218,15 +218,6 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(MoeItems.SUPERCONDUCTING_UPDATE.get())
                 .requires(MoeItems.COPPER_LC.get())
                 .unlockedBy("has_update", has(MoeItems.SUPERCONDUCTING_UPDATE.get())).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_UPDATE.get(), 2)
-                .pattern("ccc")
-                .pattern("abd")
-                .pattern("ccc")
-                .define('a', MoeItems.ENERGY_CORE.get())
-                .define('b', Items.NETHER_STAR)
-                .define('c', Items.ICE)
-                .define('d', Items.NETHERITE_INGOT)
-                .unlockedBy("has_nether_star", has(Items.NETHER_STAR)).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.EMPTY_PRIMARY_MODULE.get())
                 .pattern("ccc")
                 .define('c', MoeItems.COPPER_SHEET.get())

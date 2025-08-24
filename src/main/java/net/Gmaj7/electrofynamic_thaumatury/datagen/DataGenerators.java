@@ -25,7 +25,8 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         dataGenerator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
-                List.of(new LootTableProvider.SubProviderEntry(MoeBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+                List.of(new LootTableProvider.SubProviderEntry(MoeBlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                        new LootTableProvider.SubProviderEntry(MoeLivingEntityLootTable::new, LootContextParamSets.ENTITY)), lookupProvider));
 
         dataGenerator.addProvider(event.includeClient(), new MoeItemModelProvider(packOutput, existingFileHelper));
         //dataGenerator.addProvider(event.includeClient(), new MoeBlockStateProvider(packOutput, existingFileHelper));

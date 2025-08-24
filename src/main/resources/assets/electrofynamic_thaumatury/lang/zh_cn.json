@@ -113,6 +113,8 @@
   "death.attack.magnet_resonance.player" : "%1$s死于因%s$2的攻击产生的共振",
   "death.attack.mirage" : "%1$s陷入了蜃气幻觉",
   "death.attack.mirage.player" : "%1$s陷入了%s$2的蜃气幻觉",
+  "death.attack.origin_thaumatury" : "%1$s被一次电磁打击破坏了",
+  "death.attack.origin_thaumatury.player" : "%1$s被%s$2的一次电磁打击破坏掉了",
 
   "moe_no_magic": "空",
 

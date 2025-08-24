@@ -25,7 +25,7 @@ public class Protecting extends AbstractSelfMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+    public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         if(!source.level().isClientSide()) {
             float p = MoeFunction.getMagicAmount(itemStack);
             ((MoeDataGet) source).getProtective().setProtecting(p);

@@ -11,7 +11,7 @@ public interface IMoeMagic {
 
     void playerCast(LivingEntity livingEntity, ItemStack itemStack);
 
-    void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack);
+    void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack);
 
     int getBaseEnergyCost();
 
