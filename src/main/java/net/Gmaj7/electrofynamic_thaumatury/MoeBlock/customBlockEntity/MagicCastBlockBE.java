@@ -160,6 +160,6 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
     }
 
     public void extractEnergy(int energy){
-        this.energy.extractEnergy(energy * 128, false);
+        this.energy.extractEnergy(energy * 64, false);
     }
 }

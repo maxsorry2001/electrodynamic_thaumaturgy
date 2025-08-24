@@ -53,7 +53,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(2048, false);
+        blockEntity.getEnergy().receiveEnergy(768, false);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
         if(!level.isClientSide()){
             if (burnTime > 0) burnTime--;
             if (burnTime <= 0) {
-                if (!itemHandler.getStackInSlot(0).isEmpty()) {
+                if (!itemHandler.getStackInSlot(0).isEmpty() && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
                     int time = itemHandler.getStackInSlot(0).getBurnTime(null) / 4;
                     if (time > 0) {
                         burnTime = time;
