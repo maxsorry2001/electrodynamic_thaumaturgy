@@ -21,6 +21,11 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
+        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(source.level(), source, MagicCastBlockBE.magicItem);
+        magneticFluxCascadeEntity.setTarget(target);
+        magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
+        source.level().addFreshEntity(magneticFluxCascadeEntity);
+        if(source.level() instanceof ServerLevel) ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
 
     }
 

@@ -32,7 +32,16 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        List<Mob> list = source.level().getEntitiesOfClass(Mob.class, source.getBoundingBox().inflate(MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem)));
+        list.remove(source);
+        if(target instanceof  Mob) list.add((Mob) target);
+        if(list.isEmpty()) return;
+        for (int i = 0; i < list.size(); i++){
+            Mob changeTarget = list.get(i);
+            if(changeTarget instanceof Enemy || changeTarget.getTarget() == target){
+                changeTarget.setTarget(target);
+            }
+        }
     }
 
     @Override

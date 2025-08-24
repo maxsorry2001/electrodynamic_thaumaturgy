@@ -34,7 +34,19 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(2));
+        for (LivingEntity livingEntity : list){
+            if(livingEntity == source) {
+                source.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 10)));
+                continue;
+            }
+            livingEntity.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
+            livingEntity.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
+        }
+        if(source.level() instanceof ServerLevel) {
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

@@ -25,7 +25,11 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(source.level());
+        lightningBolt.setVisualOnly(true);
+        lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
+        source.level().addFreshEntity(lightningBolt);
     }
 
     @Override

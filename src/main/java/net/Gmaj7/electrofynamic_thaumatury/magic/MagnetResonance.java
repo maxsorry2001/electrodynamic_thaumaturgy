@@ -23,7 +23,11 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(MagicCastBlockBE.magicItem)), (int) MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem)));
+        if(!source.level().isClientSide()) {
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

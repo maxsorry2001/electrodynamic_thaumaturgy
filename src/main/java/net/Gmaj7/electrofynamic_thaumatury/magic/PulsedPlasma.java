@@ -21,7 +21,10 @@ public class PulsedPlasma extends AbstractWideMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        Vec3 vec3 = new Vec3(target.getX() - source.getX(), target.getY() - source.getY() - 3, target.getZ() - source.getZ()).normalize();
+        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(source, source.level(), itemStack);
+        pulsedPlasmaEntity.shootFromRotation(source, source.getXRot(), source.getYRot(), 0, 5, 1.5F);
+        source.level().addFreshEntity(pulsedPlasmaEntity);
     }
 
     @Override

@@ -32,8 +32,18 @@ public class Exciting extends AbstractWideMagic{
     }
 
     @Override
-    public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+    public void MobCast(LivingEntity source, LivingEntity livingEntity, ItemStack itemStack) {
+        List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(20));
+        for (LivingEntity target : list){
+            if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {
+                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
+                MoeFunction.checkTargetEnhancement(itemStack, source);
+            }
+        }
+        if(source.level() instanceof ServerLevel){
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 1, source.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 1, source.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

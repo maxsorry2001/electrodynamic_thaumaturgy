@@ -32,7 +32,20 @@ public class DomainReconstruction extends AbstractSelfMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        if(!source.level().isClientSide()) {
+            Collection<MobEffectInstance> collection = source.getActiveEffects();
+            Iterator<MobEffectInstance> iterator = collection.iterator();
+            while(iterator.hasNext()) {
+                MobEffectInstance mobEffectInstance = iterator.next();
+                if(!mobEffectInstance.getEffect().value().isBeneficial())
+                    source.removeEffect(mobEffectInstance.getEffect());
+            }
+            source.heal(MoeFunction.getMagicAmount(itemStack));
+            if(source.level() instanceof ServerLevel) {
+                ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+                ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+            }
+        }
     }
 
     @Override

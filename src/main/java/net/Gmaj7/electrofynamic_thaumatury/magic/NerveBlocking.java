@@ -33,7 +33,19 @@ public class NerveBlocking extends AbstractWideMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(MoeFunction.getMagicAmount(itemStack) * 2));
+        list.remove(source);
+        list.add(target);
+        for (LivingEntity livingEntity : list){
+            if((target instanceof Mob && ((Mob) target).getTarget() == source)) {
+                target.addEffect(new MobEffectInstance(MoeEffects.NERVE_BLOCKING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (1 * MoeFunction.getStrengthRate(itemStack))));
+                MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
+            }
+        }
+        if(source.level() instanceof ServerLevel){
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 1, source.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 1, source.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

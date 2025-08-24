@@ -38,7 +38,20 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        BlockPos blockPos = target.getOnPos();
+        Vec3 vec3 = blockPos.getCenter();
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(source.level(), (LivingEntity) source, MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
+        magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        magmaLightingBeaconEntity.setDirection(Direction.UP);
+        source.level().addFreshEntity(magmaLightingBeaconEntity);
+        if(source.level() instanceof ServerLevel) {
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

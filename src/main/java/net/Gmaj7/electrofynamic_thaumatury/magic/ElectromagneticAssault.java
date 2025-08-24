@@ -52,7 +52,32 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        Vec3 start = source.getEyePosition().subtract(0, 0.25, 0);
+        Vec3 end = source.getLookAngle().normalize().scale(MoeFunction.getMagicAmount(itemStack) * 2).add(start);
+        Level level = source.level();
+        MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, source, start, end, true, 0.5F);
+        for (HitResult result : hitResult.getTargets()) {
+            if (result instanceof EntityHitResult) {
+                Entity entity = ((EntityHitResult) result).getEntity();
+                if (entity instanceof LivingEntity) {
+                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(itemStack) * 0.5F);
+                    MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
+                }
+            }
+        }
+        BlockHitResult blockHitResult = MoeFunction.getHitBlock(level, source, start, end);
+        BlockPos blockPos = blockHitResult.getBlockPos();
+        Vec3 vec3 = new Vec3(end.x() - source.getX(), end.y() - source.getY(), end.z() - source.getZ()).normalize();
+        if (blockHitResult.getType() != HitResult.Type.MISS)
+            source.teleportTo(blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z());
+        else
+            source.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+        source.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
+        Vec3 vec3p = source.getLookAngle().normalize().scale(0.5).add(source.getEyePosition().add(0, -0.5, 0));
+        if(level instanceof ServerLevel) {
+            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0 ,0);
+        }
     }
 
     @Override

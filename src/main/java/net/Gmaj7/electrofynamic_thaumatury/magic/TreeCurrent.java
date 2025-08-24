@@ -37,7 +37,15 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(itemStack));
+        addParticle(source, target);
+        List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
+        for (LivingEntity target1 : list) {
+            if (target1 == target || target1 == source) continue;
+            addParticle(target, target1);
+            target1.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(itemStack));
+            MoeFunction.checkTargetEnhancement(itemStack, target1);
+        }
     }
 
     @Override

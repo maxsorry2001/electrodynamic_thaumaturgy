@@ -20,7 +20,12 @@ public class MiragePursuit extends AbstractSelfMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        MirageEntity mirageEntity = new MirageEntity(source.level(), source);
+        source.level().addFreshEntity(mirageEntity);
+        if(source.level() instanceof ServerLevel) {
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override

@@ -41,7 +41,21 @@ public class ElectromagneticRay extends AbstractWideMagic{
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        Vec3 start = new Vec3(source.getX(), source.getY() + 1, source.getZ());
+        Vec3 end = new Vec3(target.getX(), (target.getY() + target.getEyeY()) / 2, target.getZ());
+        Level level = source.level();
+        MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, source, start, end, true, 0.5F);
+        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, source, false);
+        level.addFreshEntity(moeRayEntity);
+        for (HitResult result : hitResult.getTargets()) {
+            if (result instanceof EntityHitResult) {
+                Entity entity = ((EntityHitResult) result).getEntity();
+                if (entity instanceof LivingEntity) {
+                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
+                    MoeFunction.checkTargetEnhancement(MagicCastBlockBE.magicItem, (LivingEntity) target);
+                }
+            }
+        }
     }
 
     @Override

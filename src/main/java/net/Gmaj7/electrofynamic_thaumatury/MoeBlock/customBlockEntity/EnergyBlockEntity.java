@@ -73,7 +73,7 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
         IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
         IEnergyStorage inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.EnergyStorage.ITEM);
         IEnergyStorage outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.EnergyStorage.ITEM);
-        if(outStorage != null){
+        if(outStorage != null && !itemHandler.getStackInSlot(0).isEmpty() && outStorage.canReceive()){
             int canOut = outStorage.getMaxEnergyStored() - outStorage.getEnergyStored();
             if(canOut < energyBlockEntity.tickEnergyTranslate)
                 energyBlockEntity.outEnergy(Math.min(energyStorage.getEnergyStored(), canOut), outStorage, energyStorage);

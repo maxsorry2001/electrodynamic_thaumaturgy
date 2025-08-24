@@ -29,7 +29,15 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
 
     @Override
     public void MobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-
+        BlockPos blockPos = target.getOnPos();
+        Vec3 vec3 = blockPos.getCenter();
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(source.level(), source, MagicCastBlockBE.magicItem);
+        magneticRecombinationCannonBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        source.level().addFreshEntity(magneticRecombinationCannonBeaconEntity);
+        if(source.level() instanceof ServerLevel) {
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) source.level()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        }
     }
 
     @Override
