@@ -2,12 +2,13 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom;
 
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
 import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
-import net.Gmaj7.electrofynamic_thaumatury.magic.IMoeMagic;
-import net.Gmaj7.electrofynamic_thaumatury.magic.LightingStrike;
+import net.Gmaj7.electrofynamic_thaumatury.magic.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -23,8 +24,22 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HarmonicSovereignEntity extends Monster implements RangedAttackMob {
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.electrofynamic_thaumatury.harmonic_sovereign"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
+    private final List<IMoeMagic> magic = new ArrayList<>(){{
+        add(new ElectromagneticRay());
+        add(new PulsedPlasma());
+        add(new LightingStrike());
+        add(new Attract());
+        add(new MagneticFluxCascade());
+        add(new MagneticRecombinationCannon());
+        add(new St_Elmo_s_fire());
+        add(new FrequencyDivisionArrowRain());
+    }};
+    private RandomSource randomSource = RandomSource.create();
     public HarmonicSovereignEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
@@ -36,7 +51,7 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0, 60, 12F));
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0, 30, 12F));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0));
         this.goalSelector.addGoal(3, new AvoidEntityGoal(this, Wolf.class, 6.0F, 1.0, 1.2));
@@ -51,7 +66,7 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 256D)
+                .add(Attributes.MAX_HEALTH, 512D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.ATTACK_DAMAGE, 5F);
     }
@@ -63,14 +78,18 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
 
     @Override
     public void performRangedAttack(LivingEntity target, float v) {
-        IMoeMagic magic = new LightingStrike();
-        magic.mobCast(this, target, MoeTabs.getGoldRod());
+        magic.get(randomSource.nextInt(magic.size())).mobCast(this, target, MoeTabs.getCopperRod());
     }
 
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.bossEvent.addPlayer(serverPlayer);
+    }
+
+    @Override
+    public void die(DamageSource damageSource) {
+        super.die(damageSource);
     }
 
     @Override

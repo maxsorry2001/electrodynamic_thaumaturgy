@@ -74,6 +74,10 @@ public class MoeEntities {
             MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 0.98F)
                     .build("harmonic_sovereign"));
+    public static final Supplier<EntityType<HarmonicSovereignSummonEntity>> HARMONIC_SOVEREIGN_SUMMON_ENTITY =
+            MOE_ENTITY_TYPES.register("harmonic_sovereign_summon_entity", () -> EntityType.Builder.<HarmonicSovereignSummonEntity>of(HarmonicSovereignSummonEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .build("harmonic_sovereign_summon_entity"));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

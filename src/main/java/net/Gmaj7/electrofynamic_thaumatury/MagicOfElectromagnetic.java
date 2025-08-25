@@ -113,6 +113,7 @@ public class MagicOfElectromagnetic
             EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), FrequencyDivisionArrowRender::new);
             EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_BEACON_ENTITY.get(), FrequencyDivisionBeaconRender::new);
             EntityRenderers.register(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), HarmonicSovereignEntityRender::new);
+            EntityRenderers.register(MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get(), HarmonicSovereignSummonRender::new);
         }
 
         @SubscribeEvent
