@@ -97,6 +97,14 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('b', MoeItems.ENERGY_CORE.get())
                 .define('c', Items.FURNACE)
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.HARMONIC_CORE_BLOCK.get())
+                .pattern("aba")
+                .pattern("aca")
+                .pattern("aba")
+                .define('a', Items.EMERALD)
+                .define('b', MoeItems.ENERGY_CORE.get())
+                .define('c', Items.NETHER_STAR)
+                .unlockedBy("has_gold", has(MoeItems.GOLD_LC.get())).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.IRON_SHEET.get(), 16)
                 .pattern("aaa")

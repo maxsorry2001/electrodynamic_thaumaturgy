@@ -38,23 +38,23 @@ public class LevelBlockEvent {
         }
     }
 
-    @SubscribeEvent
-    public static void place(BlockEvent.EntityPlaceEvent event){
-        if(event.getPlacedBlock().is(Blocks.CARVED_PUMPKIN)){
-            BlockPattern.BlockPatternMatch match = MoeBlockPattern.HARMONIC_SOVEREIGN_SUMMON.find(event.getLevel(), event.getPos());
-            if(match != null){
-                BlockPos blockPos = match.getBlock(0, 2, 0).getPos();
-                HarmonicSovereignSummonEntity harmonicSovereignSummonEntity = (HarmonicSovereignSummonEntity) MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get().create((Level) event.getLevel());
-                harmonicSovereignSummonEntity.teleportTo(blockPos.getX() + 0.5, blockPos.getY() + 0.05, blockPos.getZ() + 0.5);
-                event.getLevel().addFreshEntity(harmonicSovereignSummonEntity);
-                for(int i = 0; i < match.getWidth(); ++i) {
-                    for(int j = 0; j < match.getHeight(); ++j) {
-                        BlockInWorld blockinworld = match.getBlock(i, j, 0);
-                        event.getLevel().setBlock(blockinworld.getPos(), Blocks.AIR.defaultBlockState(), 2);
-                        event.getLevel().levelEvent(2001, blockinworld.getPos(), Block.getId(blockinworld.getState()));
-                    }
-                }
-            }
-        }
-    }
+    //@SubscribeEvent
+    //public static void place(BlockEvent.EntityPlaceEvent event){
+    //    if(event.getPlacedBlock().is(Blocks.CARVED_PUMPKIN)){
+    //        BlockPattern.BlockPatternMatch match = MoeBlockPattern.HARMONIC_SOVEREIGN_SUMMON.find(event.getLevel(), event.getPos());
+    //        if(match != null){
+    //            BlockPos blockPos = match.getBlock(0, 2, 0).getPos();
+    //            HarmonicSovereignSummonEntity harmonicSovereignSummonEntity = (HarmonicSovereignSummonEntity) MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get().create((Level) event.getLevel());
+    //            harmonicSovereignSummonEntity.teleportTo(blockPos.getX() + 0.5, blockPos.getY() + 0.05, blockPos.getZ() + 0.5);
+    //            event.getLevel().addFreshEntity(harmonicSovereignSummonEntity);
+    //            for(int i = 0; i < match.getWidth(); ++i) {
+    //                for(int j = 0; j < match.getHeight(); ++j) {
+    //                    BlockInWorld blockinworld = match.getBlock(i, j, 0);
+    //                    event.getLevel().setBlock(blockinworld.getPos(), Blocks.AIR.defaultBlockState(), 2);
+    //                    event.getLevel().levelEvent(2001, blockinworld.getPos(), Block.getId(blockinworld.getState()));
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 }

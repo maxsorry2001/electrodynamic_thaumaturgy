@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity> {
     public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "moe_ray_entity_model"), "main");
-    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_entity.png");
+    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/magnetic_recombination_cannon_beacon_entity.png");
     private final ModelPart body;
     public MagneticRecombinationCannonBeaconRender(EntityRendererProvider.Context context) {
         super(context);

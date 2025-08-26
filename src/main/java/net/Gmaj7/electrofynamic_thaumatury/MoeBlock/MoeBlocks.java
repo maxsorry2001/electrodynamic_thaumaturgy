@@ -41,4 +41,7 @@ public class MoeBlocks {
 
     public static final DeferredBlock<Block> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_BLOCKS.register("living_entity_clone_machine_block",
             () -> new LivingEntityCloneMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+
+    public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = MOE_BLOCKS.register("harmonic_core_block",
+            () -> new HarmonicCoreBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F)));
 }

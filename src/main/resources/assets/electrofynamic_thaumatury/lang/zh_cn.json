@@ -75,6 +75,7 @@
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "法术光刻台",
   "block.electrofynamic_thaumatury.magic_cast_machine_block": "电磁驱动器",
   "block.electrofynamic_thaumatury.living_entity_clone_machine_block": "生物克隆器",
+  "block.electrofynamic_thaumatury.harmonic_core_block": "谐波核心",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "电磁射线",
   "entity.electrofynamic_thaumatury.pulsed_plasma_entity": "脉冲等离子体",
@@ -87,6 +88,7 @@
   "entity.electrofynamic_thaumatury.frequency_division_arrow_entity": "电磁波箭",
   "entity.electrofynamic_thaumatury.frequency_division_beacon_entity": "频分箭雨信标",
   "entity.electrofynamic_thaumatury.harmonic_sovereign": "谐波君主",
+  "entity.electrofynamic_thaumatury.harmonic_sovereign_summon_entity": "谐波核心",
 
   "advancements.electrofynamic_thaumatury.root.title": "电磁奇术",
   "advancements.electrofynamic_thaumatury.root.description": "",

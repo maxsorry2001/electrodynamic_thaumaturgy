@@ -36,7 +36,6 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
         add(new Attract());
         add(new MagneticFluxCascade());
         add(new MagneticRecombinationCannon());
-        add(new St_Elmo_s_fire());
         add(new FrequencyDivisionArrowRain());
     }};
     private RandomSource randomSource = RandomSource.create();

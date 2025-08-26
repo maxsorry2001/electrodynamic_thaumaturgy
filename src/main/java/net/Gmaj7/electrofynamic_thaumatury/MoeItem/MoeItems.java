@@ -40,6 +40,8 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_ITEM.register("living_entity_clone_machine_block",
             () -> new  BlockItem(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> HARMONIC_CORE_BLOCK = MOE_ITEM.register("harmonic_core_block",
+            () -> new BlockItem(MoeBlocks.HARMONIC_CORE_BLOCK.get(), new Item.Properties().stacksTo(16)));
 
     public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
