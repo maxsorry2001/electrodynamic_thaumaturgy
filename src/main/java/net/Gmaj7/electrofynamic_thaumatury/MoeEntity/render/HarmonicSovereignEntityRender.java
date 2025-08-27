@@ -13,10 +13,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Witch;
 
 public class HarmonicSovereignEntityRender extends MobRenderer<HarmonicSovereignEntity, HarmonicSovereignEntityModel<HarmonicSovereignEntity>> {
-    private static final ResourceLocation WITCH_LOCATION = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/mob/harmonic_sovereign.png");
+    private static final ResourceLocation TEX_LOCATION = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/mob/harmonic_sovereign.png");
 
     public HarmonicSovereignEntityRender(EntityRendererProvider.Context p_174443_) {
-        super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(ModelLayers.WITCH)), 0.5F);
+        super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(ModelLayers.EVOKER)), 0.5F);
         this.addLayer(new WitchItemLayer(this, p_174443_.getItemInHandRenderer()));
     }
 
@@ -25,7 +25,7 @@ public class HarmonicSovereignEntityRender extends MobRenderer<HarmonicSovereign
     }
 
     public ResourceLocation getTextureLocation(HarmonicSovereignEntity entity) {
-        return WITCH_LOCATION;
+        return TEX_LOCATION;
     }
 
     protected void scale(Witch livingEntity, PoseStack poseStack, float partialTickTime) {
