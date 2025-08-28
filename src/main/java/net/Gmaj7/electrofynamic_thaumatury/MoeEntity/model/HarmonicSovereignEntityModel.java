@@ -110,9 +110,9 @@ public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> ext
         this.rightArm.yRot = 0.0F;
         this.leftArm.yRot = 0.0F;
 
-        this.arms.visible = true;
-        this.leftArm.visible = false;
-        this.rightArm.visible = false;//施法时左右臂为true
+        this.arms.visible = !entity.isCasting();
+        this.leftArm.visible = entity.isCasting();
+        this.rightArm.visible = entity.isCasting();
     }
 
     private ModelPart getArm(HumanoidArm arm) {

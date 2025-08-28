@@ -3,6 +3,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeInit;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ThermalGeneratorBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.HarmonicSovereignEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,9 +13,11 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 public class MoePacket{
     public static class MoeSelectMagicPacket implements CustomPacketPayload {
         private final int magicSelect;
@@ -159,6 +162,43 @@ public class MoePacket{
                         ((ThermalGeneratorBE) blockEntity).setBurnTime(packet.tick);
                         ((ThermalGeneratorBE) blockEntity).setFullBurnTime(packet.burn);
                     }
+                }
+            });
+        }
+    }
+
+    public static class CastTickPacket implements CustomPacketPayload{
+        public int entityId;
+        public int castTick;
+        public static final CustomPacketPayload.Type<CastTickPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "cast_tick"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, CastTickPacket> STREAM_CODEC = CustomPacketPayload.codec(CastTickPacket::write, CastTickPacket::new);
+
+        public CastTickPacket(int entityId, int castTick){
+            this.entityId = entityId;
+            this.castTick = castTick;
+        }
+
+        public CastTickPacket(FriendlyByteBuf buf){
+            this.entityId = buf.readInt();
+            this.castTick = buf.readInt();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeInt(entityId);
+            buf.writeInt(castTick);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(CastTickPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if(context.player().level().isClientSide()){
+                    Entity entity = context.player().level().getEntity(packet.entityId);
+                    if(entity instanceof HarmonicSovereignEntity)
+                        ((HarmonicSovereignEntity) entity).setCastTick(packet.castTick);
                 }
             });
         }
