@@ -16,7 +16,7 @@ public class MoeProtectHud implements LayeredDraw.Layer {
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;
-        if(player.isCreative()) return;
+        if(player.isCreative() || Minecraft.getInstance().options.hideGui) return;
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();
         float protect = ((MoeDataGet)player).getProtective().getProtecting();

@@ -18,7 +18,6 @@ public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> ext
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "harmonic_sovereign_entity"), "main");
     private final ModelPart root;
     private final ModelPart head;
-    private final ModelPart hat;
     private final ModelPart arms;
     private final ModelPart leftLeg;
     private final ModelPart rightLeg;
@@ -28,8 +27,6 @@ public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> ext
     public HarmonicSovereignEntityModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild("head");
-        this.hat = this.head.getChild("hat");
-        this.hat.visible = false;
         this.arms = root.getChild("arms");
         this.leftLeg = root.getChild("left_leg");
         this.rightLeg = root.getChild("right_leg");
@@ -103,10 +100,14 @@ public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> ext
         this.rightArm.x = -5.0F;
         this.leftArm.z = 0.0F;
         this.leftArm.x = 5.0F;
-        this.rightArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
-        this.leftArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
-        this.rightArm.zRot = (float) (Math.PI * 3.0 / 4.0);
-        this.leftArm.zRot = (float) (-Math.PI * 3.0 / 4.0);
+        //this.rightArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
+        //this.leftArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
+        //this.rightArm.zRot = (float) (Math.PI * 3.0 / 4.0);
+        //this.leftArm.zRot = (float) (-Math.PI * 3.0 / 4.0);
+        this.rightArm.xRot = - (float) ((20 - entity.getCastTick()) * Math.PI / 40.0);
+        this.leftArm.xRot = - (float) ((20 - entity.getCastTick()) * Math.PI / 40.0);
+        this.rightArm.zRot = (float) (Math.PI / 2.0);
+        this.leftArm.zRot = (float) (-Math.PI / 2.0);
         this.rightArm.yRot = 0.0F;
         this.leftArm.yRot = 0.0F;
 
@@ -117,10 +118,6 @@ public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> ext
 
     private ModelPart getArm(HumanoidArm arm) {
         return arm == HumanoidArm.LEFT ? this.leftArm : this.rightArm;
-    }
-
-    public ModelPart getHat() {
-        return this.hat;
     }
 
     @Override

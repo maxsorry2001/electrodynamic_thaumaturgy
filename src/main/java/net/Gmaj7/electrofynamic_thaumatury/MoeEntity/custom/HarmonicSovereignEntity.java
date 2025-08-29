@@ -97,10 +97,15 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
         this.castTick = castTick;
     }
 
+    public int getCastTick() {
+        return castTick;
+    }
+
     @Override
     public void tick() {
         super.tick();
         if(this.castTick > 0) this.castTick--;
+        if(coolDown.length < 7) this.coolDown = new int[]{0,0,0,0,0,0,0};
         for (int i = 0; i < coolDown.length; i++){
             if(coolDown[i] > 0) coolDown[i]--;
         }

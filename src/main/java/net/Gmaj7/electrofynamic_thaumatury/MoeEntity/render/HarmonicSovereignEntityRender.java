@@ -16,7 +16,7 @@ public class HarmonicSovereignEntityRender extends MobRenderer<HarmonicSovereign
     private static final ResourceLocation TEX_LOCATION = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/mob/harmonic_sovereign.png");
 
     public HarmonicSovereignEntityRender(EntityRendererProvider.Context p_174443_) {
-        super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(ModelLayers.EVOKER)), 0.5F);
+        super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(HarmonicSovereignEntityModel.LAYER_LOCATION)), 0.5F);
         this.addLayer(new WitchItemLayer(this, p_174443_.getItemInHandRenderer()));
     }
 
