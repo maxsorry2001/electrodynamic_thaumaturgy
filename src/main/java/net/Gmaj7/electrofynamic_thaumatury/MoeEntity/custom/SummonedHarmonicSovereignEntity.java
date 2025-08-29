@@ -5,37 +5,32 @@ import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.Gmaj7.electrofynamic_thaumatury.MoeTabs;
 import net.Gmaj7.electrofynamic_thaumatury.magic.*;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-public class HarmonicSovereignEntity extends Monster implements RangedAttackMob {
-    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.electrofynamic_thaumatury.harmonic_sovereign"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
-    protected int castTick = 0;
-    protected int[] coolDown = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
-    protected int castAnim = 0;
-    protected final RandomSource random = RandomSource.create();
+public class SummonedHarmonicSovereignEntity extends HarmonicSovereignEntity {
+    private Entity master;
+    protected UUID masterUUID;
     private final List<IMoeMagic> magic = new ArrayList<>(){{
         add(new ElectromagneticRay());
         add(new PulsedPlasma());
@@ -47,12 +42,12 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
         add(new Attract());
     }};
     private RandomSource randomSource = RandomSource.create();
-    public HarmonicSovereignEntity(EntityType<? extends Monster> entityType, Level level) {
+    public SummonedHarmonicSovereignEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
-    public HarmonicSovereignEntity(Level pLevel) {
-        super(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), pLevel);
+    public SummonedHarmonicSovereignEntity(Level pLevel) {
+        super(MoeEntities.SUMMONED_HARMONIC_SOVEREIGN_ENTITY.get(), pLevel);
     }
 
     @Override
@@ -61,14 +56,13 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0, 40, 12F));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new AvoidEntityGoal(this, Wolf.class, 6.0F, 1.0, 1.2));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[0]));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, IronGolem.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, Mob.class, 5, false, false, (p_28879_) -> {
+            return p_28879_ instanceof Enemy || ((Mob)p_28879_).getTarget() == this.getMaster();
+        }));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -81,17 +75,40 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putInt("cast_tick", this.castTick);
-        compound.putIntArray("cool_down", this.coolDown);
-        compound.putInt("cast_anim", this.castAnim);
+        if (this.masterUUID != null) {
+            compound.putUUID("master", this.masterUUID);
+        }
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.castTick = compound.getInt("cast_tick");
-        this.coolDown = compound.getIntArray("cool_down");
-        this.castAnim = compound.getInt("cast_anim");
+        if (compound.hasUUID("master")) {
+            this.masterUUID = compound.getUUID("master");
+            this.master = null;
+        }
+    }
+
+    public Entity getMaster() {
+        if (this.master != null && !this.master.isRemoved()) {
+            return this.master;
+        } else {
+            if (this.masterUUID != null) {
+                Level var2 = this.level();
+                if (var2 instanceof ServerLevel serverlevel) {
+                    this.master = serverlevel.getEntity(this.masterUUID);
+                    return this.master;
+                }
+            }
+            return null;
+        }
+    }
+
+    public void setMaster(Entity master) {
+        if(master != null) {
+            this.master = master;
+            this.masterUUID = master.getUUID();
+        }
     }
 
     public void setCastTick(int castTick) {
@@ -126,8 +143,6 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
-        if(!isSummoned())
-            this.bossEvent.addPlayer(serverPlayer);
     }
 
     @Override
@@ -138,15 +153,11 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
     @Override
     public void stopSeenByPlayer(ServerPlayer serverPlayer) {
         super.stopSeenByPlayer(serverPlayer);
-        if(!isSummoned())
-            this.bossEvent.removePlayer(serverPlayer);
     }
 
     @Override
     public void aiStep() {
         super.aiStep();
-        if(!isSummoned())
-            this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
     public boolean isCasting(){
@@ -161,7 +172,8 @@ public class HarmonicSovereignEntity extends Monster implements RangedAttackMob 
         return castAnim;
     }
 
-    protected boolean isSummoned(){
-        return false;
+    @Override
+    protected boolean isSummoned() {
+        return true;
     }
 }

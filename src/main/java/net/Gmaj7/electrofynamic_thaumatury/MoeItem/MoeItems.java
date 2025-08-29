@@ -15,8 +15,6 @@ import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
 import static net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction.setEmpty;
 
 public class MoeItems {

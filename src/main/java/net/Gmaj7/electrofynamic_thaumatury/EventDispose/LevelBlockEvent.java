@@ -1,26 +1,15 @@
 package net.Gmaj7.electrofynamic_thaumatury.EventDispose;
 
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockPattern;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.EnergyBlockEntity;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.MoeEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.HarmonicSovereignEntity;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.HarmonicSovereignSummonEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.pattern.BlockInWorld;
-import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.List;
 

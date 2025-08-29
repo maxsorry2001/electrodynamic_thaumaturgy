@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
+public class MagicCastMachineBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
     protected Entity owner;
     protected UUID ownerUUID;
     protected int cooldown = 0;
@@ -55,15 +55,15 @@ public class MagicCastBlockBE extends BlockEntity implements IMoeEnergyBlockEnti
             }
         }
     };
-    public MagicCastBlockBE(BlockPos pos, BlockState blockState) {
+    public MagicCastMachineBE(BlockPos pos, BlockState blockState) {
         super(MoeBlockEntities.MAGIC_CAST_BE.get(), pos, blockState);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, MagicCastBlockBE magicCastBlockBE){
-        if(magicCastBlockBE.canCast() && !level.isClientSide()) {
-            magicCastBlockBE.cast();
+    public static void tick(Level level, BlockPos pos, BlockState state, MagicCastMachineBE magicCastMachineBE){
+        if(magicCastMachineBE.canCast() && !level.isClientSide()) {
+            magicCastMachineBE.cast();
         }
-        else if (magicCastBlockBE.cooldown > 0) magicCastBlockBE.cooldown--;
+        else if (magicCastMachineBE.cooldown > 0) magicCastMachineBE.cooldown--;
     }
 
     protected boolean canCast(){

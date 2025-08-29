@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MagneticRecombinationCannonBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
@@ -31,7 +31,7 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(source.level(), source, MagicCastBlockBE.magicItem);
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(source.level(), source, MagicCastMachineBE.magicItem);
         magneticRecombinationCannonBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         source.level().addFreshEntity(magneticRecombinationCannonBeaconEntity);
         if(source.level() instanceof ServerLevel) {
@@ -62,19 +62,19 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-        LivingEntity target = getBlockTarget(magicCastBlockBE);
+    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
+        LivingEntity target = getBlockTarget(magicCastMachineBE);
         if(target == null) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(magicCastBlockBE.getLevel(), (LivingEntity) magicCastBlockBE.getOwner(), MagicCastBlockBE.magicItem);
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(magicCastMachineBE.getLevel(), (LivingEntity) magicCastMachineBE.getOwner(), MagicCastMachineBE.magicItem);
         magneticRecombinationCannonBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
-        magicCastBlockBE.getLevel().addFreshEntity(magneticRecombinationCannonBeaconEntity);
-        magicCastBlockBE.setCooldown(getBaseCooldown());
-        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
-        if(magicCastBlockBE.getLevel() instanceof ServerLevel) {
-            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        magicCastMachineBE.getLevel().addFreshEntity(magneticRecombinationCannonBeaconEntity);
+        magicCastMachineBE.setCooldown(getBaseCooldown());
+        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
+        if(magicCastMachineBE.getLevel() instanceof ServerLevel) {
+            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
         }
     }
 }

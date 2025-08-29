@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
-import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.CoulombDomainBeaconEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.HarmonicSovereignSummonEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

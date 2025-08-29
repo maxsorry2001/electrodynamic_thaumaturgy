@@ -170,22 +170,26 @@ public class MoePacket{
     public static class CastTickPacket implements CustomPacketPayload{
         public int entityId;
         public int castTick;
+        public int castAnim;
         public static final CustomPacketPayload.Type<CastTickPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "cast_tick"));
         public static final StreamCodec<RegistryFriendlyByteBuf, CastTickPacket> STREAM_CODEC = CustomPacketPayload.codec(CastTickPacket::write, CastTickPacket::new);
 
-        public CastTickPacket(int entityId, int castTick){
+        public CastTickPacket(int entityId, int castTick, int castAnim){
             this.entityId = entityId;
             this.castTick = castTick;
+            this.castAnim = castAnim;
         }
 
         public CastTickPacket(FriendlyByteBuf buf){
             this.entityId = buf.readInt();
             this.castTick = buf.readInt();
+            this.castAnim = buf.readInt();
         }
 
         public void write(FriendlyByteBuf buf){
             buf.writeInt(entityId);
             buf.writeInt(castTick);
+            buf.writeInt(castAnim);
         }
 
         @Override
@@ -197,8 +201,10 @@ public class MoePacket{
             context.enqueueWork(() -> {
                 if(context.player().level().isClientSide()){
                     Entity entity = context.player().level().getEntity(packet.entityId);
-                    if(entity instanceof HarmonicSovereignEntity)
+                    if(entity instanceof HarmonicSovereignEntity) {
                         ((HarmonicSovereignEntity) entity).setCastTick(packet.castTick);
+                        ((HarmonicSovereignEntity) entity).setCastAnim(packet.castAnim);
+                    }
                 }
             });
         }

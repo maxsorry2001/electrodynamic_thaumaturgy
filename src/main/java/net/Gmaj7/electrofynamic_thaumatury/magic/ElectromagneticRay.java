@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
@@ -51,8 +51,8 @@ public class ElectromagneticRay extends AbstractWideMagic{
             if (result instanceof EntityHitResult) {
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
-                    MoeFunction.checkTargetEnhancement(MagicCastBlockBE.magicItem, (LivingEntity) target);
+                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), source), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
+                    MoeFunction.checkTargetEnhancement(MagicCastMachineBE.magicItem, (LivingEntity) target);
                 }
             }
         }
@@ -74,27 +74,27 @@ public class ElectromagneticRay extends AbstractWideMagic{
     }
 
     @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
-        list.remove(magicCastBlockBE.getOwner());
+    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
+        List<LivingEntity> list = magicCastMachineBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastMachineBE.getBlockPos()).inflate(7));
+        list.remove(magicCastMachineBE.getOwner());
         if(list.isEmpty()) return;
         LivingEntity lineTarget = list.get(RandomSource.create().nextInt(list.size()));
-        Vec3 start = new Vec3(magicCastBlockBE.getBlockPos().getX(), magicCastBlockBE.getBlockPos().getY() + 1, magicCastBlockBE.getBlockPos().getZ());
+        Vec3 start = new Vec3(magicCastMachineBE.getBlockPos().getX(), magicCastMachineBE.getBlockPos().getY() + 1, magicCastMachineBE.getBlockPos().getZ());
         Vec3 end = new Vec3(lineTarget.getX(), (lineTarget.getY() + lineTarget.getEyeY()) / 2, lineTarget.getZ());
-        Level level = magicCastBlockBE.getLevel();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getBlockLineHitResult(level, magicCastBlockBE, start, end, true, 0.5F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, (LivingEntity) magicCastBlockBE.getOwner(), false);
+        Level level = magicCastMachineBE.getLevel();
+        MoeFunction.RayHitResult hitResult = MoeFunction.getBlockLineHitResult(level, magicCastMachineBE, start, end, true, 0.5F);
+        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, (LivingEntity) magicCastMachineBE.getOwner(), false);
         level.addFreshEntity(moeRayEntity);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastBlockBE.getOwner()), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
-                    MoeFunction.checkTargetEnhancement(MagicCastBlockBE.magicItem, (LivingEntity) target);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
+                    MoeFunction.checkTargetEnhancement(MagicCastMachineBE.magicItem, (LivingEntity) target);
                 }
             }
         }
-        magicCastBlockBE.setCooldown(getBaseCooldown());
-        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        magicCastMachineBE.setCooldown(getBaseCooldown());
+        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
     }
 }

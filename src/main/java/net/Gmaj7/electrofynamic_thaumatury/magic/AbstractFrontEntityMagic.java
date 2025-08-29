@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -27,9 +27,9 @@ public abstract class AbstractFrontEntityMagic implements IMoeMagic{
         else return null;
     }
 
-    protected LivingEntity getBlockTarget(MagicCastBlockBE magicCastBlockBE){
-        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
-        list.remove(magicCastBlockBE.getOwner());
+    protected LivingEntity getBlockTarget(MagicCastMachineBE magicCastMachineBE){
+        List<LivingEntity> list = magicCastMachineBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastMachineBE.getBlockPos()).inflate(7));
+        list.remove(magicCastMachineBE.getOwner());
         return list.get(RandomSource.create().nextInt(list.size()));
     }
 }

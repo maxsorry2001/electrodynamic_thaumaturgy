@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
@@ -21,12 +21,12 @@ public interface IMoeMagic {
 
     String getTranslate();
 
-    void blockCast(MagicCastBlockBE magicCastBlockBE);
+    void blockCast(MagicCastMachineBE magicCastMachineBE);
 
-    default boolean canBlockCast(MagicCastBlockBE magicCastBlockBE){
-        if(magicCastBlockBE.getEnergy().getEnergyStored() < getBaseEnergyCost() * 128) return false;
-        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
-        list.remove(magicCastBlockBE.getOwner());
+    default boolean canBlockCast(MagicCastMachineBE magicCastMachineBE){
+        if(magicCastMachineBE.getEnergy().getEnergyStored() < getBaseEnergyCost() * 128) return false;
+        List<LivingEntity> list = magicCastMachineBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastMachineBE.getBlockPos()).inflate(7));
+        list.remove(magicCastMachineBE.getOwner());
         if(list.isEmpty()) return false;
         else return true;
     }

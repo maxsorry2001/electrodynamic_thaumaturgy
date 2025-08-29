@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeDamageType;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
@@ -106,18 +106,18 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     }
 
     @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-        LivingEntity target = getBlockTarget(magicCastBlockBE);
+    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
+        LivingEntity target = getBlockTarget(magicCastMachineBE);
         if(target == null) return;
-        target.hurt(new DamageSource(MoeFunction.getHolder(magicCastBlockBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastBlockBE.getOwner()), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
-        blockParticle(new Vec3(magicCastBlockBE.getBlockPos().getX(), magicCastBlockBE.getBlockPos().getY() + 1, magicCastBlockBE.getBlockPos().getZ()), target);
+        target.hurt(new DamageSource(MoeFunction.getHolder(magicCastMachineBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
+        blockParticle(new Vec3(magicCastMachineBE.getBlockPos().getX(), magicCastMachineBE.getBlockPos().getY() + 1, magicCastMachineBE.getBlockPos().getZ()), target);
         List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
         for (LivingEntity target1 : list) {
-            if (target1 == target || target1 == magicCastBlockBE.getOwner()) continue;
+            if (target1 == target || target1 == magicCastMachineBE.getOwner()) continue;
             addParticle(target, target1);
-            target1.hurt(new DamageSource(MoeFunction.getHolder(magicCastBlockBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastBlockBE.getOwner()), MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem));
+            target1.hurt(new DamageSource(MoeFunction.getHolder(magicCastMachineBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumatury), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
         }
-        magicCastBlockBE.setCooldown(getBaseCooldown());
-        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        magicCastMachineBE.setCooldown(getBaseCooldown());
+        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
     }
 }

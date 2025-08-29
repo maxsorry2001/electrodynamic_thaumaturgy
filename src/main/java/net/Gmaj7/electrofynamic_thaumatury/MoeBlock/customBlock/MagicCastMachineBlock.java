@@ -2,7 +2,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -53,10 +53,10 @@ public class MagicCastMachineBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof MagicCastBlockBE magicCastBlockBE && !level.isClientSide()) {
-                IEnergyStorage energyStorage = magicCastBlockBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), magicCastBlockBE.getBlockPos()));
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(magicCastBlockBE, Component.translatable("block.electrofynamic_thaumatury.energy_block")), pos);
+            if (blockEntity instanceof MagicCastMachineBE magicCastMachineBE && !level.isClientSide()) {
+                IEnergyStorage energyStorage = magicCastMachineBE.getEnergy();
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), magicCastMachineBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(magicCastMachineBE, Component.translatable("block.electrofynamic_thaumatury.energy_block")), pos);
             }
             return InteractionResult.CONSUME;
         }
@@ -65,7 +65,7 @@ public class MagicCastMachineBlock extends BaseEntityBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof MagicCastBlockBE blockEntity) {
+            if (level.getBlockEntity(pos) instanceof MagicCastMachineBE blockEntity) {
                 blockEntity.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -76,20 +76,20 @@ public class MagicCastMachineBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if(blockEntity instanceof MagicCastBlockBE && placer != null){
-            ((MagicCastBlockBE) blockEntity).setOwner(placer);
+        if(blockEntity instanceof MagicCastMachineBE && placer != null){
+            ((MagicCastMachineBE) blockEntity).setOwner(placer);
         }
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.MAGIC_CAST_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.MAGIC_CAST_BE.get(), MagicCastBlockBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.MAGIC_CAST_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.MAGIC_CAST_BE.get(), MagicCastMachineBE::tick) : null;
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new MagicCastBlockBE(blockPos, blockState);
+        return new MagicCastMachineBE(blockPos, blockState);
     }
 }

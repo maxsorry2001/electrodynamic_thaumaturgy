@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastMachineBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEffect.MoeEffects;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoeFunction;
 import net.Gmaj7.electrofynamic_thaumatury.MoeParticle.MoeParticles;
@@ -23,7 +23,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(MagicCastBlockBE.magicItem)), (int) MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem)));
+        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(MagicCastMachineBE.magicItem)), (int) MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem)));
         if(!source.level().isClientSide()) {
             ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
             ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
@@ -51,15 +51,15 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     }
 
     @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
-        LivingEntity target = getBlockTarget(magicCastBlockBE);
+    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
+        LivingEntity target = getBlockTarget(magicCastMachineBE);
         if(target == null) return;
-        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(MagicCastBlockBE.magicItem)), (int) MoeFunction.getMagicAmount(MagicCastBlockBE.magicItem)));
-        if(!magicCastBlockBE.getLevel().isClientSide()) {
-            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastBlockBE.getLevel()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
+        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(MagicCastMachineBE.magicItem)), (int) MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem)));
+        if(!magicCastMachineBE.getLevel().isClientSide()) {
+            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), target.getX(), target.getY() + 0.1, target.getZ(), 1, 0, 0, 0, 0);
         }
-        magicCastBlockBE.setCooldown(getBaseCooldown());
-        magicCastBlockBE.extractEnergy(getBaseEnergyCost());
+        magicCastMachineBE.setCooldown(getBaseCooldown());
+        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
     }
 }

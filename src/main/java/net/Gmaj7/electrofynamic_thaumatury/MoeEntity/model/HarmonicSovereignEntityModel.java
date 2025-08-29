@@ -3,16 +3,16 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeEntity.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.Gmaj7.electrofynamic_thaumatury.MagicOfElectromagnetic;
 import net.Gmaj7.electrofynamic_thaumatury.MoeEntity.custom.HarmonicSovereignEntity;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.monster.AbstractIllager;
 
 public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "harmonic_sovereign_entity"), "main");
@@ -100,16 +100,24 @@ public class HarmonicSovereignEntityModel<T extends HarmonicSovereignEntity> ext
         this.rightArm.x = -5.0F;
         this.leftArm.z = 0.0F;
         this.leftArm.x = 5.0F;
-        //this.rightArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
-        //this.leftArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
-        //this.rightArm.zRot = (float) (Math.PI * 3.0 / 4.0);
-        //this.leftArm.zRot = (float) (-Math.PI * 3.0 / 4.0);
-        this.rightArm.xRot = - (float) ((20 - entity.getCastTick()) * Math.PI / 40.0);
-        this.leftArm.xRot = - (float) ((20 - entity.getCastTick()) * Math.PI / 40.0);
-        this.rightArm.zRot = (float) (Math.PI / 2.0);
-        this.leftArm.zRot = (float) (-Math.PI / 2.0);
-        this.rightArm.yRot = 0.0F;
-        this.leftArm.yRot = 0.0F;
+        switch (entity.getCastAnim()){
+            case 0 -> {
+                this.rightArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
+                this.leftArm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.25F;
+                this.rightArm.zRot = (float) (Math.PI * 3.0 / 4.0);
+                this.leftArm.zRot = (float) (-Math.PI * 3.0 / 4.0);
+                this.rightArm.yRot = 0.0F;
+                this.leftArm.yRot = 0.0F;
+            }
+            case 1 ->{
+                this.rightArm.xRot = - (float) ((20 - entity.getCastTick()) * Math.PI / 40.0);
+                this.leftArm.xRot = - (float) ((20 - entity.getCastTick()) * Math.PI / 40.0);
+                this.rightArm.zRot = (float) (Math.PI / 2.0);
+                this.leftArm.zRot = (float) (-Math.PI / 2.0);
+                this.rightArm.yRot = 0.0F;
+                this.leftArm.yRot = 0.0F;
+            }
+        }
 
         this.arms.visible = !entity.isCasting();
         this.leftArm.visible = entity.isCasting();
