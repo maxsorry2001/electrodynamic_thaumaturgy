@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "electrodynamic_thaumaturgy:block/temperature_generator_block"
+    }
+  }
+}

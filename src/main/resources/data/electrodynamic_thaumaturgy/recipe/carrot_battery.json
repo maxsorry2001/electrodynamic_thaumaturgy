@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
+    },
+    {
+      "item": "electrodynamic_thaumaturgy:copper_sheet"
+    },
+    {
+      "item": "minecraft:carrot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:carrot_battery"
+  }
+}

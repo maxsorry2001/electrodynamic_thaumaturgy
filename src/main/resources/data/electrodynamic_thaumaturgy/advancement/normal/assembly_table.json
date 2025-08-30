@@ -1,0 +1,33 @@
+{
+  "parent": "electrodynamic_thaumaturgy:normal/energy_core",
+  "criteria": {
+    "has_assembly_table_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:electromagnetic_assembly_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrodynamic_thaumaturgy.assembly_table.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamic_thaumaturgy:electromagnetic_assembly_table"
+    },
+    "title": {
+      "translate": "advancements.electrodynamic_thaumaturgy.assembly_table.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_assembly_table_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

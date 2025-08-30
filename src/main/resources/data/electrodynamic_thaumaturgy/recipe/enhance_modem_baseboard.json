@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:copper_ingot"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    },
+    "c": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "aba",
+    "ccc"
+  ],
+  "result": {
+    "count": 4,
+    "id": "electrodynamic_thaumaturgy:enhance_modem_baseboard"
+  }
+}

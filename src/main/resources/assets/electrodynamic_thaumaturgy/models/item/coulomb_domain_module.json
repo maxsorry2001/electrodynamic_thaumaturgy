@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "electrodynamic_thaumaturgy:item/coulomb_domain_module"
+  }
+}

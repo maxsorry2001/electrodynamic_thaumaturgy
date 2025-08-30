@@ -1,0 +1,127 @@
+{
+  "name": "patchouli.et.show_magic",
+  "category": "electrodynamic_thaumaturgy:category_magic",
+  "icon": "electrodynamic_thaumaturgy:attract_module",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:attract_module",
+      "text": "patchouli.et.attract_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:ray_module",
+      "text": "patchouli.et.ray_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:pulsed_plasma_module",
+      "text": "patchouli.et.pulsed_plasma_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:protecting_module",
+      "text": "patchouli.et.protecting_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:exciting_module",
+      "text": "patchouli.et.exciting_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:electric_field_domain_module",
+      "text": "patchouli.et.electric_field_domain_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:tree_current_module",
+      "text": "patchouli.et.tree_current_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:refraction_module",
+      "text": "patchouli.et.refraction_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:electric_energy_release_module",
+      "text": "patchouli.et.electric_energy_release_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:magnetic_recombination_cannon_module",
+      "text": "patchouli.et.magnetic_recombination_cannon_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:electromagnetic_assault_module",
+      "text": "patchouli.et.electromagnetic_assault_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:magma_lighting_module",
+      "text": "patchouli.et.magma_lighting_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:st_elmo_s_fire_module",
+      "text": "patchouli.et.st_elmo_s_fire_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:hydrogen_bond_fracture_module",
+      "text": "patchouli.et.hydrogen_bond_fracture_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:lighting_strike_module",
+      "text": "patchouli.et.lighting_strike_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:magnet_resonance_module",
+      "text": "patchouli.et.magnet_resonance_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:block_nerve_module",
+      "text": "patchouli.et.block_nerve_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:disturbing_by_high_intensity_magnetic_module",
+      "text": "patchouli.et.disturbing_by_high_intensity_magnetic_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:coulomb_domain_module",
+      "text": "patchouli.et.coulomb_domain_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:domain_reconstruction_module",
+      "text": "patchouli.et.domain_reconstruction_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:mirage_pursuit_module",
+      "text": "patchouli.et.mirage_pursuit_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:magnetic_flux_cascade_module",
+      "text": "patchouli.et.magnetic_flux_cascade_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:frequency_division_arrow_rain_module",
+      "text": "patchouli.et.frequency_division_arrow_rain_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:saint_summon_module",
+      "text": "patchouli.et.saint_summon_module.description"
+    }
+  ]
+}

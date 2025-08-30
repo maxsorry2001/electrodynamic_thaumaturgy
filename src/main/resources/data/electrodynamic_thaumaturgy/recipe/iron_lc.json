@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:capacitor"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:si"
+    },
+    "c": {
+      "item": "electrodynamic_thaumaturgy:inductance"
+    },
+    "d": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " a ",
+    "db ",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:iron_lc"
+  }
+}

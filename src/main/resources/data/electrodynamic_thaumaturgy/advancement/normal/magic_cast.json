@@ -1,0 +1,33 @@
+{
+  "parent": "electrodynamic_thaumaturgy:normal/energy_core",
+  "criteria": {
+    "has_magic_cast_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:electromagnetic_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrodynamic_thaumaturgy.magic_cast.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamic_thaumaturgy:electromagnetic_rod"
+    },
+    "title": {
+      "translate": "advancements.electrodynamic_thaumaturgy.magic_cast.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_magic_cast_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

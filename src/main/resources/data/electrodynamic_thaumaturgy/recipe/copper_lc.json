@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "electrodynamic_thaumaturgy:gold_lc"
+    },
+    "d": {
+      "item": "minecraft:copper_ingot"
+    },
+    "e": {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  },
+  "pattern": [
+    "   ",
+    "dbe",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:copper_lc"
+  }
+}

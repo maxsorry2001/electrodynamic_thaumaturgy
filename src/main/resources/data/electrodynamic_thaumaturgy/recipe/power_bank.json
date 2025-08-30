@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "bbb",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:power_bank"
+  }
+}

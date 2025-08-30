@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "electrofynamic_thaumatury:item/disturbing_by_high_intensity_magnetic_module"
-  }
-}

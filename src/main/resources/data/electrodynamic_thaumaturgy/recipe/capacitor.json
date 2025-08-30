@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:copper_sheet"
+    }
+  },
+  "pattern": [
+    "   ",
+    "a a",
+    "b b"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:capacitor"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "criteria": {
+    "join": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "background": "electrodynamic_thaumaturgy:textures/gui/advancement.png",
+    "description": {
+      "translate": "advancements.electrodynamic_thaumaturgy.root.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "electrodynamic_thaumaturgy:electromagnetic_rod"
+    },
+    "title": {
+      "translate": "advancements.electrodynamic_thaumaturgy.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "join"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "electrodynamic_thaumaturgy:advancement/et_start_book"
+    ],
+    "recipes": [
+      "electrodynamic_thaumaturgy:lodestone"
+    ]
+  },
+  "sends_telemetry_event": true
+}

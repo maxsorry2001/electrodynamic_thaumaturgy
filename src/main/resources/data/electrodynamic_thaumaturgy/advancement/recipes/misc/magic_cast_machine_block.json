@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_energy_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:energy_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "electrodynamic_thaumaturgy:magic_cast_machine_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_energy_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "electrodynamic_thaumaturgy:magic_cast_machine_block"
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.MoeItem;
+
+import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticTier;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import static net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction.setEmpty;
+
+public class MoeItems {
+    public static final DeferredRegister.Items MOE_ITEM = DeferredRegister.createItems(MagicOfElectromagnetic.MODID);
+
+    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_ASSEMBLY_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_assembly_table", MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
+    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_MODEM_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_modem_table", MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
+    public static final DeferredItem<BlockItem> ENERGY_BLOCK = MOE_ITEM.register("energy_block",
+            () -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
+    public static final DeferredItem<BlockItem> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_ITEM.register("temperature_generator",
+            () -> new BlockItem(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_ITEM.register("photovoltaic_generator",
+            () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> THERMAL_ENERGY_MAKER_BLOCK = MOE_ITEM.register("thermal_generator",
+            () -> new BlockItem(MoeBlocks.THERMAL_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.register("magic_lithography_table",
+            () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
+            () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<BlockItem> MAGIC_CAST_MACHINE_BLOCK = MOE_ITEM.register("magic_cast_machine_block",
+            () -> new BlockItem(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_ITEM.register("living_entity_clone_machine_block",
+            () -> new  BlockItem(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> HARMONIC_CORE_BLOCK = MOE_ITEM.register("harmonic_core_block",
+            () -> new BlockItem(MoeBlocks.HARMONIC_CORE_BLOCK.get(), new Item.Properties().stacksTo(16)));
+
+    public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
+            () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> PULSED_PLASMA_MODULE = MOE_ITEM.register("pulsed_plasma_module",
+            () -> new MoeMagicTypeModuleItem(new PulsedPlasma(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> PROTECTING_MODULE = MOE_ITEM.register("protecting_module",
+            () -> new MoeMagicTypeModuleItem(new Protecting(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EXCITING_MODULE = MOE_ITEM.register("exciting_module",
+            () -> new MoeMagicTypeModuleItem(new Exciting(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ELECTRIC_FIELD_DOMAIN_MODULE = MOE_ITEM.register("electric_field_domain_module",
+            () -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ATTRACT_MODULE = MOE_ITEM.register("attract_module",
+            () -> new MoeMagicTypeModuleItem(new Attract(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> TREE_CURRENT_MODULE = MOE_ITEM.register("tree_current_module",
+            () -> new MoeMagicTypeModuleItem(new TreeCurrent(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> REFRACTION_MODULE = MOE_ITEM.register("refraction_module",
+            () -> new MoeMagicTypeModuleItem(new Refraction(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ELECTRIC_ENERGY_RELEASE_MODULE = MOE_ITEM.register("electric_energy_release_module",
+            () -> new MoeMagicTypeModuleItem(new ElectricEnergyRelease(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAGNETIC_RECOMBINATION_CANNON_MODULE = MOE_ITEM.register("magnetic_recombination_cannon_module",
+            () -> new MoeMagicTypeModuleItem(new MagneticRecombinationCannon(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ELECTROMAGNETIC_ASSAULT_MODULE = MOE_ITEM.register("electromagnetic_assault_module",
+            () -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAGMA_LIGHTING_MODULE = MOE_ITEM.register("magma_lighting_module",
+            () -> new MoeMagicTypeModuleItem(new MagmaLighting(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ST_ELMO_S_FIRE_MODULE = MOE_ITEM.register("st_elmo_s_fire_module",
+            () -> new MoeMagicTypeModuleItem(new St_Elmo_s_fire(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> HYDROGEN_BOND_FRACTURE_MODULE = MOE_ITEM.register("hydrogen_bond_fracture_module",
+            () -> new MoeMagicTypeModuleItem(new HydrogenBondFracture(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> LIGHTING_STRIKE_MODULE = MOE_ITEM.register("lighting_strike_module",
+            () -> new MoeMagicTypeModuleItem(new LightingStrike(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAGNET_RESONANCE_MODULE = MOE_ITEM.register("magnet_resonance_module",
+            () -> new MoeMagicTypeModuleItem(new MagnetResonance(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> BLOCK_NERVE_MODULE = MOE_ITEM.register("block_nerve_module",
+            () -> new MoeMagicTypeModuleItem(new NerveBlocking(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE = MOE_ITEM.register("disturbing_by_high_intensity_magnetic_module",
+            () -> new MoeMagicTypeModuleItem(new DisturbingByHighIntensityMagnetic(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> COULOMB_DOMAIN_MODULE = MOE_ITEM.register("coulomb_domain_module",
+            () -> new MoeMagicTypeModuleItem(new CoulombDomain(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> DOMAIN_RECONSTRUCTION_MODULE = MOE_ITEM.register("domain_reconstruction_module",
+            () -> new MoeMagicTypeModuleItem(new DomainReconstruction(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MIRAGE_PURSUIT_MODULE = MOE_ITEM.register("mirage_pursuit_module",
+            () -> new MoeMagicTypeModuleItem(new MiragePursuit(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAGNETIC_FLUX_CASCADE_MODULE = MOE_ITEM.register("magnetic_flux_cascade_module",
+            () -> new MoeMagicTypeModuleItem(new MagneticFluxCascade(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> FREQUENCY_DIVISION_ARROW_RAIN_MODULE = MOE_ITEM.register("frequency_division_arrow_rain_module",
+            () -> new MoeMagicTypeModuleItem(new FrequencyDivisionArrowRain(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> SAINT_SUMMON_MODULE = MOE_ITEM.register("saint_summon_module",
+            () -> new MoeMagicTypeModuleItem(new SaintSummon(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",
+            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.register("empty_intermediate_module",
+            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> EMPTY_ADVANCED_MODULE = MOE_ITEM.register("empty_advanced_module",
+            () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
+
+    public static final DeferredItem<Item> IRON_LC = MOE_ITEM.register("iron_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> GOLD_LC = MOE_ITEM.register("gold_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.GOLD, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> COPPER_LC = MOE_ITEM.register("copper_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.COPPER, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> SUPERCONDUCTING_LC = MOE_ITEM.register("superconducting_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.SUPERCONDUCTING, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EMPTY_LC = MOE_ITEM.register("empty_lc",
+            () -> new LcOscillatorModuleItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> IRON_POWER = MOE_ITEM.register("iron_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.IRON, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> GOLD_POWER = MOE_ITEM.register("gold_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.GOLD, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> COPPER_POWER = MOE_ITEM.register("copper_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.COPPER, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> SUPERCONDUCTING_POWER = MOE_ITEM.register("superconducting_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.SUPERCONDUCTING, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EMPTY_POWER = MOE_ITEM.register("empty_power",
+            () -> new PowerAmplifierItem(ElectromagneticTier.EMPTY, new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> STRENGTH_ENHANCE = MOE_ITEM.register("strength_enhance",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.STRENGTH, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> COOLDOWN_ENHANCE = MOE_ITEM.register("cooldown_enhance",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.COOLDOWN, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EFFICIENCY_ENHANCE = MOE_ITEM.register("efficiency_enhance",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.EFFICIENCY, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ENTROPY_ENHANCE = MOE_ITEM.register("entropy_enhance",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.ENTROPY, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> LIFE_EXTRACTION_ENHANCE = MOE_ITEM.register("life_extraction_enhance",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.LIFE_EXTRACTION, new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ENHANCE_MODEM_BASEBOARD = MOE_ITEM.register("enhance_modem_baseboard",
+            () -> new EnhancementModulateItem(EnhancementData.EnhancementType.EMPTY, new Item.Properties()));
+
+    public static final DeferredItem<Item> COPPER_SHEET = MOE_ITEM.registerSimpleItem("copper_sheet");
+    public static final DeferredItem<Item> IRON_SHEET = MOE_ITEM.registerSimpleItem("iron_sheet");
+    public static final DeferredItem<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core", new Item.Properties());
+    public static final DeferredItem<Item> CAPACITOR = MOE_ITEM.registerSimpleItem("capacitor", new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> INDUCTANCE = MOE_ITEM.registerSimpleItem("inductance", new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> SI = MOE_ITEM.registerSimpleItem("si", new Item.Properties());
+    public static final DeferredItem<Item> BJT = MOE_ITEM.registerSimpleItem("bjt", new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = MOE_ITEM.register("superconducting_update",
+            () -> new SuperconductingUpdateItem(new Item.Properties()));
+    public static final DeferredItem<Item> POTATO_BATTERY = MOE_ITEM.register("potato_battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
+    public static final DeferredItem<Item> CARROT_BATTERY = MOE_ITEM.register("carrot_battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
+    public static final DeferredItem<Item> SOLUTION_BATTERY = MOE_ITEM.register("solution_battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 16384)));
+    public static final DeferredItem<Item> POWER_BANK = MOE_ITEM.register("power_bank",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
+    public static final DeferredItem<Item> GENETIC_RECORDER = MOE_ITEM.register("genetic_recorder",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
+            () -> new MagicCastItem(new Item.Properties().stacksTo(1)
+                    .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
+                    .component(DataComponents.CONTAINER, setEmpty())
+                    .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
+                    .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+
+    public static final DeferredItem<Item> HARMONIC_SOVEREIGN_SPAWN_EGG = MOE_ITEM.register("harmonic_sovereign_spawn_egg",
+            () -> new DeferredSpawnEggItem(MoeEntities.HARMONIC_SOVEREIGN_ENTITY, 0x5D6FF1, 0x52A4E6,
+                    new Item.Properties()));
+}

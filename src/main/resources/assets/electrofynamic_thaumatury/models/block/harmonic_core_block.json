@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "electrofynamic_thaumatury:block/harmonic_core_block"
-  }
-}

@@ -1,0 +1,12 @@
+{
+  "name": "patchouli.gui.et_start_book",
+  "landing_text": "patchouli.gui.et_text",
+  "version": 1,
+  "creative_tab": "electrodynamic_thaumaturgy:moe_tab",
+  "use_resource_pack": true,
+  "model": "electrodynamic_thaumaturgy:et_start_book",
+  "i18n": true,
+  "show_progress": false,
+  "book_texture": "patchouli:textures/gui/book_blue.png",
+  "custom_book_item": "electrodynamic_thaumaturgy:et_start_book"
+}

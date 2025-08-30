@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:glass_pane"
+    },
+    "b": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "c": {
+      "item": "electrodynamic_thaumaturgy:si"
+    }
+  },
+  "pattern": [
+    " a ",
+    " b ",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:genetic_recorder"
+  }
+}

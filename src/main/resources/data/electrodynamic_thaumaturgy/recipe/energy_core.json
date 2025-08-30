@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:copper_ingot"
+    },
+    "b": {
+      "item": "minecraft:lodestone"
+    }
+  },
+  "pattern": [
+    " a ",
+    "aba"
+  ],
+  "result": {
+    "count": 8,
+    "id": "electrodynamic_thaumaturgy:energy_core"
+  }
+}

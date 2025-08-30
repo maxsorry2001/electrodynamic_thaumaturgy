@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    },
+    "c": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    " c ",
+    "aba",
+    " a "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:magic_lithography_table"
+  }
+}

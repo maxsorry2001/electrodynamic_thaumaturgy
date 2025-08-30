@@ -1,0 +1,21 @@
+{
+  "name": "patchouli.et.magic_entries",
+  "category": "electrodynamic_thaumaturgy:category_magic",
+  "icon": "electrodynamic_thaumaturgy:magic_lithography_table",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:magic_lithography_table",
+      "text": "patchouli.et.magic_entries.start"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:empty_primary_module",
+      "recipe2": "electrodynamic_thaumaturgy:empty_intermediate_module"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:empty_advanced_module"
+    }
+  ]
+}

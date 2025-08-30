@@ -1,0 +1,33 @@
+{
+  "parent": "electrodynamic_thaumaturgy:normal/lithography_table",
+  "criteria": {
+    "has_empty_module_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:empty_module"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrodynamic_thaumaturgy.empty_module.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamic_thaumaturgy:empty_module"
+    },
+    "title": {
+      "translate": "advancements.electrodynamic_thaumaturgy.empty_module.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_empty_module_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
