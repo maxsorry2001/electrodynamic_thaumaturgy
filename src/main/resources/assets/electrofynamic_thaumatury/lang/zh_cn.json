@@ -195,5 +195,6 @@
   "patchouli.et.machine_entries": "电磁器械",
   "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "提供能量，电磁驱动器会根据放入的法术模块自动索敌施法，不过消耗的能量会更高。注意：电磁驱动器无法施放强化自身类的法术",
   "patchouli.et.generator_entries.bio_replication_vat_machine_block": "消耗能量，生成机器中放入的基因刻录器中刻录的生物",
-  "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆"
+  "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆",
+  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "每秒钟从大地里直接提取出一个金属锭"
 }

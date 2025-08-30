@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_board": {
+    "has_energy_core": {
       "conditions": {
         "items": [
           {
-            "items": "electrofynamic_thaumatury:si"
+            "items": "electrofynamic_thaumatury:energy_core"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrofynamic_thaumatury:iron_power"
+        "recipe": "electrofynamic_thaumatury:geological_metal_excavator_machine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_board"
+      "has_energy_core"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrofynamic_thaumatury:iron_power"
+      "electrofynamic_thaumatury:geological_metal_excavator_machine_block"
     ]
   }
 }

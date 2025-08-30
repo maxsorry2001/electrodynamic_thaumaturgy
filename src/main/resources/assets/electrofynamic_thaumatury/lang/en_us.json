@@ -195,5 +195,6 @@
   "patchouli.et.machine_entries": "Electromagnetic Apparatus",
   "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
   "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
-  "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes."
+  "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes.",
+  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "Extracts one metal ingot directly from the earth every second."
 }

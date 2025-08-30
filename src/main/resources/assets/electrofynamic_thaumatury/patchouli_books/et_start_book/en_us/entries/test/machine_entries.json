@@ -17,6 +17,11 @@
       "type": "patchouli:crafting",
       "recipe": "electrofynamic_thaumatury:genetic_recorder",
       "text": "patchouli.et.generator_entries.genetic_recorder"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrofynamic_thaumatury:geological_metal_excavator_machine_block",
+      "text": "patchouli.et.generator_entries.geological_metal_excavator_machine_block"
     }
   ]
 }
