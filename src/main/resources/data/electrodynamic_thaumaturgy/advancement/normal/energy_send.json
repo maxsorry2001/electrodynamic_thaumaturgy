@@ -1,0 +1,33 @@
+{
+  "parent": "electrodynamic_thaumaturgy:normal/generator",
+  "criteria": {
+    "has_energy_antenna_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:energy_transmission_antenna"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.electrodynamic_thaumaturgy.energy_send.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamic_thaumaturgy:energy_transmission_antenna"
+    },
+    "title": {
+      "translate": "advancements.electrodynamic_thaumaturgy.energy_send.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_energy_antenna_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,56 @@
+{
+  "name": "patchouli.et.rod_entries",
+  "category": "electrodynamic_thaumaturgy:category_start",
+  "icon": "electrodynamic_thaumaturgy:electromagnetic_rod",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:lodestone",
+      "recipe2": "electrodynamic_thaumaturgy:energy_core"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:electromagnetic_rod",
+      "text": "patchouli.et_books.start_page"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:electromagnetic_assembly_table",
+      "text": "patchouli.et.rod_use"
+    },{
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:iron_sheet",
+      "recipe2": "electrodynamic_thaumaturgy:copper_sheet"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:si",
+      "recipe2": "electrodynamic_thaumaturgy:inductance"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:bjt",
+      "recipe2": "electrodynamic_thaumaturgy:capacitor"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:iron_lc",
+      "recipe2": "electrodynamic_thaumaturgy:iron_power"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:gold_lc",
+      "recipe2": "electrodynamic_thaumaturgy:gold_power"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:copper_lc",
+      "recipe2": "electrodynamic_thaumaturgy:copper_power"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:superconducting_lc",
+      "recipe2": "electrodynamic_thaumaturgy:superconducting_power"
+    }
+  ]
+}

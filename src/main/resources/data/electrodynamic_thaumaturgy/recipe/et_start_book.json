@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "patchouli:guide_book",
+    "components": {
+      "patchouli:book": "electrodynamic_thaumaturgy:et_start_book"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:si"
+    },
+    "b": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "c": {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    },
+    "d": {
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
+    }
+  },
+  "pattern": [
+    "aba",
+    "bcb",
+    "ada"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:bio_replication_vat_machine_block"
+  }
+}

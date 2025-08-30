@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_power": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:gold_power"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "electrodynamic_thaumaturgy:copper_power"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_power"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "electrodynamic_thaumaturgy:copper_power"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "item": "electrodynamic_thaumaturgy:enhance_modem_baseboard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:life_extraction_enhance"
+  }
+}

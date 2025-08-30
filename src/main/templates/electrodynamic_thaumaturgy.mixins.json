@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.Gmaj7.electrodynamic_thaumaturgy.mixin",
+  "refmap": "electrodynamic_thaumaturgy.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "mixins": [
+    "LivingEntityMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

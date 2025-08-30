@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "electrodynamic_thaumaturgy:item/electromagnetic_rod"
+  }
+}

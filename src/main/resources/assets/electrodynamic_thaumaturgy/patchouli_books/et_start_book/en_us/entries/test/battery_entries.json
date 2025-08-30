@@ -1,0 +1,22 @@
+{
+  "name": "patchouli.et.battery_entries",
+  "category": "electrodynamic_thaumaturgy:category_energy",
+  "icon": "electrodynamic_thaumaturgy:potato_battery",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:carrot_battery",
+      "recipe2": "electrodynamic_thaumaturgy:potato_battery"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:solution_battery",
+      "text": "patchouli.et.battery.show"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:power_bank",
+      "text": "patchouli.et.battery.power_bank"
+    }
+  ]
+}

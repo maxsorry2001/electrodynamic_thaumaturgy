@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_si": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:si"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "electrodynamic_thaumaturgy:genetic_recorder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_si"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "electrodynamic_thaumaturgy:genetic_recorder"
+    ]
+  }
+}

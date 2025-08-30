@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:magic_lithography",
+  "baseboard": {
+    "item": "electrodynamic_thaumaturgy:empty_primary_module"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:electric_field_domain_module"
+  }
+}

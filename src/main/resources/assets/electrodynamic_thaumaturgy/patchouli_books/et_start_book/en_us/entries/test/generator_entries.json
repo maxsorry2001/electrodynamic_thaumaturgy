@@ -1,0 +1,22 @@
+{
+  "name": "patchouli.et.generator_entries",
+  "category": "electrodynamic_thaumaturgy:category_energy",
+  "icon": "electrodynamic_thaumaturgy:thermal_generator",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:thermal_generator",
+      "text": "patchouli.et.generator_entries.thermal_generator"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:temperature_generator",
+      "text": "patchouli.et.generator_entries.temperature_generator"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:photovoltaic_generator",
+      "text": "patchouli.et.generator_entries.photovoltaic_generator"
+    }
+  ]
+}

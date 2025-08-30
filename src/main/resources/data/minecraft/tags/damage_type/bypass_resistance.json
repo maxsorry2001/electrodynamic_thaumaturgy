@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "electrofynamic_thaumatury:magnet_resonance",
-    "electrofynamic_thaumatury:mirage"
+    "electrodynamic_thaumaturgy:magnet_resonance",
+    "electrodynamic_thaumaturgy:mirage"
   ]
 }

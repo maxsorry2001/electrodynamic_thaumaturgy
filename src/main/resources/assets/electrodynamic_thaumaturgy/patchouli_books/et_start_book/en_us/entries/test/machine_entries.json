@@ -1,0 +1,27 @@
+{
+  "name": "patchouli.et.machine_entries",
+  "category": "electrodynamic_thaumaturgy:category_energy",
+  "icon": "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block",
+      "text": "patchouli.et.generator_entries.electromagnetic_driver_machine_block"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:bio_replication_vat_machine_block",
+      "text": "patchouli.et.generator_entries.bio_replication_vat_machine_block"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:genetic_recorder",
+      "text": "patchouli.et.generator_entries.genetic_recorder"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:geological_metal_excavator_machine_block",
+      "text": "patchouli.et.generator_entries.geological_metal_excavator_machine_block"
+    }
+  ]
+}
