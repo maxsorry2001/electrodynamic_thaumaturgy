@@ -2,7 +2,7 @@ package net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.LivingEntityCloneBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.BioReplicationVatBE;
 import net.Gmaj7.electrofynamic_thaumatury.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -24,10 +24,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class LivingEntityCloneMachineBlock extends BaseEntityBlock {
-    public static final MapCodec<LivingEntityCloneMachineBlock> CODEC = simpleCodec(LivingEntityCloneMachineBlock::new);
+public class BioReplicationVatMachineBlock extends BaseEntityBlock {
+    public static final MapCodec<BioReplicationVatMachineBlock> CODEC = simpleCodec(BioReplicationVatMachineBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public LivingEntityCloneMachineBlock(Properties properties) {
+    public BioReplicationVatMachineBlock(Properties properties) {
         super(properties);
     }
 
@@ -51,10 +51,10 @@ public class LivingEntityCloneMachineBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof LivingEntityCloneBE livingEntityCloneBE && !level.isClientSide()) {
-                IEnergyStorage energyStorage = livingEntityCloneBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), livingEntityCloneBE.getBlockPos()));
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(livingEntityCloneBE, Component.translatable("block.electrofynamic_thaumatury.energy_block")), pos);
+            if (blockEntity instanceof BioReplicationVatBE bioReplicationVatBE && !level.isClientSide()) {
+                IEnergyStorage energyStorage = bioReplicationVatBE.getEnergy();
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), bioReplicationVatBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(bioReplicationVatBE, Component.translatable("block.electrofynamic_thaumatury.energy_block")), pos);
             }
             return InteractionResult.CONSUME;
         }
@@ -63,7 +63,7 @@ public class LivingEntityCloneMachineBlock extends BaseEntityBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof LivingEntityCloneBE blockEntity) {
+            if (level.getBlockEntity(pos) instanceof BioReplicationVatBE blockEntity) {
                 blockEntity.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -74,12 +74,12 @@ public class LivingEntityCloneMachineBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.LIVING_ENTITY_CLONE_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.LIVING_ENTITY_CLONE_BE.get(), LivingEntityCloneBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.BIO_REPLICATION_VAT_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.BIO_REPLICATION_VAT_BE.get(), BioReplicationVatBE::tick) : null;
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new LivingEntityCloneBE(blockPos, blockState);
+        return new BioReplicationVatBE(blockPos, blockState);
     }
 }

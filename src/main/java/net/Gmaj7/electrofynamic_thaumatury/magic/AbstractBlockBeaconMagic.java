@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -19,9 +19,9 @@ public abstract class AbstractBlockBeaconMagic implements IMoeMagic{
 
     protected abstract BlockHitResult getBlock(LivingEntity livingEntity);
 
-    protected LivingEntity getBlockTarget(MagicCastBlockBE magicCastBlockBE){
-        List<LivingEntity> list = magicCastBlockBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastBlockBE.getBlockPos()).inflate(7));
-        list.remove(magicCastBlockBE.getOwner());
+    protected LivingEntity getBlockTarget(ElectromagneticDriverBE electromagneticDriverBE){
+        List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(7));
+        list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return null;
         else return list.get(RandomSource.create().nextInt(list.size()));
     }

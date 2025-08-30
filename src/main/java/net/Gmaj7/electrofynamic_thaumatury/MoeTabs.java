@@ -96,8 +96,9 @@ public class MoeTabs {
                         output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK);
-                        output.accept(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK);
-                        output.accept(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK);
+                        output.accept(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK);
+                        output.accept(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK);
+                        output.accept(MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                         output.accept(MoeBlocks.HARMONIC_CORE_BLOCK);
 

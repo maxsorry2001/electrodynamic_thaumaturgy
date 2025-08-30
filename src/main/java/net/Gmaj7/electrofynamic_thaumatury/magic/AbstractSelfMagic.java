@@ -1,6 +1,6 @@
 package net.Gmaj7.electrofynamic_thaumatury.magic;
 
-import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.MagicCastBlockBE;
+import net.Gmaj7.electrofynamic_thaumatury.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -11,12 +11,12 @@ public abstract class AbstractSelfMagic implements IMoeMagic{
     }
 
     @Override
-    public void blockCast(MagicCastBlockBE magicCastBlockBE) {
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
 
     }
 
     @Override
-    public boolean canBlockCast(MagicCastBlockBE magicCastBlockBE) {
+    public boolean canBlockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         return false;
     }
 }

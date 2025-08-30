@@ -73,8 +73,9 @@
   "block.electrofynamic_thaumatury.thermal_generator_block": "Thermal Generator",
   "block.electrofynamic_thaumatury.energy_transmission_antenna_block": "Energy Transmission Antenna",
   "block.electrofynamic_thaumatury.magic_lithography_table_block": "Magic Lithography Table",
-  "block.electrofynamic_thaumatury.magic_cast_machine_block": "Electromagnetic Driver",
-  "block.electrofynamic_thaumatury.living_entity_clone_machine_block": "Bio-Replication Vat",
+  "block.electrofynamic_thaumatury.electromagnetic_driver_machine_block": "Electromagnetic Driver",
+  "block.electrofynamic_thaumatury.bio_replication_vat_machine_block": "Bio-Replication Vat",
+  "block.electrofynamic_thaumatury.geological_metal_excavator_machine_block": "Geological Metal Excavator",
   "block.electrofynamic_thaumatury.harmonic_core_block": "Harmonic Core",
 
   "entity.electrofynamic_thaumatury.moe_ray_entity": "Electromagnetic Ray",
@@ -192,7 +193,7 @@
   "patchouli.et.magnetic_flux_cascade_module.description": "Locks onto a target, then triggers 4 additional chain jumps to nearby enemies via magnetic flux",
   "patchouli.et.frequency_division_arrow_rain_module.description": "Emits electromagnetic waves over a targeted area, modulating amplitude into arrows that strike enemies",
   "patchouli.et.machine_entries": "Electromagnetic Apparatus",
-  "patchouli.et.generator_entries.magic_cast_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
-  "patchouli.et.generator_entries.living_entity_clone_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
+  "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
+  "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
   "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes."
 }
