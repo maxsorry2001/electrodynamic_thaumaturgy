@@ -42,6 +42,8 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.HARMONIC_CORE_BLOCK.get(), new Item.Properties().stacksTo(16)));
     public static final DeferredItem<BlockItem> GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK = MOE_ITEM.register("geological_metal_excavator_machine_block",
             () -> new BlockItem(MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> NITROGEN_HARVESTER_BLOCK = MOE_ITEM.register("nitrogen_harvester_block",
+            () -> new BlockItem(MoeBlocks.NITROGEN_HARVESTER_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));

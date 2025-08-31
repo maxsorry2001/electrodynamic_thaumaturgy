@@ -26,7 +26,7 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
     }
 
     public MoeEntityCloneBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.ENTITY_CLONE_MENU.get(), containerId);
+        super(MoeMenuType.BIO_REPLICATION_VAT_MACHINE_MENU.get(), containerId);
         this.blockEntity = (BioReplicationVatBE) blockEntity;
         this.level = inventory.player.level();
 

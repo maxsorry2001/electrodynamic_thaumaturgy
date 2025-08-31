@@ -77,6 +77,7 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine_block": "Electromagnetic Driver",
   "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "Bio-Replication Vat",
   "block.electrodynamic_thaumaturgy.geological_metal_excavator_machine_block": "Geological Metal Excavator",
+  "block.electrodynamic_thaumaturgy.nitrogen_harvester_block": "Nitrogen Harvester",
   "block.electrodynamic_thaumaturgy.harmonic_core_block": "Harmonic Core",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
@@ -198,8 +199,9 @@
   "patchouli.et.frequency_division_arrow_rain_module.description": "Emits electromagnetic waves over a targeted area, modulating amplitude into arrows that strike enemies",
   "patchouli.et.saint_summon_module.description": "Isolate and purify the primordial harmonic imprint—untouched by corrosive energy—from a cleansed Harmonic Sovereign's core. Activation does not summon a new entity, but rather guides forth its pure aspect: the Harmonic Saint, to aid you as an ally.",
   "patchouli.et.machine_entries": "Electromagnetic Apparatus",
-  "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
-  "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
-  "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes.",
-  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "Extracts one metal ingot directly from the earth every second."
+  "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
+  "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Generate biological entities recorded in the Genetic Sequencer placed within.",
+  "patchouli.et.generator_entries.genetic_recorder": "Record biological data from living entities when used on them, enabling cloning processes.",
+  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "Extract one metal ingot directly from the earth every second.",
+  "patchouli.et.generator_entries.nitrogen_harvester_block": "Accelerate the growth of crops in an 8-block radius centered on itself, and automatically harvests them. Harvests yield double the normal drops."
 }

@@ -47,4 +47,7 @@ public class MoeBlocks {
 
     public static final DeferredBlock<Block> GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK = MOE_BLOCKS.register("geological_metal_excavator_machine_block",
             () -> new GeologicalMetalExcavatorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+
+    public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = MOE_BLOCKS.register("nitrogen_harvester_block",
+            () -> new NitrogenHarvesterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 }

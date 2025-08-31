@@ -45,6 +45,10 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("geological_metal_excavator_be", () -> BlockEntityType.Builder.of(
                     GeologicalMetalExcavatorBE::new, MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get()).build(null));
 
+    public static final Supplier<BlockEntityType<NitrogenHarvesterBE>> NITROGEN_HARVESTER_BE =
+            MOE_BLOCK_ENTITY.register("nitrogen_harvester_be", () -> BlockEntityType.Builder.of(
+                    NitrogenHarvesterBE::new, MoeBlocks.NITROGEN_HARVESTER_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);
     }

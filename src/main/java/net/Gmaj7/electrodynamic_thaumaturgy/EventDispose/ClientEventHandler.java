@@ -48,8 +48,10 @@ public class ClientEventHandler {
             event.register(MoeMenuType.ENERGY_BLOCK_MENU.get(), MoeEnergyBlockScreen::new);
             event.register(MoeMenuType.MAGIC_LITHOGRAPHY_TABLE_MENU.get(), MoeMagicLithographyTableScreen::new);
             event.register(MoeMenuType.THERMAL_ENERGY_MAKER_MENU.get(), MoeThermalGeneratorScreen::new);
-            event.register(MoeMenuType.MAGIC_CAST_BLOCK_MENU.get(), MoeMagicCastBlockScreen::new);
-            event.register(MoeMenuType.ENTITY_CLONE_MENU.get(), MoeEntityCloneBlockScreen::new);
+            event.register(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), MoeMagicCastBlockScreen::new);
+            event.register(MoeMenuType.BIO_REPLICATION_VAT_MACHINE_MENU.get(), MoeEntityCloneBlockScreen::new);
+            event.register(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), MoeGeologicalMetalExcavatorBlockScreen::new);
+            event.register(MoeMenuType.NITROGEN_HARVESTER_MENU.get(), MoeNitrogenHarvesterBlockScreen::new);
         }
 
 

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.GeologicalMetalExcavatorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -14,23 +14,24 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
+public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int slotNum = 0;
-    public  final ElectromagneticDriverBE blockEntity;
+    public  final GeologicalMetalExcavatorBE blockEntity;
 
-    public MoeMagicCastBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public MoeGeologicalMetalExcavatorBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeMagicCastBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), containerId);
-        this.blockEntity = (ElectromagneticDriverBE) blockEntity;
+    public MoeGeologicalMetalExcavatorBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), containerId);
+        this.blockEntity = (GeologicalMetalExcavatorBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
+        addMachineSlot(((GeologicalMetalExcavatorBE) blockEntity).getItemHandler());
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -84,7 +85,14 @@ public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get());
+    }
+
+    private void addMachineSlot(IItemHandler itemHandler){
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 9; j++)
+                this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 19 + i * 18));
+        }
     }
 
     private void addPlayerInventory(Inventory inventory){
