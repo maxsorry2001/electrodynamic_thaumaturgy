@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.minecraft.core.registries.Registries;
@@ -25,7 +25,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
+        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(source.level());
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -53,16 +53,16 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        LivingEntity target = getBlockTarget(magicCastMachineBE);
-        if(target != null && !magicCastMachineBE.getLevel().isClientSide()) {
-            target.hurt(new DamageSource(MoeFunction.getHolder(magicCastMachineBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(magicCastMachineBE.getLevel());
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        LivingEntity target = getBlockTarget(electromagneticDriverBE);
+        if(target != null && !electromagneticDriverBE.getLevel().isClientSide()) {
+            target.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(electromagneticDriverBE.getLevel());
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
-            magicCastMachineBE.getLevel().addFreshEntity(lightningBolt);
-            magicCastMachineBE.setCooldown(getBaseCooldown());
-            magicCastMachineBE.extractEnergy(getBaseEnergyCost());
+            electromagneticDriverBE.getLevel().addFreshEntity(lightningBolt);
+            electromagneticDriverBE.setCooldown(getBaseCooldown());
+            electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
         }
     }
 }

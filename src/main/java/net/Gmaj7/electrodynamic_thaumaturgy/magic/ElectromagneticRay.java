@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
@@ -51,8 +51,8 @@ public class ElectromagneticRay extends AbstractWideMagic{
             if (result instanceof EntityHitResult) {
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
-                    MoeFunction.checkTargetEnhancement(MagicCastMachineBE.magicItem, (LivingEntity) target);
+                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
+                    MoeFunction.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
         }
@@ -74,27 +74,27 @@ public class ElectromagneticRay extends AbstractWideMagic{
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        List<LivingEntity> list = magicCastMachineBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastMachineBE.getBlockPos()).inflate(7));
-        list.remove(magicCastMachineBE.getOwner());
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(7));
+        list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
         LivingEntity lineTarget = list.get(RandomSource.create().nextInt(list.size()));
-        Vec3 start = new Vec3(magicCastMachineBE.getBlockPos().getX(), magicCastMachineBE.getBlockPos().getY() + 1, magicCastMachineBE.getBlockPos().getZ());
+        Vec3 start = new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ());
         Vec3 end = new Vec3(lineTarget.getX(), (lineTarget.getY() + lineTarget.getEyeY()) / 2, lineTarget.getZ());
-        Level level = magicCastMachineBE.getLevel();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getBlockLineHitResult(level, magicCastMachineBE, start, end, true, 0.5F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, (LivingEntity) magicCastMachineBE.getOwner(), false);
+        Level level = electromagneticDriverBE.getLevel();
+        MoeFunction.RayHitResult hitResult = MoeFunction.getBlockLineHitResult(level, electromagneticDriverBE, start, end, true, 0.5F);
+        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, (LivingEntity) electromagneticDriverBE.getOwner(), false);
         level.addFreshEntity(moeRayEntity);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
-                    MoeFunction.checkTargetEnhancement(MagicCastMachineBE.magicItem, (LivingEntity) target);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
+                    MoeFunction.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
         }
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
     }
 }

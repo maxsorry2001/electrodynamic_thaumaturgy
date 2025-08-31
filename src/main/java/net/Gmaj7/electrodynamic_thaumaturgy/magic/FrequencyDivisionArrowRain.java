@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.FrequencyDivisionBeaconEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
@@ -31,7 +31,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         Vec3 vec3 = target.getOnPos().getCenter();
-        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), MagicCastMachineBE.magicItem, source);
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, source);
         source.level().addFreshEntity(frequencyDivisionArrowEntity);
         if(source.level() instanceof ServerLevel)
             ((ServerLevel) source.level()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 11, vec3.z(), 1, 0, 0, 0, 0);
@@ -53,15 +53,15 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        LivingEntity target = getBlockTarget(magicCastMachineBE);
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         Vec3 vec3 = target.getOnPos().getCenter();
-        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(magicCastMachineBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), MagicCastMachineBE.magicItem, (LivingEntity) magicCastMachineBE.getOwner());
-        magicCastMachineBE.getLevel().addFreshEntity(frequencyDivisionArrowEntity);
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
-        if(magicCastMachineBE.getLevel() instanceof ServerLevel)
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 11, vec3.z(), 1, 0, 0, 0, 0);
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner());
+        electromagneticDriverBE.getLevel().addFreshEntity(frequencyDivisionArrowEntity);
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        if(electromagneticDriverBE.getLevel() instanceof ServerLevel)
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), vec3.x(),  vec3.y() + 11, vec3.z(), 1, 0, 0, 0, 0);
     }
 }

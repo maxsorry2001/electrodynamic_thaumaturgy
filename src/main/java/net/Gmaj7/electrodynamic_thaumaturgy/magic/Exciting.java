@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
@@ -62,20 +62,20 @@ public class Exciting extends AbstractWideMagic{
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        List<LivingEntity> list = magicCastMachineBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(magicCastMachineBE.getBlockPos()).inflate(20));
-        list.remove(magicCastMachineBE.getOwner());
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(20));
+        list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
         for (LivingEntity target : list){
-            if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == magicCastMachineBE.getOwner())) {
-                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(MagicCastMachineBE.magicItem)), (int) (MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem)) - 7));
+            if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
+                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)) - 7));
             }
         }
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
-        if(magicCastMachineBE.getLevel() instanceof ServerLevel){
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), magicCastMachineBE.getBlockPos().getX(), magicCastMachineBE.getBlockPos().getY() + 1, magicCastMachineBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), magicCastMachineBE.getBlockPos().getX(), magicCastMachineBE.getBlockPos().getY() + 1, magicCastMachineBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
         }
     }
 }

@@ -33,13 +33,17 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("energy_transmission_antenna_be", () -> BlockEntityType.Builder.of(
                     EnergyTransmissionAntennaBE::new, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<MagicCastMachineBE>> MAGIC_CAST_BE =
-            MOE_BLOCK_ENTITY.register("magic_cast_be", () -> BlockEntityType.Builder.of(
-                    MagicCastMachineBE::new, MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get()).build(null));
+    public static final Supplier<BlockEntityType<ElectromagneticDriverBE>> ELECTROMAGNETIC_DRIVER_BE =
+            MOE_BLOCK_ENTITY.register("electromagnetic_driver_be", () -> BlockEntityType.Builder.of(
+                    ElectromagneticDriverBE::new, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<LivingEntityCloneBE>> LIVING_ENTITY_CLONE_BE =
-            MOE_BLOCK_ENTITY.register("living_entity_clone_be", () -> BlockEntityType.Builder.of(
-                    LivingEntityCloneBE::new, MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get()).build(null));
+    public static final Supplier<BlockEntityType<BioReplicationVatBE>> BIO_REPLICATION_VAT_BE =
+            MOE_BLOCK_ENTITY.register("bio_replication_vat_be", () -> BlockEntityType.Builder.of(
+                    BioReplicationVatBE::new, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get()).build(null));
+
+    public static final Supplier<BlockEntityType<GeologicalMetalExcavatorBE>> GEOLOGICAL_METAL_EXCAVATOR_BE =
+            MOE_BLOCK_ENTITY.register("geological_metal_excavator_be", () -> BlockEntityType.Builder.of(
+                    GeologicalMetalExcavatorBE::new, MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);

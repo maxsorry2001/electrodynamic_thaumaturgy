@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
@@ -106,18 +106,18 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        LivingEntity target = getBlockTarget(magicCastMachineBE);
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
-        target.hurt(new DamageSource(MoeFunction.getHolder(magicCastMachineBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
-        blockParticle(new Vec3(magicCastMachineBE.getBlockPos().getX(), magicCastMachineBE.getBlockPos().getY() + 1, magicCastMachineBE.getBlockPos().getZ()), target);
+        target.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
+        blockParticle(new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ()), target);
         List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
         for (LivingEntity target1 : list) {
-            if (target1 == target || target1 == magicCastMachineBE.getOwner()) continue;
+            if (target1 == target || target1 == electromagneticDriverBE.getOwner()) continue;
             addParticle(target, target1);
-            target1.hurt(new DamageSource(MoeFunction.getHolder(magicCastMachineBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), magicCastMachineBE.getOwner()), MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem));
+            target1.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
         }
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
     }
 }

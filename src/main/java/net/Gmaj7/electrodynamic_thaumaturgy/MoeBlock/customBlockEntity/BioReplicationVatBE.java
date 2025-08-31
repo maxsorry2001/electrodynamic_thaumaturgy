@@ -29,7 +29,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class LivingEntityCloneBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity,MenuProvider {
+public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity,MenuProvider {
     private static final int SPAWN_NEED = 16384;
     private int clone = 100;
 
@@ -54,21 +54,21 @@ public class LivingEntityCloneBE extends BlockEntity implements IMoeEnergyBlockE
         }
     };
 
-    public LivingEntityCloneBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.LIVING_ENTITY_CLONE_BE.get(), pos, blockState);
+    public BioReplicationVatBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.BIO_REPLICATION_VAT_BE.get(), pos, blockState);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState state, LivingEntityCloneBE livingEntityCloneBE){
-        if(livingEntityCloneBE.clone > 0) livingEntityCloneBE.clone--;
-        if(livingEntityCloneBE.clone <= 0 && livingEntityCloneBE.canSpawn() && !level.isClientSide()){
-            ItemStack itemStack = livingEntityCloneBE.getItemHandler().getStackInSlot(0);
+    public static void tick(Level level, BlockPos blockPos, BlockState state, BioReplicationVatBE bioReplicationVatBE){
+        if(bioReplicationVatBE.clone > 0) bioReplicationVatBE.clone--;
+        if(bioReplicationVatBE.clone <= 0 && bioReplicationVatBE.canSpawn() && !level.isClientSide()){
+            ItemStack itemStack = bioReplicationVatBE.getItemHandler().getStackInSlot(0);
             Entity entity =  BuiltInRegistries.ENTITY_TYPE.getOptional(itemStack.get(MoeDataComponentTypes.ENTITY_TYPE)).get().create(level);
             if(entity instanceof LivingEntity) {
                 ((LivingEntity) entity).readAdditionalSaveData(itemStack.get(MoeDataComponentTypes.ENTITY_DATA));
                 entity.teleportTo(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
                 level.addFreshEntity(entity);
-                livingEntityCloneBE.clone = (int)((LivingEntity) entity).getMaxHealth();
-                livingEntityCloneBE.getEnergy().extractEnergy(SPAWN_NEED, false);
+                bioReplicationVatBE.clone = (int)((LivingEntity) entity).getMaxHealth();
+                bioReplicationVatBE.getEnergy().extractEnergy(SPAWN_NEED, false);
             }
         }
     }

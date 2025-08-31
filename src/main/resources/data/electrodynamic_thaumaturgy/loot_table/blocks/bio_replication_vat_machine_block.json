@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:magic_lithography_table"
+          "name": "electrodynamic_thaumaturgy:bio_replication_vat_machine_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:blocks/magic_lithography_table"
+  "random_sequence": "electrodynamic_thaumaturgy:blocks/bio_replication_vat_machine_block"
 }

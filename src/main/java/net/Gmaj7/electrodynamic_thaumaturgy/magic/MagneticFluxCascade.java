@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagneticFluxCascadeEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.minecraft.server.level.ServerLevel;
@@ -21,7 +21,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(source.level(), source, MagicCastMachineBE.magicItem);
+        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(source.level(), source, ElectromagneticDriverBE.magicItem);
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         source.level().addFreshEntity(magneticFluxCascadeEntity);
@@ -50,15 +50,15 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        LivingEntity target = getBlockTarget(magicCastMachineBE);
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
-        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(magicCastMachineBE.getLevel(), (LivingEntity) magicCastMachineBE.getOwner(), MagicCastMachineBE.magicItem);
+        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(electromagneticDriverBE.getLevel(), (LivingEntity) electromagneticDriverBE.getOwner(), ElectromagneticDriverBE.magicItem);
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
-        magicCastMachineBE.getLevel().addFreshEntity(magneticFluxCascadeEntity);
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
-        if(magicCastMachineBE.getLevel() instanceof ServerLevel) ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
+        electromagneticDriverBE.getLevel().addFreshEntity(magneticFluxCascadeEntity);
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        if(electromagneticDriverBE.getLevel() instanceof ServerLevel) ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
     }
 }

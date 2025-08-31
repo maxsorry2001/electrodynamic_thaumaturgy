@@ -74,8 +74,9 @@
   "block.electrodynamic_thaumaturgy.thermal_generator_block": "Thermal Generator",
   "block.electrodynamic_thaumaturgy.energy_transmission_antenna_block": "Energy Transmission Antenna",
   "block.electrodynamic_thaumaturgy.magic_lithography_table_block": "Magic Lithography Table",
-  "block.electrodynamic_thaumaturgy.magic_cast_machine_block": "Electromagnetic Driver",
-  "block.electrodynamic_thaumaturgy.living_entity_clone_machine_block": "Bio-Replication Vat",
+  "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine_block": "Electromagnetic Driver",
+  "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "Bio-Replication Vat",
+  "block.electrodynamic_thaumaturgy.geological_metal_excavator_machine_block": "Geological Metal Excavator",
   "block.electrodynamic_thaumaturgy.harmonic_core_block": "Harmonic Core",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
@@ -195,7 +196,8 @@
   "patchouli.et.frequency_division_arrow_rain_module.description": "Emits electromagnetic waves over a targeted area, modulating amplitude into arrows that strike enemies",
   "patchouli.et.saint_summon_module.description": "Isolate and purify the primordial harmonic imprint—untouched by corrosive energy—from a cleansed Harmonic Sovereign's core. Activation does not summon a new entity, but rather guides forth its pure aspect: the Harmonic Saint, to aid you as an ally.",
   "patchouli.et.machine_entries": "Electromagnetic Apparatus",
-  "patchouli.et.generator_entries.magic_cast_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
-  "patchouli.et.generator_entries.living_entity_clone_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
-  "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes."
+  "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "Supplies energy. The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
+  "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Consumes energy to generate biological entities recorded in the Genetic Sequencer placed within.",
+  "patchouli.et.generator_entries.genetic_recorder": "Records biological data from living entities when used on them, enabling cloning processes.",
+  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "Extracts one metal ingot directly from the earth every second."
 }

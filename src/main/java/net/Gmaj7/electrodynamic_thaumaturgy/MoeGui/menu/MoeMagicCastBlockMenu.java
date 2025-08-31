@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int slotNum = 0;
-    public  final MagicCastMachineBE blockEntity;
+    public  final ElectromagneticDriverBE blockEntity;
 
     public MoeMagicCastBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -27,7 +27,7 @@ public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
 
     public MoeMagicCastBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.MAGIC_CAST_BLOCK_MENU.get(), containerId);
-        this.blockEntity = (MagicCastMachineBE) blockEntity;
+        this.blockEntity = (ElectromagneticDriverBE) blockEntity;
         this.level = inventory.player.level();
 
         this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
@@ -84,7 +84,7 @@ public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

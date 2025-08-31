@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AttractBeaconEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.minecraft.core.BlockPos;
@@ -54,16 +54,16 @@ public class Attract extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        LivingEntity target = getBlockTarget(magicCastMachineBE);
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), (LivingEntity) magicCastMachineBE.getOwner());
+        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), (LivingEntity) electromagneticDriverBE.getOwner());
         attractBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
-        attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(MagicCastMachineBE.magicItem) * 10);
+        attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
     }
 }

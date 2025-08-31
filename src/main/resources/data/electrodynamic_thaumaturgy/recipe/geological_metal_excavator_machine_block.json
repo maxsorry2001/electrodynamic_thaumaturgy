@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:si"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    },
+    "c": {
+      "item": "minecraft:redstone"
+    },
+    "d": {
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
+    }
+  },
+  "pattern": [
+    "aca",
+    "cbc",
+    "ada"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:geological_metal_excavator_machine_block"
+  }
+}

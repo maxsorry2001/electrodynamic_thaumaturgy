@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:living_entity_clone_machine_block"
+        "recipe": "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:living_entity_clone_machine_block"
+      "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block"
     ]
   }
 }

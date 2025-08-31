@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.LivingEntityCloneBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BioReplicationVatBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int slotNum = 0;
-    public  final LivingEntityCloneBE blockEntity;
+    public  final BioReplicationVatBE blockEntity;
 
     public MoeEntityCloneBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -27,7 +27,7 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
 
     public MoeEntityCloneBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.ENTITY_CLONE_MENU.get(), containerId);
-        this.blockEntity = (LivingEntityCloneBE) blockEntity;
+        this.blockEntity = (BioReplicationVatBE) blockEntity;
         this.level = inventory.player.level();
 
         this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
@@ -84,7 +84,7 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

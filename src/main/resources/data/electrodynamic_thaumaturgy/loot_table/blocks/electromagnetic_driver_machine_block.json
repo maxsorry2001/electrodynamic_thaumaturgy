@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:living_entity_clone_machine_block"
+          "name": "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:blocks/living_entity_clone_machine_block"
+  "random_sequence": "electrodynamic_thaumaturgy:blocks/electromagnetic_driver_machine_block"
 }

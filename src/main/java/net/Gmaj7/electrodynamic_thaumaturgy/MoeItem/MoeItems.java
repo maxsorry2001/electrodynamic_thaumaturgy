@@ -34,12 +34,14 @@ public class MoeItems {
             () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
             () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
-    public static final DeferredItem<BlockItem> MAGIC_CAST_MACHINE_BLOCK = MOE_ITEM.register("magic_cast_machine_block",
-            () -> new BlockItem(MoeBlocks.MAGIC_CAST_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_ITEM.register("living_entity_clone_machine_block",
-            () -> new  BlockItem(MoeBlocks.LIVING_ENTITY_CLONE_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = MOE_ITEM.register("electromagnetic_driver_machine_block",
+            () -> new BlockItem(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> BIO_REPLICATION_VAT_MACHINE_BLOCK = MOE_ITEM.register("bio_replication_vat_machine_block",
+            () -> new  BlockItem(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> HARMONIC_CORE_BLOCK = MOE_ITEM.register("harmonic_core_block",
             () -> new BlockItem(MoeBlocks.HARMONIC_CORE_BLOCK.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<BlockItem> GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK = MOE_ITEM.register("geological_metal_excavator_machine_block",
+            () -> new BlockItem(MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));

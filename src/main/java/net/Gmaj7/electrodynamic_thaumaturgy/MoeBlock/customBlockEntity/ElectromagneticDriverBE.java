@@ -30,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class MagicCastMachineBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
-    protected Entity owner;
+public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
+protected Entity owner;
     protected UUID ownerUUID;
     protected int cooldown = 0;
     public static ItemStack magicItem = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
@@ -55,15 +55,16 @@ public class MagicCastMachineBE extends BlockEntity implements IMoeEnergyBlockEn
             }
         }
     };
-    public MagicCastMachineBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.MAGIC_CAST_BE.get(), pos, blockState);
+
+    public ElectromagneticDriverBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.ELECTROMAGNETIC_DRIVER_BE.get(), pos, blockState);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, MagicCastMachineBE magicCastMachineBE){
-        if(magicCastMachineBE.canCast() && !level.isClientSide()) {
-            magicCastMachineBE.cast();
+    public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticDriverBE electromagneticDriverBE){
+        if(electromagneticDriverBE.canCast() && !level.isClientSide()) {
+            electromagneticDriverBE.cast();
         }
-        else if (magicCastMachineBE.cooldown > 0) magicCastMachineBE.cooldown--;
+        else if (electromagneticDriverBE.cooldown > 0) electromagneticDriverBE.cooldown--;
     }
 
     protected boolean canCast(){

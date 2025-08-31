@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -26,10 +26,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicCastMachineBlock extends BaseEntityBlock {
-    public static final MapCodec<MagicCastMachineBlock> CODEC = simpleCodec(MagicCastMachineBlock::new);
+public class ElectromagneticDriverMachineBlock extends BaseEntityBlock {
+    public static final MapCodec<ElectromagneticDriverMachineBlock> CODEC = simpleCodec(ElectromagneticDriverMachineBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public MagicCastMachineBlock(Properties properties) {
+    public ElectromagneticDriverMachineBlock(Properties properties) {
         super(properties);
     }
 
@@ -53,10 +53,10 @@ public class MagicCastMachineBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof MagicCastMachineBE magicCastMachineBE && !level.isClientSide()) {
-                IEnergyStorage energyStorage = magicCastMachineBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), magicCastMachineBE.getBlockPos()));
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(magicCastMachineBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
+            if (blockEntity instanceof ElectromagneticDriverBE electromagneticDriverBE && !level.isClientSide()) {
+                IEnergyStorage energyStorage = electromagneticDriverBE.getEnergy();
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), electromagneticDriverBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDriverBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;
         }
@@ -65,7 +65,7 @@ public class MagicCastMachineBlock extends BaseEntityBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof MagicCastMachineBE blockEntity) {
+            if (level.getBlockEntity(pos) instanceof ElectromagneticDriverBE blockEntity) {
                 blockEntity.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -76,20 +76,20 @@ public class MagicCastMachineBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if(blockEntity instanceof MagicCastMachineBE && placer != null){
-            ((MagicCastMachineBE) blockEntity).setOwner(placer);
+        if(blockEntity instanceof ElectromagneticDriverBE && placer != null){
+            ((ElectromagneticDriverBE) blockEntity).setOwner(placer);
         }
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.MAGIC_CAST_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.MAGIC_CAST_BE.get(), MagicCastMachineBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.ELECTROMAGNETIC_DRIVER_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.ELECTROMAGNETIC_DRIVER_BE.get(), ElectromagneticDriverBE::tick) : null;
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new MagicCastMachineBE(blockPos, blockState);
+        return new ElectromagneticDriverBE(blockPos, blockState);
     }
 }

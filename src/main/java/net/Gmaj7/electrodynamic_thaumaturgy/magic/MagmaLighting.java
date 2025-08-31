@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagicCastMachineBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagmaLightingBeaconEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
@@ -77,24 +77,24 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     }
 
     @Override
-    public void blockCast(MagicCastMachineBE magicCastMachineBE) {
-        LivingEntity target = getBlockTarget(magicCastMachineBE);
+    public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
+        LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(magicCastMachineBE.getLevel(), (LivingEntity) magicCastMachineBE.getOwner(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(electromagneticDriverBE.getLevel(), (LivingEntity) electromagneticDriverBE.getOwner(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
         magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
         magmaLightingBeaconEntity.setDirection(Direction.UP);
-        magicCastMachineBE.getLevel().addFreshEntity(magmaLightingBeaconEntity);
-        if(magicCastMachineBE.getLevel() instanceof ServerLevel) {
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) magicCastMachineBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+        electromagneticDriverBE.getLevel().addFreshEntity(magmaLightingBeaconEntity);
+        if(electromagneticDriverBE.getLevel() instanceof ServerLevel) {
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 5, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
+            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE_IN.get(), magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY() + 10, magmaLightingBeaconEntity.getZ(), 1, 0, 0, 0, 0);
         }
-        magicCastMachineBE.setCooldown(getBaseCooldown());
-        magicCastMachineBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.setCooldown(getBaseCooldown());
+        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
     }
 }

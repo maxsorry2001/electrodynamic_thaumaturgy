@@ -6,25 +6,22 @@
       "item": "electrodynamic_thaumaturgy:si"
     },
     "b": {
-      "item": "electrodynamic_thaumaturgy:iron_sheet"
+      "item": "minecraft:rotten_flesh"
     },
     "c": {
       "item": "electrodynamic_thaumaturgy:energy_core"
     },
     "d": {
-      "item": "electrodynamic_thaumaturgy:iron_lc"
-    },
-    "e": {
-      "item": "electrodynamic_thaumaturgy:iron_power"
+      "item": "electrodynamic_thaumaturgy:iron_sheet"
     }
   },
   "pattern": [
-    "ada",
+    "aba",
     "bcb",
-    "aea"
+    "ada"
   ],
   "result": {
     "count": 1,
-    "id": "electrodynamic_thaumaturgy:magic_cast_machine_block"
+    "id": "electrodynamic_thaumaturgy:bio_replication_vat_machine_block"
   }
 }

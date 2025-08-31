@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "electrodynamic_thaumaturgy:item/saint_summon_module"
+  "layer0": "electrodynamic_thaumaturgy:item/saint_summon_module"
   }
 }

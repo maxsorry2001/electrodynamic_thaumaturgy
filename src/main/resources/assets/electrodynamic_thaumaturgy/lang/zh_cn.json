@@ -74,8 +74,9 @@
   "block.electrodynamic_thaumaturgy.thermal_generator_block": "火力发电机",
   "block.electrodynamic_thaumaturgy.energy_transmission_antenna_block": "能量传输天线",
   "block.electrodynamic_thaumaturgy.magic_lithography_table_block": "法术光刻台",
-  "block.electrodynamic_thaumaturgy.magic_cast_machine_block": "电磁驱动器",
-  "block.electrodynamic_thaumaturgy.living_entity_clone_machine_block": "生物克隆器",
+  "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine_block": "电磁驱动器",
+  "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "生物克隆器",
+  "block.electrodynamic_thaumaturgy.geological_metal_excavator_machine_block": "金属提取器",
   "block.electrodynamic_thaumaturgy.harmonic_core_block": "谐波核心",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "电磁射线",
@@ -195,7 +196,8 @@
   "patchouli.et.frequency_division_arrow_rain_module.description": "在前方一定区域上空激发电磁波，并将振幅调制为箭以打击敌人",
   "patchouli.et.saint_summon_module.description": "从被净化的谐波君主核心中，分离并提纯了其未被戾气侵蚀的原始谐波印记。激活后并非召唤，而是引导出其纯净的侧面——谐波圣君，作为盟友现身。",
   "patchouli.et.machine_entries": "电磁器械",
-  "patchouli.et.generator_entries.magic_cast_machine_block": "提供能量，电磁驱动器会根据放入的法术模块自动索敌施法，不过消耗的能量会更高。注意：电磁驱动器无法施放强化自身类的法术",
-  "patchouli.et.generator_entries.living_entity_clone_machine_block": "消耗能量，生成机器中放入的基因刻录器中刻录的生物",
-  "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆"
+  "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "提供能量，电磁驱动器会根据放入的法术模块自动索敌施法，不过消耗的能量会更高。注意：电磁驱动器无法施放强化自身类的法术",
+  "patchouli.et.generator_entries.bio_replication_vat_machine_block": "消耗能量，生成机器中放入的基因刻录器中刻录的生物",
+  "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆",
+  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "每秒钟从大地里直接提取出一个金属锭"
 }

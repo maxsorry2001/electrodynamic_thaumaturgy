@@ -36,12 +36,15 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = MOE_BLOCKS.register("magic_lithography_table_block",
             () -> new MagicLithographyTableBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
 
-    public static final DeferredBlock<Block> MAGIC_CAST_MACHINE_BLOCK = MOE_BLOCKS.register("magic_cast_machine_block",
-            () -> new MagicCastMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_driver_machine_block",
+            () -> new ElectromagneticDriverMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> LIVING_ENTITY_CLONE_MACHINE_BLOCK = MOE_BLOCKS.register("living_entity_clone_machine_block",
-            () -> new LivingEntityCloneMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE_BLOCK = MOE_BLOCKS.register("bio_replication_vat_machine_block",
+            () -> new BioReplicationVatMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
     public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = MOE_BLOCKS.register("harmonic_core_block",
             () -> new HarmonicCoreBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F)));
+
+    public static final DeferredBlock<Block> GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK = MOE_BLOCKS.register("geological_metal_excavator_machine_block",
+            () -> new GeologicalMetalExcavatorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 }
