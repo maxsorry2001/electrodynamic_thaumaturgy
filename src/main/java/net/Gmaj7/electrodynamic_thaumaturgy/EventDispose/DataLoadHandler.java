@@ -28,6 +28,7 @@ public class DataLoadHandler {
         payloadRegistrar.playToClient(MoePacket.EnergySetPacket.TYPE, MoePacket.EnergySetPacket.STREAM_CODEC, MoePacket.EnergySetPacket::handle);
         payloadRegistrar.playToClient(MoePacket.ThermalSetPacket.TYPE, MoePacket.ThermalSetPacket.STREAM_CODEC, MoePacket.ThermalSetPacket::handle);
         payloadRegistrar.playToClient(MoePacket.CastTickPacket.TYPE, MoePacket.CastTickPacket.STREAM_CODEC, MoePacket.CastTickPacket::handle);
+        payloadRegistrar.playToClient(MoePacket.BiomassSetPacket.TYPE, MoePacket.BiomassSetPacket.STREAM_CODEC, MoePacket.BiomassSetPacket::handle);
     }
 
 

@@ -24,12 +24,14 @@ public class MoeItems {
     public static final DeferredItem<BlockItem> ELECTROMAGNETIC_MODEM_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_modem_table", MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
     public static final DeferredItem<BlockItem> ENERGY_BLOCK = MOE_ITEM.register("energy_block",
             () -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
-    public static final DeferredItem<BlockItem> TEMPERATURE_ENERGY_MAKER_BLOCK = MOE_ITEM.register("temperature_generator",
+    public static final DeferredItem<BlockItem> TEMPERATURE_GENERATOR_BLOCK = MOE_ITEM.register("temperature_generator",
             () -> new BlockItem(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_ENERGY_MAKER_BLOCK = MOE_ITEM.register("photovoltaic_generator",
+    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_ITEM.register("photovoltaic_generator",
             () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> THERMAL_ENERGY_MAKER_BLOCK = MOE_ITEM.register("thermal_generator",
+    public static final DeferredItem<BlockItem> THERMAL_GENERATOR_BLOCK = MOE_ITEM.register("thermal_generator",
             () -> new BlockItem(MoeBlocks.THERMAL_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> BIOMASS_GENERATOR_BLOCK = MOE_ITEM.register("biomass_generator",
+            () -> new BlockItem(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.register("magic_lithography_table",
             () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",

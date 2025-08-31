@@ -30,6 +30,16 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_generator_3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:biomass_generator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -48,7 +58,8 @@
     [
       "has_generator_0",
       "has_generator_1",
-      "has_generator_2"
+      "has_generator_2",
+      "has_generator_3"
     ]
   ],
   "sends_telemetry_event": true

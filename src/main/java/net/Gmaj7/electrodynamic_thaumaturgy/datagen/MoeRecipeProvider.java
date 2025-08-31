@@ -70,6 +70,14 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('b', Items.COPPER_INGOT)
                 .define('c', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.BIOMASS_GENERATOR_BLOCK.get())
+                .pattern("aaa")
+                .pattern("bcb")
+                .pattern("aaa")
+                .define('a', MoeItems.SI.get())
+                .define('b', Tags.Items.FOODS)
+                .define('c', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get())
                 .pattern("ada")
                 .pattern("bcb")

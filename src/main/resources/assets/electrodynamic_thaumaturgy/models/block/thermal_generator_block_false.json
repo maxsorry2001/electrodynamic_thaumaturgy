@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "bottom": "electrodynamic_thaumaturgy:block/electromagnetic_assembly_table_bottom",
+    "bottom": "electrodynamic_thaumaturgy:block/generator_block_bottom",
     "side": "electrodynamic_thaumaturgy:block/thermal_generator_block_false_side",
     "top": "electrodynamic_thaumaturgy:block/thermal_generator_block_top"
   }

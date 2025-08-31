@@ -1,12 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeThermalGeneratorMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeBiomassGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -14,10 +14,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -25,9 +23,9 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
-    private int burnTime = 0;
-    private int fullBurnTime = 0;
+public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
+    private int biomassTime = 0;
+    private int fullBiomassTime = 0;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -47,46 +45,44 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
             }
         }
     };
-    public ThermalGeneratorBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.THERMAL_GENERATOR_BE.get(), pos, blockState);
+    public BiomassGeneratorBE(BlockPos pos, BlockState blockState) {
+        super(MoeBlockEntities.BIOMASS_GENERATOR_BE.get(), pos, blockState);
     }
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(768, false);
+        blockEntity.getEnergy().receiveEnergy(512, false);
     }
 
     @Override
     protected boolean canEnergyMake() {
         if(!level.isClientSide()){
-            if (burnTime > 0) burnTime--;
-            if (burnTime <= 0) {
-                if (!itemHandler.getStackInSlot(0).isEmpty() && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
-                    int time = itemHandler.getStackInSlot(0).getBurnTime(null) / 4;
+            if (biomassTime > 0) biomassTime--;
+            if (biomassTime <= 0) {
+                if (!itemHandler.getStackInSlot(0).isEmpty() && itemHandler.getStackInSlot(0).has(DataComponents.FOOD) && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
+                    FoodProperties foodProperties = itemHandler.getStackInSlot(0).get(DataComponents.FOOD);
+                    int time = (int) (10 * foodProperties.nutrition() + 20 * foodProperties.saturation());
                     if (time > 0) {
-                        burnTime = time;
-                        fullBurnTime = time;
-                        if (itemHandler.getStackInSlot(0).getItem() instanceof BucketItem)
-                            itemHandler.setStackInSlot(0, new ItemStack(Items.BUCKET));
-                        else
-                            itemHandler.getStackInSlot(0).shrink(1);
+                        biomassTime = time;
+                        fullBiomassTime = time;
+                        itemHandler.getStackInSlot(0).shrink(1);
                     } else {
-                        fullBurnTime = 0;
+                        fullBiomassTime = 0;
                     }
-                } else fullBurnTime = 0;
+                }
+                else fullBiomassTime = 0;
             }
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGeneratorBlock.LIT, burnTime > 0));
-            PacketDistributor.sendToAllPlayers(new MoePacket.ThermalSetPacket(burnTime, fullBurnTime, getBlockPos()));
+            PacketDistributor.sendToAllPlayers(new MoePacket.BiomassSetPacket(biomassTime, fullBiomassTime, getBlockPos()));
         }
-        return burnTime > 0;
+        return biomassTime > 0;
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("energy", energy.getEnergyStored());
-        tag.putInt("fullBurnTime", fullBurnTime);
-        tag.putInt("burnTime", burnTime);
+        tag.putInt("fullBiomassTime", fullBiomassTime);
+        tag.putInt("biomassTime", biomassTime);
         tag.put("item_handler", itemHandler.serializeNBT(registries));
     }
 
@@ -94,15 +90,15 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         setEnergy(tag.getInt("energy"));
-        fullBurnTime = tag.getInt("fullBurnTime");
-        burnTime = tag.getInt("burnTime");
+        fullBiomassTime = tag.getInt("fullBiomassTime");
+        biomassTime = tag.getInt("biomassTime");
         itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new MoeThermalGeneratorMenu(i, inventory, this);
+        return new MoeBiomassGeneratorMenu(i, inventory, this);
     }
 
     @Override
@@ -134,19 +130,19 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
         return Component.translatable("block.electrodynamic_thaumaturgy.thermal_generator_block");
     }
 
-    public int getBurnTime() {
-        return burnTime;
+    public int getBiomassTime() {
+        return biomassTime;
     }
 
-    public void setBurnTime(int burnTime) {
-        this.burnTime = burnTime;
+    public void setBiomassTime(int biomassTime) {
+        this.biomassTime = biomassTime;
     }
 
-    public int getFullBurnTime() {
-        return fullBurnTime;
+    public int getFullBiomassTime() {
+        return fullBiomassTime;
     }
 
-    public void setFullBurnTime(int fullBurnTime) {
-        this.fullBurnTime = fullBurnTime;
+    public void setFullBiomassTime(int fullBiomassTime) {
+        this.fullBiomassTime = fullBiomassTime;
     }
 }

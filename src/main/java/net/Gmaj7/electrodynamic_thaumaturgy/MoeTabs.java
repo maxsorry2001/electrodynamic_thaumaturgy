@@ -96,6 +96,7 @@ public class MoeTabs {
                         output.accept(setFullEnergyItem(new ItemStack(MoeItems.ENERGY_BLOCK.get())));
                         output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
+                        output.accept(MoeBlocks.BIOMASS_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK);
                         output.accept(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK);

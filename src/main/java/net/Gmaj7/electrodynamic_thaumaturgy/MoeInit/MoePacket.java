@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BiomassGeneratorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ThermalGeneratorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
@@ -131,8 +132,8 @@ public class MoePacket{
         public static final CustomPacketPayload.Type<ThermalSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "thermal_set"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ThermalSetPacket> STREAM_CODEC = CustomPacketPayload.codec(ThermalSetPacket::write, ThermalSetPacket::new);
 
-        public ThermalSetPacket(int energy, int burn, BlockPos blockPos){
-            this.tick = energy;
+        public ThermalSetPacket(int tick, int burn, BlockPos blockPos){
+            this.tick = tick;
             this.burn = burn;
             this.blockPos = blockPos;
         }
@@ -161,6 +162,49 @@ public class MoePacket{
                     if(blockEntity instanceof ThermalGeneratorBE) {
                         ((ThermalGeneratorBE) blockEntity).setBurnTime(packet.tick);
                         ((ThermalGeneratorBE) blockEntity).setFullBurnTime(packet.burn);
+                    }
+                }
+            });
+        }
+    }
+
+    public static class BiomassSetPacket implements CustomPacketPayload{
+        int tick;
+        int biomass;
+        BlockPos blockPos;
+        public static final CustomPacketPayload.Type<BiomassSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "biomass_set"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, BiomassSetPacket> STREAM_CODEC = CustomPacketPayload.codec(BiomassSetPacket::write, BiomassSetPacket::new);
+
+        public BiomassSetPacket(int tick, int biomass, BlockPos blockPos){
+            this.tick = tick;
+            this.biomass = biomass;
+            this.blockPos = blockPos;
+        }
+
+        public BiomassSetPacket(FriendlyByteBuf buf){
+            this.tick = buf.readInt();
+            this.biomass = buf.readInt();
+            this.blockPos = buf.readBlockPos();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeInt(tick);
+            buf.writeInt(biomass);
+            buf.writeBlockPos(blockPos);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(BiomassSetPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if(context.player().level().isClientSide()){
+                    BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
+                    if(blockEntity instanceof BiomassGeneratorBE) {
+                        ((BiomassGeneratorBE) blockEntity).setBiomassTime(packet.tick);
+                        ((BiomassGeneratorBE) blockEntity).setFullBiomassTime(packet.biomass);
                     }
                 }
             });

@@ -29,6 +29,10 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("thermal_generator_be", () -> BlockEntityType.Builder.of(
                     ThermalGeneratorBE::new, MoeBlocks.THERMAL_GENERATOR_BLOCK.get()).build(null));
 
+    public static final Supplier<BlockEntityType<BiomassGeneratorBE>> BIOMASS_GENERATOR_BE =
+            MOE_BLOCK_ENTITY.register("biomass_generator_be", () -> BlockEntityType.Builder.of(
+                    BiomassGeneratorBE::new, MoeBlocks.BIOMASS_GENERATOR_BLOCK.get()).build(null));
+
     public static final Supplier<BlockEntityType<EnergyTransmissionAntennaBE>> ENERGY_TRANSMISSION_ANTENNA_BE =
             MOE_BLOCK_ENTITY.register("energy_transmission_antenna_be", () -> BlockEntityType.Builder.of(
                     EnergyTransmissionAntennaBE::new, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get()).build(null));

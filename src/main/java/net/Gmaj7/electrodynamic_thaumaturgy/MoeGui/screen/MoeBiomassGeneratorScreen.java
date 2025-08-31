@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeBiomassGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeThermalGeneratorMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -11,12 +12,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
-public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeThermalGeneratorMenu> {
+public class MoeBiomassGeneratorScreen extends AbstractContainerScreen<MoeBiomassGeneratorMenu> {
     ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator_block.png");
     ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
     ResourceLocation fireTexture = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/fire.png");
 
-    public MoeThermalGeneratorScreen(MoeThermalGeneratorMenu menu, Inventory playerInventory, Component title) {
+    public MoeBiomassGeneratorScreen(MoeBiomassGeneratorMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
     @Override
@@ -49,6 +50,6 @@ public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeTherma
     private void renderEnergy(GuiGraphics guiGraphics, int x, int y){
         IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
         guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored()), 7, 150, 7);
-        guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime(), 7, 150, 7);
+        guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBiomassTime() == 0 ? 0 : 150 * menu.blockEntity.getBiomassTime() / menu.blockEntity.getFullBiomassTime(), 7, 150, 7);
     }
 }

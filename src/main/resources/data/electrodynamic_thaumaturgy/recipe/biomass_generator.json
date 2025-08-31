@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "electrodynamic_thaumaturgy:si"
+    },
+    "b": {
+      "tag": "c:foods"
+    },
+    "c": {
+      "item": "electrodynamic_thaumaturgy:energy_core"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "bcb",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:biomass_generator"
+  }
+}

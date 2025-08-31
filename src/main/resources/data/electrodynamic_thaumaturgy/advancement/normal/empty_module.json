@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:empty_module"
+            "items": "electrodynamic_thaumaturgy:empty_primary_module"
           }
         ]
       },
@@ -18,7 +18,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "electrodynamic_thaumaturgy:empty_module"
+      "id": "electrodynamic_thaumaturgy:empty_primary_module"
     },
     "title": {
       "translate": "advancements.electrodynamic_thaumaturgy.empty_module.title"

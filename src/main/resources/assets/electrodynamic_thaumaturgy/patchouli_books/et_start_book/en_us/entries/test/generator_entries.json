@@ -17,6 +17,11 @@
       "type": "patchouli:crafting",
       "recipe": "electrodynamic_thaumaturgy:photovoltaic_generator",
       "text": "patchouli.et.generator_entries.photovoltaic_generator"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:biomass_generator",
+      "text": "patchouli.et.generator_entries.biomass_generator"
     }
   ]
 }
