@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.EnergyBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.level.BlockDropsEvent;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = MagicOfElectromagnetic.MODID)
+@EventBusSubscriber(modid = EelectrodynamicThaumaturgy.MODID)
 public class LevelBlockEvent {
     @SubscribeEvent
     public static void dropEvent(BlockDropsEvent event) {

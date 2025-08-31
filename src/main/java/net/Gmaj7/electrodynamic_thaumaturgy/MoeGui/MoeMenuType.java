@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class MoeMenuType {
-    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(Registries.MENU, MagicOfElectromagnetic.MODID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(Registries.MENU, EelectrodynamicThaumaturgy.MODID);
 
     public static final DeferredHolder<MenuType<?>, MenuType<MoeAssemblyTableMenu>> ASSEMBLY_TABLE_MENU = MENU_TYPE.register("assembly_table_menu",
             () -> new MenuType<>(MoeAssemblyTableMenu::new, FeatureFlags.DEFAULT_FLAGS));

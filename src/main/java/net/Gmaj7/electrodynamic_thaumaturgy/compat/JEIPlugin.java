@@ -4,7 +4,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,7 @@ import java.util.List;
 public class JEIPlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "jei_plugin");
     }
 
     @Override

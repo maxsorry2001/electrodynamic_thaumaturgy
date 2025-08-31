@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeThermalEnergyMakerMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,9 +12,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeThermalEnergyMakerMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/thermal_generator_block.png");
-    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/energy.png");
-    ResourceLocation fireTexture = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/fire.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator_block.png");
+    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    ResourceLocation fireTexture = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/fire.png");
 
     public MoeThermalGeneratorScreen(MoeThermalEnergyMakerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

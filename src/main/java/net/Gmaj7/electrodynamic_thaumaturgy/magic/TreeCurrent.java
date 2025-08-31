@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
@@ -37,11 +38,11 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
-        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(itemStack));
+        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source instanceof HarmonicSaintEntity ? ((HarmonicSaintEntity) source).getOwner() : source), MoeFunction.getMagicAmount(itemStack));
         addParticle(source, target);
         List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
         for (LivingEntity target1 : list) {
-            if (target1 == target || target1 == source) continue;
+            if (target1 == target || target1 == source || (source instanceof HarmonicSaintEntity && target1 == ((HarmonicSaintEntity) source).getOwner())) continue;
             addParticle(target, target1);
             target1.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(itemStack));
             MoeFunction.checkTargetEnhancement(itemStack, target1);

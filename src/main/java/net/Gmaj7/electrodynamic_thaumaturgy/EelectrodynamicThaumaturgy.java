@@ -35,15 +35,15 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
-@Mod(MagicOfElectromagnetic.MODID)
-public class MagicOfElectromagnetic
+@Mod(EelectrodynamicThaumaturgy.MODID)
+public class EelectrodynamicThaumaturgy
 {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "electrodynamic_thaumaturgy";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public MagicOfElectromagnetic(IEventBus modEventBus, ModContainer modContainer)
+    public EelectrodynamicThaumaturgy(IEventBus modEventBus, ModContainer modContainer)
     {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

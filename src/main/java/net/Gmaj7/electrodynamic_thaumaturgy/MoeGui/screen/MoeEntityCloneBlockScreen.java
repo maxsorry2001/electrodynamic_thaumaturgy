@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeEntityCloneBlockMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,8 +12,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class MoeEntityCloneBlockScreen extends AbstractContainerScreen<MoeEntityCloneBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/one_item_machine.png");
-    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/energy.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/one_item_machine.png");
+    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
 
     public MoeEntityCloneBlockScreen(MoeEntityCloneBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

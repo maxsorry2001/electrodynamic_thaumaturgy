@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
@@ -15,7 +15,7 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-@EventBusSubscriber(modid = MagicOfElectromagnetic.MODID)
+@EventBusSubscriber(modid = EelectrodynamicThaumaturgy.MODID)
 public class TickEvent {
 
     @SubscribeEvent

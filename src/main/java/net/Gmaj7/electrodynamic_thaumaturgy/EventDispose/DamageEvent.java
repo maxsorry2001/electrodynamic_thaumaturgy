@@ -1,7 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MirageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
@@ -19,7 +20,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = MagicOfElectromagnetic.MODID)
+@EventBusSubscriber(modid = EelectrodynamicThaumaturgy.MODID)
 public class DamageEvent {
 
     @SubscribeEvent
@@ -66,6 +67,9 @@ public class DamageEvent {
             EnhancementData enhancementData = livingEntity.getMainHandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
             if(enhancementData == null) enhancementData = livingEntity.getOffhandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
             if(enhancementData != null) livingEntity.heal(event.getNewDamage() * 0.2F * enhancementData.lifeExtraction());
+        }
+        if(sourceEntity instanceof HarmonicSaintEntity && ((HarmonicSaintEntity) sourceEntity).getOwner() instanceof Player){
+            eventTarget.setLastHurtByPlayer((Player) ((HarmonicSaintEntity) sourceEntity).getOwner());
         }
     }
 }

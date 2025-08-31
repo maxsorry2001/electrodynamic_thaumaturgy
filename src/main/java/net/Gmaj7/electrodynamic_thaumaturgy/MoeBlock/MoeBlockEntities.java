@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public class MoeBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> MOE_BLOCK_ENTITY =
-            DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MagicOfElectromagnetic.MODID);
+            DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, EelectrodynamicThaumaturgy.MODID);
 
     public static final Supplier<BlockEntityType<EnergyBlockEntity>> ENERGY_BLOCK_BE =
             MOE_BLOCK_ENTITY.register("energy_block_be", () -> BlockEntityType.Builder.of(

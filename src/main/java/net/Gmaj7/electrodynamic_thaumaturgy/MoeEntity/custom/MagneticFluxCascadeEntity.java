@@ -45,7 +45,7 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
         super.tick();
         if(this.tickCount % hitTick == 0 && magicItem != null){
             float damage = MoeFunction.getMagicAmount(magicItem);
-            target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy)), damage);
+            target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), damage);
             hitTime --;
             if(hitTime == 0){
                 this.discard();

@@ -1,10 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.Level;
 
 public abstract class AbstractSovereignEntity extends PathfinderMob implements RangedAttackMob {

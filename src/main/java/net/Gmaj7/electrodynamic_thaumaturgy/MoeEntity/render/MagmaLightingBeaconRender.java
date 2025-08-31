@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagmaLightingBeaconEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
@@ -15,7 +15,7 @@ public class MagmaLightingBeaconRender extends ArrowRenderer<MagmaLightingBeacon
 
     @Override
     public ResourceLocation getTextureLocation(MagmaLightingBeaconEntity magmaLightingBeaconEntity) {
-        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+        return ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 
     @Override

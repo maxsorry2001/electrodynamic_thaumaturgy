@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -8,7 +8,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class MoeItemModelProvider extends ItemModelProvider {
     public MoeItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, MagicOfElectromagnetic.MODID, existingFileHelper);
+        super(output, EelectrodynamicThaumaturgy.MODID, existingFileHelper);
     }
 
     @Override

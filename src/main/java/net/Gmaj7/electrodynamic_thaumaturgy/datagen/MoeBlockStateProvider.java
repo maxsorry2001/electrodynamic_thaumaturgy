@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class MoeBlockStateProvider extends BlockStateProvider {
     public MoeBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, MagicOfElectromagnetic.MODID, exFileHelper);
+        super(output, EelectrodynamicThaumaturgy.MODID, exFileHelper);
     }
 
     @Override

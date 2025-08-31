@@ -51,7 +51,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(5));
             for (LivingEntity target : list){
                 if(target != getOwner() && magicItem != null){
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), getOwner()), MoeFunction.getMagicAmount(magicItem));
+                    target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), MoeFunction.getMagicAmount(magicItem));
                     MoeFunction.checkTargetEnhancement(magicItem, target);
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
                     lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

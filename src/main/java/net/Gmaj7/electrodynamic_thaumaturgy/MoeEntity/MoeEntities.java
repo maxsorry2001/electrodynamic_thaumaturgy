@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class MoeEntities {
     public static final DeferredRegister<EntityType<?>> MOE_ENTITY_TYPES =
-            DeferredRegister.create(Registries.ENTITY_TYPE, MagicOfElectromagnetic.MODID);
+            DeferredRegister.create(Registries.ENTITY_TYPE, EelectrodynamicThaumaturgy.MODID);
 
     public static final Supplier<EntityType<MoeRayEntity>> MOE_RAY_ENTITY =
             MOE_ENTITY_TYPES.register("moe_ray_entity", () -> EntityType.Builder.<MoeRayEntity>of(MoeRayEntity::new, MobCategory.MISC)

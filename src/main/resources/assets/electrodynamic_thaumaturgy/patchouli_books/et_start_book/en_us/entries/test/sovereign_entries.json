@@ -1,0 +1,12 @@
+{
+  "name": "patchouli.et.sovereign_entries",
+  "category": "electrodynamic_thaumaturgy:category_start",
+  "icon": "electrodynamic_thaumaturgy:harmonic_core_block",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "electrodynamic_thaumaturgy:harmonic_core_block",
+      "text": "patchouli.et.harmonic_core_block.description"
+    }
+  ]
+}

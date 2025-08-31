@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeMagicLithographyTableMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
 import net.minecraft.client.Minecraft;
@@ -17,9 +17,9 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.List;
 
 public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeMagicLithographyTableMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/gui/magic_lithography_table.png");
-    private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "container/lithography_table/scroller");
-    private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "container/lithography_table/scroller_disabled");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_table.png");
+    private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "container/lithography_table/scroller");
+    private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "container/lithography_table/scroller_disabled");
     private static final int SCROLLER_WIDTH = 12;
     private static final int SCROLLER_HEIGHT = 15;
     private static final int RECIPES_COLUMNS = 4;

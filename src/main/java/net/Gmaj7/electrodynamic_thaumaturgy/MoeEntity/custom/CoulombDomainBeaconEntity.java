@@ -53,7 +53,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
             for (LivingEntity target : list){
                 if(target == getOwner()) continue;
                 if (this.getOwner() instanceof HarmonicSaintEntity && target == ((HarmonicSaintEntity) this.getOwner()).getOwner()) continue;
-                target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), getOwner()), MoeFunction.getMagicAmount(magicItem) / 2);
+                target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), MoeFunction.getMagicAmount(magicItem) / 2);
                 MoeFunction.checkTargetEnhancement(magicItem, target);
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
                 lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

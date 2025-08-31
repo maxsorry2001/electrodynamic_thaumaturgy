@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeItemBlockEntity;
@@ -15,12 +15,12 @@ import net.neoforged.neoforge.energy.ComponentEnergyStorage;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = MagicOfElectromagnetic.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = EelectrodynamicThaumaturgy.MODID)
 public class DataLoadHandler {
 
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event){
-        final PayloadRegistrar payloadRegistrar = event.registrar(MagicOfElectromagnetic.MODID).versioned("1.0.0").optional();
+        final PayloadRegistrar payloadRegistrar = event.registrar(EelectrodynamicThaumaturgy.MODID).versioned("1.0.0").optional();
 
         payloadRegistrar.playToServer(MoePacket.MoeSelectMagicPacket.TYPE, MoePacket.MoeSelectMagicPacket.STREAM_CODEC, MoePacket.MoeSelectMagicPacket::handle);
 

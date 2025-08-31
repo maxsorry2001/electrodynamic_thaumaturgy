@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AttractBeaconEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
@@ -15,7 +15,7 @@ public class MagnetArrowRender extends ArrowRenderer<AttractBeaconEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(AttractBeaconEntity attractBeaconEntity) {
-        return ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "textures/entity/magnet_arrow_entity.png");
+        return ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
     }
 
     @Override

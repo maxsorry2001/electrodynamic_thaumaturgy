@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MagicOfElectromagnetic;
+import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
@@ -31,7 +31,7 @@ import java.util.List;
 public class GeologicalMetalExcavatorBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity{
     private static int fullTick = 20;
     private int excavatorTick = 0;
-    private static int tickUse =512;
+    private static int tickUse =1024;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -69,7 +69,7 @@ public class GeologicalMetalExcavatorBE extends BlockEntity implements IMoeEnerg
         else if (dimension == Level.NETHER) path = "nether";
         //else if (dimension == Level.END) path = "end";
         else  path = "overworld";
-        LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(MagicOfElectromagnetic.MODID, "machine/metal_extract_" + path)));
+        LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "machine/metal_extract_" + path)));
         LootParams lootParams = new LootParams.Builder((ServerLevel) level).create(LootContextParamSets.EMPTY);
         List<ItemStack> list = lootTable.getRandomItems(lootParams);
         Iterator<ItemStack> iterator = list.iterator();
