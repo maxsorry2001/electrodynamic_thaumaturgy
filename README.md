@@ -7,12 +7,12 @@
 ### 中文
 欢迎来到 **电磁奇术** (Electrodynamic Thaumaturgy)！
 
-本模组的核心理念是**操纵电磁相互作用以实现魔法的效果**。因此，我们摒弃了传统魔法模组中的“法力值”(Mana)概念，转而采用通用的 **FE (Forge Energy)** 作为施放法术的能量源。这一设计使得本模组能够与其它基于 FE 的科技模组无缝衔接，共享能源网络。
+本模组的核心理念是**操纵电磁相互作用以实现魔法的效果**。因此，本模组放弃了传统魔法模组中的“法力值”(Mana)概念，转而采用通用的 **FE (Forge Energy)** 作为施放法术的能量源。这一设计使得本模组能够与其它基于 FE 的科技模组无缝衔接，共享能源网络。
 
 ### English
 Welcome to **Electrodynamic Thaumaturgy**!
 
-The core concept of this mod is to **manipulate electromagnetic interactions to achieve magical effects**. Consequently, we have replaced the traditional "Mana" system found in magic mods with universal **FE (Forge Energy)** as the power source for spellcasting. This design allows the mod to seamlessly integrate and share energy networks with other FE-based technology mods.
+The core concept of this mod is to **manipulate electromagnetic interactions to achieve magical effects**. Consequently, this mod has replaced the traditional "Mana" system found in magic mods with universal **FE (Forge Energy)** as the power source for spellcasting. This design allows the mod to seamlessly integrate and share energy networks with other FE-based technology mods.
 
 ---
 
