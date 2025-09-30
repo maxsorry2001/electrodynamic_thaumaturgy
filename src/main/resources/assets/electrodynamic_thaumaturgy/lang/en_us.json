@@ -77,7 +77,7 @@
   "block.electrodynamic_thaumaturgy.magic_lithography_table_block": "Magic Lithography Table",
   "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine_block": "Electromagnetic Driver",
   "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "Bio-Replication Vat",
-  "block.electrodynamic_thaumaturgy.geological_metal_excavator_machine_block": "Geological Metal Excavator",
+  "block.electrodynamic_thaumaturgy.electromagnetic_extractor_machine_block": "Electromagnetic Extractor",
   "block.electrodynamic_thaumaturgy.nitrogen_harvester_block": "Nitrogen Harvester",
   "block.electrodynamic_thaumaturgy.harmonic_core_block": "Harmonic Core",
 
@@ -204,6 +204,6 @@
   "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
   "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Generate biological entities recorded in the Genetic Sequencer placed within.",
   "patchouli.et.generator_entries.genetic_recorder": "Record biological data from living entities when used on them, enabling cloning processes.",
-  "patchouli.et.generator_entries.geological_metal_excavator_machine_block": "Extract one metal ingot directly from the earth every second.",
+  "patchouli.et.generator_entries.electromagnetic_extractor_machine_block": "Utilizes electromagnetic waves for excavation and material extraction.",
   "patchouli.et.generator_entries.nitrogen_harvester_block": "Accelerate the growth of crops in an 8-block radius centered on itself, and automatically harvests them. Harvests yield double the normal drops."
 }

@@ -35,7 +35,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:geological_metal_excavator_machine_block"
+            "items": "electrodynamic_thaumaturgy:electromagnetic_extractor_machine_block"
           }
         ]
       },

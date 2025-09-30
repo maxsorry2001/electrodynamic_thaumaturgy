@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.GeologicalMetalExcavatorBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticExtractorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -20,7 +20,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int slotNum = 0;
-    public  final GeologicalMetalExcavatorBE blockEntity;
+    public  final ElectromagneticExtractorBE blockEntity;
 
     public MoeGeologicalMetalExcavatorBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -28,10 +28,10 @@ public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu 
 
     public MoeGeologicalMetalExcavatorBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), containerId);
-        this.blockEntity = (GeologicalMetalExcavatorBE) blockEntity;
+        this.blockEntity = (ElectromagneticExtractorBE) blockEntity;
         this.level = inventory.player.level();
 
-        addMachineSlot(((GeologicalMetalExcavatorBE) blockEntity).getItemHandler());
+        addMachineSlot(((ElectromagneticExtractorBE) blockEntity).getItemHandler());
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -85,7 +85,7 @@ public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu 
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_BLOCK_MACHINE_BLOCK.get());
     }
 
     private void addMachineSlot(IItemHandler itemHandler){

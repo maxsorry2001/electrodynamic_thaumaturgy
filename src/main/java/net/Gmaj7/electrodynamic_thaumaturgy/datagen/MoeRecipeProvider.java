@@ -105,7 +105,7 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('b', MoeItems.ENERGY_CORE.get())
                 .define('c', Items.FURNACE)
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get())).save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_BLOCK_MACHINE_BLOCK.get())
                 .pattern("aca")
                 .pattern("cbc")
                 .pattern("ada")

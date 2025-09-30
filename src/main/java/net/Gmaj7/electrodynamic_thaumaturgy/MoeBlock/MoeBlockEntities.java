@@ -45,9 +45,9 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("bio_replication_vat_be", () -> BlockEntityType.Builder.of(
                     BioReplicationVatBE::new, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get()).build(null));
 
-    public static final Supplier<BlockEntityType<GeologicalMetalExcavatorBE>> GEOLOGICAL_METAL_EXCAVATOR_BE =
-            MOE_BLOCK_ENTITY.register("geological_metal_excavator_be", () -> BlockEntityType.Builder.of(
-                    GeologicalMetalExcavatorBE::new, MoeBlocks.GEOLOGICAL_METAL_EXCAVATOR_MACHINE_BLOCK.get()).build(null));
+    public static final Supplier<BlockEntityType<ElectromagneticExtractorBE>> ELECTROMAGNETIC_EXTRACTOR_BLOCK_BE =
+            MOE_BLOCK_ENTITY.register("electromagnetic_extractor_be", () -> BlockEntityType.Builder.of(
+                    ElectromagneticExtractorBE::new, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_BLOCK_MACHINE_BLOCK.get()).build(null));
 
     public static final Supplier<BlockEntityType<NitrogenHarvesterBE>> NITROGEN_HARVESTER_BE =
             MOE_BLOCK_ENTITY.register("nitrogen_harvester_be", () -> BlockEntityType.Builder.of(

@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.GeologicalMetalExcavatorBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticExtractorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -22,10 +22,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class GeologicalMetalExcavatorBlock extends BaseEntityBlock {
-    public static final MapCodec<GeologicalMetalExcavatorBlock> CODEC = simpleCodec(GeologicalMetalExcavatorBlock::new);
+public class ElectromagneticExtractorBlock extends BaseEntityBlock {
+    public static final MapCodec<ElectromagneticExtractorBlock> CODEC = simpleCodec(ElectromagneticExtractorBlock::new);
 
-    public GeologicalMetalExcavatorBlock(Properties properties) {
+    public ElectromagneticExtractorBlock(Properties properties) {
         super(properties);
     }
 
@@ -45,7 +45,7 @@ public class GeologicalMetalExcavatorBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof GeologicalMetalExcavatorBE energyBlockEntity && !level.isClientSide()) {
+            if (blockEntity instanceof ElectromagneticExtractorBE energyBlockEntity && !level.isClientSide()) {
                 IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), energyBlockEntity.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
@@ -57,7 +57,7 @@ public class GeologicalMetalExcavatorBlock extends BaseEntityBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof GeologicalMetalExcavatorBE blockEntity) {
+            if (level.getBlockEntity(pos) instanceof ElectromagneticExtractorBE blockEntity) {
                 blockEntity.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -67,11 +67,11 @@ public class GeologicalMetalExcavatorBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new GeologicalMetalExcavatorBE(blockPos, blockState);
+        return new ElectromagneticExtractorBE(blockPos, blockState);
     }
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.GEOLOGICAL_METAL_EXCAVATOR_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.GEOLOGICAL_METAL_EXCAVATOR_BE.get(), GeologicalMetalExcavatorBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BLOCK_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BLOCK_BE.get(), ElectromagneticExtractorBE::tick) : null;
     }
 }

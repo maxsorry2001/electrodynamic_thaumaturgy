@@ -20,8 +20,8 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:geological_metal_excavator_machine_block",
-      "text": "patchouli.et.generator_entries.geological_metal_excavator_machine_block"
+      "recipe": "electrodynamic_thaumaturgy:electromagnetic_extractor_machine_block",
+      "text": "patchouli.et.generator_entries.electromagnetic_extractor_machine_block"
     },
     {
       "type": "patchouli:crafting",
