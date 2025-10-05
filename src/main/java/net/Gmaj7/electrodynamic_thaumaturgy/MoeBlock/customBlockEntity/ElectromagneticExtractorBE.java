@@ -43,6 +43,10 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     private static ItemStack SHOVE = new ItemStack(Items.NETHERITE_SHOVEL);
     private static ItemStack HOE = new ItemStack(Items.NETHERITE_HOE);
     private static ItemStack SHEARS = new ItemStack(Items.SHEARS);
+    public int radius = 1;
+    private static int MAX_RADIUS = 5;
+    private static int MIN_RADIUS = 1;
+    private static int EXTRACTOR_DEEPTH = 60;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -81,17 +85,38 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
             blockState = level.getBlockState(blockPos);
         }
         if(blockState.getBlock() instanceof LiquidBlock || blockState.getBlock().defaultDestroyTime() <= 0) return;
-        List<ItemStack> list = Block.getDrops(blockState, (ServerLevel) level, blockPos, level.getBlockEntity(blockPos), null, electromagneticExtractorBE.getDigTool(blockState));
-        Iterator<ItemStack> iterator = list.iterator();
-        while(iterator.hasNext()){
-            ItemStack itemStack = iterator.next().copy();
-            for (int i = 0; i < electromagneticExtractorBE.itemHandler.getSlots(); i++) {
-                ItemStack result = electromagneticExtractorBE.getItemHandler().insertItem(i, itemStack, false);
-                if(!result.isEmpty()) itemStack = result.copy();
-                else break;
+        boolean flag = electromagneticExtractorBE.radius % 2 == 0;
+        int i, j, j0, mi, mj;
+        if(flag){
+            i = - electromagneticExtractorBE.radius / 2;
+            j0 = - electromagneticExtractorBE.radius / 2;
+            mi = -i - 1;
+            mj = -j0 - 1;
+        }
+        else {
+            i = - (electromagneticExtractorBE.radius - 1) / 2;
+            j0 = - (electromagneticExtractorBE.radius - 1) / 2;
+            mi = -i;
+            mj = -j0;
+        }
+        for (; i <= mi; i++){
+            for (j = j0; j <= mj; j++){
+                BlockPos destroyPos = new BlockPos(blockPos.getX() + i, blockPos.getY(), blockPos.getZ() + j);
+                BlockState destroyState = level.getBlockState(destroyPos);
+                if(destroyState.isAir()) continue;
+                List<ItemStack> list = Block.getDrops(destroyState, (ServerLevel) level, destroyPos, level.getBlockEntity(destroyPos), null, electromagneticExtractorBE.getDigTool(destroyState));
+                Iterator<ItemStack> iterator = list.iterator();
+                while(iterator.hasNext()){
+                    ItemStack itemStack = iterator.next().copy();
+                    for (int k = 0; k < electromagneticExtractorBE.itemHandler.getSlots(); k++) {
+                        ItemStack result = electromagneticExtractorBE.getItemHandler().insertItem(k, itemStack, false);
+                        if(!result.isEmpty()) itemStack = result.copy();
+                        else break;
+                    }
+                }
+                level.destroyBlock(destroyPos, false);
             }
         }
-        level.destroyBlock(blockPos, false);
     }
 
     @Override
@@ -99,6 +124,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         super.saveAdditional(tag, registries);
         tag.putInt("energy", energy.getEnergyStored());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
+        tag.putInt("radius", radius);
     }
 
     @Override
@@ -106,6 +132,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         super.loadAdditional(tag, registries);
         setEnergy(tag.getInt("energy"));
         itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
+        radius = tag.getInt("radius");
     }
 
     public void drops() {
@@ -150,5 +177,13 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         if(blockState.is(BlockTags.MINEABLE_WITH_PICKAXE)) return PICE_AXE;
         if(blockState.is(BlockTags.MINEABLE_WITH_HOE)) return HOE;
         return PICE_AXE;
+    }
+
+    public void addRadius(){
+        this.radius = Math.min(radius + 1, MAX_RADIUS);
+    }
+
+    public void reduceRadius(){
+        this.radius = Math.max(radius - 1, MIN_RADIUS);
     }
 }
