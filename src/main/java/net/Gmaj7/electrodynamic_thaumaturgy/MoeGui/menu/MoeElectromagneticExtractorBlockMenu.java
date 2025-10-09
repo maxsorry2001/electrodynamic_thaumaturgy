@@ -17,16 +17,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu {
+public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int slotNum = 0;
     public  final ElectromagneticExtractorBE blockEntity;
 
-    public MoeGeologicalMetalExcavatorBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public MoeElectromagneticExtractorBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeGeologicalMetalExcavatorBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+    public MoeElectromagneticExtractorBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), containerId);
         this.blockEntity = (ElectromagneticExtractorBE) blockEntity;
         this.level = inventory.player.level();
@@ -91,7 +91,7 @@ public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu 
     private void addMachineSlot(IItemHandler itemHandler){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 9; j++)
-                this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 19 + i * 18));
+                this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 25 + i * 18));
         }
     }
 
@@ -105,5 +105,18 @@ public class MoeGeologicalMetalExcavatorBlockMenu extends AbstractContainerMenu 
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+
+    @Override
+    public boolean clickMenuButton(Player player, int id) {
+        if(id == 0) {
+            blockEntity.addWidth();
+            return true;
+        }
+        if(id == 1){
+            blockEntity.reduceWidth();
+            return true;
+        }
+        return false;
     }
 }

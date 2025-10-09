@@ -36,9 +36,12 @@ public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
     public static final BooleanProperty SEND = BooleanProperty.create("send");
     protected static final float AABB_MIN = 6.0F;
     protected static final float AABB_MAX = 10.0F;
-    protected static final VoxelShape Y_AXIS_AABB = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
-    protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0, 6.0, 0.0, 10.0, 10.0, 16.0);
-    protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 6.0, 6.0, 16.0, 10.0, 10.0);
+    protected static final VoxelShape UP_AXIS_AABB = Block.box(6.0, 0.0, 6.0, 10.0, 6.0, 10.0);
+    protected static final VoxelShape DOWN_AXIS_AABB = Block.box(6.0, 10.0, 6.0, 10.0, 16.0, 10.0);
+    protected static final VoxelShape SOUTH_AXIS_AABB = Block.box(6.0, 6.0, 0.0, 10.0, 10.0, 6.0);
+    protected static final VoxelShape NORTH_AXIS_AABB = Block.box(6.0, 6.0, 10.0, 10.0, 10.0, 16.0);
+    protected static final VoxelShape EAST_AXIS_AABB = Block.box(0.0, 6.0, 6.0, 6.0, 10.0, 10.0);
+    protected static final VoxelShape WEST_AXIS_AABB = Block.box(10.0, 6.0, 6.0, 16.0, 10.0, 10.0);
     public EnergyTransmissionAtennaBlock(Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState) this.defaultBlockState().setValue(FACING, Direction.UP).setValue(SEND, true));
@@ -46,14 +49,20 @@ public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        switch (((Direction)state.getValue(FACING)).getAxis()) {
-            case X:
+        switch ((Direction)state.getValue(FACING)) {
+            case UP:
             default:
-                return X_AXIS_AABB;
-            case Z:
-                return Z_AXIS_AABB;
-            case Y:
-                return Y_AXIS_AABB;
+                return UP_AXIS_AABB;
+            case DOWN:
+                return DOWN_AXIS_AABB;
+            case EAST:
+                return EAST_AXIS_AABB;
+            case WEST:
+                return WEST_AXIS_AABB;
+            case NORTH:
+                return NORTH_AXIS_AABB;
+            case SOUTH:
+                return SOUTH_AXIS_AABB;
         }
     }
 

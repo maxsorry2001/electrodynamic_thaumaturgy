@@ -16,16 +16,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class MoeMagicCastBlockMenu extends AbstractContainerMenu {
+public class ElectromagneticDriverBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int slotNum = 0;
     public  final ElectromagneticDriverBE blockEntity;
 
-    public MoeMagicCastBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public ElectromagneticDriverBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeMagicCastBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+    public ElectromagneticDriverBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), containerId);
         this.blockEntity = (ElectromagneticDriverBE) blockEntity;
         this.level = inventory.player.level();

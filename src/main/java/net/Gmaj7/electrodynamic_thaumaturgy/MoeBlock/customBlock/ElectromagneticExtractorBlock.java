@@ -59,21 +59,6 @@ public class ElectromagneticExtractorBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(level.isClientSide())
-            return ItemInteractionResult.SUCCESS;
-        else {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ElectromagneticExtractorBE energyBlockEntity && player.getItemInHand(hand).is(MoeItems.ELECTROMAGNETIC_ROD)) {
-                IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), energyBlockEntity.getBlockPos()));
-                energyBlockEntity.addRadius();
-            }
-            return ItemInteractionResult.CONSUME;
-        }
-    }
-
-    @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
             if (level.getBlockEntity(pos) instanceof ElectromagneticExtractorBE blockEntity) {

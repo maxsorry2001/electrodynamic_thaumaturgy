@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeGeologicalMetalExcavatorBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
@@ -43,9 +43,9 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     private static ItemStack SHOVE = new ItemStack(Items.NETHERITE_SHOVEL);
     private static ItemStack HOE = new ItemStack(Items.NETHERITE_HOE);
     private static ItemStack SHEARS = new ItemStack(Items.SHEARS);
-    public int radius = 1;
-    private static int MAX_RADIUS = 5;
-    private static int MIN_RADIUS = 1;
+    public int width = 1;
+    private static int MAX_WIDTH = 5;
+    private static int MIN_WIDTH = 1;
     private static int EXTRACTOR_DEEPTH = 60;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
@@ -85,17 +85,17 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
             blockState = level.getBlockState(blockPos);
         }
         if(blockState.getBlock() instanceof LiquidBlock || blockState.getBlock().defaultDestroyTime() <= 0) return;
-        boolean flag = electromagneticExtractorBE.radius % 2 == 0;
+        boolean flag = electromagneticExtractorBE.width % 2 == 0;
         int i, j, j0, mi, mj;
         if(flag){
-            i = - electromagneticExtractorBE.radius / 2;
-            j0 = - electromagneticExtractorBE.radius / 2;
+            i = - electromagneticExtractorBE.width / 2;
+            j0 = - electromagneticExtractorBE.width / 2;
             mi = -i - 1;
             mj = -j0 - 1;
         }
         else {
-            i = - (electromagneticExtractorBE.radius - 1) / 2;
-            j0 = - (electromagneticExtractorBE.radius - 1) / 2;
+            i = - (electromagneticExtractorBE.width - 1) / 2;
+            j0 = - (electromagneticExtractorBE.width - 1) / 2;
             mi = -i;
             mj = -j0;
         }
@@ -124,7 +124,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         super.saveAdditional(tag, registries);
         tag.putInt("energy", energy.getEnergyStored());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
-        tag.putInt("radius", radius);
+        tag.putInt("radius", width);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         super.loadAdditional(tag, registries);
         setEnergy(tag.getInt("energy"));
         itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
-        radius = tag.getInt("radius");
+        width = tag.getInt("radius");
     }
 
     public void drops() {
@@ -166,7 +166,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new MoeGeologicalMetalExcavatorBlockMenu(i, inventory, this);
+        return new MoeElectromagneticExtractorBlockMenu(i, inventory, this);
     }
 
     private ItemStack getDigTool(BlockState blockState){
@@ -179,11 +179,11 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         return PICE_AXE;
     }
 
-    public void addRadius(){
-        this.radius = Math.min(radius + 1, MAX_RADIUS);
+    public void addWidth(){
+        this.width = Math.min(width + 1, MAX_WIDTH);
     }
 
-    public void reduceRadius(){
-        this.radius = Math.max(radius - 1, MIN_RADIUS);
+    public void reduceWidth(){
+        this.width = Math.max(width - 1, MIN_WIDTH);
     }
 }
