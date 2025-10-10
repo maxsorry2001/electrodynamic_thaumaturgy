@@ -1,7 +1,30 @@
 {
   "variants": {
-    "": {
+    "facing=down": {
       "model": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block"
+    },
+    "facing=up": {
+      "model": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west": {
+      "model": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block",
+      "x": 90
     }
   }
 }

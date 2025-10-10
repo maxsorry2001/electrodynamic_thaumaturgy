@@ -132,6 +132,7 @@
   "moe_assemble": "装配",
   "moe_modem": "调制",
   "moe_extractor_width": "宽度",
+  "moe_extractor_depth": "深度",
 
   "moe_tab": "电磁奇术",
   "moe_show_energy": "能量:",
@@ -205,6 +206,6 @@
   "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "电磁驱动器会根据放入的法术模块自动索敌施法，不过消耗的能量会更高。注意：电磁驱动器无法施放强化自身类的法术",
   "patchouli.et.generator_entries.bio_replication_vat_machine_block": "生成机器中放入的基因刻录器中刻录的生物",
   "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆",
-  "patchouli.et.generator_entries.electromagnetic_extractor_machine_block": "利用电磁波进行挖掘",
+  "patchouli.et.generator_entries.electromagnetic_extractor_machine_block": "向发射面朝向发射电磁波，以照射到的方块为中心按设定的宽度挖掘方块。同时可以设定挖掘深度",
   "patchouli.et.generator_entries.nitrogen_harvester_block": "固氮采集器可以加快以自身为中心周围8格作物的生长并自动收割。收割时会获得双倍产出"
 }

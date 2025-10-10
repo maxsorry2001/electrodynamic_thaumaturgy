@@ -23,39 +23,71 @@ public class MoeElectromagneticExtractorBlockScreen extends AbstractContainerScr
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         renderTooltip(guiGraphics, mouseX, mouseY);
-        guiGraphics.blitSprite(SPRITES.get(false, false), x + 73, y + 8, 30, 12);
-        guiGraphics.blitSprite(SPRITES.get(true, isMouseAddFocused(mouseX, mouseY)), x + 58, y + 8, 12, 12);
-        guiGraphics.blitSprite(SPRITES.get(true, isMouseReduceFocused(mouseX, mouseY)), x + 106, y + 8, 12, 12);
-        guiGraphics.drawString(this.font, Component.translatable("moe_extractor_width").append(":" + menu.blockEntity.width), x + 76, y + 10, 0xFFFFFF);
-        guiGraphics.drawString(this.font, Component.literal("+"), x + 60, y + 10, 0xFFFFFF);
-        guiGraphics.drawString(this.font, Component.literal("-"), x + 108, y + 10, 0xFFFFFF);
+        guiGraphics.blitSprite(SPRITES.get(false, false), x + 28, y + 8, 40, 12);
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseAddWidthFocused(mouseX, mouseY)), x + 13, y + 8, 12, 12);
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseReduceWidthFocused(mouseX, mouseY)), x + 71, y + 8, 12, 12);
+        guiGraphics.blitSprite(SPRITES.get(false, false), x + 115, y + 8, 40, 12);
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseAddDepthFocused(mouseX, mouseY)), x + 100, y + 8, 12, 12);
+        guiGraphics.blitSprite(SPRITES.get(true, isMouseReduceDepthFocused(mouseX, mouseY)), x + 158, y + 8, 12, 12);
+        guiGraphics.drawString(this.font, Component.translatable("moe_extractor_width").append(":" + menu.blockEntity.width), x + 30, y + 10, 0xFFFFFF);
+        guiGraphics.drawString(this.font, Component.literal("+"), x + 15, y + 10, 0xFFFFFF);
+        guiGraphics.drawString(this.font, Component.literal("-"), x + 73, y + 10, 0xFFFFFF);
+        guiGraphics.drawString(this.font, Component.translatable("moe_extractor_depth").append(":" + menu.blockEntity.depth), x + 117, y + 10, 0xFFFFFF);
+        guiGraphics.drawString(this.font, Component.literal("+"), x + 102, y + 10, 0xFFFFFF);
+        guiGraphics.drawString(this.font, Component.literal("-"), x + 160, y + 10, 0xFFFFFF);
     }
 
-    private boolean isMouseAddFocused(double mouseX, double mouseY){
+    private boolean isMouseAddWidthFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - 58;
+        double d0 = mouseX - x - 13;
         double d1 = mouseY - y - 8;
         return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
     }
 
-    private boolean isMouseReduceFocused(double mouseX, double mouseY){
+    private boolean isMouseReduceWidthFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - 106;
+        double d0 = mouseX - x - 71;
+        double d1 = mouseY - y - 8;
+        return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
+    }
+
+    private boolean isMouseAddDepthFocused(double mouseX, double mouseY){
+        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
+        double d0 = mouseX - x - 100;
+        double d1 = mouseY - y - 8;
+        return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
+    }
+
+    private boolean isMouseReduceDepthFocused(double mouseX, double mouseY){
+        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
+        double d0 = mouseX - x - 158;
         double d1 = mouseY - y - 8;
         return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if(isMouseAddFocused(mouseX, mouseY)){
+        if(isMouseAddWidthFocused(mouseX, mouseY)){
             if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
-                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
+                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
                 return true;
             }
         }
-        if(isMouseReduceFocused(mouseX, mouseY)){
+        if(isMouseReduceWidthFocused(mouseX, mouseY)){
             if (this.menu.clickMenuButton(this.minecraft.player, 1)) {
-                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
+                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 1);
+                return true;
+            }
+        }
+        if(isMouseAddDepthFocused(mouseX, mouseY)){
+            if (this.menu.clickMenuButton(this.minecraft.player, 2)) {
+                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 2);
+                return true;
+            }
+        }
+        if(isMouseReduceDepthFocused(mouseX, mouseY)){
+            if (this.menu.clickMenuButton(this.minecraft.player, 3)) {
+                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 3);
                 return true;
             }
         }

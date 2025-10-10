@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "electrodynamic_thaumaturgy:block/machine_normal",
     "side": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block_side",
-    "top": "electrodynamic_thaumaturgy:block/machine_normal"
+    "top": "electrodynamic_thaumaturgy:block/electromagnetic_extractor_machine_block_side"
   }
 }

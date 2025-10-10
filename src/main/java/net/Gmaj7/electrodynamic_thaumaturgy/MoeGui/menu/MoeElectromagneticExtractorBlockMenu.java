@@ -117,6 +117,14 @@ public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu 
             blockEntity.reduceWidth();
             return true;
         }
-        return false;
+        if(id == 2) {
+            blockEntity.addDepth();
+            return true;
+        }
+        if(id == 3){
+            blockEntity.reduceDepth();
+            return true;
+        }
+        return true;
     }
 }

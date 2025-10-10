@@ -135,6 +135,7 @@
   "moe_modem": "Modem",
   "moe_assemble": "Assemble",
   "moe_extractor_width": "Diameter",
+  "moe_extractor_depth": "Depth",
 
   "key.category.electrodynamic_thaumaturgy.moe": "Electrodynamic Thaumatury",
   "key.electrodynamic_thaumaturgy.switch_magic": "Switch magic",
@@ -205,6 +206,6 @@
   "patchouli.et.generator_entries.electromagnetic_driver_machine_block": "The Electromagnetic Driver auto-targets and casts spells from inserted modules at increased energy cost. Note: Cannot cast self-enhancement type spells.",
   "patchouli.et.generator_entries.bio_replication_vat_machine_block": "Generate biological entities recorded in the Genetic Sequencer placed within.",
   "patchouli.et.generator_entries.genetic_recorder": "Record biological data from living entities when used on them, enabling cloning processes.",
-  "patchouli.et.generator_entries.electromagnetic_extractor_machine_block": "Utilizes electromagnetic waves for excavation and material extraction.",
+  "patchouli.et.generator_entries.electromagnetic_extractor_machine_block":  "Emits electromagnetic waves from its emission face. Mines blocks centered on the irradiated area with configurable width and depth settings.",
   "patchouli.et.generator_entries.nitrogen_harvester_block": "Accelerate the growth of crops in an 8-block radius centered on itself, and automatically harvests them. Harvests yield double the normal drops."
 }

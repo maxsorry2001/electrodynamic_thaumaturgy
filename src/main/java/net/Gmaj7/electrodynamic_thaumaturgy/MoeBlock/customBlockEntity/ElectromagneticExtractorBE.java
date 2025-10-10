@@ -1,15 +1,18 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ElectromagneticExtractorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -24,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -44,9 +48,10 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     private static ItemStack HOE = new ItemStack(Items.NETHERITE_HOE);
     private static ItemStack SHEARS = new ItemStack(Items.SHEARS);
     public int width = 1;
+    public int depth = 1;
     private static int MAX_WIDTH = 5;
     private static int MIN_WIDTH = 1;
-    private static int EXTRACTOR_DEEPTH = 60;
+    private static int MAX_DEPTH = 60;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -78,11 +83,13 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         electromagneticExtractorBE.getEnergy().extractEnergy(tickUse, false);
         if(electromagneticExtractorBE.excavatorTick < fullTick) return;
         electromagneticExtractorBE.excavatorTick = 0;
-        BlockPos blockPos = pos.below();
-        BlockState blockState = level.getBlockState(blockPos);
-        while (blockState.isAir()){
-            blockPos = blockPos.below();
-            blockState = level.getBlockState(blockPos);
+        BlockPos targetPos = pos.relative(state.getValue(ElectromagneticExtractorBlock.FACING));
+        BlockState blockState = level.getBlockState(targetPos);
+        while (blockState.isAir() && electromagneticExtractorBE.isMaxDepth(state, pos, targetPos)){
+            targetPos = targetPos.relative(state.getValue(ElectromagneticExtractorBlock.FACING));
+            blockState = level.getBlockState(targetPos);
+            Vec3 vec3 = targetPos.getCenter();
+            ((ServerLevel)level).sendParticles(ParticleTypes.FLASH, vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
         }
         if(blockState.getBlock() instanceof LiquidBlock || blockState.getBlock().defaultDestroyTime() <= 0) return;
         boolean flag = electromagneticExtractorBE.width % 2 == 0;
@@ -101,7 +108,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         }
         for (; i <= mi; i++){
             for (j = j0; j <= mj; j++){
-                BlockPos destroyPos = new BlockPos(blockPos.getX() + i, blockPos.getY(), blockPos.getZ() + j);
+                BlockPos destroyPos = electromagneticExtractorBE.getDestroyPos(state, i, j, targetPos);
                 BlockState destroyState = level.getBlockState(destroyPos);
                 if(destroyState.isAir()) continue;
                 List<ItemStack> list = Block.getDrops(destroyState, (ServerLevel) level, destroyPos, level.getBlockEntity(destroyPos), null, electromagneticExtractorBE.getDigTool(destroyState));
@@ -119,12 +126,48 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         }
     }
 
+    public BlockPos getDestroyPos(BlockState blockState, int i, int j, BlockPos targetPos){
+        BlockPos result;
+        switch (blockState.getValue(ElectromagneticExtractorBlock.FACING)){
+            case SOUTH, NORTH -> {
+                result = new BlockPos(targetPos.getX() + i, targetPos.getY() + j, targetPos.getZ());
+            }
+            case WEST, EAST -> {
+                result = new BlockPos(targetPos.getX(), targetPos.getY() + i, targetPos.getZ() + j);
+            }
+            default -> {
+                result = new BlockPos(targetPos.getX() + i, targetPos.getY(), targetPos.getZ() + j);
+            }
+        }
+        return result;
+    }
+
+    private boolean isMaxDepth(BlockState blockState, BlockPos startPos, BlockPos endPos){
+        int start, end;
+        switch (blockState.getValue(ElectromagneticExtractorBlock.FACING)) {
+            case SOUTH, NORTH -> {
+                start = startPos.getZ();
+                end = endPos.getZ();
+            }
+            case WEST, EAST -> {
+                start = startPos.getX();
+                end = endPos.getX();
+            }
+            default -> {
+                start = startPos.getY();
+                end = endPos.getZ();
+            }
+        }
+        return Mth.abs(start - end) < this.depth;
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("energy", energy.getEnergyStored());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
         tag.putInt("radius", width);
+        tag.putInt("depth", depth);
     }
 
     @Override
@@ -133,6 +176,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         setEnergy(tag.getInt("energy"));
         itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
         width = tag.getInt("radius");
+        depth = tag.getInt("depth");
     }
 
     public void drops() {
@@ -166,6 +210,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        PacketDistributor.sendToAllPlayers(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
         return new MoeElectromagneticExtractorBlockMenu(i, inventory, this);
     }
 
@@ -185,5 +230,21 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
 
     public void reduceWidth(){
         this.width = Math.max(width - 1, MIN_WIDTH);
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void addDepth(){
+        this.depth = Math.min(depth + 1, MAX_DEPTH);
+    }
+
+    public void reduceDepth(){
+        this.depth = Math.max(depth - 1, 1);
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 }
