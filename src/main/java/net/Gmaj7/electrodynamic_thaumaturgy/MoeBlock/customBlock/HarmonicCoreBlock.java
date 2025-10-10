@@ -5,15 +5,19 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockPattern;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSovereignSummonEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class HarmonicCoreBlock extends Block {
     public static final MapCodec<HarmonicCoreBlock> CODEC = simpleCodec(HarmonicCoreBlock::new);
+    protected static final VoxelShape AABB = Block.box(5.0, 5.0, 5.0, 11.0, 11.0, 11.0);
     public HarmonicCoreBlock(Properties properties) {
         super(properties);
     }
@@ -21,6 +25,11 @@ public class HarmonicCoreBlock extends Block {
     @Override
     protected MapCodec<? extends Block> codec() {
         return CODEC;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return AABB;
     }
 
     @Override

@@ -70,11 +70,6 @@ public class MoeEntities {
                     .clientTrackingRange(4)
                     .noSave()
                     .build("frequency_division_beacon_entity"));
-    public static final Supplier<EntityType<FluxDissipationEntity>> FLUX_DISSIPATION_ENTITY =
-            MOE_ENTITY_TYPES.register("flux_dissipation_entity", () -> EntityType.Builder.<FluxDissipationEntity>of(FluxDissipationEntity::new, MobCategory.MISC)
-                    .sized(0.98F, 0.98F)
-                    .noSave()
-                    .build("flux_dissipation_entity"));
     public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
             MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 0.98F)

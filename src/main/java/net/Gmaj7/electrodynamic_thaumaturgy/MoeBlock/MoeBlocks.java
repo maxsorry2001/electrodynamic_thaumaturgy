@@ -34,7 +34,7 @@ public class MoeBlocks {
             () ->  new PhotovoltaicGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
 
     public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = MOE_BLOCKS.register("energy_transmission_antenna_block",
-            () ->  new EnergyTransmissionAtennaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
+            () ->  new EnergyTransmissionAtennaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));
 
     public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = MOE_BLOCKS.register("magic_lithography_table_block",
             () -> new MagicLithographyTableBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
@@ -46,7 +46,7 @@ public class MoeBlocks {
             () -> new BioReplicationVatMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
     public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = MOE_BLOCKS.register("harmonic_core_block",
-            () -> new HarmonicCoreBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F)));
+            () -> new HarmonicCoreBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)));
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_BLOCK_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_extractor_machine_block",
             () -> new ElectromagneticExtractorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));

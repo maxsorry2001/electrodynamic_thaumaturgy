@@ -31,14 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class EnergyBlock extends BaseEntityBlock {
     public static final MapCodec<EnergyBlock> CODEC = simpleCodec(EnergyBlock::new);
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     public EnergyBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
     }
 
     @Override
