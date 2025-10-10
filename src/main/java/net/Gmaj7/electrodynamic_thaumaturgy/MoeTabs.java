@@ -58,6 +58,7 @@ public class MoeTabs {
                         output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
                         output.accept(MoeItems.MIRAGE_PURSUIT_MODULE.get());
                         output.accept(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get());
+                        output.accept(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get());
                         output.accept(MoeItems.SAINT_SUMMON_MODULE.get());
 
                         output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD.get());

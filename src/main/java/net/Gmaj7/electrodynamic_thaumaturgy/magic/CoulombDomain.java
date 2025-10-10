@@ -16,8 +16,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
-        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(livingEntity.level(), livingEntity, itemStack);
-        coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(coulombDomainBeaconEntity);
     }
 
@@ -25,8 +24,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), source, itemStack);
-        coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, source);
         target.level().addFreshEntity(coulombDomainBeaconEntity);
     }
 
@@ -58,8 +56,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         if(target == null) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), (LivingEntity) electromagneticDriverBE.getOwner(), ElectromagneticDriverBE.magicItem);
-        coulombDomainBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem ,(LivingEntity) electromagneticDriverBE.getOwner());
         target.level().addFreshEntity(coulombDomainBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
         electromagneticDriverBE.extractEnergy(getBaseEnergyCost());

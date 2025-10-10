@@ -36,7 +36,6 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
         return (level.isDay() && level.canSeeSky(this.getBlockPos().above())) || blockLight > 0;
     }
 
-
     @Override
     public IEnergyStorage getEnergy() {
         return energy;

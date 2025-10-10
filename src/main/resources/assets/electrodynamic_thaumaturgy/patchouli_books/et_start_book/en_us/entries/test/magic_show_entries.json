@@ -120,6 +120,11 @@
     },
     {
       "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:photoacoustic_pulse_module",
+      "text": "patchouli.et.photoacoustic_pulse_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
       "item": "electrodynamic_thaumaturgy:saint_summon_module",
       "text": "patchouli.et.saint_summon_module.description"
     }

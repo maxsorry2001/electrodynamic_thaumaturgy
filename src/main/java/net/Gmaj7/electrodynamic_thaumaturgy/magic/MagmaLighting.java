@@ -22,8 +22,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
         Direction direction = blockHitResult.getDirection();
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(livingEntity.level(), livingEntity, itemStack);
-        magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
         magmaLightingBeaconEntity.setDirection(direction);
         livingEntity.level().addFreshEntity(magmaLightingBeaconEntity);
         if(livingEntity.level() instanceof ServerLevel) {
@@ -40,8 +39,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(source.level(), (LivingEntity) source, MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
-        magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(source.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) source);
         magmaLightingBeaconEntity.setDirection(Direction.UP);
         source.level().addFreshEntity(magmaLightingBeaconEntity);
         if(source.level() instanceof ServerLevel) {
@@ -82,8 +80,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
         if(target == null) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(electromagneticDriverBE.getLevel(), (LivingEntity) electromagneticDriverBE.getOwner(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
-        magmaLightingBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) electromagneticDriverBE.getOwner());
         magmaLightingBeaconEntity.setDirection(Direction.UP);
         electromagneticDriverBE.getLevel().addFreshEntity(magmaLightingBeaconEntity);
         if(electromagneticDriverBE.getLevel() instanceof ServerLevel) {

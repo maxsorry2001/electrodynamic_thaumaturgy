@@ -30,11 +30,11 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
         super(entityType, level);
     }
 
-    public MagmaLightingBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack) {
+    public MagmaLightingBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner){
         super(MoeEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), level);
-        this.magicItem = itemStack.copy();
         this.setOwner(owner);
-        this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.setPos(x, y, z);
+        this.magicItem = itemStack.copy();
         this.pickup = Pickup.DISALLOWED;
     }
 

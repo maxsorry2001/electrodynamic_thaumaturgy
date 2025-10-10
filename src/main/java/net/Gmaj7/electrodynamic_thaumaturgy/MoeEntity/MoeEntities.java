@@ -70,6 +70,12 @@ public class MoeEntities {
                     .clientTrackingRange(4)
                     .noSave()
                     .build("frequency_division_beacon_entity"));
+    public static final Supplier<EntityType<PhotoacousticPulseBeaconEntity>> PHOTOACOUSTIC_PULSE_BEACON_ENTITY =
+            MOE_ENTITY_TYPES.register("photoacoustic_pulse_beacon_entity", () -> EntityType.Builder.<PhotoacousticPulseBeaconEntity>of(PhotoacousticPulseBeaconEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .noSave()
+                    .build("photoacoustic_pulse_beacon_entity"));
     public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
             MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 0.98F)
