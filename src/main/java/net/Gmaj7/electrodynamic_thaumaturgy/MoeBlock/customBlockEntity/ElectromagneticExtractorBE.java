@@ -38,20 +38,20 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
-    private static int fullTick = 20;
+    private static final int fullTick = 100;
     private int excavatorTick = 0;
-    private static int tickUse =1024;
-    private static ItemStack AXE = new ItemStack(Items.NETHERITE_AXE);
-    private static ItemStack PICE_AXE = new ItemStack(Items.NETHERITE_PICKAXE);
-    private static ItemStack SWORD = new ItemStack(Items.NETHERITE_SWORD);
-    private static ItemStack SHOVE = new ItemStack(Items.NETHERITE_SHOVEL);
-    private static ItemStack HOE = new ItemStack(Items.NETHERITE_HOE);
-    private static ItemStack SHEARS = new ItemStack(Items.SHEARS);
+    private static final int extractUse = 8192;
+    private static final ItemStack AXE = new ItemStack(Items.NETHERITE_AXE);
+    private static final ItemStack PICK_AXE = new ItemStack(Items.NETHERITE_PICKAXE);
+    private static final ItemStack SWORD = new ItemStack(Items.NETHERITE_SWORD);
+    private static final ItemStack SHOVE = new ItemStack(Items.NETHERITE_SHOVEL);
+    private static final ItemStack HOE = new ItemStack(Items.NETHERITE_HOE);
+    private static final ItemStack SHEARS = new ItemStack(Items.SHEARS);
     public int width = 1;
     public int depth = 1;
-    private static int MAX_WIDTH = 5;
-    private static int MIN_WIDTH = 1;
-    private static int MAX_DEPTH = 60;
+    private static final int MAX_WIDTH = 5;
+    private static final int MIN_WIDTH = 1;
+    private static final int MAX_DEPTH = 60;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -78,9 +78,8 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticExtractorBE electromagneticExtractorBE){
-        if(level.isClientSide() || electromagneticExtractorBE.getEnergy().getEnergyStored() < tickUse) return;
+        if(level.isClientSide() || electromagneticExtractorBE.getEnergy().getEnergyStored() < extractUse * Math.pow(electromagneticExtractorBE.width, 2)) return;
         electromagneticExtractorBE.excavatorTick ++;
-        electromagneticExtractorBE.getEnergy().extractEnergy(tickUse, false);
         if(electromagneticExtractorBE.excavatorTick < fullTick) return;
         electromagneticExtractorBE.excavatorTick = 0;
         BlockPos targetPos = pos.relative(state.getValue(ElectromagneticExtractorBlock.FACING));
@@ -122,6 +121,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
                     }
                 }
                 level.destroyBlock(destroyPos, false);
+                electromagneticExtractorBE.getEnergy().extractEnergy(extractUse, false);
             }
         }
     }
@@ -219,9 +219,9 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         if(blockState.is(BlockTags.LEAVES)) return SHEARS;
         if(blockState.is(BlockTags.MINEABLE_WITH_SHOVEL)) return SHOVE;
         if(blockState.is(BlockTags.MINEABLE_WITH_AXE)) return AXE;
-        if(blockState.is(BlockTags.MINEABLE_WITH_PICKAXE)) return PICE_AXE;
+        if(blockState.is(BlockTags.MINEABLE_WITH_PICKAXE)) return PICK_AXE;
         if(blockState.is(BlockTags.MINEABLE_WITH_HOE)) return HOE;
-        return PICE_AXE;
+        return PICK_AXE;
     }
 
     public void addWidth(){

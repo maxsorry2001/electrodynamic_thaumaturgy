@@ -30,10 +30,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
-    private static int growUse = 8192;
-    private static int harvestUse = 16384;
+    private static final int growUse = 131072;
+    private static final int harvestUse = 16384;
     private int checkTick = 0;
-    private static int workTick = 100;
+    private static final int workTick = 100;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -60,10 +60,13 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, NitrogenHarvesterBE nitrogenHarvesterBE){
+        if(level.isClientSide()) return;
         nitrogenHarvesterBE.checkTick ++;
-        if(level.isClientSide() || nitrogenHarvesterBE.checkTick < workTick) return;
+        if(level.getDayTime() == 1020)
+            nitrogenHarvesterBE.growCrops(pos);
+        if(nitrogenHarvesterBE.checkTick < workTick) return;
+        nitrogenHarvesterBE.harvestCrops(pos);
         nitrogenHarvesterBE.checkTick = 0;
-        nitrogenHarvesterBE.growCrops(pos);
     }
 
     private void harvestCrops(BlockPos pos) {
@@ -99,10 +102,8 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
                         ((CropBlock) blockState.getBlock()).growCrops(this.getLevel(), blockPos, blockState);
                         this.getEnergy().extractEnergy(growUse, false);
                     }
-                    else if(cropBlock.getAge(blockState) == cropBlock.getMaxAge() && this.getEnergy().getEnergyStored() > harvestUse) {
-                        this.harvestCrops(blockPos);
+                    else if(cropBlock.getAge(blockState) == cropBlock.getMaxAge() && this.getEnergy().getEnergyStored() > harvestUse)
                         this.energy.extractEnergy(harvestUse, false);
-                    }
                 }
             }
         }
