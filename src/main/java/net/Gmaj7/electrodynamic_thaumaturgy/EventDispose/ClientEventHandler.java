@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSovereignEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.HarmonicSovereignEntityModel;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.PhotoCorrosiveNovaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render.MoeRayEntityRender;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
@@ -33,6 +34,7 @@ public class ClientEventHandler {
             event.registerLayerDefinition(MoeRayEntityRender.MODEL_LAYER_LOCATION, MoeRayEntityRender::createBodyLayer);
             event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
             event.registerLayerDefinition(HarmonicSovereignEntityModel.LAYER_LOCATION, HarmonicSovereignEntityModel::createBodyLayer);
+            event.registerLayerDefinition(PhotoCorrosiveNovaEntityModel.LAYER_LOCATION, PhotoCorrosiveNovaEntityModel::createBodyLayer);
         }
 
         @SubscribeEvent

@@ -76,6 +76,12 @@ public class MoeEntities {
                     .clientTrackingRange(4)
                     .noSave()
                     .build("photoacoustic_pulse_beacon_entity"));
+    public static final Supplier<EntityType<PhotoCorrosiveNovaEntity>> PHOTO_CORROSIVE_NOVA_ENTITY =
+            MOE_ENTITY_TYPES.register("photo_corrosive_nova_entity", () -> EntityType.Builder.<PhotoCorrosiveNovaEntity>of(PhotoCorrosiveNovaEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5f)
+                    .clientTrackingRange(4)
+                    .noSave()
+                    .build("photo_corrosive_nova_entity"));
     public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
             MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 0.98F)

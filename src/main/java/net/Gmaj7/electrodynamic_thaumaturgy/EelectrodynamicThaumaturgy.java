@@ -116,6 +116,7 @@ public class EelectrodynamicThaumaturgy
             EntityRenderers.register(MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get(), HarmonicSovereignSummonRender::new);
             EntityRenderers.register(MoeEntities.HARMONIC_SAINT_ENTITY.get(), HarmonicSaintEntityRender::new);
             EntityRenderers.register(MoeEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), PhotoacousticPulseBeaconEntityRender::new);
+            EntityRenderers.register(MoeEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), PhotoCorrosiveNovaEntityRender::new);
         }
 
         @SubscribeEvent
