@@ -91,14 +91,14 @@ public class MoeNitrogenHarvesterBlockMenu extends AbstractContainerMenu {
     private void addMachineSlot(IItemHandler itemHandler){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 9; j++)
-                this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 19 + i * 18));
+                this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 18 + i * 18));
         }
     }
 
     private void addPlayerInventory(Inventory inventory){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 9; j++)
-                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 83 + i * 18));
         }
     }
 

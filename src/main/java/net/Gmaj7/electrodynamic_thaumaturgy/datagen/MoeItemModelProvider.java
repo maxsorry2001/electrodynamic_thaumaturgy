@@ -63,6 +63,7 @@ public class MoeItemModelProvider extends ItemModelProvider {
         basicItem(MoeItems.SAINT_SUMMON_MODULE.get());
         basicItem(MoeItems.GENETIC_RECORDER.get());
         basicItem(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get());
+        basicItem(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get());
 
         handheldItem(MoeItems.ELECTROMAGNETIC_ROD.get());
 

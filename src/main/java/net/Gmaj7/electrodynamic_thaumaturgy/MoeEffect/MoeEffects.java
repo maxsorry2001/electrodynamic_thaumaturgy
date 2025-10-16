@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.custom.ElectricFieldDomain
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.custom.ExcitingEffect;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.custom.MagneticLevitationEffect;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.custom.StElmo_sFireEffect;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttributes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -35,5 +36,8 @@ public class MoeEffects {
                     .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "moeeffect.bsspeed"), -0.15000000596046448, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> MAGNETIC_LEVITATION_EFFECT = MOE_EFFECTS.register("magnetic_levitation",
             () -> new MagneticLevitationEffect(MobEffectCategory.BENEFICIAL, 0x9812DD));
+    public static final DeferredHolder<MobEffect, MobEffect> PHOTO_CORROSIVE = MOE_EFFECTS.register("photo_corrosive",
+            () -> new MoeEffect(MobEffectCategory.HARMFUL, 0xFAF681)
+                    .addAttributeModifier(MoeAttributes.CORROSION, ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "moeeffect.corrosion"), 0.25, AttributeModifier.Operation.ADD_VALUE));
     public static void register(IEventBus eventBus){MOE_EFFECTS.register(eventBus);}
 }
