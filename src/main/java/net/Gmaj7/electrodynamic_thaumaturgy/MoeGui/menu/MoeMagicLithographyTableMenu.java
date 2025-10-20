@@ -118,11 +118,11 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
                 boolean flag = this.moveItemStackTo(itemstack1, inNum, outNum, false);
                 if (flag) return ItemStack.EMPTY;
             }
-            else if (index >= outNum + 1 && index < outNum + 28) {
+            else if (index < outNum + 28) {
                 if (!this.moveItemStackTo(itemstack1, outNum + 28, outNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= outNum + 28 && index < outNum + 37 && !this.moveItemStackTo(itemstack1, outNum + 1, outNum + 28, false)) {
+            } else if (index < outNum + 37 && !this.moveItemStackTo(itemstack1, outNum + 1, outNum + 28, false)) {
                 return ItemStack.EMPTY;
             }
 

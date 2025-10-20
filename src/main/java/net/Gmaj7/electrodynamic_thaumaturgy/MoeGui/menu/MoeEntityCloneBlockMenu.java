@@ -50,12 +50,10 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= slotNum + 1 && index < slotNum + 28) {
-                if (!this.moveItemStackTo(itemstack1, slotNum + 28, slotNum + 37, false)) {
+            else if (index >= slotNum + 1 && index < slotNum + 37) {
+                if (!this.moveItemStackTo(itemstack1, 0, slotNum + 1, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= slotNum + 28 && index < slotNum + 37 && !this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 28, false)) {
-                return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {

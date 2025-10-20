@@ -19,7 +19,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu {
     private final Level level;
-    private final int slotNum = 0;
+    private final int slotNum = 26;
     public  final ElectromagneticExtractorBE blockEntity;
     public boolean quick = false;
 
@@ -45,19 +45,16 @@ public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu 
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
-            Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
             if (index < slotNum + 1) {
                 if (!this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= slotNum + 1 && index < slotNum + 28) {
-                if (!this.moveItemStackTo(itemstack1, slotNum + 28, slotNum + 37, false)) {
+            else if (index >= slotNum + 1 && index < slotNum + 37) {
+                if (!this.moveItemStackTo(itemstack1, 0, slotNum + 1, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= slotNum + 28 && index < slotNum + 37 && !this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 28, false)) {
-                return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {

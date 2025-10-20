@@ -50,12 +50,10 @@ public class MoeThermalGeneratorMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= inSlot + 1 && index < inSlot + 28) {
-                if (!this.moveItemStackTo(itemstack1, inSlot + 28, inSlot + 37, false)) {
+            else if (index >= inSlot + 1 && index < inSlot + 37) {
+                if (!this.moveItemStackTo(itemstack1, 0, inSlot + 1, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= inSlot + 28 && index < inSlot + 37 && !this.moveItemStackTo(itemstack1, inSlot + 1, inSlot + 28, false)) {
-                return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {

@@ -90,11 +90,11 @@ public class MoeModemTableMenu extends AbstractContainerMenu {
                 boolean flag = moveModuleItem(enhanceStartNum, enhanceEndNum, itemstack1);
                 if (flag) return ItemStack.EMPTY;
             }
-            else if (index >= toolSlotNum + 1 && index < toolSlotNum + 28) {
+            else if (index < toolSlotNum + 28) {
                 if (!this.moveItemStackTo(itemstack1, toolSlotNum + 28, toolSlotNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= toolSlotNum + 28 && index < toolSlotNum + 37 && !this.moveItemStackTo(itemstack1, toolSlotNum + 1, toolSlotNum + 28, false)) {
+            } else if (index < toolSlotNum + 37 && !this.moveItemStackTo(itemstack1, toolSlotNum + 1, toolSlotNum + 28, false)) {
                 return ItemStack.EMPTY;
             }
 
