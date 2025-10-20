@@ -9,15 +9,18 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -25,9 +28,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlockEntity, MenuProvider, IMoeDirectionItemBlockEntity {
-    private final int inputSlot = 0;
-    private final int outputSlot = 1;
-    private final int targetSlot = 2;
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
         @Override
         public void change(int i) {
@@ -64,16 +64,40 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
         protected void onContentsChanged(int slot) {
             setChanged();
             if(!level.isClientSide()){
+                progress = 0;
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
     };
+    private int progressTick = 1;
+    private int progress = 0;
+    private static final int maxProgress = 8;
+    private static final int progressUse = 2048;
     public AtomicReconstructionBE(BlockPos pos, BlockState blockState) {
         super(MoeBlockEntities.ATOMIC_RECONSTRUCTION_BE.get(), pos, blockState);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, AtomicReconstructionBE blockEntity) {
+        if(level.isClientSide()) return;
+        IEnergyStorage energyStorage = blockEntity.getEnergy();
+        if(energyStorage.getEnergyStored() < progressUse) return;
+        blockEntity.progressTick ++;
+        if(blockEntity.progressTick != 10) return;
+        blockEntity.progressTick = 0;
+        if(!blockEntity.canUpProgress()) return;
+        blockEntity.progress ++;
+        blockEntity.inputItemHandler.getStackInSlot(0).shrink(1);
+        blockEntity.getEnergy().extractEnergy(progressUse, false);
+        if(blockEntity.progress != maxProgress) return;
+        blockEntity.progress = 0;
+        blockEntity.outputItemHandler.insertItem(0, new ItemStack(blockEntity.targetItemHandler.getStackInSlot(0).getItem()), false);
+    }
 
+    private boolean canUpProgress() {
+        return !this.inputItemHandler.getStackInSlot(0).isEmpty()
+                && this.inputItemHandler.getStackInSlot(0).is(Tags.Items.STONES)
+                && !this.targetItemHandler.getStackInSlot(0).isEmpty()
+                && (this.outputItemHandler.getStackInSlot(0).isEmpty() || this.outputItemHandler.getStackInSlot(0).is(this.targetItemHandler.getStackInSlot(0).getItem()));
     }
 
     @Override
@@ -83,15 +107,17 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
         inputItemHandler.deserializeNBT(registries, tag.getCompound("input_item_handler"));
         outputItemHandler.deserializeNBT(registries, tag.getCompound("output_item_handler"));
         targetItemHandler.deserializeNBT(registries, tag.getCompound("target_item_handler"));
+        progress = tag.getInt("progress");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("energy", energy.getEnergyStored());
-        tag.put("item_handler", inputItemHandler.serializeNBT(registries));
+        tag.put("input_item_handler", inputItemHandler.serializeNBT(registries));
         tag.put("output_item_handler", outputItemHandler.serializeNBT(registries));
         tag.put("target_item_handler", targetItemHandler.serializeNBT(registries));
+        tag.putInt("progress", progress);
     }
 
     @Override
