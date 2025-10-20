@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.AtomicReconstructionBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -16,21 +16,25 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class ElectromagneticDriverBlockMenu extends AbstractContainerMenu {
+public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
     private final Level level;
-    private final int slotNum = 0;
-    public  final ElectromagneticDriverBE blockEntity;
+    private final int targetSlot = 2;
+    private final int outSlot = 1;
+    private final int inSlot = 0;
+    public  final AtomicReconstructionBE blockEntity;
 
-    public ElectromagneticDriverBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public MoeAtomicReconstructionBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public ElectromagneticDriverBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), containerId);
-        this.blockEntity = (ElectromagneticDriverBE) blockEntity;
+    public MoeAtomicReconstructionBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), containerId);
+        this.blockEntity = (AtomicReconstructionBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 1, 80, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 2, 100, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -45,16 +49,16 @@ public class ElectromagneticDriverBlockMenu extends AbstractContainerMenu {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index < slotNum + 1) {
-                if (!this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 37, false)) {
+            if (index < targetSlot + 1) {
+                if (!this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= slotNum + 1 && index < slotNum + 28) {
-                if (!this.moveItemStackTo(itemstack1, slotNum + 28, slotNum + 37, false)) {
+            else if (index >= targetSlot + 1 && index < targetSlot + 28) {
+                if (!this.moveItemStackTo(itemstack1, targetSlot + 28, targetSlot + 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= slotNum + 28 && index < slotNum + 37 && !this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 28, false)) {
+            } else if (index >= targetSlot + 28 && index < targetSlot + 37 && !this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 28, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -84,7 +88,7 @@ public class ElectromagneticDriverBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

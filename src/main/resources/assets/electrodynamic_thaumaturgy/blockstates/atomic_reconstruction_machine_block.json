@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "electrodynamic_thaumaturgy:block/atomic_reconstruction_machine_block"
+    }
+  }
+}

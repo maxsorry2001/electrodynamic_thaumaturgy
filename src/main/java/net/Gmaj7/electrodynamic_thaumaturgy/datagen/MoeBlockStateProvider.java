@@ -22,6 +22,7 @@ public class MoeBlockStateProvider extends BlockStateProvider {
         blockWithItem(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
         blockWithItem(MoeBlocks.THERMAL_GENERATOR_BLOCK);
         blockWithItem(MoeBlocks.HARMONIC_CORE_BLOCK);
+        blockWithItem(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
     }
 
     private  void blockWithItem(DeferredBlock<?> deferredBlock){

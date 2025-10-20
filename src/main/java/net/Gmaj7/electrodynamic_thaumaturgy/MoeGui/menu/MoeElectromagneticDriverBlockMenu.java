@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.NitrogenHarvesterBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -14,24 +14,23 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class MoeNitrogenHarvesterBlockMenu extends AbstractContainerMenu {
+public class MoeElectromagneticDriverBlockMenu extends AbstractContainerMenu {
     private final Level level;
-    private final int slotNum = 26;
-    public  final NitrogenHarvesterBE blockEntity;
+    private final int slotNum = 0;
+    public  final ElectromagneticDriverBE blockEntity;
 
-    public MoeNitrogenHarvesterBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public MoeElectromagneticDriverBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeNitrogenHarvesterBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.NITROGEN_HARVESTER_MENU.get(), containerId);
-        this.blockEntity = (NitrogenHarvesterBE) blockEntity;
+    public MoeElectromagneticDriverBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), containerId);
+        this.blockEntity = (ElectromagneticDriverBE) blockEntity;
         this.level = inventory.player.level();
 
-        addMachineSlot(((NitrogenHarvesterBE) blockEntity).getItemHandler());
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -44,16 +43,19 @@ public class MoeNitrogenHarvesterBlockMenu extends AbstractContainerMenu {
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
+            Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
             if (index < slotNum + 1) {
                 if (!this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= slotNum + 1 && index < slotNum + 37) {
-                if (!this.moveItemStackTo(itemstack1, 0, slotNum + 1, false)) {
+            else if (index >= slotNum + 1 && index < slotNum + 28) {
+                if (!this.moveItemStackTo(itemstack1, slotNum + 28, slotNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
+            } else if (index >= slotNum + 28 && index < slotNum + 37 && !this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 28, false)) {
+                return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {
@@ -82,20 +84,13 @@ public class MoeNitrogenHarvesterBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.NITROGEN_HARVESTER_BLOCK.get());
-    }
-
-    private void addMachineSlot(IItemHandler itemHandler){
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 9; j++)
-                this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 18 + i * 18));
-        }
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 9; j++)
-                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 83 + i * 18));
+                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
         }
     }
 
