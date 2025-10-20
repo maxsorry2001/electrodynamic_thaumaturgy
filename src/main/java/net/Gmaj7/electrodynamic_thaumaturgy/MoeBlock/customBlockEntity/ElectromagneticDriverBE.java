@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
-protected Entity owner;
+    protected Entity owner;
     protected UUID ownerUUID;
     protected int cooldown = 0;
     public static ItemStack magicItem = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());

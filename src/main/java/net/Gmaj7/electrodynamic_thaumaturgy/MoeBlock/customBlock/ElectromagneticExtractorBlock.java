@@ -81,7 +81,7 @@ public class ElectromagneticExtractorBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BLOCK_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BLOCK_BE.get(), ElectromagneticExtractorBE::tick) : null;
+        return blockEntityType == MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BE.get(), ElectromagneticExtractorBE::tick) : null;
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -74,7 +75,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     };
 
     public ElectromagneticExtractorBE(BlockPos pos, BlockState blockState) {
-        super(MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BLOCK_BE.get(), pos, blockState);
+        super(MoeBlockEntities.ELECTROMAGNETIC_EXTRACTOR_BE.get(), pos, blockState);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticExtractorBE electromagneticExtractorBE){
@@ -119,6 +120,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
                         if(!result.isEmpty()) itemStack = result.copy();
                         else break;
                     }
+                    if(!itemStack.isEmpty()) level.addFreshEntity(new ItemEntity(level, electromagneticExtractorBE.getBlockPos().getX(), electromagneticExtractorBE.getBlockPos().getY(), electromagneticExtractorBE.getBlockPos().getZ(), itemStack));
                 }
                 level.destroyBlock(destroyPos, false);
                 electromagneticExtractorBE.getEnergy().extractEnergy(extractUse, false);

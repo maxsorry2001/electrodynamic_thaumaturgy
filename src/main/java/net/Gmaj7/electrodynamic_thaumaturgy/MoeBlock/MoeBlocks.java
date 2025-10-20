@@ -48,8 +48,11 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = MOE_BLOCKS.register("harmonic_core_block",
             () -> new HarmonicCoreBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)));
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_BLOCK_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_extractor_machine_block",
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_extractor_machine_block",
             () -> new ElectromagneticExtractorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+
+    public static final DeferredBlock<Block> ATOMIC_RECONSTRUCTION_MACHINE_BLOCK = MOE_BLOCKS.register("atomic_reconstruction_machine_block",
+            () -> new AtomicReconstructionBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
     public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = MOE_BLOCKS.register("nitrogen_harvester_block",
             () -> new NitrogenHarvesterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));

@@ -24,28 +24,19 @@ public class MoeItems {
     public static final DeferredItem<BlockItem> ELECTROMAGNETIC_MODEM_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_modem_table", MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
     public static final DeferredItem<BlockItem> ENERGY_BLOCK = MOE_ITEM.register("energy_block",
             () -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
-    public static final DeferredItem<BlockItem> TEMPERATURE_GENERATOR_BLOCK = MOE_ITEM.register("temperature_generator",
-            () -> new BlockItem(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_ITEM.register("photovoltaic_generator",
-            () -> new BlockItem(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> THERMAL_GENERATOR_BLOCK = MOE_ITEM.register("thermal_generator",
-            () -> new BlockItem(MoeBlocks.THERMAL_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> BIOMASS_GENERATOR_BLOCK = MOE_ITEM.register("biomass_generator",
-            () -> new BlockItem(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.register("magic_lithography_table",
-            () -> new BlockItem(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> TEMPERATURE_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("temperature_generator", MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("photovoltaic_generator", MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> THERMAL_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("thermal_generator", MoeBlocks.THERMAL_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> BIOMASS_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("biomass_generator", MoeBlocks.BIOMASS_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.registerSimpleBlockItem("magic_lithography_table", MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
     public static final DeferredItem<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
             () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));
-    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = MOE_ITEM.register("electromagnetic_driver_machine_block",
-            () -> new BlockItem(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> BIO_REPLICATION_VAT_MACHINE_BLOCK = MOE_ITEM.register("bio_replication_vat_machine_block",
-            () -> new  BlockItem(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> HARMONIC_CORE_BLOCK = MOE_ITEM.register("harmonic_core_block",
-            () -> new BlockItem(MoeBlocks.HARMONIC_CORE_BLOCK.get(), new Item.Properties().stacksTo(16)));
-    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = MOE_ITEM.register("electromagnetic_extractor_machine_block",
-            () -> new BlockItem(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_BLOCK_MACHINE_BLOCK.get(), new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<BlockItem> NITROGEN_HARVESTER_BLOCK = MOE_ITEM.register("nitrogen_harvester_block",
-            () -> new BlockItem(MoeBlocks.NITROGEN_HARVESTER_BLOCK.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = MOE_ITEM.registerSimpleBlockItem("electromagnetic_driver_machine_block", MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK);
+    public static final DeferredItem<BlockItem> BIO_REPLICATION_VAT_MACHINE_BLOCK = MOE_ITEM.registerSimpleBlockItem("bio_replication_vat_machine_block", MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK);
+    public static final DeferredItem<BlockItem> HARMONIC_CORE_BLOCK = MOE_ITEM.registerSimpleBlockItem("harmonic_core_block", MoeBlocks.HARMONIC_CORE_BLOCK);
+    public static final DeferredItem<BlockItem> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = MOE_ITEM.registerSimpleBlockItem("electromagnetic_extractor_machine_block", MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK);
+    public static final DeferredItem<BlockItem> NITROGEN_HARVESTER_BLOCK = MOE_ITEM.registerSimpleBlockItem("nitrogen_harvester_block", MoeBlocks.NITROGEN_HARVESTER_BLOCK);
+    public static final DeferredItem<BlockItem> ATOMIC_RECONSTRUCTION_MACHINE_BLOCK = MOE_ITEM.registerSimpleBlockItem("atomic_reconstruction_machine_block", MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
 
     public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.register("ray_module",
             () -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), new Item.Properties().stacksTo(1)));
