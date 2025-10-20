@@ -16,8 +16,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
-        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(livingEntity.level(), livingEntity);
-        attractBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), livingEntity);
         attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
         livingEntity.level().addFreshEntity(attractBeaconEntity);
     }
@@ -26,8 +25,7 @@ public class Attract extends AbstractBlockBeaconMagic {
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), source);
-        attractBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), source);
         attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
     }
@@ -59,8 +57,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         if(target == null) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), (LivingEntity) electromagneticDriverBE.getOwner());
-        attractBeaconEntity.setPos(vec3.x(), blockPos.getY() + 1, vec3.z());
+        AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), (LivingEntity) electromagneticDriverBE.getOwner());
         attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());

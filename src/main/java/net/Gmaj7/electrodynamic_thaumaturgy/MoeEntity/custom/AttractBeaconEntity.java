@@ -32,10 +32,10 @@ public class AttractBeaconEntity extends AbstractArrow {
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public AttractBeaconEntity(Level level, LivingEntity owner){
+    public AttractBeaconEntity(Level level, double x, double y, double z, LivingEntity owner){
         super(MoeEntities.ATTRACT_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
-        this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.setPos(x, y, z);
         this.pickup = Pickup.DISALLOWED;
     }
 

@@ -23,37 +23,37 @@ import java.util.List;
 
 public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
     private int startTime;
-    private ItemStack itemStack;
+    private ItemStack magicItem;
     public MagneticRecombinationCannonBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
-        this.itemStack = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
+        this.magicItem = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     }
 
     public MagneticRecombinationCannonBeaconEntity(Level level){
         super(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
-        this.itemStack = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
+        this.magicItem = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
     }
 
-    public MagneticRecombinationCannonBeaconEntity(Level level, LivingEntity owner, ItemStack itemStack){
+    public MagneticRecombinationCannonBeaconEntity(Level level, double x, double y, double z, ItemStack magicItem, LivingEntity owner){
         super(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
-        this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.setPos(x, y, z);
+        this.magicItem = magicItem.copy();
         this.pickup = Pickup.DISALLOWED;
-        this.itemStack = itemStack.copy();
     }
 
     @Override
     public void tick() {
         super.tick();
         this.startTime++;
-        if(startTime == 100 && itemStack != null){
+        if(startTime == 100 && magicItem != null){
             List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(7));
             for (LivingEntity target : list){
                 if(target != this.getOwner() && target.getY() >= this.getBlockY() - 3 && !(this.getOwner() instanceof HarmonicSaintEntity && target == ((HarmonicSaintEntity) this.getOwner()).getOwner())) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), (int) MoeFunction.getMagicAmount(itemStack) * 2);
-                    MoeFunction.checkTargetEnhancement(itemStack, target);
+                    target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), (int) MoeFunction.getMagicAmount(magicItem) * 2);
+                    MoeFunction.checkTargetEnhancement(magicItem, target);
                 }
             }
         }
@@ -83,14 +83,14 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("moe_start_time", this.startTime);
-        compound.put("moe_magic_item", this.itemStack.save(this.registryAccess()));
+        compound.put("moe_magic_item", this.magicItem.save(this.registryAccess()));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.startTime = compound.getInt("moe_start_time");
-        this.itemStack = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
+        this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
     }
 
     @Override

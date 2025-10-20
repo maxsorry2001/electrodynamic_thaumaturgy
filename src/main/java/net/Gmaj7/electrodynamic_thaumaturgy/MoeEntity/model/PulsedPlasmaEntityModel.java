@@ -61,7 +61,7 @@ public class PulsedPlasmaEntityModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int i1, int i2) {
-		bone.render(poseStack, vertexConsumer, i, i1, i2);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 	}
 }

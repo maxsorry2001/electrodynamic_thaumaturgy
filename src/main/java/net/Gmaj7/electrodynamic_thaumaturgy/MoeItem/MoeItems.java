@@ -86,6 +86,10 @@ public class MoeItems {
             () -> new MoeMagicTypeModuleItem(new FrequencyDivisionArrowRain(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> SAINT_SUMMON_MODULE = MOE_ITEM.register("saint_summon_module",
             () -> new MoeMagicTypeModuleItem(new SaintSummon(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> PHOTOACOUSTIC_PULSE_MODULE = MOE_ITEM.register("photoacoustic_pulse_module",
+            () -> new MoeMagicTypeModuleItem(new PhotoacousticPulse(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = MOE_ITEM.register("photo_corrosive_nova_module",
+            () -> new MoeMagicTypeModuleItem(new PhotoCorrosiveNova(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.register("empty_primary_module",
             () -> new MoeMagicTypeModuleItem(null, new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.register("empty_intermediate_module",

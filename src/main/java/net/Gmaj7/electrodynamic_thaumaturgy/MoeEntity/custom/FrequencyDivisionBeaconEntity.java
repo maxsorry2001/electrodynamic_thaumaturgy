@@ -28,7 +28,7 @@ public class FrequencyDivisionBeaconEntity extends Arrow {
         super(MoeEntities.FREQUENCY_DIVISION_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
-        this.magicItem = itemStack;
+        this.magicItem = itemStack.copy();
         this.pickup = Pickup.DISALLOWED;
     }
 

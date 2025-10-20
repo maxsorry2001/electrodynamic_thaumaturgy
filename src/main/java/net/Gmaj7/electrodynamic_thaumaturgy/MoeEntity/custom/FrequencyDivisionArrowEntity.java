@@ -39,7 +39,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         super(MoeEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
-        this.magicItem = itemStack;
+        this.magicItem = itemStack.copy();
         this.pickup = Pickup.DISALLOWED;
         this.maxTime = maxTime;
         this.startPos = new Vec3(x,y, z);
