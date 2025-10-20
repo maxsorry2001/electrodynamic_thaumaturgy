@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
 import com.mojang.serialization.Codec;
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class MoeDataComponentTypes {
     public static final DeferredRegister<DataComponentType<?>> MOE_DATA_COMPONENT_TYPE =
-            DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, EelectrodynamicThaumaturgy.MODID);
+            DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, ElectrodynamicThaumaturgy.MODID);
 
     public static final Supplier<DataComponentType<Integer>> MOE_ENERGY =
             MOE_DATA_COMPONENT_TYPE.register("moe_energy",

@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSovereignEntity;
@@ -27,7 +27,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 
 public class ClientEventHandler {
-    @EventBusSubscriber(modid = EelectrodynamicThaumaturgy.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class busEvent{
         @SubscribeEvent
         public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
@@ -65,13 +65,13 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerHud(RegisterGuiLayersEvent event){
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "type_show"), new MoeShowMagicHud());
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "magic_select"), MoeMagicWheelHud.instance);
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "protect_show"), new MoeProtectHud());
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "type_show"), new MoeShowMagicHud());
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_select"), MoeMagicWheelHud.instance);
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "protect_show"), new MoeProtectHud());
         }
     }
 
-    @EventBusSubscriber(modid = EelectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
     public static class notBusEvent{
         private static final MoeKeyState SELECT_MAGIC = new MoeKeyState(MoeKeyMapping.SELECT_MAGIC);
         @SubscribeEvent

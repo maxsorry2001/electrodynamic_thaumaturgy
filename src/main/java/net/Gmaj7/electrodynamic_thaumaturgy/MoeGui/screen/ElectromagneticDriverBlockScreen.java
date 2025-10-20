@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDriverBlockMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,8 +12,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class ElectromagneticDriverBlockScreen extends AbstractContainerScreen<ElectromagneticDriverBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/one_item_machine.png");
-    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/one_item_machine.png");
+    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
 
     public ElectromagneticDriverBlockScreen(ElectromagneticDriverBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

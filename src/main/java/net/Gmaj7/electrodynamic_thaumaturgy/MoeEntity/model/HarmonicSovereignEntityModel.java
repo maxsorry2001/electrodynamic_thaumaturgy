@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HeadedModel;
@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 
 public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "harmonic_sovereign_entity"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign_entity"), "main");
     private final ModelPart root;
     private final ModelPart head;
     private final ModelPart arms;

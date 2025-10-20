@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSovereignEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.HarmonicSovereignEntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Witch;
 
 public class HarmonicSovereignEntityRender extends MobRenderer<HarmonicSovereignEntity, HarmonicSovereignEntityModel<HarmonicSovereignEntity>> {
-    private static final ResourceLocation TEX_LOCATION = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/entity/mob/harmonic_sovereign.png");
+    private static final ResourceLocation TEX_LOCATION = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/mob/harmonic_sovereign.png");
 
     public HarmonicSovereignEntityRender(EntityRendererProvider.Context p_174443_) {
         super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(HarmonicSovereignEntityModel.LAYER_LOCATION)), 0.5F);

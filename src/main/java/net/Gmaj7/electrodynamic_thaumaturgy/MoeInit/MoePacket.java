@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BiomassGeneratorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticExtractorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
@@ -24,7 +24,7 @@ public class MoePacket{
     public static class MoeSelectMagicPacket implements CustomPacketPayload {
         private final int magicSelect;
         private final InteractionHand hand;
-        public static final CustomPacketPayload.Type<MoeSelectMagicPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "magic_select"));
+        public static final CustomPacketPayload.Type<MoeSelectMagicPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_select"));
         public static final StreamCodec<RegistryFriendlyByteBuf, MoeSelectMagicPacket> STREAM_CODEC = CustomPacketPayload.codec(MoeSelectMagicPacket::write, MoeSelectMagicPacket::new);
 
         public MoeSelectMagicPacket(int magicSelect, InteractionHand hand) {
@@ -59,7 +59,7 @@ public class MoePacket{
 
     public static class ProtectingPacket implements CustomPacketPayload{
         float protectNum;
-        public static final CustomPacketPayload.Type<ProtectingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "protecting"));
+        public static final CustomPacketPayload.Type<ProtectingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "protecting"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ProtectingPacket> STREAM_CODEC = CustomPacketPayload.codec(ProtectingPacket::write, ProtectingPacket::new);
 
         public ProtectingPacket(float protectNum){
@@ -91,7 +91,7 @@ public class MoePacket{
     public static class EnergySetPacket implements CustomPacketPayload{
         int energy;
         BlockPos blockPos;
-        public static final CustomPacketPayload.Type<EnergySetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "energy_set"));
+        public static final CustomPacketPayload.Type<EnergySetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "energy_set"));
         public static final StreamCodec<RegistryFriendlyByteBuf, EnergySetPacket> STREAM_CODEC = CustomPacketPayload.codec(EnergySetPacket::write, EnergySetPacket::new);
 
         public EnergySetPacket(int energy, BlockPos blockPos){
@@ -130,7 +130,7 @@ public class MoePacket{
         int tick;
         int burn;
         BlockPos blockPos;
-        public static final CustomPacketPayload.Type<ThermalSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "thermal_set"));
+        public static final CustomPacketPayload.Type<ThermalSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "thermal_set"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ThermalSetPacket> STREAM_CODEC = CustomPacketPayload.codec(ThermalSetPacket::write, ThermalSetPacket::new);
 
         public ThermalSetPacket(int tick, int burn, BlockPos blockPos){
@@ -173,7 +173,7 @@ public class MoePacket{
         int tick;
         int biomass;
         BlockPos blockPos;
-        public static final CustomPacketPayload.Type<BiomassSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "biomass_set"));
+        public static final CustomPacketPayload.Type<BiomassSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "biomass_set"));
         public static final StreamCodec<RegistryFriendlyByteBuf, BiomassSetPacket> STREAM_CODEC = CustomPacketPayload.codec(BiomassSetPacket::write, BiomassSetPacket::new);
 
         public BiomassSetPacket(int tick, int biomass, BlockPos blockPos){
@@ -216,7 +216,7 @@ public class MoePacket{
         public int entityId;
         public int castTick;
         public int castAnim;
-        public static final CustomPacketPayload.Type<CastTickPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "cast_tick"));
+        public static final CustomPacketPayload.Type<CastTickPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "cast_tick"));
         public static final StreamCodec<RegistryFriendlyByteBuf, CastTickPacket> STREAM_CODEC = CustomPacketPayload.codec(CastTickPacket::write, CastTickPacket::new);
 
         public CastTickPacket(int entityId, int castTick, int castAnim){
@@ -259,7 +259,7 @@ public class MoePacket{
         int width;
         int depth;
         BlockPos blockPos;
-        public static final CustomPacketPayload.Type<ExtractorPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "extractor"));
+        public static final CustomPacketPayload.Type<ExtractorPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "extractor"));
         public static final StreamCodec<RegistryFriendlyByteBuf, ExtractorPacket> STREAM_CODEC = CustomPacketPayload.codec(ExtractorPacket::write, ExtractorPacket::new);
 
         public ExtractorPacket(int width, int depth, BlockPos blockPos){

@@ -5,7 +5,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;// Made with Blockb
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.animations.PhotoCorrosiveNovaEntityAnimation;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoCorrosiveNovaEntity;
 import net.minecraft.client.model.HierarchicalModel;
@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PhotoCorrosiveNovaEntityModel<T extends PhotoCorrosiveNovaEntity> extends HierarchicalModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "photocorrosivenovaentity"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "photocorrosivenovaentity"), "main");
 	private final ModelPart bone;
 
 	public PhotoCorrosiveNovaEntityModel(ModelPart root) {

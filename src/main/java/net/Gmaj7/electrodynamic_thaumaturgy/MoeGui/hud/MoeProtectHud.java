@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.hud;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -11,8 +11,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 
 public class MoeProtectHud implements LayeredDraw.Layer {
-    public static final ResourceLocation FULL = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "moe_protect_full");
-    public static final ResourceLocation HALF = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "moe_protect_half");
+    public static final ResourceLocation FULL = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_protect_full");
+    public static final ResourceLocation HALF = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_protect_half");
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;

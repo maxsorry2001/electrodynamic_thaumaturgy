@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeAssemblyTableMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,8 +11,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyTableMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_assembly_table.png");
-    protected static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "widget/button"), ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "widget/button_disabled"), ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_assembly_table.png");
+    protected static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
 
     public MoeAssemblyTableScreen(MoeAssemblyTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

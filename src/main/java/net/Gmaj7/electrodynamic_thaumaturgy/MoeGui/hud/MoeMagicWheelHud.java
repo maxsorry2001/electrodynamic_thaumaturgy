@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.hud;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class MoeMagicWheelHud implements LayeredDraw.Layer {
     public static MoeMagicWheelHud instance = new MoeMagicWheelHud();
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
     public boolean active;
     private int selection;
     private InteractionHand useHand;

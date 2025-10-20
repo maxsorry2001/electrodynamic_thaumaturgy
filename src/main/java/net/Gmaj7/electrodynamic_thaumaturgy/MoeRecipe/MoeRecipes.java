@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -10,9 +10,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class MoeRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER =
-            DeferredRegister.create(Registries.RECIPE_SERIALIZER, EelectrodynamicThaumaturgy.MODID);
+            DeferredRegister.create(Registries.RECIPE_SERIALIZER, ElectrodynamicThaumaturgy.MODID);
     public static final DeferredRegister<RecipeType<?>> TYPE =
-            DeferredRegister.create(Registries.RECIPE_TYPE, EelectrodynamicThaumaturgy.MODID);
+            DeferredRegister.create(Registries.RECIPE_TYPE, ElectrodynamicThaumaturgy.MODID);
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagicLithographyRecipe>> MAGIC_LITHOGRAPHY_SERIALIZER =
             SERIALIZER.register("magic_lithography", MagicLithographyRecipe.Serializer::new);

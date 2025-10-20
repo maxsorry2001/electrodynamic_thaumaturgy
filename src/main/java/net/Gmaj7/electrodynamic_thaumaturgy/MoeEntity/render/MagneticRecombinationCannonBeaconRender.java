@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagneticRecombinationCannonBeaconEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -16,8 +16,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity> {
-    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
-    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/entity/magnetic_recombination_cannon_beacon_entity.png");
+    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
+    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnetic_recombination_cannon_beacon_entity.png");
     private final ModelPart body;
     public MagneticRecombinationCannonBeaconRender(EntityRendererProvider.Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<Magne
     @Override
     public ResourceLocation getTextureLocation(MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity) {
         if(magneticRecombinationCannonBeaconEntity.getStartTime() > 100) return LIGHT;
-        return ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 
     @Override

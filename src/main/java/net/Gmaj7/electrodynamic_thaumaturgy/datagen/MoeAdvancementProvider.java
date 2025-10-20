@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.EelectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.advancements.*;
@@ -37,15 +37,15 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                     new ItemStack(MoeItems.ELECTROMAGNETIC_ROD.get()),
                     Component.translatable("advancements.electrodynamic_thaumaturgy.root.title"),
                     Component.translatable("advancements.electrodynamic_thaumaturgy.root.description"),
-                    ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "textures/gui/advancement.png"),
+                    ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/advancement.png"),
                     AdvancementType.GOAL,
                     true,
                     true,
                     false
             );
             builder.addCriterion("join", PlayerTrigger.TriggerInstance.tick());
-            builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "advancement/et_start_book"))));
-            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, "normal/root"), existingFileHelper);
+            builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "advancement/et_start_book"))));
+            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "normal/root"), existingFileHelper);
 
             register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
             register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get());
@@ -63,11 +63,11 @@ public class MoeAdvancementProvider extends AdvancementProvider {
 
         private void register(ItemLike itemLike, String nameSpace, String parent, String name, String criterion, AdvancementType type, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper, ItemLike... criterionItem){
             Advancement.Builder builder = Advancement.Builder.advancement();
-            builder.parent(AdvancementSubProvider.createPlaceholder( EelectrodynamicThaumaturgy.MODID + ":" + nameSpace + "/" + parent));
+            builder.parent(AdvancementSubProvider.createPlaceholder( ElectrodynamicThaumaturgy.MODID + ":" + nameSpace + "/" + parent));
             builder.display(
                     new ItemStack(itemLike),
-                    Component.translatable("advancements." + EelectrodynamicThaumaturgy.MODID + "." + name + ".title"),
-                    Component.translatable("advancements." + EelectrodynamicThaumaturgy.MODID + "." + name + ".description"),
+                    Component.translatable("advancements." + ElectrodynamicThaumaturgy.MODID + "." + name + ".title"),
+                    Component.translatable("advancements." + ElectrodynamicThaumaturgy.MODID + "." + name + ".description"),
                     null,
                     type,
                     true,
@@ -80,7 +80,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                 list.add(criterion + "_" + i);
             }
             builder.requirements(AdvancementRequirements.anyOf(list));
-            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(EelectrodynamicThaumaturgy.MODID, nameSpace + "/" + name), existingFileHelper);
+            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, nameSpace + "/" + name), existingFileHelper);
         }
 
     }

@@ -21,7 +21,7 @@ import java.util.List;
 public class MoeTabs {
     public static final String MOE_TAB_STRING = "moe_tab";
     public static final DeferredRegister<CreativeModeTab> MOE_CREATIVE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, EelectrodynamicThaumaturgy.MODID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ElectrodynamicThaumaturgy.MODID);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MOE_TAB = MOE_CREATIVE_TABS.register("moe_tab",
             () -> CreativeModeTab.builder().icon(() -> setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())))
