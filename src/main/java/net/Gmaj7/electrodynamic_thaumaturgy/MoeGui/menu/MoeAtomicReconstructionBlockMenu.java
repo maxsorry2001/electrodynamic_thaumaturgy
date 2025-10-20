@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.AtomicReconstructionBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
+import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -32,9 +33,9 @@ public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (AtomicReconstructionBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 1, 80, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 2, 100, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.UP), 0, 60, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), 0, 80, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), 0, 100, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

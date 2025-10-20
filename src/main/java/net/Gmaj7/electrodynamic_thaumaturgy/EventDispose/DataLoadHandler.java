@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeDirectionItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
@@ -64,7 +65,9 @@ public class DataLoadHandler {
                 MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
                 MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
                 MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
-                MoeBlocks.NITROGEN_HARVESTER_BLOCK.get(),
+                MoeBlocks.NITROGEN_HARVESTER_BLOCK.get());
+        event.registerBlock(Capabilities.ItemHandler.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
+                        blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
                 MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
     }
 }
