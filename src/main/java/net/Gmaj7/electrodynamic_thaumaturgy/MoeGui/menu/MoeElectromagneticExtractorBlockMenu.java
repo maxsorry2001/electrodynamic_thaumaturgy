@@ -21,6 +21,7 @@ public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu 
     private final Level level;
     private final int slotNum = 0;
     public  final ElectromagneticExtractorBE blockEntity;
+    public boolean quick = false;
 
     public MoeElectromagneticExtractorBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -109,22 +110,14 @@ public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu 
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if(id == 0) {
-            blockEntity.addWidth();
-            return true;
-        }
-        if(id == 1){
-            blockEntity.reduceWidth();
-            return true;
-        }
-        if(id == 2) {
-            blockEntity.addDepth();
-            return true;
-        }
-        if(id == 3){
-            blockEntity.reduceDepth();
-            return true;
-        }
-        return true;
+        if(id == 0)
+            blockEntity.addWidth(quick);
+        if(id == 1)
+            blockEntity.reduceWidth(quick);
+        if(id == 2)
+            blockEntity.addDepth(quick);
+        if(id == 3)
+            blockEntity.reduceDepth(quick);
+        return false;
     }
 }

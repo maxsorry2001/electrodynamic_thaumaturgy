@@ -226,24 +226,32 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         return PICK_AXE;
     }
 
-    public void addWidth(){
-        this.width = Math.min(width + 1, MAX_WIDTH);
+    public void addWidth(boolean quick){
+        this.width = quick ? Math.min(width + 5, MAX_WIDTH) : Math.min(width + 1, MAX_WIDTH);
+        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
-    public void reduceWidth(){
-        this.width = Math.max(width - 1, MIN_WIDTH);
+    public void reduceWidth(boolean quick){
+        this.width = quick ? Math.max(width - 5, MIN_WIDTH) : Math.max(width - 1, MIN_WIDTH);
+        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void setWidth(int width) {
         this.width = width;
     }
 
-    public void addDepth(){
-        this.depth = Math.min(depth + 1, MAX_DEPTH);
+    public void addDepth(boolean quick){
+        this.depth = quick ?  Math.min(depth + 10, MAX_DEPTH) : Math.min(depth + 1, MAX_DEPTH);
+        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
-    public void reduceDepth(){
-        this.depth = Math.max(depth - 1, 1);
+    public void reduceDepth(boolean quick){
+        this.depth = quick ? Math.max(depth - 10, 1) : Math.max(depth - 1, 1);
+        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+    }
+
+    private void dealChange(){
+        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void setDepth(int depth) {

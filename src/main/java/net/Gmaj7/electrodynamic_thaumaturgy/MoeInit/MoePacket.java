@@ -287,12 +287,10 @@ public class MoePacket{
 
         public static void handle(ExtractorPacket packet, IPayloadContext context){
             context.enqueueWork(() -> {
-                if(context.player().level().isClientSide()){
-                    BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
-                    if(blockEntity instanceof ElectromagneticExtractorBE) {
-                        ((ElectromagneticExtractorBE) blockEntity).setWidth(packet.width);
-                        ((ElectromagneticExtractorBE) blockEntity).setDepth(packet.depth);
-                    }
+                BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
+                if(blockEntity instanceof ElectromagneticExtractorBE) {
+                    ((ElectromagneticExtractorBE) blockEntity).setWidth(packet.width);
+                    ((ElectromagneticExtractorBE) blockEntity).setDepth(packet.depth);
                 }
             });
         }

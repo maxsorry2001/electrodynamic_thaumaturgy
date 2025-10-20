@@ -67,6 +67,7 @@ public class MoeElectromagneticExtractorBlockScreen extends AbstractContainerScr
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.menu.quick = hasShiftDown();
         if(isMouseAddWidthFocused(mouseX, mouseY)){
             if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
                 this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
