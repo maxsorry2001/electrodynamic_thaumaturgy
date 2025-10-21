@@ -82,10 +82,13 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
         IEnergyStorage energyStorage = blockEntity.getEnergy();
         if(energyStorage.getEnergyStored() < progressUse) return;
         blockEntity.progressTick ++;
+        if(blockEntity.progressTick > 5 && blockEntity.progress == 0)
+            PacketDistributor.sendToAllPlayers(new MoePacket.AtomicPacket(pos, blockEntity.progress));
         if(blockEntity.progressTick != 10) return;
         blockEntity.progressTick = 0;
         if(!blockEntity.canUpProgress()) return;
         blockEntity.progress ++;
+        PacketDistributor.sendToAllPlayers(new MoePacket.AtomicPacket(pos, blockEntity.progress));
         blockEntity.inputItemHandler.getStackInSlot(0).shrink(1);
         blockEntity.getEnergy().extractEnergy(progressUse, false);
         if(blockEntity.progress != maxProgress) return;
@@ -157,5 +160,13 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
                 default -> itemHandler = targetItemHandler;
             }
         return itemHandler;
+    }
+
+    public float getProgressPer(){
+        return (float) progress / maxProgress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 }

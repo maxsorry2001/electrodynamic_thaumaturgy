@@ -12,8 +12,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<MoeAtomicReconstructionBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_energy_block.png");
+    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block.png");
     ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    ResourceLocation progressTexture = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block_progress.png");
 
     public MoeAtomicReconstructionBlockScreen(MoeAtomicReconstructionBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -48,5 +49,6 @@ public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<
     private void renderEnergy(GuiGraphics guiGraphics, int x, int y){
         IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
         guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0, (int) (150 * (float) iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored()), 7, 150, 7);
+        guiGraphics.blit(progressTexture, x + 60, y + 56, 0, 0, (int) (58 * (float) menu.blockEntity.getProgressPer()), 6, 58, 6);
     }
 }

@@ -33,9 +33,9 @@ public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (AtomicReconstructionBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.UP), 0, 60, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.UP), 0, 42, 47));
         this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), 0, 80, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), 0, 100, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), 0, 118, 47));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

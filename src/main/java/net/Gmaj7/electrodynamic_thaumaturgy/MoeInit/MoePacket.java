@@ -1,10 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BiomassGeneratorBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticExtractorBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ThermalGeneratorBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.core.BlockPos;
@@ -291,6 +288,42 @@ public class MoePacket{
                 if(blockEntity instanceof ElectromagneticExtractorBE) {
                     ((ElectromagneticExtractorBE) blockEntity).setWidth(packet.width);
                     ((ElectromagneticExtractorBE) blockEntity).setDepth(packet.depth);
+                }
+            });
+        }
+    }
+
+    public static class AtomicPacket implements CustomPacketPayload{
+        BlockPos blockPos;
+        int progress;
+        public static final CustomPacketPayload.Type<AtomicPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "atomic"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, AtomicPacket> STREAM_CODEC = CustomPacketPayload.codec(AtomicPacket::write, AtomicPacket::new);
+
+        public AtomicPacket(BlockPos blockPos, int progress){
+            this.blockPos = blockPos;
+            this.progress = progress;
+        }
+
+        public AtomicPacket(FriendlyByteBuf buf){
+            this.progress = buf.readInt();
+            this.blockPos = buf.readBlockPos();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeInt(progress);
+            buf.writeBlockPos(blockPos);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(AtomicPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
+                if(blockEntity instanceof AtomicReconstructionBE) {
+                    ((AtomicReconstructionBE) blockEntity).setProgress(packet.progress);
                 }
             });
         }

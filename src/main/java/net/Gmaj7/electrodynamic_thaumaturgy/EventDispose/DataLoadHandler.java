@@ -8,6 +8,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeItemB
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -30,6 +31,7 @@ public class DataLoadHandler {
         payloadRegistrar.playToClient(MoePacket.ThermalSetPacket.TYPE, MoePacket.ThermalSetPacket.STREAM_CODEC, MoePacket.ThermalSetPacket::handle);
         payloadRegistrar.playToClient(MoePacket.CastTickPacket.TYPE, MoePacket.CastTickPacket.STREAM_CODEC, MoePacket.CastTickPacket::handle);
         payloadRegistrar.playToClient(MoePacket.BiomassSetPacket.TYPE, MoePacket.BiomassSetPacket.STREAM_CODEC, MoePacket.BiomassSetPacket::handle);
+        payloadRegistrar.playToClient(MoePacket.AtomicPacket.TYPE, MoePacket.AtomicPacket.STREAM_CODEC, MoePacket.AtomicPacket::handle);
 
         payloadRegistrar.playBidirectional(MoePacket.ExtractorPacket.TYPE, MoePacket.ExtractorPacket.STREAM_CODEC, MoePacket.ExtractorPacket::handle);
     }
