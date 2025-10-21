@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:photovoltaic_generator"
+          "name": "electrodynamic_thaumaturgy:photovoltaic_generator_block"
         }
       ],
       "rolls": 1.0

@@ -24,10 +24,10 @@ public class MoeItems {
     public static final DeferredItem<BlockItem> ELECTROMAGNETIC_MODEM_TABLE = MOE_ITEM.registerSimpleBlockItem("electromagnetic_modem_table", MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
     public static final DeferredItem<BlockItem> ENERGY_BLOCK = MOE_ITEM.register("energy_block",
             () -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), new Item.Properties().stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
-    public static final DeferredItem<BlockItem> TEMPERATURE_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("temperature_generator", MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
-    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("photovoltaic_generator", MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
-    public static final DeferredItem<BlockItem> THERMAL_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("thermal_generator", MoeBlocks.THERMAL_GENERATOR_BLOCK);
-    public static final DeferredItem<BlockItem> BIOMASS_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("biomass_generator", MoeBlocks.BIOMASS_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> TEMPERATURE_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("temperature_generator_block", MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("photovoltaic_generator_block", MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> THERMAL_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("thermal_generator_block", MoeBlocks.THERMAL_GENERATOR_BLOCK);
+    public static final DeferredItem<BlockItem> BIOMASS_GENERATOR_BLOCK = MOE_ITEM.registerSimpleBlockItem("biomass_generator_block", MoeBlocks.BIOMASS_GENERATOR_BLOCK);
     public static final DeferredItem<BlockItem> MAGIC_LITHOGRAPHY_TABLE = MOE_ITEM.registerSimpleBlockItem("magic_lithography_table", MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
     public static final DeferredItem<BlockItem> ENERGY_TRANSMISSION_ANTENNA = MOE_ITEM.register("energy_transmission_antenna",
             () -> new BlockItem(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(), new Item.Properties().stacksTo(16)));

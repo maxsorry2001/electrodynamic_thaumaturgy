@@ -3,22 +3,25 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "electrodynamic_thaumaturgy:si"
+      "item": "minecraft:glass"
     },
     "b": {
       "item": "minecraft:copper_ingot"
     },
     "c": {
+      "item": "minecraft:iron_ingot"
+    },
+    "d": {
       "item": "electrodynamic_thaumaturgy:energy_core"
     }
   },
   "pattern": [
     "aaa",
-    "bcb",
-    "aaa"
+    "bdb",
+    "ccc"
   ],
   "result": {
     "count": 1,
-    "id": "electrodynamic_thaumaturgy:temperature_generator"
+    "id": "electrodynamic_thaumaturgy:photovoltaic_generator_block"
   }
 }

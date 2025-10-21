@@ -11,6 +11,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -130,6 +131,24 @@ public class MoeFunction {
         return new RayHitResult(end, hits);
     }
 
+    public static ItemContainerContents setEmpty(){
+        List<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
+        list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
+        for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i ++)
+            list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
+        return ItemContainerContents.fromItems(list);
+    }
+
+    public static List<Vec3> getCircleParticle(float xRot, float yRot, double radius, int count){
+        List<Vec3> list = new ArrayList<>();
+        for (int i = 0; i < count; i++){
+            Vec3 vec3 = new Vec3(radius * Mth.cos(2 * Mth.PI * i / count), radius * Mth.sin(2 * Mth.PI * i / count), 0).xRot(xRot).yRot(yRot);
+            list.add(vec3);
+        }
+        return list;
+    }
+
     public static class RayHitResult{
         private Vec3 end;
         private List<HitResult> targets;
@@ -161,14 +180,5 @@ public class MoeFunction {
         public Vec3 getEnd() {
             return end;
         }
-    }
-
-    public static ItemContainerContents setEmpty(){
-        List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
-        list.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-        for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i ++)
-            list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
-        return ItemContainerContents.fromItems(list);
     }
 }

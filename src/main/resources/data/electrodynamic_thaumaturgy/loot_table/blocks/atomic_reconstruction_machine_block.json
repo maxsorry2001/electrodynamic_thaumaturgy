@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:temperature_generator_block"
+          "name": "electrodynamic_thaumaturgy:atomic_reconstruction_machine_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:blocks/temperature_generator_block"
+  "random_sequence": "electrodynamic_thaumaturgy:blocks/atomic_reconstruction_machine_block"
 }
