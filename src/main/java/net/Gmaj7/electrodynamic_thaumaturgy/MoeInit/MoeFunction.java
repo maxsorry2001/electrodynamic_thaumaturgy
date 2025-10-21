@@ -142,9 +142,51 @@ public class MoeFunction {
 
     public static List<Vec3> getCircleParticle(float xRot, float yRot, double radius, int count){
         List<Vec3> list = new ArrayList<>();
-        for (int i = 0; i < count; i++){
-            Vec3 vec3 = new Vec3(radius * Mth.cos(2 * Mth.PI * i / count), radius * Mth.sin(2 * Mth.PI * i / count), 0).xRot(xRot).yRot(yRot);
-            list.add(vec3);
+
+        // 使用四元数表示旋转
+        // 先绕Y轴旋转yRot，再绕X轴旋转xRot
+        float cy = Mth.cos(yRot * 0.5f);
+        float sy = Mth.sin(yRot * 0.5f);
+        float cx = Mth.cos(xRot * 0.5f);
+        float sx = Mth.sin(xRot * 0.5f);
+
+        // 组合旋转的四元数
+        float qw = cx * cy;
+        float qx = sx * cy;
+        float qy = cx * sy;
+        float qz = -sx * sy;
+        double mag = Math.sqrt(qw*qw + qx*qx + qy*qy + qz*qz);
+        qw /= mag;
+        qx /= mag;
+        qy /= mag;
+        qz /= mag;
+
+        for (int i = 0; i < count; i++) {
+            float angle = 2 * Mth.PI * i / count;
+            double x = radius * Mth.cos(angle);
+            double y = radius * Mth.sin(angle);
+            double z = 0;
+
+            // 计算叉积: q × v
+            double crossX = qy * z - qz * y;
+            double crossY = qz * x - qx * z;
+            double crossZ = qx * y - qy * x;
+
+            // 计算: q × v + w * v
+            double tempX = crossX + qw * x;
+            double tempY = crossY + qw * y;
+            double tempZ = crossZ + qw * z;
+
+            // 计算第二次叉积: q × temp
+            double cross2X = qy * tempZ - qz * tempY;
+            double cross2Y = qz * tempX - qx * tempZ;
+            double cross2Z = qx * tempY - qy * tempX;
+
+            // 最终结果: v' = v + 2 * [q × temp]
+            double resultX = x + 2 * cross2X;
+            double resultY = y + 2 * cross2Y;
+            double resultZ = z + 2 * cross2Z;
+            list.add(new Vec3(resultX, resultY, resultZ));
         }
         return list;
     }
