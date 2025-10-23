@@ -146,6 +146,7 @@ public class ElectrodynamicThaumaturgy
             event.registerSpriteSet(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), HydrogenBondParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), MagneticFluxCascadeParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), FrequencyDivisionArrowRainParticle.Provider::new);
+            event.registerSpriteSet(MoeParticles.POINT_PARTICLE.get(), PointParticle.Provider::new);
         }
 
         @SubscribeEvent

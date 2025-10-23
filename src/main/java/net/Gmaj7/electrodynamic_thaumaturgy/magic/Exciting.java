@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.Electroma
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -96,9 +98,10 @@ public class Exciting extends AbstractWideMagic{
 
     public void makeParticle(Level level, LivingEntity livingEntity, int radius, float xRot, float yRot){
         List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(60, radius), xRot, -yRot);
+        Vec3 center =  new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         for (int j = 0; j < list.size(); j++) {
-            Vec3 pos = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ()).add(list.get(j));
-            ((ServerLevel) level).sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            Vec3 pos = center.add(list.get(j));
+            ((ServerLevel) level).sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
     }
 }

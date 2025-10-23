@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,6 +21,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -106,8 +108,9 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
         List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(120, 2), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < list.size(); j++) {
-                Vec3 pos = start.add(vec3.scale(i)).add(list.get(j));
-                ((ServerLevel) level).sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                Vec3 center = start.add(vec3.scale(i));
+                Vec3 pos = center.add(list.get(j));
+                ((ServerLevel) level).sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
             }
         }
     }

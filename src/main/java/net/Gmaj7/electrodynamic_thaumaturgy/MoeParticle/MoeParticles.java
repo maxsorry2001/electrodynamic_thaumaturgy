@@ -1,12 +1,18 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle;
 
+import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointParticleOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class MoeParticles {
     public static final DeferredRegister<ParticleType<?>> MOE_PARTICLE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, ElectrodynamicThaumaturgy.MODID);
@@ -51,6 +57,17 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE = MOE_PARTICLE.register("frequency_division_arrow_rain_particle",
             () -> new SimpleParticleType(true));
+    public static final Supplier<ParticleType<PointParticleOption>> POINT_PARTICLE = MOE_PARTICLE.register("point_particle", () -> new ParticleType<>(false) {
+        @Override
+        public MapCodec<PointParticleOption> codec() {
+            return PointParticleOption.CODEC;
+        }
+
+        @Override
+        public StreamCodec<? super RegistryFriendlyByteBuf, PointParticleOption> streamCodec() {
+            return PointParticleOption.STREAM_CODEC;
+        }
+    });
 
     public static void register(IEventBus eventBus){MOE_PARTICLE.register(eventBus);}
 }

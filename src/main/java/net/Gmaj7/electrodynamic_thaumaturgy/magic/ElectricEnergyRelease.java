@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -75,13 +77,13 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         int i;
         for (i = 0; i < circle.size(); i++) {
             Vec3 pos = start.add(circle.get(i));
-            level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointParticleOption(start.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++){
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
             for (int j = 0; j < line.size(); j++){
                 Vec3 pos = start.add(line.get(j));
-                level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointParticleOption(start.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
             }
         }
     }
