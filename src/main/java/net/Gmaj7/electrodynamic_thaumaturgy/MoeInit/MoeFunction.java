@@ -282,5 +282,24 @@ public class MoeFunction {
             double magnitude = Math.sqrt(w*w + x*x + y*y + z*z);
             return new Quaternion(w/magnitude, x/magnitude, y/magnitude, z/magnitude);
         }
+
+        public static Quaternion fromAxisAngle(Vec3 axis, double angle) {
+            double halfAngle = angle * 0.5;
+            double sinHalf = Math.sin(halfAngle);
+            double cosHalf = Math.cos(halfAngle);
+
+            // 确保轴是单位向量
+            double length = Math.sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
+            if (length > 0) {
+                axis = new Vec3(axis.x / length, axis.y / length, axis.z / length);
+            }
+
+            return new Quaternion(
+                    cosHalf,
+                    axis.x * sinHalf,
+                    axis.y * sinHalf,
+                    axis.z * sinHalf
+            );
+        }
     }
 }

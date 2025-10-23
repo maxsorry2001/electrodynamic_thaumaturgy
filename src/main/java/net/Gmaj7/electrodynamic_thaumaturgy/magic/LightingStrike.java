@@ -51,12 +51,12 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public int getBaseEnergyCost() {
-        return 256;
+        return 0;//256;
     }
 
     @Override
     public int getBaseCooldown() {
-        return 80;
+        return 0;//80;
     }
 
     @Override
@@ -84,14 +84,16 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
+        float xRot = livingEntity.getXRot() * Mth.PI / 180;
+        float yRot = -livingEntity.getYRot() * Mth.PI / 180;
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), xRot, yRot);
+        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
+        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
         int i;
         Vec3 center = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2));
         for (i = 0; i < circle.size(); i++) {
             Vec3 pos = center.add(circle.get(i));
-            level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), xRot, yRot), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
@@ -99,8 +101,8 @@ public class LightingStrike extends AbstractFrontEntityMagic {
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
-                level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255)), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), xRot, yRot), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), xRot, yRot), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
     }
