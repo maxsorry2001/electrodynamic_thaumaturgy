@@ -4,12 +4,16 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -27,8 +31,8 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
             target.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
         if(livingEntity.level() instanceof ServerLevel) {
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntity.getX(), livingEntity.getY() + 0.1, livingEntity.getZ(), 1, 0, 0, 0, 0);
+            Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
+            thread.start();
         }
     }
 
@@ -59,9 +63,26 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         return 80;
     }
 
-
     @Override
     public String getTranslate() {
         return "item.electrodynamic_thaumaturgy.electric_energy_release_module";
+    }
+
+    private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(60, 2), 9 * Mth.PI / 16, (90 - livingEntity.getYRot()) * Mth.PI / 180);
+        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(6, 2, 0),- 9 * Mth.PI / 16, (90 - livingEntity.getYRot()) * Mth.PI / 180);
+        Vec3 start = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
+        int i;
+        for (i = 0; i < circle.size(); i++) {
+            Vec3 pos = start.add(circle.get(i));
+            level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+        }
+        for (i = 0; i < polygon.size(); i++){
+            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            for (int j = 0; j < line.size(); j++){
+                Vec3 pos = start.add(line.get(j));
+                level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            }
+        }
     }
 }

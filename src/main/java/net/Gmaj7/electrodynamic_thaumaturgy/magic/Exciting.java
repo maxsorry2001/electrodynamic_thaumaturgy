@@ -4,17 +4,23 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.Electroma
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class Exciting extends AbstractWideMagic{
+    RandomSource randomSource = RandomSource.create();
 
     @Override
     public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
@@ -23,11 +29,14 @@ public class Exciting extends AbstractWideMagic{
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
                 MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
+                if(livingEntity.level() instanceof ServerLevel){
+                    int radius = randomSource.nextInt(2) + 1;
+                    float xRot = randomSource.nextFloat() * Mth.PI * 2;
+                    float yRot = -randomSource.nextFloat() * Mth.PI * 2;
+                    Thread thread = new Thread(() -> makeParticle(target.level(), target, radius, xRot, yRot));
+                    thread.start();
+                }
             }
-        }
-        if(livingEntity.level() instanceof ServerLevel){
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ(), 1, 0, 0, 0, 0);
         }
     }
 
@@ -38,11 +47,14 @@ public class Exciting extends AbstractWideMagic{
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
                 MoeFunction.checkTargetEnhancement(itemStack, source);
+                if(source.level() instanceof ServerLevel){
+                    int radius = randomSource.nextInt(2) + 1;
+                    float xRot = randomSource.nextFloat() * Mth.PI * 2;
+                    float yRot = -randomSource.nextFloat() * Mth.PI * 2;
+                    Thread thread = new Thread(() -> makeParticle(target.level(), target, radius, xRot, yRot));
+                    thread.start();
+                }
             }
-        }
-        if(source.level() instanceof ServerLevel){
-            ((ServerLevel) source.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 1, source.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) source.level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 1, source.getZ(), 1, 0, 0, 0, 0);
         }
     }
 
@@ -69,13 +81,24 @@ public class Exciting extends AbstractWideMagic{
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)) - 7));
+                if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
+                    int radius = randomSource.nextInt(2) + 1;
+                    float xRot = randomSource.nextFloat() * Mth.PI * 2;
+                    float yRot = -randomSource.nextFloat() * Mth.PI * 2;
+                    Thread thread = new Thread(() -> makeParticle(target.level(), target, radius, xRot, yRot));
+                    thread.start();
+                }
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
         electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
-        if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
-            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ(), 1, 0, 0, 0, 0);
+    }
+
+    public void makeParticle(Level level, LivingEntity livingEntity, int radius, float xRot, float yRot){
+        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(60, radius), xRot, -yRot);
+        for (int j = 0; j < list.size(); j++) {
+            Vec3 pos = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ()).add(list.get(j));
+            ((ServerLevel) level).sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
     }
 }

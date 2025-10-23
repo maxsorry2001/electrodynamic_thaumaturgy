@@ -47,8 +47,8 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
             return;
         }
         if(liveTick % 20 == 0 && magicItem != null){
-            if(!level().isClientSide())
-                ((ServerLevel) level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), getX(), getY()+ 1, getZ(), 1, 0, 0, 0, 0);
+            if(level().isClientSide()) return;
+            ((ServerLevel) level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), getX(), getY()+ 1, getZ(), 1, 0, 0, 0, 0);
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(10));
             for (LivingEntity target : list){
                 if(target == getOwner()) continue;
@@ -100,5 +100,9 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
         super.readAdditionalSaveData(compound);
         this.liveTick = compound.getInt("live_tick");
         this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
+    }
+
+    private void maeParticle(){
+
     }
 }

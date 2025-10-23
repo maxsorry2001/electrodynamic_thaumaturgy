@@ -140,55 +140,51 @@ public class MoeFunction {
         return ItemContainerContents.fromItems(list);
     }
 
-    public static List<Vec3> getCircleParticle(float xRot, float yRot, double radius, int count){
-        List<Vec3> list = new ArrayList<>();
+    // 使用四元数旋转点列表 (YX顺序)
+    public static List<Vec3> rotatePointsYX(List<Vec3> points, double xRot, double yRot) {
+        List<Vec3> rotatedPoints = new ArrayList<>();
 
-        // 使用四元数表示旋转
-        // 先绕Y轴旋转yRot，再绕X轴旋转xRot
-        float cy = Mth.cos(yRot * 0.5f);
-        float sy = Mth.sin(yRot * 0.5f);
-        float cx = Mth.cos(xRot * 0.5f);
-        float sx = Mth.sin(xRot * 0.5f);
+        // 创建旋转四元数 (先绕Y轴旋转yRot，再绕X轴旋转xRot)
+        Quaternion rotation = Quaternion.fromEulerYX(yRot, xRot).normalize();
 
-        // 组合旋转的四元数
-        float qw = cx * cy;
-        float qx = sx * cy;
-        float qy = cx * sy;
-        float qz = -sx * sy;
-        double mag = Math.sqrt(qw*qw + qx*qx + qy*qy + qz*qz);
-        qw /= mag;
-        qx /= mag;
-        qy /= mag;
-        qz /= mag;
-
-        for (int i = 0; i < count; i++) {
-            float angle = 2 * Mth.PI * i / count;
-            double x = radius * Mth.cos(angle);
-            double y = radius * Mth.sin(angle);
-            double z = 0;
-
-            // 计算叉积: q × v
-            double crossX = qy * z - qz * y;
-            double crossY = qz * x - qx * z;
-            double crossZ = qx * y - qy * x;
-
-            // 计算: q × v + w * v
-            double tempX = crossX + qw * x;
-            double tempY = crossY + qw * y;
-            double tempZ = crossZ + qw * z;
-
-            // 计算第二次叉积: q × temp
-            double cross2X = qy * tempZ - qz * tempY;
-            double cross2Y = qz * tempX - qx * tempZ;
-            double cross2Z = qx * tempY - qy * tempX;
-
-            // 最终结果: v' = v + 2 * [q × temp]
-            double resultX = x + 2 * cross2X;
-            double resultY = y + 2 * cross2Y;
-            double resultZ = z + 2 * cross2Z;
-            list.add(new Vec3(resultX, resultY, resultZ));
+        // 旋转每个点
+        for (Vec3 point : points) {
+            rotatedPoints.add(rotation.rotateVector(point));
         }
-        return list;
+
+        return rotatedPoints;
+    }
+
+    // 生成圆形点集 (在xy平面上)
+    public static List<Vec3> generateCirclePoints(int numPoints, double radius) {
+        List<Vec3> points = new ArrayList<>();
+
+        for (int i = 0; i < numPoints; i++) {
+            double angle = 2 * Math.PI * i / numPoints;
+            double x = radius * Math.cos(angle);
+            double y = radius * Math.sin(angle);
+            points.add(new Vec3(x, y, 0));
+        }
+
+        return points;
+    }
+
+    public static List<Vec3> getLinePoints(Vec3 start, Vec3 end, int count){
+        List<Vec3> points = new ArrayList<>();
+        Vec3 vec3 = end.subtract(start).scale((double) 1 / count);
+        for (int i = 0; i < count; i++){
+            Vec3 vec31 = start.add(vec3.scale(i));
+            points.add(vec31);
+        }
+        return points;
+    }
+
+    public static List<Vec3> getPolygonVertices(int sides, double radius, float startAngle){
+        List<Vec3> points = new ArrayList<>();
+        float dAngle = 2 * Mth.PI / sides;
+        for (int i = 0; i < sides; i++)
+            points.add(new Vec3(radius * Mth.cos(startAngle + dAngle * i), radius * Mth.sin(startAngle + dAngle * i), 0));
+        return points;
     }
 
     public static class RayHitResult{
@@ -221,6 +217,70 @@ public class MoeFunction {
 
         public Vec3 getEnd() {
             return end;
+        }
+    }
+
+    public static class Quaternion {
+        public double w, x, y, z;
+
+        public Quaternion(double w, double x, double y, double z) {
+            this.w = w;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        // 单位四元数
+        public static Quaternion identity() {
+            return new Quaternion(1, 0, 0, 0);
+        }
+
+        // 从欧拉角创建四元数 (YX顺序: 先绕Y轴，再绕X轴)
+        public static Quaternion fromEulerYX(double yRot, double xRot) {
+            double cy = Math.cos(yRot * 0.5);
+            double sy = Math.sin(yRot * 0.5);
+            double cx = Math.cos(xRot * 0.5);
+            double sx = Math.sin(xRot * 0.5);
+
+            double w = cy * cx;
+            double x = cy * sx;
+            double y = sy * cx;
+            double z = -sy * sx;
+
+            return new Quaternion(w, x, y, z);
+        }
+
+        // 四元数乘法
+        public Quaternion multiply(Quaternion other) {
+            double newW = w * other.w - x * other.x - y * other.y - z * other.z;
+            double newX = w * other.x + x * other.w + y * other.z - z * other.y;
+            double newY = w * other.y - x * other.z + y * other.w + z * other.x;
+            double newZ = w * other.z + x * other.y - y * other.x + z * other.w;
+
+            return new Quaternion(newW, newX, newY, newZ);
+        }
+
+        // 四元数共轭
+        public Quaternion conjugate() {
+            return new Quaternion(w, -x, -y, -z);
+        }
+
+        // 用四元数旋转向量
+        public Vec3 rotateVector(Vec3 vector) {
+            // 将向量转换为纯四元数 (w=0)
+            Quaternion vecQuat = new Quaternion(0, vector.x, vector.y, vector.z);
+
+            // 旋转计算: v' = q * v * q^-1
+            // 对于单位四元数，q^-1 = 共轭
+            Quaternion result = this.multiply(vecQuat).multiply(this.conjugate());
+
+            return new Vec3(result.x, result.y, result.z);
+        }
+
+        // 归一化四元数
+        public Quaternion normalize() {
+            double magnitude = Math.sqrt(w*w + x*x + y*y + z*z);
+            return new Quaternion(w/magnitude, x/magnitude, y/magnitude, z/magnitude);
         }
     }
 }

@@ -4,7 +4,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.Electroma
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -37,6 +40,10 @@ public class ElectromagneticRay extends AbstractWideMagic{
                 }
             }
         }
+        if(!level.isClientSide()){
+            Thread thread = new Thread(() -> makeParticle((ServerLevel) level, livingEntity));
+            thread.start();
+        }
     }
 
     @Override
@@ -55,6 +62,10 @@ public class ElectromagneticRay extends AbstractWideMagic{
                     MoeFunction.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
+        }
+        if(!level.isClientSide()){
+            Thread thread = new Thread(() -> makeParticle((ServerLevel) level, source));
+            thread.start();
         }
     }
 
@@ -96,5 +107,26 @@ public class ElectromagneticRay extends AbstractWideMagic{
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
         electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+    }
+
+    private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
+        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
+        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
+        int i;
+        for (i = 0; i < circle.size(); i++) {
+            Vec3 pos = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2)).add(circle.get(i));
+            level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+        }
+        for (i = 0; i < polygon.size(); i++) {
+            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
+            for (int j = 0; j < line.size(); j++) {
+                Vec3 pos = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2)).add(line.get(j));
+                Vec3 pos2 = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2)).add(line2.get(j));
+                level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+            }
+        }
     }
 }

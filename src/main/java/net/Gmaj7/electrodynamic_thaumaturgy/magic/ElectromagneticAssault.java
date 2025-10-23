@@ -52,7 +52,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             Thread thread = new Thread(() -> makeParticle(level, livingEntity, start, vec3.normalize(), Mth.floor(vec3.length()) + 2));
             thread.start();
         }
-        livingEntity.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+        //livingEntity.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
         livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
     }
 
@@ -72,18 +72,19 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             }
         }
         BlockHitResult blockHitResult = MoeFunction.getHitBlock(level, source, start, end);
-        BlockPos blockPos = blockHitResult.getBlockPos();
-        Vec3 vec3 = new Vec3(end.x() - source.getX(), end.y() - source.getY(), end.z() - source.getZ()).normalize();
-        if (blockHitResult.getType() != HitResult.Type.MISS)
-            source.teleportTo(blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z());
-        else
-            source.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-        source.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
-        Vec3 vec3p = source.getLookAngle().normalize().scale(0.5).add(source.getEyePosition().add(0, -0.5, 0));
-        if(level instanceof ServerLevel) {
-            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0, 0);
-            ((ServerLevel) level).sendParticles(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), vec3p.x(), vec3p.y(), vec3p.z(), 1, 0, 0, 0 ,0);
+        BlockPos blockPos = blockHitResult.getBlockPos(), targetPos;
+        if (blockHitResult.getType() != HitResult.Type.MISS) {
+            Direction direction = blockHitResult.getDirection();
+            targetPos = blockPos.relative(direction, direction == Direction.DOWN ? 2 : 1);
         }
+        else targetPos = blockPos;
+        if(level instanceof ServerLevel) {
+            Vec3 vec3 = new Vec3(targetPos.getX() - start.x(), targetPos.getY() - start.y(), targetPos.getZ() - start.z());
+            Thread thread = new Thread(() -> makeParticle(level, source, start, vec3.normalize(), Mth.floor(vec3.length()) + 2));
+            thread.start();
+        }
+        source.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+        source.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
     }
 
     @Override
@@ -102,7 +103,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, Vec3 start, Vec3 vec3, int length){
-        List<Vec3> list = MoeFunction.getCircleParticle(livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180, 2, 120);
+        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(120, 2), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < list.size(); j++) {
                 Vec3 pos = start.add(vec3.scale(i)).add(list.get(j));
