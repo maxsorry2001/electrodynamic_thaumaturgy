@@ -28,9 +28,6 @@ public class HarmonicSovereignSummonEntity extends AbstractArrow {
         super.tick();
         this.summonTick --;
         if(!level().isClientSide() && this.tickCount == 80){
-            ((ServerLevel) level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_SMALL.get(), this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_MIDDLE.get(), this.getX(), this.getY() + 3, this.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) level()).sendParticles(MoeParticles.MAGMA_LIGHTING_PARTICLE_LARGE.get(), this.getX(), this.getY() + 6, this.getZ(), 1, 0, 0, 0, 0);
         }
         if(summonTick < 0){
             HarmonicSovereignEntity harmonicSovereignEntity = (HarmonicSovereignEntity) MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get().create(level());

@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,18 +17,6 @@ import java.util.function.Supplier;
 public class MoeParticles {
     public static final DeferredRegister<ParticleType<?>> MOE_PARTICLE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, ElectrodynamicThaumaturgy.MODID);
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_MIDDLE = MOE_PARTICLE.register("magma_lighting_middle_particle",
-            () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_SMALL = MOE_PARTICLE.register("magma_lighting_small_particle",
-            () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_LARGE = MOE_PARTICLE.register("magma_lighting_large_particle",
-            () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_MIDDLE_IN = MOE_PARTICLE.register("magma_lighting_middle_particle_in",
-            () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_SMALL_IN = MOE_PARTICLE.register("magma_lighting_small_particle_in",
-            () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAGMA_LIGHTING_PARTICLE_LARGE_IN = MOE_PARTICLE.register("magma_lighting_large_particle_in",
-            () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TORCH_PARTICLE = MOE_PARTICLE.register("torch_particle",
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TORCH_PARTICLE_IN = MOE_PARTICLE.register("torch_particle_in",
@@ -57,15 +45,15 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE = MOE_PARTICLE.register("frequency_division_arrow_rain_particle",
             () -> new SimpleParticleType(true));
-    public static final Supplier<ParticleType<PointParticleOption>> POINT_PARTICLE = MOE_PARTICLE.register("point_particle", () -> new ParticleType<>(false) {
+    public static final Supplier<ParticleType<PointRotateParticleOption>> POINT_ROTATE_PARTICLE = MOE_PARTICLE.register("point_particle", () -> new ParticleType<>(false) {
         @Override
-        public MapCodec<PointParticleOption> codec() {
-            return PointParticleOption.CODEC;
+        public MapCodec<PointRotateParticleOption> codec() {
+            return PointRotateParticleOption.CODEC;
         }
 
         @Override
-        public StreamCodec<? super RegistryFriendlyByteBuf, PointParticleOption> streamCodec() {
-            return PointParticleOption.STREAM_CODEC;
+        public StreamCodec<? super RegistryFriendlyByteBuf, PointRotateParticleOption> streamCodec() {
+            return PointRotateParticleOption.STREAM_CODEC;
         }
     });
 

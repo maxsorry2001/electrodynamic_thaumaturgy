@@ -3,27 +3,33 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-public class PointParticle extends TextureSheetParticle {
+public class PointRotateParticle extends TextureSheetParticle {
     public final Vec3 center;
     public final double radius;
     public final float xRot;
     public final float yRot;
-    protected PointParticle(ClientLevel level, double x, double y, double z, PointParticleOption pointParticleOption) {
+    public final float omega;
+    protected PointRotateParticle(ClientLevel level, double x, double y, double z, PointRotateParticleOption pointRotateParticleOption) {
         super(level, x, y, z);
-        this.rCol = pointParticleOption.color.x() / 255;
-        this.gCol = pointParticleOption.color.y() / 255;
-        this.bCol = pointParticleOption.color.z() / 255;
-        this.center = new Vec3(pointParticleOption.center);
+        this.rCol = pointRotateParticleOption.color.x() / 255;
+        this.gCol = pointRotateParticleOption.color.y() / 255;
+        this.bCol = pointRotateParticleOption.color.z() / 255;
+        this.center = new Vec3(pointRotateParticleOption.center);
         this.radius = center.subtract(x, y, z).length();
-        this.xRot = pointParticleOption.xRot;
-        this.yRot = pointParticleOption.yRot;
-        this.lifetime = 40;
+        this.xRot = pointRotateParticleOption.rotate.x();
+        this.yRot = pointRotateParticleOption.rotate.y();
+        this.omega = pointRotateParticleOption.rotate.z();
+        this.lifetime = pointRotateParticleOption.lifeTime;
+    }
+
+    @Override
+    public float getQuadSize(float scaleFactor) {
+        return 0.1F;
     }
 
     @Override
@@ -46,7 +52,7 @@ public class PointParticle extends TextureSheetParticle {
         Vec3 planeNormal = rotation.rotateVector(originalZ);
 
         // 创建绕法向量旋转的四元数
-        MoeFunction.Quaternion circularRotation = MoeFunction.Quaternion.fromAxisAngle(planeNormal, Mth.PI / 8).normalize();
+        MoeFunction.Quaternion circularRotation = MoeFunction.Quaternion.fromAxisAngle(planeNormal, omega).normalize();
 
         // 旋转半径向量
         Vec3 newRadius = circularRotation.rotateVector(radiusVector);
@@ -57,7 +63,7 @@ public class PointParticle extends TextureSheetParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class Provider implements ParticleProvider<PointParticleOption> {
+    public static class Provider implements ParticleProvider<PointRotateParticleOption> {
         private final SpriteSet spriteSet;
 
         public Provider(SpriteSet spriteSet){
@@ -66,10 +72,10 @@ public class PointParticle extends TextureSheetParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(PointParticleOption pointParticleOption, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            PointParticle pointParticle = new PointParticle(clientLevel, x, y, z, pointParticleOption);
-            pointParticle.pickSprite(this.spriteSet);
-            return pointParticle;
+        public Particle createParticle(PointRotateParticleOption pointRotateParticleOption, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
+            PointRotateParticle pointRotateParticle = new PointRotateParticle(clientLevel, x, y, z, pointRotateParticleOption);
+            pointRotateParticle.pickSprite(this.spriteSet);
+            return pointRotateParticle;
         }
     }
 }

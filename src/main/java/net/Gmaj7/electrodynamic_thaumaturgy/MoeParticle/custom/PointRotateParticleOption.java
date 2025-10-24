@@ -12,40 +12,40 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import org.joml.Vector3f;
 
-public class PointParticleOption implements ParticleOptions {
+public class PointRotateParticleOption implements ParticleOptions {
     public final Vector3f center;
     public final Vector3f color;
-    public final float xRot;
-    public final float yRot;
-    public static final MapCodec<PointParticleOption> CODEC = RecordCodecBuilder.mapCodec(
+    public final Vector3f rotate;
+    public final int lifeTime;
+    public static final MapCodec<PointRotateParticleOption> CODEC = RecordCodecBuilder.mapCodec(
             p -> p.group(
                             ExtraCodecs.VECTOR3F.fieldOf("color").forGetter(p_253371_ -> p_253371_.color),
                             ExtraCodecs.VECTOR3F.fieldOf("center").forGetter(point -> point.center),
-                            Codec.FLOAT.fieldOf("xRot").forGetter(point -> point.xRot),
-                            Codec.FLOAT.fieldOf("yRot").forGetter(point -> point.yRot))
-                    .apply(p, PointParticleOption::new)
+                            ExtraCodecs.VECTOR3F.fieldOf("rotate").forGetter(point -> point.rotate),
+                            Codec.INT.fieldOf("life_time").forGetter(point -> point.lifeTime))
+                    .apply(p, PointRotateParticleOption::new)
     );
-    public static final StreamCodec<RegistryFriendlyByteBuf, PointParticleOption> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, PointRotateParticleOption> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VECTOR3F, pointParticleOption -> pointParticleOption.center,
             ByteBufCodecs.VECTOR3F, pointParticleOption -> pointParticleOption.color,
-            ByteBufCodecs.FLOAT, pointParticleOption -> pointParticleOption.xRot,
-            ByteBufCodecs.FLOAT, pointParticleOption -> pointParticleOption.yRot, PointParticleOption::new
+            ByteBufCodecs.VECTOR3F, pointRotateParticleOption -> pointRotateParticleOption.rotate,
+            ByteBufCodecs.INT, pointRotateParticleOption -> pointRotateParticleOption.lifeTime, PointRotateParticleOption::new
     );
 
-    public PointParticleOption(Vector3f center, Vector3f color, float xRot, float yRot){
+    public PointRotateParticleOption(Vector3f center, Vector3f color, Vector3f rotate, int lifeTime){
         this.center = center;
         this.color = color;
-        this.xRot = xRot;
-        this.yRot = yRot;
+        this.rotate = rotate;
+        this.lifeTime = lifeTime;
     }
 
-    public PointParticleOption(Vector3f center, Vector3f color){
-        this(center, color, 0, 0);
+    public PointRotateParticleOption(Vector3f center, Vector3f color){
+        this(center, color, new Vector3f(0, 0, 0), 0);
     }
 
     @Override
     public ParticleType<?> getType() {
-        return MoeParticles.POINT_PARTICLE.get();
+        return MoeParticles.POINT_ROTATE_PARTICLE.get();
     }
 
     public Vector3f getCenter() {
@@ -56,11 +56,7 @@ public class PointParticleOption implements ParticleOptions {
         return color;
     }
 
-    public float getXRot() {
-        return xRot;
-    }
-
-    public float getYRot() {
-        return yRot;
+    public Vector3f getRotate() {
+        return rotate;
     }
 }

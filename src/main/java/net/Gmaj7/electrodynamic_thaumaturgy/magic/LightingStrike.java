@@ -3,8 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -93,7 +91,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
         Vec3 center = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2));
         for (i = 0; i < circle.size(); i++) {
             Vec3 pos = center.add(circle.get(i));
-            level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), xRot, yRot), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
@@ -101,8 +99,8 @@ public class LightingStrike extends AbstractFrontEntityMagic {
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
-                level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), xRot, yRot), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), xRot, yRot), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
     }
