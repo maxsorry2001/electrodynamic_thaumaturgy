@@ -4,9 +4,12 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -18,13 +21,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.util.List;
 
 public class CoulombDomainBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
     private int liveTick = 101;
-
+    private static RandomSource randomSource = RandomSource.create();
 
     public CoulombDomainBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -48,7 +53,6 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
         }
         if(liveTick % 20 == 0 && magicItem != null){
             if(level().isClientSide()) return;
-            ((ServerLevel) level()).sendParticles(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), getX(), getY()+ 1, getZ(), 1, 0, 0, 0, 0);
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(10));
             for (LivingEntity target : list){
                 if(target == getOwner()) continue;
@@ -59,6 +63,12 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
                 lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
                 lightningBolt.setVisualOnly(true);
                 level().addFreshEntity(lightningBolt);
+                float xRot = randomSource.nextFloat() * 2 * Mth.PI, yRot = randomSource.nextFloat() * 2 * Mth.PI;
+                Thread thread = new Thread(() -> {
+                    makeParticle(target, xRot, yRot);
+                    makeParticle(target, Mth.PI / 2 - xRot, yRot);
+                });
+                thread.start();
             }
         }
     }
@@ -102,7 +112,13 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
         this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
     }
 
-    private void maeParticle(){
-
+    private void makeParticle(LivingEntity target, float xRot, float yRot){
+        if(this.level().isClientSide()) return;
+        Vec3 center = new Vec3(target.getX(), target.getY() + 0.3, target.getZ());
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), xRot, yRot);
+        for (int i = 0; i < point.size(); i++){
+            Vec3 pos = center.add(point.get(i));
+            ((ServerLevel)level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+        }
     }
 }

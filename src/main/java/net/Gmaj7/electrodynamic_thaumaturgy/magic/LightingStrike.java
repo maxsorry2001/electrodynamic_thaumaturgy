@@ -49,12 +49,12 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public int getBaseEnergyCost() {
-        return 0;//256;
+        return 256;
     }
 
     @Override
     public int getBaseCooldown() {
-        return 0;//80;
+        return 80;
     }
 
     @Override
