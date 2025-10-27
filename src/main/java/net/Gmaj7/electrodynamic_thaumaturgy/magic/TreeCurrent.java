@@ -75,37 +75,17 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     private void addParticle(LivingEntity livingEntityStart, LivingEntity livingEntityEnd){
         Vec3 vec3Start = livingEntityStart.getEyePosition().subtract(0, 0.25, 0);
         Vec3 vec3End = livingEntityEnd.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 vec3Throw = vec3Start.vectorTo(vec3End);
-        Vec3 vec3Per = vec3Throw.normalize();
-        int x = Mth.floor(vec3Throw.length());
         if(livingEntityStart.level() instanceof ServerLevel) {
             MoeRayEntity moeRayEntity = new MoeRayEntity(livingEntityStart.level(), vec3Start, vec3End, livingEntityStart, false);
             livingEntityStart.level().addFreshEntity(moeRayEntity);
-            RandomSource randomSource = RandomSource.create();
-            ((ServerLevel) livingEntityStart.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntityStart.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
-            for (float j = 0.2F; j < x; j += 0.2F) {
-                Vec3 vec3Point = vec3Start.add(vec3Per.scale(j));
-                ((ServerLevel) livingEntityStart.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, vec3Point.x + randomSource.nextFloat(), vec3Point.y + randomSource.nextFloat(), vec3Point.z + randomSource.nextFloat(), 1, 0, 0, 0, 0);
-            }
         }
     }
 
     private void blockParticle(Vec3 vec3Start, LivingEntity livingEntityEnd){
         Vec3 vec3End = livingEntityEnd.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 vec3Throw = vec3Start.vectorTo(vec3End);
-        Vec3 vec3Per = vec3Throw.normalize();
-        int x = Mth.floor(vec3Throw.length());
         if(livingEntityEnd.level() instanceof ServerLevel) {
             MoeRayEntity moeRayEntity = new MoeRayEntity(livingEntityEnd.level(), vec3Start, vec3End, livingEntityEnd, false);
             livingEntityEnd.level().addFreshEntity(moeRayEntity);
-            RandomSource randomSource = RandomSource.create();
-            ((ServerLevel) livingEntityEnd.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntityEnd.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), livingEntityEnd.getX(), livingEntityEnd.getY() , livingEntityEnd.getZ(), 1, 0, 0, 0, 0);
-            for (float j = 0.2F; j < x; j += 0.2F) {
-                Vec3 vec3Point = vec3Start.add(vec3Per.scale(j));
-                ((ServerLevel) livingEntityEnd.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, vec3Point.x + randomSource.nextFloat(), vec3Point.y + randomSource.nextFloat(), vec3Point.z + randomSource.nextFloat(), 1, 0, 0, 0, 0);
-            }
         }
     }
 

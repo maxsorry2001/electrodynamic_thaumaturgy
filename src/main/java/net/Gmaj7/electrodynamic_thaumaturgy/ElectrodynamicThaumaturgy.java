@@ -128,15 +128,9 @@ public class ElectrodynamicThaumaturgy
         public static void registerParticleProviders(RegisterParticleProvidersEvent event){
             event.registerSpriteSet(MoeParticles.TORCH_PARTICLE.get(), TorchParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.TORCH_PARTICLE_IN.get(), TorchParticleIn.Provider::new);
-            event.registerSpriteSet(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), SelfMagicCircleParticle.Provider::new);
-            event.registerSpriteSet(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), SelfMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), WildMagicCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), WildMagicCircleParticleIn.Provider::new);
-            event.registerSpriteSet(MoeParticles.HIGH_INTENSITY_MAGNETIC_PARTICLE_IN.get(), DisturbingByHighIntensityMagneticParticleIn.Provider::new);
-            event.registerSpriteSet(MoeParticles.NORMAL_CIRCLE_PARTICLE.get(), NormalCircleParticle.Provider::new);
-            event.registerSpriteSet(MoeParticles.NORMAL_SHRINK_CIRCLE_PARTICLE.get(), NormalShrinkCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), HydrogenBondParticle.Provider::new);
-            event.registerSpriteSet(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), MagneticFluxCascadeParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE.get(), FrequencyDivisionArrowRainParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.POINT_ROTATE_PARTICLE.get(), PointRotateParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.POINT_LINE_PARTICLE.get(), PointLineParticle.Provider::new);

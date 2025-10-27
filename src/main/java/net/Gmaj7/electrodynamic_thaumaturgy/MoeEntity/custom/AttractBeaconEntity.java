@@ -1,13 +1,16 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -17,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -51,9 +55,8 @@ public class AttractBeaconEntity extends AbstractArrow {
             Vec3 vec31 = vec3.normalize().multiply(0.1, 0.1, 0.1);
             target.move(MoverType.SELF, vec31);
         }
-        if(this.level() instanceof ServerLevel serverLevel && tickCount % 20 == 0){
-            BlockPos blockPos = this.getOnPos().above();
-            serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> serverLevel.sendParticles(player, MoeParticles.NORMAL_SHRINK_CIRCLE_PARTICLE.get(), false, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0D, 0D, 0D, 0D));
+        if(this.level() instanceof ServerLevel && tickCount % 20 == 0){
+            Thread thread = new Thread(() -> makeParticle());
         }
     }
 
@@ -95,5 +98,15 @@ public class AttractBeaconEntity extends AbstractArrow {
 
     public void setLiveTime(int liveTime) {
         this.liveTime = liveTime;
+    }
+
+    public void makeParticle(){
+        if(this.level().isClientSide()) return;
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 7), Mth.PI / 2, 0);
+        Vec3 center = new Vec3(this.getX(), this.getY() + 0.1, this.getZ());
+        for (int i = 0; i < point.size(); i++){
+            Vec3 pos = center.add(point.get(i));
+            ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255), point.get(i).scale(-0.2).toVector3f(), 5), pos.x(), pos.y(), pos.z(), 1, 0 ,0 ,0 ,0);
+        }
     }
 }
