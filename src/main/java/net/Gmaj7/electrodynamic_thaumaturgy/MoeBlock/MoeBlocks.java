@@ -40,7 +40,7 @@ public class MoeBlocks {
             () -> new MagicLithographyTableBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_driver_machine_block",
-            () -> new ElectromagneticDriverMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+            () -> new ElectromagneticDriverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
     public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE_BLOCK = MOE_BLOCKS.register("bio_replication_vat_machine_block",
             () -> new BioReplicationVatMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));

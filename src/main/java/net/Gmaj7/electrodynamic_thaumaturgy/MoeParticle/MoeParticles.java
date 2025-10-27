@@ -31,10 +31,6 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HIGH_INTENSITY_MAGNETIC_PARTICLE_IN = MOE_PARTICLE.register("high_intensity_magnet_particle_in",
             () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FRONT_MAGIC_CIRCLE_PARTICLE = MOE_PARTICLE.register("front_magic_circle_particle",
-            () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FRONT_MAGIC_CIRCLE_PARTICLE_IN = MOE_PARTICLE.register("front_magic_circle_particle_in",
-            () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NORMAL_CIRCLE_PARTICLE = MOE_PARTICLE.register("normal_circle_particle",
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> NORMAL_SHRINK_CIRCLE_PARTICLE = MOE_PARTICLE.register("normal_shrink_circle_particle",

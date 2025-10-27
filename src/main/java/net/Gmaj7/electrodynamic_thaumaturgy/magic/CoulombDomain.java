@@ -25,7 +25,10 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(coulombDomainBeaconEntity);
         if(!livingEntity.level().isClientSide){
-            Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), coulombDomainBeaconEntity));
+            Thread thread = new Thread(() -> {
+                makeParticle((ServerLevel) livingEntity.level(), coulombDomainBeaconEntity, 10, 0, -Mth.PI / 32);
+                makeParticle((ServerLevel) livingEntity.level(), coulombDomainBeaconEntity, 5, 5, Mth.PI / 32);
+            });
             thread.start();
         }
     }
@@ -36,20 +39,22 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         Vec3 vec3 = blockPos.getCenter();
         CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, source);
         target.level().addFreshEntity(coulombDomainBeaconEntity);
-        if(!source.level().isClientSide){
-            Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), coulombDomainBeaconEntity));
-            thread.start();
+        if(!source.level().isClientSide()){
+            Thread thread1 = new Thread(() -> makeParticle((ServerLevel) source.level(), coulombDomainBeaconEntity, 10, 0, -Mth.PI / 32));
+            Thread thread2 = new Thread(() -> makeParticle((ServerLevel) source.level(), coulombDomainBeaconEntity, 5, 5, Mth.PI / 32));
+            thread1.start();
+            thread2.start();
         }
     }
 
     @Override
     public int getBaseEnergyCost() {
-        return 0;//384;
+        return 384;
     }
 
     @Override
     public int getBaseCooldown() {
-        return 0;//100;
+        return 100;
     }
 
     @Override
@@ -75,17 +80,33 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         electromagneticDriverBE.setCooldown(getBaseCooldown());
         electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
         if(!electromagneticDriverBE.getLevel().isClientSide()){
-            Thread thread = new Thread(() -> makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), coulombDomainBeaconEntity));
+            Thread thread = new Thread(() -> {
+                makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), coulombDomainBeaconEntity, 10, 0, -Mth.PI / 32);
+                makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), coulombDomainBeaconEntity, 5, 5, Mth.PI / 32);
+            });
             thread.start();
         }
     }
 
-    private void makeParticle(ServerLevel level, CoulombDomainBeaconEntity coulombDomainBeaconEntity) {
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(240, 10), Mth.PI / 2, 0);
-        Vec3 center = new Vec3(coulombDomainBeaconEntity.getX(), coulombDomainBeaconEntity.getY() + 1, coulombDomainBeaconEntity.getZ());
-        for (int i = 0; i < point.size(); i++) {
-            Vec3 pos = center.add(point.get(i));
-            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255,255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+    private void makeParticle(ServerLevel level, CoulombDomainBeaconEntity coulombDomainBeaconEntity, int radius, int dy, float omega) {
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(12 * radius, radius), Mth.PI / 2, 0);
+        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, radius, 0), Mth.PI / 2, 0);
+        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, radius, Mth.PI), Mth.PI / 2, 0);
+        Vec3 center = new Vec3(coulombDomainBeaconEntity.getX(), coulombDomainBeaconEntity.getY() + 0.2, coulombDomainBeaconEntity.getZ()).add(0, dy, 0);
+        int i = 0;
+        for (; i < circle.size(); i++) {
+            Vec3 pos = center.add(circle.get(i));
+            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255,255), new Vector3f(Mth.PI / 2, 0, omega), 100), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+        }
+        for (i = 0; i < polygon.size(); i++) {
+            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 40);
+            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 40);
+            for (int j = 0; j < line.size(); j++) {
+                Vec3 pos = center.add(line.get(j));
+                Vec3 pos2 = center.add(line2.get(j));
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, omega), 100), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, omega), 100), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+            }
         }
     }
 }

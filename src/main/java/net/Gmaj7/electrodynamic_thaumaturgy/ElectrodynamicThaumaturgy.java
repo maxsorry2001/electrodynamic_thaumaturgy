@@ -133,8 +133,6 @@ public class ElectrodynamicThaumaturgy
             event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE.get(), WildMagicCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.WILD_MAGIC_CIRCLE_PARTICLE_IN.get(), WildMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.HIGH_INTENSITY_MAGNETIC_PARTICLE_IN.get(), DisturbingByHighIntensityMagneticParticleIn.Provider::new);
-            event.registerSpriteSet(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE.get(), FrontMagicCircleParticle.Provider::new);
-            event.registerSpriteSet(MoeParticles.FRONT_MAGIC_CIRCLE_PARTICLE_IN.get(), FrontMagicCircleParticleIn.Provider::new);
             event.registerSpriteSet(MoeParticles.NORMAL_CIRCLE_PARTICLE.get(), NormalCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.NORMAL_SHRINK_CIRCLE_PARTICLE.get(), NormalShrinkCircleParticle.Provider::new);
             event.registerSpriteSet(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), HydrogenBondParticle.Provider::new);

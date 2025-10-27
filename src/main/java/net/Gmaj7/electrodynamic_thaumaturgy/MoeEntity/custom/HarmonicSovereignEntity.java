@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -103,6 +104,7 @@ public class HarmonicSovereignEntity extends AbstractSovereignEntity implements 
     @Override
     public void tick() {
         super.tick();
+        if(this.level().getDifficulty() == Difficulty.PEACEFUL) this.discard();
         if(this.castTick > 0) this.castTick--;
         if(coolDown.length < 8) this.coolDown = new int[]{0,0,0,0,0,0,0};
         for (int i = 0; i < coolDown.length; i++){

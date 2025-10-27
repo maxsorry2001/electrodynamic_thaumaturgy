@@ -66,7 +66,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
                 float xRot = randomSource.nextFloat() * 2 * Mth.PI, yRot = randomSource.nextFloat() * 2 * Mth.PI;
                 Thread thread = new Thread(() -> {
                     makeParticle(target, xRot, yRot);
-                    makeParticle(target, Mth.PI / 2 - xRot, yRot);
+                    makeParticle(target, Mth.PI / 2 + xRot, yRot);
                 });
                 thread.start();
             }

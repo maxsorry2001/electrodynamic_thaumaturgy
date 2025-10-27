@@ -28,8 +28,5 @@ public class LevelBlockEvent {
             IEnergyStorage energyStorageItem = itemStack.getCapability(Capabilities.EnergyStorage.ITEM);
             energyStorageItem.receiveEnergy(energyStorageBlock.getEnergyStored(), false);
         }
-        if(event.getState().getBlock() instanceof CropBlock){
-
-        }
     }
 }

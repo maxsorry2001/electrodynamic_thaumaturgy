@@ -26,10 +26,10 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-public class ElectromagneticDriverMachineBlock extends BaseEntityBlock {
-    public static final MapCodec<ElectromagneticDriverMachineBlock> CODEC = simpleCodec(ElectromagneticDriverMachineBlock::new);
+public class ElectromagneticDriverBlock extends BaseEntityBlock {
+    public static final MapCodec<ElectromagneticDriverBlock> CODEC = simpleCodec(ElectromagneticDriverBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public ElectromagneticDriverMachineBlock(Properties properties) {
+    public ElectromagneticDriverBlock(Properties properties) {
         super(properties);
     }
 
