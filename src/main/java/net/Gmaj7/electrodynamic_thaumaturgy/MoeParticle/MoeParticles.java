@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -41,7 +42,7 @@ public class MoeParticles {
             () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FREQUENCY_DIVISION_ARROW_RAIN_PARTICLE = MOE_PARTICLE.register("frequency_division_arrow_rain_particle",
             () -> new SimpleParticleType(true));
-    public static final Supplier<ParticleType<PointRotateParticleOption>> POINT_ROTATE_PARTICLE = MOE_PARTICLE.register("point_particle", () -> new ParticleType<>(false) {
+    public static final Supplier<ParticleType<PointRotateParticleOption>> POINT_ROTATE_PARTICLE = MOE_PARTICLE.register("point_rotate_particle", () -> new ParticleType<>(false) {
         @Override
         public MapCodec<PointRotateParticleOption> codec() {
             return PointRotateParticleOption.CODEC;
@@ -50,6 +51,17 @@ public class MoeParticles {
         @Override
         public StreamCodec<? super RegistryFriendlyByteBuf, PointRotateParticleOption> streamCodec() {
             return PointRotateParticleOption.STREAM_CODEC;
+        }
+    });
+    public static final Supplier<ParticleType<PointLineParticleOption>> POINT_LINE_PARTICLE = MOE_PARTICLE.register("point_line_particle", () -> new ParticleType<>(false) {
+        @Override
+        public MapCodec<PointLineParticleOption> codec() {
+            return PointLineParticleOption.CODEC;
+        }
+
+        @Override
+        public StreamCodec<? super RegistryFriendlyByteBuf, PointLineParticleOption> streamCodec() {
+            return PointLineParticleOption.STREAM_CODEC;
         }
     });
 

@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -89,14 +90,14 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){
         float xRot = Mth.PI / 2, yRot = 0;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), xRot, yRot);
+        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, 0), xRot, yRot);
+        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, Mth.PI), xRot, yRot);
         int i;
         Vec3 center = livingEntity.getEyePosition();
         for (i = 0; i < circle.size(); i++) {
             Vec3 pos = center.add(circle.get(i));
-            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), circle.get(i).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
@@ -104,8 +105,8 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), line.get(j).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), line2.get(j).scale(-0.1).toVector3f(), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
     }
