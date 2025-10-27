@@ -156,7 +156,7 @@ public class MoeFunction {
     }
 
     // 生成圆形点集 (在xy平面上)
-    public static List<Vec3> generateCirclePoints(int numPoints, double radius) {
+    public static List<Vec3> getCirclePoints(int numPoints, double radius) {
         List<Vec3> points = new ArrayList<>();
 
         for (int i = 0; i < numPoints; i++) {

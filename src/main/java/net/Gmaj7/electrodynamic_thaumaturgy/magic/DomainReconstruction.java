@@ -68,7 +68,7 @@ public class DomainReconstruction extends AbstractSelfMagic{
     }
 
     private void makeParticle(ServerLevel serverLevel, LivingEntity livingEntity){
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), Mth.PI / 2, 0);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), Mth.PI / 2, 0);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), Mth.PI / 2, 0);
         List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), Mth.PI / 2, Mth.PI / 2);
         Vec3 center = livingEntity.getEyePosition(), centerBottom = center.add(0, -1.5, 0);

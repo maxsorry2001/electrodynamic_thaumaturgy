@@ -78,8 +78,8 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
 
     private void makeParticle(ServerLevel serverLevel, PhotoacousticPulseBeaconEntity entity){
         Vec3 center =new Vec3(entity.getX(), entity.getY() + 0.1, entity.getZ());
-        List<Vec3> circle1 = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), Mth.PI / 2, 0);
-        List<Vec3> circle2 = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(45, 4), Mth.PI / 2, 0);
+        List<Vec3> circle1 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), Mth.PI / 2, 0);
+        List<Vec3> circle2 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(45, 4), Mth.PI / 2, 0);
         List<Vec3> triangle = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, 0), Mth.PI / 2, 0);
         List<Vec3> triangle2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
         dealParticle(serverLevel, center, circle1, Mth.PI / 16);

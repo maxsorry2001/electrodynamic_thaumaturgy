@@ -3,9 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -102,7 +100,7 @@ public class AttractBeaconEntity extends AbstractArrow {
 
     public void makeParticle(){
         if(this.level().isClientSide()) return;
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 7), Mth.PI / 2, 0);
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 7), Mth.PI / 2, 0);
         Vec3 center = new Vec3(this.getX(), this.getY() + 0.1, this.getZ());
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));

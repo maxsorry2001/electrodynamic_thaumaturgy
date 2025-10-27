@@ -98,7 +98,7 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
 
     public void makeParticle(boolean out){
         if(this.level().isClientSide()) return;
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), Mth.PI / 2, 0);
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), Mth.PI / 2, 0);
         Vec3 center = new Vec3(target.getX(), (target.getY() + target.getEyeY()) / 2, target.getZ());
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));

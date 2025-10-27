@@ -95,7 +95,7 @@ public class Exciting extends AbstractWideMagic{
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, int radius, float xRot, float yRot){
-        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(60, radius), xRot, -yRot);
+        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, radius), xRot, -yRot);
         Vec3 center =  new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         for (int j = 0; j < list.size(); j++) {
             Vec3 pos = center.add(list.get(j));

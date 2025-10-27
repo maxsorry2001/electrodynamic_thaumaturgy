@@ -5,13 +5,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MoeRayEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -113,7 +110,7 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = livingEntity.getXRot() * Mth.PI / 180;
         float yRot = -livingEntity.getYRot() * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), xRot, yRot);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), xRot, yRot);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
         List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
         int i;

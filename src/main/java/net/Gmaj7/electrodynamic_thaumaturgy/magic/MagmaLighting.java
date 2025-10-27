@@ -4,7 +4,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.Electroma
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagmaLightingBeaconEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
 import net.minecraft.core.BlockPos;
@@ -110,7 +109,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     }
 
     private void makeCircleParticle(ServerLevel level, MagmaLightingBeaconEntity magmaLightingBeaconEntity, int height, double radius, float omega){
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints((int) (30 * radius), radius), Mth.PI / 2, 0);
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints((int) (30 * radius), radius), Mth.PI / 2, 0);
         Vec3 center = new Vec3(magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ()).add(0, height, 0);
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));

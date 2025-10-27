@@ -103,7 +103,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, Vec3 start, Vec3 vec3, int length){
-        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(120, 2), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
+        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(120, 2), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < list.size(); j++) {
                 Vec3 center = start.add(vec3.scale(i));

@@ -3,7 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -70,7 +69,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     }
 
     private void makeParticle(ServerLevel serverLevel, LivingEntity livingEntity){
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), Mth.PI / 2, 0);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), Mth.PI / 2, 0);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), Mth.PI / 2, 0);
         List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), Mth.PI / 2, Mth.PI / 2);
         Vec3 center = livingEntity.getEyePosition(), centerBottom = center.add(0, -1.5, 0);

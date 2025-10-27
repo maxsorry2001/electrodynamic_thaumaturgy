@@ -3,7 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -115,7 +114,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
     private void makeParticle(LivingEntity target, float xRot, float yRot){
         if(this.level().isClientSide()) return;
         Vec3 center = new Vec3(target.getX(), target.getY() + 0.3, target.getZ());
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), xRot, yRot);
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), xRot, yRot);
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));
             ((ServerLevel)level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);

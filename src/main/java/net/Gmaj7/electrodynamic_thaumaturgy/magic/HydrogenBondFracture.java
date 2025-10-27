@@ -88,7 +88,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = livingEntity.getXRot() * Mth.PI / 180;
         float yRot = -livingEntity.getYRot() * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 1), xRot, yRot);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), xRot, yRot);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
         List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
         int i;

@@ -2,9 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -90,7 +88,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){
         float xRot = Mth.PI / 2, yRot = 0;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), xRot, yRot);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), xRot, yRot);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, 0), xRot, yRot);
         List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, Mth.PI), xRot, yRot);
         int i;

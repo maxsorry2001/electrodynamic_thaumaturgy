@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -65,10 +64,10 @@ public class HarmonicSovereignSummonEntity extends AbstractArrow {
     }
 
     private void makeParticleA(){
-        List<Vec3> circleXY45 = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(40, 2), Mth.PI / 4, 0);
-        List<Vec3> circleXY135 = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(40, 2), -Mth.PI / 4, 0);
-        List<Vec3> circleZY45 = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(40, 2), Mth.PI / 4, Mth.PI / 2);
-        List<Vec3> circleZY135 = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(40, 2), -Mth.PI / 4, Mth.PI / 2);
+        List<Vec3> circleXY45 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(40, 2), Mth.PI / 4, 0);
+        List<Vec3> circleXY135 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(40, 2), -Mth.PI / 4, 0);
+        List<Vec3> circleZY45 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(40, 2), Mth.PI / 4, Mth.PI / 2);
+        List<Vec3> circleZY135 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(40, 2), -Mth.PI / 4, Mth.PI / 2);
         Vec3 rotateCenter = new Vec3(this.getX(), this.getY() + 5, this.getZ()),
         centerXY45 = rotateCenter.add(0, 0, 4), centerXY135 = rotateCenter.add(0, 0, -4), centerZY45 = rotateCenter.add(4, 0, 0), centerZY135 = rotateCenter.add(-4, 0, 0);
         for (int i = 0; i < circleXY45.size(); i++){

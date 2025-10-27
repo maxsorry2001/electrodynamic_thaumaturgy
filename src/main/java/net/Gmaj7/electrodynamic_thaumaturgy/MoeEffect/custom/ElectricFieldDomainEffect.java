@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -45,7 +44,7 @@ public class ElectricFieldDomainEffect extends MobEffect {
     }
 
     private void makeParticle(ServerLevel serverLevel, LivingEntity livingEntity){
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(60, 10), Mth.PI / 2, 0);
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, 10), Mth.PI / 2, 0);
         Vec3 center = livingEntity.position().add(0, 0.2, 0);
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));

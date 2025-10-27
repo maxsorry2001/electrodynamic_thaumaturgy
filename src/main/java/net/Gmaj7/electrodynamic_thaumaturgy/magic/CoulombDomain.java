@@ -89,7 +89,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
     }
 
     private void makeParticle(ServerLevel level, CoulombDomainBeaconEntity coulombDomainBeaconEntity, int radius, int dy, float omega) {
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(12 * radius, radius), Mth.PI / 2, 0);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(12 * radius, radius), Mth.PI / 2, 0);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, radius, 0), Mth.PI / 2, 0);
         List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, radius, Mth.PI), Mth.PI / 2, 0);
         Vec3 center = new Vec3(coulombDomainBeaconEntity.getX(), coulombDomainBeaconEntity.getY() + 0.2, coulombDomainBeaconEntity.getZ()).add(0, dy, 0);

@@ -55,7 +55,7 @@ public class Protecting extends AbstractSelfMagic{
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = 9 * Mth.PI / 16, yRot = (90 - livingEntity.getYRot()) * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(60, 2), xRot, yRot);
+        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, 2), xRot, yRot);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(6, 2, 0),-xRot, yRot);
         Vec3 start = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         int i;
