@@ -3,9 +3,10 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -43,6 +46,10 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
+        if(this.tickCount % hitTick == 5 && !this.level().isClientSide()){
+            Thread thread = new Thread(() -> makeParticle(false));
+            thread.start();
+        }
         if(this.tickCount % hitTick == 0 && magicItem != null){
             float damage = MoeFunction.getMagicAmount(magicItem);
             target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), damage);
@@ -63,7 +70,10 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
             }
             this.target = newTarget;
             this.teleportTo(newTarget.getX(), newTarget.getY(), newTarget.getZ());
-            if(this.level() instanceof ServerLevel) ((ServerLevel) this.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), newTarget.getX(),  (newTarget.getY() + newTarget.getEyeY()) / 2, newTarget.getZ(), 1, 0, 0, 0, 0);
+            if(this.level() instanceof ServerLevel){
+                Thread thread = new Thread(() -> makeParticle(true));
+                thread.start();
+            }
         }
     }
 
@@ -84,5 +94,18 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
 
     public void setTarget(LivingEntity target) {
         this.target = target;
+    }
+
+    public void makeParticle(boolean out){
+        if(this.level().isClientSide()) return;
+        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.generateCirclePoints(30, 2), Mth.PI / 2, 0);
+        Vec3 center = new Vec3(target.getX(), (target.getY() + target.getEyeY()) / 2, target.getZ());
+        for (int i = 0; i < point.size(); i++){
+            Vec3 pos = center.add(point.get(i));
+            if(out)
+                ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(255), point.get(i).scale(0.2).toVector3f(), 5), center.x(), center.y(), center.z(), 1, 0 ,0 ,0 ,0);
+            else
+                ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255), point.get(i).scale(-0.2).toVector3f(), 5), pos.x(), pos.y(), pos.z(), 1, 0 ,0 ,0 ,0);
+        }
     }
 }

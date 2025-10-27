@@ -48,8 +48,8 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
             livingEntity.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
         if(source.level() instanceof ServerLevel) {
-            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) source.level()).sendParticles(MoeParticles.SELF_MAGIC_CIRCLE_PARTICLE_IN.get(), source.getX(), source.getY() + 0.1, source.getZ(), 1, 0, 0, 0, 0);
+            Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
+            thread.start();
         }
     }
 

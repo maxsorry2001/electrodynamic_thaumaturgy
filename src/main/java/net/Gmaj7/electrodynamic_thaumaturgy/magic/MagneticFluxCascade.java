@@ -16,7 +16,10 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         livingEntity.level().addFreshEntity(magneticFluxCascadeEntity);
-        if(livingEntity.level() instanceof ServerLevel) ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
+        if(livingEntity.level() instanceof ServerLevel) {
+            Thread thread = new Thread(() -> magneticFluxCascadeEntity.makeParticle(true));
+            thread.start();
+        }
     }
 
     @Override
@@ -25,8 +28,10 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         source.level().addFreshEntity(magneticFluxCascadeEntity);
-        if(source.level() instanceof ServerLevel) ((ServerLevel) source.level()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
-
+        if(source.level() instanceof ServerLevel){
+            Thread thread = new Thread(() -> magneticFluxCascadeEntity.makeParticle(true));
+            thread.start();
+        }
     }
 
     @Override
@@ -59,6 +64,9 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
         electromagneticDriverBE.getLevel().addFreshEntity(magneticFluxCascadeEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
         electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
-        if(electromagneticDriverBE.getLevel() instanceof ServerLevel) ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.MAGNETIC_FLUX_CASCADE_PARTICLE.get(), target.getX(),  (target.getY() + target.getEyeY()) / 2, target.getZ(), 1, 0, 0, 0, 0);
+        if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
+            Thread thread = new Thread(() -> magneticFluxCascadeEntity.makeParticle(true));
+            thread.start();
+        }
     }
 }
