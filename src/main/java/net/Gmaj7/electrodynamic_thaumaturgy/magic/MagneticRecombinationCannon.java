@@ -20,10 +20,6 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         Vec3 vec3 = blockPos.getCenter();
         MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(magneticRecombinationCannonBeaconEntity);
-        if(livingEntity.level() instanceof ServerLevel) {
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) livingEntity.level()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-        }
     }
 
     @Override
@@ -32,10 +28,6 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         Vec3 vec3 = blockPos.getCenter();
         MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(source.level(),vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem, source);
         source.level().addFreshEntity(magneticRecombinationCannonBeaconEntity);
-        if(source.level() instanceof ServerLevel) {
-            ((ServerLevel) source.level()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) source.level()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-        }
     }
 
     @Override
@@ -69,9 +61,5 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         electromagneticDriverBE.getLevel().addFreshEntity(magneticRecombinationCannonBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
         electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
-        if(electromagneticDriverBE.getLevel() instanceof ServerLevel) {
-            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-            ((ServerLevel) electromagneticDriverBE.getLevel()).sendParticles(MoeParticles.TORCH_PARTICLE_IN.get(), magneticRecombinationCannonBeaconEntity.getX(), magneticRecombinationCannonBeaconEntity.getY() + 0.1, magneticRecombinationCannonBeaconEntity.getZ(), 1, 0, 0, 0, 0);
-        }
     }
 }

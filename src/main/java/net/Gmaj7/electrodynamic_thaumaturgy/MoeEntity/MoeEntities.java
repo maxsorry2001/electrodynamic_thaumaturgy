@@ -35,6 +35,7 @@ public class MoeEntities {
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)
+                    .noSave()
                     .build("plasma_torch_beacon_entity"));
     public static final Supplier<EntityType<MagmaLightingBeaconEntity>> MAGMA_LIGHTING_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("magma_lighting_entity", () -> EntityType.Builder.<MagmaLightingBeaconEntity>of(MagmaLightingBeaconEntity::new, MobCategory.MISC)
