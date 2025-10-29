@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.*;
+import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -56,4 +57,7 @@ public class MoeBlocks {
 
     public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = MOE_BLOCKS.register("nitrogen_harvester_block",
             () -> new NitrogenHarvesterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+
+    public static final DeferredBlock<Block> LIGHT_AIR = MOE_BLOCKS.register("light_air",
+            () -> new AirBlock(BlockBehaviour.Properties.of().air().lightLevel(p -> 15).replaceable().noCollission().noLootTable()));
 }
