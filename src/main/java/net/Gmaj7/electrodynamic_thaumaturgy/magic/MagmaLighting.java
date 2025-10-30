@@ -113,7 +113,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
         Vec3 center = new Vec3(magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ()).add(0, height, 0);
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));
-            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, omega), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(height == 3 ? 255 : 128, height == 5 ? 255 : 128, height == 7 ? 255 : 128), new Vector3f(Mth.PI / 2, 0, omega), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
     }
     private void makeInParticle(ServerLevel level, MagmaLightingBeaconEntity magmaLightingBeaconEntity, int height, double radius, float omega){
@@ -127,8 +127,8 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, omega), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, omega), 20), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(height == 3 ? 255 : 128, height == 5 ? 255 : 128, height == 7 ? 255 : 128), new Vector3f(Mth.PI / 2, 0, omega), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(height == 3 ? 255 : 128, height == 5 ? 255 : 128, height == 7 ? 255 : 128), new Vector3f(Mth.PI / 2, 0, omega), 20), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
     }

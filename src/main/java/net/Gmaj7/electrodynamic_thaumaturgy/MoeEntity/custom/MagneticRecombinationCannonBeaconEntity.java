@@ -123,10 +123,10 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
                         line4 = MoeFunction.getLinePoints(polygon4.get(i), polygon4.get((i + 1) % polygon4.size()), 10);
             for (int j = 0; j < line1.size(); j++){
                 Vec3 pos1 = center1.add(line1.get(j)), pos2 = center2.add(line2.get(j)), pos3 = center3.add(line3.get(j)), pos4 = center4.add(line4.get(j));
-                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos1.x(), pos1.y(), pos1.z(), 1, 0, 0, 0, 0);
-                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
-                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos3.x(), pos3.y(), pos3.z(), 1, 0, 0, 0, 0);
-                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos4.x(), pos4.y(), pos4.z(), 1, 0, 0, 0, 0);
+                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 128, 128), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos1.x(), pos1.y(), pos1.z(), 1, 0, 0, 0, 0);
+                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 128, 128), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 128, 128), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos3.x(), pos3.y(), pos3.z(), 1, 0, 0, 0, 0);
+                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 128, 128), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 100), pos4.x(), pos4.y(), pos4.z(), 1, 0, 0, 0, 0);
             }
         }
     }
@@ -145,7 +145,7 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), (int) (10 * radius));
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
-                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), tick), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                ((ServerLevel)this.level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(height == 4 ? 255 : 128, height == 7 ? 255 : 128, height == 10 ? 255 : 128), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), tick), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
             }
         }
     }

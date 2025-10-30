@@ -52,7 +52,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             Thread thread = new Thread(() -> makeParticle(level, livingEntity, start, vec3.normalize(), Mth.floor(vec3.length()) + 2));
             thread.start();
         }
-        //livingEntity.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+        livingEntity.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
         livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
     }
 
@@ -108,7 +108,14 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             for (int j = 0; j < list.size(); j++) {
                 Vec3 center = start.add(vec3.scale(i));
                 Vec3 pos = center.add(list.get(j));
-                ((ServerLevel) level).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255)), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                Vector3f color;
+                switch (i % 3){
+                    case 0 -> color = new Vector3f(255, 128, 128);
+                    case 1 -> color = new Vector3f(128, 255, 128);
+                    case 2 -> color = new Vector3f(128, 128, 255);
+                    default -> color = new Vector3f(255);
+                }
+                ((ServerLevel) level).sendParticles(new PointRotateParticleOption(center.toVector3f(), color, new Vector3f(livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180, Mth.PI / 180), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
             }
         }
     }

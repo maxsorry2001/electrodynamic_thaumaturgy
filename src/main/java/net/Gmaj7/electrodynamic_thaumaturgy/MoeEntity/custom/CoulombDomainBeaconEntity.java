@@ -117,7 +117,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
         List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), xRot, yRot);
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));
-            ((ServerLevel)level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel)level()).sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 128, 128), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
     }
 }

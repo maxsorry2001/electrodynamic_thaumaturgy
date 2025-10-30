@@ -79,7 +79,7 @@ public class PulsedPlasma extends AbstractWideMagic{
         Vec3 center = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2));
         for (i = 0; i < circle.size(); i++) {
             Vec3 pos = center.add(circle.get(i));
-            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(128, 128, 255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
@@ -87,8 +87,8 @@ public class PulsedPlasma extends AbstractWideMagic{
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(128, 255, 128), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(128, 255, 128), new Vector3f(xRot, yRot, -Mth.PI / 16), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
     }

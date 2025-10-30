@@ -103,9 +103,9 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));
             if(out)
-                ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(255), point.get(i).scale(0.2).toVector3f(), 5), center.x(), center.y(), center.z(), 1, 0 ,0 ,0 ,0);
+                ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(128, 255, 128), point.get(i).scale(0.2).toVector3f(), 5), center.x(), center.y(), center.z(), 1, 0 ,0 ,0 ,0);
             else
-                ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255), point.get(i).scale(-0.2).toVector3f(), 5), pos.x(), pos.y(), pos.z(), 1, 0 ,0 ,0 ,0);
+                ((ServerLevel)this.level()).sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 128, 128), point.get(i).scale(-0.2).toVector3f(), 5), pos.x(), pos.y(), pos.z(), 1, 0 ,0 ,0 ,0);
         }
     }
 }
