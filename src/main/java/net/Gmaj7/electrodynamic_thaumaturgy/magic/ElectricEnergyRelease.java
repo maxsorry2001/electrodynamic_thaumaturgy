@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -71,17 +72,17 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         float xRot = 9 * Mth.PI / 16, yRot = (90 - livingEntity.getYRot()) * Mth.PI / 180;
         List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, 2), xRot, yRot);
         List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(6, 2, 0),-xRot, yRot);
-        Vec3 start = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
+        Vec3 center = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         int i;
         for (i = 0; i < circle.size(); i++) {
-            Vec3 pos = start.add(circle.get(i));
-            level.sendParticles(new PointRotateParticleOption(start.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, Mth.PI / 8), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            Vec3 pos = center.add(circle.get(i));
+            level.sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(191, 62, 255), circle.get(i).scale(0.2).toVector3f(), 20), center.x(), center.y(), center.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++){
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
             for (int j = 0; j < line.size(); j++){
-                Vec3 pos = start.add(line.get(j));
-                level.sendParticles(new PointRotateParticleOption(start.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(-xRot, yRot, Mth.PI / 8), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                Vec3 pos = center.add(line.get(j));
+                level.sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(191, 62, 255), line.get(j).scale(0.2).toVector3f(), 20), center.x(), center.y(), center.z(), 1, 0, 0, 0, 0);
             }
         }
     }

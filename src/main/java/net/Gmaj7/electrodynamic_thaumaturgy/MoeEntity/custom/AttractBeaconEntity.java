@@ -55,6 +55,7 @@ public class AttractBeaconEntity extends AbstractArrow {
         }
         if(this.level() instanceof ServerLevel && tickCount % 20 == 0){
             Thread thread = new Thread(() -> makeParticle());
+            thread.start();
         }
     }
 

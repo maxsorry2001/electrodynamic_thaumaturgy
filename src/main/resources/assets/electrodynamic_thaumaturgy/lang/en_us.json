@@ -67,6 +67,7 @@
   "effect.electrodynamic_thaumaturgy.magnet_resonance" : "Magnet Resonance",
   "effect.electrodynamic_thaumaturgy.st_elmo_s_fire" : "St.Elmo's Fire",
   "effect.electrodynamic_thaumaturgy.magnetic_levitation" : "Magnetic Levitation",
+  "effect.electrodynamic_thaumaturgy.photo_corrosive": "Photo-Corrosion",
 
   "block.electrodynamic_thaumaturgy.electromagnetic_assembly_table": "Electromagnetic Debugging Bench",
   "block.electrodynamic_thaumaturgy.electromagnetic_modem_table": "Enhancement Modem Table",
@@ -94,6 +95,7 @@
   "entity.electrodynamic_thaumaturgy.magnetic_levitation": "Magnetic Levitation",
   "entity.electrodynamic_thaumaturgy.frequency_division_arrow_entity": "Electromagnetic Wave Arrow",
   "entity.electrodynamic_thaumaturgy.frequency_division_beacon_entity": "Frequency Division Beacon",
+  "entity.electrodynamic_thaumaturgy.photo_corrosive_nova_entity": "Photo Corrosive Nova",
   "entity.electrodynamic_thaumaturgy.harmonic_sovereign": "Harmonic Sovereign",
   "entity.electrodynamic_thaumaturgy.harmonic_sovereign_summon_entity": "Harmonic Core",
   "entity.electrodynamic_thaumaturgy.harmonic_saint": "Harmonic Saint",

@@ -98,15 +98,15 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j)).add(0, 10, 0);
                 Vec3 pos2 = center.add(line2.get(j)).add(0, 10, 0);
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(184, 206, 11), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(184, 206, 11), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
         for (i = 0; i < polygon3.size(); i++) {
             List<Vec3> line = MoeFunction.getLinePoints(polygon3.get(i), polygon3.get((i + 1) % polygon3.size()), 14);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
-                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(184, 206, 11), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
             }
         }
     }

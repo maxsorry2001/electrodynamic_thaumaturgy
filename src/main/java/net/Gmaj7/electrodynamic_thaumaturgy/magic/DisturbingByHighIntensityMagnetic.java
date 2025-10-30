@@ -95,7 +95,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
         Vec3 center = livingEntity.getEyePosition();
         for (i = 0; i < circle.size(); i++) {
             Vec3 pos = center.add(circle.get(i));
-            level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), circle.get(i).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+            level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 128, 171), circle.get(i).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
             List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
@@ -103,8 +103,8 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
-                level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), line.get(j).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
-                level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), line2.get(j).scale(-0.1).toVector3f(), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 128, 171), line.get(j).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
+                level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 128, 171), line2.get(j).scale(-0.1).toVector3f(), 10), pos2.x(), pos2.y(), pos2.z(), 1, 0, 0, 0, 0);
             }
         }
     }

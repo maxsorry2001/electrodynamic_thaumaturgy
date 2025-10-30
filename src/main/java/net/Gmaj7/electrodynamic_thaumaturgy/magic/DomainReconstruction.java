@@ -78,10 +78,10 @@ public class DomainReconstruction extends AbstractSelfMagic{
             for (int j = 0; j < line.size(); j++){
                 Vec3 posCircleUp = center.add(circle.get(j + i * 10)), posCircleBottom = centerBottom.add(circle.get(j + i * 10)),
                         posLineUp = center.add(line.get(j)), poaLineBottom = centerBottom.add(line2.get(j));
-                serverLevel.sendParticles(new PointLineParticleOption(posCircleBottom.toVector3f(), new Vector3f(255), new Vector3f(0, -0.3F, 0), 5), posCircleUp.x(), posCircleUp.y(), posCircleUp.z(), 1, 0, 0, 0, 0);
-                serverLevel.sendParticles(new PointLineParticleOption(posCircleUp.toVector3f(), new Vector3f(255), new Vector3f(0, 0.3F, 0), 5), posCircleBottom.x(), posCircleBottom.y(), posCircleBottom.z(), 1, 0, 0, 0, 0);
-                serverLevel.sendParticles(new PointLineParticleOption(poaLineBottom.toVector3f(), new Vector3f(255), new Vector3f(0, -0.3F, 0), 5), posLineUp.x(), posLineUp.y(), posLineUp.z(), 1, 0, 0, 0, 0);
-                serverLevel.sendParticles(new PointLineParticleOption(posLineUp.toVector3f(), new Vector3f(255), new Vector3f(0, 0.3F, 0), 5), poaLineBottom.x(), poaLineBottom.y(), poaLineBottom.z(), 1, 0, 0, 0, 0);
+                serverLevel.sendParticles(new PointLineParticleOption(posCircleBottom.toVector3f(), new Vector3f(152, 251, 152), new Vector3f(0, -0.3F, 0), 5), posCircleUp.x(), posCircleUp.y(), posCircleUp.z(), 1, 0, 0, 0, 0);
+                serverLevel.sendParticles(new PointLineParticleOption(posCircleUp.toVector3f(), new Vector3f(152, 251, 152), new Vector3f(0, 0.3F, 0), 5), posCircleBottom.x(), posCircleBottom.y(), posCircleBottom.z(), 1, 0, 0, 0, 0);
+                serverLevel.sendParticles(new PointLineParticleOption(poaLineBottom.toVector3f(), new Vector3f(152, 251, 152), new Vector3f(0, -0.3F, 0), 5), posLineUp.x(), posLineUp.y(), posLineUp.z(), 1, 0, 0, 0, 0);
+                serverLevel.sendParticles(new PointLineParticleOption(posLineUp.toVector3f(), new Vector3f(152, 251, 152), new Vector3f(0, 0.3F, 0), 5), poaLineBottom.x(), poaLineBottom.y(), poaLineBottom.z(), 1, 0, 0, 0, 0);
             }
         }
     }

@@ -74,11 +74,12 @@ public class PhotoCorrosiveNovaEntity extends Entity {
         super.tick();
         if(this.level().isClientSide()){
             this.setAnimationStates();
+            return;
         }
         if(!this.level().getBlockState(this.blockPosition()).is(MoeBlocks.LIGHT_AIR)){
             this.level().setBlockAndUpdate(this.blockPosition(), MoeBlocks.LIGHT_AIR.get().defaultBlockState());
         }
-        if(this.tickCount % 40 == 0){
+        if(this.tickCount % 20 == 0){
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(10));
             if(owner != null)
                 list.remove(owner);

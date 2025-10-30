@@ -67,6 +67,7 @@
   "effect.electrodynamic_thaumaturgy.magnet_resonance" : "磁感共振",
   "effect.electrodynamic_thaumaturgy.st_elmo_s_fire" : "圣艾尔摩之火",
   "effect.electrodynamic_thaumaturgy.magnetic_levitation" : "磁力悬浮",
+  "effect.electrodynamic_thaumaturgy.photo_corrosive" : "光蚀",
 
   "block.electrodynamic_thaumaturgy.electromagnetic_assembly_table": "电磁装配台",
   "block.electrodynamic_thaumaturgy.electromagnetic_modem_table": "强化调制台",
@@ -94,6 +95,7 @@
   "entity.electrodynamic_thaumaturgy.magnetic_levitation": "悬浮通量",
   "entity.electrodynamic_thaumaturgy.frequency_division_arrow_entity": "电磁波箭",
   "entity.electrodynamic_thaumaturgy.frequency_division_beacon_entity": "频分箭雨信标",
+  "entity.electrodynamic_thaumaturgy.photo_corrosive_nova_entity": "光蚀奇点",
   "entity.electrodynamic_thaumaturgy.harmonic_sovereign": "谐波君主",
   "entity.electrodynamic_thaumaturgy.harmonic_sovereign_summon_entity": "谐波核心",
   "entity.electrodynamic_thaumaturgy.harmonic_saint": "谐波圣君",
