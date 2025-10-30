@@ -45,7 +45,7 @@ public class HarmonicSovereignSummonRender extends ArrowRenderer<HarmonicSoverei
             VertexConsumer consumer = buffer.getBuffer(RenderType.energySwirl(LIGHT, 0, 0));
             {
                 poseStack.pushPose();
-                float expansion = 20 - (float) entity.tickCount / 5;
+                float expansion = 1;
                 poseStack.scale(expansion, 1, expansion);
                 poseStack.mulPose(Axis.YP.rotationDegrees(f * - 2));
                 this.body.render(poseStack, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, -1);

@@ -98,6 +98,4 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
             serverLevel.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255), new Vector3f(Mth.PI / 2, 0, omega), 30), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
     }
-
-
 }

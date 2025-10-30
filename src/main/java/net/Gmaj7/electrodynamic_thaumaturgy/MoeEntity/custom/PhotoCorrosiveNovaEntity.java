@@ -1,8 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,6 +14,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -71,6 +75,9 @@ public class PhotoCorrosiveNovaEntity extends Entity {
         if(this.level().isClientSide()){
             this.setAnimationStates();
         }
+        if(!this.level().getBlockState(this.blockPosition()).is(MoeBlocks.LIGHT_AIR)){
+            this.level().setBlockAndUpdate(this.blockPosition(), MoeBlocks.LIGHT_AIR.get().defaultBlockState());
+        }
         if(this.tickCount % 40 == 0){
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(10));
             if(owner != null)
@@ -78,7 +85,9 @@ public class PhotoCorrosiveNovaEntity extends Entity {
             for (LivingEntity target : list)
                 target.addEffect(new MobEffectInstance(MoeEffects.PHOTO_CORROSIVE, 100, amplifier));
         }
-        if(this.tickCount >= 160)
+        if(this.tickCount >= 160) {
+            this.level().setBlockAndUpdate(this.blockPosition(), Blocks.AIR.defaultBlockState());
             this.discard();
+        }
     }
 }
