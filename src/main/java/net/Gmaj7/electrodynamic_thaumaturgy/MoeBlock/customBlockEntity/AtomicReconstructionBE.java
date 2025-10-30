@@ -100,6 +100,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
         return !this.inputItemHandler.getStackInSlot(0).isEmpty()
                 && this.inputItemHandler.getStackInSlot(0).is(Tags.Items.STONES)
                 && !this.targetItemHandler.getStackInSlot(0).isEmpty()
+                && (this.targetItemHandler.getStackInSlot(0).is(Tags.Items.INGOTS) || this.targetItemHandler.getStackInSlot(0).is(Tags.Items.GEMS))
                 && (this.outputItemHandler.getStackInSlot(0).isEmpty() || this.outputItemHandler.getStackInSlot(0).is(this.targetItemHandler.getStackInSlot(0).getItem()));
     }
 

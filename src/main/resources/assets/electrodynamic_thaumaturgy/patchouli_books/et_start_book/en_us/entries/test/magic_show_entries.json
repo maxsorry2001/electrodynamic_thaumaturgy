@@ -125,6 +125,11 @@
     },
     {
       "type": "patchouli:spotlight",
+      "item": "electrodynamic_thaumaturgy:photo_corrosive_nova_module",
+      "text": "patchouli.et.photo_corrosive_nova_module.description"
+    },
+    {
+      "type": "patchouli:spotlight",
       "item": "electrodynamic_thaumaturgy:saint_summon_module",
       "text": "patchouli.et.saint_summon_module.description"
     }
