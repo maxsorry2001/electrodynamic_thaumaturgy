@@ -58,7 +58,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 70;
+        return 140;
     }
 
 

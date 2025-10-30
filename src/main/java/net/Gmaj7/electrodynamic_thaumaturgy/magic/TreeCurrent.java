@@ -61,7 +61,7 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 80;
+        return 120;
     }
 
     @Override

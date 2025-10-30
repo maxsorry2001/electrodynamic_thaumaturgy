@@ -37,7 +37,7 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 160;
+        return 300;
     }
 
     protected BlockHitResult getBlock(LivingEntity livingEntity){

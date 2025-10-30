@@ -59,7 +59,7 @@ public class DomainReconstruction extends AbstractSelfMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 70;
+        return 140;
     }
 
     @Override

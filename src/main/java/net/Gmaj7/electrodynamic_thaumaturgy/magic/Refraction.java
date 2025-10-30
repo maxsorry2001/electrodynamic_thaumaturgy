@@ -40,7 +40,7 @@ public class Refraction extends AbstractSelfMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 30;
+        return 200;
     }
 
     @Override

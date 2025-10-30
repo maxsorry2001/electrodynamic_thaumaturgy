@@ -52,7 +52,7 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 200;
+        return 300;
     }
 
     @Override

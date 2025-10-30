@@ -42,7 +42,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 25;
+        return 200;
     }
 
     @Override

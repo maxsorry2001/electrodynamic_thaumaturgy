@@ -39,7 +39,7 @@ public class St_Elmo_s_fire extends AbstractSelfMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 70;
+        return 400;
     }
 
 

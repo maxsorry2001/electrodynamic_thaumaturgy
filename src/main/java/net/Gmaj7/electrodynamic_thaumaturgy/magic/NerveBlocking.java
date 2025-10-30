@@ -67,7 +67,7 @@ public class NerveBlocking extends AbstractWideMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 30;
+        return 200;
     }
 
     @Override

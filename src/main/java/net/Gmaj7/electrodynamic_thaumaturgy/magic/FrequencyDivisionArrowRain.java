@@ -53,7 +53,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 100;
+        return 300;
     }
 
     @Override

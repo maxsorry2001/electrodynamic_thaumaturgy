@@ -63,7 +63,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 120;
+        return 240;
     }
 
     @Override

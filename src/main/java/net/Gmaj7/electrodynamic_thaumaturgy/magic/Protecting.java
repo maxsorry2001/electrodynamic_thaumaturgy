@@ -45,7 +45,7 @@ public class Protecting extends AbstractSelfMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 80;
+        return 160;
     }
 
     @Override

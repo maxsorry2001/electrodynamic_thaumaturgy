@@ -77,7 +77,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 80;
+        return 100;
     }
 
     @Override

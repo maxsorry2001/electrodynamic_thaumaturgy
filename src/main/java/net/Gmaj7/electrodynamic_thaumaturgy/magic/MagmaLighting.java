@@ -69,7 +69,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 50;
+        return 120;
     }
 
     @Override

@@ -53,7 +53,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             thread.start();
         }
         livingEntity.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
-        livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
+        livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 200));
     }
 
     @Override
@@ -84,7 +84,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             thread.start();
         }
         source.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
-        source.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 140));
+        source.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 200));
     }
 
     @Override
@@ -94,7 +94,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 300;
+        return 400;
     }
 
     @Override

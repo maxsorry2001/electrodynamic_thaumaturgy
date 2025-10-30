@@ -46,7 +46,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 100;
+        return 180;
     }
 
     @Override

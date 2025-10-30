@@ -24,7 +24,7 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(2));
         for (LivingEntity target : list){
             if(target == livingEntity) {
-                livingEntity.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 10)));
+                livingEntity.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 15)));
                 continue;
             }
             target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
@@ -41,7 +41,7 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(2));
         for (LivingEntity livingEntity : list){
             if(livingEntity == source) {
-                source.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 10)));
+                source.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 15)));
                 continue;
             }
             livingEntity.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
@@ -60,7 +60,7 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
 
     @Override
     public int getBaseCooldown() {
-        return 80;
+        return 160;
     }
 
     @Override

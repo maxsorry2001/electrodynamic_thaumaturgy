@@ -54,7 +54,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 80;
+        return 100;
     }
 
     @Override

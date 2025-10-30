@@ -37,7 +37,7 @@ public class Attract extends AbstractBlockBeaconMagic {
 
     @Override
     public int getBaseCooldown() {
-        return 300;
+        return 500;
     }
 
     protected BlockHitResult getBlock(LivingEntity livingEntity){
