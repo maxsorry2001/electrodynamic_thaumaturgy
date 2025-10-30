@@ -97,20 +97,4 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     public Direction getDirection() {
         return direction;
     }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("open_tick", opentick);
-        compound.put("moe_magic_item", this.magicItem.save(this.registryAccess()));
-        compound.putString("moe_ml_direction", this.direction.toString());
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.opentick = compound.getInt("open_tick");
-        this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
-        this.direction = Direction.byName(compound.getString("moe_ml_direction"));
-    }
 }

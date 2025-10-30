@@ -18,17 +18,20 @@ public class MoeEntities {
             MOE_ENTITY_TYPES.register("moe_ray_entity", () -> EntityType.Builder.<MoeRayEntity>of(MoeRayEntity::new, MobCategory.MISC)
                     .sized(0.98F, 0.98F)
                     .clientTrackingRange(64)
+                    .noSave()
                     .build("moe_ray_entity"));
     public static final Supplier<EntityType<PulsedPlasmaEntity>> PULSED_PLASMA_ENTITY =
             MOE_ENTITY_TYPES.register("pulsed_plasma_entity", () -> EntityType.Builder.<PulsedPlasmaEntity>of(PulsedPlasmaEntity::new, MobCategory.MISC)
                     .sized(3F, 3F)
                     .clientTrackingRange(4)
+                    .noSave()
                     .build("pulsed_plasma_entity"));
     public static final Supplier<EntityType<AttractBeaconEntity>> ATTRACT_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("attract_beacon_entity", () -> EntityType.Builder.<AttractBeaconEntity>of(AttractBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
                     .clientTrackingRange(4)
+                    .noSave()
                     .build("attract_beacon_entity"));
     public static final Supplier<EntityType<MagneticRecombinationCannonBeaconEntity>> MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("magnetic_recombination_cannon_beacon_entity", () -> EntityType.Builder.<MagneticRecombinationCannonBeaconEntity>of(MagneticRecombinationCannonBeaconEntity::new, MobCategory.MISC)
@@ -41,11 +44,13 @@ public class MoeEntities {
             MOE_ENTITY_TYPES.register("magma_lighting_entity", () -> EntityType.Builder.<MagmaLightingBeaconEntity>of(MagmaLightingBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
+                    .noSave()
                     .build("magma_lighting_entity"));
     public static final Supplier<EntityType<CoulombDomainBeaconEntity>> COULOMB_DOMAIN_BEACON_ENTITY =
             MOE_ENTITY_TYPES.register("coulomb_domain_entity", () -> EntityType.Builder.<CoulombDomainBeaconEntity>of(CoulombDomainBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .eyeHeight(0.13F)
+                    .noSave()
                     .build("coulomb_domain_entity"));
     public static final Supplier<EntityType<MirageEntity>> MIRAGE_ENTITY =
             MOE_ENTITY_TYPES.register("mirage_entity", () -> EntityType.Builder.<MirageEntity>of(MirageEntity::new, MobCategory.MISC)

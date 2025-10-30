@@ -14,7 +14,7 @@ public abstract class AbstractBlockBeaconMagic implements IMoeMagic{
 
     @Override
     public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
-        return getBlock(livingEntity).getType() != HitResult.Type.MISS;
+        return true;
     }
 
     protected abstract BlockHitResult getBlock(LivingEntity livingEntity);
