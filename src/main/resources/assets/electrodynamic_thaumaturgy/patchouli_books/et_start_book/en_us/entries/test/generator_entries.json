@@ -1,27 +1,27 @@
 {
   "name": "patchouli.et.generator_entries",
   "category": "electrodynamic_thaumaturgy:category_energy",
-  "icon": "electrodynamic_thaumaturgy:thermal_generator",
+  "icon": "electrodynamic_thaumaturgy:thermal_generator_block",
   "pages": [
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:thermal_generator",
-      "text": "patchouli.et.generator_entries.thermal_generator"
+      "recipe": "electrodynamic_thaumaturgy:thermal_generator_block",
+      "text": "patchouli.et.generator_entries.thermal_generator_block"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:temperature_generator",
-      "text": "patchouli.et.generator_entries.temperature_generator"
+      "recipe": "electrodynamic_thaumaturgy:temperature_generator_block",
+      "text": "patchouli.et.generator_entries.temperature_generator_block"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:photovoltaic_generator",
-      "text": "patchouli.et.generator_entries.photovoltaic_generator"
+      "recipe": "electrodynamic_thaumaturgy:photovoltaic_generator_block",
+      "text": "patchouli.et.generator_entries.photovoltaic_generator_block"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:biomass_generator",
-      "text": "patchouli.et.generator_entries.biomass_generator"
+      "recipe": "electrodynamic_thaumaturgy:biomass_generator_block",
+      "text": "patchouli.et.generator_entries.biomass_generator_block"
     }
   ]
 }

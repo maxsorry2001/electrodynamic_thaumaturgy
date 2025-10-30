@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:photovoltaic_generator"
+            "items": "electrodynamic_thaumaturgy:photovoltaic_generator_block"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:temperature_generator"
+            "items": "electrodynamic_thaumaturgy:temperature_generator_block"
           }
         ]
       },
@@ -25,7 +25,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:thermal_generator"
+            "items": "electrodynamic_thaumaturgy:thermal_generator_block"
           }
         ]
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:biomass_generator"
+            "items": "electrodynamic_thaumaturgy:biomass_generator_block"
           }
         ]
       },
@@ -48,7 +48,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "electrodynamic_thaumaturgy:photovoltaic_generator"
+      "id": "electrodynamic_thaumaturgy:photovoltaic_generator_block"
     },
     "title": {
       "translate": "advancements.electrodynamic_thaumaturgy.generator.title"

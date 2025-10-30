@@ -162,13 +162,13 @@
   "patchouli.et.battery.show": "最基本的一次性电池，可以提供16384FE。主手拿电池，副手拿你需要充能的物品，使用物品即可充能",
   "patchouli.et.battery.power_bank": "充电宝可以储存65536FE，使用方式和上文的一次性电池一样，不同的只是充电宝可重复使用",
   "patchouli.et.generator_entries": "发电机",
-  "patchouli.et.generator_entries.thermal_generator": "扔燃料进去就行了，简单粗暴",
-  "patchouli.et.generator_entries.temperature_generator": "在上下表面分别放置一个热方块和一个冷方块即可发电，位置可互换（如：上表面放水，下表面放篝火；或上表面放篝火，下表面放水）",
-  "patchouli.et.generator_entries.photovoltaic_generator": "有光照即可发电，根据光照强度发电量会有所不同。插根火把就能稳定发电",
-  "patchouli.et.generator_entries.biomass_generator": "汲取食物中的能量并将其转化为电能",
+  "patchouli.et.generator_entries.thermal_generator_block": "扔燃料进去就行了，简单粗暴",
+  "patchouli.et.generator_entries.temperature_generator_block": "在上下表面分别放置一个热方块和一个冷方块即可发电，位置可互换（如：上表面放水，下表面放篝火；或上表面放篝火，下表面放水）",
+  "patchouli.et.generator_entries.photovoltaic_generator_block": "有光照即可发电，根据光照强度发电量会有所不同。插根火把就能稳定发电",
+  "patchouli.et.generator_entries.biomass_generator_block": "汲取食物中的能量并将其转化为电能",
   "patchouli.et.save_entries": "能量储存与传输",
   "patchouli.et.generator_entries.energy_block": "用于储存能量，六个面都可以接受或释放能量。当然也可以右键打开GUI，吸收物品中的能量或给物品充能",
-  "patchouli.et.generator_entries.energy_transmission_antenna": "用于无线传输能量。顶部为红色是输出端，绿色是输入端，空手右击即可调整。你需要用导能杖分别右键一次输入端和输出端进行绑定",
+  "patchouli.et.generator_entries.energy_transmission_antenna": "用于无线传输能量。顶部为红色是输出端，绿色是输入端，右击切换。你需要用导能杖分别右键一次输入端和输出端进行绑定，一个输出端可以绑定多个输入端",
   "patchouli.et.magic_entries.start": "法术光刻台用于制造法术。原材料只需要三种等级的底板之一，右键打开GUI就可以制作，无需等待",
   "patchouli.et.enhance_entries": "导能杖的强化",
   "patchouli.et.enhance_entries.start": "强化调制台用于调整导能杖的强化一些法术强化效果",
@@ -213,5 +213,5 @@
   "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆",
   "patchouli.et.generator_entries.electromagnetic_extractor_machine_block": "向发射面朝向发射电磁波，以照射到的方块为中心按设定的宽度挖掘方块。同时可以设定挖掘深度",
   "patchouli.et.generator_entries.nitrogen_harvester_block": "固氮采集器可以加快以自身为中心周围8格作物的生长并自动收割。收割时会获得双倍产出",
-  "patchouli.et.generator_entries.atomic_reconstruction_machine_block": "可以将石头重组为你需要的矿物"
+  "patchouli.et.generator_entries.atomic_reconstruction_machine_block": "可以将8个石头重组为一个你需要的矿物"
 }

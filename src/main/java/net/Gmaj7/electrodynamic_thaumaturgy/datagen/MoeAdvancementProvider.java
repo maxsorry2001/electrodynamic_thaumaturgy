@@ -57,7 +57,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             register(MoeBlocks.ENERGY_BLOCK, "normal", "generator", "energy_save", "has_energy_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_BLOCK);
             register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE, "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
             register(MoeItems.EFFICIENCY_ENHANCE.get(), "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
-            register(MoeItems.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(), "normal", "energy_core", "machine_block", "has_machine", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK, MoeBlocks.NITROGEN_HARVESTER_BLOCK, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK);
+            register(MoeItems.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(), "normal", "energy_core", "machine_block", "has_machine", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK, MoeBlocks.NITROGEN_HARVESTER_BLOCK, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
 
         }
 

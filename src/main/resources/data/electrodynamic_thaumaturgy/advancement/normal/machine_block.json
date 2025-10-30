@@ -40,6 +40,16 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_machine_4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamic_thaumaturgy:atomic_reconstruction_machine_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -59,7 +69,8 @@
       "has_machine_0",
       "has_machine_1",
       "has_machine_2",
-      "has_machine_3"
+      "has_machine_3",
+      "has_machine_4"
     ]
   ],
   "sends_telemetry_event": true

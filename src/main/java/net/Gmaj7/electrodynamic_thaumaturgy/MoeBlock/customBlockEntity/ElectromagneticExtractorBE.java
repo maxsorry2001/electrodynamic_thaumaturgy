@@ -117,10 +117,13 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
                     ItemStack itemStack = iterator.next().copy();
                     for (int k = 0; k < electromagneticExtractorBE.itemHandler.getSlots(); k++) {
                         ItemStack result = electromagneticExtractorBE.getItemHandler().insertItem(k, itemStack, false);
-                        if(!result.isEmpty()) itemStack = result.copy();
+                        if(!result.isEmpty()) {
+                            if(k != electromagneticExtractorBE.itemHandler.getSlots() - 1)
+                                itemStack = result.copy();
+                            else level.addFreshEntity(new ItemEntity(level, electromagneticExtractorBE.getBlockPos().getX(), electromagneticExtractorBE.getBlockPos().getY(), electromagneticExtractorBE.getBlockPos().getZ(), result));
+                        }
                         else break;
                     }
-                    if(!itemStack.isEmpty()) level.addFreshEntity(new ItemEntity(level, electromagneticExtractorBE.getBlockPos().getX(), electromagneticExtractorBE.getBlockPos().getY(), electromagneticExtractorBE.getBlockPos().getZ(), itemStack));
                 }
                 level.destroyBlock(destroyPos, false);
                 electromagneticExtractorBE.getEnergy().extractEnergy(extractUse, false);
