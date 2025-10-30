@@ -20,7 +20,7 @@ public class MoeParticles {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HYDROGEN_BOND_PARTICLE = MOE_PARTICLE.register("hydrogen_bond_particle",
             () -> new SimpleParticleType(true));
-    public static final Supplier<ParticleType<PointRotateParticleOption>> POINT_ROTATE_PARTICLE = MOE_PARTICLE.register("point_rotate_particle", () -> new ParticleType<>(false) {
+    public static final Supplier<ParticleType<PointRotateParticleOption>> POINT_ROTATE_PARTICLE = MOE_PARTICLE.register("point_rotate_particle", () -> new ParticleType<>(true) {
         @Override
         public MapCodec<PointRotateParticleOption> codec() {
             return PointRotateParticleOption.CODEC;
@@ -31,7 +31,7 @@ public class MoeParticles {
             return PointRotateParticleOption.STREAM_CODEC;
         }
     });
-    public static final Supplier<ParticleType<PointLineParticleOption>> POINT_LINE_PARTICLE = MOE_PARTICLE.register("point_line_particle", () -> new ParticleType<>(false) {
+    public static final Supplier<ParticleType<PointLineParticleOption>> POINT_LINE_PARTICLE = MOE_PARTICLE.register("point_line_particle", () -> new ParticleType<>(true) {
         @Override
         public MapCodec<PointLineParticleOption> codec() {
             return PointLineParticleOption.CODEC;
