@@ -42,7 +42,7 @@ public class Attract extends AbstractBlockBeaconMagic {
 
     protected BlockHitResult getBlock(LivingEntity livingEntity){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(8).add(start);
         return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
