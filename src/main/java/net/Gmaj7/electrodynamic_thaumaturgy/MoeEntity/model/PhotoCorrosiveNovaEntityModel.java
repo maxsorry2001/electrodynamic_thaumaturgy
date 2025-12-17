@@ -6,7 +6,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;// Made with Blockb
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.animations.PhotoCorrosiveNovaEntityAnimation;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.animations.Animations;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoCorrosiveNovaEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -40,7 +40,7 @@ public class PhotoCorrosiveNovaEntityModel<T extends PhotoCorrosiveNovaEntity> e
 	@Override
 	public void setupAnim(PhotoCorrosiveNovaEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.bone.getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.animationState, PhotoCorrosiveNovaEntityAnimation.PHOTO_CORROSIVE_NOVA_ANIME, ageInTicks, 1F);
+		this.animate(entity.animationState, Animations.PHOTO_CORROSIVE_NOVA_ANIME, ageInTicks, 1F);
 	}
 
 	@Override
