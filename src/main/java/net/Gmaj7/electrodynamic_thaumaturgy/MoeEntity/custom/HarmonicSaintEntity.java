@@ -149,7 +149,7 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
         magic.get(magicSelect).mobCast(this, target, MoeTabs.getSuperconductingRod());
         this.castTick = 10;
         this.castAnim = random.nextInt(2);
-        PacketDistributor.sendToAllPlayers(new MoePacket.CastTickPacket(this.getId(), this.castTick, this.castAnim));
+        PacketDistributor.sendToAllPlayers(new MoePacket.CastTickPacket(this.getId(), this.castTick));
         this.coolDown[magicSelect] = magic.get(magicSelect).getBaseCooldown();
     }
 

@@ -55,15 +55,15 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
 
         PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition leg = bone.addOrReplaceChild("leg", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition leg = bone.addOrReplaceChild("leg", CubeListBuilder.create(), PartPose.offset(0.0F, -12.0F, 0.0F));
 
-        PartDefinition left = leg.addOrReplaceChild("left", CubeListBuilder.create().texOffs(0, 48).addBox(0.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -12.0F, 0.0F));
+        PartDefinition left = leg.addOrReplaceChild("left", CubeListBuilder.create().texOffs(0, 48).addBox(0.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition right = leg.addOrReplaceChild("right", CubeListBuilder.create().texOffs(0, 32).addBox(-4.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -12.0F, 0.0F));
+        PartDefinition right = leg.addOrReplaceChild("right", CubeListBuilder.create().texOffs(0, 32).addBox(-4.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition arm = bone.addOrReplaceChild("arm", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition arm = bone.addOrReplaceChild("arm", CubeListBuilder.create(), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-        PartDefinition left2 = arm.addOrReplaceChild("left2", CubeListBuilder.create(), PartPose.offset(4.0F, -23.0F, 0.0F));
+        PartDefinition left2 = arm.addOrReplaceChild("left2", CubeListBuilder.create(), PartPose.offset(4.0F, 0.0F, 0.0F));
 
         PartDefinition upper = left2.addOrReplaceChild("upper", CubeListBuilder.create().texOffs(16, 46).addBox(0.0F, -1.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(32, 36).addBox(0.0F, -1.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
@@ -71,16 +71,16 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
         PartDefinition lower = left2.addOrReplaceChild("lower", CubeListBuilder.create().texOffs(16, 36).addBox(0.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(32, 46).addBox(0.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 5.0F, 0.0F));
 
-        PartDefinition right2 = arm.addOrReplaceChild("right2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition right2 = arm.addOrReplaceChild("right2", CubeListBuilder.create(), PartPose.offset(-4.0F, 0.0F, 0.0F));
 
-        PartDefinition upper2 = right2.addOrReplaceChild("upper2", CubeListBuilder.create().texOffs(16, 46).addBox(-8.0F, -24.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(48, 36).addBox(-8.0F, -24.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition upper2 = right2.addOrReplaceChild("upper2", CubeListBuilder.create().texOffs(16, 46).addBox(-4.0F, -1.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(48, 36).addBox(-4.0F, -1.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition lower2 = right2.addOrReplaceChild("lower2", CubeListBuilder.create().texOffs(16, 36).addBox(-8.0F, -18.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(48, 46).addBox(-8.0F, -18.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition lower2 = right2.addOrReplaceChild("lower2", CubeListBuilder.create().texOffs(16, 36).addBox(-4.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(48, 46).addBox(-4.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 5.0F, 0.0F));
 
-        PartDefinition body = bone.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0F, -24.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(24, 16).addBox(-4.0F, -24.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition body = bone.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0F, -6.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(24, 16).addBox(-4.0F, -6.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -18.0F, 0.0F));
 
         PartDefinition head = bone.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -24.0F, 0.0F));
@@ -89,11 +89,12 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(AbstractSovereignEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.applyHeadRotation(netHeadYaw, headPitch);
 
         this.animateWalk(Animations.WALK_SOVEREIGN, limbSwing, limbSwingAmount, 2F, 2.5F);
+        this.animate(entity.castAnimationState, Animations.CAST_1, ageInTicks, 1F);
     }
 
     private void applyHeadRotation(float headYaw, float headPitch){

@@ -212,26 +212,22 @@ public class MoePacket{
     public static class CastTickPacket implements CustomPacketPayload{
         public int entityId;
         public int castTick;
-        public int castAnim;
         public static final CustomPacketPayload.Type<CastTickPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "cast_tick"));
         public static final StreamCodec<RegistryFriendlyByteBuf, CastTickPacket> STREAM_CODEC = CustomPacketPayload.codec(CastTickPacket::write, CastTickPacket::new);
 
-        public CastTickPacket(int entityId, int castTick, int castAnim){
+        public CastTickPacket(int entityId, int castTick){
             this.entityId = entityId;
             this.castTick = castTick;
-            this.castAnim = castAnim;
         }
 
         public CastTickPacket(FriendlyByteBuf buf){
             this.entityId = buf.readInt();
             this.castTick = buf.readInt();
-            this.castAnim = buf.readInt();
         }
 
         public void write(FriendlyByteBuf buf){
             buf.writeInt(entityId);
             buf.writeInt(castTick);
-            buf.writeInt(castAnim);
         }
 
         @Override
@@ -245,7 +241,7 @@ public class MoePacket{
                     Entity entity = context.player().level().getEntity(packet.entityId);
                     if(entity instanceof AbstractSovereignEntity) {
                         ((AbstractSovereignEntity) entity).setCastTick(packet.castTick);
-                        ((AbstractSovereignEntity) entity).setCastAnim(packet.castAnim);
+                        ((AbstractSovereignEntity) entity).castAnimationState.start(entity.tickCount);
                     }
                 }
             });

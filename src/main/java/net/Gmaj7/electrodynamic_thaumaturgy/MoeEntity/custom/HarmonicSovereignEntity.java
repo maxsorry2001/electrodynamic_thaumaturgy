@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -119,7 +120,7 @@ public class HarmonicSovereignEntity extends AbstractSovereignEntity implements 
         magic.get(magicSelect).mobCast(this, target, MoeTabs.getCopperRod());
         this.castTick = 10;
         this.castAnim = random.nextInt(2);
-        PacketDistributor.sendToAllPlayers(new MoePacket.CastTickPacket(this.getId(), this.castTick, this.castAnim));
+        PacketDistributor.sendToAllPlayers(new MoePacket.CastTickPacket(this.getId(), this.castTick));
         this.coolDown[magicSelect] = magic.get(magicSelect).getBaseCooldown();
     }
 
@@ -145,17 +146,4 @@ public class HarmonicSovereignEntity extends AbstractSovereignEntity implements 
         super.aiStep();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
-
-    public boolean isCasting(){
-        return this.castTick > 0;
-    }
-
-    public void setCastAnim(int castAnim) {
-        this.castAnim = castAnim;
-    }
-
-    public int getCastAnim() {
-        return castAnim;
-    }
-
 }
