@@ -1,8 +1,84 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "electrodynamic_thaumaturgy:block/electromagnetic_assembly_table_bottom",
-    "side": "electrodynamic_thaumaturgy:block/electromagnetic_assembly_table_side",
-    "top": "electrodynamic_thaumaturgy:block/electromagnetic_assembly_table_top"
-  }
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "electrodynamic_thaumaturgy:block/elextroomagnetic_assembly_table",
+		"particle": "electrodynamic_thaumaturgy:block/elextroomagnetic_assembly_table"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 10, 16],
+			"faces": {
+				"north": {"uv": [8, 0, 16, 5], "texture": "#0"},
+				"east": {"uv": [8, 0, 16, 5], "texture": "#0"},
+				"south": {"uv": [8, 0, 16, 5], "texture": "#0"},
+				"west": {"uv": [8, 0, 16, 5], "texture": "#0"},
+				"up": {"uv": [8, 8, 0, 0], "texture": "#0"},
+				"down": {"uv": [8, 8, 0, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 10, 5],
+			"to": [7, 11, 15],
+			"faces": {
+				"north": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
+				"east": {"uv": [8, 5, 13, 5.5], "texture": "#0"},
+				"south": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
+				"west": {"uv": [8, 5, 13, 5.5], "texture": "#0"},
+				"up": {"uv": [8.5, 10.5, 8, 5.5], "texture": "#0"},
+				"down": {"uv": [8.5, 5.5, 8, 10.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [1, 10, 4],
+			"to": [15, 11, 5],
+			"faces": {
+				"north": {"uv": [8, 5, 15, 5.5], "texture": "#0"},
+				"east": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
+				"south": {"uv": [8, 5, 15, 5.5], "texture": "#0"},
+				"west": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
+				"up": {"uv": [15, 5.5, 8, 5], "texture": "#0"},
+				"down": {"uv": [15, 5, 8, 5.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [33.75, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [33.75, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_righthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"gui": {
+			"rotation": [45, 45, 0],
+			"translation": [0, 1.25, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"fixed": {
+			"rotation": [-90, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"on_shelf": {
+			"rotation": [90, 0, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "group",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
 }
