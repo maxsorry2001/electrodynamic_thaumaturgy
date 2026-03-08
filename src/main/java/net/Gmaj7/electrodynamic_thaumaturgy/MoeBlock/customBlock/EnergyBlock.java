@@ -83,4 +83,9 @@ public class EnergyBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == MoeBlockEntities.ENERGY_BLOCK_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.ENERGY_BLOCK_BE.get(), EnergyBlockEntity::tick) : null;
     }
+
+    @Override
+    protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
+        return state.is(this) ? true : super.skipRendering(state, adjacentState, direction);
+    }
 }
