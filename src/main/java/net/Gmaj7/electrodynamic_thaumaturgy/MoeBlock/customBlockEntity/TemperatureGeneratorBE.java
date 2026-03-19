@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeTags;
@@ -46,7 +47,25 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     protected boolean canEnergyMake() {
         BlockState blockStateUp = level.getBlockState(getBlockPos().above());
         BlockState blockStateDown = level.getBlockState(getBlockPos().below());
-        return (isCold(blockStateUp) && isHot(blockStateDown)) || (isHot(blockStateUp) && isCold(blockStateDown));
+        BlockState blockState = level.getBlockState(getBlockPos());
+        boolean upHot = isHot(blockStateUp), downHot = isHot(blockStateDown), upCold = isHot(blockStateUp), downCold = isHot(blockStateDown);
+        TemperatureGeneratorBlock.WorkType workType = TemperatureGeneratorBlock.WorkType.NORMAL;
+        if(upHot){
+            if(!downCold) workType = TemperatureGeneratorBlock.WorkType.HOT;
+            else workType = TemperatureGeneratorBlock.WorkType.WORK_B;
+        }
+        else if(upCold){
+            if(!downHot) workType = TemperatureGeneratorBlock.WorkType.COLD;
+            else workType = TemperatureGeneratorBlock.WorkType.HOT;
+        }
+        else {
+            if(downCold) workType = TemperatureGeneratorBlock.WorkType.COLD;
+            else if (downHot) workType = TemperatureGeneratorBlock.WorkType.HOT;
+            else workType = TemperatureGeneratorBlock.WorkType.NORMAL;
+        }
+        if(blockState.getValue(TemperatureGeneratorBlock.WORK_TYPE) != workType)
+            blockState.setValue(TemperatureGeneratorBlock.WORK_TYPE, workType);
+        return (upCold && downHot) || (upHot && downCold);
     }
     private boolean isHot(BlockState blockState) {
         return blockState.is(MoeTags.moeBlockTags.HOT_BLOCK) || (blockState.getBlock() instanceof AbstractFurnaceBlock && blockState.getValue(AbstractFurnaceBlock.LIT));
