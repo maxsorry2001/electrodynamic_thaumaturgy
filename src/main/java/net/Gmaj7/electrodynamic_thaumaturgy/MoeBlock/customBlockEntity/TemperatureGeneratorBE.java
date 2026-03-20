@@ -48,8 +48,8 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
         BlockState blockStateUp = level.getBlockState(getBlockPos().above());
         BlockState blockStateDown = level.getBlockState(getBlockPos().below());
         BlockState blockState = level.getBlockState(getBlockPos());
-        boolean upHot = isHot(blockStateUp), downHot = isHot(blockStateDown), upCold = isHot(blockStateUp), downCold = isHot(blockStateDown);
-        TemperatureGeneratorBlock.WorkType workType = TemperatureGeneratorBlock.WorkType.NORMAL;
+        boolean upHot = isHot(blockStateUp), downHot = isHot(blockStateDown), upCold = isCold(blockStateUp), downCold = isCold(blockStateDown);
+        TemperatureGeneratorBlock.WorkType workType;
         if(upHot){
             if(!downCold) workType = TemperatureGeneratorBlock.WorkType.HOT;
             else workType = TemperatureGeneratorBlock.WorkType.WORK_B;
@@ -63,8 +63,10 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
             else if (downHot) workType = TemperatureGeneratorBlock.WorkType.HOT;
             else workType = TemperatureGeneratorBlock.WorkType.NORMAL;
         }
-        if(blockState.getValue(TemperatureGeneratorBlock.WORK_TYPE) != workType)
+        if(blockState.getValue(TemperatureGeneratorBlock.WORK_TYPE) != workType) {
             blockState.setValue(TemperatureGeneratorBlock.WORK_TYPE, workType);
+            level.setBlock(worldPosition, blockState, 3);
+        }
         return (upCold && downHot) || (upHot && downCold);
     }
     private boolean isHot(BlockState blockState) {
