@@ -3,15 +3,13 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "minecraft:copper_ingot"
-    },
-    "b": {
-      "item": "minecraft:lodestone"
+      "item": "electrodynamic_thaumaturgy:magno_ingot"
     }
   },
   "pattern": [
     " a ",
-    "aba"
+    "a a",
+    " a "
   ],
   "result": {
     "count": 8,

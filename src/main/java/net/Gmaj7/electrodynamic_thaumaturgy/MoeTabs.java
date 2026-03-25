@@ -27,6 +27,8 @@ public class MoeTabs {
             () -> CreativeModeTab.builder().icon(() -> setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())))
                     .title(Component.translatable(MOE_TAB_STRING))
                     .displayItems(((itemDisplayParameters, output) -> {
+                        output.accept(MoeItems.MAGNO_INGOT.get());
+
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));
                         output.accept(MoeItems.EMPTY_PRIMARY_MODULE.get());
@@ -69,25 +71,19 @@ public class MoeTabs {
                         output.accept(MoeItems.ENTROPY_ENHANCE.get());
                         output.accept(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
 
-                        output.accept(MoeItems.IRON_LC.get());
-                        output.accept(MoeItems.GOLD_LC.get());
-                        output.accept(MoeItems.COPPER_LC.get());
+                        output.accept(MoeItems.PRIMARY_LC.get());
+                        output.accept(MoeItems.INTERMEDIATE_LC.get());
+                        output.accept(MoeItems.ADVANCED_LC.get());
                         output.accept(MoeItems.SUPERCONDUCTING_LC.get());
-                        output.accept(MoeItems.IRON_POWER.get());
-                        output.accept(MoeItems.GOLD_POWER.get());
-                        output.accept(MoeItems.COPPER_POWER.get());
+                        output.accept(MoeItems.PRIMARY_POWER.get());
+                        output.accept(MoeItems.INTERMEDIATE_POWER.get());
+                        output.accept(MoeItems.ADVANCED_POWER.get());
                         output.accept(MoeItems.SUPERCONDUCTING_POWER.get());
                         output.accept(MoeItems.CARROT_BATTERY.get());
                         output.accept(MoeItems.POTATO_BATTERY.get());
                         output.accept(MoeItems.SOLUTION_BATTERY.get());
                         output.accept(MoeItems.POWER_BANK.get());
                         output.accept(MoeItems.ENERGY_CORE.get());
-                        output.accept(MoeItems.IRON_SHEET.get());
-                        output.accept(MoeItems.COPPER_SHEET.get());
-                        output.accept(MoeItems.CAPACITOR.get());
-                        output.accept(MoeItems.INDUCTANCE.get());
-                        output.accept(MoeItems.BJT.get());
-                        output.accept(MoeItems.SI.get());
                         output.accept(MoeItems.SUPERCONDUCTING_UPDATE.get());
                         output.accept(MoeItems.GENETIC_RECORDER.get());
 
@@ -137,12 +133,12 @@ public class MoeTabs {
     }
 
     public static final ItemStack getIronRod(){
-        return getRod(MoeItems.IRON_LC.get(), MoeItems.IRON_POWER.get());
+        return getRod(MoeItems.PRIMARY_LC.get(), MoeItems.PRIMARY_POWER.get());
     }
     public static final ItemStack getGoldRod(){
-        return getRod(MoeItems.GOLD_LC.get(), MoeItems.GOLD_POWER.get());
+        return getRod(MoeItems.INTERMEDIATE_LC.get(), MoeItems.INTERMEDIATE_POWER.get());
     }public static final ItemStack getCopperRod(){
-        return getRod(MoeItems.COPPER_LC.get(), MoeItems.COPPER_POWER.get());
+        return getRod(MoeItems.ADVANCED_LC.get(), MoeItems.ADVANCED_POWER.get());
     }public static final ItemStack getSuperconductingRod(){
         return getRod(MoeItems.SUPERCONDUCTING_LC.get(), MoeItems.SUPERCONDUCTING_POWER.get());
     }

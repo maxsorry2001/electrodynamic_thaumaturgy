@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stone": {
+    "has_board": {
       "conditions": {
         "items": [
           {
-            "items": "#c:stones"
+            "items": "electrodynamic_thaumaturgy:magno_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:si"
+        "recipe": "electrodynamic_thaumaturgy:primary_power"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stone"
+      "has_board"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:si"
+      "electrodynamic_thaumaturgy:primary_power"
     ]
   }
 }

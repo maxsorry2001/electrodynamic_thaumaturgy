@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:end_crystal"
+  },
+  "base": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:superconducting_lc"
+  },
+  "template": {
+    "item": "electrodynamic_thaumaturgy:advanced_lc"
+  }
+}

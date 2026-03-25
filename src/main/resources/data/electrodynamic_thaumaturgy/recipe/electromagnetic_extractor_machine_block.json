@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "electrodynamic_thaumaturgy:si"
+      "item": "minecraft:iron_ingot"
     },
     "b": {
       "item": "electrodynamic_thaumaturgy:energy_core"
@@ -12,7 +12,7 @@
       "item": "minecraft:redstone"
     },
     "d": {
-      "item": "electrodynamic_thaumaturgy:iron_sheet"
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [

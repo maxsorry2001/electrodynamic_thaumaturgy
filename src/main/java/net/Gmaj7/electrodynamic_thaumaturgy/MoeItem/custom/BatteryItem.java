@@ -58,7 +58,7 @@ public class BatteryItem extends Item {
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
         if(energyStorage.getEnergyStored() <= 0 && !stack.is(MoeItems.POWER_BANK.get())){
-            level.addFreshEntity(new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(MoeItems.COPPER_SHEET.get())));
+            level.addFreshEntity(new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.COPPER_INGOT)));
             if(stack.is(MoeItems.SOLUTION_BATTERY.get()))
                 level.addFreshEntity(new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.GLASS_BOTTLE)));
             stack.shrink(1);

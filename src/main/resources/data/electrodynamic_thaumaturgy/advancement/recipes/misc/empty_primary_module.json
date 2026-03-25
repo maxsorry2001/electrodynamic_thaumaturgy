@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_sheet": {
+    "has_copper": {
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:copper_sheet"
+            "items": "minecraft:copper_ingot"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_sheet"
+      "has_copper"
     ]
   ],
   "rewards": {

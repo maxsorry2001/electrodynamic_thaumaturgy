@@ -1,20 +1,20 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticTier;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticLevel;
 import net.minecraft.world.item.Item;
 
 public class ElectromagneticTierItem extends Item implements IMoeModuleItem {
-    private final ElectromagneticTier tier;
-    public ElectromagneticTierItem(ElectromagneticTier tier, Properties properties) {
+    private final ElectromagneticLevel tier;
+    public ElectromagneticTierItem(ElectromagneticLevel tier, Properties properties) {
         super(properties);
         this.tier = tier;
     }
 
-    public ElectromagneticTier getTier() {
+    public ElectromagneticLevel getTier() {
         return tier;
     }
 
     public boolean isEmpty(){
-        return tier == ElectromagneticTier.EMPTY;
+        return tier == ElectromagneticLevel.EMPTY;
     }
 }

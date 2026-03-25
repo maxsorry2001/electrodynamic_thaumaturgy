@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "electrodynamic_thaumaturgy:bjt"
+      "item": "minecraft:redstone"
     },
     "b": {
-      "item": "electrodynamic_thaumaturgy:si"
+      "item": "electrodynamic_thaumaturgy:magno_ingot"
     },
     "d": {
       "item": "minecraft:iron_ingot"
@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "electrodynamic_thaumaturgy:iron_power"
+    "id": "electrodynamic_thaumaturgy:primary_power"
   }
 }
