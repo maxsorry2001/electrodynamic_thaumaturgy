@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "electrodynamic_thaumaturgy:si"
+      "item": "minecraft:iron_ingot"
     },
     "b": {
-      "item": "electrodynamic_thaumaturgy:iron_sheet"
+      "item": "minecraft:iron_ingot"
     },
     "c": {
       "item": "electrodynamic_thaumaturgy:energy_core"
     },
     "d": {
-      "item": "electrodynamic_thaumaturgy:iron_lc"
+      "item": "electrodynamic_thaumaturgy:primary_lc"
     },
     "e": {
-      "item": "electrodynamic_thaumaturgy:iron_power"
+      "item": "electrodynamic_thaumaturgy:primary_power"
     }
   },
   "pattern": [

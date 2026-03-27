@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_sheet": {
+    "has_primary_power": {
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:iron_sheet"
+            "items": "electrodynamic_thaumaturgy:primary_power"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:bjt"
+        "recipe": "electrodynamic_thaumaturgy:intermediate_power_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_sheet"
+      "has_primary_power"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:bjt"
+      "electrodynamic_thaumaturgy:intermediate_power_upgrade"
     ]
   }
 }

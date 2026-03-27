@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "electrodynamic_thaumaturgy:item/iron_power"
+    "layer0": "electrodynamic_thaumaturgy:item/primary_power"
   }
 }

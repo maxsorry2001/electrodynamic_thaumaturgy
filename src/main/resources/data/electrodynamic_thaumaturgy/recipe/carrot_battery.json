@@ -3,10 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "electrodynamic_thaumaturgy:iron_sheet"
+      "item": "minecraft:iron_ingot"
     },
     {
-      "item": "electrodynamic_thaumaturgy:copper_sheet"
+      "item": "minecraft:copper_ingot"
     },
     {
       "item": "minecraft:carrot"

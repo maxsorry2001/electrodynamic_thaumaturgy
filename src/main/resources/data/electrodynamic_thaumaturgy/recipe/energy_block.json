@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "a": {
-      "item": "electrodynamic_thaumaturgy:copper_sheet"
+      "item": "minecraft:iron_ingot"
     },
     "b": {
-      "item": "electrodynamic_thaumaturgy:capacitor"
+      "item": "electrodynamic_thaumaturgy:magno_ingot"
     },
     "c": {
       "item": "electrodynamic_thaumaturgy:energy_core"

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:copper_ingot"
+  },
+  "base": {
+    "item": "minecraft:sculk"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:advanced_power"
+  },
+  "template": {
+    "item": "electrodynamic_thaumaturgy:intermediate_power"
+  }
+}

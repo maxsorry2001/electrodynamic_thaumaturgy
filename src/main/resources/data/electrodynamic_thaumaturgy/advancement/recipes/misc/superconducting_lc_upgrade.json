@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_ingot": {
+    "has_advanced_lc": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:iron_ingot"
+            "items": "electrodynamic_thaumaturgy:advanced_lc"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:iron_sheet"
+        "recipe": "electrodynamic_thaumaturgy:superconducting_lc_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_ingot"
+      "has_advanced_lc"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:iron_sheet"
+      "electrodynamic_thaumaturgy:superconducting_lc_upgrade"
     ]
   }
 }
