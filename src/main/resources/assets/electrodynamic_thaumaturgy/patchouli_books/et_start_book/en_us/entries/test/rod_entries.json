@@ -5,8 +5,7 @@
   "pages": [
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:lodestone",
-      "recipe2": "electrodynamic_thaumaturgy:energy_core"
+      "recipe": "electrodynamic_thaumaturgy:energy_core"
     },
     {
       "type": "patchouli:crafting",
@@ -17,35 +16,21 @@
       "type": "patchouli:crafting",
       "recipe": "electrodynamic_thaumaturgy:electromagnetic_assembly_table",
       "text": "patchouli.et.rod_use"
-    },{
-      "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:iron_sheet",
-      "recipe2": "electrodynamic_thaumaturgy:copper_sheet"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:si",
-      "recipe2": "electrodynamic_thaumaturgy:inductance"
+      "recipe": "electrodynamic_thaumaturgy:primary_lc",
+      "recipe2": "electrodynamic_thaumaturgy:primary_power"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:bjt",
-      "recipe2": "electrodynamic_thaumaturgy:capacitor"
+      "recipe": "electrodynamic_thaumaturgy:intermediate_lc",
+      "recipe2": "electrodynamic_thaumaturgy:intermediate_power"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:iron_lc",
-      "recipe2": "electrodynamic_thaumaturgy:iron_power"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:gold_lc",
-      "recipe2": "electrodynamic_thaumaturgy:gold_power"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:copper_lc",
-      "recipe2": "electrodynamic_thaumaturgy:copper_power"
+      "recipe": "electrodynamic_thaumaturgy:advanced_lc",
+      "recipe2": "electrodynamic_thaumaturgy:advanced_power"
     },
     {
       "type": "patchouli:crafting",
