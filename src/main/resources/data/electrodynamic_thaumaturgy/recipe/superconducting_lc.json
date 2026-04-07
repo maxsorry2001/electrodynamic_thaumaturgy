@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "b": {
+      "item": "electrodynamic_thaumaturgy:superconducting_update"
+    },
+    "c": {
+      "item": "electrodynamic_thaumaturgy:advanced_lc"
+    }
+  },
+  "pattern": [
+    "aba",
+    "bcb",
+    "aba"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamic_thaumaturgy:superconducting_lc"
+  }
+}

@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeBiomassGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
@@ -72,6 +73,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
                 }
                 else fullBiomassTime = 0;
             }
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGeneratorBlock.LIT, biomassTime > 0));
             PacketDistributor.sendToAllPlayers(new MoePacket.BiomassSetPacket(biomassTime, fullBiomassTime, getBlockPos()));
         }
         return biomassTime > 0;

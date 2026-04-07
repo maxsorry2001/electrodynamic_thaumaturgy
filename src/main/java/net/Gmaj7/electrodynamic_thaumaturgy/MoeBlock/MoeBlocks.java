@@ -30,13 +30,13 @@ public class MoeBlocks {
             () ->  new TemperatureGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
 
     public static final DeferredBlock<Block> THERMAL_GENERATOR_BLOCK = MOE_BLOCKS.register("thermal_generator_block",
-            () ->  new ThermalGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+            () ->  new ThermalGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
 
     public static final DeferredBlock<Block> BIOMASS_GENERATOR_BLOCK = MOE_BLOCKS.register("biomass_generator_block",
-            () ->  new BiomassGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+            () ->  new BiomassGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
 
     public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_BLOCKS.register("photovoltaic_generator_block",
-            () ->  new PhotovoltaicGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F)));
+            () ->  new PhotovoltaicGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));
 
     public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = MOE_BLOCKS.register("energy_transmission_antenna_block",
             () ->  new EnergyTransmissionAtennaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));

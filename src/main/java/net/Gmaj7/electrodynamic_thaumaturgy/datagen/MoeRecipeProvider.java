@@ -225,8 +225,9 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(recipeOutput);
 
-        // ========== 升阶系统：振荡器 (LC) 和 功放 (Power) ==========
-// 初级振荡器：感磁锭 + 铁锭 + 红石（不变）
+
+        // ========== 振荡器 (LC) 升级 ==========
+// 初级振荡器（不变）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.PRIMARY_LC.get())
                 .pattern(" a ")
                 .pattern("db ")
@@ -238,32 +239,41 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_magno_ingot", has(MoeItems.MAGNO_INGOT.get()))
                 .save(recipeOutput);
 
-// 中级振荡器：在锻造台用初级振荡器 + 紫水晶碎片 + 金锭升级
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(MoeItems.PRIMARY_LC.get()),
-                        Ingredient.of(Items.AMETHYST_SHARD),
-                        Ingredient.of(Items.GOLD_INGOT),
-                        RecipeCategory.MISC, MoeItems.INTERMEDIATE_LC.get())
-                .unlocks("has_primary_lc", has(MoeItems.PRIMARY_LC.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "intermediate_lc_upgrade"));
+// 中级振荡器：初级振荡器 + 紫水晶 + 金锭
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.INTERMEDIATE_LC.get())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', Items.AMETHYST_SHARD)
+                .define('b', Items.GOLD_INGOT)
+                .define('c', MoeItems.PRIMARY_LC.get())
+                .unlockedBy("has_primary_lc", has(MoeItems.PRIMARY_LC.get()))
+                .save(recipeOutput);
 
-// 高级振荡器：在锻造台用中级振荡器 + 幽匿块 + 铜锭升级
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(MoeItems.INTERMEDIATE_LC.get()),
-                        Ingredient.of(Blocks.SCULK.asItem()),
-                        Ingredient.of(Items.COPPER_INGOT),
-                        RecipeCategory.MISC, MoeItems.ADVANCED_LC.get())
-                .unlocks("has_intermediate_lc", has(MoeItems.INTERMEDIATE_LC.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "advanced_lc_upgrade"));
+// 高级振荡器：中级振荡器 + 幽匿块 + 铜锭
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ADVANCED_LC.get())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', Blocks.SCULK.asItem())  // 幽匿块
+                .define('b', Items.COPPER_INGOT)
+                .define('c', MoeItems.INTERMEDIATE_LC.get())
+                .unlockedBy("has_intermediate_lc", has(MoeItems.INTERMEDIATE_LC.get()))
+                .save(recipeOutput);
 
-// 超导振荡器：在锻造台用高级振荡器 + 下界合金锭 + 末影水晶升级
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(MoeItems.ADVANCED_LC.get()),
-                        Ingredient.of(Items.NETHERITE_INGOT),
-                        Ingredient.of(Items.END_CRYSTAL),
-                        RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_LC.get())
-                .unlocks("has_advanced_lc", has(MoeItems.ADVANCED_LC.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "superconducting_lc_upgrade"));
+// 超导振荡器：高级振荡器 + 超导更新组件 + 下界合金锭
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_LC.get())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', Items.NETHERITE_INGOT)
+                .define('b', MoeItems.SUPERCONDUCTING_UPDATE.get())
+                .define('c', MoeItems.ADVANCED_LC.get())
+                .unlockedBy("has_advanced_lc", has(MoeItems.ADVANCED_LC.get()))
+                .save(recipeOutput);
 
-// 功放系列同理（初级、中级、高级、超导）
-// 初级功放：感磁锭 + 铁锭 + 红石
+// ========== 功放 (Power) 升级 ==========
+// 初级功放（不变）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.PRIMARY_POWER.get())
                 .pattern(" a ")
                 .pattern("db ")
@@ -274,29 +284,38 @@ public class MoeRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_board", has(MoeItems.MAGNO_INGOT.get()))
                 .save(recipeOutput);
 
-// 中级功放：锻造台升级
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(MoeItems.PRIMARY_POWER.get()),
-                        Ingredient.of(Items.AMETHYST_SHARD),
-                        Ingredient.of(Items.GOLD_INGOT),
-                        RecipeCategory.MISC, MoeItems.INTERMEDIATE_POWER.get())
-                .unlocks("has_primary_power", has(MoeItems.PRIMARY_POWER.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "intermediate_power_upgrade"));
+// 中级功放：初级功放 + 紫水晶 + 金锭
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.INTERMEDIATE_POWER.get())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', Items.AMETHYST_SHARD)
+                .define('b', Items.GOLD_INGOT)
+                .define('c', MoeItems.PRIMARY_POWER.get())
+                .unlockedBy("has_primary_power", has(MoeItems.PRIMARY_POWER.get()))
+                .save(recipeOutput);
 
-// 高级功放：锻造台升级
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(MoeItems.INTERMEDIATE_POWER.get()),
-                        Ingredient.of(Blocks.SCULK.asItem()),
-                        Ingredient.of(Items.COPPER_INGOT),
-                        RecipeCategory.MISC, MoeItems.ADVANCED_POWER.get())
-                .unlocks("has_intermediate_power", has(MoeItems.INTERMEDIATE_POWER.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "advanced_power_upgrade"));
+// 高级功放：中级功放 + 幽匿块 + 铜锭
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.ADVANCED_POWER.get())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', Blocks.SCULK.asItem())
+                .define('b', Items.COPPER_INGOT)
+                .define('c', MoeItems.INTERMEDIATE_POWER.get())
+                .unlockedBy("has_intermediate_power", has(MoeItems.INTERMEDIATE_POWER.get()))
+                .save(recipeOutput);
 
-// 超导功放：锻造台升级
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(MoeItems.ADVANCED_POWER.get()),
-                        Ingredient.of(Items.NETHERITE_INGOT),
-                        Ingredient.of(Items.END_CRYSTAL),
-                        RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_POWER.get())
-                .unlocks("has_advanced_power", has(MoeItems.ADVANCED_POWER.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "superconducting_power_upgrade"));
+// 超导功放：高级功放 + 超导更新组件 + 末影水晶
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_POWER.get())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', Items.END_CRYSTAL)
+                .define('b', MoeItems.SUPERCONDUCTING_UPDATE.get())
+                .define('c', MoeItems.ADVANCED_POWER.get())
+                .unlockedBy("has_advanced_power", has(MoeItems.ADVANCED_POWER.get()))
+                .save(recipeOutput);
 
         // ========== 空模块（初级/中级/高级） ==========
         // 初级空模块：铜板（假设铜板为铜锭，此处用铜锭）

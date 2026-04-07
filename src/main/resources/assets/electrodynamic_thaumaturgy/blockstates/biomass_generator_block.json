@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "electrodynamic_thaumaturgy:block/biomass_generator_block"
+    "lit=true": {
+      "model": "electrodynamic_thaumaturgy:block/biomass_generator_block_true"
+    },
+    "lit=false":{
+      "model": "electrodynamic_thaumaturgy:block/biomass_generator_block_false"
     }
   }
 }
