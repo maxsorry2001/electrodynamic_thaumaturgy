@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
@@ -20,7 +21,7 @@ public class TickEvent {
 
     @SubscribeEvent
     public static void toolTip(ItemTooltipEvent event){
-        if(event.getItemStack().is(MoeItems.ENERGY_TRANSMISSION_ANTENNA.get())){
+        if(event.getItemStack().is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem())){
             event.getToolTip().add(Component.translatable("advancements.electrodynamic_thaumaturgy.energy_send.description"));
         }
         if(event.getItemStack().is(MoeItems.GENETIC_RECORDER.get()) && event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE) != null && event.getItemStack().get(MoeDataComponentTypes.ENTITY_DATA) != null)

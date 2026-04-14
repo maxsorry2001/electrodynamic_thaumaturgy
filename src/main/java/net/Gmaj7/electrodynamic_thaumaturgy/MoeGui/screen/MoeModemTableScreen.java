@@ -7,12 +7,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_modem_table.png");
-    protected static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_modem_table.png");
+    protected static final WidgetSprites SPRITES = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
 
     public MoeModemTableScreen(MoeModemTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

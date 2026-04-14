@@ -6,7 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.FrequencyDivisionAr
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class FrequencyDivisionArrowRender extends ArrowRenderer<FrequencyDivisionArrowEntity> {
     public FrequencyDivisionArrowRender(EntityRendererProvider.Context context) {
@@ -19,7 +19,7 @@ public class FrequencyDivisionArrowRender extends ArrowRenderer<FrequencyDivisio
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FrequencyDivisionArrowEntity frequencyDivisionArrowEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/frequency_division_arrow_entity.png");
+    public Identifier getTextureLocation(FrequencyDivisionArrowEntity frequencyDivisionArrowEntity) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/frequency_division_arrow_entity.png");
     }
 }

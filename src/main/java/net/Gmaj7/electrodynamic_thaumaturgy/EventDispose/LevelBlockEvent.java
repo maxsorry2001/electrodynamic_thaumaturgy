@@ -25,7 +25,7 @@ public class LevelBlockEvent {
         if(blockEntity instanceof EnergyBlockEntity){
             ItemStack itemStack = list.get(0).getItem();
             IEnergyStorage energyStorageBlock = ((EnergyBlockEntity) blockEntity).getEnergy();
-            IEnergyStorage energyStorageItem = itemStack.getCapability(Capabilities.EnergyStorage.ITEM);
+            IEnergyStorage energyStorageItem = itemStack.getCapability(Capabilities.Energy.ITEM);
             energyStorageItem.receiveEnergy(energyStorageBlock.getEnergyStored(), false);
         }
     }

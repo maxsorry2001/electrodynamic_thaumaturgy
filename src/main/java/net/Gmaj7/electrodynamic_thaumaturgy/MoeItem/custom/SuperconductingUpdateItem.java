@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -14,13 +15,13 @@ public class SuperconductingUpdateItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         if(usedHand == InteractionHand.MAIN_HAND && player.getOffhandItem().getItem() instanceof ElectromagneticTierItem item){
             if(item instanceof LcOscillatorModuleItem) player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(MoeItems.SUPERCONDUCTING_LC.get()));
             else if(item instanceof PowerAmplifierItem) player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(MoeItems.SUPERCONDUCTING_POWER.get()));
             player.swing(usedHand);
-            return InteractionResultHolder.success(player.getMainHandItem());
+            return InteractionResult.SUCCESS;
         }
-        else return InteractionResultHolder.fail(player.getItemInHand(usedHand));
+        else return InteractionResult.FAIL;
     }
 }

@@ -8,12 +8,12 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MoeElectromagneticExtractorBlockScreen extends AbstractContainerScreen<MoeElectromagneticExtractorBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_extractor_machine_block.png");
-    protected static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_extractor_machine_block.png");
+    protected static final WidgetSprites SPRITES = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
 
     public MoeElectromagneticExtractorBlockScreen(MoeElectromagneticExtractorBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

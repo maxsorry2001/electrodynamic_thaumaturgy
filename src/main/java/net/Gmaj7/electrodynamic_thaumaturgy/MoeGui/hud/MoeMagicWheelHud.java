@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class MoeMagicWheelHud implements LayeredDraw.Layer {
     public static MoeMagicWheelHud instance = new MoeMagicWheelHud();
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
     public boolean active;
     private int selection;
     private InteractionHand useHand;

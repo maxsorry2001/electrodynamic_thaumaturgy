@@ -7,13 +7,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class MoeElectromagneticDriverBlockScreen extends AbstractContainerScreen<MoeElectromagneticDriverBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/one_item_machine.png");
-    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/one_item_machine.png");
+    Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
 
     public MoeElectromagneticDriverBlockScreen(MoeElectromagneticDriverBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

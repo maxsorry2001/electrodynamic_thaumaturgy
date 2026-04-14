@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class PhotoCorrosiveNovaEntityRender extends EntityRenderer<PhotoCorrosiveNovaEntity> {
     private final PhotoCorrosiveNovaEntityModel photoCorrosiveNovaEntityModel;
@@ -19,8 +19,8 @@ public class PhotoCorrosiveNovaEntityRender extends EntityRenderer<PhotoCorrosiv
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/photo_corrosive_nova_entity.png");
+    public Identifier getTextureLocation(PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/photo_corrosive_nova_entity.png");
     }
 
     @Override

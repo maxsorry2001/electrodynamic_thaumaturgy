@@ -13,11 +13,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity> {
-    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
-    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnetic_recombination_cannon_beacon_entity.png");
+    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
+    private static final Identifier LIGHT = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnetic_recombination_cannon_beacon_entity.png");
     private final ModelPart body;
     public MagneticRecombinationCannonBeaconRender(EntityRendererProvider.Context context) {
         super(context);
@@ -26,9 +26,9 @@ public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<Magne
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity) {
+    public Identifier getTextureLocation(MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity) {
         if(magneticRecombinationCannonBeaconEntity.getStartTime() > 100) return LIGHT;
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 
     @Override

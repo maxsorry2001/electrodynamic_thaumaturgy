@@ -26,7 +26,7 @@ public class EnergyBlockItem extends BlockItem {
         BlockEntity blockEntity = context.getLevel().getBlockEntity(context.getClickedPos());
         if(blockEntity instanceof EnergyBlockEntity && flag){
             ItemStack itemStack = context.getItemInHand();
-            ((EnergyBlockEntity) blockEntity).setEnergy(itemStack.getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored());
+            ((EnergyBlockEntity) blockEntity).setEnergy(itemStack.getCapability(Capabilities.Energy.ITEM).getEnergyStored());
         }
         return flag;
     }
@@ -38,15 +38,15 @@ public class EnergyBlockItem extends BlockItem {
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
         return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
@@ -54,7 +54,7 @@ public class EnergyBlockItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
+        IEnergyStorage energyStorage = stack.getCapability(Capabilities.Energy.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
     }

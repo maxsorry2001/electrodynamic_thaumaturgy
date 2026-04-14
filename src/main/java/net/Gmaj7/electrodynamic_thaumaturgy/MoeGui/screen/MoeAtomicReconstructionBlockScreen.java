@@ -7,14 +7,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<MoeAtomicReconstructionBlockMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block.png");
-    ResourceLocation energyTexture = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
-    ResourceLocation progressTexture = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block_progress.png");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block.png");
+    Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier progressTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block_progress.png");
 
     public MoeAtomicReconstructionBlockScreen(MoeAtomicReconstructionBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

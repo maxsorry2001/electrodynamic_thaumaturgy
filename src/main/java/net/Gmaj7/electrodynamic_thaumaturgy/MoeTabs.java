@@ -92,7 +92,7 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
                         output.accept(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
                         output.accept(MoeBlocks.ENERGY_BLOCK);
-                        output.accept(setFullEnergyItem(new ItemStack(MoeItems.ENERGY_BLOCK.get())));
+                        output.accept(setFullEnergyItem(new ItemStack(MoeBlocks.ENERGY_BLOCK.get())));
                         output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.BIOMASS_GENERATOR_BLOCK);

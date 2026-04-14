@@ -39,17 +39,17 @@ public class DataLoadHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
                 MoeItems.ELECTROMAGNETIC_ROD.get());
-        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
                 MoeItems.POTATO_BATTERY.get(),
                 MoeItems.CARROT_BATTERY.get(),
                 MoeItems.SOLUTION_BATTERY.get());
-        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
                 MoeItems.POWER_BANK.get());
-        event.registerItem(Capabilities.EnergyStorage.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
-                MoeItems.ENERGY_BLOCK.get());
-        event.registerBlock(Capabilities.EnergyStorage.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
+                MoeBlocks.ENERGY_BLOCK.get());
+        event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),
                 MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(),

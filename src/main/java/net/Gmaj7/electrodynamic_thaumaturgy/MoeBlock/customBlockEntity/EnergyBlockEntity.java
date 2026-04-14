@@ -71,8 +71,8 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyBlockEntity energyBlockEntity){
         IItemHandler itemHandler = energyBlockEntity.getItemHandler();
         IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
-        IEnergyStorage inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.EnergyStorage.ITEM);
-        IEnergyStorage outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.EnergyStorage.ITEM);
+        IEnergyStorage inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.Energy.ITEM);
+        IEnergyStorage outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.Energy.ITEM);
         if(outStorage != null && !itemHandler.getStackInSlot(0).isEmpty() && outStorage.canReceive()){
             int canOut = outStorage.getMaxEnergyStored() - outStorage.getEnergyStored();
             if(canOut < energyBlockEntity.tickEnergyTranslate)

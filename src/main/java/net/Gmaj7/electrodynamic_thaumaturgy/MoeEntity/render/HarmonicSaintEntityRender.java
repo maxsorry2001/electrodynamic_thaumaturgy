@@ -8,11 +8,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.WitchItemLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.monster.Witch;
 
 public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, HarmonicSovereignEntityModel<HarmonicSaintEntity>> {
-    private static final ResourceLocation TEX_LOCATION = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/mob/harmonic_saint.png");
+    private static final Identifier TEX_LOCATION = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/mob/harmonic_saint.png");
 
     public HarmonicSaintEntityRender(EntityRendererProvider.Context p_174443_) {
         super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(HarmonicSovereignEntityModel.LAYER_LOCATION)), 0.5F);
@@ -23,7 +23,7 @@ public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, 
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 
-    public ResourceLocation getTextureLocation(HarmonicSaintEntity entity) {
+    public Identifier getTextureLocation(HarmonicSaintEntity entity) {
         return TEX_LOCATION;
     }
 

@@ -7,15 +7,11 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 public record MagicLithographyRecipe(Ingredient inputItem, ItemStack output) implements Recipe<MagicLithographyRecipeInput> {
 
-    @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
         list.add(inputItem);
@@ -28,33 +24,43 @@ public record MagicLithographyRecipe(Ingredient inputItem, ItemStack output) imp
     }
 
     @Override
-    public ItemStack assemble(MagicLithographyRecipeInput magicLithographyRecipeInput, HolderLookup.Provider provider) {
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public String group() {
+        return "";
+    }
+
+    @Override
+    public ItemStack assemble(MagicLithographyRecipeInput magicLithographyRecipeInput) {
         return output.copy();
     }
 
     @Override
-    public boolean canCraftInDimensions(int i, int i1) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
-        return output;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends Recipe<MagicLithographyRecipeInput>> getSerializer() {
         return MoeRecipes.MAGIC_LITHOGRAPHY_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<MagicLithographyRecipeInput>> getType() {
         return MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get();
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.create(inputItem);
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
     }
 
     public static class Serializer implements RecipeSerializer<MagicLithographyRecipe>{
         public static final MapCodec<MagicLithographyRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-                Ingredient.CODEC_NONEMPTY.fieldOf("baseboard").forGetter(MagicLithographyRecipe::inputItem),
+                Ingredient.CODEC.fieldOf("baseboard").forGetter(MagicLithographyRecipe::inputItem),
                 ItemStack.CODEC.fieldOf("result").forGetter(MagicLithographyRecipe::output)
         ).apply(i, MagicLithographyRecipe::new));
 

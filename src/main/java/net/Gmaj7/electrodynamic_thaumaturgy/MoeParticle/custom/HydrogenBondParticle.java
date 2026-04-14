@@ -5,11 +5,12 @@ import net.minecraft.client.particle.BubbleParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
 
 public class HydrogenBondParticle extends BubbleParticle {
-    protected HydrogenBondParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-        super(level, x, y, z, xSpeed, ySpeed, zSpeed);
+    protected HydrogenBondParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, TextureAtlasSprite sprite) {
+        super(level, x, y, z, xSpeed, ySpeed, zSpeed, sprite);
     }
 
     @Override

@@ -46,12 +46,12 @@ public class MagicCastItem extends Item {
         ItemStack typeStack = getMagic(itemStack);
         int energy = itemStack.get(MoeDataComponentTypes.MOE_ENERGY.get());
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()
-                && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(item)
+                && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(typeStack)
                 && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)
                 && item.success(player, itemStack)) {
             item.cast(player, itemStack);
             itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - (int)(item.getBaseEnergyCost() * MoeFunction.getEfficiency(itemStack)));
-            player.getCooldowns().addCooldown(item, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
+            player.getCooldowns().addCooldown(typeStack, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
             player.swing(usedHand);
             return InteractionResult.CONSUME;
         }
@@ -104,7 +104,7 @@ public class MagicCastItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(getTranslate(stack));
-        IEnergyStorage energyStorage = stack.getCapability(Capabilities.EnergyStorage.ITEM);
+        IEnergyStorage energyStorage = stack.getCapability(Capabilities.Energy.ITEM);
         int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         if(stack.has(MoeDataComponentTypes.LINK_POS)){
@@ -121,20 +121,20 @@ public class MagicCastItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored() < stack.getCapability(Capabilities.EnergyStorage.ITEM).getMaxEnergyStored();
+        return stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored() < stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
         return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.EnergyStorage.ITEM).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.EnergyStorage.ITEM).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }

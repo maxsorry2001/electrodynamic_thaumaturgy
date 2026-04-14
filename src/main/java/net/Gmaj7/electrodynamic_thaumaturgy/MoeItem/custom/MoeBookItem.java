@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom;
 
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ public class MoeBookItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         return super.use(level, player, usedHand);
     }
 }

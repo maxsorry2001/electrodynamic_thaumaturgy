@@ -69,7 +69,7 @@ public class DamageEvent {
             if(enhancementData != null) livingEntity.heal(event.getNewDamage() * 0.2F * enhancementData.lifeExtraction());
         }
         if(sourceEntity instanceof HarmonicSaintEntity && ((HarmonicSaintEntity) sourceEntity).getOwner() instanceof Player){
-            eventTarget.setLastHurtByPlayer((Player) ((HarmonicSaintEntity) sourceEntity).getOwner());
+            eventTarget.setLastHurtByPlayer((Player) ((HarmonicSaintEntity) sourceEntity).getOwner(), 100);
         }
         double corrosion = eventTarget.getAttribute(MoeAttributes.CORROSION).getValue();
         if(corrosion > 1) event.setNewDamage((float) (event.getNewDamage() * corrosion));

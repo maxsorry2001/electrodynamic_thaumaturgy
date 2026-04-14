@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class PulsedPlasmaEntityRender extends EntityRenderer<PulsedPlasmaEntity> {
@@ -21,8 +21,8 @@ public class PulsedPlasmaEntityRender extends EntityRenderer<PulsedPlasmaEntity>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PulsedPlasmaEntity pulsedPlasmaEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/pulsed_plasma_entity.png");
+    public Identifier getTextureLocation(PulsedPlasmaEntity pulsedPlasmaEntity) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/pulsed_plasma_entity.png");
     }
 
     @Override

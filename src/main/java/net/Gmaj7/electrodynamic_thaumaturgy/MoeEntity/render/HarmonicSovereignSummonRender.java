@@ -13,11 +13,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class HarmonicSovereignSummonRender extends ArrowRenderer<HarmonicSovereignSummonEntity> {
-    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
-    private static final ResourceLocation LIGHT = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/harmonic_sovereign_summon_entity.png");
+    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
+    private static final Identifier LIGHT = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/harmonic_sovereign_summon_entity.png");
     private final ModelPart body;
     public HarmonicSovereignSummonRender(EntityRendererProvider.Context context) {
         super(context);
@@ -26,7 +26,7 @@ public class HarmonicSovereignSummonRender extends ArrowRenderer<HarmonicSoverei
     }
 
     @Override
-    public ResourceLocation getTextureLocation(HarmonicSovereignSummonEntity harmonicSovereignSummonEntity) {
+    public Identifier getTextureLocation(HarmonicSovereignSummonEntity harmonicSovereignSummonEntity) {
         return LIGHT;
     }
 

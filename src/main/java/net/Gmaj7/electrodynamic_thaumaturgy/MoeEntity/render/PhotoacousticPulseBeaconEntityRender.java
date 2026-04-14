@@ -6,7 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoacousticPulseB
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class PhotoacousticPulseBeaconEntityRender extends ArrowRenderer<PhotoacousticPulseBeaconEntity> {
     public PhotoacousticPulseBeaconEntityRender(EntityRendererProvider.Context context) {
@@ -19,7 +19,7 @@ public class PhotoacousticPulseBeaconEntityRender extends ArrowRenderer<Photoaco
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
+    public Identifier getTextureLocation(PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
     }
 }

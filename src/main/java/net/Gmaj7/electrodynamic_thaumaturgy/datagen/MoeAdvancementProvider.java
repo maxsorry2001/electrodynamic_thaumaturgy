@@ -12,7 +12,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
@@ -37,15 +37,15 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                     new ItemStack(MoeItems.ELECTROMAGNETIC_ROD.get()),
                     Component.translatable("advancements.electrodynamic_thaumaturgy.root.title"),
                     Component.translatable("advancements.electrodynamic_thaumaturgy.root.description"),
-                    ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/advancement.png"),
+                    Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/advancement.png"),
                     AdvancementType.GOAL,
                     true,
                     true,
                     false
             );
             builder.addCriterion("join", PlayerTrigger.TriggerInstance.tick());
-            builder.rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "advancement/et_start_book"))));
-            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "normal/root"), existingFileHelper);
+            builder.rewards(AdvancementRewards.Builder.recipe(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "lodestone")).addLootTable(ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "advancement/et_start_book"))));
+            builder.save(consumer, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "normal/root"), existingFileHelper);
 
             register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENERGY_CORE.get());
             register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ELECTROMAGNETIC_ROD.get());
@@ -57,7 +57,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             register(MoeBlocks.ENERGY_BLOCK, "normal", "generator", "energy_save", "has_energy_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ENERGY_BLOCK);
             register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE, "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
             register(MoeItems.EFFICIENCY_ENHANCE.get(), "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, consumer, existingFileHelper, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
-            register(MoeItems.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(), "normal", "energy_core", "machine_block", "has_machine", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK, MoeBlocks.NITROGEN_HARVESTER_BLOCK, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
+            register(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(), "normal", "energy_core", "machine_block", "has_machine", AdvancementType.TASK, consumer, existingFileHelper, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK, MoeBlocks.NITROGEN_HARVESTER_BLOCK, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
 
         }
 
@@ -80,7 +80,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
                 list.add(criterion + "_" + i);
             }
             builder.requirements(AdvancementRequirements.anyOf(list));
-            builder.save(consumer, ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, nameSpace + "/" + name), existingFileHelper);
+            builder.save(consumer, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, nameSpace + "/" + name), existingFileHelper);
         }
 
     }

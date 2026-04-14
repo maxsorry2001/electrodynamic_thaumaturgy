@@ -6,7 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagmaLightingBeacon
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MagmaLightingBeaconRender extends ArrowRenderer<MagmaLightingBeaconEntity> {
     public MagmaLightingBeaconRender(EntityRendererProvider.Context context) {
@@ -14,8 +14,8 @@ public class MagmaLightingBeaconRender extends ArrowRenderer<MagmaLightingBeacon
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MagmaLightingBeaconEntity magmaLightingBeaconEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+    public Identifier getTextureLocation(MagmaLightingBeaconEntity magmaLightingBeaconEntity) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 
     @Override

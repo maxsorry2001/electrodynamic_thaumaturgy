@@ -6,7 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagneticFluxCascade
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MagneticFluxCascadeRender extends ArrowRenderer<MagneticFluxCascadeEntity> {
     public MagneticFluxCascadeRender(EntityRendererProvider.Context context) {
@@ -19,7 +19,7 @@ public class MagneticFluxCascadeRender extends ArrowRenderer<MagneticFluxCascade
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MagneticFluxCascadeEntity magneticFluxCascadeEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
+    public Identifier getTextureLocation(MagneticFluxCascadeEntity magneticFluxCascadeEntity) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
     }
 }

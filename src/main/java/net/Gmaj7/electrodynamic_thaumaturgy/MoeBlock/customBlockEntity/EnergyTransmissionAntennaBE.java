@@ -67,7 +67,7 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
             case NORTH -> blockPos = getBlockPos().south();
             case SOUTH -> blockPos = getBlockPos().north();
         }
-        return level.getCapability(Capabilities.EnergyStorage.BLOCK, blockPos, direction);
+        return level.getCapability(Capabilities.Energy.BLOCK, blockPos, direction);
     }
 
     @Override

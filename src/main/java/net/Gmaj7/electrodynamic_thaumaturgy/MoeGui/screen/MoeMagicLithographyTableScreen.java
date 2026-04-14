@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,9 +17,9 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.List;
 
 public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeMagicLithographyTableMenu> {
-    ResourceLocation backGrand = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_table.png");
-    private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/lithography_table/scroller");
-    private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/lithography_table/scroller_disabled");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_table.png");
+    private static final Identifier SCROLLER_SPRITE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/lithography_table/scroller");
+    private static final Identifier SCROLLER_DISABLED_SPRITE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/lithography_table/scroller_disabled");
     private static final int SCROLLER_WIDTH = 12;
     private static final int SCROLLER_HEIGHT = 15;
     private static final int RECIPES_COLUMNS = 4;
@@ -121,8 +121,8 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
         int j = this.topPos;
         guiGraphics.blit(backGrand, i, j, 0, 0, this.imageWidth, this.imageHeight);
         int k = (int)(41.0F * this.scrollOffs);
-        ResourceLocation resourcelocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(resourcelocation, i + 119, j + 15 + k, 12, 15);
+        Identifier Identifier = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
+        guiGraphics.blitSprite(Identifier, i + 119, j + 15 + k, 12, 15);
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
         int j1 = this.startIndex + 12;
