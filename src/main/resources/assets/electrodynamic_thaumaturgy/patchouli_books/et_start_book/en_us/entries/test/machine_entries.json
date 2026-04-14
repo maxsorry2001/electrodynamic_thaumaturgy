@@ -25,8 +25,8 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:nitrogen_harvester_block",
-      "text": "patchouli.et.generator_entries.nitrogen_harvester_block"
+      "recipe": "electrodynamic_thaumaturgy:nitrogen_harvester_machine_block",
+      "text": "patchouli.et.generator_entries.nitrogen_harvester_machine_block"
     },
     {
       "type": "patchouli:crafting",

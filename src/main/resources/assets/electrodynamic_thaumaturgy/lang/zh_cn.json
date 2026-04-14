@@ -78,7 +78,7 @@
   "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "生物克隆器",
   "block.electrodynamic_thaumaturgy.electromagnetic_extractor_machine_block": "电磁采掘器",
   "block.electrodynamic_thaumaturgy.atomic_reconstruction_machine_block": "原子重构器",
-  "block.electrodynamic_thaumaturgy.nitrogen_harvester_block": "固氮采集器",
+  "block.electrodynamic_thaumaturgy.nitrogen_harvester_machine_block": "固氮采集器",
   "block.electrodynamic_thaumaturgy.harmonic_core_block": "谐波核心",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "电磁射线",
@@ -210,6 +210,6 @@
   "patchouli.et.generator_entries.bio_replication_vat_machine_block": "生成机器中放入的基因刻录器中刻录的生物",
   "patchouli.et.generator_entries.genetic_recorder": "对着一个生物使用即可刻录这个生物的信息用于克隆",
   "patchouli.et.generator_entries.electromagnetic_extractor_machine_block": "向发射面朝向发射电磁波，以照射到的方块为中心按设定的宽度挖掘方块。同时可以设定挖掘深度",
-  "patchouli.et.generator_entries.nitrogen_harvester_block": "固氮采集器可以加快以自身为中心周围8格作物的生长并自动收割。收割时会获得双倍产出",
+  "patchouli.et.generator_entries.nitrogen_harvester_machine_block": "固氮采集器可以加快以自身为中心周围8格作物的生长并自动收割。收割时会获得双倍产出",
   "patchouli.et.generator_entries.atomic_reconstruction_machine_block": "可以将8个石头重组为一个你需要的矿物"
 }

@@ -59,7 +59,7 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ATOMIC_RECONSTRUCTION_MACHINE_BLOCK = MOE_BLOCKS.register("atomic_reconstruction_machine_block",
             () -> new AtomicReconstructionBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = MOE_BLOCKS.register("nitrogen_harvester_block",
+    public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = MOE_BLOCKS.register("nitrogen_harvester_machine_block",
             () -> new NitrogenHarvesterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
     public static final DeferredBlock<Block> LIGHT_AIR = MOE_BLOCKS.register("light_air",
