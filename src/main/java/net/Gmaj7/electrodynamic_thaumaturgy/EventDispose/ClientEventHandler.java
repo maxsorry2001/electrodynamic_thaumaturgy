@@ -17,7 +17,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeKeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeKeyState;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -27,7 +27,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 
 public class ClientEventHandler {
-    @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
     public static class busEvent{
         @SubscribeEvent
         public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
@@ -66,9 +66,9 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerHud(RegisterGuiLayersEvent event){
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "type_show"), new MoeShowMagicHud());
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_select"), MoeMagicWheelHud.instance);
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "protect_show"), new MoeProtectHud());
+            event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "type_show"), new MoeShowMagicHud());
+            event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_select"), MoeMagicWheelHud.instance);
+            event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "protect_show"), new MoeProtectHud());
         }
     }
 

@@ -1,25 +1,30 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.CoulombDomainBeaconEntity;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
+import net.minecraft.resources.Identifier;
 
-public class CoulombDomainRender extends ArrowRenderer<CoulombDomainBeaconEntity> {
+public class CoulombDomainRender extends ArrowRenderer<CoulombDomainBeaconEntity, ArrowRenderState> {
     public CoulombDomainRender(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CoulombDomainBeaconEntity coulombDomainBeaconEntity) {
-        return ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+    public ArrowRenderState createRenderState() {
+        return new ArrowRenderState();
     }
 
     @Override
-    public void render(CoulombDomainBeaconEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    protected Identifier getTextureLocation(ArrowRenderState arrowRenderState) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+    }
 
+    @Override
+    public boolean shouldRender(CoulombDomainBeaconEntity entity, Frustum culler, double camX, double camY, double camZ) {
+        return true;
     }
 }

@@ -12,13 +12,13 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLithographyRecipe> {
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_lithography");
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_gui.png");
+    public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_lithography");
+    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_gui.png");
     public static final RecipeType<MagicLithographyRecipe> RECIPE_TYPE = new RecipeType<>(UID, MagicLithographyRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;
@@ -36,6 +36,16 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
     @Override
     public Component getTitle() {
         return Component.translatable("magic_lithography");
+    }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
     }
 
     @Override

@@ -2,7 +2,9 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
@@ -14,54 +16,66 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Function;
+
 public class MoeBlocks {
     public static final DeferredRegister.Blocks MOE_BLOCKS = DeferredRegister.createBlocks(ElectrodynamicThaumaturgy.MODID);
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_ASSEMBLY_TABLE = MOE_BLOCKS.register("electromagnetic_assembly_table",
-            () -> new ElectromagneticAssemblyTable(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_ASSEMBLY_TABLE = registerBlock("electromagnetic_assembly_table",
+            (properties) -> new ElectromagneticAssemblyTable(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_MODEM_TABLE = MOE_BLOCKS.register("electromagnetic_modem_table",
-            () -> new ElectromagneticModemTable(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_MODEM_TABLE = registerBlock("electromagnetic_modem_table",
+            (properties) -> new ElectromagneticModemTable(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> ENERGY_BLOCK = MOE_BLOCKS.register("energy_block",
-            () ->  new EnergyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
+    public static final DeferredBlock<Block> ENERGY_BLOCK = registerBlock("energy_block",
+            (properties) ->  new EnergyBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
 
-    public static final DeferredBlock<Block> TEMPERATURE_GENERATOR_BLOCK = MOE_BLOCKS.register("temperature_generator_block",
-            () ->  new TemperatureGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
+    public static final DeferredBlock<Block> TEMPERATURE_GENERATOR_BLOCK = registerBlock("temperature_generator_block",
+            (properties) ->  new TemperatureGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
 
-    public static final DeferredBlock<Block> THERMAL_GENERATOR_BLOCK = MOE_BLOCKS.register("thermal_generator_block",
-            () ->  new ThermalGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
+    public static final DeferredBlock<Block> THERMAL_GENERATOR_BLOCK = registerBlock("thermal_generator_block",
+            (properties) ->  new ThermalGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
 
-    public static final DeferredBlock<Block> BIOMASS_GENERATOR_BLOCK = MOE_BLOCKS.register("biomass_generator_block",
-            () ->  new BiomassGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
+    public static final DeferredBlock<Block> BIOMASS_GENERATOR_BLOCK = registerBlock("biomass_generator_block",
+            (properties) ->  new BiomassGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()));
 
-    public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR_BLOCK = MOE_BLOCKS.register("photovoltaic_generator_block",
-            () ->  new PhotovoltaicGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));
+    public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR_BLOCK = registerBlock("photovoltaic_generator_block",
+            (properties) ->  new PhotovoltaicGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));
 
-    public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = MOE_BLOCKS.register("energy_transmission_antenna_block",
-            () ->  new EnergyTransmissionAtennaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));
+    public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = registerBlock("energy_transmission_antenna_block",
+            (properties) ->  new EnergyTransmissionAtennaBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()));
 
-    public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = MOE_BLOCKS.register("magic_lithography_table_block",
-            () -> new MagicLithographyTableBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
+    public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = registerBlock("magic_lithography_table_block",
+            (properties) -> new MagicLithographyTableBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)));
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_driver_machine_block",
-            () -> new ElectromagneticDriverBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = registerBlock("electromagnetic_driver_machine_block",
+            (properties) -> new ElectromagneticDriverBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE_BLOCK = MOE_BLOCKS.register("bio_replication_vat_machine_block",
-            () -> new BioReplicationVatMachineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE_BLOCK = registerBlock("bio_replication_vat_machine_block",
+            (properties) -> new BioReplicationVatMachineBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = MOE_BLOCKS.register("harmonic_core_block",
-            () -> new HarmonicCoreBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)));
+    public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = registerBlock("harmonic_core_block",
+            (properties) -> new HarmonicCoreBlock(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)));
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = MOE_BLOCKS.register("electromagnetic_extractor_machine_block",
-            () -> new ElectromagneticExtractorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = registerBlock("electromagnetic_extractor_machine_block",
+            (properties) -> new ElectromagneticExtractorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> ATOMIC_RECONSTRUCTION_MACHINE_BLOCK = MOE_BLOCKS.register("atomic_reconstruction_machine_block",
-            () -> new AtomicReconstructionBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> ATOMIC_RECONSTRUCTION_MACHINE_BLOCK = registerBlock("atomic_reconstruction_machine_block",
+            (properties) -> new AtomicReconstructionBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = MOE_BLOCKS.register("nitrogen_harvester_machine_block",
-            () -> new NitrogenHarvesterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
+    public static final DeferredBlock<Block> NITROGEN_HARVESTER_BLOCK = registerBlock("nitrogen_harvester_machine_block",
+            (properties) -> new NitrogenHarvesterBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)));
 
-    public static final DeferredBlock<Block> LIGHT_AIR = MOE_BLOCKS.register("light_air",
-            () -> new AirBlock(BlockBehaviour.Properties.of().air().lightLevel(p -> 15).replaceable().noCollission().noLootTable()));
+    public static final DeferredBlock<Block> LIGHT_AIR = registerBlock("light_air",
+            (properties) -> new AirBlock(properties.air().lightLevel(p -> 15).replaceable().noCollision().noLootTable()));
+
+    private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function){
+        DeferredBlock<T> toReturn = MOE_BLOCKS.registerBlock(name, function);
+        registerBlockItem(name, toReturn);
+        return toReturn;
+    }
+
+    private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block){
+        MoeItems.MOE_ITEM.registerItem(name, properties -> new BlockItem(block.get(), properties.useBlockDescriptionPrefix()));
+    }
 }

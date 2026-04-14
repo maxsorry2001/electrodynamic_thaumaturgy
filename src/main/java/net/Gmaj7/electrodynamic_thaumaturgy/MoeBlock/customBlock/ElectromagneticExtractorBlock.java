@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ElectromagneticExtractorBlock extends BaseEntityBlock {
     public static final MapCodec<ElectromagneticExtractorBlock> CODEC = simpleCodec(ElectromagneticExtractorBlock::new);
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty FACING = BlockStateProperties.FACING;
 
     public ElectromagneticExtractorBlock(Properties properties) {
         super(properties);

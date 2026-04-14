@@ -11,7 +11,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -132,7 +132,7 @@ public class MoeItems {
     public static final DeferredItem<Item> ENHANCE_MODEM_BASEBOARD = MOE_ITEM.register("enhance_modem_baseboard",
             () -> new EnhancementModulateItem(EnhancementData.EnhancementType.EMPTY, new Item.Properties()));
 
-    public static final DeferredItem<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core", new Item.Properties());
+    public static final DeferredItem<Item> ENERGY_CORE = MOE_ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = MOE_ITEM.register("superconducting_update",
             () -> new SuperconductingUpdateItem(new Item.Properties()));
     public static final DeferredItem<Item> POTATO_BATTERY = MOE_ITEM.register("potato_battery",
@@ -146,7 +146,7 @@ public class MoeItems {
     public static final DeferredItem<Item> GENETIC_RECORDER = MOE_ITEM.register("genetic_recorder",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
-    public static final DeferredItem<Item> MAGNO_INGOT = MOE_ITEM.registerSimpleItem("magno_ingot", new Item.Properties());
+    public static final DeferredItem<Item> MAGNO_INGOT = MOE_ITEM.registerSimpleItem("magno_ingot");
 
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.register("electromagnetic_rod",
             () -> new MagicCastItem(new Item.Properties().stacksTo(1)
@@ -156,6 +156,5 @@ public class MoeItems {
                     .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 
     public static final DeferredItem<Item> HARMONIC_SOVEREIGN_SPAWN_EGG = MOE_ITEM.register("harmonic_sovereign_spawn_egg",
-            () -> new DeferredSpawnEggItem(MoeEntities.HARMONIC_SOVEREIGN_ENTITY, 0x5D6FF1, 0x52A4E6,
-                    new Item.Properties()));
+            () -> new SpawnEggItem(new Item.Properties()));
 }

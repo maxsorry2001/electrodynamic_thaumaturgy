@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
     public static final MapCodec<EnergyTransmissionAtennaBlock> CODEC = simpleCodec(EnergyTransmissionAtennaBlock::new);
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty SEND = BooleanProperty.create("send");
     protected static final float AABB_MIN = 6.0F;
     protected static final float AABB_MAX = 10.0F;
@@ -116,7 +117,7 @@ public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
