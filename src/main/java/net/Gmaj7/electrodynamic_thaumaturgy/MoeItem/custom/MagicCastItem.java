@@ -13,16 +13,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 import java.util.List;
 
@@ -104,8 +107,8 @@ public class MagicCastItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(getTranslate(stack));
-        IEnergyStorage energyStorage = stack.getCapability(Capabilities.Energy.ITEM);
-        int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
+        EnergyHandler energyHandler = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
+        int i = energyHandler.getEnergyStored(),j = energyHandler.getMaxEnergyStored();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         if(stack.has(MoeDataComponentTypes.LINK_POS)){
             BlockPos blockPos = stack.get(MoeDataComponentTypes.LINK_POS);
@@ -121,20 +124,20 @@ public class MagicCastItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored() < stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
+        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
         return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }

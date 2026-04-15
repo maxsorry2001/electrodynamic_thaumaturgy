@@ -1,17 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeThermalGeneratorMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.GuiGraphicsExtractorExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeThermalGeneratorMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator_block.png");
@@ -26,10 +23,10 @@ public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeTherma
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
         extractTooltip(graphics, mouseX, mouseY);
-        IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
+        EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
-            graphics.setTooltipForNextFrame(this.font, Component.literal(iEnergyStorage.getEnergyStored() + "FE / " + iEnergyStorage.getMaxEnergyStored() + "FE"), mouseX, mouseY);
+            graphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getEnergyStored() + "FE / " + energyHandler.getMaxEnergyStored() + "FE"), mouseX, mouseY);
     }
 
     @Override
@@ -47,8 +44,8 @@ public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeTherma
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
-        IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored()), 7, 150, 7);
+        EnergyHandler energyHandler = menu.blockEntity.getEnergy();
+        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)energyHandler.getEnergyStored() / energyHandler.getMaxEnergyStored()), 7, 150, 7);
         guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime(), 7, 150, 7);
     }
 }

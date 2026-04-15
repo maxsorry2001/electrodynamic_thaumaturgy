@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +28,7 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
 
 
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyTransmissionAntennaBE energyTransmissionAntennaBE){
-        IEnergyStorage energyStorage = energyTransmissionAntennaBE.getLinkStorage();
+        EnergyHandler energyStorage = energyTransmissionAntennaBE.getLinkStorage();
         if(energyStorage != null){
             if(state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
                 Iterator<BlockPos> iterator = energyTransmissionAntennaBE.getReceivePos().iterator();
@@ -36,7 +36,7 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
                     BlockPos target = iterator.next();
                     BlockEntity blockEntity = level.getBlockEntity(target);
                     if(blockEntity instanceof EnergyTransmissionAntennaBE && !level.getBlockState(target).getValue(EnergyTransmissionAtennaBlock.SEND)) {
-                        IEnergyStorage targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
+                        EnergyHandler targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
                         if(targetStorage != null) {
                             if (energyStorage == targetStorage) continue;
                             if (energyStorage.getEnergyStored() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
@@ -56,7 +56,7 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
         }
     }
 
-    public IEnergyStorage getLinkStorage(){
+    public EnergyHandler getLinkStorage(){
         BlockPos blockPos = null;
         Direction direction = this.getBlockState().getValue(BlockStateProperties.FACING);
         switch (direction){

@@ -9,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -21,10 +20,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlockEntity, MenuProvider, IMoeDirectionItemBlockEntity {
@@ -79,7 +78,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
 
     public static void tick(Level level, BlockPos pos, BlockState state, AtomicReconstructionBE blockEntity) {
         if(level.isClientSide()) return;
-        IEnergyStorage energyStorage = blockEntity.getEnergy();
+        EnergyHandler energyStorage = blockEntity.getEnergy();
         if(energyStorage.getEnergyStored() < progressUse) return;
         blockEntity.progressTick ++;
         if(blockEntity.progressTick > 5 && blockEntity.progress == 0)
@@ -125,7 +124,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
     }
 
     @Override
-    public IEnergyStorage getEnergy() {
+    public EnergyHandler getEnergy() {
         return energy;
     }
 

@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class BioReplicationVatMachineBlock extends BaseEntityBlock {
@@ -52,7 +52,7 @@ public class BioReplicationVatMachineBlock extends BaseEntityBlock {
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BioReplicationVatBE bioReplicationVatBE && !level.isClientSide()) {
-                IEnergyStorage energyStorage = bioReplicationVatBE.getEnergy();
+                EnergyHandler energyStorage = bioReplicationVatBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), bioReplicationVatBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(bioReplicationVatBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }

@@ -22,8 +22,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ElectromagneticDriverBlock extends BaseEntityBlock {
@@ -54,7 +54,7 @@ public class ElectromagneticDriverBlock extends BaseEntityBlock {
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof ElectromagneticDriverBE electromagneticDriverBE && !level.isClientSide()) {
-                IEnergyStorage energyStorage = electromagneticDriverBE.getEnergy();
+                EnergyHandler energyStorage = electromagneticDriverBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), electromagneticDriverBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDriverBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }

@@ -29,10 +29,10 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -193,7 +193,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     }
 
     @Override
-    public IEnergyStorage getEnergy() {
+    public EnergyHandler getEnergy() {
         return energy;
     }
 

@@ -23,8 +23,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class BiomassGeneratorBlock extends AbstractGeneratorBlock {
@@ -63,7 +63,7 @@ public class BiomassGeneratorBlock extends AbstractGeneratorBlock {
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BiomassGeneratorBE thermalEnergyMakerBE && !level.isClientSide()) {
-                IEnergyStorage energyStorage = thermalEnergyMakerBE.getEnergy();
+                EnergyHandler energyStorage = thermalEnergyMakerBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), thermalEnergyMakerBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(thermalEnergyMakerBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }

@@ -21,10 +21,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -70,9 +70,9 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
 
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyBlockEntity energyBlockEntity){
         IItemHandler itemHandler = energyBlockEntity.getItemHandler();
-        IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
-        IEnergyStorage inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.Energy.ITEM);
-        IEnergyStorage outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.Energy.ITEM);
+        EnergyHandler energyStorage = energyBlockEntity.getEnergy();
+        EnergyHandler inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
+        EnergyHandler outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
         if(outStorage != null && !itemHandler.getStackInSlot(0).isEmpty() && outStorage.canReceive()){
             int canOut = outStorage.getMaxEnergyStored() - outStorage.getEnergyStored();
             if(canOut < energyBlockEntity.tickEnergyTranslate)
@@ -90,17 +90,17 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
         }
     }
 
-    private void outEnergy(int i, IEnergyStorage outStorage, IEnergyStorage energyStorage){
+    private void outEnergy(int i, EnergyHandler outStorage, EnergyHandler energyStorage){
         outStorage.receiveEnergy(i, false);
         energyStorage.extractEnergy(i, false);
     }
 
-    private void inEnergy(int i, IEnergyStorage inStorage, IEnergyStorage energyStorage){
+    private void inEnergy(int i, EnergyHandler inStorage, EnergyHandler energyStorage){
         energyStorage.receiveEnergy(i, false);
         inStorage.extractEnergy(i, false);
     }
 
-    public IEnergyStorage getEnergy() {
+    public EnergyHandler getEnergy() {
         return energy;
     }
 

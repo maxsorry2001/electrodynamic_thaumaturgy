@@ -25,8 +25,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class EnergyBlock extends BaseEntityBlock {
@@ -63,7 +63,7 @@ public class EnergyBlock extends BaseEntityBlock {
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof EnergyBlockEntity energyBlockEntity && !level.isClientSide()) {
-                IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
+                EnergyHandler energyStorage = energyBlockEntity.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), energyBlockEntity.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }

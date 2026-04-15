@@ -4,7 +4,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.Electroma
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;

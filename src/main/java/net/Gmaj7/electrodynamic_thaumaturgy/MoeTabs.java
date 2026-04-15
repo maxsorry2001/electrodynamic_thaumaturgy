@@ -11,9 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class MoeTabs {
                     .build());
 
     public static ItemStack setFullEnergyItem(ItemStack itemStack){
-        EnergyHandler energyStorage = itemStack.getCapability(Capabilities.Energy.ITEM);
+        EnergyHandler energyStorage = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
         energyStorage.receiveEnergy(energyStorage.getMaxEnergyStored(), false);
         return itemStack;
     }

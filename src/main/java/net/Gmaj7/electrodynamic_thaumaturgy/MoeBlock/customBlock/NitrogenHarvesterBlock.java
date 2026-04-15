@@ -18,8 +18,8 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class NitrogenHarvesterBlock extends BaseEntityBlock {
@@ -46,7 +46,7 @@ public class NitrogenHarvesterBlock extends BaseEntityBlock {
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof NitrogenHarvesterBE energyBlockEntity && !level.isClientSide()) {
-                IEnergyStorage energyStorage = energyBlockEntity.getEnergy();
+                EnergyHandler energyStorage = energyBlockEntity.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), energyBlockEntity.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }

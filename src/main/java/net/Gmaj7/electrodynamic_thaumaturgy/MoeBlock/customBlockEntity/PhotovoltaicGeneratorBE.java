@@ -8,8 +8,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
@@ -37,7 +37,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     }
 
     @Override
-    public IEnergyStorage getEnergy() {
+    public EnergyHandler getEnergy() {
         return energy;
     }
 

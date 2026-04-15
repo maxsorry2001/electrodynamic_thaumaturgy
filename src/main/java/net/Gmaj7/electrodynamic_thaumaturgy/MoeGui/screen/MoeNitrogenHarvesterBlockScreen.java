@@ -1,16 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeNitrogenHarvesterBlockMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class MoeNitrogenHarvesterBlockScreen extends AbstractContainerScreen<MoeNitrogenHarvesterBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/27_slots_machine_block.png");
@@ -22,7 +20,7 @@ public class MoeNitrogenHarvesterBlockScreen extends AbstractContainerScreen<Moe
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         extractTooltip(guiGraphics, mouseX, mouseY);
-        //IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
+        //EnergyHandler energyHandler = menu.blockEntity.getEnergy();
     }
 
     @Override
@@ -40,6 +38,6 @@ public class MoeNitrogenHarvesterBlockScreen extends AbstractContainerScreen<Moe
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
-        IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
+        EnergyHandler energyHandler = menu.blockEntity.getEnergy();
     }
 }

@@ -1,16 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeAtomicReconstructionBlockMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<MoeAtomicReconstructionBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block.png");
@@ -24,10 +22,10 @@ public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         extractTooltip(guiGraphics, mouseX, mouseY);
-        IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
+        EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
-            guiGraphics.tooltip(this.font, Component.literal(iEnergyStorage.getEnergyStored() + "FE / " + iEnergyStorage.getMaxEnergyStored() + "FE"), mouseX, mouseY);
+            guiGraphics.tooltip(this.font, Component.literal(energyHandler.getEnergyStored() + "FE / " + energyHandler.getMaxEnergyStored() + "FE"), mouseX, mouseY);
     }
 
     @Override
@@ -45,8 +43,8 @@ public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
-        IEnergyStorage iEnergyStorage = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0, (int) (150 * (float) iEnergyStorage.getEnergyStored() / iEnergyStorage.getMaxEnergyStored()), 7, 150, 7);
+        EnergyHandler energyHandler = menu.blockEntity.getEnergy();
+        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0, (int) (150 * (float) energyHandler.getEnergyStored() / energyHandler.getMaxEnergyStored()), 7, 150, 7);
         guiGraphics.blit(progressTexture, x + 60, y + 56, 0, 0, (int) (58 * (float) menu.blockEntity.getProgressPer()), 6, 58, 6);
     }
 }
