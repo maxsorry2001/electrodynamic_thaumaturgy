@@ -4,8 +4,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeMagicLithographyTableMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -47,12 +49,12 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+    protected void renderTooltip(GuiGraphicsExtractor guiGraphics, int x, int y) {
         super.renderTooltip(guiGraphics, x, y);
         if (this.displayRecipes) {
             int i = this.leftPos + 52;
@@ -73,9 +75,10 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         this.scrolling = false;
         if (this.displayRecipes) {
+            double mouseX = event.x(), mouseY = event.y();
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
@@ -97,12 +100,12 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
                 this.scrolling = true;
             }
         }
-
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+    public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+        double mouseX = event.x(), mouseY = event.y();
         if (this.scrolling && this.isScrollBarActive()) {
             int i = this.topPos + 14;
             int j = i + 54;
@@ -111,25 +114,25 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
             this.startIndex = (int)((double)(this.scrollOffs * (float)this.getOffscreenRows()) + 0.5) * 4;
             return true;
         } else {
-            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+            return super.mouseDragged(event, dragX, dragY);
         }
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
         int i = this.leftPos;
         int j = this.topPos;
-        guiGraphics.blit(backGrand, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         int k = (int)(41.0F * this.scrollOffs);
         Identifier Identifier = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(Identifier, i + 119, j + 15 + k, 12, 15);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier, i + 119, j + 15 + k, 12, 15);
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
         int j1 = this.startIndex + 12;
         this.renderRecipes(guiGraphics, l, i1, j1);
     }
 
-    private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
+    private void renderRecipes(GuiGraphicsExtractor guiGraphics, int x, int y, int startIndex) {
         List<RecipeHolder<MagicLithographyRecipe>> list = ((MoeMagicLithographyTableMenu)this.menu).getRecipes();
 
         for(int i = this.startIndex; i < startIndex && i < ((MoeMagicLithographyTableMenu)this.menu).getNumRecipes(); ++i) {
@@ -137,7 +140,7 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
             int k = x + j % 4 * 16;
             int l = j / 4;
             int i1 = y + l * 18 + 2;
-            guiGraphics.renderItem(((MagicLithographyRecipe)((RecipeHolder)list.get(i)).value()).getResultItem(this.minecraft.level.registryAccess()), k, i1);
+            guiGraphics.item(((MagicLithographyRecipe)((RecipeHolder)list.get(i)).value()).getResultItem(this.minecraft.level.registryAccess()), k, i1);
         }
 
     }

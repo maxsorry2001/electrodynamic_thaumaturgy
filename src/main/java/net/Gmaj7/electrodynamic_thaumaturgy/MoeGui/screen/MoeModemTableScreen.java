@@ -3,9 +3,11 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeModemTableMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
@@ -26,12 +28,12 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        guiGraphics.blitSprite(SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
-        guiGraphics.drawString(this.font, Component.translatable("moe_modem"), x + 145, y + 40, 0xFFFFFF);
-        renderTooltip(guiGraphics, mouseX, mouseY);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
+        guiGraphics.text(this.font, Component.translatable("moe_modem"), x + 145, y + 40, 0xFFFFFF);
+        extractTooltip(guiGraphics, mouseX, mouseY);
     }
 
     private boolean isMouseFocused(double mouseX, double mouseY){
@@ -42,20 +44,20 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
-            if(isMouseFocused(mouseX, mouseY)){
-                if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
-                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, button);
-                    return true;
-                }
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
+        double mouseX = event.x(), mouseY = event.y();
+        if(isMouseFocused(mouseX, mouseY)){
+            if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
+                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, event.button());
+                return true;
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+    }
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1) {
-        guiGraphics.blit(backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        graphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
     }
 }

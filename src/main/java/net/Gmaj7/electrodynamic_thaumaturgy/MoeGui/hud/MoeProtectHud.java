@@ -4,7 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -14,7 +14,7 @@ public class MoeProtectHud implements LayeredDraw.Layer {
     public static final Identifier FULL = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_protect_full");
     public static final Identifier HALF = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_protect_half");
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;
         if(player.isCreative() || player.isSpectator() || Minecraft.getInstance().options.hideGui) return;
         var screenWidth = guiGraphics.guiWidth();
