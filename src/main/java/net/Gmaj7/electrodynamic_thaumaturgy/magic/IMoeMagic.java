@@ -24,7 +24,7 @@ public interface IMoeMagic {
     void blockCast(ElectromagneticDriverBE electromagneticDriverBE);
 
     default boolean canBlockCast(ElectromagneticDriverBE electromagneticDriverBE){
-        if(electromagneticDriverBE.getEnergy().getEnergyStored() < getBaseEnergyCost() * 128) return false;
+        if(electromagneticDriverBE.getEnergy().getAmountAsInt() < getBaseEnergyCost() * 128) return false;
         List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(7));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return false;

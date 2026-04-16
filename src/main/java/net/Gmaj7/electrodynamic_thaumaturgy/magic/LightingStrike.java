@@ -77,7 +77,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
             electromagneticDriverBE.getLevel().addFreshEntity(lightningBolt);
             electromagneticDriverBE.setCooldown(getBaseCooldown());
-            electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+            electromagneticDriverBE.extract(getBaseEnergyCost());
         }
     }
 

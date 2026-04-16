@@ -64,7 +64,7 @@ public class BiomassGeneratorBlock extends AbstractGeneratorBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BiomassGeneratorBE thermalEnergyMakerBE && !level.isClientSide()) {
                 EnergyHandler energyStorage = thermalEnergyMakerBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), thermalEnergyMakerBE.getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), thermalEnergyMakerBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(thermalEnergyMakerBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

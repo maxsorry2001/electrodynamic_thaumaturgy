@@ -83,7 +83,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){

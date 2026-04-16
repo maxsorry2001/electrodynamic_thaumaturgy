@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeNitrogenHarvesterBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -21,8 +21,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
@@ -34,21 +34,21 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
     private static final int harvestUse = 16384;
     private int checkTick = 0;
     private static final int workTick = 100;
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(27){
+    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(27){
 
         @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
+        protected void onContentsChanged(int index, ItemStack previousContents) {setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
@@ -62,29 +62,30 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
     public static void tick(Level level, BlockPos pos, BlockState state, NitrogenHarvesterBE nitrogenHarvesterBE){
         if(level.isClientSide()) return;
         nitrogenHarvesterBE.checkTick ++;
-        if(level.getDayTime() == 1020)
-            nitrogenHarvesterBE.growCrops(pos);
         if(nitrogenHarvesterBE.checkTick < workTick) return;
-        nitrogenHarvesterBE.harvestCrops(pos);
+        nitrogenHarvesterBE.dealCrops(pos);
         nitrogenHarvesterBE.checkTick = 0;
     }
 
-    private void harvestCrops(BlockPos pos) {
+    private void dealCrops(BlockPos pos) {
         for (int dx = -1; dx < 2; dx++){
             for (int dz = -1; dz < 2; dz++){
                 BlockPos blockPos = new BlockPos(pos.getX() + dx, pos.getY(), pos.getZ() + dz);
                 BlockState blockState = this.getLevel().getBlockState(blockPos);
-                if(!this.getLevel().isClientSide() && blockState.getBlock() instanceof CropBlock cropBlock && cropBlock.getAge(blockState) == cropBlock.getMaxAge()){
-                    List<ItemStack> list = Block.getDrops(blockState, (ServerLevel) this.getLevel(), blockPos, null);
-                    this.getLevel().destroyBlock(blockPos, false);
-                    this.getLevel().setBlock(blockPos, cropBlock.getStateForAge(0), 2);
-                    for (int i = 0; i < list.size(); i++){
-                        ItemStack itemStack = list.get(i).copy();
-                        itemStack.setCount(Math.min(itemStack.getCount() * 2, itemStack.getMaxStackSize()));
-                        for (int j = 0; j < this.itemHandler.getSlots(); j++) {
-                            ItemStack result = this.getItemHandler().insertItem(j, itemStack, false);
-                            if(!result.isEmpty()) itemStack = result.copy();
-                            else break;
+                if(!this.getLevel().isClientSide() && blockState.getBlock() instanceof CropBlock cropBlock){
+                    if(cropBlock.getAge(blockState) != cropBlock.getMaxAge()) growCrops(pos);
+                    else {
+                        List<ItemStack> list = Block.getDrops(blockState, (ServerLevel) this.getLevel(), blockPos, null);
+                        this.getLevel().destroyBlock(blockPos, false);
+                        this.getLevel().setBlock(blockPos, cropBlock.getStateForAge(0), 2);
+                        for (int i = 0; i < list.size(); i++) {
+                            ItemStack itemStack = list.get(i).copy();
+                            itemStack.setCount(Math.min(itemStack.getCount() * 2, itemStack.getMaxStackSize()));
+                            for (int j = 0; j < this.itemHandler.getSlots(); j++) {
+                                ItemStack result = this.getItemHandler().insertItem(j, itemStack, false);
+                                if (!result.isEmpty()) itemStack = result.copy();
+                                else break;
+                            }
                         }
                     }
                 }
@@ -98,12 +99,12 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
                 BlockPos blockPos = new BlockPos(pos.getX() + dx, pos.getY(), pos.getZ() + dz);
                 BlockState blockState = this.getLevel().getBlockState(blockPos);
                 if(blockState.getBlock() instanceof CropBlock cropBlock){
-                    if(cropBlock.getAge(blockState) < cropBlock.getMaxAge() && this.getEnergy().getEnergyStored() > growUse) {
+                    if(cropBlock.getAge(blockState) < cropBlock.getMaxAge() && this.getEnergy().getAmountAsInt() > growUse) {
                         ((CropBlock) blockState.getBlock()).growCrops(this.getLevel(), blockPos, blockState);
-                        this.getEnergy().extractEnergy(growUse, false);
+                        this.getEnergy().extract(growUse, false);
                     }
-                    else if(cropBlock.getAge(blockState) == cropBlock.getMaxAge() && this.getEnergy().getEnergyStored() > harvestUse)
-                        this.energy.extractEnergy(harvestUse, false);
+                    else if(cropBlock.getAge(blockState) == cropBlock.getMaxAge() && this.getEnergy().getAmountAsInt() > harvestUse)
+                        this.energy.extract(harvestUse, false);
                 }
             }
         }
@@ -112,7 +113,7 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
         tag.putInt("check_tick", checkTick);
     }
@@ -136,7 +137,7 @@ public class NitrogenHarvesterBE extends BlockEntity implements IMoeEnergyBlockE
     }
 
     @Override
-    public IItemHandler getItemHandler() {
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
         return itemHandler;
     }
 

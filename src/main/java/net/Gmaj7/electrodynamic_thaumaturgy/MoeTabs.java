@@ -111,7 +111,7 @@ public class MoeTabs {
 
     public static ItemStack setFullEnergyItem(ItemStack itemStack){
         EnergyHandler energyStorage = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
-        energyStorage.receiveEnergy(energyStorage.getMaxEnergyStored(), false);
+        energyStorage.insert(energyStorage.getCapacityAsInt(), false);
         return itemStack;
     }
 

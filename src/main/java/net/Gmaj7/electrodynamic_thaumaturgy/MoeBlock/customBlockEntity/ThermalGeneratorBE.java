@@ -3,7 +3,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeThermalGeneratorMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -19,8 +20,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
@@ -28,16 +28,17 @@ import org.jetbrains.annotations.Nullable;
 public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
     private int burnTime = 0;
     private int fullBurnTime = 0;
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
-    private final ItemStackHandler itemHandler = new ItemStackHandler(1){
+    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
         protected void onContentsChanged(int slot) {
@@ -53,7 +54,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(768, false);
+        blockEntity.getEnergy().insert(768, false);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
         if(!level.isClientSide()){
             if (burnTime > 0) burnTime--;
             if (burnTime <= 0) {
-                if (!itemHandler.getStackInSlot(0).isEmpty() && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
+                if (!itemHandler.getStackInSlot(0).isEmpty() && energy.getAmountAsInt() != energy.getCapacityAsInt()) {
                     int time = itemHandler.getStackInSlot(0).getBurnTime(null) / 4;
                     if (time > 0) {
                         burnTime = time;
@@ -84,7 +85,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
         tag.putInt("fullBurnTime", fullBurnTime);
         tag.putInt("burnTime", burnTime);
         tag.put("item_handler", itemHandler.serializeNBT(registries));
@@ -116,7 +117,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     }
 
     @Override
-    public IItemHandler getItemHandler() {
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
         return itemHandler;
     }
 

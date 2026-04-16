@@ -15,6 +15,8 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.energy.ComponentEnergyStorage;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.energy.ItemAccessEnergyHandler;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = ElectrodynamicThaumaturgy.MODID)
 public class DataLoadHandler {
@@ -38,15 +40,15 @@ public class DataLoadHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
                 MoeItems.ELECTROMAGNETIC_ROD.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
                 MoeItems.POTATO_BATTERY.get(),
                 MoeItems.CARROT_BATTERY.get(),
                 MoeItems.SOLUTION_BATTERY.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
                 MoeItems.POWER_BANK.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ComponentEnergyStorage(itemStack, MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
                 MoeBlocks.ENERGY_BLOCK.get());
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
@@ -59,7 +61,7 @@ public class DataLoadHandler {
                 MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
                 MoeBlocks.NITROGEN_HARVESTER_BLOCK.get(),
                 MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
-        event.registerBlock(Capabilities.ItemHandler.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
+        event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),
                 MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
@@ -67,7 +69,7 @@ public class DataLoadHandler {
                 MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
                 MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
                 MoeBlocks.NITROGEN_HARVESTER_BLOCK.get());
-        event.registerBlock(Capabilities.ItemHandler.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
+        event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
                 MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
     }

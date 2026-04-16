@@ -105,7 +105,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
             thread.start();
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeCircleParticle(ServerLevel level, MagmaLightingBeaconEntity magmaLightingBeaconEntity, int height, double radius, float omega){

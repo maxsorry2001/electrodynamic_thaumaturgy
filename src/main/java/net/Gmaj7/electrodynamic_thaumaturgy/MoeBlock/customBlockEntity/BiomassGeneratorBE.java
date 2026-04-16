@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeBiomassGeneratorMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -17,9 +17,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
@@ -27,16 +29,17 @@ import org.jetbrains.annotations.Nullable;
 public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
     private int biomassTime = 0;
     private int fullBiomassTime = 0;
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
-    private final ItemStackHandler itemHandler = new ItemStackHandler(1){
+    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(1){
 
         @Override
         protected void onContentsChanged(int slot) {
@@ -52,7 +55,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(512, false);
+        blockEntity.getEnergy().insert(512, false);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
         if(!level.isClientSide()){
             if (biomassTime > 0) biomassTime--;
             if (biomassTime <= 0) {
-                if (!itemHandler.getStackInSlot(0).isEmpty() && itemHandler.getStackInSlot(0).has(DataComponents.FOOD) && energy.getEnergyStored() != energy.getMaxEnergyStored()) {
+                if (!itemHandler.getStackInSlot(0).isEmpty() && itemHandler.getStackInSlot(0).has(DataComponents.FOOD) && energy.getAmountAsInt() != energy.getCapacityAsInt()) {
                     FoodProperties foodProperties = itemHandler.getStackInSlot(0).get(DataComponents.FOOD);
                     int time = (int) (10 * foodProperties.nutrition() + 20 * foodProperties.saturation());
                     if (time > 0) {
@@ -82,7 +85,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
         tag.putInt("fullBiomassTime", fullBiomassTime);
         tag.putInt("biomassTime", biomassTime);
         tag.put("item_handler", itemHandler.serializeNBT(registries));
@@ -114,7 +117,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     }
 
     @Override
-    public IItemHandler getItemHandler() {
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
         return itemHandler;
     }
 

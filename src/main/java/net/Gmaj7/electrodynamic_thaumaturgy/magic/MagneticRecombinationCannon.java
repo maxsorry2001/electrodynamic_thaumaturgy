@@ -58,6 +58,6 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner());
         electromagneticDriverBE.getLevel().addFreshEntity(magneticRecombinationCannonBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 }

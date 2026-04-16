@@ -40,9 +40,9 @@ public class BatteryItem extends Item {
         if(remainingUseDuration % 5 == 0) {
             EnergyHandler energyHandler1 = livingEntity.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
             EnergyHandler energyHandler2 = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-            if (energyHandler2.getEnergyStored() > 0 && energyHandler1.getEnergyStored() < energyHandler1.getMaxEnergyStored()) {
-                energyHandler1.receiveEnergy(4096, false);
-                energyHandler2.extractEnergy(4096, false);
+            if (energyHandler2.getAmountAsInt() > 0 && energyHandler1.getAmountAsInt() < energyHandler1.getCapacityAsInt()) {
+                energyHandler1.insert(4096, false);
+                energyHandler2.extract(4096, false);
             } else livingEntity.stopUsingItem();
         }
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
@@ -52,7 +52,7 @@ public class BatteryItem extends Item {
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         if (usedHand == InteractionHand.MAIN_HAND && player.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)) != null
                 && player.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).canReceive()
-                && player.getMainHandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored() > 0){
+                && player.getMainHandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt() > 0){
             player.startUsingItem(usedHand);
         }
         return super.use(level, player, usedHand);
@@ -61,7 +61,7 @@ public class BatteryItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
         EnergyHandler energyStorage = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-        if(energyStorage.getEnergyStored() <= 0 && !stack.is(MoeItems.POWER_BANK.get())){
+        if(energyStorage.getAmountAsInt() <= 0 && !stack.is(MoeItems.POWER_BANK.get())){
             level.addFreshEntity(new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.COPPER_INGOT)));
             if(stack.is(MoeItems.SOLUTION_BATTERY.get()))
                 level.addFreshEntity(new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.GLASS_BOTTLE)));
@@ -72,20 +72,20 @@ public class BatteryItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
+        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
         return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
@@ -93,7 +93,7 @@ public class BatteryItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         EnergyHandler energyStorage = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-        int i = energyStorage.getEnergyStored(),j = energyStorage.getMaxEnergyStored();
+        int i = energyStorage.getAmountAsInt(),j = energyStorage.getCapacityAsInt();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
     }
 }

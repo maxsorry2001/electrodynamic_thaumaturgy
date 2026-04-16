@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeEntityCloneBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
@@ -23,8 +23,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
@@ -33,17 +34,18 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     private static final int SPAWN_NEED = 16384;
     private int clone = 100;
 
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(1){
+    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(1){
 
         @Override
         protected void onContentsChanged(int slot) {
@@ -68,7 +70,7 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
                 entity.teleportTo(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
                 level.addFreshEntity(entity);
                 bioReplicationVatBE.clone = (int)((LivingEntity) entity).getMaxHealth();
-                bioReplicationVatBE.getEnergy().extractEnergy(SPAWN_NEED, false);
+                bioReplicationVatBE.getEnergy().extract(SPAWN_NEED, false);
             }
         }
     }
@@ -77,7 +79,7 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
         return this.itemHandler.getStackInSlot(0).is(MoeItems.GENETIC_RECORDER.get())
                 && this.itemHandler.getStackInSlot(0).has(MoeDataComponentTypes.ENTITY_TYPE)
                 && this.itemHandler.getStackInSlot(0).has(MoeDataComponentTypes.ENTITY_DATA)
-                && this.energy.getEnergyStored() > SPAWN_NEED;
+                && this.energy.getAmountAsInt() > SPAWN_NEED;
     }
 
     @Override
@@ -91,7 +93,7 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     }
 
     @Override
-    public IItemHandler getItemHandler() {
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
         return itemHandler;
     }
 
@@ -119,7 +121,7 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("clone", clone);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
     }
 

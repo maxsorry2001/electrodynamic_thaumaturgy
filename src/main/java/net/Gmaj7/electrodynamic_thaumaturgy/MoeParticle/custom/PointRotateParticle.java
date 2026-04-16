@@ -2,23 +2,21 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.*;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-public class PointRotateParticle extends TextureSheetParticle {
+public class PointRotateParticle extends SingleQuadParticle {
     public final Vec3 center;
     public final double radius;
     public final float xRot;
     public final float yRot;
     public final float omega;
-    protected PointRotateParticle(ClientLevel level, double x, double y, double z, PointRotateParticleOption pointRotateParticleOption) {
-        super(level, x, y, z);
+    protected PointRotateParticle(ClientLevel level, double x, double y, double z, PointRotateParticleOption pointRotateParticleOption, SpriteSet spriteSet) {
+        super(level, x, y, z, spriteSet.first());
         this.rCol = pointRotateParticleOption.color.x() / 255;
         this.gCol = pointRotateParticleOption.color.y() / 255;
         this.bCol = pointRotateParticleOption.color.z() / 255;
@@ -35,14 +33,15 @@ public class PointRotateParticle extends TextureSheetParticle {
         return 0xF000F0;
     }
 
+
     @Override
     public float getQuadSize(float scaleFactor) {
         return 0.1F;
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_LIT;
+    protected Layer getLayer() {
+        return Layer.TRANSLUCENT;
     }
 
     @Override
@@ -78,11 +77,9 @@ public class PointRotateParticle extends TextureSheetParticle {
             this.spriteSet = spriteSet;
         }
 
-        @Nullable
         @Override
-        public Particle createParticle(PointRotateParticleOption pointRotateParticleOption, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv) {
-            PointRotateParticle pointRotateParticle = new PointRotateParticle(clientLevel, x, y, z, pointRotateParticleOption);
-            pointRotateParticle.pickSprite(this.spriteSet);
+        public @org.jspecify.annotations.Nullable Particle createParticle(PointRotateParticleOption pointRotateParticleOption, ClientLevel clientLevel, double x, double y, double z, double xv, double yv, double zv, RandomSource randomSource) {
+            PointRotateParticle pointRotateParticle = new PointRotateParticle(clientLevel, x, y, z, pointRotateParticleOption, spriteSet);
             return pointRotateParticle;
         }
     }

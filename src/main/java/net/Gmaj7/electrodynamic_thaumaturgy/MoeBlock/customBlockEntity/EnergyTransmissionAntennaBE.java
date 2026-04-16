@@ -39,13 +39,13 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
                         EnergyHandler targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
                         if(targetStorage != null) {
                             if (energyStorage == targetStorage) continue;
-                            if (energyStorage.getEnergyStored() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
-                                int trans= Math.min(energyStorage.getEnergyStored(), maxSend);
-                                int a = targetStorage.receiveEnergy(trans, true);
-                                int b = energyStorage.extractEnergy(trans, true);
+                            if (energyStorage.getAmountAsInt() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
+                                int trans= Math.min(energyStorage.getAmountAsInt(), maxSend);
+                                int a = targetStorage.insert(trans, true);
+                                int b = energyStorage.extract(trans, true);
                                 if(a != 0 && b != 0){
-                                    targetStorage.receiveEnergy(trans, false);
-                                    energyStorage.extractEnergy(trans, false);
+                                    targetStorage.insert(trans, false);
+                                    energyStorage.extract(trans, false);
                                 }
                             }
                         }

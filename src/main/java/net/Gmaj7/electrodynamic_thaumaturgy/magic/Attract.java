@@ -61,6 +61,6 @@ public class Attract extends AbstractBlockBeaconMagic {
         attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 }

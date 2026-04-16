@@ -23,7 +23,7 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ELECTROMAGNETIC_MODEM_TABLE = registerBlock("electromagnetic_modem_table",
             (properties) -> new ElectromagneticModemTable(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> ENERGY_BLOCK = registerBlock("energy_block",
+    public static final DeferredBlock<Block> ENERGY_BLOCK = MOE_BLOCKS.registerBlock("energy_block",
             (properties) ->  new EnergyBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
 
     public static final DeferredBlock<Block> TEMPERATURE_GENERATOR_BLOCK = registerBlock("temperature_generator_block",

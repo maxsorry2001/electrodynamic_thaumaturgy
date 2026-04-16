@@ -26,7 +26,7 @@ public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeTherma
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
-            graphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getEnergyStored() + "FE / " + energyHandler.getMaxEnergyStored() + "FE"), mouseX, mouseY);
+            graphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeTherma
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)energyHandler.getEnergyStored() / energyHandler.getMaxEnergyStored()), 7, 150, 7);
+        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), 7, 150, 7);
         guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime(), 7, 150, 7);
     }
 }

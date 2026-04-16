@@ -53,7 +53,7 @@ public class AtomicReconstructionBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof AtomicReconstructionBE energyBlockEntity && !level.isClientSide()) {
                 EnergyHandler energyStorage = energyBlockEntity.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), energyBlockEntity.getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), energyBlockEntity.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

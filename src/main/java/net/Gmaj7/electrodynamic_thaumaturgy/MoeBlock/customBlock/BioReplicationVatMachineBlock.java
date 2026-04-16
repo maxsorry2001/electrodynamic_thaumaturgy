@@ -53,7 +53,7 @@ public class BioReplicationVatMachineBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BioReplicationVatBE bioReplicationVatBE && !level.isClientSide()) {
                 EnergyHandler energyStorage = bioReplicationVatBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), bioReplicationVatBE.getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), bioReplicationVatBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(bioReplicationVatBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

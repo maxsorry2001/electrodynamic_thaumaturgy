@@ -55,7 +55,7 @@ public class ElectromagneticDriverBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof ElectromagneticDriverBE electromagneticDriverBE && !level.isClientSide()) {
                 EnergyHandler energyStorage = electromagneticDriverBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getEnergyStored(), electromagneticDriverBE.getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), electromagneticDriverBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDriverBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

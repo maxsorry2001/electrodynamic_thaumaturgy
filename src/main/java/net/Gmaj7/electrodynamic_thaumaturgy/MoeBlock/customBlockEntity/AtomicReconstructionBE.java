@@ -2,7 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeAtomicReconstructionBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,51 +20,54 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
 public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlockEntity, MenuProvider, IMoeDirectionItemBlockEntity {
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
 
-    private final ItemStackHandler inputItemHandler = new ItemStackHandler(1){
+    private final MoeBlockEntityItemHandler inputItemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
     };
-    private final ItemStackHandler outputItemHandler = new ItemStackHandler(1){
+    private final MoeBlockEntityItemHandler outputItemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
     };
-    private final ItemStackHandler targetItemHandler = new ItemStackHandler(1){
+    private final MoeBlockEntityItemHandler targetItemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
-                progress = 0;
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
@@ -79,20 +83,28 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
     public static void tick(Level level, BlockPos pos, BlockState state, AtomicReconstructionBE blockEntity) {
         if(level.isClientSide()) return;
         EnergyHandler energyStorage = blockEntity.getEnergy();
-        if(energyStorage.getEnergyStored() < progressUse) return;
+        if(energyStorage.getAmountAsInt() < progressUse) return;
         blockEntity.progressTick ++;
         if(blockEntity.progressTick > 5 && blockEntity.progress == 0)
             PacketDistributor.sendToAllPlayers(new MoePacket.AtomicPacket(pos, blockEntity.progress));
         if(blockEntity.progressTick != 10) return;
         blockEntity.progressTick = 0;
         if(!blockEntity.canUpProgress()) return;
-        blockEntity.progress ++;
+        boolean lastStep = blockEntity.progress >= maxProgress;
+        try (Transaction transaction = Transaction.openRoot()){
+            int i = energyStorage.extract(progressUse, transaction);
+            if(i != progressUse)  return;
+            int j = blockEntity.inputItemHandler.extract(0, blockEntity.inputItemHandler.getResource(0), 1, transaction);
+            if(j != 1) return;
+            if(lastStep){
+                int k = blockEntity.outputItemHandler.insert(ItemResource.of(blockEntity.targetItemHandler.getStackInSlot(0)), 1, transaction);
+                if(k != 1) return;
+            }
+            transaction.commit();
+            if(lastStep) blockEntity.progress = 0;
+            else blockEntity.progress ++;
+        }
         PacketDistributor.sendToAllPlayers(new MoePacket.AtomicPacket(pos, blockEntity.progress));
-        blockEntity.inputItemHandler.getStackInSlot(0).shrink(1);
-        blockEntity.getEnergy().extractEnergy(progressUse, false);
-        if(blockEntity.progress != maxProgress) return;
-        blockEntity.progress = 0;
-        blockEntity.outputItemHandler.insertItem(0, new ItemStack(blockEntity.targetItemHandler.getStackInSlot(0).getItem()), false);
     }
 
     private boolean canUpProgress() {
@@ -104,23 +116,21 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setEnergy(tag.getInt("energy"));
-        inputItemHandler.deserializeNBT(registries, tag.getCompound("input_item_handler"));
-        outputItemHandler.deserializeNBT(registries, tag.getCompound("output_item_handler"));
-        targetItemHandler.deserializeNBT(registries, tag.getCompound("target_item_handler"));
-        progress = tag.getInt("progress");
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        inputItemHandler.serializeWithKey("input_item", output);
+        outputItemHandler.serializeWithKey("output_item", output);
+        targetItemHandler.serializeWithKey("target_item", output);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
-        tag.put("input_item_handler", inputItemHandler.serializeNBT(registries));
-        tag.put("output_item_handler", outputItemHandler.serializeNBT(registries));
-        tag.put("target_item_handler", targetItemHandler.serializeNBT(registries));
-        tag.putInt("progress", progress);
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        inputItemHandler.deserializeWithKey("input_item", input);
+        outputItemHandler.deserializeWithKey("output_item", input);
+        targetItemHandler.deserializeWithKey("target_item", input);
     }
 
     @Override
@@ -150,8 +160,8 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
     }
 
     @Override
-    public IItemHandler getItemHandlerWithDirection(Direction direction){
-        IItemHandler itemHandler;
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction){
+        StacksResourceHandler<ItemStack, ItemResource> itemHandler;
         if(direction == null) itemHandler = outputItemHandler;
         else
             switch (direction){

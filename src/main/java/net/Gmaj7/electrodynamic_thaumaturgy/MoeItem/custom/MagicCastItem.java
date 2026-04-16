@@ -108,7 +108,7 @@ public class MagicCastItem extends Item {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(getTranslate(stack));
         EnergyHandler energyHandler = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-        int i = energyHandler.getEnergyStored(),j = energyHandler.getMaxEnergyStored();
+        int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
         tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         if(stack.has(MoeDataComponentTypes.LINK_POS)){
             BlockPos blockPos = stack.get(MoeDataComponentTypes.LINK_POS);
@@ -124,20 +124,20 @@ public class MagicCastItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
+        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
         return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getEnergyStored();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getMaxEnergyStored();
+        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
+        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }

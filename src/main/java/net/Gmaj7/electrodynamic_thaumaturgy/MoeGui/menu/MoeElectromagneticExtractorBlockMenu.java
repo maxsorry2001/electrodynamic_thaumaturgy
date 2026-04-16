@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu {
@@ -85,7 +85,7 @@ public class MoeElectromagneticExtractorBlockMenu extends AbstractContainerMenu 
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
     }
 
-    private void addMachineSlot(IItemHandler itemHandler){
+    private void addMachineSlot(StacksResourceHandler<ItemStack, ItemResource> itemHandler){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 9; j++)
                 this.addSlot(new SlotItemHandler(itemHandler, j + i * 9, 8 + j * 18, 25 + i * 18));

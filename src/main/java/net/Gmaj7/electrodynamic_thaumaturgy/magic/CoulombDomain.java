@@ -78,7 +78,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem ,(LivingEntity) electromagneticDriverBE.getOwner());
         target.level().addFreshEntity(coulombDomainBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(!electromagneticDriverBE.getLevel().isClientSide()){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), coulombDomainBeaconEntity, 10, 0, -Mth.PI / 32);

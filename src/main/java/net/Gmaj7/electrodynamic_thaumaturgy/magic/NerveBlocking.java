@@ -85,7 +85,7 @@ public class NerveBlocking extends AbstractWideMagic{
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(!electromagneticDriverBE.getLevel().isClientSide()){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), electromagneticDriverBE.getBlockPos().getCenter().add(0, 0.2, 0), 7);

@@ -91,7 +91,7 @@ public class Exciting extends AbstractWideMagic{
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, int radius, float xRot, float yRot){

@@ -93,7 +93,7 @@ public class MoeFunction {
     }
 
     public static <T> Holder<T> getHolder(Level level, ResourceKey<Registry<T>> registry, ResourceKey<T> resourceKey){
-        return level.registryAccess().registryOrThrow(registry).getHolderOrThrow(resourceKey);
+        return level.registryAccess().getOrThrow(registry).value().getOrThrow(resourceKey);
     }
 
     public static BlockHitResult getHitBlock(Level level, Entity source, Vec3 start, Vec3 end){

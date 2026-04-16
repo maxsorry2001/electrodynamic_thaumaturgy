@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeTags;
 import net.minecraft.core.BlockPos;
@@ -14,9 +14,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class TemperatureGeneratorBE extends AbstractGeneratorBE {
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
@@ -30,7 +31,7 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
     }
 
     @Override
@@ -41,7 +42,7 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().receiveEnergy(512, false);
+        blockEntity.getEnergy().insert(512, false);
     }
 
     protected boolean canEnergyMake() {

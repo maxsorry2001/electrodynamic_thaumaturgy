@@ -62,7 +62,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         electromagneticDriverBE.getLevel().addFreshEntity(magneticFluxCascadeEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
             Thread thread = new Thread(() -> magneticFluxCascadeEntity.makeParticle(true));
             thread.start();

@@ -69,7 +69,7 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
         PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner());
         electromagneticDriverBE.getLevel().addFreshEntity(photoacousticPulseBeaconEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(!electromagneticDriverBE.getLevel().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), photoacousticPulseBeaconEntity));
             thread.start();

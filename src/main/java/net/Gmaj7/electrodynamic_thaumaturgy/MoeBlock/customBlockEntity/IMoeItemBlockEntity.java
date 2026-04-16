@@ -1,9 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 
 public interface IMoeItemBlockEntity {
-    public IItemHandler getItemHandler();
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler();
 
     public void drops();
 }

@@ -1,12 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeItem;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticLevel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -16,6 +18,9 @@ import static net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction.setEmpty;
 
 public class MoeItems {
     public static final DeferredRegister.Items MOE_ITEM = DeferredRegister.createItems(ElectrodynamicThaumaturgy.MODID);
+
+    public static final DeferredItem<BlockItem> ENERGY_BLOCK = MOE_ITEM.registerItem("energy_block",
+            (properties) -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), properties.stacksTo(1)));
 
     public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.registerItem("ray_module",
             (properties) -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), properties.stacksTo(1)));

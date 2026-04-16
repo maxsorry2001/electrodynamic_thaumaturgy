@@ -66,7 +66,7 @@ public class PulsedPlasma extends AbstractWideMagic{
         pulsedPlasmaEntity.shoot(vec3.x(), vec3.y(), vec3.z(), 2, 5);
         electromagneticDriverBE.getLevel().addFreshEntity(pulsedPlasmaEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {

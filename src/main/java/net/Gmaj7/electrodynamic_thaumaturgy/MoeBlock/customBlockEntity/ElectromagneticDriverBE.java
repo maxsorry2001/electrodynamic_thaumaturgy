@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticDriverBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
@@ -23,7 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
@@ -35,20 +35,21 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     protected UUID ownerUUID;
     protected int cooldown = 0;
     public static ItemStack magicItem = MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get());
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(1){
+    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -84,7 +85,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
             tag.putUUID("Owner", this.ownerUUID);
         }
         tag.putInt("cooldown", cooldown);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
     }
 
@@ -123,7 +124,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     }
 
     @Override
-    public ItemStackHandler getItemHandler() {
+    public ItemStacksResourceHandler getItemHandler() {
         return itemHandler;
     }
 
@@ -160,7 +161,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
         this.cooldown = cooldown;
     }
 
-    public void extractEnergy(int energy){
-        this.energy.extractEnergy(energy * 64, false);
+    public void extract(int energy){
+        this.energy.extract(energy * 64, false);
     }
 }

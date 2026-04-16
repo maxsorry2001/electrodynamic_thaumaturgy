@@ -82,7 +82,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
         if(target == null) return;
         Level level = electromagneticDriverBE.getLevel();
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
         target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 2);
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {

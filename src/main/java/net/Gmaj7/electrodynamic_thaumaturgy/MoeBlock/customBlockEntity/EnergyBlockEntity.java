@@ -2,7 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeEnergyBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -20,30 +21,33 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
 
 public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
     private final int tickEnergyTranslate = 1024;
 
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(16777216) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(16777216) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2){
+    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(2){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -55,49 +59,45 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
-        tag.put("item_handler", itemHandler.serializeNBT(registries));
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandler.serialize(output);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setEnergy(tag.getInt("energy"));
-        itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandler.deserialize(input);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyBlockEntity energyBlockEntity){
-        IItemHandler itemHandler = energyBlockEntity.getItemHandler();
+        MoeBlockEntityItemHandler itemHandler = energyBlockEntity.getItemHandler();
         EnergyHandler energyStorage = energyBlockEntity.getEnergy();
-        EnergyHandler inStorage = itemHandler.getStackInSlot(1).getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-        EnergyHandler outStorage = itemHandler.getStackInSlot(0).getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-        if(outStorage != null && !itemHandler.getStackInSlot(0).isEmpty() && outStorage.canReceive()){
-            int canOut = outStorage.getMaxEnergyStored() - outStorage.getEnergyStored();
-            if(canOut < energyBlockEntity.tickEnergyTranslate)
-                energyBlockEntity.outEnergy(Math.min(energyStorage.getEnergyStored(), canOut), outStorage, energyStorage);
-            else
-                energyBlockEntity.outEnergy(Math.min(energyStorage.getEnergyStored(), energyBlockEntity.tickEnergyTranslate), outStorage, energyStorage);
+        ItemStack inStack = itemHandler.getStackInSlot(1), outStack = itemHandler.getStackInSlot(0);
+        EnergyHandler inStorage = inStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(inStack));
+        EnergyHandler outStorage = outStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(outStack));
+        if(outStorage != null && !outStack.isEmpty()){
+            try(Transaction transactionOut = Transaction.openRoot()) {
+                int outAmount = Math.min(outStorage.getCapacityAsInt() - outStorage.getAmountAsInt(), Math.min(energyBlockEntity.tickEnergyTranslate, energyStorage.getAmountAsInt()));
+                int insertAmount = energyStorage.extract(outAmount, transactionOut);
+                if (insertAmount > 0) {
+                    int extractAmount = outStorage.insert(insertAmount, transactionOut);
+                    if (extractAmount == insertAmount) transactionOut.commit();
+                }
+            }
         }
         if (inStorage != null){
-            int canIn = energyStorage.getMaxEnergyStored() - energyStorage.getEnergyStored();
-            if(canIn < energyBlockEntity.tickEnergyTranslate)
-                energyBlockEntity.inEnergy(Math.min(inStorage.getEnergyStored(), canIn), inStorage, energyStorage);
-            else
-                energyBlockEntity.inEnergy(Math.min(inStorage.getEnergyStored(), energyBlockEntity.tickEnergyTranslate), inStorage, energyStorage);
-
+            try(Transaction transactionIn = Transaction.openRoot()) {
+                int inAmount = Math.min(energyStorage.getCapacityAsInt() - energyStorage.getAmountAsInt(), Math.min(energyBlockEntity.tickEnergyTranslate, inStorage.getAmountAsInt()));
+                int insertAmount = inStorage.extract(inAmount, transactionIn);
+                if (insertAmount > 0) {
+                    int extractAmount = energyStorage.insert(insertAmount, transactionIn);
+                    if (extractAmount == insertAmount) transactionIn.commit();
+                }
+            }
         }
-    }
-
-    private void outEnergy(int i, EnergyHandler outStorage, EnergyHandler energyStorage){
-        outStorage.receiveEnergy(i, false);
-        energyStorage.extractEnergy(i, false);
-    }
-
-    private void inEnergy(int i, EnergyHandler inStorage, EnergyHandler energyStorage){
-        energyStorage.receiveEnergy(i, false);
-        inStorage.extractEnergy(i, false);
     }
 
     public EnergyHandler getEnergy() {
@@ -109,19 +109,19 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
     }
 
     public void clearContents() {
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        for (int i = 0; i < itemHandler.size(); i++){
             itemHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
     }
 
     @Override
-    public IItemHandler getItemHandler() {
+    public MoeBlockEntityItemHandler getItemHandler() {
         return itemHandler;
     }
 
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        SimpleContainer container = new SimpleContainer(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++){
             container.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);

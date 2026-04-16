@@ -65,7 +65,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
             thread.start();
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extractEnergy(getBaseEnergyCost());
+        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel serverLevel, LivingEntity livingEntity){

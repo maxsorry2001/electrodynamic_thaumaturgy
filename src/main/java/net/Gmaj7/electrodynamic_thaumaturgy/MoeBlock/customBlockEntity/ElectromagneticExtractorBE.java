@@ -3,9 +3,10 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ElectromagneticExtractorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEnergyStorage;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -29,8 +30,9 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
@@ -53,17 +55,18 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     private static final int MAX_WIDTH = 5;
     private static final int MIN_WIDTH = 1;
     private static final int MAX_DEPTH = 60;
-    private final MoeBlockEnergyStorage energy = new MoeBlockEnergyStorage(1048576) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
+
         @Override
-        public void change(int i) {
+        protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(27){
+    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(27){
 
         @Override
         protected void onContentsChanged(int slot) {
@@ -79,7 +82,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticExtractorBE electromagneticExtractorBE){
-        if(level.isClientSide() || electromagneticExtractorBE.getEnergy().getEnergyStored() < extractUse * Math.pow(electromagneticExtractorBE.width, 2)) return;
+        if(level.isClientSide() || electromagneticExtractorBE.getEnergy().getAmountAsInt() < extractUse * Math.pow(electromagneticExtractorBE.width, 2)) return;
         electromagneticExtractorBE.excavatorTick ++;
         if(electromagneticExtractorBE.excavatorTick < fullTick) return;
         electromagneticExtractorBE.excavatorTick = 0;
@@ -126,7 +129,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
                     }
                 }
                 level.destroyBlock(destroyPos, false);
-                electromagneticExtractorBE.getEnergy().extractEnergy(extractUse, false);
+                electromagneticExtractorBE.getEnergy().extract(extractUse, false);
             }
         }
     }
@@ -134,10 +137,10 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     public BlockPos getDestroyPos(BlockState blockState, int i, int j, BlockPos targetPos){
         BlockPos result;
         switch (blockState.getValue(ElectromagneticExtractorBlock.FACING)){
-            case SOUTH, NORTH -> {
+            case Direction.SOUTH , Direction.NORTH -> {
                 result = new BlockPos(targetPos.getX() + i, targetPos.getY() + j, targetPos.getZ());
             }
-            case WEST, EAST -> {
+            case Direction.WEST, Direction.EAST -> {
                 result = new BlockPos(targetPos.getX(), targetPos.getY() + i, targetPos.getZ() + j);
             }
             default -> {
@@ -150,11 +153,11 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     private boolean isMaxDepth(BlockState blockState, BlockPos startPos, BlockPos endPos){
         int start, end;
         switch (blockState.getValue(ElectromagneticExtractorBlock.FACING)) {
-            case SOUTH, NORTH -> {
+            case Direction.SOUTH, Direction.NORTH -> {
                 start = startPos.getZ();
                 end = endPos.getZ();
             }
-            case WEST, EAST -> {
+            case Direction.WEST, Direction.EAST -> {
                 start = startPos.getX();
                 end = endPos.getX();
             }
@@ -169,7 +172,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getEnergyStored());
+        tag.putInt("energy", energy.getAmountAsInt());
         tag.put("item_handler", itemHandler.serializeNBT(registries));
         tag.putInt("radius", width);
         tag.putInt("depth", depth);
@@ -203,7 +206,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     }
 
     @Override
-    public IItemHandler getItemHandler() {
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
         return itemHandler;
     }
 
