@@ -11,11 +11,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 public class PointLineParticleOption implements ParticleOptions {
-    public final Vector3f target;
-    public final Vector3f color;
-    public final Vector3f speed;
+    public final Vector3fc target;
+    public final Vector3fc color;
+    public final Vector3fc speed;
     public final int lifeTime;
     public static final MapCodec<PointLineParticleOption> CODEC = RecordCodecBuilder.mapCodec(
             p -> p.group(
@@ -32,14 +33,14 @@ public class PointLineParticleOption implements ParticleOptions {
             ByteBufCodecs.INT, pointRotateParticleOption -> pointRotateParticleOption.lifeTime, PointLineParticleOption::new
     );
 
-    public PointLineParticleOption(Vector3f target, Vector3f color, Vector3f speed, int lifeTime){
+    public PointLineParticleOption(Vector3fc target, Vector3fc color, Vector3fc speed, int lifeTime){
         this.target = target;
         this.color = color;
         this.speed = speed;
         this.lifeTime = lifeTime;
     }
 
-    public PointLineParticleOption(Vector3f target, Vector3f color){
+    public PointLineParticleOption(Vector3fc target, Vector3fc color){
         this(target, color, new Vector3f(0, 0, 0), 0);
     }
 
@@ -48,15 +49,15 @@ public class PointLineParticleOption implements ParticleOptions {
         return MoeParticles.POINT_LINE_PARTICLE.get();
     }
 
-    public Vector3f getTarget() {
+    public Vector3fc getTarget() {
         return target;
     }
 
-    public Vector3f getColor() {
+    public Vector3fc getColor() {
         return color;
     }
 
-    public Vector3f getSpeed() {
+    public Vector3fc getSpeed() {
         return speed;
     }
 }

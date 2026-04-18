@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeBiomassGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -19,11 +20,14 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
 public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
@@ -39,10 +43,10 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
             }
         }
     };
-    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(1){
+    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -55,7 +59,10 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().insert(512, false);
+        try (Transaction transaction = Transaction.openRoot()){
+            int i = blockEntity.getEnergy().insert(512, transaction);
+            if(i > 0) transaction.commit();
+        }
     }
 
     @Override
@@ -83,21 +90,21 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getAmountAsInt());
-        tag.putInt("fullBiomassTime", fullBiomassTime);
-        tag.putInt("biomassTime", biomassTime);
-        tag.put("item_handler", itemHandler.serializeNBT(registries));
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandler.serialize(output);
+        output.putInt("fullBiomassTime", fullBiomassTime);
+        output.putInt("biomassTime", biomassTime);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setEnergy(tag.getInt("energy"));
-        fullBiomassTime = tag.getInt("fullBiomassTime");
-        biomassTime = tag.getInt("biomassTime");
-        itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandler.deserialize(input);
+        fullBiomassTime = input.getInt("fullBiomassTime").get();
+        biomassTime = input.getInt("biomassTime").get();
     }
 
     @Nullable
@@ -123,8 +130,8 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
 
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        SimpleContainer container = new SimpleContainer(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++){
             container.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);

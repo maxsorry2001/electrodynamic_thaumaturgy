@@ -11,11 +11,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 public class PointRotateParticleOption implements ParticleOptions {
-    public final Vector3f center;
-    public final Vector3f color;
-    public final Vector3f rotate;
+    public final Vector3fc center;
+    public final Vector3fc color;
+    public final Vector3fc rotate;
     public final int lifeTime;
     public static final MapCodec<PointRotateParticleOption> CODEC = RecordCodecBuilder.mapCodec(
             p -> p.group(
@@ -32,14 +33,14 @@ public class PointRotateParticleOption implements ParticleOptions {
             ByteBufCodecs.INT, pointRotateParticleOption -> pointRotateParticleOption.lifeTime, PointRotateParticleOption::new
     );
 
-    public PointRotateParticleOption(Vector3f center, Vector3f color, Vector3f rotate, int lifeTime){
+    public PointRotateParticleOption(Vector3fc center, Vector3fc color, Vector3fc rotate, int lifeTime){
         this.center = center;
         this.color = color;
         this.rotate = rotate;
         this.lifeTime = lifeTime;
     }
 
-    public PointRotateParticleOption(Vector3f center, Vector3f color){
+    public PointRotateParticleOption(Vector3fc center, Vector3fc color){
         this(center, color, new Vector3f(0, 0, 0), 0);
     }
 
@@ -48,15 +49,15 @@ public class PointRotateParticleOption implements ParticleOptions {
         return MoeParticles.POINT_ROTATE_PARTICLE.get();
     }
 
-    public Vector3f getCenter() {
+    public Vector3fc getCenter() {
         return center;
     }
 
-    public Vector3f getColor() {
+    public Vector3fc getColor() {
         return color;
     }
 
-    public Vector3f getRotate() {
+    public Vector3fc getRotate() {
         return rotate;
     }
 }
