@@ -24,8 +24,8 @@ public class TickEvent {
         if(event.getItemStack().is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem())){
             event.getToolTip().add(Component.translatable("advancements.electrodynamic_thaumaturgy.energy_send.description"));
         }
-        if(event.getItemStack().is(MoeItems.GENETIC_RECORDER.get()) && event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE) != null && event.getItemStack().get(MoeDataComponentTypes.ENTITY_DATA) != null)
-            event.getToolTip().add(BuiltInRegistries.ENTITY_TYPE.getOptional(event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE)).get().getDescription());
+        if(event.getItemStack().is(MoeItems.GENETIC_RECORDER.get()) && event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE) != null)
+            event.getToolTip().add(event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE).getDescription());
     }
 
     @SubscribeEvent

@@ -31,11 +31,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class ElectromagneticExtractorBlock extends BaseEntityBlock {
     public static final MapCodec<ElectromagneticExtractorBlock> CODEC = simpleCodec(ElectromagneticExtractorBlock::new);
-    public static final EnumProperty FACING = BlockStateProperties.FACING;
 
     public ElectromagneticExtractorBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState) this.defaultBlockState().setValue(FACING, Direction.UP));
+        this.registerDefaultState((BlockState) this.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP));
     }
 
     @Override
@@ -86,18 +85,18 @@ public class ElectromagneticExtractorBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(BlockStateProperties.FACING);
     }
 
     @Override
     public BlockState rotate(BlockState state, Rotation direction) {
-        return (BlockState)state.setValue(FACING, direction.rotate((Direction)state.getValue(FACING)));
+        return (BlockState)state.setValue(BlockStateProperties.FACING, direction.rotate((Direction)state.getValue(BlockStateProperties.FACING)));
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getClickedFace();
-        return this.defaultBlockState().setValue(FACING, direction.getOpposite());
+        return this.defaultBlockState().setValue(BlockStateProperties.FACING, direction.getOpposite());
     }
 }

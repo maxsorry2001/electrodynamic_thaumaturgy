@@ -4,10 +4,12 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ElectromagneticExtractorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -29,14 +31,19 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,10 +73,10 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         }
     };
 
-    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(27){
+    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(27){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -82,17 +89,17 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticExtractorBE electromagneticExtractorBE){
-        if(level.isClientSide() || electromagneticExtractorBE.getEnergy().getAmountAsInt() < extractUse * Math.pow(electromagneticExtractorBE.width, 2)) return;
+        if(level.isClientSide()) return;
         electromagneticExtractorBE.excavatorTick ++;
         if(electromagneticExtractorBE.excavatorTick < fullTick) return;
         electromagneticExtractorBE.excavatorTick = 0;
-        BlockPos targetPos = pos.relative(state.getValue(ElectromagneticExtractorBlock.FACING));
+        BlockPos targetPos = pos.relative(state.getValue(BlockStateProperties.FACING));
         BlockState blockState = level.getBlockState(targetPos);
         while (blockState.isAir() && electromagneticExtractorBE.isMaxDepth(state, pos, targetPos)){
-            targetPos = targetPos.relative(state.getValue(ElectromagneticExtractorBlock.FACING));
+            targetPos = targetPos.relative(state.getValue(BlockStateProperties.FACING));
             blockState = level.getBlockState(targetPos);
             Vec3 vec3 = targetPos.getCenter();
-            ((ServerLevel)level).sendParticles(ParticleTypes.FLASH, vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
+            ((ServerLevel)level).sendParticles(ColorParticleOption.create(ParticleTypes.FLASH, 0xFFFFFF), vec3.x(), vec3.y(), vec3.z(), 1, 0, 0, 0, 0);
         }
         if(blockState.getBlock() instanceof LiquidBlock || blockState.getBlock().defaultDestroyTime() <= 0) return;
         boolean flag = electromagneticExtractorBE.width % 2 == 0;
@@ -109,34 +116,43 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
             mi = -i;
             mj = -j0;
         }
-        for (; i <= mi; i++){
-            for (j = j0; j <= mj; j++){
-                BlockPos destroyPos = electromagneticExtractorBE.getDestroyPos(state, i, j, targetPos);
-                BlockState destroyState = level.getBlockState(destroyPos);
-                if(destroyState.isAir()) continue;
-                List<ItemStack> list = Block.getDrops(destroyState, (ServerLevel) level, destroyPos, level.getBlockEntity(destroyPos), null, electromagneticExtractorBE.getDigTool(destroyState));
-                Iterator<ItemStack> iterator = list.iterator();
-                while(iterator.hasNext()){
-                    ItemStack itemStack = iterator.next().copy();
-                    for (int k = 0; k < electromagneticExtractorBE.itemHandler.getSlots(); k++) {
-                        ItemStack result = electromagneticExtractorBE.getItemHandler().insertItem(k, itemStack, false);
-                        if(!result.isEmpty()) {
-                            if(k != electromagneticExtractorBE.itemHandler.getSlots() - 1)
-                                itemStack = result.copy();
-                            else level.addFreshEntity(new ItemEntity(level, electromagneticExtractorBE.getBlockPos().getX(), electromagneticExtractorBE.getBlockPos().getY(), electromagneticExtractorBE.getBlockPos().getZ(), result));
-                        }
-                        else break;
-                    }
+        try (Transaction transaction = Transaction.openRoot()){
+            List<ItemStack> drops = new ArrayList<>(), others = new ArrayList<>();
+            List<BlockPos> destroyPoses = new ArrayList<>();
+            for (; i <= mi; i++){
+                for (j = j0; j <= mj; j++){
+                    BlockPos destroyPos = electromagneticExtractorBE.getDestroyPos(state, i, j, targetPos);
+                    BlockState destroyState = level.getBlockState(destroyPos);
+                    if(destroyState.isAir()) continue;
+                    drops.addAll(Block.getDrops(destroyState, (ServerLevel) level, destroyPos, level.getBlockEntity(destroyPos), null, electromagneticExtractorBE.getDigTool(destroyState)));
+                    destroyPoses.add(destroyPos);
                 }
-                level.destroyBlock(destroyPos, false);
-                electromagneticExtractorBE.getEnergy().extract(extractUse, false);
+            }
+            Iterator<ItemStack> iterator = drops.iterator();
+            while (iterator.hasNext()) {
+                ItemStack itemStack = iterator.next().copy();
+                for (int k = 0; k < electromagneticExtractorBE.itemHandler.size(); k++) {
+                    int result = electromagneticExtractorBE.getItemHandler().insert(ItemResource.of(itemStack), itemStack.count(), transaction);
+                    if (result != itemStack.count()) {
+                        itemStack.setCount(itemStack.count() - result);
+                        if (k == electromagneticExtractorBE.itemHandler.size() - 1) others.add(itemStack);
+                    } else break;
+                }
+            }
+            int energyUse = electromagneticExtractorBE.getEnergy().extract(extractUse * destroyPoses.size(), transaction);
+            if(energyUse == extractUse * destroyPoses.size()) {
+                transaction.commit();
+                for (BlockPos blockPos : destroyPoses)
+                    level.destroyBlock(blockPos, false);
+                for (ItemStack itemStack : others)
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), itemStack));
             }
         }
     }
 
     public BlockPos getDestroyPos(BlockState blockState, int i, int j, BlockPos targetPos){
         BlockPos result;
-        switch (blockState.getValue(ElectromagneticExtractorBlock.FACING)){
+        switch (blockState.getValue(BlockStateProperties.FACING)){
             case Direction.SOUTH , Direction.NORTH -> {
                 result = new BlockPos(targetPos.getX() + i, targetPos.getY() + j, targetPos.getZ());
             }
@@ -152,7 +168,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
 
     private boolean isMaxDepth(BlockState blockState, BlockPos startPos, BlockPos endPos){
         int start, end;
-        switch (blockState.getValue(ElectromagneticExtractorBlock.FACING)) {
+        switch (blockState.getValue(BlockStateProperties.FACING)) {
             case Direction.SOUTH, Direction.NORTH -> {
                 start = startPos.getZ();
                 end = endPos.getZ();
@@ -163,33 +179,33 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
             }
             default -> {
                 start = startPos.getY();
-                end = endPos.getZ();
+                end = endPos.getY();
             }
         }
         return Mth.abs(start - end) < this.depth;
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getAmountAsInt());
-        tag.put("item_handler", itemHandler.serializeNBT(registries));
-        tag.putInt("radius", width);
-        tag.putInt("depth", depth);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandler.serialize(output);
+        output.putInt("width", width);
+        output.putInt("depth", depth);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setEnergy(tag.getInt("energy"));
-        itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
-        width = tag.getInt("radius");
-        depth = tag.getInt("depth");
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandler.deserialize(input);
+        width = input.getInt("width").get();
+        depth = input.getInt("depth").get();
     }
 
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        SimpleContainer container = new SimpleContainer(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++){
             container.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);
@@ -234,12 +250,12 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
 
     public void addWidth(boolean quick){
         this.width = quick ? Math.min(width + 5, MAX_WIDTH) : Math.min(width + 1, MAX_WIDTH);
-        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void reduceWidth(boolean quick){
         this.width = quick ? Math.max(width - 5, MIN_WIDTH) : Math.max(width - 1, MIN_WIDTH);
-        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void setWidth(int width) {
@@ -248,16 +264,16 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
 
     public void addDepth(boolean quick){
         this.depth = quick ?  Math.min(depth + 10, MAX_DEPTH) : Math.min(depth + 1, MAX_DEPTH);
-        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void reduceDepth(boolean quick){
         this.depth = quick ? Math.max(depth - 10, 1) : Math.max(depth - 1, 1);
-        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     private void dealChange(){
-        PacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void setDepth(int depth) {

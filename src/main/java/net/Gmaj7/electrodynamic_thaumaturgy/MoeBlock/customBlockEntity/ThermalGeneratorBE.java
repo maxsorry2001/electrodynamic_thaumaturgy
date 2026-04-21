@@ -20,9 +20,12 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
 public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemBlockEntity, MenuProvider {
@@ -41,7 +44,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -54,7 +57,10 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().insert(768, false);
+        try (Transaction transaction = Transaction.openRoot()){
+            int i = blockEntity.getEnergy().insert(768, transaction);
+            if(i > 0) transaction.commit();
+        }
     }
 
     @Override
@@ -63,7 +69,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
             if (burnTime > 0) burnTime--;
             if (burnTime <= 0) {
                 if (!itemHandler.getStackInSlot(0).isEmpty() && energy.getAmountAsInt() != energy.getCapacityAsInt()) {
-                    int time = itemHandler.getStackInSlot(0).getBurnTime(null) / 4;
+                    int time = itemHandler.getStackInSlot(0).getBurnTime(null, level.fuelValues()) / 4;
                     if (time > 0) {
                         burnTime = time;
                         fullBurnTime = time;
@@ -83,21 +89,21 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getAmountAsInt());
-        tag.putInt("fullBurnTime", fullBurnTime);
-        tag.putInt("burnTime", burnTime);
-        tag.put("item_handler", itemHandler.serializeNBT(registries));
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandler.serialize(output);
+        output.putInt("full_burn_time", fullBurnTime);
+        output.putInt("burn_time", burnTime);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        setEnergy(tag.getInt("energy"));
-        fullBurnTime = tag.getInt("fullBurnTime");
-        burnTime = tag.getInt("burnTime");
-        itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandler.deserialize(input);
+        burnTime = input.getInt("burn_time").get();
+        fullBurnTime = input.getInt("full_burn_time").get();
     }
 
     @Nullable
@@ -117,14 +123,14 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     }
 
     @Override
-    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
+    public MoeBlockEntityItemHandler getItemHandler() {
         return itemHandler;
     }
 
 
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        SimpleContainer container = new SimpleContainer(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++){
             container.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);

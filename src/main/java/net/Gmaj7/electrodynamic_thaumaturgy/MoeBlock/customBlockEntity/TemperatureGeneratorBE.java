@@ -10,8 +10,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
@@ -20,7 +23,7 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(i, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energy, getBlockPos()));
             }
         }
     };
@@ -29,20 +32,22 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("energy", energy.getAmountAsInt());
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        energy.setEnergy(tag.getInt("energy"));
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
     }
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        blockEntity.getEnergy().insert(512, false);
+        try (Transaction transaction = Transaction.openRoot()){
+            blockEntity.getEnergy().insert(512, transaction);
+        }
     }
 
     protected boolean canEnergyMake() {

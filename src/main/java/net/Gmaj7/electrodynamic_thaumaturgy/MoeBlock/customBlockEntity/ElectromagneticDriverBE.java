@@ -3,12 +3,14 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticDriverBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -23,9 +25,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -46,7 +50,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
         }
     };
 
-    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(1){
+    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
@@ -79,26 +83,24 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        if (this.ownerUUID != null) {
-            tag.putUUID("Owner", this.ownerUUID);
-        }
-        tag.putInt("cooldown", cooldown);
-        tag.putInt("energy", energy.getAmountAsInt());
-        tag.put("item_handler", itemHandler.serializeNBT(registries));
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        if(this.ownerUUID != null)
+            output.store("owner", UUIDUtil.CODEC, ownerUUID);
+        output.putInt("cooldown", cooldown);
+        energy.serialize(output);
+        itemHandler.serialize(output);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        if (tag.hasUUID("Owner")) {
-            this.ownerUUID = tag.getUUID("Owner");
-            this.owner = null;
-        }
-        this.cooldown = tag.getInt("cooldown");
-        setEnergy(tag.getInt("energy"));
-        itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        input.read("owner", UUIDUtil.CODEC).ifPresent(
+                uuid -> this.ownerUUID = uuid
+        );
+        this.cooldown = input.getInt("cooldown").get();
+        energy.deserialize(input);
+        itemHandler.deserialize(input);
     }
 
     public Entity getOwner() {
@@ -124,7 +126,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     }
 
     @Override
-    public ItemStacksResourceHandler getItemHandler() {
+    public MoeBlockEntityItemHandler getItemHandler() {
         return itemHandler;
     }
 
@@ -139,8 +141,8 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     }
 
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        SimpleContainer container = new SimpleContainer(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++){
             container.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);
@@ -161,7 +163,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
         this.cooldown = cooldown;
     }
 
-    public void extract(int energy){
-        this.energy.extract(energy * 64, false);
+    public void extract(int energy, Transaction transaction){
+        this.energy.extract(energy * 64, transaction);
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -32,11 +33,8 @@ public class MoeDataComponentTypes {
             MOE_DATA_COMPONENT_TYPE.register("moe_link_pos",
                     () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).build());
 
-    public static final Supplier<DataComponentType<CompoundTag>> ENTITY_DATA = MOE_DATA_COMPONENT_TYPE.register("entity_data",
-            () -> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).build());
-
-    public static final Supplier<DataComponentType<Identifier>> ENTITY_TYPE = MOE_DATA_COMPONENT_TYPE.register("entity_type",
-            () -> DataComponentType.<Identifier>builder().persistent(Identifier.CODEC).build());
+    public static final Supplier<DataComponentType<EntityType<?>>> ENTITY_TYPE = MOE_DATA_COMPONENT_TYPE.register("entity_type",
+            () -> DataComponentType.<EntityType<?>>builder().persistent(EntityType.CODEC).build());
 
 
     public static void register(IEventBus eventBus){

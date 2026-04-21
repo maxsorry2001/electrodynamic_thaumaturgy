@@ -12,13 +12,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.energy.ComponentEnergyStorage;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.ItemAccessEnergyHandler;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = ElectrodynamicThaumaturgy.MODID)
+@EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
 public class DataLoadHandler {
 
     @SubscribeEvent

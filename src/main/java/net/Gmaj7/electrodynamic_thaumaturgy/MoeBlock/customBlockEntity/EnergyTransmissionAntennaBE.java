@@ -1,5 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
+import com.mojang.serialization.Codec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
 import net.minecraft.core.BlockPos;
@@ -10,8 +11,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,6 +25,7 @@ import java.util.List;
 public class EnergyTransmissionAntennaBE extends BlockEntity {
     private static final int maxSend = 65535;
     private List<BlockPos> receivePos = new ArrayList<>();
+    private Codec<List<BlockPos>> codec = Codec.list(BlockPos.CODEC);
 
     public EnergyTransmissionAntennaBE(BlockPos pos, BlockState blockState) {
         super(MoeBlockEntities.ENERGY_TRANSMISSION_ANTENNA_BE.get(), pos, blockState);
@@ -31,26 +36,32 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
         EnergyHandler energyStorage = energyTransmissionAntennaBE.getLinkStorage();
         if(energyStorage != null){
             if(state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
-                Iterator<BlockPos> iterator = energyTransmissionAntennaBE.getReceivePos().iterator();
-                while (iterator.hasNext()){
-                    BlockPos target = iterator.next();
-                    BlockEntity blockEntity = level.getBlockEntity(target);
-                    if(blockEntity instanceof EnergyTransmissionAntennaBE && !level.getBlockState(target).getValue(EnergyTransmissionAtennaBlock.SEND)) {
-                        EnergyHandler targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
-                        if(targetStorage != null) {
-                            if (energyStorage == targetStorage) continue;
-                            if (energyStorage.getAmountAsInt() > 0 && targetStorage.canReceive() && energyStorage.canExtract()) {
-                                int trans= Math.min(energyStorage.getAmountAsInt(), maxSend);
-                                int a = targetStorage.insert(trans, true);
-                                int b = energyStorage.extract(trans, true);
-                                if(a != 0 && b != 0){
-                                    targetStorage.insert(trans, false);
-                                    energyStorage.extract(trans, false);
+                try (Transaction transaction = Transaction.openRoot()){
+                    Iterator<BlockPos> iterator = energyTransmissionAntennaBE.getReceivePos().iterator();
+                    boolean commit = true;
+                    while (iterator.hasNext()) {
+                        BlockPos target = iterator.next();
+                        if (target == energyTransmissionAntennaBE.getBlockPos()) continue;
+                        BlockEntity blockEntity = level.getBlockEntity(target);
+                        if (blockEntity instanceof EnergyTransmissionAntennaBE && !level.getBlockState(target).getValue(EnergyTransmissionAtennaBlock.SEND)) {
+                            EnergyHandler targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
+                            if (targetStorage != null) {
+                                if (energyStorage.getAmountAsInt() > 0) {
+                                    int trans = Math.min(Math.min(energyStorage.getAmountAsInt(), targetStorage.getCapacityAsInt() - targetStorage.getAmountAsInt()), maxSend);
+                                    if(trans <= 0) break;
+                                    int insert = targetStorage.insert(trans, transaction);
+                                    if(insert > 0) {
+                                        int extract = energyStorage.extract(insert, transaction);
+                                        if(insert != extract) {
+                                            commit = false;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        } else iterator.remove();
                     }
-                    else iterator.remove();
+                    if(commit) transaction.commit();
                 }
             }
         }
@@ -71,25 +82,15 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        List<Integer> list = new ArrayList<>();
-        for (BlockPos pos : receivePos){
-            list.add(pos.getX());
-            list.add(pos.getY());
-            list.add(pos.getZ());
-        }
-        tag.putIntArray("receive_pos", list);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.store("receive_pos", codec, receivePos);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        int[] pos = tag.getIntArray("receive_pos");
-        for (int i = 0; i < pos.length / 3; i++){
-            BlockPos blockPos = new BlockPos(pos[i * 3], pos[i * 3 + 1], pos[i * 3 + 2]);
-            receivePos.add(blockPos);
-        }
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        receivePos = input.read("receive_pos", codec).orElse(new ArrayList<>());
     }
 
     public List<BlockPos> getReceivePos() {

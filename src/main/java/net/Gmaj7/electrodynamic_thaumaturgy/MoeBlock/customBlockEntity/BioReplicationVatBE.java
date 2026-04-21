@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeEntityCloneBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
@@ -15,6 +16,8 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,11 +26,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.transfer.StacksResourceHandler;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
 public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity,MenuProvider {
@@ -45,10 +49,10 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
         }
     };
 
-    private final ItemStacksResourceHandler itemHandler = new ItemStacksResourceHandler(1){
+    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(1){
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -64,13 +68,17 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
         if(bioReplicationVatBE.clone > 0) bioReplicationVatBE.clone--;
         if(bioReplicationVatBE.clone <= 0 && bioReplicationVatBE.canSpawn() && !level.isClientSide()){
             ItemStack itemStack = bioReplicationVatBE.getItemHandler().getStackInSlot(0);
-            Entity entity =  BuiltInRegistries.ENTITY_TYPE.getOptional(itemStack.get(MoeDataComponentTypes.ENTITY_TYPE)).get().create(level);
+            Entity entity =  itemStack.get(MoeDataComponentTypes.ENTITY_TYPE).create(level, EntitySpawnReason.MOB_SUMMONED);
             if(entity instanceof LivingEntity) {
-                ((LivingEntity) entity).readAdditionalSaveData(itemStack.get(MoeDataComponentTypes.ENTITY_DATA));
-                entity.teleportTo(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
-                level.addFreshEntity(entity);
-                bioReplicationVatBE.clone = (int)((LivingEntity) entity).getMaxHealth();
-                bioReplicationVatBE.getEnergy().extract(SPAWN_NEED, false);
+                try (Transaction transaction = Transaction.openRoot()){
+                    entity.teleportTo(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
+                    bioReplicationVatBE.clone = (int)((LivingEntity) entity).getMaxHealth();
+                    int i = bioReplicationVatBE.getEnergy().extract(SPAWN_NEED, transaction);
+                    if(i > 0) {
+                        transaction.commit();
+                        level.addFreshEntity(entity);
+                    }
+                }
             }
         }
     }
@@ -78,7 +86,6 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     private boolean canSpawn() {
         return this.itemHandler.getStackInSlot(0).is(MoeItems.GENETIC_RECORDER.get())
                 && this.itemHandler.getStackInSlot(0).has(MoeDataComponentTypes.ENTITY_TYPE)
-                && this.itemHandler.getStackInSlot(0).has(MoeDataComponentTypes.ENTITY_DATA)
                 && this.energy.getAmountAsInt() > SPAWN_NEED;
     }
 
@@ -93,14 +100,14 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     }
 
     @Override
-    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
+    public MoeBlockEntityItemHandler getItemHandler() {
         return itemHandler;
     }
 
 
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++){
+        SimpleContainer container = new SimpleContainer(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++){
             container.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);
@@ -118,18 +125,18 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putInt("clone", clone);
-        tag.putInt("energy", energy.getAmountAsInt());
-        tag.put("item_handler", itemHandler.serializeNBT(registries));
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandler.serialize(output);
+        output.putInt("clone", clone);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        this.clone = tag.getInt("clone");
-        setEnergy(tag.getInt("energy"));
-        itemHandler.deserializeNBT(registries, tag.getCompound("item_handler"));
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandler.deserialize(input);
+        this.clone = input.getInt("clone").get();
     }
 }
