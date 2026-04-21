@@ -3,7 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BiomassGeneratorBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ThermalGeneratorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -75,16 +74,5 @@ public class BiomassGeneratorBlock extends AbstractGeneratorBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == MoeBlockEntities.BIOMASS_GENERATOR_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.BIOMASS_GENERATOR_BE.get(), BiomassGeneratorBE::tick) : null;
-    }
-
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof ThermalGeneratorBE blockEntity) {
-                blockEntity.drops();
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-            super.onRemove(state, level, pos, newState, movedByPiston);
-        }
     }
 }

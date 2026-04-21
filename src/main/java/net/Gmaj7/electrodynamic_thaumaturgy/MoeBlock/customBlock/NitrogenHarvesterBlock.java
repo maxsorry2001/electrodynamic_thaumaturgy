@@ -55,17 +55,6 @@ public class NitrogenHarvesterBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof NitrogenHarvesterBE blockEntity) {
-                blockEntity.drops();
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-            super.onRemove(state, level, pos, newState, movedByPiston);
-        }
-    }
-
-    @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new NitrogenHarvesterBE(blockPos, blockState);
     }

@@ -9,9 +9,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -165,5 +163,10 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
 
     public void extract(int energy, Transaction transaction){
         this.energy.extract(energy * 64, transaction);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        this.drops();
     }
 }

@@ -75,15 +75,4 @@ public class ThermalGeneratorBlock extends AbstractGeneratorBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == MoeBlockEntities.THERMAL_GENERATOR_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.THERMAL_GENERATOR_BE.get(), ThermalGeneratorBE::tick) : null;
     }
-
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof ThermalGeneratorBE blockEntity) {
-                blockEntity.drops();
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-            super.onRemove(state, level, pos, newState, movedByPiston);
-        }
-    }
 }
