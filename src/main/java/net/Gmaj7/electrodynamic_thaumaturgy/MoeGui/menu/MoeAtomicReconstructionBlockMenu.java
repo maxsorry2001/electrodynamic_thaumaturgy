@@ -15,7 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
 public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
     private final Level level;
@@ -33,9 +33,9 @@ public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (AtomicReconstructionBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.UP), 0, 42, 47));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), 0, 80, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), 0, 118, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.UP), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.UP).set(slot, resource, amount), 0, 42, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.NORTH).set(slot, resource, amount), 0, 80, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.DOWN).set(slot, resource, amount), 0, 118, 47));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

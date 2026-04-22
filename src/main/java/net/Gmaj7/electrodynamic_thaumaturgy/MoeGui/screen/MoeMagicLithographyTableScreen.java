@@ -51,11 +51,12 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
     @Override
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
+        this.extractTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    protected void renderTooltip(GuiGraphicsExtractor guiGraphics, int x, int y) {
-        super.renderTooltip(guiGraphics, x, y);
+    @Override
+    protected void extractTooltip(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+        super.extractTooltip(guiGraphics, mouseX, mouseY);
         if (this.displayRecipes) {
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
@@ -66,12 +67,11 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
                 int i1 = l - this.startIndex;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
-                if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18) {
-                    guiGraphics.renderTooltip(this.font, ((MagicLithographyRecipe)((RecipeHolder)list.get(l)).value()).getResultItem(this.minecraft.level.registryAccess()), x, y);
+                if (mouseX >= j1 && mouseX < j1 + 16 && mouseY >= k1 && mouseY < k1 + 18) {
+                    guiGraphics.tooltip(this.font, ((MagicLithographyRecipe)((RecipeHolder)list.get(l)).value()).getResultItem(this.minecraft.level.registryAccess()), mouseX, mouseY);
                 }
             }
         }
-
     }
 
     @Override

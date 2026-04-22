@@ -68,7 +68,7 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
             }
 
             public void onTake(Player p_150672_, ItemStack p_150673_) {
-                p_150673_.onCraftedBy(p_150672_.level(), p_150672_, p_150673_.getCount());
+                p_150673_.onCraftedBy(p_150672_, p_150673_.getCount());
                 MoeMagicLithographyTableMenu.this.resultContainer.awardUsedRecipes(p_150672_, this.getRelevantItems());
                 ItemStack itemstack = MoeMagicLithographyTableMenu.this.inputSlot.remove(1);
                 if (!itemstack.isEmpty()) {
@@ -187,7 +187,7 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
     void setupResultSlot() {
         if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
             RecipeHolder<MagicLithographyRecipe> recipeholder = (RecipeHolder)this.recipes.get(this.selectedRecipeIndex.get());
-            ItemStack itemstack = ((MagicLithographyRecipe)recipeholder.value()).assemble(createRecipeInput(this.container), this.level.registryAccess());
+            ItemStack itemstack = ((MagicLithographyRecipe)recipeholder.value()).assemble(createRecipeInput(this.container));
             if (itemstack.isItemEnabled(this.level.enabledFeatures())) {
                 this.resultContainer.setRecipeUsed(recipeholder);
                 this.resultSlot.set(itemstack);
@@ -212,7 +212,6 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
         if (!stack.isEmpty()) {
             this.recipes = this.level.getRecipeManager().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), createRecipeInput(container), this.level);
         }
-
     }
 
     private void addPlayerInventory(Inventory inventory){

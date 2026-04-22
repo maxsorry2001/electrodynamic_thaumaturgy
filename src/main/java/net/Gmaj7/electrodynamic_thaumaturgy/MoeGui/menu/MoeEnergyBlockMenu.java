@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
 public class MoeEnergyBlockMenu extends AbstractContainerMenu {
     private final Level level;
@@ -31,8 +31,8 @@ public class MoeEnergyBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (EnergyBlockEntity) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 60, 35));
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 1, 100, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 60, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 1, 100, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

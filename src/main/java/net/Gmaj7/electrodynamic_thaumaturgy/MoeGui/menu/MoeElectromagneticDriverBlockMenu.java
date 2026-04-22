@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
 public class MoeElectromagneticDriverBlockMenu extends AbstractContainerMenu {
     private final Level level;
@@ -30,7 +30,7 @@ public class MoeElectromagneticDriverBlockMenu extends AbstractContainerMenu {
         this.blockEntity = (ElectromagneticDriverBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.getItemHandler(), 0, 80, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 80, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
