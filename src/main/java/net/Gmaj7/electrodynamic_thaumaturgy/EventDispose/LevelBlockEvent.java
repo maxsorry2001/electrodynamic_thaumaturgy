@@ -12,6 +12,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.List;
 
@@ -23,10 +24,13 @@ public class LevelBlockEvent {
         List<ItemEntity> list = event.getDrops();
         BlockState blockState = event.getState();
         if(blockEntity instanceof EnergyBlockEntity){
-            ItemStack itemStack = list.get(0).getItem();
-            EnergyHandler energyStorageBlock = ((EnergyBlockEntity) blockEntity).getEnergy();
-            EnergyHandler energyStorageItem = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-            energyStorageItem.insert(energyStorageBlock.getAmountAsInt(), false);
+            try (Transaction transaction = Transaction.openRoot()){
+                ItemStack itemStack = list.get(0).getItem();
+                EnergyHandler energyStorageBlock = ((EnergyBlockEntity) blockEntity).getEnergy();
+                EnergyHandler energyStorageItem = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
+                energyStorageItem.insert(energyStorageBlock.getAmountAsInt(), transaction);
+                transaction.commit();
+            }
         }
     }
 }

@@ -68,7 +68,7 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (mouseX >= j1 && mouseX < j1 + 16 && mouseY >= k1 && mouseY < k1 + 18) {
-                    guiGraphics.tooltip(this.font, ((MagicLithographyRecipe)((RecipeHolder)list.get(l)).value()).getResultItem(this.minecraft.level.registryAccess()), mouseX, mouseY);
+                    guiGraphics.setTooltipForNextFrame(this.font, ((MagicLithographyRecipe)((RecipeHolder)list.get(l)).value()).getResultItem(), mouseX, mouseY);
                 }
             }
         }
@@ -140,7 +140,7 @@ public class MoeMagicLithographyTableScreen extends AbstractContainerScreen<MoeM
             int k = x + j % 4 * 16;
             int l = j / 4;
             int i1 = y + l * 18 + 2;
-            guiGraphics.item(((MagicLithographyRecipe)((RecipeHolder)list.get(i)).value()).getResultItem(this.minecraft.level.registryAccess()), k, i1);
+            guiGraphics.item(((MagicLithographyRecipe)((RecipeHolder)list.get(i)).value()).getResultItem(), k, i1);
         }
 
     }

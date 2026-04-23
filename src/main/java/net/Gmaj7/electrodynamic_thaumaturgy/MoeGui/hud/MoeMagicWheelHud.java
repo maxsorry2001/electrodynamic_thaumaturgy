@@ -7,16 +7,17 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleIte
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.client.gui.GuiLayer;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
-public class MoeMagicWheelHud implements LayeredDraw.Layer {
+public class MoeMagicWheelHud implements GuiLayer {
     public static MoeMagicWheelHud instance = new MoeMagicWheelHud();
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
     public boolean active;
@@ -44,13 +45,13 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
         for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
             ItemStack type = contents.getStackInSlot(i);
             if(type.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()){
-                guiGraphics.renderFakeItem(type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
-                guiGraphics.renderItemDecorations(Minecraft.getInstance().font, type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
+                guiGraphics.fakeItem(type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
+                guiGraphics.itemDecorations(Minecraft.getInstance().font, type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
             }
             alpha = alpha + 0.25 * Math.PI;
         }
-        int textureWidth = 256, textureHeight = 256;
-        guiGraphics.blit(TEXTURE, centerX - textureWidth / 2, centerY - textureHeight / 2, 0, 0, textureWidth, textureHeight);
+        int textureWidth = 2048, textureHeight = 2048;
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, centerX - textureWidth / 2, centerY - textureHeight / 2, 0, 0, textureWidth, textureHeight, 256, 256);
         double mouseX = Minecraft.getInstance().mouseHandler.xpos(), mouseY = Minecraft.getInstance().mouseHandler.ypos();
         double screenCenterX = Minecraft.getInstance().getWindow().getScreenWidth() / 2F, screenCenterY = Minecraft.getInstance().getWindow().getScreenHeight() / 2F;
         double Lx = mouseX - screenCenterX, Ly = mouseY - screenCenterY;
@@ -69,7 +70,7 @@ public class MoeMagicWheelHud implements LayeredDraw.Layer {
     public void close(){
         active = false;
         if(selection > 1)
-            PacketDistributor.sendToServer(new MoePacket.MoeSelectMagicPacket(selection, useHand));
+            ClientPacketDistributor.sendToServer(new MoePacket.MoeSelectMagicPacket(selection, useHand));
         Minecraft.getInstance().mouseHandler.grabMouse();
     }
 

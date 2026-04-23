@@ -24,11 +24,7 @@ public class ClickDispose {
         InteractionHand hand = event.getHand();
         ItemStack handStack = player.getItemInHand(hand);
         if(handStack.is(MoeItems.GENETIC_RECORDER.get()) && target instanceof LivingEntity && target.isAlive()){
-            CompoundTag compoundTag = new CompoundTag();
-            ((LivingEntity) target).addAdditionalSaveData(compoundTag);
-            compoundTag.remove("UUID");
-            handStack.set(MoeDataComponentTypes.ENTITY_TYPE, EntityType.getKey(target.getType()));
-            handStack.set(MoeDataComponentTypes.ENTITY_DATA, compoundTag);
+            handStack.set(MoeDataComponentTypes.ENTITY_TYPE, target.getType());
             player.swing(event.getHand());
             event.setCanceled(true);
         }

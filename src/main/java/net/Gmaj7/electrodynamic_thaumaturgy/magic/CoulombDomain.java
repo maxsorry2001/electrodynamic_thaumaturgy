@@ -24,7 +24,7 @@ public class CoulombDomain extends AbstractBlockBeaconMagic {
         Vec3 vec3 = blockPos.getCenter();
         CoulombDomainBeaconEntity coulombDomainBeaconEntity = new CoulombDomainBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
         livingEntity.level().addFreshEntity(coulombDomainBeaconEntity);
-        if(!livingEntity.level().isClientSide){
+        if(!livingEntity.level().isClientSide()){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) livingEntity.level(), coulombDomainBeaconEntity, 10, 0, -Mth.PI / 32);
                 makeParticle((ServerLevel) livingEntity.level(), coulombDomainBeaconEntity, 5, 5, Mth.PI / 32);

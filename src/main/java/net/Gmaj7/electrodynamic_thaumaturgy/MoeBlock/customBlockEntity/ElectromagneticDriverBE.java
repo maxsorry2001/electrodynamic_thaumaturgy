@@ -161,8 +161,15 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
         this.cooldown = cooldown;
     }
 
-    public void extract(int energy, Transaction transaction){
-        this.energy.extract(energy * 64, transaction);
+    public boolean extract(int energy){
+        boolean commit;
+        try (Transaction transaction = Transaction.openRoot()){
+            int i = this.energy.extract(energy * 64, transaction);
+            commit = i == energy * 64;
+            if(commit)
+                transaction.commit();
+        }
+        return commit;
     }
 
     @Override

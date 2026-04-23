@@ -6,8 +6,8 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLithographyRecipe> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_lithography");
     public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_gui.png");
-    public static final RecipeType<MagicLithographyRecipe> RECIPE_TYPE = new RecipeType<>(UID, MagicLithographyRecipe.class);
+    public static final IRecipeType<MagicLithographyRecipe> RECIPE_TYPE = IRecipeType.create(UID, MagicLithographyRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;
 
@@ -29,7 +29,7 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
     }
 
     @Override
-    public RecipeType<MagicLithographyRecipe> getRecipeType() {
+    public IRecipeType<MagicLithographyRecipe> getRecipeType() {
         return RECIPE_TYPE;
     }
 
@@ -49,18 +49,13 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
     public @Nullable IDrawable getIcon() {
         return icon;
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MagicLithographyRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.getResultItem());
     }
 }

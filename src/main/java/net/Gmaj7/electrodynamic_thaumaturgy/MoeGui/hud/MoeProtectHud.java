@@ -5,12 +5,13 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
-public class MoeProtectHud implements LayeredDraw.Layer {
+public class MoeProtectHud implements GuiLayer {
     public static final Identifier FULL = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_protect_full");
     public static final Identifier HALF = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_protect_half");
     @Override
@@ -23,8 +24,8 @@ public class MoeProtectHud implements LayeredDraw.Layer {
         int p = Mth.floor(protect / 2);
         double q = protect % 2;
         for (int k = 0; k < Math.min(p, 10); k++)
-            guiGraphics.blitSprite(FULL, screenWidth / 2 - 91 + 8 * k, screenHeight - 39, 9, 9);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, FULL, screenWidth / 2 - 91 + 8 * k, screenHeight - 39, 9, 9);
         if(q > 0.5 && p < 10)
-            guiGraphics.blitSprite(HALF, screenWidth / 2 - 91 + 8 * p, screenHeight - 39, 9, 9);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HALF, screenWidth / 2 - 91 + 8 * p, screenHeight - 39, 9, 9);
     }
 }

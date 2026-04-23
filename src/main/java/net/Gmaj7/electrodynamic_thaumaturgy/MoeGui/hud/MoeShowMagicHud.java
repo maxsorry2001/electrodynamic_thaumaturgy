@@ -6,12 +6,12 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleIte
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
-public class MoeShowMagicHud implements LayeredDraw.Layer {
+public class MoeShowMagicHud implements GuiLayer {
     @Override
     public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;
@@ -23,8 +23,8 @@ public class MoeShowMagicHud implements LayeredDraw.Layer {
         ItemStack typeStack = itemStack.get(DataComponents.CONTAINER).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item){
             if (!item.isEmpty()){
-                guiGraphics.renderFakeItem(typeStack, screenWidth / 6, screenHeight * 7 / 8);
-                guiGraphics.renderItemDecorations(Minecraft.getInstance().font, typeStack, screenWidth / 6, screenHeight * 7 / 8);
+                guiGraphics.fakeItem(typeStack, screenWidth / 6, screenHeight * 7 / 8);
+                guiGraphics.itemDecorations(Minecraft.getInstance().font, typeStack, screenWidth / 6, screenHeight * 7 / 8);
             }
         }
     }

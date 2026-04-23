@@ -15,7 +15,7 @@ public class MoeRecipes {
             DeferredRegister.create(Registries.RECIPE_TYPE, ElectrodynamicThaumaturgy.MODID);
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagicLithographyRecipe>> MAGIC_LITHOGRAPHY_SERIALIZER =
-            SERIALIZER.register("magic_lithography", MagicLithographyRecipe.Serializer::new);
+            SERIALIZER.register("magic_lithography", () -> new RecipeSerializer<>(MagicLithographyRecipe.CODEC, MagicLithographyRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeType<?>, RecipeType<MagicLithographyRecipe>> MAGIC_LITHOGRAPHY_TYPE =
             TYPE.register("magic_lithography", () -> new RecipeType<MagicLithographyRecipe>() {
                 @Override
