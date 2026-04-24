@@ -9,10 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -78,7 +75,7 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[0]));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, Mob.class, 5, false, false, (p_28879_) -> {
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, Mob.class, 5, false, false, (p_28879_, serverLevel) -> {
             return p_28879_ instanceof Enemy || ((Mob)p_28879_).getTarget() == this.getOwner();
         }));
     }
@@ -90,10 +87,9 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
                 .add(Attributes.ATTACK_DAMAGE, 5F);
     }
 
-    @Nullable
     @Override
-    public UUID getOwnerUUID() {
-        return masterUUID;
+    public @org.jspecify.annotations.Nullable EntityReference<LivingEntity> getOwnerReference() {
+        return null;
     }
 
     @Nullable
@@ -218,7 +214,7 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
         if (!this.canTeleportTo(new BlockPos(x, y, z))) {
             return false;
         } else {
-            this.moveTo((double)x + 0.5, (double)y, (double)z + 0.5, this.getYRot(), this.getXRot());
+            this.teleportTo((double)x + 0.5, (double)y, (double)z + 0.5);
             this.navigation.stop();
             return true;
         }

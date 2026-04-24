@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,7 +44,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
         opentick++;
         if(opentick == 20 && !level().isClientSide()){
             level().setBlockAndUpdate(getOnPos().relative(direction), Fluids.FLOWING_LAVA.defaultFluidState().createLegacyBlock());
-            LightningBolt lightningBolt1 = EntityType.LIGHTNING_BOLT.create(level());
+            LightningBolt lightningBolt1 = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
             lightningBolt1.teleportTo(this.getX(), this.getY(), this.getZ());
             lightningBolt1.setVisualOnly(true);
             level().addFreshEntity(lightningBolt1);
@@ -52,7 +53,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
                 if(target != getOwner() && magicItem != null){
                     target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), MoeFunction.getMagicAmount(magicItem));
                     MoeFunction.checkTargetEnhancement(magicItem, target);
-                    LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
+                    LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
                     lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
                     lightningBolt.setVisualOnly(true);
                     level().addFreshEntity(lightningBolt);

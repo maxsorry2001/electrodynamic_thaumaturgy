@@ -1,5 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.custom;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,8 +18,8 @@ public class MagneticLevitationEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        return super.applyEffectTick(livingEntity, amplifier);
+    public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity mob, int amplification) {
+        return super.applyEffectTick(serverLevel, mob, amplification);
     }
 
     @Override

@@ -4,10 +4,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
@@ -19,20 +19,22 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.golem.IronGolem;
+import net.minecraft.world.entity.animal.turtle.Turtle;
+import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HarmonicSovereignEntity extends AbstractSovereignEntity implements Enemy {
-    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.electrodynamic_thaumaturgy.harmonic_sovereign"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
+    private final ServerBossEvent bossEvent = new ServerBossEvent(Mth.createInsecureUUID(this.level().getRandom()), Component.translatable("entity.electrodynamic_thaumaturgy.harmonic_sovereign"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
     protected final RandomSource random = RandomSource.create();
     protected int[] coolDown = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
     private final List<IMoeMagic> magic = new ArrayList<>(){{
@@ -78,19 +80,19 @@ public class HarmonicSovereignEntity extends AbstractSovereignEntity implements 
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("cast_tick", this.castTick);
-        compound.putIntArray("cool_down", this.coolDown);
-        compound.putInt("cast_anim", this.castAnim);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("cast_tick", this.castTick);
+        output.putIntArray("cool_down", this.coolDown);
+        output.putInt("cast_anim", this.castAnim);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.castTick = compound.getInt("cast_tick");
-        this.coolDown = compound.getIntArray("cool_down");
-        this.castAnim = compound.getInt("cast_anim");
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.castTick = input.getInt("cast_tick").get();
+        this.coolDown = input.getIntArray("cool_down").get();
+        this.castAnim = input.getInt("cast_anim").get();
     }
 
     public void setCastTick(int castTick) {

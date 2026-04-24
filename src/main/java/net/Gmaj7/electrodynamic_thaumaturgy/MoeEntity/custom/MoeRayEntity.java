@@ -1,14 +1,17 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
 
@@ -45,6 +48,11 @@ public class MoeRayEntity extends Entity implements IEntityWithComplexSpawn {
     }
 
     @Override
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource damageSource, float v) {
+        return false;
+    }
+
+    @Override
     public boolean shouldRender(double x, double y, double z) {
         return true;
     }
@@ -60,13 +68,13 @@ public class MoeRayEntity extends Entity implements IEntityWithComplexSpawn {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {
-        this.distance = compoundTag.getFloat("moe_ray_time");
+    protected void addAdditionalSaveData(ValueOutput valueOutput) {
+        valueOutput.putFloat("moe_ray_time", this.distance);
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
-        compoundTag.putFloat("moe_ray_time", this.distance);
+    protected void readAdditionalSaveData(ValueInput valueInput) {
+        this.distance = valueInput.getFloatOr("moe_ray_time", 0);
     }
 
     @Override

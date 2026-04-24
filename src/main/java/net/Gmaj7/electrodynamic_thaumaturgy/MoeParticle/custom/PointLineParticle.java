@@ -24,11 +24,6 @@ public class PointLineParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTick) {
-        return 0xF000F0;
-    }
-
-    @Override
     public float getQuadSize(float scaleFactor) {
         return 0.1F;
     }

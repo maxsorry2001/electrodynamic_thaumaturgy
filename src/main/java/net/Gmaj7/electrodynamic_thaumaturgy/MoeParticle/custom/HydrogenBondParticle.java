@@ -7,6 +7,8 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
+import org.jspecify.annotations.Nullable;
 
 public class HydrogenBondParticle extends BubbleParticle {
     protected HydrogenBondParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, TextureAtlasSprite sprite) {
@@ -36,9 +38,9 @@ public class HydrogenBondParticle extends BubbleParticle {
             this.sprite = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            HydrogenBondParticle hydrogenBondParticle = new HydrogenBondParticle(level, x, y, z, xSpeed, ySpeed, zSpeed);
-            hydrogenBondParticle.pickSprite(this.sprite);
+        @Override
+        public @Nullable Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource randomSource) {
+            HydrogenBondParticle hydrogenBondParticle = new HydrogenBondParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, sprite.get(randomSource));
             return hydrogenBondParticle;
         }
     }

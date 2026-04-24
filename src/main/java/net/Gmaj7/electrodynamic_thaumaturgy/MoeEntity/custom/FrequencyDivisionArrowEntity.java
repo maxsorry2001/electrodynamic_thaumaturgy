@@ -48,7 +48,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
     @Override
     public void tick() {
         super.tick();
-        if(this.inGround) explodeTime --;
+        if(this.isInGround()) explodeTime --;
         if(this.tickCount < maxTime)
             this.teleportTo(startPos.x(), startPos.y(), startPos.z());
         if(this.tickCount == maxTime){

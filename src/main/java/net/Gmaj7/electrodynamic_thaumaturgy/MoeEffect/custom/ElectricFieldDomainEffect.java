@@ -22,7 +22,7 @@ public class ElectricFieldDomainEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.getOnPos()).inflate(10));
         for (LivingEntity target : list){
             if(target != livingEntity && target.walkAnimation.speed() > 0.01 && target.onGround()) {
@@ -32,9 +32,8 @@ public class ElectricFieldDomainEffect extends MobEffect {
                 target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), num / rr);
             }
         }
-        if(!livingEntity.level().isClientSide())
-            makeParticle((ServerLevel) livingEntity.level(), livingEntity);
-        return super.applyEffectTick(livingEntity, amplifier);
+        makeParticle(serverLevel, livingEntity);
+        return super.applyEffectTick(serverLevel, livingEntity, amplifier);
     }
 
     @Override

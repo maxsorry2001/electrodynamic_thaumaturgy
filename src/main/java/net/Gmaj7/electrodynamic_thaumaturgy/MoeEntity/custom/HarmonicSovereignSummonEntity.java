@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticle
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
@@ -58,12 +59,12 @@ public class HarmonicSovereignSummonEntity extends AbstractArrow {
             }
         }
         if(summonTick < 0){
-            HarmonicSovereignEntity harmonicSovereignEntity = MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get().create(level());
+            HarmonicSovereignEntity harmonicSovereignEntity = MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get().create(level(), EntitySpawnReason.SPAWNER);
             harmonicSovereignEntity.teleportTo(getOnPos().getX() + 0.5, getOnPos().getY() + 1, getOnPos().getZ() + 0.5);
             level().addFreshEntity(harmonicSovereignEntity);
             for (int i = 1; i <= 8; i++){
                 float r = i * 2 * Mth.PI / 8;
-                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
+                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.SPAWNER);
                 lightningBolt.teleportTo(getX() + 4 * Mth.sin(r), getY(), getZ() + 4 * Mth.cos(r));
                 lightningBolt.setVisualOnly(true);
                 level().addFreshEntity(lightningBolt);

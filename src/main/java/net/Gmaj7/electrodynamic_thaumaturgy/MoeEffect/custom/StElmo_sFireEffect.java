@@ -26,18 +26,16 @@ public class StElmo_sFireEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplification) {
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(3));
         for (LivingEntity target : list){
             if (target != livingEntity && target instanceof Enemy){
-                target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), 5 + 2F * amplifier);
-                if(!livingEntity.level().isClientSide()){
-                    Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity, target));
-                    thread.start();
-                }
+                target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), 5 + 2F * amplification);
+                Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity, target));
+                thread.start();
             }
         }
-        return super.applyEffectTick(livingEntity, amplifier);
+        return super.applyEffectTick(serverLevel, livingEntity, amplification);
     }
 
     private void makeParticle(ServerLevel level, LivingEntity source, LivingEntity target){

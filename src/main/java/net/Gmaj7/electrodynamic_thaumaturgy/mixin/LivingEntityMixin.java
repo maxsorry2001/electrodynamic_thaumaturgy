@@ -4,13 +4,14 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeProtective;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Attackable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -41,14 +42,12 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
-    public void addAdditionalSaveDataMixin(CompoundTag compound, CallbackInfo ci){
-        compound.putFloat("moe_protecting", protective.getProtecting());
+    public void addAdditionalSaveDataMixin(ValueOutput output, CallbackInfo ci){
+        output.putFloat("moe_protecting", protective.getProtecting());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-    public void readAdditionalSaveDataMixin(CompoundTag compound, CallbackInfo ci){
-        if (compound.contains("moe_protecting")) {
-            this.protective.setProtecting(compound.getFloat("moe_protecting"));
-        }
+    public void readAdditionalSaveDataMixin(ValueInput input, CallbackInfo ci){
+        this.protective.setProtecting(input.getFloatOr("moe_protecting", 0F));
     }
 }

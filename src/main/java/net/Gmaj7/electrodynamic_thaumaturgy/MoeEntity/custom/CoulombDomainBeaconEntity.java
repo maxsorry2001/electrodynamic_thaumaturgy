@@ -5,11 +5,11 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +17,8 @@ import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -58,7 +60,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
                 if (this.getOwner() instanceof HarmonicSaintEntity && target == ((HarmonicSaintEntity) this.getOwner()).getOwner()) continue;
                 target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), MoeFunction.getMagicAmount(magicItem) / 2);
                 MoeFunction.checkTargetEnhancement(magicItem, target);
-                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level());
+                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
                 lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
                 lightningBolt.setVisualOnly(true);
                 level().addFreshEntity(lightningBolt);
@@ -98,17 +100,19 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("live_tick", liveTick);
-        compound.put("moe_magic_item", this.magicItem.save(this.registryAccess()));
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("live_tick", liveTick);
+        output.store("moe_magic_item", ItemStack.CODEC, this.magicItem);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.liveTick = compound.getInt("live_tick");
-        this.magicItem = ItemStack.parse(this.registryAccess(), compound.getCompound("moe_magic_item")).get();
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.liveTick = input.getInt("live_tick").get();
+        input.read("moe_magic_item", ItemStack.CODEC).ifPresent(itemStack -> {
+            magicItem = itemStack;
+        });
     }
 
     private void makeParticle(LivingEntity target, float xRot, float yRot){
