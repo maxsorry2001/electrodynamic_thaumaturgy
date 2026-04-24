@@ -88,6 +88,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
         MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) electromagneticDriverBE.getOwner());
@@ -105,7 +106,6 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
             thread.start();
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeCircleParticle(ServerLevel level, MagmaLightingBeaconEntity magmaLightingBeaconEntity, int height, double radius, float omega){

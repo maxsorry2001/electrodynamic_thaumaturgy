@@ -95,6 +95,7 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         target.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
         blockParticle(new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ()), target);
         List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
@@ -104,7 +105,6 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
             target1.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {

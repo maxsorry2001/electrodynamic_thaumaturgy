@@ -59,13 +59,13 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)));
         if(!electromagneticDriverBE.getLevel().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), target));
             thread.start();
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel serverLevel, LivingEntity livingEntity){

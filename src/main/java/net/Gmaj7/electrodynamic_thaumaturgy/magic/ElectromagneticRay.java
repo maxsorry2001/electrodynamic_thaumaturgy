@@ -90,6 +90,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
         List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(7));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         LivingEntity lineTarget = list.get(RandomSource.create().nextInt(list.size()));
         Vec3 start = new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ());
         Vec3 end = new Vec3(lineTarget.getX(), (lineTarget.getY() + lineTarget.getEyeY()) / 2, lineTarget.getZ());
@@ -107,7 +108,6 @@ public class ElectromagneticRay extends AbstractWideMagic{
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {

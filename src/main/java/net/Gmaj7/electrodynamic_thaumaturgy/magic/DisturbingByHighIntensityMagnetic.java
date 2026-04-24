@@ -72,6 +72,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
         List<Mob> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(Mob.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         for (int i = 0; i < list.size(); i++){
             Mob target = list.get(i);
             if(target instanceof Enemy || target.getTarget() == electromagneticDriverBE.getOwner()){
@@ -83,7 +84,6 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){

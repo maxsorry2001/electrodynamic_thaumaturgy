@@ -6,6 +6,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,7 +15,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class EnergyBlockItem extends BlockItem {
     public EnergyBlockItem(Block block, Properties properties) {
@@ -27,7 +28,7 @@ public class EnergyBlockItem extends BlockItem {
         BlockEntity blockEntity = context.getLevel().getBlockEntity(context.getClickedPos());
         if(blockEntity instanceof EnergyBlockEntity && flag){
             ItemStack itemStack = context.getItemInHand();
-            ((EnergyBlockEntity) blockEntity).setEnergy(itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt());
+            ((EnergyBlockEntity) blockEntity).setEnergy(itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack)).getAmountAsInt());
         }
         return flag;
     }
@@ -53,10 +54,10 @@ public class EnergyBlockItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        EnergyHandler energyStorage = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
+    public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+        EnergyHandler energyStorage = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
         int i = energyStorage.getAmountAsInt(),j = energyStorage.getCapacityAsInt();
-        tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+        builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
     }
 }

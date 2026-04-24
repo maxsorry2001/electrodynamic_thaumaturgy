@@ -78,6 +78,7 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(20));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
                 target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)) - 7));
@@ -91,7 +92,6 @@ public class Exciting extends AbstractWideMagic{
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, int radius, float xRot, float yRot){

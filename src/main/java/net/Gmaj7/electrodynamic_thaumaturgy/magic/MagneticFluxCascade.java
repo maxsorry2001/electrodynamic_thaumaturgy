@@ -57,12 +57,12 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(electromagneticDriverBE.getLevel(), (LivingEntity) electromagneticDriverBE.getOwner(), ElectromagneticDriverBE.magicItem);
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         electromagneticDriverBE.getLevel().addFreshEntity(magneticFluxCascadeEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
             Thread thread = new Thread(() -> magneticFluxCascadeEntity.makeParticle(true));
             thread.start();

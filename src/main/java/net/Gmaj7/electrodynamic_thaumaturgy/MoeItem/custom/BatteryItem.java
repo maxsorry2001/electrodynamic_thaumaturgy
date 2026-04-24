@@ -12,13 +12,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class BatteryItem extends Item {
     public BatteryItem(Properties properties) {
@@ -38,21 +40,43 @@ public class BatteryItem extends Item {
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if(remainingUseDuration % 5 == 0) {
-            EnergyHandler energyHandler1 = livingEntity.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-            EnergyHandler energyHandler2 = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-            if (energyHandler2.getAmountAsInt() > 0 && energyHandler1.getAmountAsInt() < energyHandler1.getCapacityAsInt()) {
-                energyHandler1.insert(4096, false);
-                energyHandler2.extract(4096, false);
-            } else livingEntity.stopUsingItem();
+            EnergyHandler mainHandEnergy = livingEntity.getMainHandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
+            EnergyHandler offHandEnergy = livingEntity.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
+            boolean flag = stack == livingEntity.getMainHandItem();
+            if(flag){
+                if(mainHandEnergy.getAmountAsInt() <= 0 || offHandEnergy.getAmountAsInt() >= offHandEnergy.getCapacityAsInt()) livingEntity.stopUsingItem();
+                else {
+                    try (Transaction transaction = Transaction.openRoot()){
+                        int insert = Math.min(Math.min(4096, mainHandEnergy.getAmountAsInt()), offHandEnergy.getCapacityAsInt() - offHandEnergy.getAmountAsInt());
+                        int trueInsert = offHandEnergy.insert(insert, transaction);
+                        if(trueInsert > 0){
+                            mainHandEnergy.extract(trueInsert, transaction);
+                            transaction.commit();
+                        }
+                    }
+                }
+            }
+            else {
+                if(offHandEnergy.getAmountAsInt() <= 0 || mainHandEnergy.getAmountAsInt() >= mainHandEnergy.getCapacityAsInt()) livingEntity.stopUsingItem();
+                else {
+                    try (Transaction transaction = Transaction.openRoot()){
+                        int insert = Math.min(Math.min(4096, offHandEnergy.getAmountAsInt()), mainHandEnergy.getCapacityAsInt() - mainHandEnergy.getAmountAsInt());
+                        int trueInsert = mainHandEnergy.insert(insert, transaction);
+                        if(trueInsert > 0){
+                            offHandEnergy.extract(trueInsert, transaction);
+                            transaction.commit();
+                        }
+                    }
+                }
+            }
         }
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
     }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
-        if (usedHand == InteractionHand.MAIN_HAND && player.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)) != null
-                && player.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).canReceive()
-                && player.getMainHandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt() > 0){
+        if (player.getMainHandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(player.getMainHandItem())) != null
+        && player.getOffhandItem().getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(player.getOffhandItem())) != null){
             player.startUsingItem(usedHand);
         }
         return super.use(level, player, usedHand);
@@ -89,11 +113,12 @@ public class BatteryItem extends Item {
         float f = Math.max(0.0F, (float) i / stackMaxEnergy);
         return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
+
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, builder, tooltipFlag);
         EnergyHandler energyStorage = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
         int i = energyStorage.getAmountAsInt(),j = energyStorage.getCapacityAsInt();
-        tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+        builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
     }
 }

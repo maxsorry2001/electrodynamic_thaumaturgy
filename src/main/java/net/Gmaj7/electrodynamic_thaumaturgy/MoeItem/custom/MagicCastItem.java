@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,8 +27,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class MagicCastItem extends Item {
     private static final int maxMagicSlots = 10;
@@ -47,15 +49,21 @@ public class MagicCastItem extends Item {
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
         ItemStack typeStack = getMagic(itemStack);
-        int energy = itemStack.get(MoeDataComponentTypes.MOE_ENERGY.get());
+        EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()
-                && energy >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(typeStack)
+                && energyHandler.getAmountAsInt() >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(typeStack)
                 && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)
                 && item.success(player, itemStack)) {
             item.cast(player, itemStack);
-            itemStack.set(MoeDataComponentTypes.MOE_ENERGY, energy - (int)(item.getBaseEnergyCost() * MoeFunction.getEfficiency(itemStack)));
-            player.getCooldowns().addCooldown(typeStack, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
-            player.swing(usedHand);
+            try (Transaction transaction = Transaction.openRoot()){
+                int cost = (int) (item.getBaseEnergyCost() * MoeFunction.getEfficiency(itemStack));
+                int i = energyHandler.extract(cost, transaction);
+                if(i == cost){
+                    transaction.commit();
+                    player.getCooldowns().addCooldown(typeStack, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
+                    player.swing(usedHand);
+                }
+            }
             return InteractionResult.CONSUME;
         }
         else return InteractionResult.FAIL;
@@ -104,22 +112,22 @@ public class MagicCastItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(getTranslate(stack));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, builder, tooltipFlag);
+        builder.accept(getTranslate(stack));
         EnergyHandler energyHandler = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
         int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
-        tooltipComponents.add(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+        builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         if(stack.has(MoeDataComponentTypes.LINK_POS)){
             BlockPos blockPos = stack.get(MoeDataComponentTypes.LINK_POS);
-            tooltipComponents.add(Component.translatable("binding").append(blockPos.getX() + "," + blockPos.getY() + "," + blockPos.getZ()));
+            builder.accept(Component.translatable("binding").append(blockPos.getX() + "," + blockPos.getY() + "," + blockPos.getZ()));
         }
         EnhancementData enhancementData = stack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-        tooltipComponents.add(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
-        tooltipComponents.add(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
-        tooltipComponents.add(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
-        tooltipComponents.add(Component.translatable("item.electrodynamic_thaumaturgy.entropy_enhance").append(":" + enhancementData.entropy()));
-        tooltipComponents.add(Component.translatable("item.electrodynamic_thaumaturgy.life_extraction_enhance").append(":" + enhancementData.lifeExtraction()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.entropy_enhance").append(":" + enhancementData.entropy()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.life_extraction_enhance").append(":" + enhancementData.lifeExtraction()));
     }
 
     @Override

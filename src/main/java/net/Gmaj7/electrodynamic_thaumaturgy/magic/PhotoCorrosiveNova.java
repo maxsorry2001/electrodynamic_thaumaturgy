@@ -64,12 +64,12 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
         PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem ,(LivingEntity) electromagneticDriverBE.getOwner());
         target.level().addFreshEntity(photoCorrosiveNovaEntity);
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(!electromagneticDriverBE.getLevel().isClientSide()){
             Thread thread = new Thread(() -> makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), photoCorrosiveNovaEntity));
             thread.start();

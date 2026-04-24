@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +25,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target == null) return;
         target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack));
-        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level());
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level(), EntitySpawnReason.TRIGGERED);
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
         livingEntity.level().addFreshEntity(lightningBolt);
@@ -37,7 +38,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
-        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(source.level());
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(source.level(), EntitySpawnReason.TRIGGERED);
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
         source.level().addFreshEntity(lightningBolt);
@@ -71,13 +72,13 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE) {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target != null && !electromagneticDriverBE.getLevel().isClientSide()) {
+            if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
             target.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(electromagneticDriverBE.getLevel());
+            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(electromagneticDriverBE.getLevel(), EntitySpawnReason.TRIGGERED);
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
             electromagneticDriverBE.getLevel().addFreshEntity(lightningBolt);
             electromagneticDriverBE.setCooldown(getBaseCooldown());
-            electromagneticDriverBE.extract(getBaseEnergyCost());
         }
     }
 

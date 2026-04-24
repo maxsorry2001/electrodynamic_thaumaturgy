@@ -79,13 +79,13 @@ public class NerveBlocking extends AbstractWideMagic{
         List<LivingEntity> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(7));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
+        if(!electromagneticDriverBE.extract(getBaseEnergyCost())) return;
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
                 target.addEffect(new MobEffectInstance(MoeEffects.NERVE_BLOCKING, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (1 * MoeFunction.getStrengthRate(ElectromagneticDriverBE.magicItem))));
             }
         }
         electromagneticDriverBE.setCooldown(getBaseCooldown());
-        electromagneticDriverBE.extract(getBaseEnergyCost());
         if(!electromagneticDriverBE.getLevel().isClientSide()){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), electromagneticDriverBE.getBlockPos().getCenter().add(0, 0.2, 0), 7);
