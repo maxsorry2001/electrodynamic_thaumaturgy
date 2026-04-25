@@ -6,20 +6,21 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AttractBeaconEntity
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.resources.Identifier;
 
-public class MagnetArrowRender extends ArrowRenderer<AttractBeaconEntity> {
+public class MagnetArrowRender extends ArrowRenderer<AttractBeaconEntity, ArrowRenderState> {
     public MagnetArrowRender(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public Identifier getTextureLocation(AttractBeaconEntity attractBeaconEntity) {
-        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
+    public ArrowRenderState createRenderState() {
+        return new ArrowRenderState();
     }
 
     @Override
-    public void render(AttractBeaconEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-
+    protected Identifier getTextureLocation(ArrowRenderState arrowRenderState) {
+        return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
     }
 }

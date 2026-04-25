@@ -25,6 +25,6 @@ public class CoulombDomainRender extends ArrowRenderer<CoulombDomainBeaconEntity
 
     @Override
     public boolean shouldRender(CoulombDomainBeaconEntity entity, Frustum culler, double camX, double camY, double camZ) {
-        return true;
+        return false;
     }
 }

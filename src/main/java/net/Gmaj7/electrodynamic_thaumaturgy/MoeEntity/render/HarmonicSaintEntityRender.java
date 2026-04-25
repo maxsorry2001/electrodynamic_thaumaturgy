@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.layers.WitchItemLayer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.monster.Witch;
 
-public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, HarmonicSovereignEntityModel<HarmonicSaintEntity>> {
+public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, HarmonicSaintEntityRenderState, HarmonicSovereignEntityModel<HarmonicSaintEntity>> {
     private static final Identifier TEX_LOCATION = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/mob/harmonic_saint.png");
 
     public HarmonicSaintEntityRender(EntityRendererProvider.Context p_174443_) {
@@ -19,16 +19,22 @@ public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, 
         this.addLayer(new WitchItemLayer(this, p_174443_.getItemInHandRenderer()));
     }
 
-    public void render(HarmonicSaintEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+    @Override
+    public HarmonicSaintEntityRenderState createRenderState() {
+        return null;
     }
 
-    public Identifier getTextureLocation(HarmonicSaintEntity entity) {
-        return TEX_LOCATION;
+    public void render(HarmonicSaintEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 
     protected void scale(Witch livingEntity, PoseStack poseStack, float partialTickTime) {
         float f = 0.9375F;
         poseStack.scale(0.9375F, 0.9375F, 0.9375F);
+    }
+
+    @Override
+    public Identifier getTextureLocation(HarmonicSaintEntityRenderState harmonicSaintEntityRenderState) {
+        return TEX_LOCATION;
     }
 }

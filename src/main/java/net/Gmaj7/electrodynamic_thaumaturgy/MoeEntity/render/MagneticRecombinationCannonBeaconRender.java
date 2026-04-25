@@ -7,15 +7,14 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagneticRecombinationCannonBeaconEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
-public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity> {
+public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity, ArrowRenderState> {
     public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "moe_ray_entity_model"), "main");
     private static final Identifier LIGHT = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnetic_recombination_cannon_beacon_entity.png");
     private final ModelPart body;
@@ -26,8 +25,12 @@ public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<Magne
     }
 
     @Override
-    public Identifier getTextureLocation(MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity) {
-        if(magneticRecombinationCannonBeaconEntity.getStartTime() > 100) return LIGHT;
+    public ArrowRenderState createRenderState() {
+        return new ArrowRenderState();
+    }
+
+    @Override
+    protected Identifier getTextureLocation(ArrowRenderState arrowRenderState) {
         return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
     }
 

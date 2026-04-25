@@ -4,22 +4,29 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MirageEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.resources.Identifier;
 
-public class MirageEntityRender extends ArrowRenderer<MirageEntity> {
+public class MirageEntityRender extends ArrowRenderer<MirageEntity, ArrowRenderState> {
     public MirageEntityRender(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public Identifier getTextureLocation(MirageEntity attractBeaconEntity) {
+    public ArrowRenderState createRenderState() {
+        return new ArrowRenderState();
+    }
+
+    @Override
+    protected Identifier getTextureLocation(ArrowRenderState arrowRenderState) {
         return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/magnet_arrow_entity.png");
     }
 
     @Override
-    public void render(MirageEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-
+    public boolean shouldRender(MirageEntity entity, Frustum culler, double camX, double camY, double camZ) {
+        return false;
     }
 }
