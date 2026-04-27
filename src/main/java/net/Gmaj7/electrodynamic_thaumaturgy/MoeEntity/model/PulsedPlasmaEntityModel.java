@@ -3,8 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -21,7 +19,8 @@ public class PulsedPlasmaEntityModel<T extends Entity> extends EntityModel<Entit
 	private final ModelPart bone;
 
 	public PulsedPlasmaEntityModel(ModelPart root) {
-		this.bone = root.getChild("bone");
+        super(root);
+        this.bone = root.getChild("bone");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -59,10 +58,5 @@ public class PulsedPlasmaEntityModel<T extends Entity> extends EntityModel<Entit
 	@Override
 	public void setupAnim(EntityRenderState state) {
 		super.setupAnim(state);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 	}
 }

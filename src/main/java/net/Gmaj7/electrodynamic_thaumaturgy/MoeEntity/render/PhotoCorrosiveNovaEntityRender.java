@@ -6,12 +6,16 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoCorrosiveNovaEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.PhotoCorrosiveNovaEntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
-public class PhotoCorrosiveNovaEntityRender extends EntityRenderer<PhotoCorrosiveNovaEntity> {
+public class PhotoCorrosiveNovaEntityRender extends EntityRenderer<PhotoCorrosiveNovaEntity, EntityRenderState> {
     private final PhotoCorrosiveNovaEntityModel photoCorrosiveNovaEntityModel;
     public PhotoCorrosiveNovaEntityRender(EntityRendererProvider.Context context) {
         super(context);
@@ -19,17 +23,19 @@ public class PhotoCorrosiveNovaEntityRender extends EntityRenderer<PhotoCorrosiv
     }
 
     @Override
-    public Identifier getTextureLocation(PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity) {
+    public EntityRenderState createRenderState() {
+        return new EntityRenderState();
+    }
+
+    public static Identifier getTextureLocation() {
         return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/photo_corrosive_nova_entity.png");
     }
 
     @Override
-    public void render(PhotoCorrosiveNovaEntity p_entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        super.render(p_entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
-        poseStack.pushPose();
-        this.photoCorrosiveNovaEntityModel.setupAnim(p_entity, 0, 0, p_entity.tickCount, 0, 0);
-        VertexConsumer buffer = bufferSource.getBuffer(this.photoCorrosiveNovaEntityModel.renderType(this.getTextureLocation(p_entity)));
-        this.photoCorrosiveNovaEntityModel.renderToBuffer(poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY);
+    public void submit(EntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+        super.submit(state, poseStack, submitNodeCollector, camera);poseStack.pushPose();
+        this.photoCorrosiveNovaEntityModel.setupAnim(state);
+        submitNodeCollector.submitModel(this.photoCorrosiveNovaEntityModel, state, poseStack, RenderTypes.entityCutout(getTextureLocation()), 15728880, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         poseStack.popPose();
     }
 }

@@ -3,11 +3,10 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.animations.Animations;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
-import net.minecraft.client.model.ArmedModel;
-import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.model.HierarchicalModel;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.renderState.SovereignRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -15,8 +14,14 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
-public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
+public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> extends HumanoidModel<SovereignRenderState> {
+    public static final AnimationHolder WALK_SOVEREIGN = Model.getAnimation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "walk_sovereign"));
+    public static final AnimationHolder CAST_1 = Model.getAnimation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "cast_1"));
+
+    private final KeyframeAnimation walk;
+    private final KeyframeAnimation cast_1;
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign"), "main");
     private final ModelPart bone;
@@ -34,6 +39,7 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
     private final ModelPart head;
 
     public HarmonicSovereignEntityModel(ModelPart root) {
+        super(root);
         this.bone = root.getChild("bone");
         this.leg = this.bone.getChild("leg");
         this.left = this.leg.getChild("left");
@@ -47,6 +53,8 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
         this.lower2 = this.right2.getChild("lower2");
         this.body = this.bone.getChild("body");
         this.head = this.bone.getChild("head");
+        this.walk = WALK_SOVEREIGN.get().bake(root);
+        this.cast_1 = CAST_1.get().bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -89,38 +97,33 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
     }
 
     @Override
-    public void setupAnim(AbstractSovereignEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(SovereignRenderState state) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.applyHeadRotation(netHeadYaw, headPitch);
+        this.head.xRot = state.xRot * ((float)Math.PI / 180F);
+        this.head.yRot = state.yRot * ((float)Math.PI / 180F);
 
-        this.animateWalk(Animations.WALK_SOVEREIGN, limbSwing, limbSwingAmount, 2F, 2.5F);
-        this.animate(entity.castAnimationState, Animations.CAST_1, ageInTicks, 1F);
+        this.walk.applyWalk(state.walkAnimationPos, state.walkAnimationSpeed, 1, 1);
+        this.cast_1.apply(state.castAnimationState, state.ageInTicks);
     }
 
-    private void applyHeadRotation(float headYaw, float headPitch){
-        headYaw = Mth.clamp(headYaw, -30F, 30F);
-        headPitch = Mth.clamp(headPitch, -25F, 45);
 
-        this.head.yRot = headYaw * (Mth.PI / 180F);
-        this.head.xRot = headPitch * (Mth.PI / 180F);
-    }
+
+    //@Override
+    //public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+    //    bone.render(poseStack, buffer, packedLight, packedOverlay, color);
+    //}
+//
+    //@Override
+    //public ModelPart root() {
+    //    return this.bone;
+    //}
+//
+    //@Override
+    //public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
+    //    this.getArm(humanoidArm).translateAndRotate(poseStack);
+    //}
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        bone.render(poseStack, buffer, packedLight, packedOverlay, color);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.bone;
-    }
-
-    @Override
-    public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
-        this.getArm(humanoidArm).translateAndRotate(poseStack);
-    }
-
-
     public ModelPart getArm(HumanoidArm side) {
         return side == HumanoidArm.LEFT ? this.left2 : this.right2;
     }

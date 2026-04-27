@@ -3,25 +3,28 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;// Made with Blockb
 // Paste this class into your mod and generate all required imports
 
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.animations.Animations;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoCorrosiveNovaEntity;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.animation.KeyframeAnimation;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
-public class PhotoCorrosiveNovaEntityModel<T extends PhotoCorrosiveNovaEntity> extends HierarchicalModel<T> {
+public class PhotoCorrosiveNovaEntityModel extends EntityModel<EntityRenderState> {
+	public static final AnimationHolder PHOTO_CORROSIVE_NOVA_ANIME = getAnimation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "photo_corrosive_nova"));
+	private final KeyframeAnimation keyframeAnimation;
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "photocorrosivenovaentity"), "main");
 	private final ModelPart bone;
 
 	public PhotoCorrosiveNovaEntityModel(ModelPart root) {
+		super(root);
 		this.bone = root.getChild("bone");
+		this.keyframeAnimation = PHOTO_CORROSIVE_NOVA_ANIME.get().bake(root);
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -38,18 +41,8 @@ public class PhotoCorrosiveNovaEntityModel<T extends PhotoCorrosiveNovaEntity> e
 	}
 
 	@Override
-	public void setupAnim(PhotoCorrosiveNovaEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.bone.getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.animationState, Animations.PHOTO_CORROSIVE_NOVA_ANIME, ageInTicks, 1F);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-	}
-
-	@Override
-	public ModelPart root() {
-		return bone;
+	public void setupAnim(EntityRenderState state) {
+		super.setupAnim(state);
+		this.keyframeAnimation.applyStatic();
 	}
 }
