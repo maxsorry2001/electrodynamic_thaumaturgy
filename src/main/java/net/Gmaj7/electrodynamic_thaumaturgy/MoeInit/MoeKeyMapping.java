@@ -9,6 +9,6 @@ public class MoeKeyMapping {
     public static final String KEY_CATEGORY_MOE = "key.category.electrodynamic_thaumaturgy.moe";
     public static final String KEY_SWITCH_MAGIC = "key.electrodynamic_thaumaturgy.switch_magic";
 
-    public static final KeyMapping SELECT_MAGIC = new KeyMapping(KEY_SWITCH_MAGIC, KeyConflictContext.IN_GAME,
-            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, KEY_CATEGORY_MOE);
+    public static final KeyMapping SELECT_MAGIC = new KeyMapping(KEY_SWITCH_MAGIC,
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, KeyMapping.Category.MISC);
 }

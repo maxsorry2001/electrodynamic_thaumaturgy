@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -11,10 +12,14 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLithographyRecipe> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_lithography");
@@ -40,12 +45,12 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
 
     @Override
     public int getWidth() {
-        return 0;
+        return 176;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return 85;
     }
 
     @Override
@@ -57,5 +62,11 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
     public void setRecipe(IRecipeLayoutBuilder builder, MagicLithographyRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.getResultItem());
+    }
+
+    @Override
+    public void draw(MagicLithographyRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+        this.background.draw(guiGraphics);
+        guiGraphics.fillGradient(156, 50, 164, 56, 0xffb51500, 0xff600b00);
     }
 }
