@@ -67,14 +67,14 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
                 return false;
             }
 
-            public void onTake(Player p_150672_, ItemStack p_150673_) {
-                p_150673_.onCraftedBy(p_150672_, p_150673_.getCount());
-                MoeMagicLithographyTableMenu.this.resultContainer.awardUsedRecipes(p_150672_, this.getRelevantItems());
+            public void onTake(Player player, ItemStack itemStack) {
+                itemStack.onCraftedBy(player, itemStack.getCount());
+                MoeMagicLithographyTableMenu.this.resultContainer.awardUsedRecipes(player, this.getRelevantItems());
                 ItemStack itemstack = MoeMagicLithographyTableMenu.this.inputSlot.remove(1);
                 if (!itemstack.isEmpty()) {
                     MoeMagicLithographyTableMenu.this.setupResultSlot();
                 }
-                super.onTake(p_150672_, p_150673_);
+                super.onTake(player, itemStack);
             }
 
             private List<ItemStack> getRelevantItems() {

@@ -1,7 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -67,7 +69,7 @@ public class MoeElectromagneticExtractorBlockScreen extends AbstractContainerScr
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        this.menu.quick = hasShiftDown();
+        this.menu.quick = InputConstants.isKeyDown(Minecraft.getInstance().getWindow(), 340);
         double mouseX = event.x(), mouseY = event.y();
         if(isMouseAddWidthFocused(mouseX, mouseY)){
             if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
