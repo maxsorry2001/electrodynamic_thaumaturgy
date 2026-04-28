@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +112,10 @@ public class MoeTabs {
 
     public static ItemStack setFullEnergyItem(ItemStack itemStack){
         EnergyHandler energyStorage = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
-        energyStorage.insert(energyStorage.getCapacityAsInt(), false);
+        try (Transaction transaction = Transaction.openRoot()){
+            energyStorage.insert(energyStorage.getCapacityAsInt(), transaction);
+            transaction.commit();
+        }
         return itemStack;
     }
 
