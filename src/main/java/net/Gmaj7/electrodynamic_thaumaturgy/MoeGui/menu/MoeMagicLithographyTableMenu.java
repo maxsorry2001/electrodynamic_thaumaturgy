@@ -8,6 +8,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipeInput;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
@@ -202,15 +204,17 @@ public class MoeMagicLithographyTableMenu extends AbstractContainerMenu {
     }
 
     private List<RecipeHolder<MagicLithographyRecipe>> getRecipe() {
-        return this.level.getRecipeManager().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), new MagicLithographyRecipeInput(container.getItem(inNum)), level);
+        if(level.isClientSide()) return new ArrayList<>();
+        return ((ServerLevel)this.level).recipeAccess().recipeMap().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), new MagicLithographyRecipeInput(container.getItem(inNum)), level).toList();
     }
 
     private void setupRecipeList(Container container, ItemStack stack) {
+        if(level.isClientSide()) return;
         this.recipes.clear();
         this.selectedRecipeIndex.set(-1);
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), createRecipeInput(container), this.level);
+            this.recipes = ((ServerLevel)this.level).recipeAccess().recipeMap().getRecipesFor(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get(), createRecipeInput(container), this.level).toList();
         }
     }
 
