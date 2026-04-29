@@ -33,7 +33,7 @@ public class DataLoadHandler {
         payloadRegistrar.playToClient(MoePacket.BiomassSetPacket.TYPE, MoePacket.BiomassSetPacket.STREAM_CODEC, MoePacket.BiomassSetPacket::handle);
         payloadRegistrar.playToClient(MoePacket.AtomicPacket.TYPE, MoePacket.AtomicPacket.STREAM_CODEC, MoePacket.AtomicPacket::handle);
 
-        payloadRegistrar.playBidirectional(MoePacket.ExtractorPacket.TYPE, MoePacket.ExtractorPacket.STREAM_CODEC, MoePacket.ExtractorPacket::handle);
+        payloadRegistrar.playBidirectional(MoePacket.ExtractorPacket.TYPE, MoePacket.ExtractorPacket.STREAM_CODEC, MoePacket.ExtractorPacket::handle, MoePacket.ExtractorPacket::handle);
     }
 
 

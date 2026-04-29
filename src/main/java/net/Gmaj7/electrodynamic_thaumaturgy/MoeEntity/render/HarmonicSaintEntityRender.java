@@ -12,11 +12,11 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.monster.Witch;
 
-public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, SovereignRenderState, HarmonicSovereignEntityModel<HarmonicSaintEntity>> {
+public class HarmonicSaintEntityRender extends MobRenderer<HarmonicSaintEntity, SovereignRenderState, HarmonicSovereignEntityModel> {
     private static final Identifier TEX_LOCATION = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/mob/harmonic_saint.png");
 
     public HarmonicSaintEntityRender(EntityRendererProvider.Context p_174443_) {
-        super(p_174443_, new HarmonicSovereignEntityModel<>(p_174443_.bakeLayer(HarmonicSovereignEntityModel.LAYER_LOCATION)), 0.5F);
+        super(p_174443_, new HarmonicSovereignEntityModel(p_174443_.bakeLayer(HarmonicSovereignEntityModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

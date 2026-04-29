@@ -43,7 +43,6 @@ public class PointLineParticle extends SingleQuadParticle {
         this.setPos(newPos.x(), newPos.y(), newPos.z());
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<PointLineParticleOption> {
         private final SpriteSet spriteSet;
 

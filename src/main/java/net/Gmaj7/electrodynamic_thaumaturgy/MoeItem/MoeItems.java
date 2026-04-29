@@ -11,6 +11,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -135,7 +136,7 @@ public class MoeItems {
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
-                    .component(DataComponents.CONTAINER, setEmpty())
+                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
                     .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 

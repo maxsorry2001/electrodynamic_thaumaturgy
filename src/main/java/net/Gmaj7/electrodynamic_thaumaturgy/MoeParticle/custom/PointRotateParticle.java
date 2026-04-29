@@ -65,7 +65,6 @@ public class PointRotateParticle extends SingleQuadParticle {
         this.setPos(newPos.x(), newPos.y(), newPos.z());
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<PointRotateParticleOption> {
         private final SpriteSet spriteSet;
 

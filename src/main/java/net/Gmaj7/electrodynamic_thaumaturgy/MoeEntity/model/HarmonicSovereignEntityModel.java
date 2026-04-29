@@ -1,11 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.renderState.SovereignRenderState;
 import net.minecraft.client.animation.KeyframeAnimation;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.Model;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -14,13 +13,13 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.HumanoidArm;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
-public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> extends HumanoidModel<SovereignRenderState> {
+public class HarmonicSovereignEntityModel extends EntityModel<SovereignRenderState> implements ArmedModel<SovereignRenderState>, HeadedModel {
     public static final AnimationHolder WALK_SOVEREIGN = Model.getAnimation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "walk_sovereign"));
     public static final AnimationHolder CAST_1 = Model.getAnimation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "cast_1"));
 
     private final KeyframeAnimation walk;
     private final KeyframeAnimation cast_1;
-    // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
+     //This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign"), "main");
     private final ModelPart bone;
     private final ModelPart leg;
@@ -104,24 +103,6 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
         this.cast_1.apply(state.castAnimationState, state.ageInTicks);
     }
 
-
-
-    //@Override
-    //public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-    //    bone.render(poseStack, buffer, packedLight, packedOverlay, color);
-    //}
-//
-    //@Override
-    //public ModelPart root() {
-    //    return this.bone;
-    //}
-//
-    //@Override
-    //public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
-    //    this.getArm(humanoidArm).translateAndRotate(poseStack);
-    //}
-
-    @Override
     public ModelPart getArm(HumanoidArm side) {
         return side == HumanoidArm.LEFT ? this.left2 : this.right2;
     }
@@ -129,5 +110,10 @@ public class HarmonicSovereignEntityModel<T extends AbstractSovereignEntity> ext
     @Override
     public ModelPart getHead() {
         return this.head;
+    }
+
+    @Override
+    public void translateToHand(SovereignRenderState sovereignRenderState, HumanoidArm humanoidArm, PoseStack poseStack) {
+        this.getArm(humanoidArm).translateAndRotate(poseStack);
     }
 }
