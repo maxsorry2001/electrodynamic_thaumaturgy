@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:nitrogen_harvester_block"
+        "recipe": "electrodynamic_thaumaturgy:nitrogen_harvester_machine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:nitrogen_harvester_block"
+      "electrodynamic_thaumaturgy:nitrogen_harvester_machine_block"
     ]
   }
 }

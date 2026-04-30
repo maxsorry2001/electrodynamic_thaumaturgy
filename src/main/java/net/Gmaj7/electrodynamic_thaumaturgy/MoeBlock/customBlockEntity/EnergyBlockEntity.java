@@ -76,8 +76,11 @@ public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEnt
         MoeBlockEntityItemHandler itemHandler = energyBlockEntity.getItemHandler();
         EnergyHandler energyStorage = energyBlockEntity.getEnergy();
         ItemStack inStack = itemHandler.getStackInSlot(1), outStack = itemHandler.getStackInSlot(0);
-        EnergyHandler inStorage = inStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(inStack));
-        EnergyHandler outStorage = outStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(outStack));
+        EnergyHandler inStorage = null, outStorage = null;
+        if(!inStack.isEmpty())
+            inStorage= inStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(inStack));
+        if(!outStack.isEmpty())
+            outStorage  = outStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(outStack));
         if(outStorage != null && !outStack.isEmpty()){
             try(Transaction transactionOut = Transaction.openRoot()) {
                 int outAmount = Math.min(outStorage.getCapacityAsInt() - outStorage.getAmountAsInt(), Math.min(energyBlockEntity.tickEnergyTranslate, energyStorage.getAmountAsInt()));

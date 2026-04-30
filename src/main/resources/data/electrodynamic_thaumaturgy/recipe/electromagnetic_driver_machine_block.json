@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:iron_ingot"
-    },
-    "b": {
-      "item": "minecraft:iron_ingot"
-    },
-    "c": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    },
-    "d": {
-      "item": "electrodynamic_thaumaturgy:primary_lc"
-    },
-    "e": {
-      "item": "electrodynamic_thaumaturgy:primary_power"
-    }
+    "a": "minecraft:iron_ingot",
+    "b": "minecraft:iron_ingot",
+    "c": "electrodynamic_thaumaturgy:energy_core",
+    "d": "electrodynamic_thaumaturgy:primary_lc",
+    "e": "electrodynamic_thaumaturgy:primary_power"
   },
   "pattern": [
     "ada",
@@ -24,7 +14,6 @@
     "aea"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block"
   }
 }

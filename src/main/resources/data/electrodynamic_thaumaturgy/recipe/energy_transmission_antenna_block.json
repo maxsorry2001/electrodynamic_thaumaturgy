@@ -2,15 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": "minecraft:iron_ingot",
+    "a": "minecraft:copper_ingot",
     "b": "electrodynamic_thaumaturgy:energy_core"
   },
   "pattern": [
-    "aaa",
-    "bbb",
-    "aaa"
+    "a",
+    "a",
+    "b"
   ],
   "result": {
-    "id": "electrodynamic_thaumaturgy:power_bank"
+    "count": 2,
+    "id": "electrodynamic_thaumaturgy:energy_transmission_antenna_block"
   }
 }

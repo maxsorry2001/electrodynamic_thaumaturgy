@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "electrodynamic_thaumaturgy:magno_ingot"
-    }
+    "a": "electrodynamic_thaumaturgy:magno_ingot"
   },
   "pattern": [
     " a ",

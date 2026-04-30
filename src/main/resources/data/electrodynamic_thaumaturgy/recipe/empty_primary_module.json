@@ -2,15 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "c": {
-      "item": "minecraft:copper_ingot"
-    }
+    "c": "minecraft:copper_ingot"
   },
   "pattern": [
     "ccc"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:empty_primary_module"
   }
 }

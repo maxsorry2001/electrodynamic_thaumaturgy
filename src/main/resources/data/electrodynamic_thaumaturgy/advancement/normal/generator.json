@@ -47,7 +47,6 @@
       "translate": "advancements.electrodynamic_thaumaturgy.generator.description"
     },
     "icon": {
-      "count": 1,
       "id": "electrodynamic_thaumaturgy:photovoltaic_generator_block"
     },
     "title": {

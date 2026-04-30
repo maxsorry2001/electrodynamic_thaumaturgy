@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:energy_transmission_antenna"
+            "items": "electrodynamic_thaumaturgy:energy_transmission_antenna_block"
           }
         ]
       },
@@ -17,8 +17,7 @@
       "translate": "advancements.electrodynamic_thaumaturgy.energy_send.description"
     },
     "icon": {
-      "count": 1,
-      "id": "electrodynamic_thaumaturgy:energy_transmission_antenna"
+      "id": "electrodynamic_thaumaturgy:energy_transmission_antenna_block"
     },
     "title": {
       "translate": "advancements.electrodynamic_thaumaturgy.energy_send.title"

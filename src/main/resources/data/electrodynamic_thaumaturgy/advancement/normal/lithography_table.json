@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:magic_lithography_table"
+            "items": "electrodynamic_thaumaturgy:magic_lithography_table_block"
           }
         ]
       },
@@ -17,8 +17,7 @@
       "translate": "advancements.electrodynamic_thaumaturgy.lithography_table.description"
     },
     "icon": {
-      "count": 1,
-      "id": "electrodynamic_thaumaturgy:magic_lithography_table"
+      "id": "electrodynamic_thaumaturgy:magic_lithography_table_block"
     },
     "title": {
       "translate": "advancements.electrodynamic_thaumaturgy.lithography_table.title"

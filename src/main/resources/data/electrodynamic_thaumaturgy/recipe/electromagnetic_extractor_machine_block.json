@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:iron_ingot"
-    },
-    "b": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    },
-    "c": {
-      "item": "minecraft:redstone"
-    },
-    "d": {
-      "item": "minecraft:iron_ingot"
-    }
+    "a": "minecraft:iron_ingot",
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "minecraft:redstone",
+    "d": "minecraft:iron_ingot"
   },
   "pattern": [
     "aca",
@@ -21,7 +13,6 @@
     "ada"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:electromagnetic_extractor_machine_block"
   }
 }

@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:iron_ingot"
-    },
-    "b": {
-      "item": "minecraft:rotten_flesh"
-    },
-    "c": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    },
-    "d": {
-      "item": "minecraft:iron_ingot"
-    }
+    "a": "minecraft:iron_ingot",
+    "b": "minecraft:rotten_flesh",
+    "c": "electrodynamic_thaumaturgy:energy_core",
+    "d": "minecraft:iron_ingot"
   },
   "pattern": [
     "aba",
@@ -21,7 +13,6 @@
     "ada"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:bio_replication_vat_machine_block"
   }
 }

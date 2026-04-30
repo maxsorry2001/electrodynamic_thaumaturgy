@@ -2,18 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:copper_ingot"
-    },
-    {
-      "item": "minecraft:carrot"
-    }
+    "minecraft:iron_ingot",
+    "minecraft:copper_ingot",
+    "minecraft:carrot"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:carrot_battery"
   }
 }

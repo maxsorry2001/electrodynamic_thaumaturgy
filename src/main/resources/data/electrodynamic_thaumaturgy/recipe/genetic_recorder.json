@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:glass_pane"
-    },
-    "b": {
-      "item": "minecraft:rotten_flesh"
-    },
-    "c": {
-      "item": "minecraft:iron_ingot"
-    }
+    "a": "minecraft:glass_pane",
+    "b": "minecraft:rotten_flesh",
+    "c": "minecraft:iron_ingot"
   },
   "pattern": [
     " a ",
@@ -18,7 +12,6 @@
     " c "
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:genetic_recorder"
   }
 }

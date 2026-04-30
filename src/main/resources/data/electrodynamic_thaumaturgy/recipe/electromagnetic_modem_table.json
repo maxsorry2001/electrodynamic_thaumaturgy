@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "electrodynamic_thaumaturgy:magno_ingot"
-    },
-    "b": {
-      "item": "minecraft:smithing_table"
-    }
+    "a": "electrodynamic_thaumaturgy:magno_ingot",
+    "b": "minecraft:smithing_table"
   },
   "pattern": [
     " a ",
@@ -15,7 +11,6 @@
     " a "
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:electromagnetic_modem_table"
   }
 }

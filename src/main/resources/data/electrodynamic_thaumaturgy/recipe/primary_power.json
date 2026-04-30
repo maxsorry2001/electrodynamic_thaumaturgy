@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:redstone"
-    },
-    "b": {
-      "item": "electrodynamic_thaumaturgy:magno_ingot"
-    },
-    "d": {
-      "item": "minecraft:iron_ingot"
-    }
+    "a": "minecraft:redstone",
+    "b": "electrodynamic_thaumaturgy:magno_ingot",
+    "d": "minecraft:iron_ingot"
   },
   "pattern": [
     " a ",
@@ -18,7 +12,6 @@
     "   "
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:primary_power"
   }
 }

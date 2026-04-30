@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:nitrogen_harvester_block"
+          "name": "electrodynamic_thaumaturgy:nitrogen_harvester_machine_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:blocks/nitrogen_harvester_block"
+  "random_sequence": "electrodynamic_thaumaturgy:blocks/nitrogen_harvester_machine_block"
 }

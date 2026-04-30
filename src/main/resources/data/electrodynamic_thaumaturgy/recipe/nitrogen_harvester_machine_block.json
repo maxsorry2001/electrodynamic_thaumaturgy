@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "electrodynamic_thaumaturgy:magno_ingot"
-    },
-    "b": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    },
-    "c": {
-      "item": "minecraft:bone_block"
-    },
-    "d": {
-      "item": "minecraft:iron_ingot"
-    }
+    "a": "electrodynamic_thaumaturgy:magno_ingot",
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "minecraft:bone_block",
+    "d": "minecraft:iron_ingot"
   },
   "pattern": [
     "aca",
@@ -21,7 +13,6 @@
     "ada"
   ],
   "result": {
-    "count": 1,
-    "id": "electrodynamic_thaumaturgy:nitrogen_harvester_block"
+    "id": "electrodynamic_thaumaturgy:nitrogen_harvester_machine_block"
   }
 }

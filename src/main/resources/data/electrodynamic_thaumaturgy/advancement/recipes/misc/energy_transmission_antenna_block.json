@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:magic_lithography_table"
+        "recipe": "electrodynamic_thaumaturgy:energy_transmission_antenna_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:magic_lithography_table"
+      "electrodynamic_thaumaturgy:energy_transmission_antenna_block"
     ]
   }
 }

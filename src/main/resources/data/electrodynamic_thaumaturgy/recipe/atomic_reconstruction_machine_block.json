@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:iron_ingot"
-    },
-    "b": {
-      "item": "minecraft:ender_eye"
-    },
-    "c": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    }
+    "a": "minecraft:iron_ingot",
+    "b": "minecraft:ender_eye",
+    "c": "electrodynamic_thaumaturgy:energy_core"
   },
   "pattern": [
     "aba",
@@ -18,7 +12,6 @@
     "aba"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:atomic_reconstruction_machine_block"
   }
 }

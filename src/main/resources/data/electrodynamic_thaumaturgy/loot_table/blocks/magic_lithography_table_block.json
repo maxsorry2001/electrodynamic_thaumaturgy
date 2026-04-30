@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:magic_lithography_table"
+          "name": "electrodynamic_thaumaturgy:magic_lithography_table_block"
         }
       ],
       "rolls": 1.0

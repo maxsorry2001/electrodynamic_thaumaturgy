@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:iron_ingot"
-    },
-    "b": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    },
-    "c": {
-      "item": "minecraft:furnace"
-    }
+    "a": "minecraft:iron_ingot",
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "minecraft:furnace"
   },
   "pattern": [
     " a ",
@@ -18,7 +12,6 @@
     " c "
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:thermal_generator_block"
   }
 }

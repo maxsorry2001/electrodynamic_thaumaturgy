@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:sculk"
-    },
-    "b": {
-      "item": "minecraft:copper_ingot"
-    },
-    "c": {
-      "item": "electrodynamic_thaumaturgy:intermediate_power"
-    }
+    "a": "minecraft:sculk",
+    "b": "minecraft:copper_ingot",
+    "c": "electrodynamic_thaumaturgy:intermediate_power"
   },
   "pattern": [
     "aba",
@@ -18,7 +12,6 @@
     "aba"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:advanced_power"
   }
 }

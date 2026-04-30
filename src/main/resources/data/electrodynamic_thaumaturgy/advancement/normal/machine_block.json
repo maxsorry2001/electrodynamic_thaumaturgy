@@ -25,7 +25,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:nitrogen_harvester_block"
+            "items": "electrodynamic_thaumaturgy:nitrogen_harvester_machine_block"
           }
         ]
       },
@@ -57,7 +57,6 @@
       "translate": "advancements.electrodynamic_thaumaturgy.machine_block.description"
     },
     "icon": {
-      "count": 1,
       "id": "electrodynamic_thaumaturgy:electromagnetic_driver_machine_block"
     },
     "title": {

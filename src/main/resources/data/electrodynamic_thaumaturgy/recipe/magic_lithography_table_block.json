@@ -3,14 +3,15 @@
   "category": "misc",
   "key": {
     "a": "electrodynamic_thaumaturgy:magno_ingot",
-    "b": "minecraft:crafting_table"
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "minecraft:glass_pane"
   },
   "pattern": [
-    " a ",
+    " c ",
     "aba",
     " a "
   ],
   "result": {
-    "id": "electrodynamic_thaumaturgy:electromagnetic_assembly_table"
+    "id": "electrodynamic_thaumaturgy:magic_lithography_table_block"
   }
 }

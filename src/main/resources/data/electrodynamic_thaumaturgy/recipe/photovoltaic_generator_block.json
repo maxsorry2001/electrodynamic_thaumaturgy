@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "minecraft:glass"
-    },
-    "b": {
-      "item": "minecraft:copper_ingot"
-    },
-    "c": {
-      "item": "minecraft:iron_ingot"
-    },
-    "d": {
-      "item": "electrodynamic_thaumaturgy:energy_core"
-    }
+    "a": "minecraft:glass",
+    "b": "minecraft:copper_ingot",
+    "c": "minecraft:iron_ingot",
+    "d": "electrodynamic_thaumaturgy:energy_core"
   },
   "pattern": [
     "aaa",
@@ -21,7 +13,6 @@
     "ccc"
   ],
   "result": {
-    "count": 1,
     "id": "electrodynamic_thaumaturgy:photovoltaic_generator_block"
   }
 }
