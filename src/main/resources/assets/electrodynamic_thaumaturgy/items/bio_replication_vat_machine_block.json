@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "electrodynamic_thaumaturgy:block/bio_replication_vat_machine_block"
+  }
+}

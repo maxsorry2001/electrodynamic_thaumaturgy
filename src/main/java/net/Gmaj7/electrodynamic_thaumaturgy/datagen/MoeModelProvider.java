@@ -61,6 +61,15 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.GENETIC_RECORDER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.LIGHTING_STRIKE_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.BLOCK_NERVE_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.STRENGTH_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.COOLDOWN_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.EFFICIENCY_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.ENTROPY_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.ENHANCE_MODEM_BASEBOARD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.HARMONIC_SOVEREIGN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
@@ -74,5 +83,12 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.HARMONIC_CORE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get());
+        blockModels.createTrivialCube(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.NITROGEN_HARVESTER_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
     }
 }

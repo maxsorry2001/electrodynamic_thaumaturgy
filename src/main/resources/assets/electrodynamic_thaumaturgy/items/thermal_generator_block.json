@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "electrodynamic_thaumaturgy:block/thermal_generator_block"
+  }
+}

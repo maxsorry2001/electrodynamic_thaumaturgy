@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "electrodynamic_thaumaturgy:item/magnetic_recombination_cannon_module"
+  }
+}
