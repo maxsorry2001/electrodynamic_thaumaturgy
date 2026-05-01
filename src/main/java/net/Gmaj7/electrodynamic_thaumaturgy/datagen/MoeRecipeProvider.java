@@ -167,7 +167,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 氮气采集器（原配方用了SI，改为感磁锭）
-        shaped(RecipeCategory.MISC, MoeBlocks.NITROGEN_HARVESTER_BLOCK.get())
+        shaped(RecipeCategory.MISC, MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get())
                 .pattern("aca")
                 .pattern("cbc")
                 .pattern("ada")

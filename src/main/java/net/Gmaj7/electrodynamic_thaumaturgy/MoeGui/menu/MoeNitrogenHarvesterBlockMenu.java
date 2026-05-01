@@ -82,7 +82,7 @@ public class MoeNitrogenHarvesterBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.NITROGEN_HARVESTER_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get());
     }
 
     private void addMachineSlot(StacksResourceHandler<ItemStack, ItemResource> itemHandler){

@@ -88,7 +88,7 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get());
         blockModels.createTrivialCube(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
-        blockModels.createTrivialCube(MoeBlocks.NITROGEN_HARVESTER_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
     }
 }

@@ -55,7 +55,7 @@ public class MoeBlockEntities {
 
     public static final Supplier<BlockEntityType<NitrogenHarvesterBE>> NITROGEN_HARVESTER_BE =
             MOE_BLOCK_ENTITY.register("nitrogen_harvester_be", () -> new BlockEntityType<>(
-                    NitrogenHarvesterBE::new, MoeBlocks.NITROGEN_HARVESTER_BLOCK.get()));
+                    NitrogenHarvesterBE::new, MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get()));
 
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);

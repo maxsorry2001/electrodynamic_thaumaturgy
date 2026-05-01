@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "electrodynamic_thaumaturgy:block/nitrogen_harvester_block"
+      "model": "electrodynamic_thaumaturgy:block/nitrogen_harvester_machine_block"
     }
   }
 }
