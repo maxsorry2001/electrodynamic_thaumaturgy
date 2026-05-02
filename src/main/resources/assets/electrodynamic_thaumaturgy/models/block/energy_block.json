@@ -1,8 +1,6 @@
 {
-	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"render_type": "cutout",
-	"texture_size": [32, 32],
 	"textures": {
 		"0": "electrodynamic_thaumaturgy:block/energy_block",
 		"particle": "electrodynamic_thaumaturgy:block/energy_block"
@@ -130,7 +128,7 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 14, 0]},
 			"faces": {
 				"north": {"uv": [1, 0, 7, 1], "texture": "#0"},
-				"east": {"uv": [8, 18, 9, 19], "texture": "#0"},
+				"east": {"uv": [0, 7, 1, 8], "texture": "#0"},
 				"south": {"uv": [1, 0, 7, 1], "texture": "#0"},
 				"west": {"uv": [0, 7, 1, 8], "texture": "#0"},
 				"up": {"uv": [7, 1, 1, 0], "texture": "#0"},
@@ -243,10 +241,6 @@
 		"fixed": {
 			"rotation": [-30, 45, 0],
 			"scale": [0.5, 0.5, 0.5]
-		},
-		"on_shelf": {
-			"rotation": [30, 45, 0],
-			"scale": [0.5, 0.5, 0.5]
 		}
 	},
 	"groups": [
@@ -262,5 +256,6 @@
 			"color": 0,
 			"children": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 		}
-	]
+	],
+	"format_version": "1.9.0"
 }

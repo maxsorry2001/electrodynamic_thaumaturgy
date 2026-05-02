@@ -44,7 +44,8 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
         try (Transaction transaction = Transaction.openRoot()){
-            blockEntity.getEnergy().insert(512, transaction);
+            int i = blockEntity.getEnergy().insert(512, transaction);
+            if(i > 0) transaction.commit();
         }
     }
 

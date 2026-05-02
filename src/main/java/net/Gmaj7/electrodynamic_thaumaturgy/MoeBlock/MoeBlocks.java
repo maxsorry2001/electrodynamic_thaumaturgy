@@ -61,7 +61,7 @@ public class MoeBlocks {
             (properties) -> new AtomicReconstructionBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)), 1);
 
     public static final DeferredBlock<Block> NITROGEN_HARVESTER_MACHINE_BLOCK = registerBlock("nitrogen_harvester_machine_block",
-            (properties) -> new NitrogenHarvesterBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)), 1);
+            (properties) -> new NitrogenHarvesterBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
 
     public static final DeferredBlock<Block> LIGHT_AIR = registerBlock("light_air",
             (properties) -> new AirBlock(properties.air().lightLevel(p -> 15).replaceable().noCollision().noLootTable()), null);
