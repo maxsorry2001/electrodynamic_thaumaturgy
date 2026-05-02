@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "electrodynamic_thaumaturgy:block/temperature_generator_block"
+    "model": "electrodynamic_thaumaturgy:block/temperature_generator_block_normal"
   }
 }
