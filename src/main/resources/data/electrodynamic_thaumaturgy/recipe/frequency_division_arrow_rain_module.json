@@ -1,8 +1,6 @@
 {
   "type": "electrodynamic_thaumaturgy:magic_lithography",
-  "baseboard": {
-    "item": "electrodynamic_thaumaturgy:empty_advanced_module"
-  },
+  "baseboard": "electrodynamic_thaumaturgy:empty_advanced_module",
   "result": {
     "count": 1,
     "id": "electrodynamic_thaumaturgy:frequency_division_arrow_rain_module"

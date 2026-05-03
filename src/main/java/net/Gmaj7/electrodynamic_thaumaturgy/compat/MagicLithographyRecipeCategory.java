@@ -16,12 +16,12 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLithographyRecipe> {
+public class MagicLithographyRecipeCategory implements IRecipeCategory<RecipeHolder<MagicLithographyRecipe>> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_lithography");
     public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_gui.png");
-    public static final IRecipeType<MagicLithographyRecipe> RECIPE_TYPE = IRecipeType.create(UID, MagicLithographyRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;
 
@@ -31,8 +31,8 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
     }
 
     @Override
-    public IRecipeType<MagicLithographyRecipe> getRecipeType() {
-        return RECIPE_TYPE;
+    public IRecipeType<RecipeHolder<MagicLithographyRecipe>> getRecipeType() {
+        return JEIRecipeTypes.MAGIC_LITHOGRAPHY;
     }
 
     @Override
@@ -56,13 +56,13 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<MagicLith
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, MagicLithographyRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.getResultItem());
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MagicLithographyRecipe> recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().inputItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
     }
 
     @Override
-    public void draw(MagicLithographyRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+    public void draw(RecipeHolder<MagicLithographyRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.background.draw(guiGraphics);
         guiGraphics.fillGradient(156, 50, 164, 56, 0xffb51500, 0xff600b00);
     }
