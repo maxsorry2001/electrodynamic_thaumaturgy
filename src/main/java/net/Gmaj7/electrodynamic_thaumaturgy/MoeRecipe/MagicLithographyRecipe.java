@@ -10,34 +10,18 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class MagicLithographyRecipe implements Recipe<MagicLithographyRecipeInput> {
-
-    private final Recipe.CommonInfo commonInfo;
-    private final MagicLithographyRecipe.BlockBookInfo blockBookInfo;
-    private final Ingredient inputItem;
-    private final ItemStackTemplate output;
+public record MagicLithographyRecipe(Ingredient inputItem, ItemStackTemplate output) implements Recipe<MagicLithographyRecipeInput> {
 
     public static final MapCodec<MagicLithographyRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-            CommonInfo.MAP_CODEC.forGetter(magicLithographyRecipe -> magicLithographyRecipe.commonInfo),
-            BlockBookInfo.CODEC.forGetter(magicLithographyRecipe -> magicLithographyRecipe.blockBookInfo),
-            Ingredient.CODEC.fieldOf("baseboard").forGetter(MagicLithographyRecipe::getInputItem),
-            ItemStackTemplate.CODEC.fieldOf("result").forGetter(MagicLithographyRecipe::getOutput)
+            Ingredient.CODEC.fieldOf("baseboard").forGetter(MagicLithographyRecipe::inputItem),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(MagicLithographyRecipe::output)
     ).apply(i, MagicLithographyRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, MagicLithographyRecipe> STREAM_CODEC =
             StreamCodec.composite(
-                    CommonInfo.STREAM_CODEC, magicLithographyRecipe -> magicLithographyRecipe.commonInfo,
-                    BlockBookInfo.STREAM_CODEC, magicLithographyRecipe -> magicLithographyRecipe.blockBookInfo,
-                    Ingredient.CONTENTS_STREAM_CODEC, MagicLithographyRecipe::getInputItem,
-                    ItemStackTemplate.STREAM_CODEC, MagicLithographyRecipe::getOutput,
+                    Ingredient.CONTENTS_STREAM_CODEC, MagicLithographyRecipe::inputItem,
+                    ItemStackTemplate.STREAM_CODEC, MagicLithographyRecipe::output,
                     MagicLithographyRecipe::new);
-
-    public MagicLithographyRecipe(CommonInfo commonInfo, BlockBookInfo blockBookInfo, Ingredient inputItem, ItemStackTemplate output) {
-        this.commonInfo = commonInfo;
-        this.blockBookInfo = blockBookInfo;
-        this.inputItem = inputItem;
-        this.output = output;
-    }
 
 
     public NonNullList<Ingredient> getIngredients() {
@@ -47,23 +31,26 @@ public class MagicLithographyRecipe implements Recipe<MagicLithographyRecipeInpu
     }
 
     @Override
-    public boolean matches(MagicLithographyRecipeInput magicLithographyRecipeInput, Level level) {
-        return inputItem.test(magicLithographyRecipeInput.getItem(0));
+    public boolean matches(MagicLithographyRecipeInput input, Level level) {
+        if(level.isClientSide()) {
+            return false;
+        }
+        return inputItem.test(input.getItem(0));
     }
 
     @Override
     public boolean showNotification() {
-        return false;
+        return true;
     }
 
     @Override
     public String group() {
-        return blockBookInfo.group();
+        return "magic_lithography";
     }
 
     @Override
     public ItemStack assemble(MagicLithographyRecipeInput magicLithographyRecipeInput) {
-        return this.output.create();
+        return this.output.create().copy();
     }
 
     @Override
@@ -76,10 +63,6 @@ public class MagicLithographyRecipe implements Recipe<MagicLithographyRecipeInpu
         return MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get();
     }
 
-    public Ingredient getInputItem() {
-        return inputItem;
-    }
-
     public ItemStackTemplate getOutput() {
         return output;
     }
@@ -90,25 +73,11 @@ public class MagicLithographyRecipe implements Recipe<MagicLithographyRecipeInpu
 
     @Override
     public PlacementInfo placementInfo() {
-        return PlacementInfo.create(inputItem);
+        return PlacementInfo.NOT_PLACEABLE;
     }
 
     @Override
     public RecipeBookCategory recipeBookCategory() {
         return RecipeBookCategories.CRAFTING_MISC;
-    }
-
-    public record BlockBookInfo(CraftingBookCategory craftingBookCategory, String group) implements Recipe.BookInfo<CraftingBookCategory>{
-        public static final MapCodec<BlockBookInfo> CODEC = Recipe.BookInfo.mapCodec(
-                CraftingBookCategory.CODEC, CraftingBookCategory.MISC, BlockBookInfo::new
-        );
-        public static final StreamCodec<RegistryFriendlyByteBuf, BlockBookInfo> STREAM_CODEC = Recipe.BookInfo.streamCodec(
-                CraftingBookCategory.STREAM_CODEC, BlockBookInfo::new
-        );
-
-        @Override
-        public CraftingBookCategory category() {
-            return craftingBookCategory;
-        }
     }
 }
