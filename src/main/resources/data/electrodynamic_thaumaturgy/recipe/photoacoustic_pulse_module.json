@@ -1,6 +1,8 @@
 {
-  "type": "electrodynamic_thaumaturgy:magic_lithography",
-  "baseboard": "electrodynamic_thaumaturgy:empty_advanced_module",
+  "type": "electrodynamic_thaumaturgy:magic_encode",
+  "base": "electrodynamic_thaumaturgy:empty_advanced_module",
+  "code1": "minecraft:gold_ingot",
+  "code2": "minecraft:gold_ingot",
   "result": {
     "count": 1,
     "id": "electrodynamic_thaumaturgy:photoacoustic_pulse_module"

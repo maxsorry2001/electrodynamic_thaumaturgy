@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "electrodynamic_thaumaturgy:block/electromagnetic_assembly_table_bottom",
-    "side": "electrodynamic_thaumaturgy:block/magic_lithography_table_side",
-    "top": "electrodynamic_thaumaturgy:block/magic_lithography_table_top"
+    "side": "electrodynamic_thaumaturgy:block/magic_encode_table_side",
+    "top": "electrodynamic_thaumaturgy:block/magic_encode_table_top"
   }
 }

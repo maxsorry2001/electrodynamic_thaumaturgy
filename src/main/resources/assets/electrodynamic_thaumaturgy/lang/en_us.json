@@ -73,7 +73,7 @@
   "block.electrodynamic_thaumaturgy.thermal_generator_block": "Thermal Generator",
   "block.electrodynamic_thaumaturgy.biomass_generator_block": "Biomass Generator",
   "block.electrodynamic_thaumaturgy.energy_transmission_antenna_block": "Energy Transmission Antenna",
-  "block.electrodynamic_thaumaturgy.magic_lithography_table_block": "Magic Lithography Table",
+  "block.electrodynamic_thaumaturgy.magic_encode_table_block": "Magic Encode Table",
   "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine_block": "Electromagnetic Driver",
   "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "Bio-Replication Vat",
   "block.electrodynamic_thaumaturgy.electromagnetic_extractor_machine_block": "Electromagnetic Extractor",
@@ -140,7 +140,7 @@
 
   "key.category.electrodynamic_thaumaturgy.moe": "Electrodynamic Thaumatury",
   "key.electrodynamic_thaumaturgy.switch_magic": "Switch magic",
-  "magic_lithography": "Magic Lithography",
+  "magic_encode": "Magic Encode",
   "binding": "binding:",
 
   "patchouli.et.how_start": "Basic Preparation",

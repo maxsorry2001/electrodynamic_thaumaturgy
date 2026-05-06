@@ -19,8 +19,8 @@ public class MoeMenuType {
             () -> new MenuType<>(MoeAssemblyTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<MenuType<?>, MenuType<MoeModemTableMenu>> MODEM_TABLE_MENU = MENU_TYPE.register("modem_table_menu",
             () -> new MenuType<>(MoeModemTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeMagicLithographyTableMenu>> MAGIC_LITHOGRAPHY_TABLE_MENU = MENU_TYPE.register("magic_lithography_table_menu",
-            () -> new MenuType<>(MoeMagicLithographyTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<MoeMagicEncodeTableMenu>> MAGIC_ENCODE_TABLE_MENU = MENU_TYPE.register("magic_encode_table_menu",
+            () -> new MenuType<>(MoeMagicEncodeTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<MenuType<?>, MenuType<MoeEnergyBlockMenu>> ENERGY_BLOCK_MENU = registerMenuType("energy_block_menu", MoeEnergyBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<MoeThermalGeneratorMenu>> THERMAL_GENERATOR_MENU = registerMenuType("thermal_generator_menu", MoeThermalGeneratorMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<MoeBiomassGeneratorMenu>> BIOMASS_GENERATOR_MENU = registerMenuType("biomass_generator_menu", MoeBiomassGeneratorMenu::new);

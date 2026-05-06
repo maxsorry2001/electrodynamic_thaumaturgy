@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicLithographyRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -19,25 +19,25 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicLithographyRecipeCategory implements IRecipeCategory<RecipeHolder<MagicLithographyRecipe>> {
-    public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_lithography");
-    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_lithography_gui.png");
+public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<MagicEncodeRecipe>> {
+    public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_encode");
+    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_encode_gui.png");
     private final IDrawable background;
     private final IDrawable icon;
 
-    public MagicLithographyRecipeCategory(IGuiHelper helper) {
+    public MagicEncodeRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
     }
 
     @Override
-    public IRecipeType<RecipeHolder<MagicLithographyRecipe>> getRecipeType() {
-        return JEIRecipeTypes.MAGIC_LITHOGRAPHY;
+    public IRecipeType<RecipeHolder<MagicEncodeRecipe>> getRecipeType() {
+        return JEIRecipeTypes.MAGIC_ENCODE;
     }
 
     @Override
     public Component getTitle() {
-        return Component.translatable("magic_lithography");
+        return Component.translatable("magic_encode");
     }
 
     @Override
@@ -56,13 +56,15 @@ public class MagicLithographyRecipeCategory implements IRecipeCategory<RecipeHol
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MagicLithographyRecipe> recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().inputItem());
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MagicEncodeRecipe> recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 16).add(recipe.value().base());
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().code1());
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 52).add(recipe.value().code2());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
     }
 
     @Override
-    public void draw(RecipeHolder<MagicLithographyRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+    public void draw(RecipeHolder<MagicEncodeRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.background.draw(guiGraphics);
         guiGraphics.fillGradient(156, 50, 164, 56, 0xffb51500, 0xff600b00);
     }

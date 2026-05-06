@@ -43,7 +43,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 魔法光刻台
-        shaped(RecipeCategory.MISC, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get())
+        shaped(RecipeCategory.MISC, MoeBlocks.MAGIC_ENCODE_TABLE.get())
                 .pattern(" c ")
                 .pattern("aba")
                 .pattern(" a ")

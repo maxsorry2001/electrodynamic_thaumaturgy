@@ -14,13 +14,13 @@ public class MoeRecipes {
     public static final DeferredRegister<RecipeType<?>> TYPE =
             DeferredRegister.create(Registries.RECIPE_TYPE, ElectrodynamicThaumaturgy.MODID);
 
-    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagicLithographyRecipe>> MAGIC_LITHOGRAPHY_SERIALIZER =
-            SERIALIZER.register("magic_lithography", () -> new RecipeSerializer<>(MagicLithographyRecipe.CODEC, MagicLithographyRecipe.STREAM_CODEC));
-    public static final DeferredHolder<RecipeType<?>, RecipeType<MagicLithographyRecipe>> MAGIC_LITHOGRAPHY_TYPE =
-            TYPE.register("magic_lithography", () -> new RecipeType<MagicLithographyRecipe>() {
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagicEncodeRecipe>> MAGIC_ENCODE_SERIALIZER =
+            SERIALIZER.register("magic_encode", () -> new RecipeSerializer<>(MagicEncodeRecipe.CODEC, MagicEncodeRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MagicEncodeRecipe>> MAGIC_ENCODE_TYPE =
+            TYPE.register("magic_encode", () -> new RecipeType<MagicEncodeRecipe>() {
                 @Override
                 public String toString() {
-                    return "magic_lithography";
+                    return "magic_encode";
                 }
             });
 

@@ -91,7 +91,7 @@ public class MoeTabs {
 
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
-                        output.accept(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
+                        output.accept(MoeBlocks.MAGIC_ENCODE_TABLE);
                         output.accept(MoeBlocks.ENERGY_BLOCK);
                         output.accept(setFullEnergyItem(new ItemStack(MoeBlocks.ENERGY_BLOCK.get())));
                         output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
@@ -126,9 +126,6 @@ public class MoeTabs {
         list.add(new ItemStack(MoeItems.SUPERCONDUCTING_LC.get()));
         if (item == MoeItems.ELECTROMAGNETIC_ROD.get()){
             list.add(new ItemStack(MoeItems.RAY_MODULE.get()));
-        }
-        else {
-            list.add(new ItemStack(MoeItems.PULSED_PLASMA_MODULE.get()));
         }
         for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
             list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));

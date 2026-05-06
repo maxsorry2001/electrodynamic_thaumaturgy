@@ -32,16 +32,16 @@ public class ElectromagneticRay extends AbstractWideMagic{
         MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
         MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity, true);
         level.addFreshEntity(moeRayEntity);
-        for (HitResult result : hitResult.getTargets()) {
-            if (result instanceof EntityHitResult) {
-                Entity target = ((EntityHitResult) result).getEntity();
-                if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack));
-                    MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
+        if(!level.isClientSide()){
+            for (HitResult result : hitResult.getTargets()) {
+                if (result instanceof EntityHitResult) {
+                    Entity target = ((EntityHitResult) result).getEntity();
+                    if (target instanceof LivingEntity) {
+                        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack));
+                        MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
+                    }
                 }
             }
-        }
-        if(!level.isClientSide()){
             Thread thread = new Thread(() -> makeParticle((ServerLevel) level, livingEntity));
             thread.start();
         }

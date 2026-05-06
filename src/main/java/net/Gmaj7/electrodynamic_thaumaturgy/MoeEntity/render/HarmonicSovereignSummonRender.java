@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 
 public class HarmonicSovereignSummonRender extends ArrowRenderer<HarmonicSovereignSummonEntity, HarmonicSovereignSummonRenderState> {
@@ -46,6 +47,16 @@ public class HarmonicSovereignSummonRender extends ArrowRenderer<HarmonicSoverei
         super.extractRenderState(entity, state, partialTicks);
         state.boxYHalf =  entity.getBoundingBox().getYsize() * .5f;
         state.tickCount = entity.tickCount;
+    }
+
+    @Override
+    protected int getSkyLightLevel(HarmonicSovereignSummonEntity entity, BlockPos blockPos) {
+        return 15;
+    }
+
+    @Override
+    protected int getBlockLightLevel(HarmonicSovereignSummonEntity entity, BlockPos blockPos) {
+        return 15;
     }
 
     @Override

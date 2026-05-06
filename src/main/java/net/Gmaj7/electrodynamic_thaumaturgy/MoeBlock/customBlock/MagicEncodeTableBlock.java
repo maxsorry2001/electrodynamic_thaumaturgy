@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeMagicLithographyTableMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeMagicEncodeTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicLithographyTableBlock extends Block {
-    public MagicLithographyTableBlock(Properties properties) {
+public class MagicEncodeTableBlock extends Block {
+    public MagicEncodeTableBlock(Properties properties) {
         super(properties);
     }
 
@@ -35,7 +35,7 @@ public class MagicLithographyTableBlock extends Block {
     @Override
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((id, inventory, player) -> {
-            return new MoeMagicLithographyTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
-        }, Component.translatable("block.electrodynamic_thaumaturgy.magic_lithography_table_block"));
+            return new MoeMagicEncodeTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
+        }, Component.translatable("block.electrodynamic_thaumaturgy.magic_encode_table_block"));
     }
 }

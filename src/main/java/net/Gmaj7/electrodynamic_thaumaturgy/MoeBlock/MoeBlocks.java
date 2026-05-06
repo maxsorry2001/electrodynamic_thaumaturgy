@@ -42,8 +42,8 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = registerBlock("energy_transmission_antenna_block",
             (properties) ->  new EnergyTransmissionAtennaBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 16);
 
-    public static final DeferredBlock<Block> MAGIC_LITHOGRAPHY_TABLE = registerBlock("magic_lithography_table_block",
-            (properties) -> new MagicLithographyTableBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)), 1);
+    public static final DeferredBlock<Block> MAGIC_ENCODE_TABLE = registerBlock("magic_encode_table_block",
+            (properties) -> new MagicEncodeTableBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)), 1);
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = registerBlock("electromagnetic_driver_machine_block",
             (properties) -> new ElectromagneticDriverBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F)), 1);

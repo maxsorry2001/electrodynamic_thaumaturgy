@@ -50,7 +50,7 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, output, MoeItems.ENERGY_CORE.get());
             register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, output, MoeItems.ELECTROMAGNETIC_ROD.get());
             register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.asItem(), "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
-            register(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.asItem(), "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, output, MoeBlocks.MAGIC_LITHOGRAPHY_TABLE);
+            register(MoeBlocks.MAGIC_ENCODE_TABLE.asItem(), "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, output, MoeBlocks.MAGIC_ENCODE_TABLE);
             register(MoeItems.EMPTY_PRIMARY_MODULE.get(), "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, output, MoeItems.EMPTY_PRIMARY_MODULE.get());
             register(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.asItem(), "normal", "energy_core", "generator", "has_generator", AdvancementType.TASK, output, MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK, MoeBlocks.TEMPERATURE_GENERATOR_BLOCK, MoeBlocks.THERMAL_GENERATOR_BLOCK, MoeBlocks.BIOMASS_GENERATOR_BLOCK);
             register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem(), "normal", "generator", "energy_send", "has_energy_antenna", AdvancementType.TASK, output, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);

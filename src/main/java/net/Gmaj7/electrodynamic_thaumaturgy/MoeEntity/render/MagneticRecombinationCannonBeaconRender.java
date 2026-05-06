@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 
 public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<MagneticRecombinationCannonBeaconEntity, MagneticRecombinationCannonBeaconRenderState> {
@@ -33,6 +34,16 @@ public class MagneticRecombinationCannonBeaconRender extends ArrowRenderer<Magne
     @Override
     protected Identifier getTextureLocation(MagneticRecombinationCannonBeaconRenderState state) {
         return Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/entity/plasma_torch_beacon_entity.png");
+    }
+
+    @Override
+    protected int getSkyLightLevel(MagneticRecombinationCannonBeaconEntity entity, BlockPos blockPos) {
+        return 15;
+    }
+
+    @Override
+    protected int getBlockLightLevel(MagneticRecombinationCannonBeaconEntity entity, BlockPos blockPos) {
+        return 15;
     }
 
     @Override

@@ -1,6 +1,8 @@
 {
-  "type": "electrodynamic_thaumaturgy:magic_lithography",
-  "baseboard": "electrodynamic_thaumaturgy:empty_primary_module",
+  "type": "electrodynamic_thaumaturgy:magic_encode",
+  "base": "electrodynamic_thaumaturgy:empty_primary_module",
+  "code1": "minecraft:gold_ingot",
+  "code2": "minecraft:redstone",
   "result": {
     "count": 1,
     "id": "electrodynamic_thaumaturgy:pulsed_plasma_module"

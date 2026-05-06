@@ -85,7 +85,7 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());
-        blockModels.createTrivialCube(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.get());
+        blockModels.createTrivialCube(MoeBlocks.MAGIC_ENCODE_TABLE.get());
         blockModels.createTrivialCube(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get());

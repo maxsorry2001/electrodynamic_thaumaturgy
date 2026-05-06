@@ -34,24 +34,24 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new MagicLithographyRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new MagicEncodeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(JEIRecipeTypes.MAGIC_LITHOGRAPHY, this.getRecipes(recipeMap, MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.MAGIC_ENCODE, this.getRecipes(recipeMap, MoeRecipes.MAGIC_ENCODE_TYPE.get()));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addCraftingStation(JEIRecipeTypes.MAGIC_LITHOGRAPHY, new ItemStack(MoeBlocks.MAGIC_LITHOGRAPHY_TABLE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
     }
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
     public static class ServerRecipeSync {
         @SubscribeEvent
         public static void onDatapackSync(OnDatapackSyncEvent event) {
-            event.sendRecipes(MoeRecipes.MAGIC_LITHOGRAPHY_TYPE.get());
+            event.sendRecipes(MoeRecipes.MAGIC_ENCODE_TYPE.get());
         }
     }
 

@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
@@ -52,9 +53,19 @@ public class MoeRayEntityRender extends EntityRenderer<MoeRayEntity, MoeRayEntit
     public void extractRenderState(MoeRayEntity entity, MoeRayEntityRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
         state.distance = entity.distance;
-        state.xRot = - entity.getXRot() - 180.0F;
-        state.yRot = - entity.getXRot() - 90F;
+        state.xRot = entity.getXRot() + 90F;
+        state.yRot = - entity.getYRot();
         state.boxYHalf =  entity.getBoundingBox().getYsize() * .5f;
+    }
+
+    @Override
+    protected int getBlockLightLevel(MoeRayEntity entity, BlockPos blockPos) {
+        return 15;
+    }
+
+    @Override
+    protected int getSkyLightLevel(MoeRayEntity entity, BlockPos blockPos) {
+        return 15;
     }
 
     @Override
