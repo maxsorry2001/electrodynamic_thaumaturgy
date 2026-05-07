@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:magic_encode_table_block"
+            "items": "electrodynamic_thaumaturgy:magic_encode_table"
           }
         ]
       },
@@ -17,7 +17,7 @@
       "translate": "advancements.electrodynamic_thaumaturgy.lithography_table.description"
     },
     "icon": {
-      "id": "electrodynamic_thaumaturgy:magic_encode_table_block"
+      "id": "electrodynamic_thaumaturgy:magic_encode_table"
     },
     "title": {
       "translate": "advancements.electrodynamic_thaumaturgy.lithography_table.title"

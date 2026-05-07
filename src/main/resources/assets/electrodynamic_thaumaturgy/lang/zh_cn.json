@@ -73,7 +73,7 @@
   "block.electrodynamic_thaumaturgy.thermal_generator_block": "火力发电机",
   "block.electrodynamic_thaumaturgy.biomass_generator_block": "生物质能发电机",
   "block.electrodynamic_thaumaturgy.energy_transmission_antenna_block": "能量传输天线",
-  "block.electrodynamic_thaumaturgy.magic_encode_table_block": "法术编码台",
+  "block.electrodynamic_thaumaturgy.magic_encode_table": "法术编码台",
   "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine_block": "电磁驱动器",
   "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "生物克隆器",
   "block.electrodynamic_thaumaturgy.electromagnetic_extractor_machine_block": "电磁采掘器",

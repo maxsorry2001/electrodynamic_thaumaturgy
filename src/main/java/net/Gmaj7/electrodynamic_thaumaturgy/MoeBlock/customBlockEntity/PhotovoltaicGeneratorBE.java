@@ -29,7 +29,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        int i = Math.max( level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above()));
+        int i = Math.max(level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above()));
         try(Transaction transaction = Transaction.openRoot()) {
             int insert = blockEntity.getEnergy().insert(i * 64, transaction);
             if(insert > 0) transaction.commit();
@@ -37,8 +37,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     }
 
     protected boolean canEnergyMake() {
-        int blockLight = level.getBrightness(LightLayer.BLOCK, getBlockPos().above());
-        return blockLight > 0;
+        return Math.max(level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above())) > 0;
     }
 
     @Override

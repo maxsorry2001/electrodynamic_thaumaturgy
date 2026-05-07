@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:magic_encode_table_block"
+          "name": "electrodynamic_thaumaturgy:magic_encode_table"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:blocks/magic_encode_table_block"
+  "random_sequence": "electrodynamic_thaumaturgy:blocks/magic_encode_table"
 }

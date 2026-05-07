@@ -33,7 +33,8 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyTransmissionAntennaBE energyTransmissionAntennaBE){
         EnergyHandler energyStorage = energyTransmissionAntennaBE.getLinkStorage();
         if(energyStorage != null){
-            if(state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
+            if(!state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.receivePos.isEmpty()) energyTransmissionAntennaBE.clear();
+            else if(state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
                 try (Transaction transaction = Transaction.openRoot()){
                     Iterator<BlockPos> iterator = energyTransmissionAntennaBE.getReceivePos().iterator();
                     boolean commit = true;
@@ -57,7 +58,7 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
                                     }
                                 }
                             }
-                        } else iterator.remove();
+                        }
                     }
                     if(commit) transaction.commit();
                 }
@@ -93,5 +94,10 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
 
     public List<BlockPos> getReceivePos() {
         return this.receivePos;
+    }
+
+    public void clear(){
+        this.receivePos.clear();
+        setChanged();
     }
 }

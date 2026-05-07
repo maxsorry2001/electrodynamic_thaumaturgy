@@ -2,8 +2,8 @@
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "electrodynamic_thaumaturgy:block/elextromagnetic_assembly_table",
-		"particle": "electrodynamic_thaumaturgy:block/elextromagnetic_assembly_table"
+		"0": "electrodynamic_thaumaturgy:block/magic_encode_table",
+		"particle": "electrodynamic_thaumaturgy:block/magic_encode_table"
 	},
 	"elements": [
 		{
@@ -19,20 +19,8 @@
 			}
 		},
 		{
-			"from": [6, 10, 5],
-			"to": [7, 11, 15],
-			"faces": {
-				"north": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
-				"east": {"uv": [8, 5, 13, 5.5], "texture": "#0"},
-				"south": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
-				"west": {"uv": [8, 5, 13, 5.5], "texture": "#0"},
-				"up": {"uv": [8.5, 10.5, 8, 5.5], "texture": "#0"},
-				"down": {"uv": [8.5, 5.5, 8, 10.5], "texture": "#0"}
-			}
-		},
-		{
-			"from": [1, 10, 4],
-			"to": [15, 11, 5],
+			"from": [1, 10, 6],
+			"to": [15, 11, 7],
 			"faces": {
 				"north": {"uv": [8, 5, 15, 5.5], "texture": "#0"},
 				"east": {"uv": [15.5, 10, 16, 10.5], "texture": "#0"},
@@ -80,7 +68,7 @@
 			"origin": [0, 0, 0],
 			"scope": 0,
 			"color": 0,
-			"children": [0, 1, 2]
+			"children": [0, 1]
 		}
 	]
 }

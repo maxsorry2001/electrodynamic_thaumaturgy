@@ -36,6 +36,6 @@ public class MagicEncodeTableBlock extends Block {
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((id, inventory, player) -> {
             return new MoeMagicEncodeTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
-        }, Component.translatable("block.electrodynamic_thaumaturgy.magic_encode_table_block"));
+        }, Component.translatable("block.electrodynamic_thaumaturgy.magic_encode_table"));
     }
 }
