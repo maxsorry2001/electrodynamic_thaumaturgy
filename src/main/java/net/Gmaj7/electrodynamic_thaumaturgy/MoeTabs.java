@@ -85,6 +85,7 @@ public class MoeTabs {
                         output.accept(MoeItems.POTATO_BATTERY.get());
                         output.accept(MoeItems.SOLUTION_BATTERY.get());
                         output.accept(MoeItems.POWER_BANK.get());
+                        output.accept(setFullEnergyItem(new ItemStack(MoeItems.POWER_BANK.get())));
                         output.accept(MoeItems.ENERGY_CORE.get());
                         output.accept(MoeItems.SUPERCONDUCTING_UPDATE.get());
                         output.accept(MoeItems.GENETIC_RECORDER.get());

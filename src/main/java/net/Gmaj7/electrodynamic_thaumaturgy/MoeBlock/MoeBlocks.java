@@ -24,8 +24,8 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ELECTROMAGNETIC_MODEM_TABLE = registerBlock("electromagnetic_modem_table",
             (properties) -> new ElectromagneticModemTable(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> ENERGY_BLOCK = registerBlock("energy_block",
-            (properties) ->  new EnergyBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> ENERGY_BLOCK = registerBlockNoItem("energy_block",
+            (properties) ->  new EnergyBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
 
     public static final DeferredBlock<Block> TEMPERATURE_GENERATOR_BLOCK = registerBlock("temperature_generator_block",
             (properties) ->  new TemperatureGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
@@ -83,5 +83,10 @@ public class MoeBlocks {
             else
                 return new BlockItem(block.get(), properties.useBlockDescriptionPrefix());
         });
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerBlockNoItem(String name, Function<BlockBehaviour.Properties, T> function){
+        DeferredBlock<T> toReturn = MOE_BLOCKS.registerBlock(name, function);
+        return toReturn;
     }
 }

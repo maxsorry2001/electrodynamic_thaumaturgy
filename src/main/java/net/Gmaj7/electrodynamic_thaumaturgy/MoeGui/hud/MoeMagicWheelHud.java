@@ -50,7 +50,7 @@ public class MoeMagicWheelHud implements GuiLayer {
             }
             alpha = alpha + 0.25 * Math.PI;
         }
-        int textureWidth = 2048, textureHeight = 2048;
+        int textureWidth = 256, textureHeight = 256;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, centerX - textureWidth / 2, centerY - textureHeight / 2, 0, 0, textureWidth, textureHeight, 256, 256);
         double mouseX = Minecraft.getInstance().mouseHandler.xpos(), mouseY = Minecraft.getInstance().mouseHandler.ypos();
         double screenCenterX = Minecraft.getInstance().getWindow().getScreenWidth() / 2F, screenCenterY = Minecraft.getInstance().getWindow().getScreenHeight() / 2F;

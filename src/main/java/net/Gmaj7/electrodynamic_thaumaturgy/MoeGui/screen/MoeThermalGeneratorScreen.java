@@ -45,7 +45,8 @@ public class MoeThermalGeneratorScreen extends AbstractContainerScreen<MoeTherma
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), 7, 150, 7);
-        guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime(), 7, 150, 7);
+        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), fireX = menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime();
+        guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
+        guiGraphics.blit(fireTexture, x + 16, y + 31, x + 16 + fireX, y + 38, 0 , fireX, 0, 7);
     }
 }

@@ -34,7 +34,7 @@ public class MoeNitrogenHarvesterBlockScreen extends AbstractContainerScreen<Moe
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderEnergy(guiGraphics, x, y);
+        //renderEnergy(guiGraphics, x, y);
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){

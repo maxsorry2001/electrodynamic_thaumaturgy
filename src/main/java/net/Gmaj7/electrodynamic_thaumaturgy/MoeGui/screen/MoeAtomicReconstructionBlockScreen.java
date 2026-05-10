@@ -46,7 +46,8 @@ public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0, (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), 7, 150, 7);
-        guiGraphics.blit(progressTexture, x + 60, y + 56, 0, 0, (int) (58 * (float) menu.blockEntity.getProgressPer()), 6, 58, 6);
+        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), progressX = (int) (58 * (float) menu.blockEntity.getProgressPer());
+        guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
+        guiGraphics.blit(progressTexture, x + 60, y + 56, x + 60 + progressX, y + 62, 0, progressX, 0, 6);
     }
 }
