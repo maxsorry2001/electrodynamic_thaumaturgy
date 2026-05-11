@@ -49,7 +49,7 @@ public class AttractBeaconEntity extends AbstractArrow {
         List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(15));
         for (LivingEntity target : list){
             if (target == this.getOwner()) continue;
-            if (this.getOwner() instanceof HarmonicSaintEntity && target == ((HarmonicSaintEntity) this.getOwner()).getOwner()) continue;
+            if (this.getOwner() instanceof MagnetoOrderSageEntity && target == ((MagnetoOrderSageEntity) this.getOwner()).getOwner()) continue;
             Vec3 vec3 = new Vec3(this.getX() - target.getX(), this.getY() - target.getY(), this.getZ() - target.getZ());
             Vec3 vec31 = vec3.normalize().multiply(0.1, 0.1, 0.1);
             target.move(MoverType.SELF, vec31);

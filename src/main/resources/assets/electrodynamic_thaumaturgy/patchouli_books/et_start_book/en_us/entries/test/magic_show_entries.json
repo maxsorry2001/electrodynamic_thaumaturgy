@@ -130,8 +130,8 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "electrodynamic_thaumaturgy:saint_summon_module",
-      "text": "patchouli.et.saint_summon_module.description"
+      "item": "electrodynamic_thaumaturgy:sage_s_magnetism_seal_module",
+      "text": "patchouli.et.sage_s_magnetism_seal_module.description"
     }
   ]
 }

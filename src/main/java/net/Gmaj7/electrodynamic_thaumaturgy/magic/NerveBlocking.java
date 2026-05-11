@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
 import net.minecraft.server.level.ServerLevel;
@@ -43,7 +43,7 @@ public class NerveBlocking extends AbstractWideMagic{
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack) {
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(7));
         list.remove(source);
-        if(source instanceof HarmonicSaintEntity) list.remove(((HarmonicSaintEntity) source).getOwner());
+        if(source instanceof MagnetoOrderSageEntity) list.remove(((MagnetoOrderSageEntity) source).getOwner());
         list.add(target);
         for (LivingEntity livingEntity : list){
             target.addEffect(new MobEffectInstance(MoeEffects.NERVE_BLOCKING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (1 * MoeFunction.getStrengthRate(itemStack))));

@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.minecraft.server.level.ServerLevel;
@@ -12,11 +12,11 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-public class SaintSummon extends AbstractSelfMagic{
+public class SageSMagnetismSeal extends AbstractSelfMagic{
     @Override
     public void playerCast(LivingEntity livingEntity, ItemStack itemStack) {
-        HarmonicSaintEntity harmonicSaintEntity = new HarmonicSaintEntity(livingEntity.level(), livingEntity, 600);
-        livingEntity.level().addFreshEntity(harmonicSaintEntity);
+        MagnetoOrderSageEntity magnetoOrderSageEntity = new MagnetoOrderSageEntity(livingEntity.level(), livingEntity, 600);
+        livingEntity.level().addFreshEntity(magnetoOrderSageEntity);
         if(!livingEntity.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
@@ -40,7 +40,7 @@ public class SaintSummon extends AbstractSelfMagic{
 
     @Override
     public String getTranslate() {
-        return "item.electrodynamic_thaumaturgy.saint_summon_module";
+        return "item.electrodynamic_thaumaturgy.sage_s_magnetism_seal_module";
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){

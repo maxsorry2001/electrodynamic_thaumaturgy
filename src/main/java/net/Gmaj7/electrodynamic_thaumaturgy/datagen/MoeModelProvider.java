@@ -57,7 +57,7 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.LIFE_EXTRACTION_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MoeItems.SAINT_SUMMON_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.SAGE_S_MAGNETISM_SEAL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.GENETIC_RECORDER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get(), ModelTemplates.FLAT_ITEM);
@@ -71,7 +71,7 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.RADIANT_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.STELLAR_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MoeItems.HARMONIC_SOVEREIGN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
@@ -83,7 +83,7 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
-        blockModels.createTrivialCube(MoeBlocks.HARMONIC_CORE_BLOCK.get());
+        blockModels.createTrivialCube(MoeBlocks.MAGNETO_CORE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
         blockModels.createTrivialCube(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());

@@ -51,7 +51,7 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE_BLOCK = registerBlock("bio_replication_vat_machine_block",
             (properties) -> new BioReplicationVatMachineBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> HARMONIC_CORE_BLOCK = registerBlock("harmonic_core_block",
+    public static final DeferredBlock<Block> MAGNETO_CORE_BLOCK = registerBlock("magneto_core_block",
             (properties) -> new HarmonicCoreBlock(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = registerBlock("electromagnetic_extractor_machine_block",

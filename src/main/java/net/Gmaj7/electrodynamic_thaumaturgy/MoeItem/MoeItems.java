@@ -68,8 +68,8 @@ public class MoeItems {
             (properties) -> new MoeMagicTypeModuleItem(new MagneticFluxCascade(), properties.stacksTo(1)));
     public static final DeferredItem<Item> FREQUENCY_DIVISION_ARROW_RAIN_MODULE = MOE_ITEM.registerItem("frequency_division_arrow_rain_module",
             (properties) -> new MoeMagicTypeModuleItem(new FrequencyDivisionArrowRain(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> SAINT_SUMMON_MODULE = MOE_ITEM.registerItem("saint_summon_module",
-            (properties) -> new MoeMagicTypeModuleItem(new SaintSummon(), properties.stacksTo(1)));
+    public static final DeferredItem<Item> SAGE_S_MAGNETISM_SEAL = MOE_ITEM.registerItem("sage_s_magnetism_seal_module",
+            (properties) -> new MoeMagicTypeModuleItem(new SageSMagnetismSeal(), properties.stacksTo(1)));
     public static final DeferredItem<Item> PHOTOACOUSTIC_PULSE_MODULE = MOE_ITEM.registerItem("photoacoustic_pulse_module",
             (properties) -> new MoeMagicTypeModuleItem(new PhotoacousticPulse(), properties.stacksTo(1)));
     public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = MOE_ITEM.registerItem("photo_corrosive_nova_module",
@@ -141,6 +141,6 @@ public class MoeItems {
                     .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 
-    public static final DeferredItem<Item> HARMONIC_SOVEREIGN_SPAWN_EGG = MOE_ITEM.registerItem("harmonic_sovereign_spawn_egg",
+    public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = MOE_ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));
 }

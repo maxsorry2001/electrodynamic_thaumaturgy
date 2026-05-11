@@ -57,7 +57,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         if(explodeTime <= 0 && magicItem != null){
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5));
             if(list.contains(getOwner())) list.remove(getOwner());
-            if (this.getOwner() instanceof HarmonicSaintEntity && list.contains(((HarmonicSaintEntity) this.getOwner()).getOwner())) list.remove(((HarmonicSaintEntity) this.getOwner()));
+            if (this.getOwner() instanceof MagnetoOrderSageEntity && list.contains(((MagnetoOrderSageEntity) this.getOwner()).getOwner())) list.remove(((MagnetoOrderSageEntity) this.getOwner()));
             for (LivingEntity target : list)
                 target.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), MoeFunction.getMagicAmount(magicItem) / 7);
             this.discard();
@@ -96,7 +96,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity livingEntity && livingEntity != getOwner()){
             if(magicItem != null)
-                livingEntity.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner() instanceof HarmonicSaintEntity ? ((HarmonicSaintEntity) this.getOwner()).getOwner() : this.getOwner()), MoeFunction.getMagicAmount(magicItem));
+                livingEntity.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner() instanceof MagnetoOrderSageEntity ? ((MagnetoOrderSageEntity) this.getOwner()).getOwner() : this.getOwner()), MoeFunction.getMagicAmount(magicItem));
             this.discard();
         }
     }

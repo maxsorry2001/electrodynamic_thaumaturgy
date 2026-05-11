@@ -1,12 +1,12 @@
 {
   "name": "patchouli.et.sovereign_entries",
   "category": "electrodynamic_thaumaturgy:category_start",
-  "icon": "electrodynamic_thaumaturgy:harmonic_core_block",
+  "icon": "electrodynamic_thaumaturgy:magneto_core_block",
   "pages": [
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:harmonic_core_block",
-      "text": "patchouli.et.harmonic_core_block.description"
+      "recipe": "electrodynamic_thaumaturgy:magneto_core_block",
+      "text": "patchouli.et.magneto_core_block.description"
     }
   ]
 }

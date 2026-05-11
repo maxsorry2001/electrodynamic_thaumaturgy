@@ -23,11 +23,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:saint_summon_module"
+          "name": "electrodynamic_thaumaturgy:sage_s_magnetism_seal_module"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:entities/harmonic_sovereign"
+  "random_sequence": "electrodynamic_thaumaturgy:entities/magneto_entropy_witch_entity"
 }

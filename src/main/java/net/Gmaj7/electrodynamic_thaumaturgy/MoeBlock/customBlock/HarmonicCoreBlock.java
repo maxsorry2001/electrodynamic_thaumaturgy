@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockPattern;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSovereignSummonEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoEntropyWitchSummonEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.BlockGetter;
@@ -38,9 +38,9 @@ public class HarmonicCoreBlock extends Block {
         BlockPattern.BlockPatternMatch match = MoeBlockPattern.HARMONIC_SOVEREIGN_SUMMON.find(level, pos);
         if(match != null){
             BlockPos blockPos = match.getBlock(0, 2, 0).getPos();
-            HarmonicSovereignSummonEntity harmonicSovereignSummonEntity = MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get().create(level, EntitySpawnReason.MOB_SUMMONED);
-            harmonicSovereignSummonEntity.teleportTo(blockPos.getX() + 0.5, blockPos.getY() + 0.05, blockPos.getZ() + 0.5);
-            level.addFreshEntity(harmonicSovereignSummonEntity);
+            MagnetoEntropyWitchSummonEntity magnetoEntropyWitchSummonEntity = MoeEntities.MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY.get().create(level, EntitySpawnReason.MOB_SUMMONED);
+            magnetoEntropyWitchSummonEntity.teleportTo(blockPos.getX() + 0.5, blockPos.getY() + 0.05, blockPos.getZ() + 0.5);
+            level.addFreshEntity(magnetoEntropyWitchSummonEntity);
             for(int i = 0; i < match.getWidth(); ++i) {
                 for(int j = 0; j < match.getHeight(); ++j) {
                     BlockInWorld blockinworld = match.getBlock(i, j, 0);

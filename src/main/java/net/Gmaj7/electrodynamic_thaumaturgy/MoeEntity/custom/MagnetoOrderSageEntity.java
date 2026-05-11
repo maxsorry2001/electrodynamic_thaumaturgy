@@ -34,7 +34,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 
-public class HarmonicSaintEntity extends AbstractSovereignEntity implements OwnableEntity {
+public class MagnetoOrderSageEntity extends AbstractSovereignEntity implements OwnableEntity {
     private LivingEntity master;
     protected UUID masterUUID;
     private int liveTick;
@@ -49,16 +49,16 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
         add(new HydrogenBondFracture());
     }};
     private RandomSource randomSource = RandomSource.create();
-    public HarmonicSaintEntity(EntityType<? extends AbstractSovereignEntity> entityType, Level level) {
+    public MagnetoOrderSageEntity(EntityType<? extends AbstractSovereignEntity> entityType, Level level) {
         super(entityType, level);
     }
 
-    public HarmonicSaintEntity(Level pLevel) {
-        super(MoeEntities.HARMONIC_SAINT_ENTITY.get(), pLevel);
+    public MagnetoOrderSageEntity(Level pLevel) {
+        super(MoeEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), pLevel);
     }
 
-    public HarmonicSaintEntity(Level level, LivingEntity master, int liveTick){
-        super(MoeEntities.HARMONIC_SAINT_ENTITY.get(), level);
+    public MagnetoOrderSageEntity(Level level, LivingEntity master, int liveTick){
+        super(MoeEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), level);
         this.setOwner(master);
         this.teleportRelative(master.getX(), master.getY(), master.getZ());
         this.liveTick = liveTick;
@@ -236,7 +236,7 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
     }
 
     private class followGoal extends Goal{
-        private final HarmonicSaintEntity harmonicSaintEntity;
+        private final MagnetoOrderSageEntity magnetoOrderSageEntity;
         @javax.annotation.Nullable
         private LivingEntity owner;
         private final double speedModifier;
@@ -246,25 +246,25 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
         private final float startDistance;
         private float oldWaterCost;
 
-        public followGoal(HarmonicSaintEntity harmonicSaintEntity, double speedModifier, float startDistance, float stopDistance) {
-            this.harmonicSaintEntity = harmonicSaintEntity;
+        public followGoal(MagnetoOrderSageEntity magnetoOrderSageEntity, double speedModifier, float startDistance, float stopDistance) {
+            this.magnetoOrderSageEntity = magnetoOrderSageEntity;
             this.speedModifier = speedModifier;
-            this.navigation = harmonicSaintEntity.getNavigation();
+            this.navigation = magnetoOrderSageEntity.getNavigation();
             this.startDistance = startDistance;
             this.stopDistance = stopDistance;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
-            if (!(harmonicSaintEntity.getNavigation() instanceof GroundPathNavigation) && !(harmonicSaintEntity.getNavigation() instanceof FlyingPathNavigation)) {
+            if (!(magnetoOrderSageEntity.getNavigation() instanceof GroundPathNavigation) && !(magnetoOrderSageEntity.getNavigation() instanceof FlyingPathNavigation)) {
                 throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
             }
         }
 
         public boolean canUse() {
-            LivingEntity livingentity = this.harmonicSaintEntity.getOwner();
+            LivingEntity livingentity = this.magnetoOrderSageEntity.getOwner();
             if (livingentity == null) {
                 return false;
-            } else if (this.harmonicSaintEntity.unableToMoveToOwner()) {
+            } else if (this.magnetoOrderSageEntity.unableToMoveToOwner()) {
                 return false;
-            } else if (this.harmonicSaintEntity.distanceToSqr(livingentity) < (double)(this.startDistance * this.startDistance)) {
+            } else if (this.magnetoOrderSageEntity.distanceToSqr(livingentity) < (double)(this.startDistance * this.startDistance)) {
                 return false;
             } else {
                 this.owner = livingentity;
@@ -276,32 +276,32 @@ public class HarmonicSaintEntity extends AbstractSovereignEntity implements Owna
             if (this.navigation.isDone()) {
                 return false;
             } else {
-                return this.harmonicSaintEntity.unableToMoveToOwner() ? false : !(this.harmonicSaintEntity.distanceToSqr(this.owner) <= (double)(this.stopDistance * this.stopDistance));
+                return this.magnetoOrderSageEntity.unableToMoveToOwner() ? false : !(this.magnetoOrderSageEntity.distanceToSqr(this.owner) <= (double)(this.stopDistance * this.stopDistance));
             }
         }
 
         public void start() {
             this.timeToRecalcPath = 0;
-            this.oldWaterCost = this.harmonicSaintEntity.getPathfindingMalus(PathType.WATER);
-            this.harmonicSaintEntity.setPathfindingMalus(PathType.WATER, 0.0F);
+            this.oldWaterCost = this.magnetoOrderSageEntity.getPathfindingMalus(PathType.WATER);
+            this.magnetoOrderSageEntity.setPathfindingMalus(PathType.WATER, 0.0F);
         }
 
         public void stop() {
             this.owner = null;
             this.navigation.stop();
-            this.harmonicSaintEntity.setPathfindingMalus(PathType.WATER, this.oldWaterCost);
+            this.magnetoOrderSageEntity.setPathfindingMalus(PathType.WATER, this.oldWaterCost);
         }
 
         public void tick() {
-            boolean flag = this.harmonicSaintEntity.shouldTryTeleportToOwner();
+            boolean flag = this.magnetoOrderSageEntity.shouldTryTeleportToOwner();
             if (!flag) {
-                this.harmonicSaintEntity.getLookControl().setLookAt(this.owner, 10.0F, (float)this.harmonicSaintEntity.getMaxHeadXRot());
+                this.magnetoOrderSageEntity.getLookControl().setLookAt(this.owner, 10.0F, (float)this.magnetoOrderSageEntity.getMaxHeadXRot());
             }
 
             if (--this.timeToRecalcPath <= 0) {
                 this.timeToRecalcPath = this.adjustedTickDelay(10);
                 if (flag) {
-                    this.harmonicSaintEntity.tryToTeleportToOwner();
+                    this.magnetoOrderSageEntity.tryToTeleportToOwner();
                 } else {
                     this.navigation.moveTo(this.owner, this.speedModifier);
                 }

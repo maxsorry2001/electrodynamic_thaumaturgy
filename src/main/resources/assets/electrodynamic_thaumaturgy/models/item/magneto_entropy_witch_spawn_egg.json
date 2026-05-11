@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "electrodynamic_thaumaturgy:item/magneto_entropy_witch_entity_spawn_egg"
+  }
+}

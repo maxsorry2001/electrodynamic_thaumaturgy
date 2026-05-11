@@ -117,9 +117,9 @@ public class ElectrodynamicThaumaturgy
             EntityRenderers.register(MoeEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), MagneticFluxCascadeRender::new);
             EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), FrequencyDivisionArrowRender::new);
             EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_BEACON_ENTITY.get(), FrequencyDivisionBeaconRender::new);
-            EntityRenderers.register(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), HarmonicSovereignEntityRender::new);
-            EntityRenderers.register(MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get(), HarmonicSovereignSummonRender::new);
-            EntityRenderers.register(MoeEntities.HARMONIC_SAINT_ENTITY.get(), HarmonicSaintEntityRender::new);
+            EntityRenderers.register(MoeEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), MagnetoEntropyWitchEntityRender::new);
+            EntityRenderers.register(MoeEntities.MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY.get(), MagnetoEntropyWitchSummonRender::new);
+            EntityRenderers.register(MoeEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), MagnetoOrderSageEntityRender::new);
             EntityRenderers.register(MoeEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), PhotoacousticPulseBeaconEntityRender::new);
             EntityRenderers.register(MoeEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), PhotoCorrosiveNovaEntityRender::new);
         }

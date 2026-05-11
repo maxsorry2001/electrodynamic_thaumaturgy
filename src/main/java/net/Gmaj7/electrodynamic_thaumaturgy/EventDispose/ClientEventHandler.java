@@ -2,9 +2,9 @@ package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSovereignEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.HarmonicSovereignEntityModel;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoEntropyWitchEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.MagnetoEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.PhotoCorrosiveNovaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render.MoeRayEntityRender;
@@ -33,14 +33,14 @@ public class ClientEventHandler {
         public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
             event.registerLayerDefinition(MoeRayEntityRender.MODEL_LAYER_LOCATION, MoeRayEntityRender::createBodyLayer);
             event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
-            event.registerLayerDefinition(HarmonicSovereignEntityModel.LAYER_LOCATION, HarmonicSovereignEntityModel::createBodyLayer);
+            event.registerLayerDefinition(MagnetoEntityModel.LAYER_LOCATION, MagnetoEntityModel::createBodyLayer);
             event.registerLayerDefinition(PhotoCorrosiveNovaEntityModel.LAYER_LOCATION, PhotoCorrosiveNovaEntityModel::createBodyLayer);
         }
 
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event){
-            event.put(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), HarmonicSovereignEntity.createAttributes().build());
-            event.put(MoeEntities.HARMONIC_SAINT_ENTITY.get(), HarmonicSaintEntity.createAttributes().build());
+            event.put(MoeEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), MagnetoEntropyWitchEntity.createAttributes().build());
+            event.put(MoeEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), MagnetoOrderSageEntity.createAttributes().build());
         }
 
         @SubscribeEvent

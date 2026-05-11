@@ -70,7 +70,7 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
         if(startTime == 100 && magicItem != null){
             List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(7));
             for (LivingEntity target : list){
-                if(target != this.getOwner() && target.getY() >= this.getBlockY() - 3 && !(this.getOwner() instanceof HarmonicSaintEntity && target == ((HarmonicSaintEntity) this.getOwner()).getOwner())) {
+                if(target != this.getOwner() && target.getY() >= this.getBlockY() - 3 && !(this.getOwner() instanceof MagnetoOrderSageEntity && target == ((MagnetoOrderSageEntity) this.getOwner()).getOwner())) {
                     target.hurt(new DamageSource(MoeFunction.getHolder(this.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner()), (int) MoeFunction.getMagicAmount(magicItem) * 2);
                     MoeFunction.checkTargetEnhancement(magicItem, target);
                 }

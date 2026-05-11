@@ -64,7 +64,7 @@ public class MoeTabs {
                         output.accept(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get());
                         output.accept(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get());
                         output.accept(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get());
-                        output.accept(MoeItems.SAINT_SUMMON_MODULE.get());
+                        output.accept(MoeItems.SAGE_S_MAGNETISM_SEAL.get());
 
                         output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD.get());
                         output.accept(MoeItems.COOLDOWN_ENHANCE.get());
@@ -105,9 +105,9 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
                         output.accept(MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
-                        output.accept(MoeBlocks.HARMONIC_CORE_BLOCK);
+                        output.accept(MoeBlocks.MAGNETO_CORE_BLOCK);
 
-                        output.accept(MoeItems.HARMONIC_SOVEREIGN_SPAWN_EGG);
+                        output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
                     }))
                     .build());
 

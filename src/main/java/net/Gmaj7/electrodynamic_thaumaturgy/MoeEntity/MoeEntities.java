@@ -102,20 +102,20 @@ public class MoeEntities {
                     .noSave()
                     .noLootTable()
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "photo_corrosive_nova_entity"))));
-    public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
-            MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
+    public static final Supplier<EntityType<MagnetoEntropyWitchEntity>> MAGNETO_ENTROPY_WITCH_ENTITY =
+            MOE_ENTITY_TYPES.register("magneto_entropy_witch_entity", () -> EntityType.Builder.<MagnetoEntropyWitchEntity>of(MagnetoEntropyWitchEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 1.98F)
-                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign"))));
-    public static final Supplier<EntityType<HarmonicSovereignSummonEntity>> HARMONIC_SOVEREIGN_SUMMON_ENTITY =
-            MOE_ENTITY_TYPES.register("harmonic_sovereign_summon_entity", () -> EntityType.Builder.<HarmonicSovereignSummonEntity>of(HarmonicSovereignSummonEntity::new, MobCategory.MISC)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magneto_entropy_witch_entity"))));
+    public static final Supplier<EntityType<MagnetoEntropyWitchSummonEntity>> MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY =
+            MOE_ENTITY_TYPES.register("magneto_entropy_witch_entity_summon_entity", () -> EntityType.Builder.<MagnetoEntropyWitchSummonEntity>of(MagnetoEntropyWitchSummonEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .noLootTable()
-                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign_summon_entity"))));
-    public static final Supplier<EntityType<HarmonicSaintEntity>> HARMONIC_SAINT_ENTITY =
-            MOE_ENTITY_TYPES.register("harmonic_saint", () -> EntityType.Builder.<HarmonicSaintEntity>of(HarmonicSaintEntity::new, MobCategory.MONSTER)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magneto_entropy_witch_entity_summon_entity"))));
+    public static final Supplier<EntityType<MagnetoOrderSageEntity>> MAGNETO_ORDER_SAGE_ENTITY =
+            MOE_ENTITY_TYPES.register("magneto_order_sage_entity", () -> EntityType.Builder.<MagnetoOrderSageEntity>of(MagnetoOrderSageEntity::new, MobCategory.MONSTER)
                     .sized(0.98F, 1.98F)
                     .noSave()
-                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_saint"))));
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magneto_order_sage_entity"))));
 
     public static void register(IEventBus eventBus){MOE_ENTITY_TYPES.register(eventBus);}
 }

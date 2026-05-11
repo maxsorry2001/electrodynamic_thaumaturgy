@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "electrodynamic_thaumaturgy:harmonic_core_block"
+          "name": "electrodynamic_thaumaturgy:magneto_core_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "electrodynamic_thaumaturgy:blocks/harmonic_core_block"
+  "random_sequence": "electrodynamic_thaumaturgy:blocks/magneto_core_block"
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "electrodynamic_thaumaturgy:block/magneto_core_block"
+    }
+  }
+}

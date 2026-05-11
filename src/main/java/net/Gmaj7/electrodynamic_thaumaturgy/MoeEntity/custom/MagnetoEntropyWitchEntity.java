@@ -33,8 +33,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HarmonicSovereignEntity extends AbstractSovereignEntity implements Enemy {
-    private final ServerBossEvent bossEvent = new ServerBossEvent(Mth.createInsecureUUID(this.level().getRandom()), Component.translatable("entity.electrodynamic_thaumaturgy.harmonic_sovereign"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
+public class MagnetoEntropyWitchEntity extends AbstractSovereignEntity implements Enemy {
+    private final ServerBossEvent bossEvent = new ServerBossEvent(Mth.createInsecureUUID(this.level().getRandom()), Component.translatable("entity.electrodynamic_thaumaturgy.magneto_entropy_witch_entity"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
     protected final RandomSource random = RandomSource.create();
     protected int[] coolDown = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
     private final List<IMoeMagic> magic = new ArrayList<>(){{
@@ -48,12 +48,12 @@ public class HarmonicSovereignEntity extends AbstractSovereignEntity implements 
         add(new Attract());
     }};
     private RandomSource randomSource = RandomSource.create();
-    public HarmonicSovereignEntity(EntityType<? extends AbstractSovereignEntity> entityType, Level level) {
+    public MagnetoEntropyWitchEntity(EntityType<? extends AbstractSovereignEntity> entityType, Level level) {
         super(entityType, level);
     }
 
-    public HarmonicSovereignEntity(Level pLevel) {
-        super(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), pLevel);
+    public MagnetoEntropyWitchEntity(Level pLevel) {
+        super(MoeEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), pLevel);
     }
 
     @Override

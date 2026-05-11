@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.HarmonicSaintEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MirageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
@@ -68,8 +68,8 @@ public class DamageEvent {
             if(enhancementData == null) enhancementData = livingEntity.getOffhandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
             if(enhancementData != null) livingEntity.heal(event.getNewDamage() * 0.2F * enhancementData.lifeExtraction());
         }
-        if(sourceEntity instanceof HarmonicSaintEntity && ((HarmonicSaintEntity) sourceEntity).getOwner() instanceof Player){
-            eventTarget.setLastHurtByPlayer((Player) ((HarmonicSaintEntity) sourceEntity).getOwner(), 100);
+        if(sourceEntity instanceof MagnetoOrderSageEntity && ((MagnetoOrderSageEntity) sourceEntity).getOwner() instanceof Player){
+            eventTarget.setLastHurtByPlayer((Player) ((MagnetoOrderSageEntity) sourceEntity).getOwner(), 100);
         }
         double corrosion = eventTarget.getAttribute(MoeAttributes.CORROSION).getValue();
         if(corrosion > 1) event.setNewDamage((float) (event.getNewDamage() * corrosion));

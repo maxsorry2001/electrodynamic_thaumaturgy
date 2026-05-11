@@ -60,7 +60,7 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
             }
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(target.getOnPos()).inflate(7, 2, 7));
             LivingEntity newTarget = list.get(RandomSource.create().nextInt(list.size()));
-            while (newTarget == getOwner() || !newTarget.isAlive() || (this.getOwner() instanceof HarmonicSaintEntity && newTarget == ((HarmonicSaintEntity) this.getOwner()).getOwner())) {
+            while (newTarget == getOwner() || !newTarget.isAlive() || (this.getOwner() instanceof MagnetoOrderSageEntity && newTarget == ((MagnetoOrderSageEntity) this.getOwner()).getOwner())) {
                 list.remove(newTarget);
                 if(list.isEmpty()){
                     this.discard();

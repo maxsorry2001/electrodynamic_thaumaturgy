@@ -176,7 +176,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 谐波核心
-        shaped(RecipeCategory.MISC, MoeBlocks.HARMONIC_CORE_BLOCK.get())
+        shaped(RecipeCategory.MISC, MoeBlocks.MAGNETO_CORE_BLOCK.get())
                 .pattern("aba")
                 .pattern("aca")
                 .pattern("aba")

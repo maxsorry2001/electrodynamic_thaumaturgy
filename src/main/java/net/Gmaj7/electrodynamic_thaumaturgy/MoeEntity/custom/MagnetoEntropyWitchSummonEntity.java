@@ -18,15 +18,15 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-public class HarmonicSovereignSummonEntity extends AbstractArrow {
+public class MagnetoEntropyWitchSummonEntity extends AbstractArrow {
     private int summonTick = 100;
-    public HarmonicSovereignSummonEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+    public MagnetoEntropyWitchSummonEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public HarmonicSovereignSummonEntity(Level pLevel) {
-        super(MoeEntities.HARMONIC_SOVEREIGN_SUMMON_ENTITY.get(), pLevel);
+    public MagnetoEntropyWitchSummonEntity(Level pLevel) {
+        super(MoeEntities.MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY.get(), pLevel);
         this.pickup = Pickup.DISALLOWED;
     }
 
@@ -59,9 +59,9 @@ public class HarmonicSovereignSummonEntity extends AbstractArrow {
             }
         }
         if(summonTick < 0){
-            HarmonicSovereignEntity harmonicSovereignEntity = MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get().create(level(), EntitySpawnReason.SPAWNER);
-            harmonicSovereignEntity.teleportTo(getOnPos().getX() + 0.5, getOnPos().getY() + 1, getOnPos().getZ() + 0.5);
-            level().addFreshEntity(harmonicSovereignEntity);
+            MagnetoEntropyWitchEntity magnetoEntropyWitchEntity = MoeEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get().create(level(), EntitySpawnReason.SPAWNER);
+            magnetoEntropyWitchEntity.teleportTo(getOnPos().getX() + 0.5, getOnPos().getY() + 1, getOnPos().getZ() + 0.5);
+            level().addFreshEntity(magnetoEntropyWitchEntity);
             for (int i = 1; i <= 8; i++){
                 float r = i * 2 * Mth.PI / 8;
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.SPAWNER);

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "electrodynamic_thaumaturgy:block/harmonic_core_block",
-		"particle": "electrodynamic_thaumaturgy:block/harmonic_core_block"
+		"0": "electrodynamic_thaumaturgy:block/magneto_core_block",
+		"particle": "electrodynamic_thaumaturgy:block/magneto_core_block"
 	},
 	"render_type": "cutout",
 	"elements": [

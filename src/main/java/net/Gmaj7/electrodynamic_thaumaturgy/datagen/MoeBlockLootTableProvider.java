@@ -26,7 +26,7 @@ public class MoeBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
         dropSelf(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
         dropSelf(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());
-        dropSelf(MoeBlocks.HARMONIC_CORE_BLOCK.get());
+        dropSelf(MoeBlocks.MAGNETO_CORE_BLOCK.get());
         dropSelf(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
         dropSelf(MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get());
         dropSelf(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());

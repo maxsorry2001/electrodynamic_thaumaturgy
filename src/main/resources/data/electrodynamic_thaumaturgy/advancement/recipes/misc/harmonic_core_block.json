@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:harmonic_core_block"
+        "recipe": "electrodynamic_thaumaturgy:magneto_core_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:harmonic_core_block"
+      "electrodynamic_thaumaturgy:magneto_core_block"
     ]
   }
 }

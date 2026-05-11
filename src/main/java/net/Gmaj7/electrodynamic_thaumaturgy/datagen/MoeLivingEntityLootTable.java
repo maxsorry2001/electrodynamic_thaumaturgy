@@ -22,7 +22,7 @@ public class MoeLivingEntityLootTable extends EntityLootSubProvider {
 
     @Override
     public void generate() {
-        add(MoeEntities.HARMONIC_SOVEREIGN_ENTITY.get(), LootTable.lootTable()
+        add(MoeEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), LootTable.lootTable()
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1.0F))
@@ -32,9 +32,9 @@ public class MoeLivingEntityLootTable extends EntityLootSubProvider {
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1.0F))
-                                .add(LootItem.lootTableItem(MoeItems.SAINT_SUMMON_MODULE.get()))
+                                .add(LootItem.lootTableItem(MoeItems.SAGE_S_MAGNETISM_SEAL.get()))
                 ));
-        add(MoeEntities.HARMONIC_SAINT_ENTITY.get(), LootTable.lootTable());
+        add(MoeEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), LootTable.lootTable());
     }
 
     @Override
