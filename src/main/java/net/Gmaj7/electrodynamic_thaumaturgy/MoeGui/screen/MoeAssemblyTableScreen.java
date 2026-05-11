@@ -32,7 +32,7 @@ public class MoeAssemblyTableScreen extends AbstractContainerScreen<MoeAssemblyT
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
-        guiGraphics.text(this.font, Component.translatable("moe_assemble"), x + 145, y + 40, 0x000000);
+        guiGraphics.text(this.font, Component.translatable("moe_assemble"), x + 145, y + 40, 0xFFFFFFFF);
     }
 
     private boolean isMouseFocused(double mouseX, double mouseY){

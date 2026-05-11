@@ -104,7 +104,7 @@ public class MoeEntities {
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "photo_corrosive_nova_entity"))));
     public static final Supplier<EntityType<HarmonicSovereignEntity>> HARMONIC_SOVEREIGN_ENTITY =
             MOE_ENTITY_TYPES.register("harmonic_sovereign", () -> EntityType.Builder.<HarmonicSovereignEntity>of(HarmonicSovereignEntity::new, MobCategory.MONSTER)
-                    .sized(0.98F, 0.98F)
+                    .sized(0.98F, 1.98F)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign"))));
     public static final Supplier<EntityType<HarmonicSovereignSummonEntity>> HARMONIC_SOVEREIGN_SUMMON_ENTITY =
             MOE_ENTITY_TYPES.register("harmonic_sovereign_summon_entity", () -> EntityType.Builder.<HarmonicSovereignSummonEntity>of(HarmonicSovereignSummonEntity::new, MobCategory.MISC)
@@ -113,7 +113,7 @@ public class MoeEntities {
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_sovereign_summon_entity"))));
     public static final Supplier<EntityType<HarmonicSaintEntity>> HARMONIC_SAINT_ENTITY =
             MOE_ENTITY_TYPES.register("harmonic_saint", () -> EntityType.Builder.<HarmonicSaintEntity>of(HarmonicSaintEntity::new, MobCategory.MONSTER)
-                    .sized(0.98F, 0.98F)
+                    .sized(0.98F, 1.98F)
                     .noSave()
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "harmonic_saint"))));
 

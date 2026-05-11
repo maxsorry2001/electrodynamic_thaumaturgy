@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "electrodynamic_thaumaturgy:empty_intermediate_module",
+    "electrodynamic_thaumaturgy:intermediate_code_module",
     "minecraft:copper_ingot",
     "minecraft:popped_chorus_fruit"
   ],
   "result": {
-    "id": "electrodynamic_thaumaturgy:empty_advanced_module"
+    "id": "electrodynamic_thaumaturgy:advanced_code_module"
   }
 }

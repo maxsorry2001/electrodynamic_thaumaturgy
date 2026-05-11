@@ -10,12 +10,12 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:empty_primary_module",
-      "recipe2": "electrodynamic_thaumaturgy:empty_intermediate_module"
+      "recipe": "electrodynamic_thaumaturgy:primary_code_module",
+      "recipe2": "electrodynamic_thaumaturgy:intermediate_code_module"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "electrodynamic_thaumaturgy:empty_advanced_module"
+      "recipe": "electrodynamic_thaumaturgy:advanced_code_module"
     }
   ]
 }

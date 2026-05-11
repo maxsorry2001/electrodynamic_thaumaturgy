@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "electrodynamic_thaumaturgy:empty_primary_module",
+    "electrodynamic_thaumaturgy:primary_code_module",
     "minecraft:gold_ingot",
     "minecraft:quartz"
   ],
   "result": {
-    "id": "electrodynamic_thaumaturgy:empty_intermediate_module"
+    "id": "electrodynamic_thaumaturgy:intermediate_code_module"
   }
 }

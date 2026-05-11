@@ -26,43 +26,43 @@ public class MoeElectromagneticExtractorBlockScreen extends AbstractContainerScr
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         extractTooltip(guiGraphics, mouseX, mouseY);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(false, false), x + 28, y + 8, 40, 12);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseAddWidthFocused(mouseX, mouseY)), x + 13, y + 8, 12, 12);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseReduceWidthFocused(mouseX, mouseY)), x + 71, y + 8, 12, 12);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseAddWidthFocused(mouseX, mouseY)), x + 71, y + 8, 12, 12);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseReduceWidthFocused(mouseX, mouseY)), x + 13, y + 8, 12, 12);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(false, false), x + 115, y + 8, 40, 12);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseAddDepthFocused(mouseX, mouseY)), x + 100, y + 8, 12, 12);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseReduceDepthFocused(mouseX, mouseY)), x + 158, y + 8, 12, 12);
-        guiGraphics.text(this.font, Component.translatable("moe_extractor_width").append(":" + menu.blockEntity.width), x + 30, y + 10, 0xFFFFFF);
-        guiGraphics.text(this.font, Component.literal("+"), x + 15, y + 10, 0xFFFFFF);
-        guiGraphics.text(this.font, Component.literal("-"), x + 73, y + 10, 0xFFFFFF);
-        guiGraphics.text(this.font, Component.translatable("moe_extractor_depth").append(":" + menu.blockEntity.depth), x + 117, y + 10, 0xFFFFFF);
-        guiGraphics.text(this.font, Component.literal("+"), x + 102, y + 10, 0xFFFFFF);
-        guiGraphics.text(this.font, Component.literal("-"), x + 160, y + 10, 0xFFFFFF);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseAddDepthFocused(mouseX, mouseY)), x + 158, y + 8, 12, 12);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseReduceDepthFocused(mouseX, mouseY)), x + 100, y + 8, 12, 12);
+        guiGraphics.text(this.font, Component.translatable("moe_extractor_width").append(":" + menu.blockEntity.width), x + 30, y + 10, 0xFFFFFFFF);
+        guiGraphics.text(this.font, Component.literal("-"), x + 15, y + 10, 0xFFFFFFFF);
+        guiGraphics.text(this.font, Component.literal("+"), x + 73, y + 10, 0xFFFFFFFF);
+        guiGraphics.text(this.font, Component.translatable("moe_extractor_depth").append(":" + menu.blockEntity.depth), x + 117, y + 10, 0xFFFFFFFF);
+        guiGraphics.text(this.font, Component.literal("-"), x + 102, y + 10, 0xFFFFFFFF);
+        guiGraphics.text(this.font, Component.literal("+"), x + 160, y + 10, 0xFFFFFFFF);
     }
 
     private boolean isMouseAddWidthFocused(double mouseX, double mouseY){
-        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - 13;
-        double d1 = mouseY - y - 8;
-        return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
-    }
-
-    private boolean isMouseReduceWidthFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         double d0 = mouseX - x - 71;
         double d1 = mouseY - y - 8;
         return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
     }
 
+    private boolean isMouseReduceWidthFocused(double mouseX, double mouseY){
+        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
+        double d0 = mouseX - x - 13;
+        double d1 = mouseY - y - 8;
+        return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
+    }
+
     private boolean isMouseAddDepthFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - 100;
+        double d0 = mouseX - x - 158;
         double d1 = mouseY - y - 8;
         return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
     }
 
     private boolean isMouseReduceDepthFocused(double mouseX, double mouseY){
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - 158;
+        double d0 = mouseX - x - 100;
         double d1 = mouseY - y - 8;
         return d0 > 0 && d0 < 12 && d1 > 0 && d1 < 12;
     }

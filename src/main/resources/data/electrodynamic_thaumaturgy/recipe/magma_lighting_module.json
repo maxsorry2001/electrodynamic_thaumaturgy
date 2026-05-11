@@ -1,6 +1,6 @@
 {
   "type": "electrodynamic_thaumaturgy:magic_encode",
-  "base": "electrodynamic_thaumaturgy:empty_intermediate_module",
+  "base": "electrodynamic_thaumaturgy:intermediate_code_module",
   "code1": "minecraft:iron_ingot",
   "code2": "minecraft:diamond",
   "result": {

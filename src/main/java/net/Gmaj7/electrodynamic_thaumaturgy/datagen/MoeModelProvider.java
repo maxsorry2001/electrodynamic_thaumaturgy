@@ -16,7 +16,7 @@ public class MoeModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        itemModels.generateFlatItem(MoeItems.EMPTY_PRIMARY_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.PRIMARY_CODE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.RAY_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.PULSED_PLASMA_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.EXCITING_MODULE.get(), ModelTemplates.FLAT_ITEM);
@@ -47,8 +47,8 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.POWER_BANK.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.ENERGY_CORE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.SUPERCONDUCTING_UPDATE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MoeItems.EMPTY_INTERMEDIATE_MODULE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MoeItems.EMPTY_ADVANCED_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.INTERMEDIATE_CODE_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.ADVANCED_CODE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.COULOMB_DOMAIN_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get(), ModelTemplates.FLAT_ITEM);
@@ -69,6 +69,8 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.ENTROPY_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.ENHANCE_MODEM_BASEBOARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.RADIANT_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.STELLAR_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.HARMONIC_SOVEREIGN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);

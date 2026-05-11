@@ -33,9 +33,9 @@ public class MoeTabs {
 
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));
-                        output.accept(MoeItems.EMPTY_PRIMARY_MODULE.get());
-                        output.accept(MoeItems.EMPTY_INTERMEDIATE_MODULE.get());
-                        output.accept(MoeItems.EMPTY_ADVANCED_MODULE.get());
+                        output.accept(MoeItems.PRIMARY_CODE_MODULE.get());
+                        output.accept(MoeItems.INTERMEDIATE_CODE_MODULE.get());
+                        output.accept(MoeItems.ADVANCED_CODE_MODULE.get());
 
                         output.accept(MoeItems.RAY_MODULE.get());
                         output.accept(MoeItems.ATTRACT_MODULE.get());
@@ -129,7 +129,7 @@ public class MoeTabs {
             list.add(new ItemStack(MoeItems.RAY_MODULE.get()));
         }
         for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
+            list.add(new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get()));
         }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         return itemStack;
@@ -152,7 +152,7 @@ public class MoeTabs {
         list.add(new ItemStack(lc));
         list.add(new ItemStack(power));
         for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get()));
+            list.add(new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get()));
         }
         itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
         return itemStack;

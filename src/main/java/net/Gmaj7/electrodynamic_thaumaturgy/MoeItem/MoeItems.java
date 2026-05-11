@@ -74,11 +74,11 @@ public class MoeItems {
             (properties) -> new MoeMagicTypeModuleItem(new PhotoacousticPulse(), properties.stacksTo(1)));
     public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = MOE_ITEM.registerItem("photo_corrosive_nova_module",
             (properties) -> new MoeMagicTypeModuleItem(new PhotoCorrosiveNova(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> EMPTY_PRIMARY_MODULE = MOE_ITEM.registerItem("empty_primary_module",
+    public static final DeferredItem<Item> PRIMARY_CODE_MODULE = MOE_ITEM.registerItem("primary_code_module",
             (properties) -> new MoeMagicTypeModuleItem(null, properties.stacksTo(16)));
-    public static final DeferredItem<Item> EMPTY_INTERMEDIATE_MODULE = MOE_ITEM.registerItem("empty_intermediate_module",
+    public static final DeferredItem<Item> INTERMEDIATE_CODE_MODULE = MOE_ITEM.registerItem("intermediate_code_module",
             (properties) -> new MoeMagicTypeModuleItem(null, properties.stacksTo(16)));
-    public static final DeferredItem<Item> EMPTY_ADVANCED_MODULE = MOE_ITEM.registerItem("empty_advanced_module",
+    public static final DeferredItem<Item> ADVANCED_CODE_MODULE = MOE_ITEM.registerItem("advanced_code_module",
             (properties) -> new MoeMagicTypeModuleItem(null, properties.stacksTo(16)));
 
     public static final DeferredItem<Item> PRIMARY_LC = MOE_ITEM.registerItem("primary_lc",
@@ -131,6 +131,8 @@ public class MoeItems {
             (properties) -> new Item(properties.stacksTo(1)));
 
     public static final DeferredItem<Item> MAGNO_INGOT = MOE_ITEM.registerSimpleItem("magno_ingot");
+    public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("radiant_magno_ingot");
+    public static final DeferredItem<Item> STELLAR_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("stellar_magno_ingot");
 
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)

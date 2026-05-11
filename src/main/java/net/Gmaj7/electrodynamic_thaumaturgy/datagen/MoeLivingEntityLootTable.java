@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
@@ -38,6 +39,6 @@ public class MoeLivingEntityLootTable extends EntityLootSubProvider {
 
     @Override
     protected Stream<EntityType<?>> getKnownEntityTypes() {
-        return MoeEntities.MOE_ENTITY_TYPES.getEntries().stream().map(e -> (EntityType<?>) e.value());
+        return MoeEntities.MOE_ENTITY_TYPES.getEntries().stream().map(Holder::value);
     }
 }

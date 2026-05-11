@@ -163,7 +163,7 @@ public class MagicCastItem extends Item {
             ItemStack typeStack = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
             return typeStack;
         }
-        else return new ItemStack(MoeItems.EMPTY_PRIMARY_MODULE.get());
+        else return new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get());
     }
 
     public static int getMaxMagicSlots() {

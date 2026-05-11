@@ -27,9 +27,9 @@
   "item.electrodynamic_thaumaturgy.photo_corrosive_nova_module": "光蚀新星",
   "item.electrodynamic_thaumaturgy.saint_summon_module": "圣君召唤",
 
-  "item.electrodynamic_thaumaturgy.empty_primary_module": "初级光刻板",
-  "item.electrodynamic_thaumaturgy.empty_intermediate_module": "中级光刻板",
-  "item.electrodynamic_thaumaturgy.empty_advanced_module": "高级光刻板",
+  "item.electrodynamic_thaumaturgy.primary_code_module": "初级法术代码模块",
+  "item.electrodynamic_thaumaturgy.intermediate_code_module": "中级法术代码模块",
+  "item.electrodynamic_thaumaturgy.advanced_code_module": "高级法术代码模块",
   "item.electrodynamic_thaumaturgy.empty_lc": "空振荡器",
   "item.electrodynamic_thaumaturgy.primary_lc": "初级振荡器",
   "item.electrodynamic_thaumaturgy.intermediate_lc": "中级振荡器",

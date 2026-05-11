@@ -1,7 +1,7 @@
 {
   "values": [
-    "electrodynamic_thaumaturgy:empty_primary_module",
-    "electrodynamic_thaumaturgy:empty_intermediate_module",
-    "electrodynamic_thaumaturgy:empty_advanced_module"
+    "electrodynamic_thaumaturgy:primary_code_module",
+    "electrodynamic_thaumaturgy:intermediate_code_module",
+    "electrodynamic_thaumaturgy:advanced_code_module"
   ]
 }

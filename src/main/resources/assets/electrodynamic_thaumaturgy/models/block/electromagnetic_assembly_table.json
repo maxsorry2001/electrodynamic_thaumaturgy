@@ -1,5 +1,4 @@
 {
-	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "electrodynamic_thaumaturgy:block/elextromagnetic_assembly_table",
@@ -78,7 +77,6 @@
 		{
 			"name": "group",
 			"origin": [0, 0, 0],
-			"scope": 0,
 			"color": 0,
 			"children": [0, 1, 2]
 		}

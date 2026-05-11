@@ -14,5 +14,7 @@ public abstract class AbstractSovereignEntity extends PathfinderMob implements R
         super(entityType, level);
     }
 
+
+
     public abstract void setCastTick(int castTick);
 }
