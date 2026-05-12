@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -409,6 +410,8 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .define('b', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get()))
                 .save(output);
+
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.PRIMARY_CODE_MODULE, Items.IRON_INGOT, Items.GOLD_INGOT, MoeItems.ATTRACT_MODULE).save(output);
     }
 
     protected static class Runner extends RecipeProvider.Runner{
