@@ -1,0 +1,9 @@
+{
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "minecraft:iron_ingot"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:magno_ingot"
+  }
+}

@@ -23,6 +23,15 @@ public class MoeRecipes {
                     return "magic_encode";
                 }
             });
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagnetoFusionRecipe>> MAGNO_FUSION_SERIALIZER =
+            SERIALIZER.register("magno_fusion", () -> new RecipeSerializer<>(MagnetoFusionRecipe.CODEC, MagnetoFusionRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MagnetoFusionRecipe>> MAGNO_FUSION_TYPE =
+            TYPE.register("magno_fusion", () -> new RecipeType<MagnetoFusionRecipe>() {
+                @Override
+                public String toString() {
+                    return "magno_fusion";
+                }
+            });
 
     public static void register(IEventBus eventBus){
         SERIALIZER.register(eventBus);

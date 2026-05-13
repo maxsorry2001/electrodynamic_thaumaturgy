@@ -27,7 +27,6 @@ public class MoeMenuType {
     public static final DeferredHolder<MenuType<?>, MenuType<MoeElectromagneticDriverBlockMenu>> ELECTROMAGNETIC_DRIVER_MACHINE_MENU = registerMenuType("electromagnetic_driver_machine_menu", MoeElectromagneticDriverBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<MoeEntityCloneBlockMenu>> BIO_REPLICATION_VAT_MACHINE_MENU = registerMenuType("bio_replication_vat_machine_menu", MoeEntityCloneBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<MoeElectromagneticExtractorBlockMenu>> GEOLOGICAL_METAL_EXCAVATOR_MENU = registerMenuType("geological_metal_excavator_menu", MoeElectromagneticExtractorBlockMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeNitrogenHarvesterBlockMenu>> NITROGEN_HARVESTER_MENU = registerMenuType("nitrogen_harvester_menu", MoeNitrogenHarvesterBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<MoeAtomicReconstructionBlockMenu>> ATOMIC_RECONSTRUCTION_BLOCK_MENU = registerMenuType("atomic_reconstruction_mavhine_menu", MoeAtomicReconstructionBlockMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory){

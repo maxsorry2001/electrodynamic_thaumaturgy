@@ -53,9 +53,10 @@ public class MoeBlockEntities {
             MOE_BLOCK_ENTITY.register("atomic_reconstruction_be", () -> new BlockEntityType<>(
                     AtomicReconstructionBE::new, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get()));
 
-    public static final Supplier<BlockEntityType<NitrogenHarvesterBE>> NITROGEN_HARVESTER_BE =
-            MOE_BLOCK_ENTITY.register("nitrogen_harvester_be", () -> new BlockEntityType<>(
-                    NitrogenHarvesterBE::new, MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get()));
+    public static final Supplier<BlockEntityType<MagnetoFusionBE>> MAGNETO_FUSION_BE =
+            MOE_BLOCK_ENTITY.register("magneto_fusion_be", () -> new BlockEntityType<>(
+                    MagnetoFusionBE::new, MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get()
+            ));
 
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);

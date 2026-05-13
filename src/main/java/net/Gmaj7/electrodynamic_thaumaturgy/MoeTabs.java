@@ -103,7 +103,6 @@ public class MoeTabs {
                         output.accept(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
-                        output.accept(MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                         output.accept(MoeBlocks.MAGNETO_CORE_BLOCK);
 

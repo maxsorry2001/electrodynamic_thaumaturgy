@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.NitrogenHarvesterBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BioReplicationVatBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -10,28 +10,37 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class NitrogenHarvesterBlock extends BaseEntityBlock {
-    public static final MapCodec<NitrogenHarvesterBlock> CODEC = simpleCodec(NitrogenHarvesterBlock::new);
-
-    public NitrogenHarvesterBlock(Properties properties) {
+public class BioReplicationVatBlock extends BaseEntityBlock {
+    public static final MapCodec<BioReplicationVatBlock> CODEC = simpleCodec(BioReplicationVatBlock::new);
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    public BioReplicationVatBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override
@@ -45,22 +54,24 @@ public class NitrogenHarvesterBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof NitrogenHarvesterBE energyBlockEntity && !level.isClientSide()) {
-                EnergyHandler energyStorage = energyBlockEntity.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), energyBlockEntity.getBlockPos()));
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(energyBlockEntity, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
+            if (blockEntity instanceof BioReplicationVatBE bioReplicationVatBE && !level.isClientSide()) {
+                EnergyHandler energyStorage = bioReplicationVatBE.getEnergy();
+                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), bioReplicationVatBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(bioReplicationVatBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;
         }
     }
 
+    @Nullable
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new NitrogenHarvesterBE(blockPos, blockState);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return blockEntityType == MoeBlockEntities.BIO_REPLICATION_VAT_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.BIO_REPLICATION_VAT_BE.get(), BioReplicationVatBE::tick) : null;
     }
 
+    @Nullable
     @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == MoeBlockEntities.NITROGEN_HARVESTER_BE.get() ? createTickerHelper(blockEntityType, MoeBlockEntities.NITROGEN_HARVESTER_BE.get(), NitrogenHarvesterBE::tick) : null;
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new BioReplicationVatBE(blockPos, blockState);
     }
 }

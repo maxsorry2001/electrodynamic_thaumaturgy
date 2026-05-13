@@ -112,8 +112,6 @@ public class MoeModelProvider extends ModelProvider {
                 BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_driver_machine_block"))));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
                 BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_extractor_machine_block"))));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/nitrogen_harvester_machine_block"))));
         blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
     }
 }

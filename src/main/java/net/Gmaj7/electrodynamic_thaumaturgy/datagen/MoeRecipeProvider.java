@@ -2,12 +2,13 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeReciprBuilder.MagicEncodeRecipeBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeReciprBuilder.MagnetoFusionRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -162,17 +163,6 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .define('a', MoeItems.MAGNO_INGOT)
                 .define('b', MoeItems.ENERGY_CORE.get())
                 .define('c', Items.REDSTONE)
-                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get()))
-                .save(output);
-
-        // 固氮采集器
-        shaped(RecipeCategory.MISC, MoeBlocks.NITROGEN_HARVESTER_MACHINE_BLOCK.get())
-                .pattern("aca")
-                .pattern("cbc")
-                .pattern("aaa")
-                .define('a', MoeItems.MAGNO_INGOT.get())
-                .define('b', MoeItems.ENERGY_CORE.get())
-                .define('c', Blocks.BONE_BLOCK)
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get()))
                 .save(output);
 
@@ -412,6 +402,8 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.PRIMARY_CODE_MODULE, Items.IRON_INGOT, Items.GOLD_INGOT, MoeItems.ATTRACT_MODULE).save(output);
+
+        MagnetoFusionRecipeBuilder.magnetoFusion(MoeItems.MAGNO_INGOT, Items.IRON_INGOT).save(output);
     }
 
     protected static class Runner extends RecipeProvider.Runner{

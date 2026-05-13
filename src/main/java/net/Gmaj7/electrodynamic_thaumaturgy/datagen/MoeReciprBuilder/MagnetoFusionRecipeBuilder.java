@@ -1,36 +1,42 @@
-package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
+package net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeReciprBuilder;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipe;
 import net.minecraft.advancements.Criterion;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
-public class MagicEncodeRecipeBuilder implements RecipeBuilder {
+public class MagnetoFusionRecipeBuilder implements RecipeBuilder {
     private final ItemStackTemplate result;
-    private final Ingredient baseInput;
-    private final Ingredient code1Input;
-    private final Ingredient code2Input;
+    private final List<Ingredient> ingredients;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private String group;
 
-    private MagicEncodeRecipeBuilder(Ingredient base, Ingredient code1, Ingredient code2, ItemStackTemplate result) {
+    private MagnetoFusionRecipeBuilder(ItemStackTemplate result, List<Ingredient> ingredients) {
         this.result = result;
-        this.baseInput = base;
-        this.code1Input = code1;
-        this.code2Input = code2;
+        this.ingredients = ingredients;
     }
 
-    public static MagicEncodeRecipeBuilder magicEncode(ItemLike base, ItemLike code1, ItemLike code2, ItemLike result) {
-        return new MagicEncodeRecipeBuilder(Ingredient.of(base), Ingredient.of(code1), Ingredient.of(code2), new ItemStackTemplate(result.asItem()));
+    public static MagnetoFusionRecipeBuilder magnetoFusion(ItemLike result, ItemLike... input) {
+        List<Ingredient> list = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, input.length); i++){
+            list.add(Ingredient.of(input[i]));
+        }
+        return new MagnetoFusionRecipeBuilder(new ItemStackTemplate(result.asItem()), list);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class MagicEncodeRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
-        MagicEncodeRecipe recipe = new MagicEncodeRecipe(baseInput, code1Input, code2Input, result);
+        MagnetoFusionRecipe recipe = new MagnetoFusionRecipe(ingredients, result);
         recipeOutput.accept(resourceKey, recipe, null);
     }
 }

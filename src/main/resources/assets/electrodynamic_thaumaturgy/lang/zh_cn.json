@@ -46,6 +46,8 @@
   "item.electrodynamic_thaumaturgy.power_bank": "充电宝",
   "item.electrodynamic_thaumaturgy.energy_core": "导能核心",
   "item.electrodynamic_thaumaturgy.magno_ingot": "感磁锭",
+  "item.electrodynamic_thaumaturgy.radiant_magno_ingot": "耀磁锭",
+  "item.electrodynamic_thaumaturgy.stellar_magno_ingot": "星磁锭",
   "item.electrodynamic_thaumaturgy.superconducting_update": "超导升级工具",
   "item.electrodynamic_thaumaturgy.cooldown_enhance": "冷却",
   "item.electrodynamic_thaumaturgy.strength_enhance": "强度",
@@ -79,8 +81,8 @@
   "block.electrodynamic_thaumaturgy.bio_replication_vat_machine_block": "生物克隆器",
   "block.electrodynamic_thaumaturgy.electromagnetic_extractor_machine_block": "电磁采掘器",
   "block.electrodynamic_thaumaturgy.atomic_reconstruction_machine_block": "原子重构器",
-  "block.electrodynamic_thaumaturgy.nitrogen_harvester_machine_block": "固氮采集器",
   "block.electrodynamic_thaumaturgy.magneto_core_block": "电磁核心",
+  "block.electrodynamic_thaumaturgy.magneto_fusion_machine_block": "磁力融合器",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "电磁射线",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "脉冲等离子体",

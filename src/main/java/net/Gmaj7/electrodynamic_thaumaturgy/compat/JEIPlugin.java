@@ -35,16 +35,19 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new MagicEncodeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new MagnetoFusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(JEIRecipeTypes.MAGIC_ENCODE, this.getRecipes(recipeMap, MoeRecipes.MAGIC_ENCODE_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.MAGNETO_FUSION, this.getRecipes(recipeMap, MoeRecipes.MAGNO_FUSION_TYPE.get()));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
     }
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
@@ -52,6 +55,7 @@ public class JEIPlugin implements IModPlugin {
         @SubscribeEvent
         public static void onDatapackSync(OnDatapackSyncEvent event) {
             event.sendRecipes(MoeRecipes.MAGIC_ENCODE_TYPE.get());
+            event.sendRecipes(MoeRecipes.MAGNO_FUSION_TYPE.get());
         }
     }
 
