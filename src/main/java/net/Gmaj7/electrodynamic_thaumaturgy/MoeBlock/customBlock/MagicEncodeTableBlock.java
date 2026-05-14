@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeMagicEncodeTableMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MagicEncodeTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -39,7 +39,7 @@ public class MagicEncodeTableBlock extends Block {
     @Override
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((id, inventory, player) -> {
-            return new MoeMagicEncodeTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
+            return new MagicEncodeTableMenu(id, inventory, ContainerLevelAccess.create(level, pos));
         }, Component.translatable("block.electrodynamic_thaumaturgy.magic_encode_table"));
     }
 

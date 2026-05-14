@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class MoeMagicEncodeTableMenu extends AbstractContainerMenu {
+public class MagicEncodeTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     final ResultContainer resultContainer;
@@ -38,11 +38,11 @@ public class MoeMagicEncodeTableMenu extends AbstractContainerMenu {
     private final Slot code2Slot;
     final Slot resultSlot;
 
-    public MoeMagicEncodeTableMenu(int containerId, Inventory inventory){
+    public MagicEncodeTableMenu(int containerId, Inventory inventory){
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
 
-    public MoeMagicEncodeTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
+    public MagicEncodeTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
         super(MoeMenuType.MAGIC_ENCODE_TABLE_MENU.get(), containerId);
         this.access = access;
         checkContainerSize(inventory, 1);
@@ -52,7 +52,7 @@ public class MoeMagicEncodeTableMenu extends AbstractContainerMenu {
             @Override
             public void setChanged() {
                 super.setChanged();
-                MoeMagicEncodeTableMenu.this.slotsChanged(this);
+                MagicEncodeTableMenu.this.slotsChanged(this);
             }
         };
         this.resultContainer = new ResultContainer();
@@ -80,16 +80,16 @@ public class MoeMagicEncodeTableMenu extends AbstractContainerMenu {
             }
 
             public void onTake(Player player, ItemStack itemStack) {
-                MoeMagicEncodeTableMenu.this.baseSlot.remove(1);
-                MoeMagicEncodeTableMenu.this.code1Slot.remove(1);
-                MoeMagicEncodeTableMenu.this.code2Slot.remove(1);
-                MoeMagicEncodeTableMenu.this.slotsChanged(MoeMagicEncodeTableMenu.this.container);
+                MagicEncodeTableMenu.this.baseSlot.remove(1);
+                MagicEncodeTableMenu.this.code1Slot.remove(1);
+                MagicEncodeTableMenu.this.code2Slot.remove(1);
+                MagicEncodeTableMenu.this.slotsChanged(MagicEncodeTableMenu.this.container);
 
                 super.onTake(player, itemStack);
             }
 
             private List<ItemStack> getRelevantItems() {
-                return List.of(MoeMagicEncodeTableMenu.this.baseSlot.getItem());
+                return List.of(MagicEncodeTableMenu.this.baseSlot.getItem());
             }
         });
         addPlayerInventory(inventory);

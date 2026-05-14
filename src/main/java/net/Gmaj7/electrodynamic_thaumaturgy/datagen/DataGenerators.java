@@ -26,7 +26,7 @@ public class DataGenerators {
         //        List.of(new LootTableProvider.SubProviderEntry(MoeBlockLootTableProvider::new, LootContextParamSets.BLOCK),
         //                new LootTableProvider.SubProviderEntry(MoeLivingEntityLootTable::new, LootContextParamSets.ENTITY)), lookupProvider));
 
-        //dataGenerator.addProvider(true, new MoeModelProvider(packOutput));
+        dataGenerator.addProvider(true, new MoeModelProvider(packOutput));
         dataGenerator.addProvider(true, new MoeRecipeProvider.Runner(packOutput, lookupProvider));
         dataGenerator.addProvider(true, new MoeAdvancementProvider(packOutput, lookupProvider));
     }

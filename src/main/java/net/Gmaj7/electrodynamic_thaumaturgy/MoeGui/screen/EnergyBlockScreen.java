@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeAtomicReconstructionBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.EnergyBlockMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -10,14 +10,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
-import java.util.List;
-
-public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<MoeAtomicReconstructionBlockMenu> {
-    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block.png");
+public class EnergyBlockScreen extends AbstractContainerScreen<EnergyBlockMenu> {
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_energy_block.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
-    Identifier progressTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block_progress.png");
 
-    public MoeAtomicReconstructionBlockScreen(MoeAtomicReconstructionBlockMenu menu, Inventory playerInventory, Component title) {
+    public EnergyBlockScreen(EnergyBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
     @Override
@@ -27,7 +24,7 @@ public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
-            guiGraphics.setTooltipForNextFrame(this.font, List.of(), mouseX, mouseY);
+            guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
     }
 
     @Override
@@ -46,8 +43,7 @@ public class MoeAtomicReconstructionBlockScreen extends AbstractContainerScreen<
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), progressX = (int) (58 * (float) menu.blockEntity.getProgressPer());
+        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
         guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
-        guiGraphics.blit(progressTexture, x + 60, y + 56, x + 60 + progressX, y + 62, 0, progressX, 0, 6);
     }
 }

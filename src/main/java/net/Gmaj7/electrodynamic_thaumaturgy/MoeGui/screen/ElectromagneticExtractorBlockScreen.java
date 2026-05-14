@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticExtractorBlockMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -13,11 +13,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MoeElectromagneticExtractorBlockScreen extends AbstractContainerScreen<MoeElectromagneticExtractorBlockMenu> {
+public class ElectromagneticExtractorBlockScreen extends AbstractContainerScreen<ElectromagneticExtractorBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_extractor_machine_block.png");
     protected static final WidgetSprites SPRITES = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
 
-    public MoeElectromagneticExtractorBlockScreen(MoeElectromagneticExtractorBlockMenu menu, Inventory playerInventory, Component title) {
+    public ElectromagneticExtractorBlockScreen(ElectromagneticExtractorBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
     @Override

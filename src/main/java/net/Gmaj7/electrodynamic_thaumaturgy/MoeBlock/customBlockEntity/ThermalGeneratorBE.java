@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeThermalGeneratorMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ThermalGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
@@ -106,7 +106,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new MoeThermalGeneratorMenu(i, inventory, this);
+        return new ThermalGeneratorMenu(i, inventory, this);
     }
 
     @Override

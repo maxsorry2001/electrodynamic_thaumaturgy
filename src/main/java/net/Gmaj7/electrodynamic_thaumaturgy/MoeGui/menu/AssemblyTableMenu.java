@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoeAssemblyTableMenu extends AbstractContainerMenu {
+public class AssemblyTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     private final ContainerLevelAccess access;
@@ -31,11 +31,11 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
     private final int typeSlotEndNum = 10;
     Runnable slotUpdateListener;
 
-    public MoeAssemblyTableMenu(int containerId, Inventory inventory){
+    public AssemblyTableMenu(int containerId, Inventory inventory){
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
 
-    public MoeAssemblyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
+    public AssemblyTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
         super(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), containerId);
         this.access = access;
         checkContainerSize(inventory, toolSlotNum + 1);
@@ -45,8 +45,8 @@ public class MoeAssemblyTableMenu extends AbstractContainerMenu {
             @Override
             public void setChanged() {
                 super.setChanged();
-                MoeAssemblyTableMenu.this.slotsChanged(this);
-                MoeAssemblyTableMenu.this.slotUpdateListener.run();
+                AssemblyTableMenu.this.slotsChanged(this);
+                AssemblyTableMenu.this.slotUpdateListener.run();
             }
         };
         this.addSlot(new Slot(this.container, powerSlotNum, 70, 20){

@@ -45,16 +45,17 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerScreen(RegisterMenuScreensEvent event){
-            event.register(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), MoeAssemblyTableScreen::new);
-            event.register(MoeMenuType.MODEM_TABLE_MENU.get(), MoeModemTableScreen::new);
-            event.register(MoeMenuType.ENERGY_BLOCK_MENU.get(), MoeEnergyBlockScreen::new);
-            event.register(MoeMenuType.MAGIC_ENCODE_TABLE_MENU.get(), MoeMagicEncodeTableScreen::new);
-            event.register(MoeMenuType.THERMAL_GENERATOR_MENU.get(), MoeThermalGeneratorScreen::new);
-            event.register(MoeMenuType.BIOMASS_GENERATOR_MENU.get(), MoeBiomassGeneratorScreen::new);
-            event.register(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), MoeElectromagneticDriverBlockScreen::new);
-            event.register(MoeMenuType.BIO_REPLICATION_VAT_MACHINE_MENU.get(), MoeEntityCloneBlockScreen::new);
-            event.register(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), MoeElectromagneticExtractorBlockScreen::new);
-            event.register(MoeMenuType.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), MoeAtomicReconstructionBlockScreen::new);
+            event.register(MoeMenuType.ASSEMBLY_TABLE_MENU.get(), AssemblyTableScreen::new);
+            event.register(MoeMenuType.MODEM_TABLE_MENU.get(), ModemTableScreen::new);
+            event.register(MoeMenuType.ENERGY_BLOCK_MENU.get(), EnergyBlockScreen::new);
+            event.register(MoeMenuType.MAGIC_ENCODE_TABLE_MENU.get(), MagicEncodeTableScreen::new);
+            event.register(MoeMenuType.THERMAL_GENERATOR_MENU.get(), ThermalGeneratorScreen::new);
+            event.register(MoeMenuType.BIOMASS_GENERATOR_MENU.get(), BiomassGeneratorScreen::new);
+            event.register(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), ElectromagneticDriverBlockScreen::new);
+            event.register(MoeMenuType.BIO_REPLICATION_VAT_MACHINE_MENU.get(), EntityCloneBlockScreen::new);
+            event.register(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), ElectromagneticExtractorBlockScreen::new);
+            event.register(MoeMenuType.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), AtomicReconstructionBlockScreen::new);
+            event.register(MoeMenuType.MAGNETO_FUSION_BLOCK_MENU.get(), MagnetoFusionBlockScreen::new);
         }
 
 

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticDriverBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDriverBlockMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -10,11 +10,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
-public class MoeElectromagneticDriverBlockScreen extends AbstractContainerScreen<MoeElectromagneticDriverBlockMenu> {
+public class ElectromagneticDriverBlockScreen extends AbstractContainerScreen<ElectromagneticDriverBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/one_item_machine.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
 
-    public MoeElectromagneticDriverBlockScreen(MoeElectromagneticDriverBlockMenu menu, Inventory playerInventory, Component title) {
+    public ElectromagneticDriverBlockScreen(ElectromagneticDriverBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
     @Override

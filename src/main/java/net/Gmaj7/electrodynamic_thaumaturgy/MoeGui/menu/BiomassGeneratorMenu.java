@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ThermalGeneratorBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BiomassGeneratorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -16,18 +16,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
-public class MoeThermalGeneratorMenu extends AbstractContainerMenu {
+public class BiomassGeneratorMenu extends AbstractContainerMenu {
     private final Level level;
     private final int inSlot = 0;
-    public  final ThermalGeneratorBE blockEntity;
+    public  final BiomassGeneratorBE blockEntity;
 
-    public MoeThermalGeneratorMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public BiomassGeneratorMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeThermalGeneratorMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.THERMAL_GENERATOR_MENU.get(), containerId);
-        this.blockEntity = (ThermalGeneratorBE) blockEntity;
+    public BiomassGeneratorMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.BIOMASS_GENERATOR_MENU.get(), containerId);
+        this.blockEntity = (BiomassGeneratorBE) blockEntity;
         this.level = inventory.player.level();
 
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 80, 44));
@@ -82,7 +82,7 @@ public class MoeThermalGeneratorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

@@ -17,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class MoeModemTableMenu extends AbstractContainerMenu {
+public class ModemTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     private final ContainerLevelAccess access;
@@ -26,11 +26,11 @@ public class MoeModemTableMenu extends AbstractContainerMenu {
     private final int enhanceEndNum = 8;
     Runnable slotUpdateListener;
 
-    public MoeModemTableMenu(int containerId, Inventory inventory){
+    public ModemTableMenu(int containerId, Inventory inventory){
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
 
-    public MoeModemTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
+    public ModemTableMenu(int  containerId, Inventory inventory, final ContainerLevelAccess access){
         super(MoeMenuType.MODEM_TABLE_MENU.get(), containerId);
         this.access = access;
         checkContainerSize(inventory, toolSlotNum + 1);
@@ -40,8 +40,8 @@ public class MoeModemTableMenu extends AbstractContainerMenu {
             @Override
             public void setChanged() {
                 super.setChanged();
-                MoeModemTableMenu.this.slotsChanged(this);
-                MoeModemTableMenu.this.slotUpdateListener.run();
+                ModemTableMenu.this.slotsChanged(this);
+                ModemTableMenu.this.slotUpdateListener.run();
             }
         };
         for (int i = enhanceStartNum; i < enhanceEndNum; i++) {

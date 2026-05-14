@@ -15,19 +15,20 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class MoeMenuType {
     public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(Registries.MENU, ElectrodynamicThaumaturgy.MODID);
 
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeAssemblyTableMenu>> ASSEMBLY_TABLE_MENU = MENU_TYPE.register("assembly_table_menu",
-            () -> new MenuType<>(MoeAssemblyTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeModemTableMenu>> MODEM_TABLE_MENU = MENU_TYPE.register("modem_table_menu",
-            () -> new MenuType<>(MoeModemTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeMagicEncodeTableMenu>> MAGIC_ENCODE_TABLE_MENU = MENU_TYPE.register("magic_encode_table_menu",
-            () -> new MenuType<>(MoeMagicEncodeTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeEnergyBlockMenu>> ENERGY_BLOCK_MENU = registerMenuType("energy_block_menu", MoeEnergyBlockMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeThermalGeneratorMenu>> THERMAL_GENERATOR_MENU = registerMenuType("thermal_generator_menu", MoeThermalGeneratorMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeBiomassGeneratorMenu>> BIOMASS_GENERATOR_MENU = registerMenuType("biomass_generator_menu", MoeBiomassGeneratorMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeElectromagneticDriverBlockMenu>> ELECTROMAGNETIC_DRIVER_MACHINE_MENU = registerMenuType("electromagnetic_driver_machine_menu", MoeElectromagneticDriverBlockMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeEntityCloneBlockMenu>> BIO_REPLICATION_VAT_MACHINE_MENU = registerMenuType("bio_replication_vat_machine_menu", MoeEntityCloneBlockMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeElectromagneticExtractorBlockMenu>> GEOLOGICAL_METAL_EXCAVATOR_MENU = registerMenuType("geological_metal_excavator_menu", MoeElectromagneticExtractorBlockMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<MoeAtomicReconstructionBlockMenu>> ATOMIC_RECONSTRUCTION_BLOCK_MENU = registerMenuType("atomic_reconstruction_mavhine_menu", MoeAtomicReconstructionBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<AssemblyTableMenu>> ASSEMBLY_TABLE_MENU = MENU_TYPE.register("assembly_table_menu",
+            () -> new MenuType<>(AssemblyTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<ModemTableMenu>> MODEM_TABLE_MENU = MENU_TYPE.register("modem_table_menu",
+            () -> new MenuType<>(ModemTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<MagicEncodeTableMenu>> MAGIC_ENCODE_TABLE_MENU = MENU_TYPE.register("magic_encode_table_menu",
+            () -> new MenuType<>(MagicEncodeTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<EnergyBlockMenu>> ENERGY_BLOCK_MENU = registerMenuType("energy_block_menu", EnergyBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<ThermalGeneratorMenu>> THERMAL_GENERATOR_MENU = registerMenuType("thermal_generator_menu", ThermalGeneratorMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<BiomassGeneratorMenu>> BIOMASS_GENERATOR_MENU = registerMenuType("biomass_generator_menu", BiomassGeneratorMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<ElectromagneticDriverBlockMenu>> ELECTROMAGNETIC_DRIVER_MACHINE_MENU = registerMenuType("electromagnetic_driver_machine_menu", ElectromagneticDriverBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<EntityCloneBlockMenu>> BIO_REPLICATION_VAT_MACHINE_MENU = registerMenuType("bio_replication_vat_machine_menu", EntityCloneBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<ElectromagneticExtractorBlockMenu>> GEOLOGICAL_METAL_EXCAVATOR_MENU = registerMenuType("geological_metal_excavator_menu", ElectromagneticExtractorBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<AtomicReconstructionBlockMenu>> ATOMIC_RECONSTRUCTION_BLOCK_MENU = registerMenuType("atomic_reconstruction_machine_menu", AtomicReconstructionBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<MagnetoFusionBlockMenu>> MAGNETO_FUSION_BLOCK_MENU = registerMenuType("maneto_fusion_machine_menu", MagnetoFusionBlockMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory){
         return MENU_TYPE.register(name, () -> IMenuTypeExtension.create(factory));

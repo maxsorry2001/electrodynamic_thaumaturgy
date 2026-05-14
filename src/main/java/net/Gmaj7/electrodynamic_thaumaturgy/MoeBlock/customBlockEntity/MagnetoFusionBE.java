@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MagnetoFusionBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
@@ -65,7 +66,6 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
     public static void tick(Level level, BlockPos pos, BlockState state, MagnetoFusionBE magnetoFusionBE){
         if(level.isClientSide()) return;
         ServerLevel serverLevel = (ServerLevel)level;
-        List<Ingredient> ingredients = magnetoFusionBE.getIngredients();
         MagnetoFusionRecipeInput input = new MagnetoFusionRecipeInput(magnetoFusionBE.getInputs());
 
         RecipeHolder<MagnetoFusionRecipe> recipe = serverLevel.recipeAccess()
@@ -76,7 +76,16 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
             if (!result.isItemEnabled(serverLevel.enabledFeatures())) {
                 result = ItemStack.EMPTY;
             }
-            this.itemHandler.
+            if(!result.isEmpty())
+                try (Transaction transaction = Transaction.openRoot()){
+                    int insert = magnetoFusionBE.itemHandler.insert(3, ItemResource.of(result), result.count(), transaction);
+                    if(insert > 0){
+                        for (int i = 0; i < 3; i++)
+                            if(!magnetoFusionBE.itemHandler.getStackInSlot(i).isEmpty())
+                                magnetoFusionBE.itemHandler.extract(i, magnetoFusionBE.itemHandler.getResource(i), 1, transaction);
+                        transaction.commit();
+                    }
+                }
         }
     }
 
@@ -114,7 +123,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return ;
+        return new MagnetoFusionBlockMenu(i, inventory, this);
     }
 
     @Override

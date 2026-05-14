@@ -1,9 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.AtomicReconstructionBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
-import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,25 +16,21 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
-public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
+public class ElectromagneticDriverBlockMenu extends AbstractContainerMenu {
     private final Level level;
-    private final int targetSlot = 2;
-    private final int outSlot = 1;
-    private final int inSlot = 0;
-    public  final AtomicReconstructionBE blockEntity;
+    private final int slotNum = 0;
+    public  final ElectromagneticDriverBE blockEntity;
 
-    public MoeAtomicReconstructionBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public ElectromagneticDriverBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeAtomicReconstructionBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), containerId);
-        this.blockEntity = (AtomicReconstructionBE) blockEntity;
+    public ElectromagneticDriverBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.ELECTROMAGNETIC_DRIVER_MACHINE_MENU.get(), containerId);
+        this.blockEntity = (ElectromagneticDriverBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.UP), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.UP).set(slot, resource, amount), 0, 42, 47));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.NORTH).set(slot, resource, amount), 0, 80, 35));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.DOWN).set(slot, resource, amount), 0, 118, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 80, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -50,16 +45,16 @@ public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index < targetSlot + 1) {
-                if (!this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 37, false)) {
+            if (index < slotNum + 1) {
+                if (!this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= targetSlot + 1 && index < targetSlot + 28) {
-                if (!this.moveItemStackTo(itemstack1, targetSlot + 28, targetSlot + 37, false)) {
+            else if (index >= slotNum + 1 && index < slotNum + 28) {
+                if (!this.moveItemStackTo(itemstack1, slotNum + 28, slotNum + 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= targetSlot + 28 && index < targetSlot + 37 && !this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 28, false)) {
+            } else if (index >= slotNum + 28 && index < slotNum + 37 && !this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 28, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -89,7 +84,7 @@ public class MoeAtomicReconstructionBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

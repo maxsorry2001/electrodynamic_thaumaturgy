@@ -16,17 +16,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
-public class MoeEnergyBlockMenu extends AbstractContainerMenu {
+public class EnergyBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int outSlot = 0;
     private final int inSlot = 1;
     public  final EnergyBlockEntity blockEntity;
 
-    public MoeEnergyBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public EnergyBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeEnergyBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+    public EnergyBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.ENERGY_BLOCK_MENU.get(), containerId);
         this.blockEntity = (EnergyBlockEntity) blockEntity;
         this.level = inventory.player.level();

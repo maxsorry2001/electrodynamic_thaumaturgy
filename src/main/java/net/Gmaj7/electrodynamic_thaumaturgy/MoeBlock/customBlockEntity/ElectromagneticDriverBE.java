@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticDriverBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDriverBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
@@ -154,7 +154,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new MoeElectromagneticDriverBlockMenu(i, inventory, this);
+        return new ElectromagneticDriverBlockMenu(i, inventory, this);
     }
 
     public void setCooldown(int cooldown) {

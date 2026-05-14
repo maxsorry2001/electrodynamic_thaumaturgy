@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeEntityCloneBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.EntityCloneBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
@@ -116,7 +116,7 @@ public class BioReplicationVatBE extends BlockEntity implements IMoeEnergyBlockE
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new MoeEntityCloneBlockMenu(i, inventory, this);
+        return new EntityCloneBlockMenu(i, inventory, this);
     }
 
     @Override

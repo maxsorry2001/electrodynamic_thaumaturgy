@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeModemTableMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.AssemblyTableMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -12,11 +12,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMenu> {
-    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_modem_table.png");
+public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMenu> {
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_assembly_table.png");
     protected static final WidgetSprites SPRITES = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/button_highlighted"));
 
-    public MoeModemTableScreen(MoeModemTableMenu menu, Inventory playerInventory, Component title) {
+    public AssemblyTableScreen(AssemblyTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 
@@ -32,8 +32,7 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
-        guiGraphics.text(this.font, Component.translatable("moe_modem"), x + 145, y + 40, 0xFFFFFFFF);
-        extractTooltip(guiGraphics, mouseX, mouseY);
+        guiGraphics.text(this.font, Component.translatable("moe_assemble"), x + 145, y + 40, 0xFFFFFFFF);
     }
 
     private boolean isMouseFocused(double mouseX, double mouseY){
@@ -44,20 +43,21 @@ public class MoeModemTableScreen extends AbstractContainerScreen<MoeModemTableMe
     }
 
     @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         double mouseX = event.x(), mouseY = event.y();
-        if(isMouseFocused(mouseX, mouseY)){
-            if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
-                this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, event.button());
-                return true;
+        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
+            if(isMouseFocused(mouseX, mouseY)){
+                if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
+                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, event.button());
+                    return true;
+                }
             }
         }
-    }
         return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-        graphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
     }
 }

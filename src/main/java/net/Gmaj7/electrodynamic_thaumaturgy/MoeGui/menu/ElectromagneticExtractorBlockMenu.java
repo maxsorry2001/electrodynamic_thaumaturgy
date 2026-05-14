@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BioReplicationVatBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticExtractorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -10,27 +10,29 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
-public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
+public class ElectromagneticExtractorBlockMenu extends AbstractContainerMenu {
     private final Level level;
-    private final int slotNum = 0;
-    public  final BioReplicationVatBE blockEntity;
+    private final int slotNum = 26;
+    public  final ElectromagneticExtractorBE blockEntity;
+    public boolean quick = false;
 
-    public MoeEntityCloneBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public ElectromagneticExtractorBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public MoeEntityCloneBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.BIO_REPLICATION_VAT_MACHINE_MENU.get(), containerId);
-        this.blockEntity = (BioReplicationVatBE) blockEntity;
+    public ElectromagneticExtractorBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), containerId);
+        this.blockEntity = (ElectromagneticExtractorBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 80, 35));
+        addMachineSlot(((ElectromagneticExtractorBE) blockEntity).getItemHandler());
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -43,7 +45,6 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
-            Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
             if (index < slotNum + 1) {
                 if (!this.moveItemStackTo(itemstack1, slotNum + 1, slotNum + 37, false)) {
@@ -82,7 +83,14 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
+    }
+
+    private void addMachineSlot(StacksResourceHandler<ItemStack, ItemResource> itemHandler){
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 9; j++)
+                this.addSlot(new ResourceHandlerSlot(itemHandler, itemHandler::set, j + i * 9, 8 + j * 18, 25 + i * 18));
+        }
     }
 
     private void addPlayerInventory(Inventory inventory){
@@ -95,5 +103,18 @@ public class MoeEntityCloneBlockMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+
+    @Override
+    public boolean clickMenuButton(Player player, int id) {
+        if(id == 0)
+            blockEntity.addWidth(quick);
+        if(id == 1)
+            blockEntity.reduceWidth(quick);
+        if(id == 2)
+            blockEntity.addDepth(quick);
+        if(id == 3)
+            blockEntity.reduceDepth(quick);
+        return false;
     }
 }

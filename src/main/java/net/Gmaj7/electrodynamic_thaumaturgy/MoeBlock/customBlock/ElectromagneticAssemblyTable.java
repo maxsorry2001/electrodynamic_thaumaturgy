@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeAssemblyTableMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.AssemblyTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -39,7 +39,7 @@ public class ElectromagneticAssemblyTable extends Block {
     @Override
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((p1, p2, p3) -> {
-            return new MoeAssemblyTableMenu(p1, p2, ContainerLevelAccess.create(level, pos));
+            return new AssemblyTableMenu(p1, p2, ContainerLevelAccess.create(level, pos));
         }, Component.translatable("block.electrodynamic_thaumaturgy.electromagnetic_assembly_table"));
     }
 

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeMagicEncodeTableMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MagicEncodeTableMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -9,10 +9,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MoeMagicEncodeTableScreen extends AbstractContainerScreen<MoeMagicEncodeTableMenu> {
+public class MagicEncodeTableScreen extends AbstractContainerScreen<MagicEncodeTableMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_encode_table.png");
 
-    public MoeMagicEncodeTableScreen(MoeMagicEncodeTableMenu menu, Inventory playerInventory, Component title) {
+    public MagicEncodeTableScreen(MagicEncodeTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 

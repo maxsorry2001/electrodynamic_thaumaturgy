@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MoeElectromagneticExtractorBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticExtractorBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
@@ -232,7 +232,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         PacketDistributor.sendToAllPlayers(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
-        return new MoeElectromagneticExtractorBlockMenu(i, inventory, this);
+        return new ElectromagneticExtractorBlockMenu(i, inventory, this);
     }
 
     private ItemStack getDigTool(BlockState blockState){
