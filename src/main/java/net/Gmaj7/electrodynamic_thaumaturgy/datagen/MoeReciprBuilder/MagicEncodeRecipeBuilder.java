@@ -22,15 +22,15 @@ public class MagicEncodeRecipeBuilder implements RecipeBuilder {
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private String group;
 
-    private MagicEncodeRecipeBuilder(Ingredient base, Ingredient code1, Ingredient code2, ItemStackTemplate result) {
+    private MagicEncodeRecipeBuilder(ItemStackTemplate result, Ingredient base, Ingredient code1, Ingredient code2) {
         this.result = result;
         this.baseInput = base;
         this.code1Input = code1;
         this.code2Input = code2;
     }
 
-    public static MagicEncodeRecipeBuilder magicEncode(ItemLike base, ItemLike code1, ItemLike code2, ItemLike result) {
-        return new MagicEncodeRecipeBuilder(Ingredient.of(base), Ingredient.of(code1), Ingredient.of(code2), new ItemStackTemplate(result.asItem()));
+    public static MagicEncodeRecipeBuilder magicEncode(ItemLike result,ItemLike base, ItemLike code1, ItemLike code2) {
+        return new MagicEncodeRecipeBuilder(new ItemStackTemplate(result.asItem()), Ingredient.of(base), Ingredient.of(code1), Ingredient.of(code2));
     }
 
     @Override

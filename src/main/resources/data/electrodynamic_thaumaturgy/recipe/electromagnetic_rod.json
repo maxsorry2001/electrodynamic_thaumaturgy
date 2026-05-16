@@ -1,15 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": "electrodynamic_thaumaturgy:energy_core",
-    "b": "minecraft:iron_ingot",
-    "c": "#c:stones"
-  },
-  "pattern": [
-    "  a",
-    " b ",
-    "c  "
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:magno_ingot",
+    "electrodynamic_thaumaturgy:energy_core",
+    "#minecraft:copper"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:electromagnetic_rod"

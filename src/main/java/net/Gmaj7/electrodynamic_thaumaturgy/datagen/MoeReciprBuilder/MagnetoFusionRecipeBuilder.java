@@ -1,13 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeReciprBuilder;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,32 +20,41 @@ import java.util.List;
 import java.util.Map;
 
 public class MagnetoFusionRecipeBuilder implements RecipeBuilder {
+    private final HolderGetter<Item> items;
     private final ItemStackTemplate result;
-    private final List<Ingredient> ingredients;
+    private final List<Ingredient> ingredients = new ArrayList<>();
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private String group;
 
-    private MagnetoFusionRecipeBuilder(ItemStackTemplate result, List<Ingredient> ingredients) {
+    private MagnetoFusionRecipeBuilder(HolderGetter<Item> items, ItemStackTemplate result) {
+        this.items = items;
         this.result = result;
-        this.ingredients = ingredients;
     }
 
-    public static MagnetoFusionRecipeBuilder magnetoFusion(ItemLike result, ItemLike... input) {
-        List<Ingredient> list = new ArrayList<>();
-        for (int i = 0; i < Math.min(3, input.length); i++){
-            list.add(Ingredient.of(input[i]));
-        }
-        return new MagnetoFusionRecipeBuilder(new ItemStackTemplate(result.asItem()), list);
+    public static MagnetoFusionRecipeBuilder result(HolderGetter<Item> items, ItemLike result) {
+        return new MagnetoFusionRecipeBuilder(items, new ItemStackTemplate(result.asItem()));
+    }
+
+    public MagnetoFusionRecipeBuilder items(ItemLike... input) {
+        if(this.ingredients.size() >= 3) return this;
+        this.ingredients.add(Ingredient.of(input));
+        return this;
+    }
+
+    public MagnetoFusionRecipeBuilder tag(TagKey<Item> tagKey){
+        if(this.ingredients.size() >= 3) return this;
+        this.ingredients.add(Ingredient.of(this.items.getOrThrow(tagKey)));
+        return this;
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String s, Criterion<?> criterion) {
+    public MagnetoFusionRecipeBuilder unlockedBy(String s, Criterion<?> criterion) {
         this.criteria.put(s, criterion);
         return this;
     }
 
     @Override
-    public RecipeBuilder group(@Nullable String s) {
+    public MagnetoFusionRecipeBuilder group(@Nullable String s) {
         this.group = s;
         return this;
     }

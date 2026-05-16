@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -186,18 +187,6 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .define('b', Items.ENDER_EYE)
                 .define('c', MoeItems.ENERGY_CORE.get())
                 .unlockedBy("has_core", has(MoeItems.ENERGY_CORE.get()))
-                .save(output);
-
-        // ========== 物品配方 ==========
-        // 电磁导能杖
-        shaped(RecipeCategory.MISC, MoeItems.ELECTROMAGNETIC_ROD.get())
-                .pattern("  a")
-                .pattern(" b ")
-                .pattern("c  ")
-                .define('a', MoeItems.ENERGY_CORE.get())
-                .define('b', MoeItems.MAGNO_INGOT)
-                .define('c', Tags.Items.STONES)
-                .unlockedBy("has_iron_ingot", has(MoeItems.MAGNO_INGOT))
                 .save(output);
 
         // 基因记录器
@@ -401,9 +390,10 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get()))
                 .save(output);
 
-        MagicEncodeRecipeBuilder.magicEncode(MoeItems.PRIMARY_CODE_MODULE, Items.IRON_INGOT, Items.GOLD_INGOT, MoeItems.ATTRACT_MODULE).save(output);
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ATTRACT_MODULE, MoeItems.PRIMARY_CODE_MODULE, Items.IRON_INGOT, Items.GOLD_INGOT).save(output);
 
-        MagnetoFusionRecipeBuilder.magnetoFusion(MoeItems.MAGNO_INGOT, Items.IRON_INGOT).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.ELECTROMAGNETIC_ROD).items(MoeItems.MAGNO_INGOT).items(MoeItems.ENERGY_CORE).tag(ItemTags.COPPER).save(output);
     }
 
     protected static class Runner extends RecipeProvider.Runner{
