@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:test_magic",
+  "energy_cose": 50,
+  "cooldown": 100,
+  "translation_key": "spell.electrodynamic_thaumaturgy.test_magic"
+}

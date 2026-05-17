@@ -8,6 +8,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -133,6 +134,10 @@ public class MoeItems {
     public static final DeferredItem<Item> MAGNO_INGOT = MOE_ITEM.registerSimpleItem("magno_ingot");
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("radiant_magno_ingot");
     public static final DeferredItem<Item> STELLAR_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("stellar_magno_ingot");
+
+    public static final DeferredItem<Item> NEW_MAGIC = MOE_ITEM.registerItem("new_magic",
+            (properties) -> new NewMagicModuleItem(properties.stacksTo(1)
+                    .component(MoeDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "test_magic"))));
 
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
