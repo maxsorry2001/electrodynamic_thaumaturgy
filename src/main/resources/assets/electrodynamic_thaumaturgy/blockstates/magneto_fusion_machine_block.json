@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "electrodynamic_thaumaturgy:block/electromagnetic_driver_machine_block"
+      "model": "electrodynamic_thaumaturgy:block/magneto_fusion_machine_block"
     }
   }
 }

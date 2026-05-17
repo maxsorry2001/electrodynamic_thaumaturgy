@@ -36,7 +36,7 @@ public class MagnetoFusionRecipeBuilder implements RecipeBuilder {
     }
 
     public MagnetoFusionRecipeBuilder items(ItemLike... input) {
-        if(this.ingredients.size() >= 3) return this;
+        if(this.ingredients.size() >= 3 || input.length == 0) return this;
         this.ingredients.add(Ingredient.of(input));
         return this;
     }

@@ -54,6 +54,8 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
             }
         }
     };
+    private static final int tickUse = 128;
+
     public MagnetoFusionBE(BlockPos worldPosition, BlockState blockState) {
         super(MoeBlockEntities.MAGNETO_FUSION_BE.get(), worldPosition, blockState);
     }
@@ -73,8 +75,8 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
             }
             if(!result.isEmpty())
                 try (Transaction transaction = Transaction.openRoot()){
-                    int insert = magnetoFusionBE.itemHandler.insert(3, ItemResource.of(result), result.count(), transaction);
-                    if(insert > 0){
+                    int insert = magnetoFusionBE.itemHandler.insert(3, ItemResource.of(result), result.count(), transaction), energyUse = magnetoFusionBE.energy.extract(tickUse, transaction);
+                    if(insert > 0 && energyUse >= tickUse){
                         for (int i = 0; i < 3; i++)
                             if(!magnetoFusionBE.itemHandler.getStackInSlot(i).isEmpty())
                                 magnetoFusionBE.itemHandler.extract(i, magnetoFusionBE.itemHandler.getResource(i), 1, transaction);

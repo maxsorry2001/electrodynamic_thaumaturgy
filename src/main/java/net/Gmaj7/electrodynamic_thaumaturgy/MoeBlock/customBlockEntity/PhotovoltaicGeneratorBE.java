@@ -4,7 +4,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.DaylightDetectorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -29,7 +32,7 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
 
     @Override
     protected void energyMake(AbstractGeneratorBE blockEntity) {
-        int i = Math.max(level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above()));
+        int i = getLight(level.getEffectiveSkyBrightness(getBlockPos()));
         try(Transaction transaction = Transaction.openRoot()) {
             int insert = blockEntity.getEnergy().insert(i * 64, transaction);
             if(insert > 0) transaction.commit();
@@ -37,7 +40,20 @@ public class PhotovoltaicGeneratorBE extends AbstractGeneratorBE {
     }
 
     protected boolean canEnergyMake() {
-        return Math.max(level.getBrightness(LightLayer.SKY, getBlockPos().above()) - level.getSkyDarken(),  level.getBrightness(LightLayer.BLOCK, getBlockPos().above())) > 0;
+        if(!level.getBlockState(getBlockPos().above()).isAir() || !level.canSeeSky(getBlockPos().above())) return false;
+        int lightSky = getLight(level.getEffectiveSkyBrightness(getBlockPos().above()));
+        return lightSky > 0;
+    }
+
+    private int getLight(int light){
+        int returnLight = light;
+        if(light > 0) {
+            float sunAngle = level.environmentAttributes().getValue(EnvironmentAttributes.SUN_ANGLE, getBlockPos()) * Mth.PI / 180F;
+            float offSet = sunAngle < (float) Math.PI ? 0.0F : ((float) Math.PI * 2F);
+            sunAngle += (offSet - sunAngle) * 0.2F;
+            returnLight = Math.round((float)light * Mth.cos(sunAngle));
+        }
+        return Mth.clamp(returnLight, 0, 15);
     }
 
     @Override

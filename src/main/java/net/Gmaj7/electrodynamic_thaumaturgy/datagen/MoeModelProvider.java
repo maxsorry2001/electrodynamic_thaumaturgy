@@ -2,14 +2,19 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.BiomassGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 
@@ -80,40 +85,55 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_assembly_table"))));
+                getModel("electromagnetic_assembly_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ENERGY_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/energy_block"))));
+                getModel("energy_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_modem_table"))));
+                getModel("electromagnetic_modem_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/energy_transmission_antenna_block"))));
+                getModel("energy_transmission_antenna_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/photovoltaic_generator_block"))));
+                getModel("photovoltaic_generator_block")));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get())
-                                .with(PropertyDispatch.initial(TemperatureGeneratorBlock.WORK_TYPE).select(TemperatureGeneratorBlock.WorkType.NORMAL, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/temperature_generator_block_normal")))
-                                        .select(TemperatureGeneratorBlock.WorkType.HOT, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/temperature_generator_block_hot")))
-                                        .select(TemperatureGeneratorBlock.WorkType.COLD, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/temperature_generator_block_cold")))
-                                        .select(TemperatureGeneratorBlock.WorkType.WORK_A, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/temperature_generator_block_work_a")))
-                                        .select(TemperatureGeneratorBlock.WorkType.WORK_B, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/temperature_generator_block_work_b")))));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/thermal_generator_block"))));
+                                .with(PropertyDispatch.initial(TemperatureGeneratorBlock.WORK_TYPE).select(TemperatureGeneratorBlock.WorkType.NORMAL, getModel("temperature_generator_block_normal"))
+                                        .select(TemperatureGeneratorBlock.WorkType.HOT, getModel("temperature_generator_block_hot"))
+                                        .select(TemperatureGeneratorBlock.WorkType.COLD, getModel("temperature_generator_block_cold"))
+                                        .select(TemperatureGeneratorBlock.WorkType.WORK_A, getModel("temperature_generator_block_work_a"))
+                                        .select(TemperatureGeneratorBlock.WorkType.WORK_B, getModel("temperature_generator_block_work_b"))));
+        itemModels.itemModelOutput.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.asItem(), setNormalBlockModule("temperature_generator_block_normal"));
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(MoeBlocks.THERMAL_GENERATOR_BLOCK.get())
+                                .with(PropertyDispatch.initial(ThermalGeneratorBlock.LIT).select(true, getModel("thermal_generator_block_true"))
+                                        .select(false, getModel("thermal_generator_block_false"))));
+        itemModels.itemModelOutput.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK.asItem(), setNormalBlockModule("thermal_generator_block_false"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_CORE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/magneto_core_block"))));
+                getModel("magneto_core_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/atomic_reconstruction_machine_block"))));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/biomass_generator_block"))));
+                getModel("atomic_reconstruction_machine_block")));
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get())
+                                .with(PropertyDispatch.initial(BiomassGeneratorBlock.LIT).select(true, getModel("biomass_generator_block_true"))
+                                        .select(false, getModel("biomass_generator_block_false"))));
+        itemModels.itemModelOutput.accept(MoeBlocks.BIOMASS_GENERATOR_BLOCK.asItem(), setNormalBlockModule("biomass_generator_block_false"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/bio_replication_vat_machine_block"))));
+                getModel("bio_replication_vat_machine_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGIC_ENCODE_TABLE.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/magic_encode_table"))));
+                getModel("magic_encode_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_driver_machine_block"))));
+                getModel("electromagnetic_driver_machine_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_extractor_machine_block"))));
+                getModel("electromagnetic_extractor_machine_block")));
         blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
-                BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/electromagnetic_driver_machine_block"))));
+                getModel("magneto_fusion_machine_block")));
+    }
+
+    private MultiVariant getModel(String name){
+        return BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/" + name));
+    }
+
+    private ItemModel.Unbaked setNormalBlockModule(String name){
+        return ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/" + name));
     }
 }
