@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "minecraft:glass_pane",
+    "b": "minecraft:rotten_flesh",
+    "c": "electrodynamic_thaumaturgy:radiant_magno_ingot"
+  },
+  "pattern": [
+    " a ",
+    " b ",
+    " c "
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:genetic_recorder"
+  }
+}
