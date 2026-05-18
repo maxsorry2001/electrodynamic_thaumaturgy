@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:mirage_pursuit",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.mirage_pursuit_module"
+}

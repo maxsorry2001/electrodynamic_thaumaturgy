@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:st_elmo_s_fire",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.st_elmo_s_fire_module"
+}

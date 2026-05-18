@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:domain_reconstruction",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.domain_reconstruction_module"
+}

@@ -25,5 +25,6 @@ public class DataGenerators {
         dataGenerator.addProvider(true, new MoeModelProvider(packOutput));
         dataGenerator.addProvider(true, new MoeRecipeProvider.Runner(packOutput, lookupProvider));
         dataGenerator.addProvider(true, new MoeAdvancementProvider(packOutput, lookupProvider));
+        dataGenerator.addProvider(true, new MagicDefinitionProvider(packOutput, lookupProvider));
     }
 }

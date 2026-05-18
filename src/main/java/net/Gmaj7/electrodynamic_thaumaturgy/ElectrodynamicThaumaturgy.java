@@ -7,15 +7,18 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttachmentType;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttributes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.HydrogenBondParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
-import net.Gmaj7.electrodynamic_thaumaturgy.NewMagicSystem.NewMagics;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.Magics;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +39,6 @@ import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -72,7 +74,7 @@ public class ElectrodynamicThaumaturgy
         MoeBlockEntities.register(modEventBus);
         MoeRecipes.register(modEventBus);
         MoeAttributes.register(modEventBus);
-        NewMagics.register(modEventBus);
+        Magics.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

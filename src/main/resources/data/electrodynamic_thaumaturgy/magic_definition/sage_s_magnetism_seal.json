@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:sage_s_magnetism_seal",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.sage_s_magnetism_seal_module"
+}

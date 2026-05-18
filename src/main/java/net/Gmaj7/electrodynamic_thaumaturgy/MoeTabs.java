@@ -108,8 +108,6 @@ public class MoeTabs {
                         output.accept(MoeBlocks.MAGNETO_CORE_BLOCK);
 
                         output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
-
-                        output.accept(MoeItems.NEW_MAGIC);
                     }))
                     .build());
 

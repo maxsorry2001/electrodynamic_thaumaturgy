@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:tree_current",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.tree_current_module"
+}

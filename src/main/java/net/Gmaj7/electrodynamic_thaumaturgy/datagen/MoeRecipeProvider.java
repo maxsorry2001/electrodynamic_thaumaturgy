@@ -2,8 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeReciprBuilder.MagicEncodeRecipeBuilder;
-import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeReciprBuilder.MagnetoFusionRecipeBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.MagicEncodeRecipeBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.MagnetoFusionRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;

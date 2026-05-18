@@ -6,8 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticLevel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
-import net.Gmaj7.electrodynamic_thaumaturgy.NewMagicSystem.NewMagics;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
@@ -24,64 +23,38 @@ public class MoeItems {
             (properties -> new EnergyBlockItem(MoeBlocks.ENERGY_BLOCK.get(), properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0))));
 
-    public static final DeferredItem<Item> RAY_MODULE = MOE_ITEM.registerItem("ray_module",
-            (properties) -> new MoeMagicTypeModuleItem(new ElectromagneticRay(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> PULSED_PLASMA_MODULE = MOE_ITEM.registerItem("pulsed_plasma_module",
-            (properties) -> new MoeMagicTypeModuleItem(new PulsedPlasma(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> PROTECTING_MODULE = MOE_ITEM.registerItem("protecting_module",
-            (properties) -> new MoeMagicTypeModuleItem(new Protecting(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> EXCITING_MODULE = MOE_ITEM.registerItem("exciting_module",
-            (properties) -> new MoeMagicTypeModuleItem(new Exciting(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> ELECTRIC_FIELD_DOMAIN_MODULE = MOE_ITEM.registerItem("electric_field_domain_module",
-            (properties) -> new MoeMagicTypeModuleItem(new ElectricFieldDomain(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> ATTRACT_MODULE = MOE_ITEM.registerItem("attract_module",
-            (properties) -> new MoeMagicTypeModuleItem(new Attract(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> TREE_CURRENT_MODULE = MOE_ITEM.registerItem("tree_current_module",
-            (properties) -> new MoeMagicTypeModuleItem(new TreeCurrent(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> REFRACTION_MODULE = MOE_ITEM.registerItem("refraction_module",
-            (properties) -> new MoeMagicTypeModuleItem(new Refraction(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> ELECTRIC_ENERGY_RELEASE_MODULE = MOE_ITEM.registerItem("electric_energy_release_module",
-            (properties) -> new MoeMagicTypeModuleItem(new ElectricEnergyRelease(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> MAGNETIC_RECOMBINATION_CANNON_MODULE = MOE_ITEM.registerItem("magnetic_recombination_cannon_module",
-            (properties) -> new MoeMagicTypeModuleItem(new MagneticRecombinationCannon(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> ELECTROMAGNETIC_ASSAULT_MODULE = MOE_ITEM.registerItem("electromagnetic_assault_module",
-            (properties) -> new MoeMagicTypeModuleItem(new ElectromagneticAssault(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> MAGMA_LIGHTING_MODULE = MOE_ITEM.registerItem("magma_lighting_module",
-            (properties) -> new MoeMagicTypeModuleItem(new MagmaLighting(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> ST_ELMO_S_FIRE_MODULE = MOE_ITEM.registerItem("st_elmo_s_fire_module",
-            (properties) -> new MoeMagicTypeModuleItem(new St_Elmo_s_fire(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> HYDROGEN_BOND_FRACTURE_MODULE = MOE_ITEM.registerItem("hydrogen_bond_fracture_module",
-            (properties) -> new MoeMagicTypeModuleItem(new HydrogenBondFracture(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> LIGHTING_STRIKE_MODULE = MOE_ITEM.registerItem("lighting_strike_module",
-            (properties) -> new MoeMagicTypeModuleItem(new LightingStrike(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> MAGNET_RESONANCE_MODULE = MOE_ITEM.registerItem("magnet_resonance_module",
-            (properties) -> new MoeMagicTypeModuleItem(new MagnetResonance(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> BLOCK_NERVE_MODULE = MOE_ITEM.registerItem("block_nerve_module",
-            (properties) -> new MoeMagicTypeModuleItem(new NerveBlocking(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE = MOE_ITEM.registerItem("disturbing_by_high_intensity_magnetic_module",
-            (properties) -> new MoeMagicTypeModuleItem(new DisturbingByHighIntensityMagnetic(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> COULOMB_DOMAIN_MODULE = MOE_ITEM.registerItem("coulomb_domain_module",
-            (properties) -> new MoeMagicTypeModuleItem(new CoulombDomain(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> DOMAIN_RECONSTRUCTION_MODULE = MOE_ITEM.registerItem("domain_reconstruction_module",
-            (properties) -> new MoeMagicTypeModuleItem(new DomainReconstruction(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> MIRAGE_PURSUIT_MODULE = MOE_ITEM.registerItem("mirage_pursuit_module",
-            (properties) -> new MoeMagicTypeModuleItem(new MiragePursuit(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> MAGNETIC_FLUX_CASCADE_MODULE = MOE_ITEM.registerItem("magnetic_flux_cascade_module",
-            (properties) -> new MoeMagicTypeModuleItem(new MagneticFluxCascade(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> FREQUENCY_DIVISION_ARROW_RAIN_MODULE = MOE_ITEM.registerItem("frequency_division_arrow_rain_module",
-            (properties) -> new MoeMagicTypeModuleItem(new FrequencyDivisionArrowRain(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> SAGE_S_MAGNETISM_SEAL = MOE_ITEM.registerItem("sage_s_magnetism_seal_module",
-            (properties) -> new MoeMagicTypeModuleItem(new SageSMagnetismSeal(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> PHOTOACOUSTIC_PULSE_MODULE = MOE_ITEM.registerItem("photoacoustic_pulse_module",
-            (properties) -> new MoeMagicTypeModuleItem(new PhotoacousticPulse(), properties.stacksTo(1)));
-    public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = MOE_ITEM.registerItem("photo_corrosive_nova_module",
-            (properties) -> new MoeMagicTypeModuleItem(new PhotoCorrosiveNova(), properties.stacksTo(1)));
+    public static final DeferredItem<Item> RAY_MODULE = registerMagicModule("ray");
+    public static final DeferredItem<Item> PULSED_PLASMA_MODULE = registerMagicModule("pulsed_plasma");
+    public static final DeferredItem<Item> PROTECTING_MODULE = registerMagicModule("protecting");
+    public static final DeferredItem<Item> EXCITING_MODULE = registerMagicModule("exciting");
+    public static final DeferredItem<Item> ELECTRIC_FIELD_DOMAIN_MODULE = registerMagicModule("electric_field_domain");
+    public static final DeferredItem<Item> ATTRACT_MODULE = registerMagicModule("attract");
+    public static final DeferredItem<Item> TREE_CURRENT_MODULE = registerMagicModule("tree_current");
+    public static final DeferredItem<Item> REFRACTION_MODULE = registerMagicModule("refraction");
+    public static final DeferredItem<Item> ELECTRIC_ENERGY_RELEASE_MODULE = registerMagicModule("electric_energy_release");
+    public static final DeferredItem<Item> MAGNETIC_RECOMBINATION_CANNON_MODULE = registerMagicModule("magnetic_recombination_cannon");
+    public static final DeferredItem<Item> ELECTROMAGNETIC_ASSAULT_MODULE = registerMagicModule("electromagnetic_assault");
+    public static final DeferredItem<Item> MAGMA_LIGHTING_MODULE = registerMagicModule("magma_lighting");
+    public static final DeferredItem<Item> ST_ELMO_S_FIRE_MODULE = registerMagicModule("st_elmo_s_fire");
+    public static final DeferredItem<Item> HYDROGEN_BOND_FRACTURE_MODULE = registerMagicModule("hydrogen_bond_fracture");
+    public static final DeferredItem<Item> LIGHTING_STRIKE_MODULE = registerMagicModule("lighting_strike");
+    public static final DeferredItem<Item> MAGNET_RESONANCE_MODULE = registerMagicModule("magnet_resonance");
+    public static final DeferredItem<Item> BLOCK_NERVE_MODULE = registerMagicModule("block_nerve");
+    public static final DeferredItem<Item> DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE = registerMagicModule("disturbing_by_high_intensity_magnetic");
+    public static final DeferredItem<Item> COULOMB_DOMAIN_MODULE = registerMagicModule("coulomb_domain");
+    public static final DeferredItem<Item> DOMAIN_RECONSTRUCTION_MODULE = registerMagicModule("domain_reconstruction");
+    public static final DeferredItem<Item> MIRAGE_PURSUIT_MODULE = registerMagicModule("mirage_pursuit");
+    public static final DeferredItem<Item> MAGNETIC_FLUX_CASCADE_MODULE = registerMagicModule("magnetic_flux_cascade");
+    public static final DeferredItem<Item> FREQUENCY_DIVISION_ARROW_RAIN_MODULE = registerMagicModule("frequency_division_arrow_rain");
+    public static final DeferredItem<Item> SAGE_S_MAGNETISM_SEAL = registerMagicModule("sage_s_magnetism_seal");
+    public static final DeferredItem<Item> PHOTOACOUSTIC_PULSE_MODULE = registerMagicModule("photoacoustic_pulse");
+    public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = registerMagicModule("photo_corrosive_nova");
     public static final DeferredItem<Item> PRIMARY_CODE_MODULE = MOE_ITEM.registerItem("primary_code_module",
-            (properties) -> new MoeMagicTypeModuleItem(null, properties.stacksTo(16)));
+            (properties) -> new Item(properties.stacksTo(16)));
     public static final DeferredItem<Item> INTERMEDIATE_CODE_MODULE = MOE_ITEM.registerItem("intermediate_code_module",
-            (properties) -> new MoeMagicTypeModuleItem(null, properties.stacksTo(16)));
+            (properties) -> new Item(properties.stacksTo(16)));
     public static final DeferredItem<Item> ADVANCED_CODE_MODULE = MOE_ITEM.registerItem("advanced_code_module",
-            (properties) -> new MoeMagicTypeModuleItem(null, properties.stacksTo(16)));
+            (properties) -> new Item(properties.stacksTo(16)));
 
     public static final DeferredItem<Item> PRIMARY_LC = MOE_ITEM.registerItem("primary_lc",
             (properties) -> new LcOscillatorModuleItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
@@ -136,10 +109,6 @@ public class MoeItems {
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("radiant_magno_ingot");
     public static final DeferredItem<Item> STELLAR_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("stellar_magno_ingot");
 
-    public static final DeferredItem<Item> NEW_MAGIC = MOE_ITEM.registerItem("new_magic",
-            (properties) -> new NewMagicModuleItem(properties.stacksTo(1)
-                    .component(MoeDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "test_magic"))));
-
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
@@ -149,4 +118,8 @@ public class MoeItems {
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = MOE_ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));
+
+    private static DeferredItem<Item> registerMagicModule(String name){
+        return MOE_ITEM.registerItem(name + "_module", (properties -> new MoeMagicTypeModuleItem(properties.stacksTo(1).component(MoeDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name)))));
+    }
 }

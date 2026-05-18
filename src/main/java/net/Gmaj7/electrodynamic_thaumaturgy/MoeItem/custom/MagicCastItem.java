@@ -7,6 +7,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -50,17 +52,18 @@ public class MagicCastItem extends Item {
         ItemStack itemStack = player.getItemInHand(usedHand);
         ItemStack typeStack = getMagic(itemStack);
         EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
+        MagicDefinition magicDefinition = MagicDefinitionLoader.get(typeStack.get(MoeDataComponentTypes.MAGIC_DEF_LOCATION));
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()
-                && energyHandler.getAmountAsInt() >= item.getBaseEnergyCost() && !player.getCooldowns().isOnCooldown(typeStack)
+                && energyHandler.getAmountAsInt() >= magicDefinition.baseEnergyCost() && !player.getCooldowns().isOnCooldown(typeStack)
                 && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)
-                && item.success(player, itemStack)) {
-            item.cast(player, itemStack);
+                && item.success(player, typeStack)) {
+            item.cast(player, typeStack);
             try (Transaction transaction = Transaction.openRoot()){
-                int cost = (int) (item.getBaseEnergyCost() * MoeFunction.getEfficiency(itemStack));
+                int cost = (int) (magicDefinition.baseEnergyCost() * MoeFunction.getEfficiency(itemStack));
                 int i = energyHandler.extract(cost, transaction);
                 if(i == cost){
                     transaction.commit();
-                    player.getCooldowns().addCooldown(typeStack, (int) (item.getBaseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
+                    player.getCooldowns().addCooldown(typeStack, (int) (magicDefinition.baseCooldown() * MoeFunction.getCoolDownRate(itemStack)));
                     player.swing(usedHand);
                 }
             }
@@ -153,7 +156,7 @@ public class MagicCastItem extends Item {
     private Component getTranslate(ItemStack itemStack){
         ItemStack typeStack = getMagic(itemStack);
         Item item = typeStack.getItem();
-        if(item instanceof MoeMagicTypeModuleItem && !((MoeMagicTypeModuleItem) item).isEmpty()) return ((MoeMagicTypeModuleItem) item).getTranslate();
+        if(item instanceof MoeMagicTypeModuleItem && !((MoeMagicTypeModuleItem) item).isEmpty()) return ((MoeMagicTypeModuleItem) item).getTranslate(MagicDefinitionLoader.get(typeStack.get(MoeDataComponentTypes.MAGIC_DEF_LOCATION)));
         return Component.translatable("moe_no_magic");
     }
 

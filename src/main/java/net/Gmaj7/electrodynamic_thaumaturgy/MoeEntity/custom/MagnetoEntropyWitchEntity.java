@@ -1,10 +1,15 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.*;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -37,15 +42,14 @@ public class MagnetoEntropyWitchEntity extends AbstractSovereignEntity implement
     private final ServerBossEvent bossEvent = new ServerBossEvent(Mth.createInsecureUUID(this.level().getRandom()), Component.translatable("entity.electrodynamic_thaumaturgy.magneto_entropy_witch_entity"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_10);
     protected final RandomSource random = RandomSource.create();
     protected int[] coolDown = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
-    private final List<IMoeMagic> magic = new ArrayList<>(){{
-        add(new ElectromagneticRay());
-        add(new PulsedPlasma());
-        add(new LightingStrike());
-        add(new Attract());
-        add(new MagneticFluxCascade());
-        add(new MagneticRecombinationCannon());
-        add(new FrequencyDivisionArrowRain());
-        add(new Attract());
+    private final List<String> magic = new ArrayList<>(){{
+        add("ray");
+        add("pulsed_plasma");
+        add("lighting_strike");
+        add("attract");
+        add("magnetic_flux_cascade");
+        add("magnetic_recombination_cannon");
+        add("frequency_division_arrow_rain");
     }};
     private RandomSource randomSource = RandomSource.create();
     public MagnetoEntropyWitchEntity(EntityType<? extends AbstractSovereignEntity> entityType, Level level) {
@@ -118,11 +122,13 @@ public class MagnetoEntropyWitchEntity extends AbstractSovereignEntity implement
     public void performRangedAttack(LivingEntity target, float v) {
         int magicSelect = randomSource.nextInt(magic.size());
         while (coolDown[magicSelect] > 0) magicSelect = randomSource.nextInt(magic.size());
-        magic.get(magicSelect).mobCast(this, target, MoeTabs.getCopperRod());
+        MagicDefinition magicDefinition = MagicDefinitionLoader.get(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, magic.get(magicSelect)));
+        if(magicDefinition != null)
+            level().registryAccess().lookupOrThrow(MoeRegistries.MAGIC_KEY).getOrThrow(magicDefinition.behaviorKey()).value().mobCast(this, target, MoeTabs.getCopperRod(), magicDefinition);
         this.castTick = 10;
         this.castAnim = random.nextInt(2);
         PacketDistributor.sendToAllPlayers(new MoePacket.CastTickPacket(this.getId(), this.castTick));
-        this.coolDown[magicSelect] = magic.get(magicSelect).getBaseCooldown();
+        this.coolDown[magicSelect] = magicDefinition.baseCooldown();
     }
 
     @Override

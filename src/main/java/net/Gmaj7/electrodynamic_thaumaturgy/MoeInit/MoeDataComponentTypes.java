@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
 import com.mojang.serialization.Codec;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.NewMagicSystem.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;

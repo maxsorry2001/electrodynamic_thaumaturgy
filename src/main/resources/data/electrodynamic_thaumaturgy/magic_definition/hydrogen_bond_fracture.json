@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:hydrogen_bond_fracture",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.hydrogen_bond_fracture_module"
+}
