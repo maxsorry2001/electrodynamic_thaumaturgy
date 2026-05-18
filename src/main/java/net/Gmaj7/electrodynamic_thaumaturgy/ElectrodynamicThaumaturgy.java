@@ -18,6 +18,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.HydrogenBondParti
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.Magics;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -73,6 +74,7 @@ public class ElectrodynamicThaumaturgy
         MoeBlockEntities.register(modEventBus);
         MoeRecipes.register(modEventBus);
         MoeAttributes.register(modEventBus);
+        Magics.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

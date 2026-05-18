@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:electric_energy_release",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.electric_energy_release_module"
+}

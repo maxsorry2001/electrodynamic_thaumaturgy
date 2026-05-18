@@ -4,10 +4,13 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDriverBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.chat.Component;
@@ -71,13 +74,14 @@ public class ElectromagneticDriverBE extends BlockEntity implements IMoeEnergyBl
     }
 
     protected boolean canCast(){
+        MagicDefinition magicDefinition = MagicDefinitionLoader.get(itemHandler.getStackInSlot(0).get(MoeDataComponentTypes.MAGIC_DEF_LOCATION));
         return cooldown <= 0 && itemHandler.getStackInSlot(0).getItem() instanceof MoeMagicTypeModuleItem
                 && !((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).isEmpty()
-                && ((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).canBlockCast(this);
+                && ((MoeMagicTypeModuleItem) itemHandler.getStackInSlot(0).getItem()).canBlockCast(this, magicDefinition);
     }
 
     protected void cast(){
-        ((MoeMagicTypeModuleItem)itemHandler.getStackInSlot(0).getItem()).blockCast(this);
+        ((MoeMagicTypeModuleItem)itemHandler.getStackInSlot(0).getItem()).blockCast(this, MagicDefinitionLoader.get(itemHandler.getStackInSlot(0).get(MoeDataComponentTypes.MAGIC_DEF_LOCATION)));
     }
 
     @Override

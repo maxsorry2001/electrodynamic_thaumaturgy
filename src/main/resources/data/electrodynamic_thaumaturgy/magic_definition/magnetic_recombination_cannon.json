@@ -1,0 +1,6 @@
+{
+  "behavior": "electrodynamic_thaumaturgy:magnetic_recombination_cannon",
+  "cooldown": 50,
+  "energy_cost": 128,
+  "translation_key": "item.electrodynamic_thaumaturgy.magnetic_recombination_cannon_module"
+}
