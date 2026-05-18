@@ -16,7 +16,6 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 public class MoeRegistries {
     public static final ResourceKey<Registry<INewMagic>> MAGIC_KEY = createRegistryKey("magic");
     public static final Registry<INewMagic> MAGIC_REGISTRY = new RegistryBuilder<>(MAGIC_KEY).maxId(256).create();
-    public static final ResourceKey<Registry<MagicDefinition>> MAGIC_DEFINITION = createRegistryKey("magic_definition");
 
     private static <T> ResourceKey<Registry<T>> createRegistryKey(String name) {
         return ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name));

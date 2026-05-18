@@ -9,7 +9,7 @@ public record MagicDefinition(ResourceKey<INewMagic> behaviorKey, int baseEnergy
     public static final Codec<MagicDefinition> CODEC = RecordCodecBuilder.create(magicDefinitionInstance ->
             magicDefinitionInstance.group(
                     ResourceKey.codec(MoeRegistries.MAGIC_KEY).fieldOf("behavior").forGetter(MagicDefinition::behaviorKey),
-                    Codec.INT.fieldOf("energy_cose").forGetter(MagicDefinition::baseEnergyCost),
+                    Codec.INT.fieldOf("energy_cost").forGetter(MagicDefinition::baseEnergyCost),
                     Codec.INT.fieldOf("cooldown").forGetter(MagicDefinition::baseCooldown),
                     Codec.STRING.fieldOf("translation_key").forGetter(MagicDefinition::translationKey)
             ).apply(magicDefinitionInstance, MagicDefinition::new));

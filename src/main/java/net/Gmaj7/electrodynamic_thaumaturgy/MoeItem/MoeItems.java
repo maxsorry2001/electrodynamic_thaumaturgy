@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticLevel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.NewMagicSystem.NewMagics;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
