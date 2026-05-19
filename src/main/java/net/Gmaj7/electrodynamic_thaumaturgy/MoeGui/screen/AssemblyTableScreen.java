@@ -30,30 +30,6 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
     @Override
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
-        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SPRITES.get(true, isMouseFocused(mouseX, mouseY)), x + 138, y + 35, 30, 20);
-        guiGraphics.text(this.font, Component.translatable("moe_assemble"), x + 145, y + 40, 0xFFFFFFFF);
-    }
-
-    private boolean isMouseFocused(double mouseX, double mouseY){
-        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0 = mouseX - x - 138;
-        double d1 = mouseY - y - 35;
-        return d0 > 0 && d0 < 30 && d1 > 0 && d1 < 20;
-    }
-
-    @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        double mouseX = event.x(), mouseY = event.y();
-        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
-            if(isMouseFocused(mouseX, mouseY)){
-                if (this.menu.clickMenuButton(this.minecraft.player, 0)) {
-                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, event.button());
-                    return true;
-                }
-            }
-        }
-        return super.mouseClicked(event, doubleClick);
     }
 
     @Override

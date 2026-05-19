@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.minecraft.core.component.DataComponents;
@@ -129,9 +130,9 @@ public class MoeTabs {
             list.add(new ItemStack(MoeItems.RAY_MODULE.get()));
         }
         for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get()));
+            list.add(new ItemStack(MoeItems.EMPTY_MAGIC_MODULE.get()));
         }
-        itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
+        itemStack.set(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.fromItems(list));
         return itemStack;
     }
 
@@ -152,9 +153,9 @@ public class MoeTabs {
         list.add(new ItemStack(lc));
         list.add(new ItemStack(power));
         for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get()));
+            list.add(new ItemStack(MoeItems.EMPTY_MAGIC_MODULE.get()));
         }
-        itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(list));
+        itemStack.set(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.fromItems(list));
         return itemStack;
     }
 }

@@ -2,10 +2,12 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -48,17 +50,44 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 AssemblyTableMenu.this.slotsChanged(this);
                 AssemblyTableMenu.this.slotUpdateListener.run();
             }
+
+            @Override
+            public void setItem(int slot, ItemStack itemStack) {
+                this.getItems().set(slot, itemStack);
+                itemStack.limitSize(this.getMaxStackSize(itemStack));
+            }
+
+            @Override
+            public ItemStack removeItem(int slot, int count) {
+                ItemStack result = ContainerHelper.removeItem(this.getItems(), slot, count);
+                if (!result.isEmpty()) {
+                    if(slot == toolSlotNum) slotsChanged(container);
+                    else moduleChanged(container);
+                }
+
+                return result;
+            }
         };
         this.addSlot(new Slot(this.container, powerSlotNum, 70, 20){
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof PowerAmplifierItem;
+                return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof PowerAmplifierItem;
+            }
+
+            @Override
+            public void setChanged() {
+                moduleChanged(this.container);
             }
         });
         this.addSlot(new Slot(this.container, lcSlotNum, 88, 20){
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof LcOscillatorModuleItem;
+                return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof LcOscillatorModuleItem;
+            }
+
+            @Override
+            public void setChanged() {
+                moduleChanged(this.container);
             }
         });
         for (int i = typeSlotStartNum; i < typeSlotEndNum; i++) {
@@ -74,7 +103,12 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(this.container, i , dx, dy){
                 @Override
                 public boolean mayPlace(ItemStack stack) {
-                    return stack.getItem() instanceof MoeMagicTypeModuleItem;
+                    return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof MoeMagicTypeModuleItem;
+                }
+
+                @Override
+                public void setChanged() {
+                    moduleChanged(this.container);
                 }
             });
         }
@@ -150,41 +184,49 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
+
+        return true;
+    }
+
+    private void moduleChanged(Container container){
         ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
         ItemStack toolStack = toolSlot.copy();
         this.access.execute((level1, blockPos) -> {
             if(toolStack.getItem() instanceof MagicCastItem) {
-                ItemContainerContents contents = toolStack.get(DataComponents.CONTAINER);
                 List<ItemStack> newList = new ArrayList<>();
                 for (int i = powerSlotNum; i < typeSlotEndNum; i++){
                     ItemStack itemStack = this.slots.get(i).getItem();
-                    ItemStack menuSlot = contents.getStackInSlot(i).copy();
-                    if(menuSlot.getItem() instanceof IMoeModuleItem && ((IMoeModuleItem) menuSlot.getItem()).isEmpty())
-                        menuSlot = ItemStack.EMPTY;
                     if(itemStack.isEmpty()){
                         if(i == powerSlotNum) newList.add(new ItemStack(MoeItems.EMPTY_POWER.get()));
                         else if (i == lcSlotNum) newList.add(new ItemStack(MoeItems.EMPTY_LC.get()));
-                        else newList.add(new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get()));
+                        else newList.add(new ItemStack(MoeItems.EMPTY_MAGIC_MODULE.get()));
                     }
                     else newList.add(itemStack);
-                    this.container.setItem(i, menuSlot);
                 }
-                toolSlot.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(newList));
+                toolSlot.set(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.fromItems(newList));
             }
         });
-        return true;
     }
 
     @Override
     public void slotsChanged(Container container) {
         super.slotsChanged(container);
         if (container == this.container){
-            ItemStack itemstack = container.getItem(toolSlotNum);
-            if(!itemstack.isEmpty()){
+            ItemStack toolStack = container.getItem(toolSlotNum);
+            if(!toolStack.isEmpty() && toolStack.getItem() instanceof MagicCastItem){
                 this.access.execute((level1, blockPos) -> {
-
+                    ItemContainerContents contents = toolStack.get(MoeDataComponentTypes.ROD_SETTING.get());
+                    for (int i = powerSlotNum; i < typeSlotEndNum; i++){
+                        ItemStack menuSlot = contents.getStackInSlot(i).copy();
+                        if(menuSlot.getItem() instanceof IMoeModuleItem && ((IMoeModuleItem) menuSlot.getItem()).isEmpty())
+                            menuSlot = ItemStack.EMPTY;
+                        this.container.setItem(i, menuSlot);
+                    }
                 });
             }
+            else
+                for (int i = powerSlotNum; i < typeSlotEndNum; i++)
+                    this.container.setItem(i, ItemStack.EMPTY);
         }
     }
 

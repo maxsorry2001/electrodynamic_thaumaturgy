@@ -19,8 +19,15 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
-    public MoeMagicTypeModuleItem(Properties properties) {
+    private final boolean isEmpty;
+
+    public MoeMagicTypeModuleItem(Properties properties, boolean isEmpty){
         super(properties);
+        this.isEmpty = isEmpty;
+    }
+
+    public MoeMagicTypeModuleItem(Properties properties) {
+        this(properties, false);
     }
 
     public void cast(Player player, ItemStack itemStack){
@@ -58,6 +65,6 @@ public class MoeMagicTypeModuleItem extends Item implements IMoeModuleItem{
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return isEmpty;
     }
 }

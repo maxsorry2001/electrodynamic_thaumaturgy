@@ -20,7 +20,7 @@ public class MoeShowMagicHud implements GuiLayer {
         if (!(itemStack.getItem() instanceof MagicCastItem)) return;
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();
-        ItemStack typeStack = itemStack.get(DataComponents.CONTAINER).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
+        ItemStack typeStack = itemStack.get(MoeDataComponentTypes.ROD_SETTING.get()).getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
         if(typeStack.getItem() instanceof MoeMagicTypeModuleItem item){
             if (!item.isEmpty()){
                 guiGraphics.fakeItem(typeStack, screenWidth / 6, screenHeight * 7 / 8);

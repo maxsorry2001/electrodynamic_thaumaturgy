@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.hud;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
@@ -41,7 +42,7 @@ public class MoeMagicWheelHud implements GuiLayer {
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY / 2;
         double alpha = - 0.375 * Math.PI;
-        ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
+        ItemContainerContents contents = stack.get(MoeDataComponentTypes.ROD_SETTING.get());
         for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
             ItemStack type = contents.getStackInSlot(i);
             if(type.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()){

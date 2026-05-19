@@ -6,7 +6,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticLevel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
@@ -49,6 +48,8 @@ public class MoeItems {
     public static final DeferredItem<Item> SAGE_S_MAGNETISM_SEAL = registerMagicModule("sage_s_magnetism_seal");
     public static final DeferredItem<Item> PHOTOACOUSTIC_PULSE_MODULE = registerMagicModule("photoacoustic_pulse");
     public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = registerMagicModule("photo_corrosive_nova");
+    public static final DeferredItem<Item> EMPTY_MAGIC_MODULE = MOE_ITEM.registerItem("empty_module",
+            (properties -> new MoeMagicTypeModuleItem(properties.stacksTo(1), true)));
     public static final DeferredItem<Item> PRIMARY_CODE_MODULE = MOE_ITEM.registerItem("primary_code_module",
             (properties) -> new Item(properties.stacksTo(16)));
     public static final DeferredItem<Item> INTERMEDIATE_CODE_MODULE = MOE_ITEM.registerItem("intermediate_code_module",
@@ -112,7 +113,7 @@ public class MoeItems {
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
-                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+                    .component(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.EMPTY)
                     .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 

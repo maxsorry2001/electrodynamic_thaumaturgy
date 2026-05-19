@@ -32,8 +32,8 @@ public class MoeFunction {
     }
     private static float getBaseAmount(ItemStack itemStack){
         float amount = 0;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+        if(itemStack.has(MoeDataComponentTypes.ROD_SETTING.get())){
+            ItemContainerContents contents = itemStack.get(MoeDataComponentTypes.ROD_SETTING.get());
             ItemStack lcModule = contents.getStackInSlot(MagicCastItem.getLcNum());
             Item item = lcModule.getItem();
             if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
@@ -43,8 +43,8 @@ public class MoeFunction {
 
     private static float getBasePower(ItemStack itemStack){
         float power = 1;
-        if(itemStack.has(DataComponents.CONTAINER)){
-            ItemContainerContents contents = itemStack.get(DataComponents.CONTAINER);
+        if(itemStack.has(MoeDataComponentTypes.ROD_SETTING.get())){
+            ItemContainerContents contents = itemStack.get(MoeDataComponentTypes.ROD_SETTING.get());
             ItemStack powerModule = contents.getStackInSlot(MagicCastItem.getPowerNum());
             Item item = powerModule.getItem();
             if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
