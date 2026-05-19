@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.projectile.arrow.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -96,7 +97,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity livingEntity && livingEntity != getOwner()){
             if(magicItem != null)
-                livingEntity.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner() instanceof MagnetoOrderSageEntity ? ((MagnetoOrderSageEntity) this.getOwner()).getOwner() : this.getOwner()), MoeFunction.getMagicAmount(magicItem));
+                livingEntity.hurt(new DamageSource(MoeFunction.getHolder(level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), this.getOwner() instanceof OwnableEntity ? ((OwnableEntity) this.getOwner()).getOwner() : this.getOwner()), MoeFunction.getMagicAmount(magicItem));
             this.discard();
         }
     }

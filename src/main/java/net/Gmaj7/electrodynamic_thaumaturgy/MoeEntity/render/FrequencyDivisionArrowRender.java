@@ -25,6 +25,6 @@ public class FrequencyDivisionArrowRender extends ArrowRenderer<FrequencyDivisio
 
     @Override
     public boolean shouldRender(FrequencyDivisionArrowEntity entity, Frustum culler, double camX, double camY, double camZ) {
-        return false;
+        return true;
     }
 }

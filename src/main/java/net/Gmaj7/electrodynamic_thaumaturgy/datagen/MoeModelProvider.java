@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.BiomassGeneratorBlock;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
@@ -15,8 +16,10 @@ import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class MoeModelProvider extends ModelProvider {
     public MoeModelProvider(PackOutput output) {
@@ -90,8 +93,16 @@ public class MoeModelProvider extends ModelProvider {
                 getModel("energy_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get(),
                 getModel("electromagnetic_modem_table")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get(),
-                getModel("energy_transmission_antenna_block")));
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get())
+                        .with(PropertyDispatch.initial(EnergyTransmissionAtennaBlock.SEND).select(true, getModel("energy_transmission_antenna_send_block")).select(false, getModel("energy_transmission_antenna_receive_block")))
+                        .with(PropertyDispatch.modify(EnergyTransmissionAtennaBlock.FACING).select(Direction.DOWN, BlockModelGenerators.X_ROT_180)
+                                .select(Direction.UP, BlockModelGenerators.NOP)
+                                .select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90))
+                                .select(Direction.WEST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
+                                .select(Direction.SOUTH, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_180))
+                                .select(Direction.NORTH, BlockModelGenerators.X_ROT_90)));
+        itemModels.itemModelOutput.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem(), setNormalBlockModule("energy_transmission_antenna_send_block"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(),
                 getModel("photovoltaic_generator_block")));
         blockModels.blockStateOutput.accept(
@@ -122,18 +133,25 @@ public class MoeModelProvider extends ModelProvider {
                 getModel("magic_encode_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
                 getModel("electromagnetic_driver_machine_block")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
-                getModel("electromagnetic_extractor_machine_block")));
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(), getModel("electromagnetic_extractor_machine_block"))
+                                .with(PropertyDispatch.modify(BlockStateProperties.FACING).select(Direction.DOWN, BlockModelGenerators.NOP)
+                                        .select(Direction.UP, BlockModelGenerators.X_ROT_180)
+                                        .select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
+                                        .select(Direction.WEST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90))
+                                        .select(Direction.NORTH, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_180))
+                                        .select(Direction.SOUTH, BlockModelGenerators.X_ROT_90)
+                                ));
         blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
                 getModel("magneto_fusion_machine_block")));
     }
 
-    private MultiVariant getModel(String name){
+    protected MultiVariant getModel(String name){
         return BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/" + name));
     }
 
-    private ItemModel.Unbaked setNormalBlockModule(String name){
+    protected ItemModel.Unbaked setNormalBlockModule(String name){
         return ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/" + name));
     }
 }

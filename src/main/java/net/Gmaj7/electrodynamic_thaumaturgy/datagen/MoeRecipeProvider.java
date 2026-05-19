@@ -24,16 +24,6 @@ public class MoeRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
 
-        // 能量核心：8个感磁锭围成环
-        shaped(RecipeCategory.MISC, MoeItems.ENERGY_CORE.get(), 8)
-                .pattern("aaa")
-                .pattern("a a")
-                .pattern("aaa")
-                .define('a', MoeItems.MAGNO_INGOT.get())
-                .unlockedBy("has_magno_ingot", has(MoeItems.MAGNO_INGOT.get()))
-                .save(output);
-
-        // ========== 方块配方（仅使用原版+感磁锭+能量核心） ==========
         // 电磁装配台
         shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get())
                 .pattern(" a ")
@@ -405,6 +395,7 @@ public class MoeRecipeProvider extends RecipeProvider {
         MagnetoFusionRecipeBuilder.result(items, MoeItems.RADIANT_MAGNO_INGOT).items(MoeItems.MAGNO_INGOT).items(Items.GLOWSTONE_DUST).items(Items.QUARTZ).save(output);
         MagnetoFusionRecipeBuilder.result(items, MoeItems.STELLAR_MAGNO_INGOT).items(MoeItems.RADIANT_MAGNO_INGOT).items(Items.ENDER_PEARL).items(Items.AMETHYST_SHARD).save(output);
         MagnetoFusionRecipeBuilder.result(items, MoeItems.ELECTROMAGNETIC_ROD).items(MoeItems.MAGNO_INGOT).items(MoeItems.ENERGY_CORE).tag(ItemTags.COPPER).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.ENERGY_CORE, 4).items(Items.COPPER_INGOT).items(MoeItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
     }
 
     protected static class Runner extends RecipeProvider.Runner{

@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": "electrodynamic_thaumaturgy:magno_ingot"
-  },
-  "pattern": [
-    "aaa",
-    "a a",
-    "aaa"
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "minecraft:copper_ingot",
+    "electrodynamic_thaumaturgy:magno_ingot",
+    "minecraft:iron_ingot"
   ],
   "result": {
-    "count": 8,
+    "count": 4,
     "id": "electrodynamic_thaumaturgy:energy_core"
   }
 }

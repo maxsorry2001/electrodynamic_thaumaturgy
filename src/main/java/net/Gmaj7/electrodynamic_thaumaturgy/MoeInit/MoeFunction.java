@@ -53,20 +53,23 @@ public class MoeFunction {
     }
 
     public static float getStrengthRate(ItemStack itemStack){
-        return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).strength();
+        EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        return enhancementData == null ? 1 : enhancementData.strength();
     }
 
     public static float getCoolDownRate(ItemStack itemStack){
-        return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).coolDown();
+        EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        return enhancementData == null ? 1 : enhancementData.coolDown();
     }
 
     public static float getEfficiency(ItemStack itemStack){
-        return itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA).efficiency();
+        EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        return enhancementData == null ? 1 : enhancementData.efficiency();
     }
 
     public static void checkTargetEnhancement(ItemStack itemStack, LivingEntity livingEntity){
         EnhancementData enhancementData = itemStack.get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-        int entropy = enhancementData.entropy();
+        int entropy = enhancementData == null ? 0 : enhancementData.entropy();
         if(entropy > 0){
             livingEntity.igniteForTicks(entropy * 20);
         }

@@ -35,6 +35,10 @@ public class MagnetoFusionRecipeBuilder implements RecipeBuilder {
         return new MagnetoFusionRecipeBuilder(items, new ItemStackTemplate(result.asItem()));
     }
 
+    public static MagnetoFusionRecipeBuilder result(HolderGetter<Item> items, ItemLike result, int count) {
+        return new MagnetoFusionRecipeBuilder(items, new ItemStackTemplate(result.asItem(), count));
+    }
+
     public MagnetoFusionRecipeBuilder items(ItemLike... input) {
         if(this.ingredients.size() >= 3 || input.length == 0) return this;
         this.ingredients.add(Ingredient.of(input));
