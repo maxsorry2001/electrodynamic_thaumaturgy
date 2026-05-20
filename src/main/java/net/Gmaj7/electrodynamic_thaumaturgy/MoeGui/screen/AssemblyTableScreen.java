@@ -34,6 +34,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        this.extractBlurredBackground(guiGraphics);
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
     }
 }

@@ -26,7 +26,7 @@ public record MagnetoFusionRecipe(List<Ingredient> ingredients, ItemStackTemplat
             );
     @Override
     public boolean matches(MagnetoFusionRecipeInput input, Level level) {
-        if(level.isClientSide() || input.size() > ingredients.size()) {
+        if(level.isClientSide() || !(input.size() == ingredients.size())) {
             return false;
         }
         boolean flag = true;

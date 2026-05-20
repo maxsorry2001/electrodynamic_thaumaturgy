@@ -68,7 +68,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 return result;
             }
         };
-        this.addSlot(new Slot(this.container, powerSlotNum, 70, 20){
+        this.addSlot(new Slot(this.container, powerSlotNum, 54, 52){
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof PowerAmplifierItem;
@@ -79,7 +79,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 moduleChanged(this.container);
             }
         });
-        this.addSlot(new Slot(this.container, lcSlotNum, 88, 20){
+        this.addSlot(new Slot(this.container, lcSlotNum, 54, 70){
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof LcOscillatorModuleItem;
@@ -93,12 +93,12 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
         for (int i = typeSlotStartNum; i < typeSlotEndNum; i++) {
             int dx, dy;
             if(i < 6) {
-                dx = 18 * i + 16;
-                dy = 40;
+                dx = 48 * i + 16;
+                dy = 26;
             }
             else {
-                dx = 18 * i - 56;
-                dy = 58;
+                dx = 48 * i - 56;
+                dy = 44;
             }
             this.addSlot(new Slot(this.container, i , dx, dy){
                 @Override

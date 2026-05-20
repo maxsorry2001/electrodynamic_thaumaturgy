@@ -57,7 +57,8 @@ public class ModemTableScreen extends AbstractContainerScreen<ModemTableMenu> {
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-        graphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        this.extractBlurredBackground(guiGraphics);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
     }
 }

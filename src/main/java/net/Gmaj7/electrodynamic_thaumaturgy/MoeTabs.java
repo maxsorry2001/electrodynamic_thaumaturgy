@@ -31,6 +31,8 @@ public class MoeTabs {
                     .title(Component.translatable(MOE_TAB_STRING))
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(MoeItems.MAGNO_INGOT.get());
+                        output.accept(MoeItems.RADIANT_MAGNO_INGOT.get());
+                        output.accept(MoeItems.STELLAR_MAGNO_INGOT.get());
 
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));

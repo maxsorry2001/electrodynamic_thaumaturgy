@@ -37,10 +37,11 @@ public class ThermalGeneratorScreen extends AbstractContainerScreen<ThermalGener
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        this.extractBlurredBackground(guiGraphics);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        graphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderEnergy(graphics, x, y);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+        renderEnergy(guiGraphics, x, y);
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){

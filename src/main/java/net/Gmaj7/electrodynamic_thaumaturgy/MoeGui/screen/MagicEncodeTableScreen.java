@@ -36,6 +36,7 @@ public class MagicEncodeTableScreen extends AbstractContainerScreen<MagicEncodeT
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        this.extractBlurredBackground(guiGraphics);
         int i = this.leftPos;
         int j = this.topPos;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);

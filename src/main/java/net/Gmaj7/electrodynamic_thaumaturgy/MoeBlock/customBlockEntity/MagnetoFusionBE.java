@@ -9,6 +9,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipeInput;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -23,7 +24,10 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
@@ -32,7 +36,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
+public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeDirectionItemBlockEntity, MenuProvider {
     private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
 
         @Override
@@ -44,7 +48,17 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
         }
     };
 
-    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(4){
+    private final MoeBlockEntityItemHandler itemHandlerInput = new MoeBlockEntityItemHandler(3){
+
+        @Override
+        protected void onContentsChanged(int index, ItemStack previousContents) {
+            setChanged();
+            if(!level.isClientSide()){
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    };
+    private final MoeBlockEntityItemHandler itemHandlerOutput = new MoeBlockEntityItemHandler(1){
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
@@ -75,15 +89,31 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
             }
             if(!result.isEmpty())
                 try (Transaction transaction = Transaction.openRoot()){
-                    int insert = magnetoFusionBE.itemHandler.insert(3, ItemResource.of(result), result.count(), transaction), energyUse = magnetoFusionBE.energy.extract(tickUse, transaction);
+                    int insert = magnetoFusionBE.itemHandlerOutput.insert(0, ItemResource.of(result), result.count(), transaction), energyUse = magnetoFusionBE.energy.extract(tickUse, transaction);
                     if(insert > 0 && energyUse >= tickUse){
                         for (int i = 0; i < 3; i++)
-                            if(!magnetoFusionBE.itemHandler.getStackInSlot(i).isEmpty())
-                                magnetoFusionBE.itemHandler.extract(i, magnetoFusionBE.itemHandler.getResource(i), 1, transaction);
+                            if(!magnetoFusionBE.itemHandlerInput.getStackInSlot(i).isEmpty())
+                                magnetoFusionBE.itemHandlerInput.extract(i, magnetoFusionBE.itemHandlerInput.getResource(i), 1, transaction);
                         transaction.commit();
                     }
                 }
         }
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandlerInput.deserializeWithKey("input_item", input);
+        itemHandlerInput.deserializeWithKey("output_item", input);
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandlerInput.serializeWithKey("input_item", output);
+        itemHandlerInput.serializeWithKey("output_item", output);
     }
 
     @Override
@@ -100,15 +130,29 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
     }
 
     @Override
-    public MoeBlockEntityItemHandler getItemHandler() {
-        return itemHandler;
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction) {
+        if(direction == null) return getItemHandlerOutput();
+        StacksResourceHandler<ItemStack, ItemResource> handler;
+        switch (direction){
+            case UP, DOWN -> handler = getItemHandlerOutput();
+            default ->  handler = getItemHandlerInput();
+        }
+        return handler;
+    }
+
+    public MoeBlockEntityItemHandler getItemHandlerInput() {
+        return itemHandlerInput;
+    }
+
+    public MoeBlockEntityItemHandler getItemHandlerOutput() {
+        return itemHandlerOutput;
     }
 
     @Override
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.size());
-        for (int i = 0; i < itemHandler.size(); i++){
-            container.setItem(i, itemHandler.getStackInSlot(i));
+        SimpleContainer container = new SimpleContainer(itemHandlerInput.size());
+        for (int i = 0; i < itemHandlerInput.size(); i++){
+            container.setItem(i, itemHandlerInput.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, container);
     }
@@ -131,7 +175,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
     public List<Ingredient> getIngredients(){
         List<Ingredient> list = new ArrayList<>();
         for (int i = 0; i < 3; i++){
-            ItemStack itemStack = itemHandler.getStackInSlot(i);
+            ItemStack itemStack = itemHandlerInput.getStackInSlot(i);
             if(!itemStack.isEmpty()) list.add(Ingredient.of(itemStack.getItem()));
         }
         return list;
@@ -140,7 +184,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
     public List<ItemStack> getInputs(){
         List<ItemStack> list = new ArrayList<>();
         for (int i = 0; i < 3; i++){
-            ItemStack itemStack = itemHandler.getStackInSlot(i);
+            ItemStack itemStack = itemHandlerInput.getStackInSlot(i);
             if(!itemStack.isEmpty()) list.add(itemStack);
         }
         return list;

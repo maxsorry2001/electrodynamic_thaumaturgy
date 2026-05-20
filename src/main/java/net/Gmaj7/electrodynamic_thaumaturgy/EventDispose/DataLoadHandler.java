@@ -58,16 +58,19 @@ public class DataLoadHandler {
                 MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
                 MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
                 MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
-                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
+                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
+                MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),
                 MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
                 MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
                 MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
+                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
+                MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
-                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
+                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
+                MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get());
     }
 }

@@ -60,7 +60,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
                 }
             });
         }
-        this.addSlot(new Slot(this.container, toolSlotNum, 20, 10){
+        this.addSlot(new Slot(this.container, toolSlotNum, 20, 37){
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() instanceof MagicCastItem;

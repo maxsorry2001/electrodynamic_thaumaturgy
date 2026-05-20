@@ -56,25 +56,25 @@ public class MagicEncodeTableMenu extends AbstractContainerMenu {
             }
         };
         this.resultContainer = new ResultContainer();
-        this.baseSlot = this.addSlot(new Slot(this.container, baseNum, 20, 33){
+        this.baseSlot = this.addSlot(new Slot(this.container, baseNum, 50, 19){
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(MoeTags.moeItemTags.EMPTY_MAGIC_MODULE);
             }
         });
-        this.code1Slot = this.addSlot(new Slot(this.container, code1Num, 50, 33) {
+        this.code1Slot = this.addSlot(new Slot(this.container, code1Num, 80, 19) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return true;
             }
         });
-        this.code2Slot = this.addSlot(new Slot(this.container, code2Num, 80, 33) {
+        this.code2Slot = this.addSlot(new Slot(this.container, code2Num, 110, 19) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return true;
             }
         });
-        this.resultSlot = this.addSlot(new Slot(this.resultContainer, outNum, 143, 33) {
+        this.resultSlot = this.addSlot(new Slot(this.resultContainer, outNum, 80, 51) {
             public boolean mayPlace(ItemStack p_40362_) {
                 return false;
             }
