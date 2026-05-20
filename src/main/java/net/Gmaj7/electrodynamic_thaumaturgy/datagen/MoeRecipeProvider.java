@@ -389,7 +389,125 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get()))
                 .save(output);
 
-        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ATTRACT_MODULE, MoeItems.PRIMARY_CODE_MODULE, Items.IRON_INGOT, Items.GOLD_INGOT).save(output);
+        // attract_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ATTRACT_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.IRON_INGOT, Items.GOLD_INGOT)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// exciting_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.EXCITING_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.EMERALD)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// electric_field_domain_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.COPPER_INGOT, Items.QUARTZ)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// coulomb_domain_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.COULOMB_DOMAIN_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.IRON_INGOT)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// block_nerve_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.BLOCK_NERVE_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.COPPER_INGOT)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// electric_energy_release_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.COPPER_INGOT, Items.REDSTONE)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// hydrogen_bond_fracture_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.IRON_INGOT)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// domain_reconstruction_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.DIAMOND)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// magnetic_recombination_cannon_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.ENDER_PEARL)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// magma_lighting_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGMA_LIGHTING_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.IRON_INGOT, Items.DIAMOND)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// mirage_pursuit_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.MIRAGE_PURSUIT_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.EMERALD)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// frequency_division_arrow_rain_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.COPPER_INGOT, Items.LAPIS_LAZULI)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// electromagnetic_assault_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.COPPER_INGOT, Items.ENDER_PEARL)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// lighting_strike_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.LIGHTING_STRIKE_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.DIAMOND, Items.DIAMOND)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// magnet_resonance_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGNET_RESONANCE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.REDSTONE)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// magnetic_flux_cascade_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.IRON_INGOT, Items.QUARTZ)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// photo_corrosive_nova_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.LAPIS_LAZULI)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// photoacoustic_pulse_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.GOLD_INGOT, Items.GOLD_INGOT)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// protecting_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.PROTECTING_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.DIAMOND)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// pulsed_plasma_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.PULSED_PLASMA_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.REDSTONE)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// ray_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.RAY_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.QUARTZ)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
+
+// refraction_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.REFRACTION_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.GOLD_INGOT, Items.ENDER_PEARL)
+                .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .save(output);
+
+// st_elmo_s_fire_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.ST_ELMO_S_FIRE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.GOLD_INGOT, Items.EMERALD)
+                .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
+                .save(output);
+
+// tree_current_module
+        MagicEncodeRecipeBuilder.magicEncode(MoeItems.TREE_CURRENT_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.LAPIS_LAZULI)
+                .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
+                .save(output);
 
         MagnetoFusionRecipeBuilder.result(items, MoeItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
         MagnetoFusionRecipeBuilder.result(items, MoeItems.RADIANT_MAGNO_INGOT).items(MoeItems.MAGNO_INGOT).items(Items.GLOWSTONE_DUST).items(Items.QUARTZ).save(output);
