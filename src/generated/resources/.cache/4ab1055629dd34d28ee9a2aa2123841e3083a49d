@@ -1,4 +1,4 @@
-// 26.1.2	2026-05-20T11:25:37.2651025	Moe Recipes
+// 26.1.2	2026-05-21T11:53:23.8450035	Moe Recipes
 38266df82a6d75da2c8083271d9978bd9874efbd data/electrodynamic_thaumaturgy/advancement/recipes/misc/advanced_code_module.json
 85917e9198cbddf1b2340781be17f1a460314c81 data/electrodynamic_thaumaturgy/advancement/recipes/misc/advanced_lc.json
 c6ac83bc02b53b96b0080c99744a438d2fc4b881 data/electrodynamic_thaumaturgy/advancement/recipes/misc/advanced_power.json
@@ -69,6 +69,7 @@ b59d59a8170aa359ac8ca299887f684edd3e088c data/electrodynamic_thaumaturgy/recipe/
 78adf20e6a83d445f31441b15ff98224f528c791 data/electrodynamic_thaumaturgy/recipe/intermediate_code_module.json
 87f4c4d06251159e3c6e8f2b83a9c714022a4230 data/electrodynamic_thaumaturgy/recipe/intermediate_lc.json
 b0f2fc92853ec0d59dbd381a663b027fd97360fe data/electrodynamic_thaumaturgy/recipe/intermediate_power.json
+c9dc56d0905b7c32b8f0285e7ae2456a486762fd data/electrodynamic_thaumaturgy/recipe/iron_dust.json
 e5ff6f79cd08a6f81ebd1a85d6fb1e7feede9728 data/electrodynamic_thaumaturgy/recipe/life_extraction_enhance.json
 532802ce507f44194f599cc3ec3e8d44f3f9701a data/electrodynamic_thaumaturgy/recipe/lighting_strike_module.json
 36349886e40fb331caef77a4940d4439afc3450f data/electrodynamic_thaumaturgy/recipe/magic_encode_table.json

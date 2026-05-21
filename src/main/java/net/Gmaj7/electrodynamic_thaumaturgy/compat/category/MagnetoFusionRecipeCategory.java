@@ -1,4 +1,4 @@
-package net.Gmaj7.electrodynamic_thaumaturgy.compat;
+package net.Gmaj7.electrodynamic_thaumaturgy.compat.category;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -11,33 +11,34 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.JEIRecipeTypes;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
-public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<MagicEncodeRecipe>> {
+public class MagnetoFusionRecipeCategory implements IRecipeCategory<RecipeHolder<MagnetoFusionRecipe>> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_encode");
     public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_encode_gui.png");
     private final IDrawable background;
     private final IDrawable icon;
 
-    public MagicEncodeRecipeCategory(IGuiHelper helper) {
+    public MagnetoFusionRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
     }
 
     @Override
-    public IRecipeType<RecipeHolder<MagicEncodeRecipe>> getRecipeType() {
-        return JEIRecipeTypes.MAGIC_ENCODE;
+    public IRecipeType<RecipeHolder<MagnetoFusionRecipe>> getRecipeType() {
+        return JEIRecipeTypes.MAGNETO_FUSION;
     }
 
     @Override
     public Component getTitle() {
-        return Component.translatable("magic_encode");
+        return Component.translatable("magneto_fusion");
     }
 
     @Override
@@ -56,15 +57,15 @@ public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<M
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MagicEncodeRecipe> recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 16).add(recipe.value().base());
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().code1());
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 52).add(recipe.value().code2());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MagnetoFusionRecipe> recipe, IFocusGroup focuses) {
+        for (int i = 0; i < recipe.value().ingredients().size(); i++){
+            builder.addSlot(RecipeIngredientRole.INPUT, 54, 16 + 18 * i).add(recipe.value().ingredients().get(i));
+        }
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().result());
     }
 
     @Override
-    public void draw(RecipeHolder<MagicEncodeRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+    public void draw(RecipeHolder<MagnetoFusionRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.background.draw(guiGraphics);
         guiGraphics.fillGradient(156, 50, 164, 56, 0xffb51500, 0xff600b00);
     }

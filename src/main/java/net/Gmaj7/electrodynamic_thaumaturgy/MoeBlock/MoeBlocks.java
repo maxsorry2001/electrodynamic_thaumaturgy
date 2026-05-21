@@ -63,6 +63,9 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> MAGNETO_FUSION_MACHINE_BLOCK = registerBlock("magneto_fusion_machine_block",
             (properties -> new MagnetoFusionBlock(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK = registerBlock("electromagnetic_dissociation_machine_block",
+            (properties -> new ElectromagneticDissociationBlock(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
+
     public static final DeferredBlock<Block> LIGHT_AIR = registerBlock("light_air",
             (properties) -> new AirBlock(properties.air().lightLevel(p -> 15).replaceable().noCollision().noLootTable()), null);
 

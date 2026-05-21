@@ -58,6 +58,11 @@ public class MoeBlockEntities {
                     MagnetoFusionBE::new, MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get()
             ));
 
+    public static final Supplier<BlockEntityType<ElectromagneticDissociationBE>> ELECTROMAGNETIC_DISSOCIATION_BE =
+            MOE_BLOCK_ENTITY.register("electromagnetic_dissociation_be", () -> new BlockEntityType<>(
+                    ElectromagneticDissociationBE::new, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get()
+            ));
+
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);
     }

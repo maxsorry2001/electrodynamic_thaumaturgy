@@ -56,6 +56,7 @@ public class ClientEventHandler {
             event.register(MoeMenuType.GEOLOGICAL_METAL_EXCAVATOR_MENU.get(), ElectromagneticExtractorBlockScreen::new);
             event.register(MoeMenuType.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), AtomicReconstructionBlockScreen::new);
             event.register(MoeMenuType.MAGNETO_FUSION_BLOCK_MENU.get(), MagnetoFusionBlockScreen::new);
+            event.register(MoeMenuType.ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU.get(), ElectromagneticDissociationBlockScreen::new);
         }
 
 

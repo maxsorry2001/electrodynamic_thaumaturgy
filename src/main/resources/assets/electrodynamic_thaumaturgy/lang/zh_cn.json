@@ -48,6 +48,7 @@
   "item.electrodynamic_thaumaturgy.magno_ingot": "感磁锭",
   "item.electrodynamic_thaumaturgy.radiant_magno_ingot": "耀磁锭",
   "item.electrodynamic_thaumaturgy.stellar_magno_ingot": "星磁锭",
+  "item.electrodynamic_thaumaturgy.iron_dust": "铁粉",
   "item.electrodynamic_thaumaturgy.superconducting_update": "超导升级工具",
   "item.electrodynamic_thaumaturgy.cooldown_enhance": "冷却",
   "item.electrodynamic_thaumaturgy.strength_enhance": "强度",
@@ -83,6 +84,7 @@
   "block.electrodynamic_thaumaturgy.atomic_reconstruction_machine_block": "原子重构器",
   "block.electrodynamic_thaumaturgy.magneto_core_block": "电磁核心",
   "block.electrodynamic_thaumaturgy.magneto_fusion_machine_block": "磁力融合器",
+  "block.electrodynamic_thaumaturgy.electromagnetic_dissociation_machine_block": "电磁解离器",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "电磁射线",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "脉冲等离子体",
