@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_intermediate_lc": {
+    "has_energy_core": {
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:intermediate_lc"
+            "items": "electrodynamic_thaumaturgy:energy_core"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:advanced_lc"
+        "recipe": "electrodynamic_thaumaturgy:electromagnetic_dissociation_machine_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_intermediate_lc"
+      "has_energy_core"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:advanced_lc"
+      "electrodynamic_thaumaturgy:electromagnetic_dissociation_machine_block"
     ]
   }
 }

@@ -1,10 +1,9 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
   "ingredients": [
     "electrodynamic_thaumaturgy:primary_code_module",
-    "minecraft:gold_ingot",
-    "minecraft:quartz"
+    "electrodynamic_thaumaturgy:radiant_magno_ingot",
+    "minecraft:amethyst_shard"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:intermediate_code_module"

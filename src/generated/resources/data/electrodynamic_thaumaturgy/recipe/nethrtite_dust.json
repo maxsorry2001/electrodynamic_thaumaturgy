@@ -1,0 +1,8 @@
+{
+  "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
+  "ingredient": "#c:ores/netherite_scrap",
+  "output": {
+    "count": 3,
+    "id": "electrodynamic_thaumaturgy:nethrtite_dust"
+  }
+}

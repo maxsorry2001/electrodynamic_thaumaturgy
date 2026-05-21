@@ -28,7 +28,7 @@ public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<M
 
     public MagicEncodeRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK));
     }
 
     @Override

@@ -1,17 +1,27 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.ElectromagneticDissociationRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.MagicEncodeRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.MagnetoFusionRecipeBuilder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
@@ -167,7 +177,6 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_magno_ingot", has(MoeItems.MAGNO_INGOT.get()))
                 .save(output);
 
-        // 谐波核心
         shaped(RecipeCategory.MISC, MoeBlocks.MAGNETO_CORE_BLOCK.get())
                 .pattern("aba")
                 .pattern("aca")
@@ -200,120 +209,14 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(output);
 
-
-        // ========== 振荡器 (LC) 升级 ==========
-// 初级振荡器（不变）
-        shaped(RecipeCategory.MISC, MoeItems.PRIMARY_LC.get())
-                .pattern(" a ")
-                .pattern("db ")
-                .pattern(" c ")
-                .define('a', Items.REDSTONE)
-                .define('b', Items.IRON_INGOT)
-                .define('c', Items.REDSTONE)
-                .define('d', MoeItems.MAGNO_INGOT.get())
-                .unlockedBy("has_magno_ingot", has(MoeItems.MAGNO_INGOT.get()))
-                .save(output);
-
-// 中级振荡器：初级振荡器 + 紫水晶 + 金锭
-        shaped(RecipeCategory.MISC, MoeItems.INTERMEDIATE_LC.get())
+        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())
                 .pattern("aba")
-                .pattern("bcb")
+                .pattern("c c")
                 .pattern("aba")
-                .define('a', Items.AMETHYST_SHARD)
-                .define('b', Items.GOLD_INGOT)
-                .define('c', MoeItems.PRIMARY_LC.get())
-                .unlockedBy("has_primary_lc", has(MoeItems.PRIMARY_LC.get()))
-                .save(output);
-
-// 高级振荡器：中级振荡器 + 幽匿块 + 铜锭
-        shaped(RecipeCategory.MISC, MoeItems.ADVANCED_LC.get())
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', Blocks.SCULK.asItem())  // 幽匿块
-                .define('b', Items.COPPER_INGOT)
-                .define('c', MoeItems.INTERMEDIATE_LC.get())
-                .unlockedBy("has_intermediate_lc", has(MoeItems.INTERMEDIATE_LC.get()))
-                .save(output);
-
-// 超导振荡器：高级振荡器 + 超导更新组件 + 下界合金锭
-        shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_LC.get())
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', Items.NETHERITE_INGOT)
-                .define('b', MoeItems.SUPERCONDUCTING_UPDATE.get())
-                .define('c', MoeItems.ADVANCED_LC.get())
-                .unlockedBy("has_advanced_lc", has(MoeItems.ADVANCED_LC.get()))
-                .save(output);
-
-// ========== 功放 (Power) 升级 ==========
-// 初级功放（不变）
-        shaped(RecipeCategory.MISC, MoeItems.PRIMARY_POWER.get())
-                .pattern(" a ")
-                .pattern("db ")
-                .pattern("   ")
-                .define('a', Items.REDSTONE)
-                .define('b', MoeItems.MAGNO_INGOT.get())
-                .define('d', Items.IRON_INGOT)
-                .unlockedBy("has_board", has(MoeItems.MAGNO_INGOT.get()))
-                .save(output);
-
-// 中级功放：初级功放 + 紫水晶 + 金锭
-        shaped(RecipeCategory.MISC, MoeItems.INTERMEDIATE_POWER.get())
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', Items.AMETHYST_SHARD)
-                .define('b', Items.GOLD_INGOT)
-                .define('c', MoeItems.PRIMARY_POWER.get())
-                .unlockedBy("has_primary_power", has(MoeItems.PRIMARY_POWER.get()))
-                .save(output);
-
-// 高级功放：中级功放 + 幽匿块 + 铜锭
-        shaped(RecipeCategory.MISC, MoeItems.ADVANCED_POWER.get())
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', Blocks.SCULK.asItem())
-                .define('b', Items.COPPER_INGOT)
-                .define('c', MoeItems.INTERMEDIATE_POWER.get())
-                .unlockedBy("has_intermediate_power", has(MoeItems.INTERMEDIATE_POWER.get()))
-                .save(output);
-
-// 超导功放：高级功放 + 超导更新组件 + 末影水晶
-        shaped(RecipeCategory.MISC, MoeItems.SUPERCONDUCTING_POWER.get())
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', Items.END_CRYSTAL)
-                .define('b', MoeItems.SUPERCONDUCTING_UPDATE.get())
-                .define('c', MoeItems.ADVANCED_POWER.get())
-                .unlockedBy("has_advanced_power", has(MoeItems.ADVANCED_POWER.get()))
-                .save(output);
-
-        // ========== 空模块（初级/中级/高级） ==========
-        // 初级空模块：铜板（假设铜板为铜锭，此处用铜锭）
-        shaped(RecipeCategory.MISC, MoeItems.PRIMARY_CODE_MODULE.get())
-                .pattern("ccc")
-                .define('c', Items.COPPER_INGOT)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT))
-                .save(output);
-
-        // 中级空模块：初级空模块 + 金锭 + 石英
-        shapeless(RecipeCategory.MISC, MoeItems.INTERMEDIATE_CODE_MODULE.get())
-                .requires(MoeItems.PRIMARY_CODE_MODULE.get())
-                .requires(Items.GOLD_INGOT)
-                .requires(Items.QUARTZ)
-                .unlockedBy("has_primary_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
-                .save(output);
-
-        // 高级空模块：中级空模块 + 铜锭 + 紫颂果
-        shapeless(RecipeCategory.MISC, MoeItems.ADVANCED_CODE_MODULE.get())
-                .requires(MoeItems.INTERMEDIATE_CODE_MODULE.get())
-                .requires(Items.COPPER_INGOT)
-                .requires(Items.POPPED_CHORUS_FRUIT)
-                .unlockedBy("has_intermediate_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
+                .define('a', MoeItems.MAGNO_INGOT.get())
+                .define('b', Blocks.PISTON)
+                .define('c', MoeItems.ENERGY_CORE.get())
+                .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE))
                 .save(output);
 
         // ========== 增强模块基板 ==========
@@ -390,122 +293,84 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE.get()))
                 .save(output);
 
-        // attract_module
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MoeItems.COPPER_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.COPPER_INGOT), 0.5F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.COPPER_INGOT, "from_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(MoeItems.COPPER_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.COPPER_INGOT), 0.5F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.COPPER_INGOT, "from_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MoeItems.IRON_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.IRON_INGOT), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.IRON_INGOT, "from_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(MoeItems.IRON_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.IRON_INGOT), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.IRON_INGOT, "from_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MoeItems.GOLD_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.GOLD_INGOT), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.GOLD_INGOT, "from_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(MoeItems.GOLD_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.GOLD_INGOT), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.GOLD_INGOT, "from_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MoeItems.NETHERITE_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.NETHERITE_SCRAP), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.NETHERITE_SCRAP, "from_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(MoeItems.NETHERITE_DUST.get()), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.NETHERITE_SCRAP), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.NETHERITE_SCRAP, "from_dust_blasting"));
+
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.ATTRACT_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.IRON_INGOT, Items.GOLD_INGOT)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// exciting_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.EXCITING_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.EMERALD)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// electric_field_domain_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.COPPER_INGOT, Items.QUARTZ)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// coulomb_domain_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.COULOMB_DOMAIN_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.IRON_INGOT)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// block_nerve_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.BLOCK_NERVE_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.COPPER_INGOT)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// electric_energy_release_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.COPPER_INGOT, Items.REDSTONE)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// hydrogen_bond_fracture_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.IRON_INGOT)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// domain_reconstruction_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.COPPER_INGOT, Items.DIAMOND)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// magnetic_recombination_cannon_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.ENDER_PEARL)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// magma_lighting_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGMA_LIGHTING_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.IRON_INGOT, Items.DIAMOND)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// mirage_pursuit_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.MIRAGE_PURSUIT_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.EMERALD)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// frequency_division_arrow_rain_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.COPPER_INGOT, Items.LAPIS_LAZULI)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// electromagnetic_assault_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.COPPER_INGOT, Items.ENDER_PEARL)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// lighting_strike_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.LIGHTING_STRIKE_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.DIAMOND, Items.DIAMOND)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// magnet_resonance_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGNET_RESONANCE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.REDSTONE)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// magnetic_flux_cascade_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.IRON_INGOT, Items.QUARTZ)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// photo_corrosive_nova_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.IRON_INGOT, Items.LAPIS_LAZULI)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// photoacoustic_pulse_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.GOLD_INGOT, Items.GOLD_INGOT)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// protecting_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.PROTECTING_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.DIAMOND)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// pulsed_plasma_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.PULSED_PLASMA_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.REDSTONE)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// ray_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.RAY_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.QUARTZ)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
-
-// refraction_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.REFRACTION_MODULE.get(), MoeItems.INTERMEDIATE_CODE_MODULE.get(), Items.GOLD_INGOT, Items.ENDER_PEARL)
                 .unlockedBy("has_intermediate_code_module", has(MoeItems.INTERMEDIATE_CODE_MODULE.get()))
                 .save(output);
-
-// st_elmo_s_fire_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.ST_ELMO_S_FIRE_MODULE.get(), MoeItems.ADVANCED_CODE_MODULE.get(), Items.GOLD_INGOT, Items.EMERALD)
                 .unlockedBy("has_advanced_code_module", has(MoeItems.ADVANCED_CODE_MODULE.get()))
                 .save(output);
-
-// tree_current_module
         MagicEncodeRecipeBuilder.magicEncode(MoeItems.TREE_CURRENT_MODULE.get(), MoeItems.PRIMARY_CODE_MODULE.get(), Items.GOLD_INGOT, Items.LAPIS_LAZULI)
                 .unlockedBy("has_primary_code_module", has(MoeItems.PRIMARY_CODE_MODULE.get()))
                 .save(output);
@@ -516,7 +381,33 @@ public class MoeRecipeProvider extends RecipeProvider {
         MagnetoFusionRecipeBuilder.result(items, MoeItems.ELECTROMAGNETIC_ROD).items(MoeItems.MAGNO_INGOT).items(MoeItems.ENERGY_CORE).tag(ItemTags.COPPER).save(output);
         MagnetoFusionRecipeBuilder.result(items, MoeItems.ENERGY_CORE, 4).items(Items.COPPER_INGOT).items(MoeItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
 
-        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.IRON_DUST, 2, Items.RAW_IRON).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.PRIMARY_LC.get()).items(MoeItems.MAGNO_INGOT.get()).items(Items.REDSTONE).items(Items.EMERALD).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.INTERMEDIATE_LC.get()).items(MoeItems.PRIMARY_LC.get()).items(MoeItems.RADIANT_MAGNO_INGOT).items(Items.QUARTZ).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.ADVANCED_LC.get()).items(MoeItems.INTERMEDIATE_LC.get()).items(MoeItems.STELLAR_MAGNO_INGOT).items(Items.AMETHYST_SHARD).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.SUPERCONDUCTING_LC.get()).items(MoeItems.ADVANCED_LC.get()).items(MoeItems.SUPERCONDUCTING_UPDATE).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.PRIMARY_POWER.get()).items(MoeItems.MAGNO_INGOT.get()).items(Items.REDSTONE).items(Items.DIAMOND).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.INTERMEDIATE_POWER.get()).items(MoeItems.PRIMARY_POWER.get()).items(MoeItems.RADIANT_MAGNO_INGOT).items(Items.QUARTZ).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.ADVANCED_POWER.get()).items(MoeItems.INTERMEDIATE_POWER.get()).items(MoeItems.STELLAR_MAGNO_INGOT).items(Items.AMETHYST_SHARD).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.SUPERCONDUCTING_POWER.get()).items(MoeItems.ADVANCED_POWER.get()).items(MoeItems.SUPERCONDUCTING_UPDATE).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.PRIMARY_CODE_MODULE.get()).items(MoeItems.MAGNO_INGOT.get()).items(Items.REDSTONE).items(Items.GOLD_INGOT).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.INTERMEDIATE_CODE_MODULE.get()).items(MoeItems.PRIMARY_CODE_MODULE.get()).items(MoeItems.RADIANT_MAGNO_INGOT).items(Items.AMETHYST_SHARD).save(output);
+        MagnetoFusionRecipeBuilder.result(items, MoeItems.ADVANCED_CODE_MODULE.get()).items(MoeItems.INTERMEDIATE_CODE_MODULE.get()).items(MoeItems.STELLAR_MAGNO_INGOT).items(Items.COPPER_INGOT).save(output);
+
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.COPPER_DUST, 2, Items.RAW_COPPER).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).saveWithAddition(output, "from_raw");
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.COPPER_DUST, 4, Tags.Items.ORES_COPPER).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).saveWithAddition(output, "from_ore_block");
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.IRON_DUST, 2, Items.RAW_IRON).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).saveWithAddition(output, "from_raw");
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.IRON_DUST, 4, Tags.Items.ORES_IRON).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).saveWithAddition(output, "from_ore_block");
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.GOLD_DUST, 2, Items.RAW_GOLD).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).saveWithAddition(output, "from_raw");
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.GOLD_DUST, 4, Tags.Items.ORES_GOLD).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).saveWithAddition(output, "from_ore_block");
+        ElectromagneticDissociationRecipeBuilder.result(items, MoeItems.NETHERITE_DUST, 3, Tags.Items.ORES_NETHERITE_SCRAP).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output);
+        ElectromagneticDissociationRecipeBuilder.result(items, Items.EMERALD, 3, Tags.Items.ORES_EMERALD).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Items.EMERALD, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Items.COAL, 3, Tags.Items.ORES_COAL).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Items.COAL, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Items.QUARTZ, 3, Tags.Items.ORES_QUARTZ).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Items.QUARTZ, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Items.REDSTONE, 8, Tags.Items.ORES_REDSTONE).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Items.REDSTONE, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Items.DIAMOND, 3, Tags.Items.ORES_DIAMOND).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Items.DIAMOND, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Items.LAPIS_LAZULI, 3, Tags.Items.ORES_LAPIS).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Items.LAPIS_LAZULI, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Blocks.SAND, Tags.Items.GRAVELS).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Blocks.SAND.asItem(), "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.result(items, Blocks.GRAVEL, Tags.Items.COBBLESTONES).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get())).save(output, getVanillaItemWithAddition(Blocks.GRAVEL.asItem(), "from_ore_dissociation"));
     }
 
     protected static class Runner extends RecipeProvider.Runner{
@@ -534,5 +425,11 @@ public class MoeRecipeProvider extends RecipeProvider {
         public String getName() {
             return "Moe Recipes";
         }
+    }
+
+    protected static ResourceKey<Recipe<?>> getVanillaItemWithAddition(Item item, String addition){
+        String s = item.toString();
+        int index = s.indexOf(":");
+        return ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, item.toString().substring(index + 1) + "_" + addition));
     }
 }

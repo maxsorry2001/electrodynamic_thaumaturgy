@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_primary_module": {
+    "has_blast_furnace": {
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:primary_code_module"
+            "items": "minecraft:blast_furnace"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:intermediate_code_module"
+        "recipe": "electrodynamic_thaumaturgy:gold_ingot_from_dust_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_primary_module"
+      "has_blast_furnace"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:intermediate_code_module"
+      "electrodynamic_thaumaturgy:gold_ingot_from_dust_blasting"
     ]
   }
 }

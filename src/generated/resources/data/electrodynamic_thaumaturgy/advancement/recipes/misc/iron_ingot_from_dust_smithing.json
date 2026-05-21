@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper": {
+    "has_furnace": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:copper_ingot"
+            "items": "minecraft:furnace"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:primary_code_module"
+        "recipe": "electrodynamic_thaumaturgy:iron_ingot_from_dust_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper"
+      "has_furnace"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:primary_code_module"
+      "electrodynamic_thaumaturgy:iron_ingot_from_dust_smithing"
     ]
   }
 }

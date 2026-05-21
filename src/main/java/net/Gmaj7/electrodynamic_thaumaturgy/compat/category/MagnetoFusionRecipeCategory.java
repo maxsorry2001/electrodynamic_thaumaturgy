@@ -28,7 +28,7 @@ public class MagnetoFusionRecipeCategory implements IRecipeCategory<RecipeHolder
 
     public MagnetoFusionRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK));
     }
 
     @Override

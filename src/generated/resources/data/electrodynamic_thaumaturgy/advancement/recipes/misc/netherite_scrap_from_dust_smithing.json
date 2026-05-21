@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_intermediate_module": {
+    "has_furnace": {
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:intermediate_code_module"
+            "items": "minecraft:furnace"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "electrodynamic_thaumaturgy:advanced_code_module"
+        "recipe": "electrodynamic_thaumaturgy:netherite_scrap_from_dust_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_intermediate_module"
+      "has_furnace"
     ]
   ],
   "rewards": {
     "recipes": [
-      "electrodynamic_thaumaturgy:advanced_code_module"
+      "electrodynamic_thaumaturgy:netherite_scrap_from_dust_smithing"
     ]
   }
 }

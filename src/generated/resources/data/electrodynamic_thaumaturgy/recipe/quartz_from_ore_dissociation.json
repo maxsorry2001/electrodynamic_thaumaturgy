@@ -1,0 +1,8 @@
+{
+  "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
+  "ingredient": "#c:ores/quartz",
+  "output": {
+    "count": 3,
+    "id": "minecraft:quartz"
+  }
+}

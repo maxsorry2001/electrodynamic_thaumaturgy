@@ -1,15 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": "minecraft:end_crystal",
-    "b": "electrodynamic_thaumaturgy:superconducting_update",
-    "c": "electrodynamic_thaumaturgy:advanced_power"
-  },
-  "pattern": [
-    "aba",
-    "bcb",
-    "aba"
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:advanced_power",
+    "electrodynamic_thaumaturgy:superconducting_update"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:superconducting_power"

@@ -86,6 +86,9 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.EMPTY_MAGIC_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.IRON_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.COPPER_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.GOLD_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.NETHERITE_DUST.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
