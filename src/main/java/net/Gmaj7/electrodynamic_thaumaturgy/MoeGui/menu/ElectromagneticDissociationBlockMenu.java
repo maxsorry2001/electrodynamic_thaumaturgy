@@ -28,8 +28,8 @@ public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu 
         this.blockEntity = (ElectromagneticDissociationBE) blockEntity;
         this.level = inventory.player.level();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 40, 35));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 1, 100, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 40, 33));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 1, 120, 33));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

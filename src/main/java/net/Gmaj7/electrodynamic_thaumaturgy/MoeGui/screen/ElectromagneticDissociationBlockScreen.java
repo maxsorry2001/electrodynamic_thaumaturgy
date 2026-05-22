@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class ElectromagneticDissociationBlockScreen extends AbstractContainerScreen<ElectromagneticDissociationBlockMenu> {
-    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_energy_block.png");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_dissociation.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
 
     public ElectromagneticDissociationBlockScreen(ElectromagneticDissociationBlockMenu menu, Inventory playerInventory, Component title) {

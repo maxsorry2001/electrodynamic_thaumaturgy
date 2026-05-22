@@ -22,13 +22,13 @@ import org.jspecify.annotations.Nullable;
 
 public class ElectromagneticDissociationRecipeCategory implements IRecipeCategory<RecipeHolder<ElectromagneticDissociationRecipe>> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_encode");
-    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_encode_gui.png");
+    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_dissociation_gui.png");
     private final IDrawable background;
     private final IDrawable icon;
 
     public ElectromagneticDissociationRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK));
     }
 
     @Override
