@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MagnetoFusionBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagnetoFusionRecipeInput;
@@ -34,7 +35,9 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntity,IMoeDirectionItemBlockEntity, MenuProvider {
     private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
@@ -70,8 +73,11 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
     };
     private static final int tickUse = 128;
 
+    private Map<Direction, Boolean> directionOutputSet = new HashMap<>();
+
     public MagnetoFusionBE(BlockPos worldPosition, BlockState blockState) {
         super(MoeBlockEntities.MAGNETO_FUSION_BE.get(), worldPosition, blockState);
+        this.directionOutputSet = MoeFunction.decodeDirection(0x03);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, MagnetoFusionBE magnetoFusionBE){
@@ -90,7 +96,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
             if(!result.isEmpty())
                 try (Transaction transaction = Transaction.openRoot()){
                     int insert = magnetoFusionBE.itemHandlerOutput.insert(0, ItemResource.of(result), result.count(), transaction), energyUse = magnetoFusionBE.energy.extract(tickUse, transaction);
-                    if(insert > 0 && energyUse >= tickUse){
+                    if(insert > 0 && energyUse == tickUse){
                         for (int i = 0; i < 3; i++)
                             if(!magnetoFusionBE.itemHandlerInput.getStackInSlot(i).isEmpty())
                                 magnetoFusionBE.itemHandlerInput.extract(i, magnetoFusionBE.itemHandlerInput.getResource(i), 1, transaction);
@@ -106,6 +112,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
         energy.deserialize(input);
         itemHandlerInput.deserializeWithKey("input_item", input);
         itemHandlerInput.deserializeWithKey("output_item", input);
+        directionOutputSet = MoeFunction.decodeDirection(input.getIntOr("direction_set", 0x03));
     }
 
     @Override
@@ -114,6 +121,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
         energy.serialize(output);
         itemHandlerInput.serializeWithKey("input_item", output);
         itemHandlerInput.serializeWithKey("output_item", output);
+        output.putInt("direction_set", MoeFunction.encodeDirection(directionOutputSet));
     }
 
     @Override
@@ -132,12 +140,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
     @Override
     public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction) {
         if(direction == null) return getItemHandlerOutput();
-        StacksResourceHandler<ItemStack, ItemResource> handler;
-        switch (direction){
-            case UP, DOWN -> handler = getItemHandlerOutput();
-            default ->  handler = getItemHandlerInput();
-        }
-        return handler;
+        return directionOutputSet.getOrDefault(direction, true) ? getItemHandlerOutput() : getItemHandlerInput();
     }
 
     public MoeBlockEntityItemHandler getItemHandlerInput() {
@@ -150,10 +153,9 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
 
     @Override
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandlerInput.size());
-        for (int i = 0; i < itemHandlerInput.size(); i++){
-            container.setItem(i, itemHandlerInput.getStackInSlot(i));
-        }
+        SimpleContainer container = new SimpleContainer(itemHandlerInput.size() + itemHandlerOutput.size());
+        container.setItem(0, itemHandlerInput.getStackInSlot(0));
+        container.setItem(0, itemHandlerOutput.getStackInSlot(0));
         Containers.dropContents(this.level, this.worldPosition, container);
     }
 
@@ -188,5 +190,12 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
             if(!itemStack.isEmpty()) list.add(itemStack);
         }
         return list;
+    }
+
+    public void changeDirectionSet(Direction direction){
+        this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
+        setChanged();
+        if(!level.isClientSide())
+            invalidateCapabilities();
     }
 }

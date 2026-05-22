@@ -55,13 +55,15 @@ public class MoeBlockEntities {
 
     public static final Supplier<BlockEntityType<MagnetoFusionBE>> MAGNETO_FUSION_BE =
             MOE_BLOCK_ENTITY.register("magneto_fusion_be", () -> new BlockEntityType<>(
-                    MagnetoFusionBE::new, MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get()
-            ));
+                    MagnetoFusionBE::new, MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get()));
 
     public static final Supplier<BlockEntityType<ElectromagneticDissociationBE>> ELECTROMAGNETIC_DISSOCIATION_BE =
             MOE_BLOCK_ENTITY.register("electromagnetic_dissociation_be", () -> new BlockEntityType<>(
-                    ElectromagneticDissociationBE::new, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get()
-            ));
+                    ElectromagneticDissociationBE::new, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get()));
+
+    public static final Supplier<BlockEntityType<EddyCurrentRemelterBE>> EDDY_CURRENT_REMELTER_BE =
+            MOE_BLOCK_ENTITY.register("eddyCurrent_remelter_be", () -> new BlockEntityType<>(
+                    EddyCurrentRemelterBE::new, MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get()));
 
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);

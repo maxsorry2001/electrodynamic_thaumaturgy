@@ -22,7 +22,9 @@ import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.entity.PartEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MoeFunction {
     public static float getMagicAmount(ItemStack itemStack){
@@ -140,6 +142,25 @@ public class MoeFunction {
         for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i ++)
             list.add(new ItemStack(MoeItems.PRIMARY_CODE_MODULE.get()));
         return ItemContainerContents.fromItems(list);
+    }
+
+    public static int encodeDirection(Map<Direction, Boolean> map) {
+        int flags = 0;
+        for (Direction dir : Direction.values()) {
+            if (map.getOrDefault(dir, false)) {
+                flags |= (1 << dir.ordinal());
+            }
+        }
+        return flags;
+    }
+
+    // 将 int 位掩码解码为 Map
+    public static Map<Direction, Boolean> decodeDirection(int flags) {
+        Map<Direction, Boolean> result = new HashMap<>();
+        for (Direction dir : Direction.values()) {
+            result.put(dir, (flags & (1 << dir.ordinal())) != 0);
+        }
+        return result;
     }
 
     // 使用四元数旋转点列表 (YX顺序)
