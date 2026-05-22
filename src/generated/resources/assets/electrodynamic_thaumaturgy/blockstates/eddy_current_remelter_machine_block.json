@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "electrodynamic_thaumaturgy:block/eddy_current_remelter_machine_block"
+    }
+  }
+}

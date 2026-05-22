@@ -2,12 +2,14 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.EddyCurrentRemelterBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDissociationBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.MagnetoFusionBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticExtractorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -23,10 +25,15 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import org.jspecify.annotations.Nullable;
 
-public class ElectromagneticDissociationBlock extends BaseEntityBlock {
-    public static final MapCodec<ElectromagneticDissociationBlock> CODEC = simpleCodec(ElectromagneticDissociationBlock::new);
-    public ElectromagneticDissociationBlock(Properties properties) {
+public class EddyCurrentRemelterBlock extends BaseEntityBlock {
+    public static final MapCodec<EddyCurrentRemelterBlock> CODEC = simpleCodec(EddyCurrentRemelterBlock::new);
+    public EddyCurrentRemelterBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
+        return type == MoeBlockEntities.EDDY_CURRENT_REMELTER_BE.get() ? createTickerHelper(type, MoeBlockEntities.EDDY_CURRENT_REMELTER_BE.get(), EddyCurrentRemelterBE::tick) : null;
     }
 
     @Override
@@ -35,21 +42,15 @@ public class ElectromagneticDissociationBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
-        return type == MoeBlockEntities.ELECTROMAGNETIC_DISSOCIATION_BE.get() ? createTickerHelper(type, MoeBlockEntities.ELECTROMAGNETIC_DISSOCIATION_BE.get(), ElectromagneticDissociationBE::tick) : null;
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(level.isClientSide())
             return InteractionResult.SUCCESS;
         else {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ElectromagneticDissociationBE electromagneticDissociationBE && !level.isClientSide()) {
+            if (blockEntity instanceof EddyCurrentRemelterBE electromagneticDissociationBE && !level.isClientSide()) {
                 EnergyHandler energyStorage = electromagneticDissociationBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), electromagneticDissociationBE.getBlockPos()));
-                if(player.isShiftKeyDown()) electromagneticDissociationBE.changeDirectionSet(hitResult.getDirection());
-                else ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDissociationBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDissociationBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;
         }
@@ -62,6 +63,6 @@ public class ElectromagneticDissociationBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new ElectromagneticDissociationBE(blockPos, blockState);
+        return new EddyCurrentRemelterBE(blockPos, blockState);
     }
 }

@@ -57,6 +57,7 @@ public class ClientEventHandler {
             event.register(MoeMenuType.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), AtomicReconstructionBlockScreen::new);
             event.register(MoeMenuType.MAGNETO_FUSION_BLOCK_MENU.get(), MagnetoFusionBlockScreen::new);
             event.register(MoeMenuType.ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU.get(), ElectromagneticDissociationBlockScreen::new);
+            event.register(MoeMenuType.EDDY_CURRENT_REMELTER_BLOCK_MENU.get(), EddyCurrentRemelterBlockScreen::new);
         }
 
 

@@ -107,10 +107,14 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
                         output.accept(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK);
+                        output.accept(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                         output.accept(MoeBlocks.MAGNETO_CORE_BLOCK);
 
+                        output.accept(MoeItems.COPPER_DUST);
                         output.accept(MoeItems.IRON_DUST);
+                        output.accept(MoeItems.GOLD_DUST);
+                        output.accept(MoeItems.NETHERITE_DUST);
 
                         output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
                     }))

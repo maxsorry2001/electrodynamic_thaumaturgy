@@ -72,6 +72,7 @@ public class DataLoadHandler {
                         blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
                 MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
                 MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get());
+                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get(),
+                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get());
     }
 }

@@ -62,7 +62,7 @@ public class MoeBlockEntities {
                     ElectromagneticDissociationBE::new, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get()));
 
     public static final Supplier<BlockEntityType<EddyCurrentRemelterBE>> EDDY_CURRENT_REMELTER_BE =
-            MOE_BLOCK_ENTITY.register("eddyCurrent_remelter_be", () -> new BlockEntityType<>(
+            MOE_BLOCK_ENTITY.register("eddy_current_remelter_be", () -> new BlockEntityType<>(
                     EddyCurrentRemelterBE::new, MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get()));
 
     public static void register(IEventBus eventBus){
