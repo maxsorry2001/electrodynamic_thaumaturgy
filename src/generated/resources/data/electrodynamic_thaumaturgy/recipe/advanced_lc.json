@@ -1,15 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": "minecraft:sculk",
-    "b": "minecraft:copper_ingot",
-    "c": "electrodynamic_thaumaturgy:intermediate_lc"
-  },
-  "pattern": [
-    "aba",
-    "bcb",
-    "aba"
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:intermediate_lc",
+    "electrodynamic_thaumaturgy:stellar_magno_ingot",
+    "minecraft:amethyst_shard"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:advanced_lc"

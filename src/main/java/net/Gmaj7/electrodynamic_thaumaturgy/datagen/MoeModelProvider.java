@@ -84,6 +84,11 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.RADIANT_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.STELLAR_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.EMPTY_MAGIC_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.IRON_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.COPPER_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.GOLD_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.NETHERITE_DUST.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
@@ -145,6 +150,8 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
                 getModel("magneto_fusion_machine_block")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get(),
+                getModel("electromagnetic_dissociation_machine_block")));
     }
 
     protected MultiVariant getModel(String name){

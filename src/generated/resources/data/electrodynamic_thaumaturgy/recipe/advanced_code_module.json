@@ -1,10 +1,9 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
   "ingredients": [
     "electrodynamic_thaumaturgy:intermediate_code_module",
-    "minecraft:copper_ingot",
-    "minecraft:popped_chorus_fruit"
+    "electrodynamic_thaumaturgy:stellar_magno_ingot",
+    "minecraft:copper_ingot"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:advanced_code_module"

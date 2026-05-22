@@ -8,6 +8,9 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticDissociationRecipeCategory;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagicEncodeRecipeCategory;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagnetoFusionRecipeCategory;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -36,18 +39,21 @@ public class JEIPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new MagicEncodeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new MagnetoFusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new ElectromagneticDissociationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(JEIRecipeTypes.MAGIC_ENCODE, this.getRecipes(recipeMap, MoeRecipes.MAGIC_ENCODE_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.MAGNETO_FUSION, this.getRecipes(recipeMap, MoeRecipes.MAGNO_FUSION_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, this.getRecipes(recipeMap, MoeRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get()));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.asItem()));
     }
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
@@ -56,6 +62,7 @@ public class JEIPlugin implements IModPlugin {
         public static void onDatapackSync(OnDatapackSyncEvent event) {
             event.sendRecipes(MoeRecipes.MAGIC_ENCODE_TYPE.get());
             event.sendRecipes(MoeRecipes.MAGNO_FUSION_TYPE.get());
+            event.sendRecipes(MoeRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get());
         }
     }
 

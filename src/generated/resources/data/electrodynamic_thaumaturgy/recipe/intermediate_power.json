@@ -1,15 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": "minecraft:amethyst_shard",
-    "b": "minecraft:gold_ingot",
-    "c": "electrodynamic_thaumaturgy:primary_power"
-  },
-  "pattern": [
-    "aba",
-    "bcb",
-    "aba"
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:primary_power",
+    "electrodynamic_thaumaturgy:radiant_magno_ingot",
+    "minecraft:quartz"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:intermediate_power"

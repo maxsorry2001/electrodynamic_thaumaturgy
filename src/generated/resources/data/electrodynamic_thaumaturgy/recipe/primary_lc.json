@@ -1,16 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": "minecraft:redstone",
-    "b": "minecraft:iron_ingot",
-    "c": "minecraft:redstone",
-    "d": "electrodynamic_thaumaturgy:magno_ingot"
-  },
-  "pattern": [
-    " a ",
-    "db ",
-    " c "
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:magno_ingot",
+    "minecraft:redstone",
+    "minecraft:emerald"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:primary_lc"

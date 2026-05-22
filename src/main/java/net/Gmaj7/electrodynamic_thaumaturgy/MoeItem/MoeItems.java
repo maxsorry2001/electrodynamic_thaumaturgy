@@ -6,7 +6,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.ElectromagneticLevel;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.*;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -109,6 +108,11 @@ public class MoeItems {
     public static final DeferredItem<Item> MAGNO_INGOT = MOE_ITEM.registerSimpleItem("magno_ingot");
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("radiant_magno_ingot");
     public static final DeferredItem<Item> STELLAR_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("stellar_magno_ingot");
+
+    public static final DeferredItem<Item> COPPER_DUST = MOE_ITEM.registerSimpleItem("copper_dust");
+    public static final DeferredItem<Item> IRON_DUST = MOE_ITEM.registerSimpleItem("iron_dust");
+    public static final DeferredItem<Item> GOLD_DUST = MOE_ITEM.registerSimpleItem("gold_dust");
+    public static final DeferredItem<Item> NETHERITE_DUST = MOE_ITEM.registerSimpleItem("nethrtite_dust");
 
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)

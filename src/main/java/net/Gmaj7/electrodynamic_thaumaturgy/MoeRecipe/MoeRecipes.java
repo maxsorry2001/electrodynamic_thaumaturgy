@@ -32,6 +32,15 @@ public class MoeRecipes {
                     return "magno_fusion";
                 }
             });
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ElectromagneticDissociationRecipe>> ELECTROMAGNETIC_DISSOCIATION_RECIPE_SERIALIZER =
+            SERIALIZER.register("electromagnetic_dissociation", () -> new RecipeSerializer<>(ElectromagneticDissociationRecipe.CODEC, ElectromagneticDissociationRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ElectromagneticDissociationRecipe>> ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE =
+            TYPE.register("electromagnetic_dissociation", () -> new RecipeType<ElectromagneticDissociationRecipe>() {
+                @Override
+                public String toString() {
+                    return "electromagnetic_dissociation";
+                }
+            });
 
     public static void register(IEventBus eventBus){
         SERIALIZER.register(eventBus);

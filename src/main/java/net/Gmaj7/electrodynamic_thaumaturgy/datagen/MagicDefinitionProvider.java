@@ -1,6 +1,5 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import com.mojang.serialization.Codec;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;

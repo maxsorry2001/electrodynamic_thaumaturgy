@@ -4,7 +4,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -107,8 +106,11 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
                         output.accept(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK);
+                        output.accept(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK);
                         output.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
                         output.accept(MoeBlocks.MAGNETO_CORE_BLOCK);
+
+                        output.accept(MoeItems.IRON_DUST);
 
                         output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
                     }))

@@ -1,11 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "c": "minecraft:copper_ingot"
-  },
-  "pattern": [
-    "ccc"
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:magno_ingot",
+    "minecraft:redstone",
+    "minecraft:gold_ingot"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:primary_code_module"
