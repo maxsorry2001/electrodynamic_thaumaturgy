@@ -48,7 +48,8 @@ public class ElectromagneticDissociationBlock extends BaseEntityBlock {
                 if (blockEntity instanceof ElectromagneticDissociationBE electromagneticDissociationBE && !level.isClientSide()) {
                     EnergyHandler energyStorage = electromagneticDissociationBE.getEnergy();
                     PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), electromagneticDissociationBE.getBlockPos()));
-                    ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDissociationBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
+                    if(player.isShiftKeyDown()) electromagneticDissociationBE.changeDirectionSet(hitResult.getDirection());
+                    else ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDissociationBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
                 }
                 return InteractionResult.CONSUME;
             }

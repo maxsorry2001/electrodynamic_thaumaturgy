@@ -1,13 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
+import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDissociationBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.MagnetoFusionBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -30,7 +31,10 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
-public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEnergyBlockEntity, IMoeItemBlockEntity, MenuProvider{
+import java.util.HashMap;
+import java.util.Map;
+
+public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEnergyBlockEntity, IMoeDirectionItemBlockEntity, MenuProvider{
 
     private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(1048576) {
 
@@ -43,7 +47,7 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
         }
     };
 
-    private final MoeBlockEntityItemHandler itemHandler = new MoeBlockEntityItemHandler(2){
+    private final MoeBlockEntityItemHandler itemHandlerInput = new MoeBlockEntityItemHandler(1){
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
@@ -54,8 +58,22 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
         }
     };
 
+    private final MoeBlockEntityItemHandler itemHandlerOutput = new MoeBlockEntityItemHandler(1){
+
+        @Override
+        protected void onContentsChanged(int index, ItemStack previousContents) {
+            setChanged();
+            if(!level.isClientSide()){
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    };
+
+    private Map<Direction, Boolean> directionOutputSet = new HashMap<>();
+
     public ElectromagneticDissociationBE(BlockPos worldPosition, BlockState blockState) {
         super(MoeBlockEntities.ELECTROMAGNETIC_DISSOCIATION_BE.get(), worldPosition, blockState);
+        directionOutputSet = decodeDirection(0x03);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticDissociationBE blockEntity){
@@ -73,10 +91,10 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
             }
             if(!result.isEmpty())
                 try (Transaction transaction = Transaction.openRoot()){
-                    int insert = blockEntity.itemHandler.insert(1, ItemResource.of(result), result.count(), transaction);// energyUse = blockEntity.energy.extract(tickUse, transaction);
+                    int insert = blockEntity.itemHandlerOutput.insert(0, ItemResource.of(result), result.count(), transaction);// energyUse = blockEntity.energy.extract(tickUse, transaction);
                     if(insert == result.count()){// && energyUse >= tickUse){
-                    if(!blockEntity.itemHandler.getStackInSlot(0).isEmpty())
-                        blockEntity.itemHandler.extract(0, blockEntity.itemHandler.getResource(0), 1, transaction);
+                    if(!blockEntity.itemHandlerInput.getStackInSlot(0).isEmpty())
+                        blockEntity.itemHandlerInput.extract(0, blockEntity.itemHandlerInput.getResource(0), 1, transaction);
                     transaction.commit();
                     }
                 }
@@ -86,15 +104,19 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
     @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
-        itemHandler.serialize(output);
+        itemHandlerInput.serializeWithKey("input_item", output);
+        itemHandlerOutput.serializeWithKey("output_item", output);
         energy.serialize(output);
+        output.putInt("direction_set", encodeDirection(directionOutputSet));
     }
 
     @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
-        itemHandler.deserialize(input);
+        itemHandlerInput.deserializeWithKey("input_item", input);
+        itemHandlerOutput.deserializeWithKey("output_item", input);
         energy.deserialize(input);
+        directionOutputSet = decodeDirection(input.getIntOr("direction_set", 0x03));
     }
 
     @Override
@@ -107,21 +129,21 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
         energy.setEnergy(i);
     }
 
-    @Override
-    public StacksResourceHandler<ItemStack, ItemResource> getItemHandler() {
-        return itemHandler;
+    public ItemStack getInput(){
+        return itemHandlerInput.getStackInSlot(0).isEmpty() ? ItemStack.EMPTY : itemHandlerInput.getStackInSlot(0);
     }
 
-    public ItemStack getInput(){
-        return itemHandler.getStackInSlot(0).isEmpty() ? ItemStack.EMPTY : itemHandler.getStackInSlot(0);
+    @Override
+    public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction) {
+        if(direction == null) return getItemHandlerOutput();
+        return directionOutputSet.getOrDefault(direction, true) ? getItemHandlerOutput() : getItemHandlerInput();
     }
 
     @Override
     public void drops() {
-        SimpleContainer container = new SimpleContainer(itemHandler.size());
-        for (int i = 0; i < itemHandler.size(); i++){
-            container.setItem(i, itemHandler.getStackInSlot(i));
-        }
+        SimpleContainer container = new SimpleContainer(itemHandlerInput.size());
+        container.setItem(0, itemHandlerInput.getStackInSlot(0));
+        container.setItem(1, itemHandlerOutput.getStackInSlot(0));
         Containers.dropContents(this.level, this.worldPosition, container);
     }
 
@@ -133,5 +155,40 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new ElectromagneticDissociationBlockMenu(i, inventory, this);
+    }
+
+    public MoeBlockEntityItemHandler getItemHandlerInput() {
+        return itemHandlerInput;
+    }
+
+    public MoeBlockEntityItemHandler getItemHandlerOutput() {
+        return itemHandlerOutput;
+    }
+
+    // 将 Map 编码为 int 位掩码
+    private int encodeDirection(Map<Direction, Boolean> map) {
+        int flags = 0;
+        for (Direction dir : Direction.values()) {
+            if (map.getOrDefault(dir, false)) {
+                flags |= (1 << dir.ordinal());
+            }
+        }
+        return flags;
+    }
+
+    // 将 int 位掩码解码为 Map
+    private Map<Direction, Boolean> decodeDirection(int flags) {
+        Map<Direction, Boolean> result = new HashMap<>();
+        for (Direction dir : Direction.values()) {
+            result.put(dir, (flags & (1 << dir.ordinal())) != 0);
+        }
+        return result;
+    }
+
+    public void changeDirectionSet(Direction direction){
+        this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
+        setChanged();
+        if(!level.isClientSide())
+            invalidateCapabilities();
     }
 }

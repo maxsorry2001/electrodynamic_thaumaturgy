@@ -71,6 +71,7 @@ public class DataLoadHandler {
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
                 MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
-                MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get());
+                MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
+                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get());
     }
 }
