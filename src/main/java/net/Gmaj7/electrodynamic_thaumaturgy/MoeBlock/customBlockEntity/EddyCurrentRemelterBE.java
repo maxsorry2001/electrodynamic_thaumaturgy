@@ -23,7 +23,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -95,8 +94,11 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IMoeEnergyBloc
         }
 
         @Override
-        public void set(int i, int i1) {
-
+        public void set(int dataId, int value) {
+            switch (dataId){
+                case 0 -> EddyCurrentRemelterBE.this.progress = value;
+                case 1 -> EddyCurrentRemelterBE.this.progress = value;
+            }
         }
 
         @Override
@@ -147,13 +149,13 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IMoeEnergyBloc
                     if (extracted == 1) {
                         transaction.commit();
                         blockEntity.progress = 0;
-                        blockEntity.setChanged();
+                        setChanged(level, pos, state);
                     }
                 }
             } else {
                 transaction.commit();
                 blockEntity.progress++;
-                blockEntity.setChanged();
+                setChanged(level, pos, state);
             }
         }
     }

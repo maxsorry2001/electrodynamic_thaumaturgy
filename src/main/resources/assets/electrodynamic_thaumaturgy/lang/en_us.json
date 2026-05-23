@@ -49,6 +49,9 @@
   "item.electrodynamic_thaumaturgy.radiant_magno_ingot": "Radiant Magno Ingot",
   "item.electrodynamic_thaumaturgy.stellar_magno_ingot": "Stellar Magno Ingot",
   "item.electrodynamic_thaumaturgy.iron_dust": "Iron Dust",
+  "item.electrodynamic_thaumaturgy.copper_dust": "Copper Dust",
+  "item.electrodynamic_thaumaturgy.gold_dust": "Gold Dust",
+  "item.electrodynamic_thaumaturgy.nethrtite_dust": "Netherite Dust",
   "item.electrodynamic_thaumaturgy.superconducting_update": "Superconducting Updating Tool",
   "item.electrodynamic_thaumaturgy.cooldown_enhance": "Cooldown",
   "item.electrodynamic_thaumaturgy.strength_enhance": "Strength",
@@ -85,6 +88,7 @@
   "block.electrodynamic_thaumaturgy.magneto_core_block": "Magneto Core",
   "block.electrodynamic_thaumaturgy.magneto_fusion_machine_block": "Magneto Fusion Machine",
   "block.electrodynamic_thaumaturgy.electromagnetic_dissociation_machine_block": "Electromagnetic Dissociation Machine",
+  "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine_block": "Eddy Current Remelter Machine",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "Pulsed Plasma",
