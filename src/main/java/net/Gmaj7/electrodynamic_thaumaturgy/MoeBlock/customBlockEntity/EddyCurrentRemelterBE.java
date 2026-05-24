@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -89,6 +90,7 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IMoeEnergyBloc
             return switch (i){
                 case 0 -> progress;
                 case 1 -> maxProgress;
+                case 2 -> MoeFunction.encodeDirection(directionOutputSet);
                 default -> 0;
             };
         }
@@ -97,17 +99,18 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IMoeEnergyBloc
         public void set(int dataId, int value) {
             switch (dataId){
                 case 0 -> EddyCurrentRemelterBE.this.progress = value;
-                case 1 -> EddyCurrentRemelterBE.this.progress = value;
+                case 1 -> EddyCurrentRemelterBE.this.maxProgress = value;
+                case 2 -> EddyCurrentRemelterBE.this.directionOutputSet = MoeFunction.decodeDirection(value);
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
 
-    private Map<Direction, Boolean> directionOutputSet = new HashMap<>();
+    private Map<Direction, Boolean> directionOutputSet;
     private static final int tickUse = 1024;
     private int progress = 0;
     private int maxProgress = 0;
@@ -196,7 +199,7 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IMoeEnergyBloc
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new EddyCurrentRemelterBlockMenu(i, inventory, this);
+        return new EddyCurrentRemelterBlockMenu(i, ContainerLevelAccess.create(level, getBlockPos()), inventory, this);
     }
 
     public MoeBlockEntityItemHandler getItemHandlerOutput() {
@@ -217,5 +220,13 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IMoeEnergyBloc
 
     public ContainerData getData() {
         return data;
+    }
+
+    @Override
+    public void changeDirectionSet(Direction direction){
+        this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
+        setChanged();
+        if(!level.isClientSide())
+            invalidateCapabilities();
     }
 }

@@ -6,7 +6,9 @@ import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 
 public interface IMoeDirectionItemBlockEntity {
-    public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction);
+    StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction);
 
-    public void drops();
+    void drops();
+
+    void changeDirectionSet(Direction direction);
 }

@@ -147,6 +147,11 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
     }
 
     @Override
+    public void changeDirectionSet(Direction direction) {
+
+    }
+
+    @Override
     public Component getDisplayName() {
         return Component.translatable("block.electrodynamic_thaumaturgy.energy_block");
     }

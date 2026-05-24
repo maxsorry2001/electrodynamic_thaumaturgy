@@ -25,6 +25,7 @@ public class DataLoadHandler {
         final PayloadRegistrar payloadRegistrar = event.registrar(ElectrodynamicThaumaturgy.MODID).versioned("1.0.0").optional();
 
         payloadRegistrar.playToServer(MoePacket.MoeSelectMagicPacket.TYPE, MoePacket.MoeSelectMagicPacket.STREAM_CODEC, MoePacket.MoeSelectMagicPacket::handle);
+        payloadRegistrar.playToServer(MoePacket.DirectionSetPacket.TYPE, MoePacket.DirectionSetPacket.STREAM_CODEC, MoePacket.DirectionSetPacket::handle);
 
         payloadRegistrar.playToClient(MoePacket.ProtectingPacket.TYPE, MoePacket.ProtectingPacket.STREAM_CODEC, MoePacket.ProtectingPacket::handle);
         payloadRegistrar.playToClient(MoePacket.EnergySetPacket.TYPE, MoePacket.EnergySetPacket.STREAM_CODEC, MoePacket.EnergySetPacket::handle);

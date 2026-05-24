@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -320,6 +321,43 @@ public class MoePacket{
                 BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
                 if(blockEntity instanceof AtomicReconstructionBE) {
                     ((AtomicReconstructionBE) blockEntity).setProgress(packet.progress);
+                }
+            });
+        }
+    }
+
+
+    public static class DirectionSetPacket implements CustomPacketPayload{
+        BlockPos blockPos;
+        Direction direction;
+        public static final CustomPacketPayload.Type<DirectionSetPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "direction_set"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, DirectionSetPacket> STREAM_CODEC = CustomPacketPayload.codec(DirectionSetPacket::write, DirectionSetPacket::new);
+
+        public DirectionSetPacket(BlockPos blockPos, Direction direction){
+            this.blockPos = blockPos;
+            this.direction = direction;
+        }
+
+        public DirectionSetPacket(FriendlyByteBuf buf){
+            this.blockPos = buf.readBlockPos();
+            this.direction = buf.readEnum(Direction.class);
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeBlockPos(blockPos);
+            buf.writeEnum(direction);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(DirectionSetPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
+                if(blockEntity instanceof IMoeDirectionItemBlockEntity) {
+                    ((IMoeDirectionItemBlockEntity) blockEntity).changeDirectionSet(packet.direction);
                 }
             });
         }

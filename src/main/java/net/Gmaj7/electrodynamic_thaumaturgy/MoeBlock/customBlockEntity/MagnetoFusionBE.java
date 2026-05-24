@@ -192,6 +192,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
         return list;
     }
 
+    @Override
     public void changeDirectionSet(Direction direction){
         this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
         setChanged();

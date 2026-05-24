@@ -169,6 +169,7 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IMoeEn
         return itemHandlerOutput;
     }
 
+    @Override
     public void changeDirectionSet(Direction direction){
         this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
         setChanged();

@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.EddyCurrentRemelterBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
+import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -20,13 +21,15 @@ public class EddyCurrentRemelterBlockMenu extends AbstractContainerMenu {
     private final int inNum = 0;
     private final int outNum = 1;
     private ContainerData data;
+    private ContainerLevelAccess access;
     public  final EddyCurrentRemelterBE blockEntity;
     public EddyCurrentRemelterBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
-        this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
+        this(containerId, ContainerLevelAccess.NULL, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public EddyCurrentRemelterBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+    public EddyCurrentRemelterBlockMenu(int containerId, ContainerLevelAccess access, Inventory inventory, BlockEntity blockEntity) {
         super(MoeMenuType.EDDY_CURRENT_REMELTER_BLOCK_MENU.get(), containerId);
+        this.access = access;
         this.blockEntity = (EddyCurrentRemelterBE) blockEntity;
         this.level = inventory.player.level();
         this.data = ((EddyCurrentRemelterBE)blockEntity).getData();
@@ -103,5 +106,9 @@ public class EddyCurrentRemelterBlockMenu extends AbstractContainerMenu {
 
     public int getMaxProgress(){
         return data.get(1);
+    }
+
+    public int getItemSet(){
+        return data.get(2);
     }
 }
