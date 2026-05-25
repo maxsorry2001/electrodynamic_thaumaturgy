@@ -3,7 +3,7 @@
   "category": "misc",
   "cookingtime": 50,
   "experience": 0.7,
-  "ingredient": "electrodynamic_thaumaturgy:nethrtite_dust",
+  "ingredient": "electrodynamic_thaumaturgy:netherite_dust",
   "result": {
     "id": "minecraft:netherite_scrap"
   }

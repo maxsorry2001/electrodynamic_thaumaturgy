@@ -3,6 +3,6 @@
   "ingredient": "#c:ores/netherite_scrap",
   "output": {
     "count": 3,
-    "id": "electrodynamic_thaumaturgy:nethrtite_dust"
+    "id": "electrodynamic_thaumaturgy:netherite_dust"
   }
 }

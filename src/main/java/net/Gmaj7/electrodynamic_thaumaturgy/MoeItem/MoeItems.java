@@ -112,7 +112,7 @@ public class MoeItems {
     public static final DeferredItem<Item> COPPER_DUST = MOE_ITEM.registerSimpleItem("copper_dust");
     public static final DeferredItem<Item> IRON_DUST = MOE_ITEM.registerSimpleItem("iron_dust");
     public static final DeferredItem<Item> GOLD_DUST = MOE_ITEM.registerSimpleItem("gold_dust");
-    public static final DeferredItem<Item> NETHERITE_DUST = MOE_ITEM.registerSimpleItem("nethrtite_dust");
+    public static final DeferredItem<Item> NETHERITE_DUST = MOE_ITEM.registerSimpleItem("netherite_dust");
 
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
