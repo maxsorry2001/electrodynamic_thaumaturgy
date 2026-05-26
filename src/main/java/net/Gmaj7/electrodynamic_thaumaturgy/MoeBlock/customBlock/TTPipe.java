@@ -11,6 +11,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -23,8 +26,20 @@ import java.util.Set;
 public class TTPipe extends Block {
 
     protected static final VoxelShape AABB = Block.box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
+    public static final BooleanProperty UP = BlockStateProperties.UP;
+    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+    public static final BooleanProperty EAST = BlockStateProperties.EAST;
+    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
     public TTPipe(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.defaultBlockState().setValue(UP, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(DOWN, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(EAST, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(WEST, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(NORTH, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(SOUTH, false));
     }
 
     @Override
@@ -35,10 +50,29 @@ public class TTPipe extends Block {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(!level.isClientSide()) {
-            PipeNetSaveData pipeNetSaveData = ((ServerLevel)level).getDataStorage().get(PipeNetSaveData.PIPE_NETS);
-            int i = 1;
+            if(player.isShiftKeyDown()) {
+                PipeNetSaveData pipeNetSaveData = ((ServerLevel) level).getDataStorage().get(PipeNetSaveData.PIPE_NETS);
+                int i = 1;
+            }
+            else {
+                level.setBlock(pos, changeDirection(hitResult.getDirection(), state), 2);
+                BlockPos blockPos = pos.relative(hitResult.getDirection());
+                if(level.getBlockState(blockPos).getBlock() instanceof TTPipe) {
+                    level.setBlock(blockPos, changeDirection(hitResult.getDirection().getOpposite(), level.getBlockState(blockPos)), 2);
+                }
+            }
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(UP).add(DOWN).add(EAST).add(WEST).add(NORTH).add(SOUTH);
+    }
+
+    @Override
+    public StateDefinition<Block, BlockState> getStateDefinition() {
+        return super.getStateDefinition();
     }
 
     @Override
@@ -91,5 +125,18 @@ public class TTPipe extends Block {
             if((list.isEmpty() || !list.contains(i)) && i != -1) list.add(i);
         }
         return list;
+    }
+
+    public BlockState changeDirection(Direction direction, BlockState state){
+        BlockState newState = state;
+        switch (direction){
+            case UP -> newState = state.setValue(UP, !state.getValue(UP));
+            case DOWN -> newState = state.setValue(DOWN, !state.getValue(DOWN));
+            case EAST -> newState = state.setValue(EAST, !state.getValue(EAST));
+            case WEST -> newState = state.setValue(WEST, !state.getValue(WEST));
+            case NORTH -> newState = state.setValue(NORTH, !state.getValue(NORTH));
+            case SOUTH -> newState = state.setValue(SOUTH, !state.getValue(SOUTH));
+        }
+        return newState;
     }
 }

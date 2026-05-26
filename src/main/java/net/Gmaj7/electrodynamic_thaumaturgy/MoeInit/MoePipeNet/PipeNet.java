@@ -25,24 +25,33 @@ public class PipeNet {
 
     public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj){
         this.netId = id;
-        this.posSet = posSet;
-        this.adj = adj;
+        this.posSet = new HashSet<>(posSet);
+        this.adj = new HashMap<>();
+        for (Map.Entry<BlockPos, Set<BlockPos>> entry : adj.entrySet()) {
+            // 深度拷贝：每个值 Set 也拷贝为 HashSet
+            this.adj.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        }
     }
 
     public void addPos(BlockPos blockPos, Set<BlockPos> links){
         posSet.add(blockPos);
-        adj.put(blockPos, links);
-        for (BlockPos linkPos : links){
-            adj.get(linkPos).add(blockPos);
+        Set<BlockPos> neighbors = new HashSet<>(links);  // 拷贝
+        adj.put(blockPos, neighbors);
+        for (BlockPos linkPos : links) {
+            adj.computeIfAbsent(linkPos, k -> new HashSet<>()).add(blockPos);
         }
     }
 
     public void removePos(BlockPos blockPos){
         posSet.remove(blockPos);
-        adj.remove(blockPos);
-        for (Set<BlockPos> set : adj.values()){
-            if(set.contains(blockPos))
-                set.remove(blockPos);
+        Set<BlockPos> removedNeighbors = adj.remove(blockPos);
+        if (removedNeighbors != null) {
+            for (BlockPos neighbor : removedNeighbors) {
+                Set<BlockPos> neighborSet = adj.get(neighbor);
+                if (neighborSet != null) {
+                    neighborSet.remove(blockPos);
+                }
+            }
         }
     }
 

@@ -2,15 +2,14 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.BiomassGeneratorBlock;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.ConditionBuilder;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ItemModelUtils;
@@ -154,8 +153,13 @@ public class MoeModelProvider extends ModelProvider {
                 getModel("electromagnetic_dissociation_machine_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get(),
                 getModel("eddy_current_remelter_machine_block")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.TT_PIPE.get(),
-                getModel("tt_pipe")));
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(MoeBlocks.TT_PIPE.get()).with(getModel("tt_pipe"))
+                .with(new ConditionBuilder().term(TTPipe.UP, true), getModel("tt_pipe_up"))
+                .with(new ConditionBuilder().term(TTPipe.DOWN, true), getModel("tt_pipe_down"))
+                .with(new ConditionBuilder().term(TTPipe.EAST, true), getModel("tt_pipe_east"))
+                .with(new ConditionBuilder().term(TTPipe.WEST, true), getModel("tt_pipe_west"))
+                .with(new ConditionBuilder().term(TTPipe.NORTH, true), getModel("tt_pipe_north"))
+                .with(new ConditionBuilder().term(TTPipe.SOUTH, true), getModel("tt_pipe_south")));
     }
 
     protected MultiVariant getModel(String name){

@@ -1,7 +1,57 @@
 {
-  "variants": {
-    "": {
-      "model": "electrodynamic_thaumaturgy:block/tt_pipe"
+  "multipart": [
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_up"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_down"
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_east"
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_west"
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_north"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_south"
+      },
+      "when": {
+        "south": "true"
+      }
     }
-  }
+  ]
 }

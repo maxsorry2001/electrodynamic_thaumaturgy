@@ -26,7 +26,7 @@ public class PipeNetSaveData extends SavedData {
     );
 
     private PipeNetSaveData(int nextId, Map<Integer, PipeNet> pipeNets){
-        this.pipeNets = pipeNets;
+        this.pipeNets = new HashMap<>(pipeNets);
         this.nextId = nextId;
     }
 
