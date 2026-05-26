@@ -58,7 +58,7 @@ public class PipeNetSaveData extends SavedData {
         return pipeNets;
     }
 
-    public int getNetOfPos(BlockPos pos){
+    public int getNetIdOfPos(BlockPos pos){
         int i = -1;
         for (PipeNet pipeNet : pipeNets.values())
             if(pipeNet.containPos(pos)) {
@@ -100,8 +100,79 @@ public class PipeNetSaveData extends SavedData {
         }
         PipeNet newNet = new PipeNet(netLinks.get(0), allPos, allAdj);
 
-
         pipeNets.put(netLinks.get(0), newNet);
+        setDirty();
+    }
+
+    /**
+     * 处理管道破坏：从网络 netId 中删除 pos，如果导致网络分裂，则将分裂出的子图创建为新网络。
+     */
+    public void breakPipe(BlockPos pos) {
+        int netId = getNetIdOfPos(pos);
+        PipeNet net = pipeNets.get(netId);
+        if (net == null) return;
+
+        // 1. 删除该节点
+        net.removePos(pos);
+
+        // 2. 如果网络没有节点了，直接删除整个网络
+        if (net.getPosSet().isEmpty()) {
+            pipeNets.remove(netId);
+            setDirty();
+            return;
+        }
+
+        // 3. 检查当前网络是否连通：从任意一个节点出发 BFS，看能否到达所有节点
+        Set<BlockPos> allPos = net.getPosSet();
+        BlockPos anyPos = allPos.iterator().next();
+        Set<BlockPos> mainComponent = net.extractComponent(anyPos);
+
+        // 如果主分量包含所有节点，则网络仍然连通，无需拆分
+        if (mainComponent.size() == allPos.size()) {
+            setDirty();  // 因为删除了节点，仍需标记保存
+            return;
+        }
+
+        // 4. 网络已分裂：主分量保留原网络 ID，其余分量创建新网络
+        // 注意：当前 net 对象仍然保留所有节点，我们需要重新构建它的节点集合为主分量
+        // 简单做法：新建一个 PipeNet 作为主分量，然后删除原网络，再添加主分量和其他分量
+
+        // 4.1 收集所有分量
+        Set<BlockPos> remaining = new HashSet<>(allPos);
+        List<Set<BlockPos>> components = new ArrayList<>();
+        while (!remaining.isEmpty()) {
+            BlockPos start = remaining.iterator().next();
+            Set<BlockPos> comp = net.extractComponent(start);
+            components.add(comp);
+            remaining.removeAll(comp);
+        }
+
+        // 4.2 删除原网络
+        pipeNets.remove(netId);
+
+        // 4.3 创建新网络：主分量使用原 netId，其他分量使用新 ID
+        // 需要根据分量构建新的 PipeNet 实例（包含节点和邻接关系）
+        for (int i = 0; i < components.size(); i++) {
+            Set<BlockPos> comp = components.get(i);
+            // 构建该分量的邻接表（只包含分量内部的边）
+            Map<BlockPos, Set<BlockPos>> subAdj = new HashMap<>();
+            for (BlockPos p : comp) {
+                Set<BlockPos> neighbors = net.getPosNeighbors(p);
+                Set<BlockPos> filtered = new HashSet<>();
+                for (BlockPos nb : neighbors) {
+                    if (comp.contains(nb)) {
+                        filtered.add(nb);
+                    }
+                }
+                if (!filtered.isEmpty()) {
+                    subAdj.put(p, filtered);
+                }
+            }
+            int newId = (i == 0) ? netId : nextId++;
+            PipeNet newNet = new PipeNet(newId, comp, subAdj);
+            pipeNets.put(newId, newNet);
+        }
+
         setDirty();
     }
 

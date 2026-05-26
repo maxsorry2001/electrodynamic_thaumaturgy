@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -65,6 +66,13 @@ public class TTPipe extends Block {
         super.onPlace(state, level, pos, oldState, movedByPiston);
     }
 
+    @Override
+    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
+        if(level.isClientSide()) return;
+        ((ServerLevel)level).getDataStorage().get(PipeNetSaveData.PIPE_NETS).breakPipe(pos);
+        super.destroy(level, pos, state);
+    }
+
     private List<Direction> checkLinkDirection(Level level, BlockPos pos){
         List<Direction> list = new ArrayList<>();
         for (Direction direction : Direction.values()){
@@ -79,7 +87,7 @@ public class TTPipe extends Block {
         PipeNetSaveData pipeNetSaveData = level.getDataStorage().get(PipeNetSaveData.PIPE_NETS);
         for (Direction direction : directions){
             BlockPos blockPos = pos.relative(direction);
-            int i = pipeNetSaveData.getNetOfPos(blockPos);
+            int i = pipeNetSaveData.getNetIdOfPos(blockPos);
             if((list.isEmpty() || !list.contains(i)) && i != -1) list.add(i);
         }
         return list;
