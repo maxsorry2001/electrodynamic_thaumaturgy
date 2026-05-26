@@ -117,6 +117,8 @@ public class MoeTabs {
                         output.accept(MoeItems.NETHERITE_DUST);
 
                         output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
+
+                        output.accept(MoeBlocks.TT_PIPE);
                     }))
                     .build());
 

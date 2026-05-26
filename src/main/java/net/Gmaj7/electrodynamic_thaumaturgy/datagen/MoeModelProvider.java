@@ -154,6 +154,8 @@ public class MoeModelProvider extends ModelProvider {
                 getModel("electromagnetic_dissociation_machine_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get(),
                 getModel("eddy_current_remelter_machine_block")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.TT_PIPE.get(),
+                getModel("tt_pipe")));
     }
 
     protected MultiVariant getModel(String name){
