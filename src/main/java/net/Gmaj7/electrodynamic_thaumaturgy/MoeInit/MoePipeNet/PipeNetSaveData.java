@@ -3,12 +3,12 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PipeNetSaveData extends SavedData {
     private Map<Integer, PipeNet> pipeNets = new HashMap<>();
@@ -56,6 +56,53 @@ public class PipeNetSaveData extends SavedData {
 
     public Map<Integer, PipeNet> getPipeNets() {
         return pipeNets;
+    }
+
+    public int getNetOfPos(BlockPos pos){
+        int i = -1;
+        for (PipeNet pipeNet : pipeNets.values())
+            if(pipeNet.containPos(pos)) {
+                i = pipeNet.getNetId();
+                break;
+            }
+        return i;
+    }
+
+    public void addPosToNet(int i, BlockPos pos, Set<BlockPos> set) {
+        pipeNets.get(i).addPos(pos, set);
+        setDirty();
+    }
+
+    public void linkNetsOfPos(BlockPos pos, List<Integer> netLinks, Set<BlockPos> links) {
+        // 收集所有节点和邻接关系
+        Set<BlockPos> allPos = new HashSet<>();
+        Map<BlockPos, Set<BlockPos>> allAdj = new HashMap<>();
+
+        for (int id : netLinks) {
+            PipeNet net = pipeNets.get(id);
+            if (net == null) continue;
+            allPos.addAll(net.getPosSet());
+            for (Map.Entry<BlockPos, Set<BlockPos>> entry : net.getAdj().entrySet()) {
+                allAdj.computeIfAbsent(entry.getKey(), k -> new HashSet<>()).addAll(entry.getValue());
+            }
+        }
+
+        // 添加新管道节点
+        allPos.add(pos);
+        allAdj.put(pos, new HashSet<>(links));
+        for (BlockPos neighbor : links) {
+            allAdj.computeIfAbsent(neighbor, k -> new HashSet<>()).add(pos);
+        }
+
+        // 删除旧网络
+        for (int id : netLinks) {
+            pipeNets.remove(id);
+        }
+        PipeNet newNet = new PipeNet(netLinks.get(0), allPos, allAdj);
+
+
+        pipeNets.put(netLinks.get(0), newNet);
+        setDirty();
     }
 
     private static String saveId(int i){

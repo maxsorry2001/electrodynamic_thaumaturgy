@@ -23,7 +23,7 @@ public class PipeNet {
         this.netId = id;
     }
 
-    private PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj){
+    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj){
         this.netId = id;
         this.posSet = posSet;
         this.adj = adj;
@@ -58,5 +58,9 @@ public class PipeNet {
     private static BlockPos keyToPos(String key){
         String[] parts = key.split("_");
         return new BlockPos(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+    }
+
+    public boolean containPos(BlockPos pos){
+        return posSet.contains(pos);
     }
 }
