@@ -7,7 +7,8 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_up"
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "x": 270
       },
       "when": {
         "up": "true"
@@ -15,7 +16,8 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_down"
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "x": 90
       },
       "when": {
         "down": "true"
@@ -23,7 +25,8 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_east"
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "y": 90
       },
       "when": {
         "east": "true"
@@ -31,7 +34,8 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_west"
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "y": 270
       },
       "when": {
         "west": "true"
@@ -39,7 +43,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_north"
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part"
       },
       "when": {
         "north": "true"
@@ -47,7 +51,8 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_south"
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "y": 180
       },
       "when": {
         "south": "true"

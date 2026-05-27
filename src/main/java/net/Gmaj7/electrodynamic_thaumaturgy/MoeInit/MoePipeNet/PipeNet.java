@@ -104,4 +104,9 @@ public class PipeNet {
         }
         return component;
     }
+
+    public void removeConnection(BlockPos posA, BlockPos posB) {
+        if (adj.containsKey(posA)) adj.get(posA).remove(posB);
+        if (adj.containsKey(posB)) adj.get(posB).remove(posA);
+    }
 }

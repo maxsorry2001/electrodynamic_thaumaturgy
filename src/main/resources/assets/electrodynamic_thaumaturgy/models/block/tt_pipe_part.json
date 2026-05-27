@@ -2,8 +2,8 @@
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "electrodynamic_thaumaturgy:block/tt_pipe_part_ns",
-		"particle": "electrodynamic_thaumaturgy:block/tt_pipe_part_ns"
+		"0": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+		"particle": "electrodynamic_thaumaturgy:block/tt_pipe_part"
 	},
 	"elements": [
 		{

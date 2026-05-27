@@ -123,22 +123,37 @@ public class PipeNetSaveData extends SavedData {
         }
 
         // 3. 检查当前网络是否连通：从任意一个节点出发 BFS，看能否到达所有节点
+        BlockPos anyPos = net.getPosSet().iterator().next();
+        Set<BlockPos> mainComponent = net.extractComponent(anyPos);
+
+        // 如果主分量包含所有节点，则网络仍然连通，无需拆分
+        if (mainComponent.size() == net.getPosSet().size()) {
+            setDirty();  // 因为删除了节点，仍需标记保存
+            return;
+        }
+        dealBreak(netId, net);
+    }
+
+    public void removeConnection(BlockPos posA, BlockPos posB) {
+        int netId = getNetIdOfPos(posA);
+        if (netId == -1) return;
+        PipeNet net = pipeNets.get(netId);
+        if (net == null) return;
+        net.removeConnection(posA, posB);
         Set<BlockPos> allPos = net.getPosSet();
         BlockPos anyPos = allPos.iterator().next();
         Set<BlockPos> mainComponent = net.extractComponent(anyPos);
 
         // 如果主分量包含所有节点，则网络仍然连通，无需拆分
         if (mainComponent.size() == allPos.size()) {
-            setDirty();  // 因为删除了节点，仍需标记保存
+            setDirty();
             return;
         }
+        dealBreak(netId, net);
+    }
 
-        // 4. 网络已分裂：主分量保留原网络 ID，其余分量创建新网络
-        // 注意：当前 net 对象仍然保留所有节点，我们需要重新构建它的节点集合为主分量
-        // 简单做法：新建一个 PipeNet 作为主分量，然后删除原网络，再添加主分量和其他分量
-
-        // 4.1 收集所有分量
-        Set<BlockPos> remaining = new HashSet<>(allPos);
+    private void dealBreak(int netId, PipeNet net){
+        Set<BlockPos> remaining = new HashSet<>(net.getPosSet());
         List<Set<BlockPos>> components = new ArrayList<>();
         while (!remaining.isEmpty()) {
             BlockPos start = remaining.iterator().next();
@@ -172,7 +187,6 @@ public class PipeNetSaveData extends SavedData {
             PipeNet newNet = new PipeNet(newId, comp, subAdj);
             pipeNets.put(newId, newNet);
         }
-
         setDirty();
     }
 
