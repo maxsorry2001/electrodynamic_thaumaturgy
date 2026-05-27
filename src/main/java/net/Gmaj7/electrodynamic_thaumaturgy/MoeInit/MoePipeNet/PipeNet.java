@@ -109,4 +109,9 @@ public class PipeNet {
         if (adj.containsKey(posA)) adj.get(posA).remove(posB);
         if (adj.containsKey(posB)) adj.get(posB).remove(posA);
     }
+
+    public void link2Pos(BlockPos pos, BlockPos neighborPos) {
+        adj.get(pos).add(neighborPos);
+        adj.get(neighborPos).add(pos);
+    }
 }

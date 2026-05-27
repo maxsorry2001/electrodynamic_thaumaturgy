@@ -11,7 +11,7 @@
         "x": 270
       },
       "when": {
-        "up": "true"
+        "link_state_up": "link"
       }
     },
     {
@@ -20,7 +20,7 @@
         "x": 90
       },
       "when": {
-        "down": "true"
+        "link_state_down": "link"
       }
     },
     {
@@ -29,7 +29,7 @@
         "y": 90
       },
       "when": {
-        "east": "true"
+        "link_state_east": "link"
       }
     },
     {
@@ -38,7 +38,7 @@
         "y": 270
       },
       "when": {
-        "west": "true"
+        "link_state_west": "link"
       }
     },
     {
@@ -46,7 +46,7 @@
         "model": "electrodynamic_thaumaturgy:block/tt_pipe_part"
       },
       "when": {
-        "north": "true"
+        "link_state_north": "link"
       }
     },
     {
@@ -55,7 +55,60 @@
         "y": 180
       },
       "when": {
-        "south": "true"
+        "link_state_south": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "x": 270
+      },
+      "when": {
+        "link_state_up": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "x": 90
+      },
+      "when": {
+        "link_state_down": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "y": 90
+      },
+      "when": {
+        "link_state_east": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "y": 270
+      },
+      "when": {
+        "link_state_west": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract"
+      },
+      "when": {
+        "link_state_north": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "y": 180
+      },
+      "when": {
+        "link_state_south": "extract"
       }
     }
   ]

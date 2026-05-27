@@ -197,4 +197,8 @@ public class PipeNetSaveData extends SavedData {
     private static int loadId(String i){
         return Integer.parseInt(i);
     }
+
+    public void link2PosInNet(int netId, BlockPos pos, BlockPos neighborPos) {
+        pipeNets.get(netId).link2Pos(pos, neighborPos);
+    }
 }

@@ -154,12 +154,18 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get(),
                 getModel("eddy_current_remelter_machine_block")));
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(MoeBlocks.TT_PIPE.get()).with(getModel("tt_pipe"))
-                .with(new ConditionBuilder().term(TTPipe.UP, true), getModel("tt_pipe_part").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(TTPipe.DOWN, true), getModel("tt_pipe_part").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(TTPipe.EAST, true), getModel("tt_pipe_part").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(TTPipe.WEST, true), getModel("tt_pipe_part").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(TTPipe.NORTH, true), getModel("tt_pipe_part"))
-                .with(new ConditionBuilder().term(TTPipe.SOUTH, true), getModel("tt_pipe_part").with(BlockModelGenerators.Y_ROT_180)));
+                .with(new ConditionBuilder().term(TTPipe.UP, TTPipe.LinkState.LINK), getModel("tt_pipe_part").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(TTPipe.DOWN, TTPipe.LinkState.LINK), getModel("tt_pipe_part").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(TTPipe.EAST, TTPipe.LinkState.LINK), getModel("tt_pipe_part").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(TTPipe.WEST, TTPipe.LinkState.LINK), getModel("tt_pipe_part").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(TTPipe.NORTH, TTPipe.LinkState.LINK), getModel("tt_pipe_part"))
+                .with(new ConditionBuilder().term(TTPipe.SOUTH, TTPipe.LinkState.LINK), getModel("tt_pipe_part").with(BlockModelGenerators.Y_ROT_180))
+                .with(new ConditionBuilder().term(TTPipe.UP, TTPipe.LinkState.EXTRACT), getModel("tt_pipe_extract").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(TTPipe.DOWN, TTPipe.LinkState.EXTRACT), getModel("tt_pipe_extract").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(TTPipe.EAST, TTPipe.LinkState.EXTRACT), getModel("tt_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(TTPipe.WEST, TTPipe.LinkState.EXTRACT), getModel("tt_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(TTPipe.NORTH, TTPipe.LinkState.EXTRACT), getModel("tt_pipe_extract"))
+                .with(new ConditionBuilder().term(TTPipe.SOUTH, TTPipe.LinkState.EXTRACT), getModel("tt_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
     }
 
     protected MultiVariant getModel(String name){

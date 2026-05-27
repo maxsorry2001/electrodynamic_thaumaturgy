@@ -1,10 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -13,24 +13,24 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
 import java.util.*;
 
 public class TTPipe extends Block {
 
     protected static final VoxelShape AABB = Block.box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
-    public static final BooleanProperty UP = BlockStateProperties.UP;
-    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
-    public static final BooleanProperty EAST = BlockStateProperties.EAST;
-    public static final BooleanProperty WEST = BlockStateProperties.WEST;
-    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
-    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
-    private static final Map<Direction, BooleanProperty> DIR_TO_PROP = Map.of(
+    public static final EnumProperty<LinkState> UP = EnumProperty.create("link_state_up", LinkState.class, LinkState.NULL, LinkState.LINK, LinkState.EXTRACT);
+    public static final EnumProperty<LinkState> DOWN = EnumProperty.create("link_state_down", LinkState.class, LinkState.NULL, LinkState.LINK, LinkState.EXTRACT);
+    public static final EnumProperty<LinkState> EAST = EnumProperty.create("link_state_east", LinkState.class, LinkState.NULL, LinkState.LINK, LinkState.EXTRACT);
+    public static final EnumProperty<LinkState> WEST = EnumProperty.create("link_state_west", LinkState.class, LinkState.NULL, LinkState.LINK, LinkState.EXTRACT);
+    public static final EnumProperty<LinkState> NORTH = EnumProperty.create("link_state_north", LinkState.class, LinkState.NULL, LinkState.LINK, LinkState.EXTRACT);
+    public static final EnumProperty<LinkState> SOUTH = EnumProperty.create("link_state_south", LinkState.class, LinkState.NULL, LinkState.LINK, LinkState.EXTRACT);
+    private static final Map<Direction, EnumProperty<LinkState>> DIR_TO_PROP = Map.of(
             Direction.UP, UP,
             Direction.DOWN, DOWN,
             Direction.NORTH, NORTH,
@@ -40,12 +40,12 @@ public class TTPipe extends Block {
     );
     public TTPipe(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(UP, false));
-        this.registerDefaultState(this.defaultBlockState().setValue(DOWN, false));
-        this.registerDefaultState(this.defaultBlockState().setValue(EAST, false));
-        this.registerDefaultState(this.defaultBlockState().setValue(WEST, false));
-        this.registerDefaultState(this.defaultBlockState().setValue(NORTH, false));
-        this.registerDefaultState(this.defaultBlockState().setValue(SOUTH, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(UP, LinkState.NULL));
+        this.registerDefaultState(this.defaultBlockState().setValue(DOWN, LinkState.NULL));
+        this.registerDefaultState(this.defaultBlockState().setValue(EAST, LinkState.NULL));
+        this.registerDefaultState(this.defaultBlockState().setValue(WEST, LinkState.NULL));
+        this.registerDefaultState(this.defaultBlockState().setValue(NORTH, LinkState.NULL));
+        this.registerDefaultState(this.defaultBlockState().setValue(SOUTH, LinkState.NULL));
     }
 
     @Override
@@ -58,28 +58,28 @@ public class TTPipe extends Block {
         if(level.isClientSide()) return InteractionResult.CONSUME;
         ServerLevel serverLevel = (ServerLevel) level;
         PipeNetSaveData data = serverLevel.getDataStorage().computeIfAbsent(PipeNetSaveData.PIPE_NETS);
-        Direction clickedFace = hitResult.getDirection();
-        BlockPos neighborPos = pos.relative(clickedFace);
+        Direction direction = hitResult.getDirection();
+        BlockPos neighborPos = pos.relative(direction);
         BlockState neighborState = level.getBlockState(neighborPos);
         if(player.isShiftKeyDown()) {
             PipeNetSaveData pipeNetSaveData = ((ServerLevel) level).getDataStorage().get(PipeNetSaveData.PIPE_NETS);
             int i = 1;
         }
         else if (neighborState.getBlock() instanceof TTPipe) {
-            level.setBlock(pos, changeDirection(clickedFace, state), 2);
-            level.setBlock(neighborPos, changeDirection(clickedFace.getOpposite(), neighborState), 2);
             // 切换连接状态
-            boolean current = getConnection(clickedFace, state);
+            boolean current = getConnection(direction, state);
             if (!current) {
                 // 尚未连接，建立连接
                 // 1. 更新网络图（添加边）
                 int netA = data.getNetIdOfPos(pos);
                 int netB = data.getNetIdOfPos(neighborPos);
-                if (netA != -1 && netB != -1 && netA != netB) {
-                    // 两个不同网络，需要合并
-                    List<Integer> nets = List.of(netA, netB);
-                    Set<BlockPos> links = Set.of(neighborPos);
-                    data.linkNetsOfPos(pos, nets, links);
+                if (netA != -1 && netB != -1 ) {
+                    if(netA != netB){
+                        List<Integer> nets = List.of(netA, netB);
+                        Set<BlockPos> links = Set.of(neighborPos);
+                        data.linkNetsOfPos(pos, nets, links);
+                    }
+                    else data.link2PosInNet(netA, pos, neighborPos);
                 }
             }
             else {
@@ -87,12 +87,16 @@ public class TTPipe extends Block {
                 // 1. 更新网络图（删除边）
                 data.removeConnection(pos, neighborPos);
             }
+            level.setBlock(pos, changeDirection(direction, state, state.getValue(DIR_TO_PROP.get(direction)).changeLinkNull()), 2);
+            level.setBlock(neighborPos, changeDirection(direction.getOpposite(), neighborState, neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())).changeLinkNull()), 2);
         }
+        else if(level.getCapability(Capabilities.Energy.BLOCK, neighborPos, direction.getOpposite()) != null)
+            level.setBlock(pos, state.setValue(DIR_TO_PROP.get(direction), state.getValue(DIR_TO_PROP.get(direction)).cycleLinkState()), 2);
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     private boolean getConnection(Direction direction, BlockState state) {
-        return state.getValue(DIR_TO_PROP.get(direction));
+        return state.getValue(DIR_TO_PROP.get(direction)) == LinkState.LINK;
     }
 
     @Override
@@ -130,8 +134,10 @@ public class TTPipe extends Block {
             for (Direction direction : Direction.values()) {
                 BlockPos neighbor = pos.relative(direction);
                 BlockState neighborState = level.getBlockState(neighbor);
-                if (neighborState.getBlock() instanceof TTPipe && (isReplace && (!neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite()))) || (state.getValue((DIR_TO_PROP.get(direction))) != neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())))))
-                    level.setBlock(neighbor, changeDirection(direction.getOpposite(), neighborState), 2);
+                if (neighborState.getBlock() instanceof TTPipe && (isReplace && (neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.NULL) || (state.getValue((DIR_TO_PROP.get(direction))) != neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())))))
+                    level.setBlock(neighbor, changeDirection(direction.getOpposite(), neighborState, LinkState.LINK), 2);
+                else if((isReplace && level.getCapability(Capabilities.Energy.BLOCK, neighbor, direction.getOpposite()) != null))
+                    level.setBlock(pos, changeDirection(direction, state, LinkState.LINK), 2);
             }
         }
     }
@@ -144,8 +150,8 @@ public class TTPipe extends Block {
         for (Direction direction : Direction.values()){
             BlockPos neighbor = pos.relative(direction);
             BlockState neighborState = level.getBlockState(neighbor);
-            if(neighborState.getBlock() instanceof TTPipe && neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())))
-                level.setBlock(neighbor, changeDirection(direction.getOpposite(), neighborState), 2);
+            if(neighborState.getBlock() instanceof TTPipe && neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.LINK)
+                level.setBlock(neighbor, changeDirection(direction.getOpposite(), neighborState, LinkState.NULL), 2);
         }
     }
 
@@ -169,7 +175,38 @@ public class TTPipe extends Block {
         return list;
     }
 
-    public BlockState changeDirection(Direction direction, BlockState state){
-        return state.setValue(DIR_TO_PROP.get(direction), !state.getValue(DIR_TO_PROP.get(direction)));
+    public BlockState changeDirection(Direction direction, BlockState state, LinkState linkState){
+        return state.setValue(DIR_TO_PROP.get(direction), linkState);
+    }
+
+    public enum LinkState implements StringRepresentable {
+        NULL("null"),
+        EXTRACT("extract"),
+        LINK("link");
+
+        private final String name;
+
+        LinkState(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return name;
+        }
+
+        public LinkState changeLinkNull(){
+            if(this == NULL)
+                return LINK;
+            else return NULL;
+        }
+
+        public LinkState cycleLinkState(){
+            return switch (this){
+                case EXTRACT -> NULL;
+                case NULL -> LINK;
+                case LINK -> EXTRACT;
+            };
+        }
     }
 }
