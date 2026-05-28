@@ -1,33 +1,17 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedDataType;
 
 import java.util.*;
 
-public class PipeNetSaveData extends SavedData {
-    private Map<Integer, PipeNet> pipeNets = new HashMap<>();
-    private int nextId = 0;
+public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
+    protected Map<Integer, T> pipeNets = new HashMap<>();
+    protected int nextId = 0;
 
-    public static final Codec<PipeNetSaveData> CODEC = RecordCodecBuilder.create(i -> i.group(
-            Codec.INT.fieldOf("next_id").forGetter(PipeNetSaveData::getNextId),
-            Codec.unboundedMap(Codec.STRING.xmap(PipeNetSaveData::loadId, PipeNetSaveData::saveId), PipeNet.CODEC).fieldOf("nets").forGetter(PipeNetSaveData::getPipeNets)
-    ).apply(i, PipeNetSaveData::new));
-
-    public static final SavedDataType<PipeNetSaveData> PIPE_NETS = new SavedDataType<>(
-            Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "pipe_nets"),
-            () -> new PipeNetSaveData(),
-            CODEC
-    );
-
-    private PipeNetSaveData(int nextId, Map<Integer, PipeNet> pipeNets){
+    protected PipeNetSaveData(int nextId, Map<Integer, T> pipeNets){
         this.pipeNets = new HashMap<>(pipeNets);
         this.nextId = nextId;
     }
@@ -35,13 +19,7 @@ public class PipeNetSaveData extends SavedData {
     public PipeNetSaveData(){
     }
 
-    public PipeNet createNet(){
-        PipeNet net = new PipeNet(nextId);
-        nextId ++;
-        pipeNets.put(net.getNetId(), net);
-        setDirty();
-        return net;
-    }
+    public abstract T createNet();
 
     public PipeNet getNet(int id){
         return pipeNets.containsKey(id) ? pipeNets.get(id) : null;
@@ -56,7 +34,7 @@ public class PipeNetSaveData extends SavedData {
         return nextId;
     }
 
-    public Map<Integer, PipeNet> getPipeNets() {
+    public Map<Integer, T> getPipeNets() {
         return pipeNets;
     }
 
@@ -107,7 +85,7 @@ public class PipeNetSaveData extends SavedData {
         for (int id : netLinks) {
             pipeNets.remove(id);
         }
-        PipeNet newNet = new PipeNet(netLinks.get(0), allPos, allAdj, allInsert, allExtract);
+        T newNet = createNetWith(netLinks.get(0), allPos, allAdj, allInsert, allExtract);
 
         pipeNets.put(netLinks.get(0), newNet);
         setDirty();
@@ -171,7 +149,7 @@ public class PipeNetSaveData extends SavedData {
             remaining.removeAll(comp);
         }
 
-        Map<BlockPos, Set<Direction>> insert = pipeNets.get(netId).getInsert(), extract = pipeNets.get(netId).getExtract();
+        Map<BlockPos, Set<Direction>> insert = net.getInsert(), extract = net.getExtract();
 
         // 4.2 删除原网络
         pipeNets.remove(netId);
@@ -198,17 +176,19 @@ public class PipeNetSaveData extends SavedData {
                 }
             }
             int newId = (i == 0) ? netId : nextId++;
-            PipeNet newNet = new PipeNet(newId, comp, subAdj, newInsert, newExtract);
+            T newNet = createNetWith(newId, comp, subAdj, newInsert, newExtract);
             pipeNets.put(newId, newNet);
         }
         setDirty();
     }
 
-    private static String saveId(int i){
+    protected abstract T createNetWith(int newId, Set<BlockPos> comp, Map<BlockPos, Set<BlockPos>> subAdj, Map<BlockPos, Set<Direction>> newInsert, Map<BlockPos, Set<Direction>> newExtract);
+
+    protected static String saveId(int i){
         return String.valueOf(i);
     }
 
-    private static int loadId(String i){
+    protected static int loadId(String i){
         return Integer.parseInt(i);
     }
 

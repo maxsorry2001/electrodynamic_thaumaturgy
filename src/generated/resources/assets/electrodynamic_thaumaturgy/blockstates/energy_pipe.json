@@ -2,12 +2,12 @@
   "multipart": [
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe"
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe"
       }
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_part",
         "x": 270
       },
       "when": {
@@ -16,7 +16,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_part",
         "x": 90
       },
       "when": {
@@ -25,7 +25,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_part",
         "y": 90
       },
       "when": {
@@ -34,7 +34,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_part",
         "y": 270
       },
       "when": {
@@ -43,7 +43,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part"
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_part"
       },
       "when": {
         "link_state_north": "link"
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_part",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_part",
         "y": 180
       },
       "when": {
@@ -60,7 +60,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_extract",
         "x": 270
       },
       "when": {
@@ -69,7 +69,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_extract",
         "x": 90
       },
       "when": {
@@ -78,7 +78,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_extract",
         "y": 90
       },
       "when": {
@@ -87,7 +87,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_extract",
         "y": 270
       },
       "when": {
@@ -96,7 +96,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract"
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_extract"
       },
       "when": {
         "link_state_north": "extract"
@@ -104,7 +104,7 @@
     },
     {
       "apply": {
-        "model": "electrodynamic_thaumaturgy:block/tt_pipe_extract",
+        "model": "electrodynamic_thaumaturgy:block/energy_pipe_extract",
         "y": 180
       },
       "when": {

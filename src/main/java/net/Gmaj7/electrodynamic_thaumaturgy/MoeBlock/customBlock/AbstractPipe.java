@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNet;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.EnergyPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,12 +20,11 @@ import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
-public class TTPipe extends Block {
+public abstract class AbstractPipe extends Block {
 
     protected static final VoxelShape AABB = Block.box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
     public static final EnumProperty<LinkState> UP = EnumProperty.create("link_state_up", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
@@ -42,7 +41,7 @@ public class TTPipe extends Block {
             Direction.WEST, WEST,
             Direction.EAST, EAST
     );
-    public TTPipe(Properties properties) {
+    public AbstractPipe(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(UP, LinkState.NULL_AUTO)
                 .setValue(DOWN, LinkState.NULL_AUTO)
@@ -61,15 +60,14 @@ public class TTPipe extends Block {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(level.isClientSide()) return InteractionResult.CONSUME;
         ServerLevel serverLevel = (ServerLevel) level;
-        PipeNetSaveData data = serverLevel.getDataStorage().computeIfAbsent(PipeNetSaveData.PIPE_NETS);
+        PipeNetSaveData data = getPipeNetSaveData((ServerLevel) level);
         Direction direction = hitResult.getDirection();
         BlockPos neighborPos = pos.relative(direction);
         BlockState neighborState = level.getBlockState(neighborPos);
         if(player.isShiftKeyDown()) {
-            PipeNetSaveData pipeNetSaveData = ((ServerLevel) level).getDataStorage().get(PipeNetSaveData.PIPE_NETS);
             int i = 1;
         }
-        else if (neighborState.getBlock() instanceof TTPipe) {
+        else if (isSamePipe(neighborState)) {
             // 切换连接状态
             boolean current = getConnection(direction, state);
             if (!current) {
@@ -94,17 +92,11 @@ public class TTPipe extends Block {
             level.setBlock(pos, changeDirection(direction, state, state.getValue(DIR_TO_PROP.get(direction)).changeLinkNull()), 2);
             level.setBlock(neighborPos, changeDirection(direction.getOpposite(), neighborState, neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())).changeLinkNull()), 2);
         }
-        else if(level.getCapability(Capabilities.Energy.BLOCK, neighborPos, direction.getOpposite()) != null) {
-            BlockState newState = state.setValue(DIR_TO_PROP.get(direction), state.getValue(DIR_TO_PROP.get(direction)).cycleLinkState());
+        else if(hasCapability(level, neighborPos, direction.getOpposite())) {
+            LinkState linkState = state.getValue(DIR_TO_PROP.get(direction)).cycleLinkState();
+            BlockState newState = state.setValue(DIR_TO_PROP.get(direction), linkState);
             level.setBlock(pos, newState, 2);
-            switch (newState.getValue(DIR_TO_PROP.get(direction))) {
-                case LINK -> data.addInsert((ServerLevel)level, pos, direction);
-                case EXTRACT -> {
-                    data.removeInsert((ServerLevel)level, pos, direction);
-                    data.addExtract((ServerLevel)level, pos, direction);
-                }
-                default -> data.removeExtract((ServerLevel)level, pos, direction);
-            }
+            dealCapabilityChange((ServerLevel) level, pos, direction, linkState);
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
@@ -122,13 +114,13 @@ public class TTPipe extends Block {
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if(level.isClientSide()) return;
         List<Direction> directionLinks = checkLinkDirection(level, pos);
-        PipeNetSaveData pipeNetSaveData = ((ServerLevel)level).getDataStorage().computeIfAbsent(PipeNetSaveData.PIPE_NETS);
+        PipeNetSaveData pipeNetSaveData = getPipeNetSaveData((ServerLevel) level);
         if (directionLinks.isEmpty()) {
             if (pipeNetSaveData.getPipeNets().isEmpty() || pipeNetSaveData.getNetIdOfPos(pos) == -1)
                 pipeNetSaveData.createNet().addPos(pos, new HashSet<>());
         } else {
             List<Integer> netLinks = checkLinkNet((ServerLevel) level, pos, directionLinks);
-            boolean isReplace = !(oldState.getBlock() instanceof TTPipe);
+            boolean isReplace = !isSamePipe(oldState);
             if (netLinks.size() == 1 && isReplace) {
                 Set<BlockPos> set = new HashSet<>();
                 for (Direction direction : directionLinks)
@@ -143,7 +135,7 @@ public class TTPipe extends Block {
             for (Direction direction : Direction.values()) {
                 BlockPos neighbor = pos.relative(direction);
                 BlockState neighborState = level.getBlockState(neighbor);
-                if(!(neighborState.getBlock() instanceof TTPipe)) {
+                if(!(isSamePipe(neighborState))) {
                     if(state.getValue(DIR_TO_PROP.get(direction)) == LinkState.LINK)
                         pipeNetSaveData.addInsert((ServerLevel)level, pos, direction);
                     continue;
@@ -159,15 +151,15 @@ public class TTPipe extends Block {
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
         if (level.isClientSide()) return;
         BlockState newState = state;
-        PipeNetSaveData data = ((ServerLevel)level).getDataStorage().get(PipeNetSaveData.PIPE_NETS);
+        PipeNetSaveData data = getPipeNetSaveData((ServerLevel) level);
         for (Direction direction : Direction.values()){
             BlockPos neighbor = pos.relative(direction);
             LinkState linkState = state.getValue(DIR_TO_PROP.get(direction));
-            if(linkState == LinkState.NULL_AUTO && level.getCapability(Capabilities.Energy.BLOCK, neighbor, direction.getOpposite()) != null) {
+            if(linkState == LinkState.NULL_AUTO && hasCapability(level, neighbor, direction.getOpposite())) {
                 newState = newState.setValue(DIR_TO_PROP.get(direction), LinkState.LINK);
                 data.addInsert((ServerLevel)level, pos, direction);
             }
-            else if (linkState != LinkState.NULL_PLAYER && !(level.getBlockState(neighbor).getBlock() instanceof TTPipe) && level.getCapability(Capabilities.Energy.BLOCK, neighbor, direction.getOpposite()) == null) {
+            else if (linkState != LinkState.NULL_PLAYER && !isSamePipe(level.getBlockState(neighbor)) && !hasCapability(level, neighbor, direction.getOpposite())) {
                 newState = newState.setValue(DIR_TO_PROP.get(direction), LinkState.NULL_AUTO);
                 switch (state.getValue(DIR_TO_PROP.get(direction))) {
                     case LINK ->  data.removeInsert((ServerLevel)level, pos, direction);
@@ -187,7 +179,7 @@ public class TTPipe extends Block {
         for (Direction direction : Direction.values()){
             BlockPos neighbor = pos.relative(direction);
             Level level = context.getLevel();
-            if(level.getCapability(Capabilities.Energy.BLOCK, neighbor, direction.getOpposite()) != null)
+            if(hasCapability(level, neighbor, direction.getOpposite()))
                 defaultState = defaultState.setValue(DIR_TO_PROP.get(direction), LinkState.LINK);
         }
         return defaultState;
@@ -196,12 +188,12 @@ public class TTPipe extends Block {
     @Override
     public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
         if(level.isClientSide()) return;
-        ((ServerLevel)level).getDataStorage().get(PipeNetSaveData.PIPE_NETS).breakPipe(pos);
+        getPipeNetSaveData((ServerLevel) level).breakPipe(pos);
         super.destroy(level, pos, state);
         for (Direction direction : Direction.values()){
             BlockPos neighbor = pos.relative(direction);
             BlockState neighborState = level.getBlockState(neighbor);
-            if(neighborState.getBlock() instanceof TTPipe && neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.LINK)
+            if(isSamePipe(neighborState) && neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.LINK)
                 level.setBlock(neighbor, changeDirection(direction.getOpposite(), neighborState, LinkState.NULL_AUTO), 2);
         }
     }
@@ -210,7 +202,7 @@ public class TTPipe extends Block {
         List<Direction> list = new ArrayList<>();
         for (Direction direction : Direction.values()){
             BlockPos neighborPos = pos.relative(direction);
-            if (level.getBlockState(neighborPos).getBlock() instanceof TTPipe && !(level.getBlockState(neighborPos).getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.NULL_PLAYER))
+            if (isSamePipe(level.getBlockState(neighborPos)) && !(level.getBlockState(neighborPos).getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.NULL_PLAYER))
                 list.add(direction);
         }
         return list;
@@ -218,7 +210,7 @@ public class TTPipe extends Block {
 
     private List<Integer> checkLinkNet(ServerLevel level, BlockPos pos, List<Direction> directions){
         List<Integer> list = new ArrayList<>();
-        PipeNetSaveData pipeNetSaveData = level.getDataStorage().get(PipeNetSaveData.PIPE_NETS);
+        PipeNetSaveData pipeNetSaveData = getPipeNetSaveData(level);
         for (Direction direction : directions){
             BlockPos blockPos = pos.relative(direction);
             int i = pipeNetSaveData.getNetIdOfPos(blockPos);
@@ -230,6 +222,11 @@ public class TTPipe extends Block {
     public BlockState changeDirection(Direction direction, BlockState state, LinkState linkState){
         return state.setValue(DIR_TO_PROP.get(direction), linkState);
     }
+
+    public abstract boolean isSamePipe(BlockState state);
+    public abstract PipeNetSaveData getPipeNetSaveData(ServerLevel level);
+    public abstract boolean hasCapability(Level level, BlockPos pos, Direction direction);
+    public abstract void dealCapabilityChange(ServerLevel level, BlockPos pos, Direction direction, LinkState newState);
 
     public enum LinkState implements StringRepresentable {
         NULL_AUTO("null_auto"),
