@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
 import java.util.*;
 
@@ -10,26 +11,39 @@ public class PipeNet {
     private final int netId;
     private Set<BlockPos> posSet;
     private Map<BlockPos, Set<BlockPos>> adj;
+    private Map<BlockPos, Set<Direction>> insert;
+    private Map<BlockPos, Set<Direction>> extract;
 
     public static final Codec<PipeNet> CODEC = RecordCodecBuilder.create(i -> i.group(
             Codec.INT.fieldOf("net_id").forGetter(PipeNet::getNetId),
             BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new).fieldOf("poses").forGetter(PipeNet::getPosSet),
-            Codec.unboundedMap(Codec.STRING.xmap(PipeNet::keyToPos, PipeNet::posToKey), BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("adj").forGetter(PipeNet::getAdj)
+            Codec.unboundedMap(Codec.STRING.xmap(PipeNet::keyToPos, PipeNet::posToKey), BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("adj").forGetter(PipeNet::getAdj),
+            Codec.unboundedMap(Codec.STRING.xmap(PipeNet::keyToPos, PipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("insert").forGetter(PipeNet::getInsert),
+            Codec.unboundedMap(Codec.STRING.xmap(PipeNet::keyToPos, PipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(PipeNet::getExtract)
     ).apply(i, PipeNet::new));
 
     public PipeNet(int id){
         this.netId = id;
         this.posSet = new HashSet<>();
         this.adj = new HashMap<>();
+        this.insert = new HashMap<>();
+        this.extract = new HashMap<>();
     }
 
-    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj){
+    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract){
         this.netId = id;
         this.posSet = new HashSet<>(posSet);
         this.adj = new HashMap<>();
+        this.insert = new HashMap<>();
+        this.extract = new HashMap<>();
         for (Map.Entry<BlockPos, Set<BlockPos>> entry : adj.entrySet()) {
-            // 深度拷贝：每个值 Set 也拷贝为 HashSet
             this.adj.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        }
+        for (Map.Entry<BlockPos, Set<Direction>> entry : insert.entrySet()) {
+            this.insert.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        }
+        for (Map.Entry<BlockPos, Set<Direction>> entry : extract.entrySet()) {
+            this.extract.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
     }
 
@@ -53,6 +67,8 @@ public class PipeNet {
                 }
             }
         }
+        if(insert.containsKey(blockPos)) insert.remove(blockPos);
+        if(extract.containsKey(blockPos)) extract.remove(blockPos);
     }
 
     public Set<BlockPos> getPosSet() {
@@ -69,6 +85,14 @@ public class PipeNet {
 
     public Map<BlockPos, Set<BlockPos>> getAdj() {
         return adj;
+    }
+
+    public Map<BlockPos, Set<Direction>> getExtract() {
+        return extract;
+    }
+
+    public Map<BlockPos, Set<Direction>> getInsert() {
+        return insert;
     }
 
     private static String posToKey(BlockPos pos){
@@ -113,5 +137,37 @@ public class PipeNet {
     public void link2Pos(BlockPos pos, BlockPos neighborPos) {
         adj.get(pos).add(neighborPos);
         adj.get(neighborPos).add(pos);
+    }
+
+    public void addInsert(BlockPos pos, Direction direction){
+        if(insert.containsKey(pos) && !insert.get(pos).contains(direction)) insert.get(pos).add(direction);
+        else {
+            Set<Direction> set = new HashSet<>();
+            set.add(direction);
+            insert.put(pos, set);
+        }
+    }
+
+    public void removeInsert(BlockPos pos, Direction direction){
+        if(insert.containsKey(pos)){
+            if(insert.get(pos).contains(direction)) insert.get(pos).remove(direction);
+            if(insert.get(pos).isEmpty()) insert.remove(pos);
+        }
+    }
+
+    public void addExtract(BlockPos pos, Direction direction){
+        if(extract.containsKey(pos)) extract.get(pos).add(direction);
+        else {
+            Set<Direction> set = new HashSet<>();
+            set.add(direction);
+            extract.put(pos, set);
+        }
+    }
+
+    public void removeExtract(BlockPos pos, Direction direction){
+        if(extract.containsKey(pos)){
+            if(extract.get(pos).contains(direction)) extract.get(pos).remove(direction);
+            if(extract.get(pos).isEmpty()) extract.remove(pos);
+        }
     }
 }

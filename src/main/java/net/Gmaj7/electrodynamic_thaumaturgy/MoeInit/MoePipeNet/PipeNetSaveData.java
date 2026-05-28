@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
@@ -77,6 +78,7 @@ public class PipeNetSaveData extends SavedData {
         // 收集所有节点和邻接关系
         Set<BlockPos> allPos = new HashSet<>();
         Map<BlockPos, Set<BlockPos>> allAdj = new HashMap<>();
+        Map<BlockPos, Set<Direction>> allInsert = new HashMap<>(), allExtract = new HashMap<>();
 
         for (int id : netLinks) {
             PipeNet net = pipeNets.get(id);
@@ -84,6 +86,12 @@ public class PipeNetSaveData extends SavedData {
             allPos.addAll(net.getPosSet());
             for (Map.Entry<BlockPos, Set<BlockPos>> entry : net.getAdj().entrySet()) {
                 allAdj.computeIfAbsent(entry.getKey(), k -> new HashSet<>()).addAll(entry.getValue());
+            }
+            for (Map.Entry<BlockPos, Set<Direction>> entry : net.getInsert().entrySet()) {
+                allInsert.computeIfAbsent(entry.getKey(), k -> new HashSet<>()).addAll(entry.getValue());
+            }
+            for (Map.Entry<BlockPos, Set<Direction>> entry : net.getExtract().entrySet()) {
+                allExtract.computeIfAbsent(entry.getKey(), k -> new HashSet<>()).addAll(entry.getValue());
             }
         }
 
@@ -98,7 +106,7 @@ public class PipeNetSaveData extends SavedData {
         for (int id : netLinks) {
             pipeNets.remove(id);
         }
-        PipeNet newNet = new PipeNet(netLinks.get(0), allPos, allAdj);
+        PipeNet newNet = new PipeNet(netLinks.get(0), allPos, allAdj, allInsert, allExtract);
 
         pipeNets.put(netLinks.get(0), newNet);
         setDirty();
@@ -162,6 +170,8 @@ public class PipeNetSaveData extends SavedData {
             remaining.removeAll(comp);
         }
 
+        Map<BlockPos, Set<Direction>> insert = pipeNets.get(netId).getInsert(), extract = pipeNets.get(netId).getExtract();
+
         // 4.2 删除原网络
         pipeNets.remove(netId);
 
@@ -169,9 +179,12 @@ public class PipeNetSaveData extends SavedData {
         // 需要根据分量构建新的 PipeNet 实例（包含节点和邻接关系）
         for (int i = 0; i < components.size(); i++) {
             Set<BlockPos> comp = components.get(i);
+            Map<BlockPos, Set<Direction>> newInsert = new HashMap<>(), newExtract = new HashMap<>();
             // 构建该分量的邻接表（只包含分量内部的边）
             Map<BlockPos, Set<BlockPos>> subAdj = new HashMap<>();
             for (BlockPos p : comp) {
+                if(insert.containsKey(p)) newInsert.put(p, new HashSet<>(insert.get(p)));
+                if(extract.containsKey(p)) newExtract.put(p, new HashSet<>(extract.get(p)));
                 Set<BlockPos> neighbors = net.getPosNeighbors(p);
                 Set<BlockPos> filtered = new HashSet<>();
                 for (BlockPos nb : neighbors) {
@@ -184,7 +197,7 @@ public class PipeNetSaveData extends SavedData {
                 }
             }
             int newId = (i == 0) ? netId : nextId++;
-            PipeNet newNet = new PipeNet(newId, comp, subAdj);
+            PipeNet newNet = new PipeNet(newId, comp, subAdj, newInsert, newExtract);
             pipeNets.put(newId, newNet);
         }
         setDirty();
@@ -200,5 +213,34 @@ public class PipeNetSaveData extends SavedData {
 
     public void link2PosInNet(int netId, BlockPos pos, BlockPos neighborPos) {
         pipeNets.get(netId).link2Pos(pos, neighborPos);
+        setDirty();
+    }
+
+    public void addInsert(BlockPos pos, Direction direction){
+        int id = getNetIdOfPos(pos);
+        if(id == -1) return;
+        pipeNets.get(id).addInsert(pos, direction);
+        setDirty();
+    }
+
+    public void addExtract(BlockPos pos, Direction direction){
+        int id = getNetIdOfPos(pos);
+        if(id == -1) return;
+        pipeNets.get(id).addExtract(pos, direction);
+        setDirty();
+    }
+
+    public void removeInsert(BlockPos pos, Direction direction){
+        int id = getNetIdOfPos(pos);
+        if(id == -1) return;
+        pipeNets.get(id).removeInsert(pos, direction);
+        setDirty();
+    }
+
+    public void removeExtract(BlockPos pos, Direction direction){
+        int id = getNetIdOfPos(pos);
+        if(id == -1) return;
+        pipeNets.get(id).removeExtract(pos, direction);
+        setDirty();
     }
 }
