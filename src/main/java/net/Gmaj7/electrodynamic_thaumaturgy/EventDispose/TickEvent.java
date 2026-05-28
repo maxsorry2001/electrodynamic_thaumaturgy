@@ -4,9 +4,11 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +16,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
 public class TickEvent {
@@ -40,6 +44,15 @@ public class TickEvent {
         MobEffectInstance effectInstance = event.getEffectInstance();
         if(effectInstance.is(MoeEffects.MAGNETIC_LEVITATION_EFFECT)){
             event.getEntity().getAttribute(NeoForgeMod.CREATIVE_FLIGHT).setBaseValue(0);
+        }
+    }
+
+    @SubscribeEvent
+    public static void levelTick(LevelTickEvent.Pre event){
+        if(event.getLevel() instanceof ServerLevel serverLevel){
+            PipeNetSaveData data = serverLevel.getDataStorage().get(PipeNetSaveData.PIPE_NETS);
+            if(data != null)
+                data.tick(serverLevel);
         }
     }
 }

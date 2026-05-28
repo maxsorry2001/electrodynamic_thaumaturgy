@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 
@@ -216,31 +217,36 @@ public class PipeNetSaveData extends SavedData {
         setDirty();
     }
 
-    public void addInsert(BlockPos pos, Direction direction){
+    public void addInsert(ServerLevel level, BlockPos pos, Direction direction){
         int id = getNetIdOfPos(pos);
         if(id == -1) return;
-        pipeNets.get(id).addInsert(pos, direction);
+        pipeNets.get(id).addInsert(level, pos, direction);
         setDirty();
     }
 
-    public void addExtract(BlockPos pos, Direction direction){
+    public void addExtract(ServerLevel level, BlockPos pos, Direction direction){
         int id = getNetIdOfPos(pos);
         if(id == -1) return;
-        pipeNets.get(id).addExtract(pos, direction);
+        pipeNets.get(id).addExtract(level, pos, direction);
         setDirty();
     }
 
-    public void removeInsert(BlockPos pos, Direction direction){
+    public void removeInsert(ServerLevel level, BlockPos pos, Direction direction){
         int id = getNetIdOfPos(pos);
         if(id == -1) return;
-        pipeNets.get(id).removeInsert(pos, direction);
+        pipeNets.get(id).removeInsert(level, pos, direction);
         setDirty();
     }
 
-    public void removeExtract(BlockPos pos, Direction direction){
+    public void removeExtract(ServerLevel level, BlockPos pos, Direction direction){
         int id = getNetIdOfPos(pos);
         if(id == -1) return;
-        pipeNets.get(id).removeExtract(pos, direction);
+        pipeNets.get(id).removeExtract(level, pos, direction);
         setDirty();
+    }
+
+    public void tick(ServerLevel level){
+        for (PipeNet pipeNet : pipeNets.values())
+            pipeNet.tick(level);
     }
 }

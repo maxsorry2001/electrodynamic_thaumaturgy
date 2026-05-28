@@ -98,12 +98,12 @@ public class TTPipe extends Block {
             BlockState newState = state.setValue(DIR_TO_PROP.get(direction), state.getValue(DIR_TO_PROP.get(direction)).cycleLinkState());
             level.setBlock(pos, newState, 2);
             switch (newState.getValue(DIR_TO_PROP.get(direction))) {
-                case LINK -> data.addInsert(pos, direction);
+                case LINK -> data.addInsert((ServerLevel)level, pos, direction);
                 case EXTRACT -> {
-                    data.removeInsert(pos, direction);
-                    data.addExtract(pos, direction);
+                    data.removeInsert((ServerLevel)level, pos, direction);
+                    data.addExtract((ServerLevel)level, pos, direction);
                 }
-                default -> data.removeExtract(pos, direction);
+                default -> data.removeExtract((ServerLevel)level, pos, direction);
             }
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
@@ -145,7 +145,7 @@ public class TTPipe extends Block {
                 BlockState neighborState = level.getBlockState(neighbor);
                 if(!(neighborState.getBlock() instanceof TTPipe)) {
                     if(state.getValue(DIR_TO_PROP.get(direction)) == LinkState.LINK)
-                        pipeNetSaveData.addInsert(pos, direction);
+                        pipeNetSaveData.addInsert((ServerLevel)level, pos, direction);
                     continue;
                 }
                 LinkState linkState = state.getValue((DIR_TO_PROP.get(direction))), neighborLinkState = neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite()));
@@ -165,13 +165,13 @@ public class TTPipe extends Block {
             LinkState linkState = state.getValue(DIR_TO_PROP.get(direction));
             if(linkState == LinkState.NULL_AUTO && level.getCapability(Capabilities.Energy.BLOCK, neighbor, direction.getOpposite()) != null) {
                 newState = newState.setValue(DIR_TO_PROP.get(direction), LinkState.LINK);
-                data.addInsert(pos, direction);
+                data.addInsert((ServerLevel)level, pos, direction);
             }
             else if (linkState != LinkState.NULL_PLAYER && !(level.getBlockState(neighbor).getBlock() instanceof TTPipe) && level.getCapability(Capabilities.Energy.BLOCK, neighbor, direction.getOpposite()) == null) {
                 newState = newState.setValue(DIR_TO_PROP.get(direction), LinkState.NULL_AUTO);
                 switch (state.getValue(DIR_TO_PROP.get(direction))) {
-                    case LINK ->  data.removeInsert(pos, direction);
-                    case EXTRACT -> data.removeExtract(pos, direction);
+                    case LINK ->  data.removeInsert((ServerLevel)level, pos, direction);
+                    case EXTRACT -> data.removeExtract((ServerLevel)level, pos, direction);
                 }
             }
         }
