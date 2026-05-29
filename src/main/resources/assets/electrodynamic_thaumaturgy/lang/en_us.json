@@ -90,6 +90,8 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_dissociation_machine_block": "Electromagnetic Dissociation Machine",
   "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine_block": "Eddy Current Remelter Machine",
 
+  "block.electrodynamic_thaumaturgy.energy_pipe": "Energy Pipe",
+
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "Pulsed Plasma",
   "entity.electrodynamic_thaumaturgy.attract_beacon_entity": "Attract Beacon",

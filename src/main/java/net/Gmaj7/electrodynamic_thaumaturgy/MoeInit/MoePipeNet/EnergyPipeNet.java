@@ -37,8 +37,7 @@ public class EnergyPipeNet extends PipeNet{
     }
 
     @Override
-    public void tick(ServerLevel level) {
-        super.tick(level);// 收集所有抽取器、插入器
+    public void work() {
         if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
         List<EnergyHandler> extractors = new ArrayList<>();
         for (var map : extractCaches.values()) {
@@ -63,7 +62,7 @@ public class EnergyPipeNet extends PipeNet{
                 extractCap[i] = extractors.get(i).extract(2048, simTx);
                 totalExtract += extractCap[i];
             }
-        } // simTx 结束，所有模拟操作被撤销
+        }
 
         int[] insertCap = new int[inserters.size()];
         int totalInsert = 0;
@@ -72,7 +71,7 @@ public class EnergyPipeNet extends PipeNet{
                 insertCap[i] = inserters.get(i).insert(2048, simTx);
                 totalInsert += insertCap[i];
             }
-        } // 同样回滚
+        }
 
         if (totalExtract == 0 || totalInsert == 0) return;
 
@@ -134,8 +133,7 @@ public class EnergyPipeNet extends PipeNet{
     }
 
     @Override
-    public void removeExtract(ServerLevel level, BlockPos pos, Direction direction) {
-        super.removeExtract(level, pos, direction);
+    public void removeExtractCache(BlockPos pos, Direction direction) {
         Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>> map = extractCaches.get(pos);
         if (map != null) {
             map.remove(direction);
@@ -144,8 +142,7 @@ public class EnergyPipeNet extends PipeNet{
     }
 
     @Override
-    public void removeInsert(ServerLevel level, BlockPos pos, Direction direction) {
-        super.removeInsert(level, pos, direction);
+    public void removeInsertCache(BlockPos pos, Direction direction) {
         Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>> map = insertCaches.get(pos);
         if (map != null) {
             map.remove(direction);
@@ -156,8 +153,6 @@ public class EnergyPipeNet extends PipeNet{
     public void addExtractCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) {
         BlockPos machinePos = pipePos.relative(pipeSide);
         Direction machineSide = pipeSide.getOpposite();
-
-        // 缓存会保存在 extractCaches 中
         extractCaches.computeIfAbsent(pipePos, k -> new HashMap<>()).put(pipeSide,
                 BlockCapabilityCache.create(
                         Capabilities.Energy.BLOCK,
@@ -173,8 +168,6 @@ public class EnergyPipeNet extends PipeNet{
     public void addInsertCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) {
         BlockPos machinePos = pipePos.relative(pipeSide);
         Direction machineSide = pipeSide.getOpposite();
-
-        // 缓存会保存在 extractCaches 中
         insertCaches.computeIfAbsent(pipePos, k -> new HashMap<>()).put(pipeSide,
                 BlockCapabilityCache.create(
                         Capabilities.Energy.BLOCK,

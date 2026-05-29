@@ -1,14 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.transfer.energy.EnergyHandler;
-import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.*;
 
@@ -151,6 +145,7 @@ public abstract class PipeNet {
             if(insert.get(pos).contains(direction)) insert.get(pos).remove(direction);
             if(insert.get(pos).isEmpty()) insert.remove(pos);
         }
+        removeInsertCache(pos, direction);
     }
 
     public void addExtract(ServerLevel level, BlockPos pos, Direction direction){
@@ -168,7 +163,12 @@ public abstract class PipeNet {
             if(extract.get(pos).contains(direction)) extract.get(pos).remove(direction);
             if(extract.get(pos).isEmpty()) extract.remove(pos);
         }
+        removeExtractCache(pos, direction);
     }
+
+    protected abstract void removeInsertCache(BlockPos pos, Direction direction);
+
+    protected abstract void removeExtractCache(BlockPos pos, Direction direction);
 
     public abstract void addExtractCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) ;
 
@@ -176,7 +176,10 @@ public abstract class PipeNet {
 
     public void tick(ServerLevel level) {
         ensureCachesInitialized(level);
+        work();
     }
+
+    protected abstract void work();
 
     protected abstract void ensureCachesInitialized(ServerLevel level) ;
 }

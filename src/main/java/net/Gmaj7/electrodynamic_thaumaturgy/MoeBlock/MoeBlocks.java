@@ -69,8 +69,11 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> EDDY_CURRENT_REMELTER_MACHINE_BLOCK = registerBlock("eddy_current_remelter_machine_block",
             (properties -> new EddyCurrentRemelterBlock(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
-    public static final DeferredBlock<Block> TT_PIPE = registerBlock("energy_pipe",
+    public static final DeferredBlock<Block> ENERGY_PIPE = registerBlock("energy_pipe",
             (properties -> new EnergyPipe(properties.noOcclusion())));
+
+    public static final DeferredBlock<Block> ITEM_PIPE = registerBlock("item_pipe",
+            (properties -> new ItemPipe(properties.noOcclusion())));
 
     public static final DeferredBlock<Block> LIGHT_AIR = registerBlock("light_air",
             (properties) -> new AirBlock(properties.air().lightLevel(p -> 15).replaceable().noCollision().noLootTable()), null);

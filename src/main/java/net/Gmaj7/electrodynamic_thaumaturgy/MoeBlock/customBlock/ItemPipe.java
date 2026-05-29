@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.EnergyPipeNetSaveData;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -8,24 +8,29 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 
-public class EnergyPipe extends AbstractPipe {
-    public EnergyPipe(Properties properties) {
+public class ItemPipe extends AbstractPipe{
+    public ItemPipe(Properties properties) {
         super(properties);
     }
 
     @Override
     public boolean isSamePipe(BlockState state) {
-        return state.getBlock() instanceof EnergyPipe;
+        return state.getBlock() instanceof ItemPipe;
+    }
+
+    @Override
+    public ItemPipeNetSaveData getPipeNetSaveData(ServerLevel level) {
+        return level.getDataStorage().computeIfAbsent(ItemPipeNetSaveData.ITEM_PIPE_NETS);
     }
 
     @Override
     public boolean hasCapability(Level level, BlockPos pos, Direction direction) {
-        return level.getCapability(Capabilities.Energy.BLOCK, pos, direction) != null;
+        return level.getCapability(Capabilities.Item.BLOCK, pos, direction) != null;
     }
 
     @Override
     public void dealCapabilityChange(ServerLevel level, BlockPos pos, Direction direction, LinkState newState) {
-        EnergyPipeNetSaveData data = getPipeNetSaveData(level);
+        ItemPipeNetSaveData data = getPipeNetSaveData(level);
         switch (newState) {
             case LINK -> data.addInsert(level, pos, direction);
             case EXTRACT -> {
@@ -34,10 +39,5 @@ public class EnergyPipe extends AbstractPipe {
             }
             default -> data.removeExtract(level, pos, direction);
         }
-    }
-
-    @Override
-    public EnergyPipeNetSaveData getPipeNetSaveData(ServerLevel level) {
-        return level.getDataStorage().computeIfAbsent(EnergyPipeNetSaveData.ENERGY_PIPE_NETS);
     }
 }

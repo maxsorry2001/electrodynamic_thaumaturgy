@@ -1,6 +1,5 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.EnergyPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -116,8 +115,12 @@ public abstract class AbstractPipe extends Block {
         List<Direction> directionLinks = checkLinkDirection(level, pos);
         PipeNetSaveData pipeNetSaveData = getPipeNetSaveData((ServerLevel) level);
         if (directionLinks.isEmpty()) {
-            if (pipeNetSaveData.getPipeNets().isEmpty() || pipeNetSaveData.getNetIdOfPos(pos) == -1)
+            if (pipeNetSaveData.getPipeNets().isEmpty() || pipeNetSaveData.getNetIdOfPos(pos) == -1) {
                 pipeNetSaveData.createNet().addPos(pos, new HashSet<>());
+                for (Direction direction : Direction.values())
+                    if(state.getValue(DIR_TO_PROP.get(direction)) == LinkState.LINK)
+                        pipeNetSaveData.addInsert((ServerLevel) level, pos, direction);
+            }
         } else {
             List<Integer> netLinks = checkLinkNet((ServerLevel) level, pos, directionLinks);
             boolean isReplace = !isSamePipe(oldState);
