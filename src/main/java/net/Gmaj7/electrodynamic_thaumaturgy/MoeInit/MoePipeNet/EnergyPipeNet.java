@@ -200,5 +200,6 @@ public class EnergyPipeNet extends PipeNet{
                 }
             }
         }
+        checkDistance();
     }
 }

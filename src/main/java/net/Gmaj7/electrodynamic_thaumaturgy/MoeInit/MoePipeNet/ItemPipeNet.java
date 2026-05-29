@@ -109,6 +109,7 @@ public class ItemPipeNet extends PipeNet{
                 }
             }
         }
+        checkDistance();
     }
 
     @Override

@@ -12,6 +12,7 @@ public abstract class PipeNet {
     protected Map<BlockPos, Set<BlockPos>> adj;
     protected Map<BlockPos, Set<Direction>> insert;
     protected Map<BlockPos, Set<Direction>> extract;
+    protected Map<BlockPos, Map<BlockPos, Integer>> distances;
 
     public PipeNet(int id){
         this.netId = id;
@@ -19,6 +20,7 @@ public abstract class PipeNet {
         this.adj = new HashMap<>();
         this.insert = new HashMap<>();
         this.extract = new HashMap<>();
+        this.distances = new HashMap<>();
     }
 
     public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract){
@@ -27,6 +29,7 @@ public abstract class PipeNet {
         this.adj = new HashMap<>();
         this.insert = new HashMap<>();
         this.extract = new HashMap<>();
+        this.distances = new HashMap<>();
         for (Map.Entry<BlockPos, Set<BlockPos>> entry : adj.entrySet()) {
             this.adj.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
@@ -123,11 +126,13 @@ public abstract class PipeNet {
     public void removeConnection(BlockPos posA, BlockPos posB) {
         if (adj.containsKey(posA)) adj.get(posA).remove(posB);
         if (adj.containsKey(posB)) adj.get(posB).remove(posA);
+        checkDistance();
     }
 
     public void link2Pos(BlockPos pos, BlockPos neighborPos) {
         adj.get(pos).add(neighborPos);
         adj.get(neighborPos).add(pos);
+        checkDistance();
     }
 
     public void addInsert(ServerLevel level, BlockPos pos, Direction direction){
@@ -138,6 +143,7 @@ public abstract class PipeNet {
             insert.put(pos, set);
         }
         addInsertCache(level, pos, direction);
+        checkDistance();
     }
 
     public void removeInsert(ServerLevel level, BlockPos pos, Direction direction){
@@ -146,6 +152,7 @@ public abstract class PipeNet {
             if(insert.get(pos).isEmpty()) insert.remove(pos);
         }
         removeInsertCache(pos, direction);
+        checkDistance();
     }
 
     public void addExtract(ServerLevel level, BlockPos pos, Direction direction){
@@ -156,6 +163,7 @@ public abstract class PipeNet {
             extract.put(pos, set);
         }
         addExtractCache(level, pos, direction);
+        checkDistance();
     }
 
     public void removeExtract(ServerLevel level, BlockPos pos, Direction direction){
@@ -164,6 +172,38 @@ public abstract class PipeNet {
             if(extract.get(pos).isEmpty()) extract.remove(pos);
         }
         removeExtractCache(pos, direction);
+        checkDistance();
+    }
+
+    protected Map<BlockPos, Integer> bfsDistances(BlockPos startPos){
+        Map<BlockPos, Integer> dis = new HashMap<>(), ioDis = new HashMap<>();
+        Deque<BlockPos> que = new ArrayDeque<>();
+        dis.put(startPos, 0);
+        que.add(startPos);
+        if(insert.containsKey(startPos))
+            ioDis.put(startPos, 0);
+        while (!que.isEmpty()){
+            BlockPos cur = que.poll();
+            int curDis = dis.get(cur);
+            for (BlockPos neighbor : adj.getOrDefault(cur, Collections.emptySet())){
+                if(!dis.containsKey(neighbor)){
+                    dis.put(neighbor, curDis + 1);
+                    que.add(neighbor);
+                    if(insert.containsKey(neighbor))
+                        ioDis.put(neighbor, curDis + 1);
+                }
+            }
+        }
+        return ioDis;
+    }
+
+    protected void checkDistance(){
+        if(insert.isEmpty() || extract.isEmpty()){
+            distances.clear();
+            return;
+        }
+        for (BlockPos start : extract.keySet())
+            distances.put(start, bfsDistances(start));
     }
 
     protected abstract void removeInsertCache(BlockPos pos, Direction direction);
