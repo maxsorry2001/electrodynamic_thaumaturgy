@@ -48,6 +48,7 @@ public abstract class PipeNet {
         for (BlockPos linkPos : links) {
             adj.computeIfAbsent(linkPos, k -> new HashSet<>()).add(blockPos);
         }
+        checkDistance();
     }
 
     public void removePos(BlockPos blockPos){
@@ -63,6 +64,7 @@ public abstract class PipeNet {
         }
         if(insert.containsKey(blockPos)) insert.remove(blockPos);
         if(extract.containsKey(blockPos)) extract.remove(blockPos);
+        checkDistance();
     }
 
     public Set<BlockPos> getPosSet() {
