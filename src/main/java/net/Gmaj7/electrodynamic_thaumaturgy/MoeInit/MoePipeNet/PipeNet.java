@@ -13,6 +13,7 @@ public abstract class PipeNet {
     protected Map<BlockPos, Set<Direction>> insert;
     protected Map<BlockPos, Set<Direction>> extract;
     protected Map<BlockPos, Map<BlockPos, Integer>> distances;
+    protected int tickCounter;
 
     public PipeNet(int id){
         this.netId = id;
@@ -21,15 +22,17 @@ public abstract class PipeNet {
         this.insert = new HashMap<>();
         this.extract = new HashMap<>();
         this.distances = new HashMap<>();
+        this.tickCounter = 0;
     }
 
-    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract){
+    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract, int tickCounter){
         this.netId = id;
         this.posSet = new HashSet<>(posSet);
         this.adj = new HashMap<>();
         this.insert = new HashMap<>();
         this.extract = new HashMap<>();
         this.distances = new HashMap<>();
+        this.tickCounter = tickCounter;
         for (Map.Entry<BlockPos, Set<BlockPos>> entry : adj.entrySet()) {
             this.adj.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
@@ -85,6 +88,10 @@ public abstract class PipeNet {
 
     public Map<BlockPos, Set<Direction>> getExtract() {
         return extract;
+    }
+
+    public int getTickCounter() {
+        return tickCounter;
     }
 
     public Map<BlockPos, Set<Direction>> getInsert() {
@@ -219,9 +226,28 @@ public abstract class PipeNet {
     public void tick(ServerLevel level) {
         ensureCachesInitialized(level);
         work();
+        tickCounter = (tickCounter + 1) % 20;
     }
 
     protected abstract void work();
 
     protected abstract void ensureCachesInitialized(ServerLevel level) ;
+
+    protected BlockPos getNearestInsert(BlockPos extractPos){
+        if(!extract.containsKey(extractPos) || !distances.containsKey(extractPos)) return null;
+        Map<BlockPos, Integer> dis = distances.get(extractPos);
+        BlockPos blockPos = extractPos;
+        int nearest = -1;
+        for (Map.Entry<BlockPos, Integer> entry : dis.entrySet()){
+            if(nearest == -1){
+                nearest = entry.getValue();
+                blockPos = entry.getKey();
+            }
+            else if(entry.getValue() < nearest){
+                nearest = entry.getValue();
+                blockPos = entry.getKey();
+            }
+        }
+        return blockPos;
+    }
 }

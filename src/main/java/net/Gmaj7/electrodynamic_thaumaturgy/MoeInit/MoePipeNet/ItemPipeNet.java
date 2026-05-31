@@ -8,12 +8,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ItemPipeNet extends PipeNet{
     public static final Codec<ItemPipeNet> CODEC = RecordCodecBuilder.create(i -> i.group(
@@ -21,7 +19,8 @@ public class ItemPipeNet extends PipeNet{
             BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new).fieldOf("poses").forGetter(ItemPipeNet::getPosSet),
             Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("adj").forGetter(ItemPipeNet::getAdj),
             Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("insert").forGetter(ItemPipeNet::getInsert),
-            Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(ItemPipeNet::getExtract)
+            Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(ItemPipeNet::getExtract),
+            Codec.INT.fieldOf("tick_counter").forGetter(ItemPipeNet::getTickCounter)
     ).apply(i, ItemPipeNet::new));
 
     // 为每个连接的机器存储其对应的缓存
@@ -33,8 +32,8 @@ public class ItemPipeNet extends PipeNet{
         this.extractCaches = new HashMap<>();
     }
 
-    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract) {
-        super(id, posSet, adj, insert, extract);
+    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract, int tickCounter) {
+        super(id, posSet, adj, insert, extract, tickCounter);
         this.insertCaches = new HashMap<>();
         this.extractCaches = new HashMap<>();
     }
@@ -113,7 +112,27 @@ public class ItemPipeNet extends PipeNet{
     }
 
     @Override
-    protected void work() {
+    protected void work() {if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
+        List<ResourceHandler<ItemResource>> extractors = new ArrayList<>();
+        for (var map : extractCaches.values()) {
+            for (var cache : map.values()) {
+                ResourceHandler<ItemResource> h = cache.getCapability();
+                if (h != null) extractors.add(h);
+            }
+        }
+        List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
+        for (var map : insertCaches.values()) {
+            for (var cache : map.values()) {
+                ResourceHandler<ItemResource> h = cache.getCapability();
+                if (h != null) inserters.add(h);
+            }
+        }
+        if(extractors.isEmpty() || inserters.isEmpty()) return;int total = extractors.size();
+        int base = total / 20, remaining = total % 20, processedBefore = tickCounter * base + Math.min(remaining, tickCounter);
+        if (processedBefore >= total) return; // 本 tick 无任务
+        int count = (tickCounter < remaining) ? base + 1 : base, end = Math.min(processedBefore + count, total);
+        for (; processedBefore < end; processedBefore ++){
 
+        }
     }
 }

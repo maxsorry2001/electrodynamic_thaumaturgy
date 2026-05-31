@@ -41,6 +41,6 @@ public class EnergyPipeNetSaveData extends PipeNetSaveData<EnergyPipeNet>{
 
     @Override
     protected EnergyPipeNet createNetWith(int newId, Set<BlockPos> comp, Map<BlockPos, Set<BlockPos>> subAdj, Map<BlockPos, Set<Direction>> newInsert, Map<BlockPos, Set<Direction>> newExtract) {
-        return new EnergyPipeNet(newId, comp, subAdj, newInsert, newExtract);
+        return new EnergyPipeNet(newId, comp, subAdj, newInsert, newExtract, 0);
     }
 }

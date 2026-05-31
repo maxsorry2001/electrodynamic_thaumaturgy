@@ -18,7 +18,8 @@ public class EnergyPipeNet extends PipeNet{
             BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new).fieldOf("poses").forGetter(EnergyPipeNet::getPosSet),
             Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("adj").forGetter(EnergyPipeNet::getAdj),
             Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("insert").forGetter(EnergyPipeNet::getInsert),
-            Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(EnergyPipeNet::getExtract)
+            Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(EnergyPipeNet::getExtract),
+            Codec.INT.fieldOf("tick_counter").forGetter(EnergyPipeNet::getTickCounter)
     ).apply(i, EnergyPipeNet::new));
 
     // 为每个连接的机器存储其对应的缓存
@@ -30,8 +31,8 @@ public class EnergyPipeNet extends PipeNet{
         this.extractCaches = new HashMap<>();
     }
 
-    public EnergyPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract) {
-        super(id, posSet, adj, insert, extract);
+    public EnergyPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract, int tickCounter) {
+        super(id, posSet, adj, insert, extract, tickCounter);
         this.insertCaches = new HashMap<>();
         this.extractCaches = new HashMap<>();
     }

@@ -41,6 +41,6 @@ public class ItemPipeNetSaveData extends PipeNetSaveData<ItemPipeNet>{
 
     @Override
     protected ItemPipeNet createNetWith(int newId, Set<BlockPos> comp, Map<BlockPos, Set<BlockPos>> subAdj, Map<BlockPos, Set<Direction>> newInsert, Map<BlockPos, Set<Direction>> newExtract) {
-        return new ItemPipeNet(newId, comp, subAdj, newInsert, newExtract);
+        return new ItemPipeNet(newId, comp, subAdj, newInsert, newExtract, 0);
     }
 }
