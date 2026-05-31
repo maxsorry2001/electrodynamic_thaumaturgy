@@ -91,6 +91,7 @@
   "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine_block": "Eddy Current Remelter Machine",
 
   "block.electrodynamic_thaumaturgy.energy_pipe": "Energy Pipe",
+  "block.electrodynamic_thaumaturgy.item_pipe": "Item Pipe",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "Pulsed Plasma",

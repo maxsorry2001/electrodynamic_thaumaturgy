@@ -3,6 +3,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.resource.Resource;
 
 import java.util.*;
 
@@ -12,7 +14,7 @@ public abstract class PipeNet {
     protected Map<BlockPos, Set<BlockPos>> adj;
     protected Map<BlockPos, Set<Direction>> insert;
     protected Map<BlockPos, Set<Direction>> extract;
-    protected Map<BlockPos, Map<BlockPos, Integer>> distances;
+    protected Map<BlockPos, LinkedHashMap<BlockPos, Integer>> distances;
     protected int tickCounter;
 
     public PipeNet(int id){
@@ -184,8 +186,8 @@ public abstract class PipeNet {
         checkDistance();
     }
 
-    protected Map<BlockPos, Integer> bfsDistances(BlockPos startPos){
-        Map<BlockPos, Integer> dis = new HashMap<>(), ioDis = new HashMap<>();
+    protected LinkedHashMap<BlockPos, Integer> bfsDistances(BlockPos startPos){
+        LinkedHashMap<BlockPos, Integer> dis = new LinkedHashMap<>(), ioDis = new LinkedHashMap<>();
         Deque<BlockPos> que = new ArrayDeque<>();
         dis.put(startPos, 0);
         que.add(startPos);
@@ -233,21 +235,35 @@ public abstract class PipeNet {
 
     protected abstract void ensureCachesInitialized(ServerLevel level) ;
 
-    protected BlockPos getNearestInsert(BlockPos extractPos){
+    protected BlockPos getNearestInsert(BlockPos extractPos, int order){
         if(!extract.containsKey(extractPos) || !distances.containsKey(extractPos)) return null;
         Map<BlockPos, Integer> dis = distances.get(extractPos);
         BlockPos blockPos = extractPos;
-        int nearest = -1;
         for (Map.Entry<BlockPos, Integer> entry : dis.entrySet()){
-            if(nearest == -1){
-                nearest = entry.getValue();
+            order --;
+            if(order <= 0) {
                 blockPos = entry.getKey();
-            }
-            else if(entry.getValue() < nearest){
-                nearest = entry.getValue();
-                blockPos = entry.getKey();
+                break;
             }
         }
         return blockPos;
+    }
+
+    protected static class PosAndResourceHandler<T extends Resource>{
+        protected BlockPos pos;
+        protected ResourceHandler<T> resourceHandler;
+
+        protected PosAndResourceHandler(BlockPos pos, ResourceHandler<T> resourceHandler){
+            this.pos = pos;
+            this.resourceHandler = resourceHandler;
+        }
+
+        protected BlockPos getPos() {
+            return pos;
+        }
+
+        protected ResourceHandler<T> getResourceHandler() {
+            return resourceHandler;
+        }
     }
 }

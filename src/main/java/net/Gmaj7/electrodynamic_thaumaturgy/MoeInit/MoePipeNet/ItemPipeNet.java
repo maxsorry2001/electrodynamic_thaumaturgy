@@ -10,6 +10,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.*;
 
@@ -108,16 +109,17 @@ public class ItemPipeNet extends PipeNet{
                 }
             }
         }
-        checkDistance();
+        if(distances.isEmpty())
+            checkDistance();
     }
 
     @Override
     protected void work() {if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
-        List<ResourceHandler<ItemResource>> extractors = new ArrayList<>();
-        for (var map : extractCaches.values()) {
-            for (var cache : map.values()) {
+        List<PosAndResourceHandler<ItemResource>> extractors = new ArrayList<>();
+        for (Map.Entry<BlockPos, Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> entry : extractCaches.entrySet()) {
+            for (var cache : entry.getValue().values()) {
                 ResourceHandler<ItemResource> h = cache.getCapability();
-                if (h != null) extractors.add(h);
+                if (h != null) extractors.add(new PosAndResourceHandler<>(entry.getKey(), h));
             }
         }
         List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
@@ -132,7 +134,47 @@ public class ItemPipeNet extends PipeNet{
         if (processedBefore >= total) return; // 本 tick 无任务
         int count = (tickCounter < remaining) ? base + 1 : base, end = Math.min(processedBefore + count, total);
         for (; processedBefore < end; processedBefore ++){
-
+            ItemResource resource = ItemResource.EMPTY;
+            ResourceHandler<ItemResource> insertHandler = null;
+            int insertCount = 0;
+            var extractSet = extractors.get(processedBefore);
+            try (Transaction transaction = Transaction.openRoot()){
+                ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
+                // 找到第一个非空槽位
+                for (int i = 0; i < extractHandler.size(); i++){
+                    resource = extractHandler.getResource(i);
+                    if(!resource.isEmpty()) break;
+                }
+                if(!resource.isEmpty()){
+                    // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
+                    int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
+                    if (extracted > 0) {
+                        // 按距离顺序尝试插入
+                        outer:
+                        for (int i = 1; i <= distances.get(extractSet.getPos()).size(); i++){
+                            BlockPos checkPos = getNearestInsert(extractSet.getPos(), i);
+                            Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> dirMap = insertCaches.get(checkPos);
+                            if (dirMap == null) continue;
+                            for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : dirMap.entrySet()){
+                                ResourceHandler<ItemResource> inserter = entry.getValue().getCapability();
+                                if (inserter == null) continue;
+                                int inserted = inserter.insert(resource, extracted, transaction);
+                                if (inserted == extracted) {
+                                    insertHandler = inserter;
+                                    insertCount = inserted;
+                                    break outer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (resource.isEmpty() || insertCount == 0) break;
+            try (Transaction transaction = Transaction.openRoot()){
+                extractSet.getResourceHandler().extract(resource, insertCount, transaction);
+                insertHandler.insert(resource, insertCount, transaction);
+                transaction.commit();
+            }
         }
     }
 }
