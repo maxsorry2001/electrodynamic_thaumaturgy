@@ -105,6 +105,9 @@ public class MoeItems {
     public static final DeferredItem<Item> GENETIC_RECORDER = MOE_ITEM.registerItem("genetic_recorder",
             (properties) -> new Item(properties.stacksTo(1)));
 
+    public static final DeferredItem<Item> MAGNO_WRENCH = MOE_ITEM.registerItem("magno_wrench",
+            (properties) -> new MagnoWrenchItem(properties.stacksTo(1)));
+
     public static final DeferredItem<Item> MAGNO_INGOT = MOE_ITEM.registerSimpleItem("magno_ingot");
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("radiant_magno_ingot");
     public static final DeferredItem<Item> STELLAR_MAGNO_INGOT = MOE_ITEM.registerSimpleItem("stellar_magno_ingot");

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "electrodynamic_thaumaturgy:magno_ingot",
+    "b": "minecraft:stick"
+  },
+  "pattern": [
+    " a ",
+    " b "
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:magno_wrench"
+  }
+}

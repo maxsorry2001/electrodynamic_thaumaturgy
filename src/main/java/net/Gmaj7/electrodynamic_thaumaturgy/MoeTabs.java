@@ -29,74 +29,74 @@ public class MoeTabs {
             () -> CreativeModeTab.builder().icon(() -> setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())))
                     .title(Component.translatable(MOE_TAB_STRING))
                     .displayItems(((itemDisplayParameters, output) -> {
-                        output.accept(MoeItems.MAGNO_INGOT.get());
-                        output.accept(MoeItems.RADIANT_MAGNO_INGOT.get());
-                        output.accept(MoeItems.STELLAR_MAGNO_INGOT.get());
+                        output.accept(MoeItems.MAGNO_INGOT);
+                        output.accept(MoeItems.RADIANT_MAGNO_INGOT);
+                        output.accept(MoeItems.STELLAR_MAGNO_INGOT);
 
-                        output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()));
+                        output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));
-                        output.accept(MoeItems.PRIMARY_CODE_MODULE.get());
-                        output.accept(MoeItems.INTERMEDIATE_CODE_MODULE.get());
-                        output.accept(MoeItems.ADVANCED_CODE_MODULE.get());
+                        output.accept(MoeItems.PRIMARY_CODE_MODULE);
+                        output.accept(MoeItems.INTERMEDIATE_CODE_MODULE);
+                        output.accept(MoeItems.ADVANCED_CODE_MODULE);
 
-                        output.accept(MoeItems.RAY_MODULE.get());
-                        output.accept(MoeItems.ATTRACT_MODULE.get());
-                        output.accept(MoeItems.LIGHTING_STRIKE_MODULE.get());
-                        output.accept(MoeItems.PULSED_PLASMA_MODULE.get());
-                        output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE.get());
-                        output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE.get());
-                        output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE.get());
-                        output.accept(MoeItems.PROTECTING_MODULE.get());
-                        output.accept(MoeItems.TREE_CURRENT_MODULE.get());
+                        output.accept(MoeItems.RAY_MODULE);
+                        output.accept(MoeItems.ATTRACT_MODULE);
+                        output.accept(MoeItems.LIGHTING_STRIKE_MODULE);
+                        output.accept(MoeItems.PULSED_PLASMA_MODULE);
+                        output.accept(MoeItems.ELECTRIC_ENERGY_RELEASE_MODULE);
+                        output.accept(MoeItems.ELECTRIC_FIELD_DOMAIN_MODULE);
+                        output.accept(MoeItems.ELECTROMAGNETIC_ASSAULT_MODULE);
+                        output.accept(MoeItems.PROTECTING_MODULE);
+                        output.accept(MoeItems.TREE_CURRENT_MODULE);
 
-                        output.accept(MoeItems.EXCITING_MODULE.get());
-                        output.accept(MoeItems.DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE.get());
-                        output.accept(MoeItems.COULOMB_DOMAIN_MODULE.get());
-                        output.accept(MoeItems.MAGMA_LIGHTING_MODULE.get());
-                        output.accept(MoeItems.REFRACTION_MODULE.get());
-                        output.accept(MoeItems.BLOCK_NERVE_MODULE.get());
-                        output.accept(MoeItems.DOMAIN_RECONSTRUCTION_MODULE.get());
-                        output.accept(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE.get());
+                        output.accept(MoeItems.EXCITING_MODULE);
+                        output.accept(MoeItems.DISTURBING_BY_HIGH_INTENSITY_MAGNETIC_MODULE);
+                        output.accept(MoeItems.COULOMB_DOMAIN_MODULE);
+                        output.accept(MoeItems.MAGMA_LIGHTING_MODULE);
+                        output.accept(MoeItems.REFRACTION_MODULE);
+                        output.accept(MoeItems.BLOCK_NERVE_MODULE);
+                        output.accept(MoeItems.DOMAIN_RECONSTRUCTION_MODULE);
+                        output.accept(MoeItems.MAGNETIC_FLUX_CASCADE_MODULE);
 
-                        output.accept(MoeItems.MAGNET_RESONANCE_MODULE.get());
-                        output.accept(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE.get());
-                        output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE.get());
-                        output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE.get());
-                        output.accept(MoeItems.MIRAGE_PURSUIT_MODULE.get());
-                        output.accept(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get());
-                        output.accept(MoeItems.PHOTOACOUSTIC_PULSE_MODULE.get());
-                        output.accept(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE.get());
-                        output.accept(MoeItems.SAGE_S_MAGNETISM_SEAL.get());
+                        output.accept(MoeItems.MAGNET_RESONANCE_MODULE);
+                        output.accept(MoeItems.MAGNETIC_RECOMBINATION_CANNON_MODULE);
+                        output.accept(MoeItems.ST_ELMO_S_FIRE_MODULE);
+                        output.accept(MoeItems.HYDROGEN_BOND_FRACTURE_MODULE);
+                        output.accept(MoeItems.MIRAGE_PURSUIT_MODULE);
+                        output.accept(MoeItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE);
+                        output.accept(MoeItems.PHOTOACOUSTIC_PULSE_MODULE);
+                        output.accept(MoeItems.PHOTO_CORROSIVE_NOVA_MODULE);
+                        output.accept(MoeItems.SAGE_S_MAGNETISM_SEAL);
 
-                        output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD.get());
-                        output.accept(MoeItems.COOLDOWN_ENHANCE.get());
-                        output.accept(MoeItems.STRENGTH_ENHANCE.get());
-                        output.accept(MoeItems.EFFICIENCY_ENHANCE.get());
-                        output.accept(MoeItems.ENTROPY_ENHANCE.get());
-                        output.accept(MoeItems.LIFE_EXTRACTION_ENHANCE.get());
+                        output.accept(MoeItems.ENHANCE_MODEM_BASEBOARD);
+                        output.accept(MoeItems.COOLDOWN_ENHANCE);
+                        output.accept(MoeItems.STRENGTH_ENHANCE);
+                        output.accept(MoeItems.EFFICIENCY_ENHANCE);
+                        output.accept(MoeItems.ENTROPY_ENHANCE);
+                        output.accept(MoeItems.LIFE_EXTRACTION_ENHANCE);
 
-                        output.accept(MoeItems.PRIMARY_LC.get());
-                        output.accept(MoeItems.INTERMEDIATE_LC.get());
-                        output.accept(MoeItems.ADVANCED_LC.get());
-                        output.accept(MoeItems.SUPERCONDUCTING_LC.get());
-                        output.accept(MoeItems.PRIMARY_POWER.get());
-                        output.accept(MoeItems.INTERMEDIATE_POWER.get());
-                        output.accept(MoeItems.ADVANCED_POWER.get());
-                        output.accept(MoeItems.SUPERCONDUCTING_POWER.get());
-                        output.accept(MoeItems.CARROT_BATTERY.get());
-                        output.accept(MoeItems.POTATO_BATTERY.get());
-                        output.accept(MoeItems.SOLUTION_BATTERY.get());
-                        output.accept(MoeItems.POWER_BANK.get());
+                        output.accept(MoeItems.PRIMARY_LC);
+                        output.accept(MoeItems.INTERMEDIATE_LC);
+                        output.accept(MoeItems.ADVANCED_LC);
+                        output.accept(MoeItems.SUPERCONDUCTING_LC);
+                        output.accept(MoeItems.PRIMARY_POWER);
+                        output.accept(MoeItems.INTERMEDIATE_POWER);
+                        output.accept(MoeItems.ADVANCED_POWER);
+                        output.accept(MoeItems.SUPERCONDUCTING_POWER);
+                        output.accept(MoeItems.CARROT_BATTERY);
+                        output.accept(MoeItems.POTATO_BATTERY);
+                        output.accept(MoeItems.SOLUTION_BATTERY);
+                        output.accept(MoeItems.POWER_BANK);
                         output.accept(setFullEnergyItem(new ItemStack(MoeItems.POWER_BANK.get())));
-                        output.accept(MoeItems.ENERGY_CORE.get());
-                        output.accept(MoeItems.SUPERCONDUCTING_UPDATE.get());
-                        output.accept(MoeItems.GENETIC_RECORDER.get());
+                        output.accept(MoeItems.ENERGY_CORE);
+                        output.accept(MoeItems.SUPERCONDUCTING_UPDATE);
+                        output.accept(MoeItems.GENETIC_RECORDER);
 
                         output.accept(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
                         output.accept(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
                         output.accept(MoeBlocks.MAGIC_ENCODE_TABLE);
                         output.accept(MoeBlocks.ENERGY_BLOCK);
-                        output.accept(setFullEnergyItem(new ItemStack(MoeBlocks.ENERGY_BLOCK.get())));
+                        output.accept(setFullEnergyItem(new ItemStack(MoeBlocks.ENERGY_BLOCK)));
                         output.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK);
                         output.accept(MoeBlocks.BIOMASS_GENERATOR_BLOCK);
@@ -118,6 +118,7 @@ public class MoeTabs {
 
                         output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
 
+                        output.accept(MoeItems.MAGNO_WRENCH);
                         output.accept(MoeBlocks.ENERGY_PIPE);
                         output.accept(MoeBlocks.ITEM_PIPE);
                     }))

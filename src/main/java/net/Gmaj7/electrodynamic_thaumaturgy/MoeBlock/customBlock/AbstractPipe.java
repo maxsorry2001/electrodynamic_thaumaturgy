@@ -5,8 +5,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -17,21 +19,30 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.Tags;
 import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
 public abstract class AbstractPipe extends Block {
 
-    protected static final VoxelShape AABB = Block.box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
     public static final EnumProperty<LinkState> UP = EnumProperty.create("link_state_up", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> DOWN = EnumProperty.create("link_state_down", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> EAST = EnumProperty.create("link_state_east", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> WEST = EnumProperty.create("link_state_west", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> NORTH = EnumProperty.create("link_state_north", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> SOUTH = EnumProperty.create("link_state_south", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
+    protected static final VoxelShape CORE = Block.box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
+    protected static final VoxelShape SHAPE_NORTH = Block.box(6.0, 6.0, 0.0, 10.0, 10.0, 6.0);
+    protected static final VoxelShape SHAPE_SOUTH = Block.box(6.0, 6.0, 10.0, 10.0, 10.0, 16.0);
+    protected static final VoxelShape SHAPE_EAST  = Block.box(10.0, 6.0, 6.0, 16.0, 10.0, 10.0);
+    protected static final VoxelShape SHAPE_WEST  = Block.box(0.0, 6.0, 6.0, 6.0, 10.0, 10.0);
+    protected static final VoxelShape SHAPE_UP    = Block.box(6.0, 10.0, 6.0, 10.0, 16.0, 10.0);
+    protected static final VoxelShape SHAPE_DOWN  = Block.box(6.0, 0.0, 6.0, 10.0, 6.0, 10.0);
     private static final Map<Direction, EnumProperty<LinkState>> DIR_TO_PROP = Map.of(
             Direction.UP, UP,
             Direction.DOWN, DOWN,
@@ -39,6 +50,14 @@ public abstract class AbstractPipe extends Block {
             Direction.SOUTH, SOUTH,
             Direction.WEST, WEST,
             Direction.EAST, EAST
+    );
+    private static final List<ShapeEntry> SHAPES = List.of(
+            new ShapeEntry(SHAPE_NORTH, NORTH, Direction.NORTH),
+            new ShapeEntry(SHAPE_SOUTH, SOUTH, Direction.SOUTH),
+            new ShapeEntry(SHAPE_WEST,  WEST,  Direction.WEST),
+            new ShapeEntry(SHAPE_EAST,  EAST,  Direction.EAST),
+            new ShapeEntry(SHAPE_UP,    UP,    Direction.UP),
+            new ShapeEntry(SHAPE_DOWN,  DOWN,  Direction.DOWN)
     );
     public AbstractPipe(Properties properties) {
         super(properties);
@@ -52,21 +71,37 @@ public abstract class AbstractPipe extends Block {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return AABB;
+        VoxelShape shape = CORE;
+        // 辅助判断：是否为连接状态（LINK 或 EXTRACT）
+        for (Direction dir : Direction.values()) {
+            LinkState linkState = state.getValue(DIR_TO_PROP.get(dir));
+            if (linkState == LinkState.LINK || linkState == LinkState.EXTRACT) {
+                // 根据方向选择对应的形状
+                VoxelShape part = switch (dir) {
+                    case NORTH -> SHAPE_NORTH;
+                    case SOUTH -> SHAPE_SOUTH;
+                    case EAST  -> SHAPE_EAST;
+                    case WEST  -> SHAPE_WEST;
+                    case UP    -> SHAPE_UP;
+                    case DOWN  -> SHAPE_DOWN;
+                };
+                shape = Shapes.or(shape, part);
+            }
+        }
+        return shape;
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if(level.isClientSide()) return InteractionResult.CONSUME;
-        ServerLevel serverLevel = (ServerLevel) level;
+    protected InteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if(level.isClientSide() || !itemStack.is(Tags.Items.TOOLS_WRENCH)) return InteractionResult.CONSUME;
+        Direction direction = getSelection(state, level, pos, player);
+        if (direction == null) {
+            direction = hitResult.getDirection(); // 回退
+        }
         PipeNetSaveData data = getPipeNetSaveData((ServerLevel) level);
-        Direction direction = hitResult.getDirection();
         BlockPos neighborPos = pos.relative(direction);
         BlockState neighborState = level.getBlockState(neighborPos);
-        if(player.isShiftKeyDown()) {
-            int i = 1;
-        }
-        else if (isSamePipe(neighborState)) {
+        if (isSamePipe(neighborState)) {
             // 切换连接状态
             boolean current = getConnection(direction, state);
             if (!current) {
@@ -96,6 +131,16 @@ public abstract class AbstractPipe extends Block {
             BlockState newState = state.setValue(DIR_TO_PROP.get(direction), linkState);
             level.setBlock(pos, newState, 2);
             dealCapabilityChange((ServerLevel) level, pos, direction, linkState);
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if(level.isClientSide()) return InteractionResult.CONSUME;
+        PipeNetSaveData data = getPipeNetSaveData((ServerLevel) level);
+        if(player.isShiftKeyDown()) {
+            int i = 1;
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
@@ -226,6 +271,38 @@ public abstract class AbstractPipe extends Block {
         return state.setValue(DIR_TO_PROP.get(direction), linkState);
     }
 
+    private double rayTraceShape(VoxelShape shape, BlockState state, BlockGetter level, BlockPos pos, Vec3 start, Vec3 end) {
+        BlockHitResult hit = level.clipWithInteractionOverride(start, end, pos, shape, state);
+        return hit == null ? Double.MAX_VALUE : hit.getLocation().distanceTo(start);
+    }
+
+    private Direction getSelection(BlockState state, Level level, BlockPos pos, Player player) {
+        Vec3 start = player.getEyePosition(1.0F);
+        Vec3 end = start.add(player.getLookAngle().normalize().scale(4.5)); // 玩家触及距离
+        Direction bestDir = null;
+        double bestDist = Double.MAX_VALUE;
+
+        // 检查核心（可选，如果不想让玩家点击核心，可以跳过）
+        double coreDist = rayTraceShape(CORE, state, level, pos, start, end);
+        if (coreDist < bestDist) {
+            bestDist = coreDist;
+            // 核心不返回方向，但保留距离，以便优先于臂（或者你可以让核心返回 null，让臂有机会）
+        }
+
+        // 检查各个方向的臂（只检查当前状态为 LINK 或 EXTRACT 的方向）
+        for (ShapeEntry entry : SHAPES) {
+            LinkState linkState = state.getValue(entry.property);
+            if (linkState == LinkState.LINK || linkState == LinkState.EXTRACT) {
+                double dist = rayTraceShape(entry.shape, state, level, pos, start, end);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    bestDir = entry.direction;
+                }
+            }
+        }
+        return bestDir;
+    }
+
     public abstract boolean isSamePipe(BlockState state);
     public abstract PipeNetSaveData getPipeNetSaveData(ServerLevel level);
     public abstract boolean hasCapability(Level level, BlockPos pos, Direction direction);
@@ -266,4 +343,6 @@ public abstract class AbstractPipe extends Block {
             return this == NULL_AUTO || this == NULL_PLAYER;
         }
     }
+
+    private record ShapeEntry(VoxelShape shape, EnumProperty<LinkState> property, Direction direction) {}
 }

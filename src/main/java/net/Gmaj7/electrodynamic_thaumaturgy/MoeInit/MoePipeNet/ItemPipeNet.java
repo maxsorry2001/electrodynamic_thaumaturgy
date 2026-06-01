@@ -91,7 +91,7 @@ public class ItemPipeNet extends PipeNet{
 
     @Override
     protected void ensureCachesInitialized(ServerLevel level) {
-        if (extractCaches.isEmpty() && !extract.isEmpty()) {
+        if (extractCaches.size() != extract.size() && !extract.isEmpty()) {
             // 根据已有的 extract 映射创建缓存
             for (Map.Entry<BlockPos, Set<Direction>> entry : extract.entrySet()) {
                 BlockPos pipePos = entry.getKey();
@@ -100,7 +100,7 @@ public class ItemPipeNet extends PipeNet{
                 }
             }
         }
-        if(insertCaches.isEmpty() && ! insert.isEmpty()){
+        if(insertCaches.size() != insert.size() && ! insert.isEmpty()){
             // 根据已有的 insert 映射创建缓存
             for (Map.Entry<BlockPos, Set<Direction>> entry : insert.entrySet()) {
                 BlockPos pipePos = entry.getKey();
