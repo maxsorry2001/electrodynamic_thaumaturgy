@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class EnergyTransmissionAtennaBlock extends BaseEntityBlock {
     public static final MapCodec<EnergyTransmissionAtennaBlock> CODEC = simpleCodec(EnergyTransmissionAtennaBlock::new);
-    public static final EnumProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final BooleanProperty SEND = BooleanProperty.create("send");
     protected static final float AABB_MIN = 6.0F;
     protected static final float AABB_MAX = 10.0F;

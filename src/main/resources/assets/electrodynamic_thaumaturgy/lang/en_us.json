@@ -61,6 +61,7 @@
   "item.electrodynamic_thaumaturgy.enhance_modem_baseboard": "Enhance Modem Baseboard",
   "item.electrodynamic_thaumaturgy.genetic_recorder": "Genetic Recorder",
   "item.electrodynamic_thaumaturgy.magneto_entropy_witch_entity_spawn_egg": "Magneto‑Entropy Witch Spawn Egg",
+  "item.electrodynamic_thaumaturgy.magno_wrench": "Magno Wrench",
 
   "effect.electrodynamic_thaumaturgy.exciting": "Exciting",
   "effect.electrodynamic_thaumaturgy.electric_energy_release" : "Electric Energy Release",
@@ -89,6 +90,9 @@
   "block.electrodynamic_thaumaturgy.magneto_fusion_machine_block": "Magneto Fusion Machine",
   "block.electrodynamic_thaumaturgy.electromagnetic_dissociation_machine_block": "Electromagnetic Dissociation Machine",
   "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine_block": "Eddy Current Remelter Machine",
+
+  "block.electrodynamic_thaumaturgy.energy_pipe": "Energy Pipe",
+  "block.electrodynamic_thaumaturgy.item_pipe": "Item Pipe",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "Pulsed Plasma",
