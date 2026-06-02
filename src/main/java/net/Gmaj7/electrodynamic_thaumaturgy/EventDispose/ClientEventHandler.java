@@ -58,6 +58,7 @@ public class ClientEventHandler {
             event.register(MoeMenuType.MAGNETO_FUSION_BLOCK_MENU.get(), MagnetoFusionBlockScreen::new);
             event.register(MoeMenuType.ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU.get(), ElectromagneticDissociationBlockScreen::new);
             event.register(MoeMenuType.EDDY_CURRENT_REMELTER_BLOCK_MENU.get(), EddyCurrentRemelterBlockScreen::new);
+            event.register(MoeMenuType.PIPE_NET_MENU.get(), PipeNetScreen::new);
         }
 
 

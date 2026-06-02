@@ -1,15 +1,23 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.PipeNetMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.resource.Resource;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
-public abstract class PipeNet {
+public abstract class PipeNet implements MenuProvider {
     protected final int netId;
     protected Set<BlockPos> posSet;
     protected LinkedHashMap<BlockPos, Set<BlockPos>> adj;
@@ -264,6 +272,29 @@ public abstract class PipeNet {
             }
         }
         return blockPos;
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("item.electrodynamic_thaumaturgy.energy_block");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new PipeNetMenu(netId, inventory, extract, insert);
+    }
+
+    @Override
+    public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+        buffer.writeMap(extract, (buf, pos) -> buf.writeBlockPos(pos),
+                (buf, map) -> buf.writeMap(map,
+                    (b, dir) -> b.writeEnum(dir),
+                    (b, mode) -> b.writeEnum(mode)));
+        buffer.writeMap(insert,  (buf, pos) -> buf.writeBlockPos(pos),
+                (buf, set) -> {
+                    buf.writeVarInt(set.size());
+                    for (Direction dir : set) buf.writeEnum(dir);
+                });
     }
 
     public void loopTransferMod(BlockPos pos, Direction direction) {

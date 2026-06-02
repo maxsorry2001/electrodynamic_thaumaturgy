@@ -142,9 +142,7 @@ public abstract class AbstractPipe extends Block {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(level.isClientSide()) return InteractionResult.CONSUME;
         PipeNetSaveData data = getPipeNetSaveData((ServerLevel) level);
-        if(player.isShiftKeyDown()) {
-            int i = 1;
-        }
+        player.openMenu((data.getNetOfPos(pos)));
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 

@@ -31,6 +31,7 @@ public class MoeMenuType {
     public static final DeferredHolder<MenuType<?>, MenuType<MagnetoFusionBlockMenu>> MAGNETO_FUSION_BLOCK_MENU = registerMenuType("maneto_fusion_machine_menu", MagnetoFusionBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ElectromagneticDissociationBlockMenu>> ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU = registerMenuType("electromagnetic_dissociation_machine_block_menu", ElectromagneticDissociationBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<EddyCurrentRemelterBlockMenu>> EDDY_CURRENT_REMELTER_BLOCK_MENU = registerMenuType("eddy_current_remelter_block_menu", EddyCurrentRemelterBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<PipeNetMenu>> PIPE_NET_MENU = registerMenuType("pipe_net_menu", PipeNetMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory){
         return MENU_TYPE.register(name, () -> IMenuTypeExtension.create(factory));

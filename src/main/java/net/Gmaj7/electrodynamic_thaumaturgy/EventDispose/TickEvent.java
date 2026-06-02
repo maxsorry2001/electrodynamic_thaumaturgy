@@ -6,7 +6,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.EnergyPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
