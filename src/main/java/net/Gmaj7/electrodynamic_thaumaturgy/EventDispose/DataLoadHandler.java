@@ -48,7 +48,7 @@ public class DataLoadHandler {
                 MoeItems.SOLUTION_BATTERY.get());
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
                 MoeItems.POWER_BANK.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 16777216)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 536870912)),
                 MoeBlocks.ENERGY_BLOCK.get());
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),

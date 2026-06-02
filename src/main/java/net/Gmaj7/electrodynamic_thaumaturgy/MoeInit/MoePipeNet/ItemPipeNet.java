@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
@@ -20,23 +19,24 @@ public class ItemPipeNet extends PipeNet{
             BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new).fieldOf("poses").forGetter(ItemPipeNet::getPosSet),
             Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("adj").forGetter(ItemPipeNet::getAdj),
             Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("insert").forGetter(ItemPipeNet::getInsert),
-            Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(ItemPipeNet::getExtract),
+            Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey),
+                    Codec.unboundedMap(Direction.CODEC, TransferMode.CODEC)).fieldOf("extract").forGetter(ItemPipeNet::getExtract),
             Codec.INT.fieldOf("tick_counter").forGetter(ItemPipeNet::getTickCounter)
     ).apply(i, ItemPipeNet::new));
 
     // 为每个连接的机器存储其对应的缓存
-    private Map<BlockPos, Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> extractCaches;
-    private Map<BlockPos, Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> insertCaches;
+    private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> extractCaches;
+    private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> insertCaches;
     public ItemPipeNet(int id) {
         super(id);
-        this.insertCaches = new HashMap<>();
-        this.extractCaches = new HashMap<>();
+        this.insertCaches = new LinkedHashMap<>();
+        this.extractCaches = new LinkedHashMap<>();
     }
 
-    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract, int tickCounter) {
+    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter) {
         super(id, posSet, adj, insert, extract, tickCounter);
-        this.insertCaches = new HashMap<>();
-        this.extractCaches = new HashMap<>();
+        this.insertCaches = new LinkedHashMap<>();
+        this.extractCaches = new LinkedHashMap<>();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ItemPipeNet extends PipeNet{
     public void addExtractCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) {
         BlockPos machinePos = pipePos.relative(pipeSide);
         Direction machineSide = pipeSide.getOpposite();
-        extractCaches.computeIfAbsent(pipePos, k -> new HashMap<>()).put(pipeSide,
+        extractCaches.computeIfAbsent(pipePos, k -> new LinkedHashMap<>()).put(pipeSide,
                 BlockCapabilityCache.create(
                         Capabilities.Item.BLOCK,
                         level,
@@ -77,7 +77,7 @@ public class ItemPipeNet extends PipeNet{
     public void addInsertCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) {
         BlockPos machinePos = pipePos.relative(pipeSide);
         Direction machineSide = pipeSide.getOpposite();
-        insertCaches.computeIfAbsent(pipePos, k -> new HashMap<>()).put(pipeSide,
+        insertCaches.computeIfAbsent(pipePos, k -> new LinkedHashMap<>()).put(pipeSide,
                 BlockCapabilityCache.create(
                         Capabilities.Item.BLOCK,
                         level,
@@ -90,12 +90,18 @@ public class ItemPipeNet extends PipeNet{
     }
 
     @Override
+    public void removePosCache(BlockPos blockPos) {
+        insertCaches.remove(blockPos);
+        extractCaches.remove(blockPos);
+    }
+
+    @Override
     protected void ensureCachesInitialized(ServerLevel level) {
         if (extractCaches.size() != extract.size() && !extract.isEmpty()) {
             // 根据已有的 extract 映射创建缓存
-            for (Map.Entry<BlockPos, Set<Direction>> entry : extract.entrySet()) {
+            for (Map.Entry<BlockPos, Map<Direction, TransferMode>> entry : extract.entrySet()) {
                 BlockPos pipePos = entry.getKey();
-                for (Direction dir : entry.getValue()) {
+                for (Direction dir : entry.getValue().keySet()) {
                     addExtractCache(level, pipePos, dir);
                 }
             }
@@ -110,70 +116,144 @@ public class ItemPipeNet extends PipeNet{
             }
         }
         if(distances.isEmpty())
-            checkDistance();
+            checkChange();
     }
 
     @Override
-    protected void work() {if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
+    protected void work() {
+        if(extract.isEmpty() || insert.isEmpty()) return;
+        if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
         List<PosAndResourceHandler<ItemResource>> extractors = new ArrayList<>();
-        for (Map.Entry<BlockPos, Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> entry : extractCaches.entrySet()) {
-            for (var cache : entry.getValue().values()) {
-                ResourceHandler<ItemResource> h = cache.getCapability();
-                if (h != null) extractors.add(new PosAndResourceHandler<>(entry.getKey(), h));
+        List<TransferMode> transferModes = new ArrayList<>();
+        for (Map.Entry<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> entry : extractCaches.entrySet()) {
+            for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry1 : entry.getValue().entrySet()) {
+                ResourceHandler<ItemResource> h = entry1.getValue().getCapability();
+                if (h != null) {
+                    extractors.add(new PosAndResourceHandler<>(entry.getKey(), h));
+                    transferModes.add(extract.get(entry.getKey()).get(entry1.getKey()));
+                }
             }
         }
-        List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
-        for (var map : insertCaches.values()) {
-            for (var cache : map.values()) {
-                ResourceHandler<ItemResource> h = cache.getCapability();
-                if (h != null) inserters.add(h);
-            }
-        }
-        if(extractors.isEmpty() || inserters.isEmpty()) return;int total = extractors.size();
+        if(extractors.isEmpty()) return;
+        int total = extractors.size();
         int base = total / 20, remaining = total % 20, processedBefore = tickCounter * base + Math.min(remaining, tickCounter);
         if (processedBefore >= total) return; // 本 tick 无任务
         int count = (tickCounter < remaining) ? base + 1 : base, end = Math.min(processedBefore + count, total);
         for (; processedBefore < end; processedBefore ++){
             ItemResource resource = ItemResource.EMPTY;
-            ResourceHandler<ItemResource> insertHandler = null;
-            int insertCount = 0;
             var extractSet = extractors.get(processedBefore);
-            try (Transaction transaction = Transaction.openRoot()){
-                ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
-                // 找到第一个非空槽位
-                for (int i = 0; i < extractHandler.size(); i++){
-                    resource = extractHandler.getResource(i);
-                    if(!resource.isEmpty()) break;
-                }
-                if(!resource.isEmpty()){
-                    // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
-                    int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
-                    if (extracted > 0) {
-                        // 按距离顺序尝试插入
-                        outer:
-                        for (int i = 1; i <= distances.get(extractSet.getPos()).size(); i++){
-                            BlockPos checkPos = getNearestInsert(extractSet.getPos(), i);
-                            Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> dirMap = insertCaches.get(checkPos);
-                            if (dirMap == null) continue;
-                            for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : dirMap.entrySet()){
-                                ResourceHandler<ItemResource> inserter = entry.getValue().getCapability();
-                                if (inserter == null) continue;
-                                int inserted = inserter.insert(resource, extracted, transaction);
-                                if (inserted == extracted) {
-                                    insertHandler = inserter;
-                                    insertCount = inserted;
-                                    break outer;
+            TransferMode transferMode = transferModes.get(processedBefore);
+            if(transferMode != TransferMode.POLLING){
+                int insertCount = 0;
+                ResourceHandler<ItemResource> insertHandler = null;
+                try (Transaction transaction = Transaction.openRoot()) {
+                    ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
+                    // 找到第一个非空槽位
+                    for (int i = 0; i < extractHandler.size(); i++) {
+                        resource = extractHandler.getResource(i);
+                        if (!resource.isEmpty()) break;
+                    }
+                    if (!resource.isEmpty()) {
+                        // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
+                        int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
+                        if (extracted > 0) {
+                            int size = distances.get(extractSet.getPos()).size();
+                            // 按距离顺序尝试插入
+                            outer:
+                            for (int i = 0; i < size; i++) {
+                                BlockPos checkPos = getNearestInsert(extractSet.getPos(), transferMode == TransferMode.NEAREST ? i : size - i);
+                                Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> dirMap = insertCaches.get(checkPos);
+                                if (dirMap == null) continue;
+                                for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : dirMap.entrySet()) {
+                                    ResourceHandler<ItemResource> inserter = entry.getValue().getCapability();
+                                    if (inserter == null) continue;
+                                    int inserted = inserter.insert(resource, extracted, transaction);
+                                    if (inserted == extracted) {
+                                        insertHandler = inserter;
+                                        insertCount = inserted;
+                                        break outer;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                if (resource.isEmpty() || insertCount == 0) break;
+                try (Transaction transaction = Transaction.openRoot()) {
+                    extractSet.getResourceHandler().extract(resource, insertCount, transaction);
+                    insertHandler.insert(resource, insertCount, transaction);
+                    transaction.commit();
+                }
             }
-            if (resource.isEmpty() || insertCount == 0) break;
-            try (Transaction transaction = Transaction.openRoot()){
-                extractSet.getResourceHandler().extract(resource, insertCount, transaction);
-                insertHandler.insert(resource, insertCount, transaction);
-                transaction.commit();
+            else {
+                Set<BlockPos> list = distances.get(extractSet.getPos()).keySet();
+                List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
+                for (BlockPos pos : list){
+                    for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : insertCaches.get(pos).entrySet()){
+                        inserters.add(entry.getValue().getCapability());
+                    }
+                }
+                if(inserters.isEmpty()) break;
+                int trueExtract = 0;
+                int[] insertCounts = new int[inserters.size()];
+                List<Integer> available = new ArrayList<>();
+                for (int i = 0; i < inserters.size(); i++)
+                    available.add((pollingIndexes.get(extractSet.getPos()) + i) % inserters.size());
+                int testPolling = (pollingIndexes.get(extractSet.getPos()));
+                try (Transaction transaction = Transaction.openRoot()) {
+                    ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
+                    // 找到第一个非空槽位
+                    for (int i = 0; i < extractHandler.size(); i++) {
+                        resource = extractHandler.getResource(i);
+                        if (!resource.isEmpty()) break;
+                    }
+                    if (!resource.isEmpty()) {
+                        // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
+                        int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
+                        while (extracted > 0) {
+                            if(available.isEmpty()) break;
+                            int baseInsertCount = extracted / available.size(), remainingCount = extracted % available.size();
+                            if(baseInsertCount > 0) {
+                                Iterator<Integer> iterator = available.iterator();
+                                while (iterator.hasNext()){
+                                    testPolling = iterator.next();
+                                    var insertHandler = inserters.get(testPolling);
+                                    int inserted = insertHandler.insert(resource, baseInsertCount, transaction);
+                                    insertCounts[testPolling] += inserted;
+                                    trueExtract += inserted;
+                                    extracted -= inserted;
+                                    if (inserted < baseInsertCount) {
+                                        iterator.remove();
+                                    }
+                                }
+                            }
+                            else {
+                                Iterator<Integer> iterator = available.iterator();
+                                while (iterator.hasNext()){
+                                    if(extracted == 0) break;
+                                    testPolling = iterator.next();
+                                    var insertHandler = inserters.get(testPolling);
+                                    int inserted = insertHandler.insert(resource, 1, transaction);
+                                    insertCounts[testPolling] += inserted;
+                                    trueExtract += inserted;
+                                    extracted -= inserted;
+                                    if (inserted == 0) {
+                                        iterator.remove();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if(trueExtract == 0) break;
+                pollingIndexes.put(extractSet.getPos(), (testPolling + 1) % inserters.size());
+                try (Transaction transaction = Transaction.openRoot()){
+                    extractSet.resourceHandler.extract(resource, trueExtract, transaction);
+                    for (int i = 0; i < insertCounts.length; i++){
+                        inserters.get(i).insert(resource, insertCounts[i], transaction);
+                    }
+                    transaction.commit();
+                }
             }
         }
     }

@@ -93,7 +93,8 @@ public abstract class AbstractPipe extends Block {
 
     @Override
     protected InteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(level.isClientSide() || !itemStack.is(Tags.Items.TOOLS_WRENCH)) return InteractionResult.CONSUME;
+        if(level.isClientSide()) return InteractionResult.CONSUME;
+        if(!itemStack.isEmpty() && !itemStack.is(Tags.Items.TOOLS_WRENCH)) return useWithoutItem(state, level, pos, player, hitResult);
         Direction direction = getSelection(state, level, pos, player);
         if (direction == null) {
             direction = hitResult.getDirection(); // 回退
@@ -101,7 +102,9 @@ public abstract class AbstractPipe extends Block {
         PipeNetSaveData data = getPipeNetSaveData((ServerLevel) level);
         BlockPos neighborPos = pos.relative(direction);
         BlockState neighborState = level.getBlockState(neighborPos);
-        if (isSamePipe(neighborState)) {
+        if(itemStack.isEmpty() && state.getValue(DIR_TO_PROP.get(direction)) == LinkState.EXTRACT)
+            data.loopTransferModOfPos(pos, direction);
+        else if (isSamePipe(neighborState)) {
             // 切换连接状态
             boolean current = getConnection(direction, state);
             if (!current) {

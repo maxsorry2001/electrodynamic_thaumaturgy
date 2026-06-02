@@ -7,7 +7,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.*;
@@ -18,118 +20,151 @@ public class EnergyPipeNet extends PipeNet{
             BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new).fieldOf("poses").forGetter(EnergyPipeNet::getPosSet),
             Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), BlockPos.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("adj").forGetter(EnergyPipeNet::getAdj),
             Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("insert").forGetter(EnergyPipeNet::getInsert),
-            Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("extract").forGetter(EnergyPipeNet::getExtract),
+            Codec.unboundedMap(Codec.STRING.xmap(EnergyPipeNet::keyToPos, EnergyPipeNet::posToKey),
+                    Codec.unboundedMap(Direction.CODEC, TransferMode.CODEC)).fieldOf("extract").forGetter(EnergyPipeNet::getExtract),
             Codec.INT.fieldOf("tick_counter").forGetter(EnergyPipeNet::getTickCounter)
     ).apply(i, EnergyPipeNet::new));
 
     // 为每个连接的机器存储其对应的缓存
-    private Map<BlockPos, Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> extractCaches;
-    private Map<BlockPos, Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> insertCaches;
+    private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> extractCaches;
+    private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> insertCaches;
     public EnergyPipeNet(int id) {
         super(id);
-        this.insertCaches = new HashMap<>();
-        this.extractCaches = new HashMap<>();
+        this.insertCaches = new LinkedHashMap<>();
+        this.extractCaches = new LinkedHashMap<>();
     }
 
-    public EnergyPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract, int tickCounter) {
+    public EnergyPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter) {
         super(id, posSet, adj, insert, extract, tickCounter);
-        this.insertCaches = new HashMap<>();
-        this.extractCaches = new HashMap<>();
+        this.insertCaches = new LinkedHashMap<>();
+        this.extractCaches = new LinkedHashMap<>();
+    }
+
+    @Override
+    public void removePosCache(BlockPos blockPos) {
+        insertCaches.remove(blockPos);
+        extractCaches.remove(blockPos);
     }
 
     @Override
     public void work() {
+        if(extract.isEmpty() || insert.isEmpty()) return;
         if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
-        List<EnergyHandler> extractors = new ArrayList<>();
-        for (var map : extractCaches.values()) {
-            for (var cache : map.values()) {
-                EnergyHandler h = cache.getCapability();
-                if (h != null) extractors.add(h);
-            }
-        }
-        List<EnergyHandler> inserters = new ArrayList<>();
-        for (var map : insertCaches.values()) {
-            for (var cache : map.values()) {
-                EnergyHandler h = cache.getCapability();
-                if (h != null) inserters.add(h);
-            }
-        }
-        if (extractors.isEmpty() || inserters.isEmpty()) return;
-        // 1. 模拟阶段：获取每个源的最大可抽取量、每个目标的最大可插入量
-        int[] extractCap = new int[extractors.size()];
-        int totalExtract = 0;
-        try (Transaction simTx = Transaction.openRoot()) {
-            for (int i = 0; i < extractors.size(); i++) {
-                extractCap[i] = extractors.get(i).extract(2048, simTx);
-                totalExtract += extractCap[i];
-            }
-        }
-
-        int[] insertCap = new int[inserters.size()];
-        int totalInsert = 0;
-        try (Transaction simTx = Transaction.openRoot()) {
-            for (int i = 0; i < inserters.size(); i++) {
-                insertCap[i] = inserters.get(i).insert(2048, simTx);
-                totalInsert += insertCap[i];
-            }
-        }
-
-        if (totalExtract == 0 || totalInsert == 0) return;
-
-        // 2. 计算实际传输总量（受限于总可抽和总可插）
-        int transfer = Math.min(totalExtract, totalInsert);
-        // 3. 计算每个插入器应该分得的能量（平均分配）
-        int[] toInsert = new int[inserters.size()];
-        int remaining = transfer;
-        double avg = (double) remaining / inserters.size();
-        // 第一轮：每个分配 min(自身容量, 平均值)
-        for (int i = 0; i < inserters.size(); i++) {
-            int alloc = (int) Math.min(insertCap[i], avg);
-            toInsert[i] = alloc;
-            remaining -= alloc;
-            insertCap[i] -= alloc;
-        }
-        // 第二轮：将剩余能量按顺序分配给仍有容量的插入器
-        for (int i = 0; i < inserters.size() && remaining > 0; i++) {
-            if (insertCap[i] > 0) {
-                int add = Math.min(insertCap[i], remaining);
-                toInsert[i] += add;
-                remaining -= add;
-            }
-        }
-
-        // 4. 确定从每个抽取器要提取的能量（按顺序填充，确保总提取 = transfer）
-        int[] toExtract = new int[extractors.size()];
-        remaining = transfer;
-        for (int i = 0; i < extractors.size() && remaining > 0; i++) {
-            int take = Math.min(extractCap[i], remaining);
-            toExtract[i] = take;
-            remaining -= take;
-        }
-
-        // 5. 执行阶段：使用新事务实际执行抽取和插入
-        try (Transaction execTx = Transaction.openRoot()) {
-            // 抽取
-            for (int i = 0; i < extractors.size(); i++) {
-                if (toExtract[i] > 0) {
-                    int extracted = extractors.get(i).extract(toExtract[i], execTx);
-                    if (extracted != toExtract[i]) {
-                        execTx.close();
-                        return;
-                    }
+        List<PosAndEnergyHandler> extractors = new ArrayList<>();
+        List<TransferMode> transferModes = new ArrayList<>();
+        for (Map.Entry<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> entry : extractCaches.entrySet()) {
+            for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry1 : entry.getValue().entrySet()) {
+                EnergyHandler h = entry1.getValue().getCapability();
+                if (h != null) {
+                    extractors.add(new PosAndEnergyHandler(entry.getKey(), h));
+                    transferModes.add(extract.get(entry.getKey()).get(entry1.getKey()));
                 }
             }
-            // 插入
-            for (int i = 0; i < inserters.size(); i++) {
-                if (toInsert[i] > 0) {
-                    int inserted = inserters.get(i).insert(toInsert[i], execTx);
-                    if (inserted != toInsert[i]) {
-                        execTx.close();
-                        return;
+        }
+        if(extractors.isEmpty()) return;
+        int total = extractors.size();
+        int base = total / 20, remaining = total % 20, processedBefore = tickCounter * base + Math.min(remaining, tickCounter);
+        if (processedBefore >= total) return; // 本 tick 无任务
+        int count = (tickCounter < remaining) ? base + 1 : base, end = Math.min(processedBefore + count, total);
+        for (; processedBefore < end; processedBefore ++){
+            var extractSet = extractors.get(processedBefore);
+            TransferMode transferMode = transferModes.get(processedBefore);
+            if(transferMode != TransferMode.POLLING){
+                int insertCount = 0;
+                EnergyHandler insertHandler = null;
+                try (Transaction transaction = Transaction.openRoot()) {
+                    EnergyHandler extractHandler = extractSet.getEnergyHandler();
+                    int extracted = extractHandler.extract(16777216, transaction);
+                    if (extracted > 0) {
+                        int size = distances.get(extractSet.getPos()).size();
+                        // 按距离顺序尝试插入
+                        outer:
+                        for (int i = 0; i < size; i++) {
+                            BlockPos checkPos = getNearestInsert(extractSet.getPos(), transferMode == TransferMode.NEAREST ? i : size - i);
+                            Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>> dirMap = insertCaches.get(checkPos);
+                            if (dirMap == null) continue;
+                            for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry : dirMap.entrySet()) {
+                                EnergyHandler inserter = entry.getValue().getCapability();
+                                if (inserter == null) continue;
+                                int inserted = inserter.insert(extracted, transaction);
+                                if (inserted == extracted) {
+                                    insertHandler = inserter;
+                                    insertCount = inserted;
+                                    break outer;
+                                }
+                            }
+                        }
                     }
                 }
+                if (insertCount == 0) break;
+                try (Transaction transaction = Transaction.openRoot()) {
+                    extractSet.getEnergyHandler().extract(insertCount, transaction);
+                    insertHandler.insert(insertCount, transaction);
+                    transaction.commit();
+                }
             }
-            execTx.commit();
+            else {
+                Set<BlockPos> list = distances.get(extractSet.getPos()).keySet();
+                List<EnergyHandler> inserters = new ArrayList<>();
+                for (BlockPos pos : list){
+                    for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry : insertCaches.get(pos).entrySet()){
+                        inserters.add(entry.getValue().getCapability());
+                    }
+                }
+                if(inserters.isEmpty()) break;
+                int trueExtract = 0;
+                int[] insertCounts = new int[inserters.size()];
+                List<Integer> available = new ArrayList<>();
+                for (int i = 0; i < inserters.size(); i++)
+                    available.add((pollingIndexes.get(extractSet.getPos()) + i) % inserters.size());
+                int testPolling = (pollingIndexes.get(extractSet.getPos()));
+                try (Transaction transaction = Transaction.openRoot()) {
+                    EnergyHandler extractHandler = extractSet.getEnergyHandler();
+                    int extracted = extractHandler.extract(16777216, transaction);
+                    while (extracted > 0) {
+                        if(available.isEmpty()) break;
+                        int baseInsertCount = extracted / available.size(), remainingCount = extracted % available.size();
+                        if(baseInsertCount > 0) {
+                            Iterator<Integer> iterator = available.iterator();
+                            while (iterator.hasNext()){
+                                testPolling = iterator.next();
+                                var insertHandler = inserters.get(testPolling);
+                                int inserted = insertHandler.insert(baseInsertCount, transaction);
+                                insertCounts[testPolling] += inserted;
+                                trueExtract += inserted;
+                                extracted -= inserted;
+                                if (inserted < baseInsertCount) {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+                        else {
+                            Iterator<Integer> iterator = available.iterator();
+                            while (iterator.hasNext()){
+                                if(extracted == 0) break;
+                                testPolling = iterator.next();
+                                var insertHandler = inserters.get(testPolling);
+                                int inserted = insertHandler.insert(1, transaction);
+                                insertCounts[testPolling] += inserted;
+                                trueExtract += inserted;
+                                extracted -= inserted;
+                                if (inserted == 0) {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+                    }
+                }
+                if(trueExtract == 0) break;
+                pollingIndexes.put(extractSet.getPos(), (testPolling + 1) % inserters.size());
+                try (Transaction transaction = Transaction.openRoot()){
+                    extractSet.getEnergyHandler().extract(trueExtract, transaction);
+                    for (int i = 0; i < insertCounts.length; i++){
+                        inserters.get(i).insert(insertCounts[i], transaction);
+                    }
+                    transaction.commit();
+                }
+            }
         }
     }
 
@@ -154,7 +189,7 @@ public class EnergyPipeNet extends PipeNet{
     public void addExtractCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) {
         BlockPos machinePos = pipePos.relative(pipeSide);
         Direction machineSide = pipeSide.getOpposite();
-        extractCaches.computeIfAbsent(pipePos, k -> new HashMap<>()).put(pipeSide,
+        extractCaches.computeIfAbsent(pipePos, k -> new LinkedHashMap<>()).put(pipeSide,
                 BlockCapabilityCache.create(
                         Capabilities.Energy.BLOCK,
                         level,
@@ -169,7 +204,7 @@ public class EnergyPipeNet extends PipeNet{
     public void addInsertCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) {
         BlockPos machinePos = pipePos.relative(pipeSide);
         Direction machineSide = pipeSide.getOpposite();
-        insertCaches.computeIfAbsent(pipePos, k -> new HashMap<>()).put(pipeSide,
+        insertCaches.computeIfAbsent(pipePos, k -> new LinkedHashMap<>()).put(pipeSide,
                 BlockCapabilityCache.create(
                         Capabilities.Energy.BLOCK,
                         level,
@@ -183,16 +218,16 @@ public class EnergyPipeNet extends PipeNet{
 
     @Override
     protected void ensureCachesInitialized(ServerLevel level) {
-        if (extractCaches.isEmpty() && !extract.isEmpty()) {
+        if (extractCaches.size() != extract.size() && !extract.isEmpty()) {
             // 根据已有的 extract 映射创建缓存
-            for (Map.Entry<BlockPos, Set<Direction>> entry : extract.entrySet()) {
+            for (Map.Entry<BlockPos, Map<Direction, TransferMode>> entry : extract.entrySet()) {
                 BlockPos pipePos = entry.getKey();
-                for (Direction dir : entry.getValue()) {
+                for (Direction dir : entry.getValue().keySet()) {
                     addExtractCache(level, pipePos, dir);
                 }
             }
         }
-        if(insertCaches.isEmpty() && ! insert.isEmpty()){
+        if(insertCaches.size() != insert.size() && ! insert.isEmpty()){
             // 根据已有的 insert 映射创建缓存
             for (Map.Entry<BlockPos, Set<Direction>> entry : insert.entrySet()) {
                 BlockPos pipePos = entry.getKey();
@@ -202,6 +237,25 @@ public class EnergyPipeNet extends PipeNet{
             }
         }
         if(distances.isEmpty())
-            checkDistance();
+            checkChange();
+    }
+
+    protected static class PosAndEnergyHandler{
+        protected BlockPos pos;
+        protected EnergyHandler energyHandler;
+
+        protected PosAndEnergyHandler(BlockPos pos, EnergyHandler energyHandler){
+            this.pos = pos;
+            this.energyHandler = energyHandler;
+        }
+
+        protected BlockPos getPos() {
+            return pos;
+        }
+
+        protected EnergyHandler getEnergyHandler() {
+            return energyHandler;
+        }
+
     }
 }

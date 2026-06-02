@@ -25,6 +25,16 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
         return pipeNets.containsKey(id) ? pipeNets.get(id) : null;
     }
 
+    public PipeNet getNetOfPos(BlockPos pos){
+        PipeNet net = null;
+        for (PipeNet pipeNet : pipeNets.values())
+            if(pipeNet.containPos(pos)) {
+                net = pipeNet;
+                break;
+            }
+        return net;
+    }
+
     public void removeNet(int id){
         pipeNets.remove(id);
         setDirty();
@@ -57,7 +67,8 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
         // 收集所有节点和邻接关系
         Set<BlockPos> allPos = new HashSet<>();
         Map<BlockPos, Set<BlockPos>> allAdj = new HashMap<>();
-        Map<BlockPos, Set<Direction>> allInsert = new HashMap<>(), allExtract = new HashMap<>();
+        Map<BlockPos, Set<Direction>> allInsert = new HashMap<>();
+        Map<BlockPos, Map<Direction, PipeNet.TransferMode>> allExtract = new HashMap<>();
 
         for (int id : netLinks) {
             PipeNet net = pipeNets.get(id);
@@ -69,8 +80,8 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
             for (Map.Entry<BlockPos, Set<Direction>> entry : net.getInsert().entrySet()) {
                 allInsert.computeIfAbsent(entry.getKey(), k -> new HashSet<>()).addAll(entry.getValue());
             }
-            for (Map.Entry<BlockPos, Set<Direction>> entry : net.getExtract().entrySet()) {
-                allExtract.computeIfAbsent(entry.getKey(), k -> new HashSet<>()).addAll(entry.getValue());
+            for (Map.Entry<BlockPos, Map<Direction, PipeNet.TransferMode>> entry : net.getExtract().entrySet()) {
+                allExtract.computeIfAbsent(entry.getKey(), k -> new HashMap<>()).putAll(entry.getValue());
             }
         }
 
@@ -149,7 +160,8 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
             remaining.removeAll(comp);
         }
 
-        Map<BlockPos, Set<Direction>> insert = net.getInsert(), extract = net.getExtract();
+        Map<BlockPos, Set<Direction>> insert = net.getInsert();
+        Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract = net.getExtract();
 
         // 4.2 删除原网络
         pipeNets.remove(netId);
@@ -158,12 +170,13 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
         // 需要根据分量构建新的 PipeNet 实例（包含节点和邻接关系）
         for (int i = 0; i < components.size(); i++) {
             Set<BlockPos> comp = components.get(i);
-            Map<BlockPos, Set<Direction>> newInsert = new HashMap<>(), newExtract = new HashMap<>();
+            Map<BlockPos, Set<Direction>> newInsert = new HashMap<>();
+            Map<BlockPos, Map<Direction, PipeNet.TransferMode>> newExtract = new HashMap<>();
             // 构建该分量的邻接表（只包含分量内部的边）
             Map<BlockPos, Set<BlockPos>> subAdj = new HashMap<>();
             for (BlockPos p : comp) {
                 if(insert.containsKey(p)) newInsert.put(p, new HashSet<>(insert.get(p)));
-                if(extract.containsKey(p)) newExtract.put(p, new HashSet<>(extract.get(p)));
+                if(extract.containsKey(p)) newExtract.put(p, new HashMap<>(extract.get(p)));
                 Set<BlockPos> neighbors = net.getPosNeighbors(p);
                 Set<BlockPos> filtered = new HashSet<>();
                 for (BlockPos nb : neighbors) {
@@ -182,7 +195,7 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
         setDirty();
     }
 
-    protected abstract T createNetWith(int newId, Set<BlockPos> comp, Map<BlockPos, Set<BlockPos>> subAdj, Map<BlockPos, Set<Direction>> newInsert, Map<BlockPos, Set<Direction>> newExtract);
+    protected abstract T createNetWith(int newId, Set<BlockPos> comp, Map<BlockPos, Set<BlockPos>> subAdj, Map<BlockPos, Set<Direction>> newInsert, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> newExtract);
 
     protected static String saveId(int i){
         return String.valueOf(i);
@@ -228,5 +241,15 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
     public void tick(ServerLevel level){
         for (PipeNet pipeNet : pipeNets.values())
             pipeNet.tick(level);
+    }
+
+    public void loopTransferModOfPos(BlockPos pos, Direction direction) {
+        PipeNet net = null;
+        for (PipeNet pipeNet : pipeNets.values())
+            if(pipeNet.containPos(pos))
+                net = pipeNet;
+        if(net == null) return;
+        net.loopTransferMod(pos, direction);
+        setDirty();
     }
 }

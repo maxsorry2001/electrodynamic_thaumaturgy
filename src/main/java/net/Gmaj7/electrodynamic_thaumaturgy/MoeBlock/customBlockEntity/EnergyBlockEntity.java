@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 public class EnergyBlockEntity extends BlockEntity implements IMoeEnergyBlockEntity,IMoeItemBlockEntity, MenuProvider {
     private final int tickEnergyTranslate = 1024;
 
-    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(16777216) {
+    private final MoeBlockEntityEnergyHandler energy = new MoeBlockEntityEnergyHandler(536870912) {
 
         @Override
         protected void onEnergyChanged(int previousAmount) {

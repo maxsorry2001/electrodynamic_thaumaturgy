@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.StringRepresentable;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.resource.Resource;
 
@@ -11,49 +12,55 @@ import java.util.*;
 public abstract class PipeNet {
     protected final int netId;
     protected Set<BlockPos> posSet;
-    protected Map<BlockPos, Set<BlockPos>> adj;
-    protected Map<BlockPos, Set<Direction>> insert;
-    protected Map<BlockPos, Set<Direction>> extract;
+    protected LinkedHashMap<BlockPos, Set<BlockPos>> adj;
+    protected LinkedHashMap<BlockPos, Set<Direction>> insert;
+    protected LinkedHashMap<BlockPos, Map<Direction, TransferMode>> extract;
     protected Map<BlockPos, LinkedHashMap<BlockPos, Integer>> distances;
     protected int tickCounter;
+    protected Map<BlockPos, Integer> pollingIndexes;
 
     public PipeNet(int id){
         this.netId = id;
-        this.posSet = new HashSet<>();
-        this.adj = new HashMap<>();
-        this.insert = new HashMap<>();
-        this.extract = new HashMap<>();
+        this.posSet = new LinkedHashSet<>();
+        this.adj = new LinkedHashMap<>();
+        this.insert = new LinkedHashMap<>();
+        this.extract = new LinkedHashMap<>();
         this.distances = new HashMap<>();
         this.tickCounter = 0;
+        this.pollingIndexes = new HashMap<>();
     }
 
-    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Set<Direction>> extract, int tickCounter){
+    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter){
         this.netId = id;
         this.posSet = new HashSet<>(posSet);
-        this.adj = new HashMap<>();
-        this.insert = new HashMap<>();
-        this.extract = new HashMap<>();
+        this.adj = new LinkedHashMap<>();
+        this.insert = new LinkedHashMap<>();
+        this.extract = new LinkedHashMap<>();
         this.distances = new HashMap<>();
+        this.pollingIndexes = new HashMap<>();
         this.tickCounter = tickCounter;
         for (Map.Entry<BlockPos, Set<BlockPos>> entry : adj.entrySet()) {
-            this.adj.put(entry.getKey(), new HashSet<>(entry.getValue()));
+            this.adj.put(entry.getKey(), new LinkedHashSet<>(entry.getValue()));
         }
         for (Map.Entry<BlockPos, Set<Direction>> entry : insert.entrySet()) {
-            this.insert.put(entry.getKey(), new HashSet<>(entry.getValue()));
+            this.insert.put(entry.getKey(), new LinkedHashSet<>(entry.getValue()));
         }
-        for (Map.Entry<BlockPos, Set<Direction>> entry : extract.entrySet()) {
-            this.extract.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        for (Map.Entry<BlockPos, Map<Direction, TransferMode>> entry : extract.entrySet()) {
+            Map<Direction, TransferMode> map = new LinkedHashMap<>();
+            map.putAll(entry.getValue());
+            this.extract.put(entry.getKey(), map);
+            this.pollingIndexes.put(entry.getKey(), 0);
         }
     }
 
     public void addPos(BlockPos blockPos, Set<BlockPos> links){
         posSet.add(blockPos);
-        Set<BlockPos> neighbors = new HashSet<>(links);  // 拷贝
+        LinkedHashSet<BlockPos> neighbors = new LinkedHashSet<>(links);  // 拷贝
         adj.put(blockPos, neighbors);
         for (BlockPos linkPos : links) {
-            adj.computeIfAbsent(linkPos, k -> new HashSet<>()).add(blockPos);
+            adj.computeIfAbsent(linkPos, k -> new LinkedHashSet<>()).add(blockPos);
         }
-        checkDistance();
+        checkChange();
     }
 
     public void removePos(BlockPos blockPos){
@@ -69,7 +76,8 @@ public abstract class PipeNet {
         }
         if(insert.containsKey(blockPos)) insert.remove(blockPos);
         if(extract.containsKey(blockPos)) extract.remove(blockPos);
-        checkDistance();
+        removePosCache(blockPos);
+        checkChange();
     }
 
     public Set<BlockPos> getPosSet() {
@@ -77,7 +85,7 @@ public abstract class PipeNet {
     }
 
     public Set<BlockPos> getPosNeighbors(BlockPos pos) {
-        return adj.getOrDefault(pos, Collections.emptySet());
+        return adj.getOrDefault(pos, new LinkedHashSet<>());
     }
 
     public int getNetId() {
@@ -88,7 +96,7 @@ public abstract class PipeNet {
         return adj;
     }
 
-    public Map<BlockPos, Set<Direction>> getExtract() {
+    public LinkedHashMap<BlockPos, Map<Direction, TransferMode>> getExtract() {
         return extract;
     }
 
@@ -137,24 +145,24 @@ public abstract class PipeNet {
     public void removeConnection(BlockPos posA, BlockPos posB) {
         if (adj.containsKey(posA)) adj.get(posA).remove(posB);
         if (adj.containsKey(posB)) adj.get(posB).remove(posA);
-        checkDistance();
+        checkChange();
     }
 
     public void link2Pos(BlockPos pos, BlockPos neighborPos) {
         adj.get(pos).add(neighborPos);
         adj.get(neighborPos).add(pos);
-        checkDistance();
+        checkChange();
     }
 
     public void addInsert(ServerLevel level, BlockPos pos, Direction direction){
         if(insert.containsKey(pos) && !insert.get(pos).contains(direction)) insert.get(pos).add(direction);
         else {
-            Set<Direction> set = new HashSet<>();
+            LinkedHashSet<Direction> set = new LinkedHashSet<>();
             set.add(direction);
             insert.put(pos, set);
         }
         addInsertCache(level, pos, direction);
-        checkDistance();
+        checkChange();
     }
 
     public void removeInsert(ServerLevel level, BlockPos pos, Direction direction){
@@ -163,27 +171,31 @@ public abstract class PipeNet {
             if(insert.get(pos).isEmpty()) insert.remove(pos);
         }
         removeInsertCache(pos, direction);
-        checkDistance();
+        checkChange();
+    }
+
+    public void addExtract(ServerLevel level, BlockPos pos, Direction direction, TransferMode transferMode){
+        if(extract.containsKey(pos)) extract.get(pos).put(direction, transferMode);
+        else {
+            LinkedHashMap<Direction, TransferMode> map = new LinkedHashMap<>();
+            map.put(direction, transferMode);
+            extract.put(pos, map);
+        }
+        addExtractCache(level, pos, direction);
+        checkChange();
     }
 
     public void addExtract(ServerLevel level, BlockPos pos, Direction direction){
-        if(extract.containsKey(pos)) extract.get(pos).add(direction);
-        else {
-            Set<Direction> set = new HashSet<>();
-            set.add(direction);
-            extract.put(pos, set);
-        }
-        addExtractCache(level, pos, direction);
-        checkDistance();
+        this.addExtract(level, pos, direction, TransferMode.NEAREST);
     }
 
     public void removeExtract(ServerLevel level, BlockPos pos, Direction direction){
         if(extract.containsKey(pos)){
-            if(extract.get(pos).contains(direction)) extract.get(pos).remove(direction);
+            if(extract.get(pos).containsKey(direction)) extract.get(pos).remove(direction);
             if(extract.get(pos).isEmpty()) extract.remove(pos);
         }
         removeExtractCache(pos, direction);
-        checkDistance();
+        checkChange();
     }
 
     protected LinkedHashMap<BlockPos, Integer> bfsDistances(BlockPos startPos){
@@ -196,7 +208,7 @@ public abstract class PipeNet {
         while (!que.isEmpty()){
             BlockPos cur = que.poll();
             int curDis = dis.get(cur);
-            for (BlockPos neighbor : adj.getOrDefault(cur, Collections.emptySet())){
+            for (BlockPos neighbor : adj.getOrDefault(cur, new LinkedHashSet<>())){
                 if(!dis.containsKey(neighbor)){
                     dis.put(neighbor, curDis + 1);
                     que.add(neighbor);
@@ -208,22 +220,27 @@ public abstract class PipeNet {
         return ioDis;
     }
 
-    protected void checkDistance(){
+    protected void checkChange(){
         if(insert.isEmpty() || extract.isEmpty()){
             distances.clear();
             return;
         }
-        for (BlockPos start : extract.keySet())
+        pollingIndexes.clear();
+        for (BlockPos start : extract.keySet()) {
             distances.put(start, bfsDistances(start));
+            pollingIndexes.put(start, 0);
+        }
     }
 
     protected abstract void removeInsertCache(BlockPos pos, Direction direction);
 
     protected abstract void removeExtractCache(BlockPos pos, Direction direction);
 
-    public abstract void addExtractCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) ;
+    public abstract void addExtractCache(ServerLevel level, BlockPos pipePos, Direction pipeSide);
 
-    public abstract void addInsertCache(ServerLevel level, BlockPos pipePos, Direction pipeSide) ;
+    public abstract void addInsertCache(ServerLevel level, BlockPos pipePos, Direction pipeSide);
+
+    public abstract void removePosCache(BlockPos blockPos);
 
     public void tick(ServerLevel level) {
         ensureCachesInitialized(level);
@@ -249,6 +266,11 @@ public abstract class PipeNet {
         return blockPos;
     }
 
+    public void loopTransferMod(BlockPos pos, Direction direction) {
+        TransferMode transferMode = extract.get(pos).get(direction).next();
+        extract.get(pos).put(direction, transferMode);
+    }
+
     protected static class PosAndResourceHandler<T extends Resource>{
         protected BlockPos pos;
         protected ResourceHandler<T> resourceHandler;
@@ -264,6 +286,33 @@ public abstract class PipeNet {
 
         protected ResourceHandler<T> getResourceHandler() {
             return resourceHandler;
+        }
+    }
+
+    public enum TransferMode implements StringRepresentable {
+        NEAREST("nearest"),
+        FARTHEST("farthest"),
+        POLLING("polling");
+
+        public static final StringRepresentable.EnumCodec<TransferMode> CODEC = StringRepresentable.fromEnum(TransferMode::values);
+
+        private final String name;
+
+        TransferMode(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return name;
+        }
+
+        public TransferMode next(){
+            return switch (this){
+                case NEAREST -> FARTHEST;
+                case FARTHEST -> POLLING;
+                default -> NEAREST;
+            };
         }
     }
 }
