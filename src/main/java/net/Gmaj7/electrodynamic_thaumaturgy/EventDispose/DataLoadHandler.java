@@ -26,6 +26,7 @@ public class DataLoadHandler {
 
         payloadRegistrar.playToServer(MoePacket.MoeSelectMagicPacket.TYPE, MoePacket.MoeSelectMagicPacket.STREAM_CODEC, MoePacket.MoeSelectMagicPacket::handle);
         payloadRegistrar.playToServer(MoePacket.DirectionSetPacket.TYPE, MoePacket.DirectionSetPacket.STREAM_CODEC, MoePacket.DirectionSetPacket::handle);
+        payloadRegistrar.playToServer(MoePacket.NetChangePacket.TYPE, MoePacket.NetChangePacket.STREAM_CODEC, MoePacket.NetChangePacket ::handle);
 
         payloadRegistrar.playToClient(MoePacket.ProtectingPacket.TYPE, MoePacket.ProtectingPacket.STREAM_CODEC, MoePacket.ProtectingPacket::handle);
         payloadRegistrar.playToClient(MoePacket.EnergySetPacket.TYPE, MoePacket.EnergySetPacket.STREAM_CODEC, MoePacket.EnergySetPacket::handle);

@@ -14,14 +14,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class PipeNetMenu extends AbstractContainerMenu {
     private final Level level;
-    protected Map<BlockPos, Set<Direction>> insert;
-    protected Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract;
+    protected LinkedHashMap<BlockPos, Set<Direction>> insert;
+    protected LinkedHashMap<BlockPos, Map<Direction, PipeNet.TransferMode>> extract;
 
     public PipeNetMenu(int containerId, Inventory inventory, FriendlyByteBuf buffer){
         Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract = buffer.readMap(
@@ -47,8 +48,8 @@ public class PipeNetMenu extends AbstractContainerMenu {
     public PipeNetMenu(int containerId, Inventory inventory, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, Map<BlockPos, Set<Direction>> insert) {
         super(MoeMenuType.PIPE_NET_MENU.get(), containerId);
         this.level = inventory.player.level();
-        this.insert = insert;
-        this.extract = extract;
+        this.insert = new LinkedHashMap<>(insert);
+        this.extract = new LinkedHashMap<>(extract);
 
         addPlayerHotbar(inventory);
         addPlayerInventory(inventory);
@@ -107,5 +108,17 @@ public class PipeNetMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public Map<BlockPos, Map<Direction, PipeNet.TransferMode>> getExtract() {
+        return extract;
+    }
+
+    public Map<BlockPos, Set<Direction>> getInsert() {
+        return insert;
     }
 }

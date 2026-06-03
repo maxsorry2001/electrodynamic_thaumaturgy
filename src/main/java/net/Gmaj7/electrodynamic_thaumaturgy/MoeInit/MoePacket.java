@@ -1,9 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.AbstractPipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AbstractSovereignEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,11 +13,13 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MoePacket{
@@ -326,7 +330,6 @@ public class MoePacket{
         }
     }
 
-
     public static class DirectionSetPacket implements CustomPacketPayload{
         BlockPos blockPos;
         Direction direction;
@@ -358,6 +361,44 @@ public class MoePacket{
                 BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
                 if(blockEntity instanceof IMoeDirectionItemBlockEntity) {
                     ((IMoeDirectionItemBlockEntity) blockEntity).changeDirectionSet(packet.direction);
+                }
+            });
+        }
+    }
+
+    public static class NetChangePacket implements CustomPacketPayload{
+        BlockPos blockPos;
+        Direction direction;
+        public static final CustomPacketPayload.Type<NetChangePacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "pipe_net_change"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, NetChangePacket> STREAM_CODEC = CustomPacketPayload.codec(NetChangePacket::write, NetChangePacket::new);
+
+        public NetChangePacket(BlockPos blockPos, Direction direction){
+            this.blockPos = blockPos;
+            this.direction = direction;
+        }
+
+        public NetChangePacket(FriendlyByteBuf buf){
+            this.blockPos = buf.readBlockPos();
+            this.direction = buf.readEnum(Direction.class);
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeBlockPos(blockPos);
+            buf.writeEnum(direction);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+
+        public static void handle(NetChangePacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                ServerLevel level = (ServerLevel) context.player().level();
+                BlockState blockState = level.getBlockState(packet.blockPos);
+                if(blockState.getBlock() instanceof AbstractPipe pipe){
+                    PipeNet pipeNet = pipe.getPipeNetSaveData(level).getNetOfPos(packet.blockPos);
+                    pipeNet.loopTransferMod(packet.blockPos, packet.direction);
                 }
             });
         }
