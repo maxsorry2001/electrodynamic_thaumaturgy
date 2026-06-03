@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.PipeNetMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNet;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -23,8 +22,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
-    private static final Identifier BACK_GRAND = Identifier.fromNamespaceAndPath(
-            ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_energy_block.png");
+    private static final Identifier EXTRACT_GRAND = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "textures/gui/net_gui_extract.png");
+    private static final Identifier INSERT_GRAND = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "textures/gui/net_gui_insert.png");
+    private static final Identifier NEAREST = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/nearest");
+    private static final Identifier NEAREST_ON = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/nearest_on");
+    private static final Identifier FARTHEST = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/farthest");
+    private static final Identifier FARTHEST_ON = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/farthest_on");
+    private static final Identifier POLLING = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/polling");
+    private static final Identifier POLLING_ON = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/polling_on");
     private static final Identifier SCROLLER_SPRITE = Identifier.withDefaultNamespace("container/stonecutter/scroller");
     private static final Identifier SCROLLER_DISABLED_SPRITE = Identifier.withDefaultNamespace("container/stonecutter/scroller_disabled");
 
@@ -93,13 +106,13 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
         this.extractBlurredBackground(guiGraphics);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BACK_GRAND, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, isInsert ? INSERT_GRAND : EXTRACT_GRAND, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
 
         // 绘制滚动条
         drawScrollBar(guiGraphics, mouseX, mouseY, x, y);
 
         // 绘制节点信息（序号、类型、坐标）
-        drawNodeInfo(guiGraphics, x, y);
+        drawNodeInfo(guiGraphics, mouseX, mouseY, x, y);
     }
 
     private void drawScrollBar(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int left, int top) {
@@ -119,26 +132,23 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         }
     }
 
-    private void drawNodeInfo(GuiGraphicsExtractor guiGraphics, int left, int top) {
+    private void drawNodeInfo(GuiGraphicsExtractor guiGraphics, int mouthX, int mouthY, int left, int top) {
         if (getTotalDirections() == 0) {
-            guiGraphics.text(font, Component.literal("无连接"), left + 10, top + 40, 0xFFFFFF, false);
+            guiGraphics.text(font, Component.literal("无连接"), left + 10, top + 40, 0xFFFFFFFF);
             return;
         }
 
         // 显示选中节点序号/总数
         int totalNodes = isInsert ? menu.getInsert().size() : menu.getExtract().size();
         String indexStr = (posSelect + 1) + "/" + totalNodes;
-        guiGraphics.text(font, Component.literal(indexStr), left + 10, top + 10, 0xFFFFFF, false);
+        guiGraphics.text(font, Component.literal(indexStr), left + 10, top + 10, 0xFFFFFFFF);
 
-        // 显示节点类型和坐标
-        String typeStr = isInsert ? "输入节点" : "输出节点";
         BlockPos currentPos = getCurrentPos();
         String posStr = String.format("(%d,%d,%d)", currentPos.getX(), currentPos.getY(), currentPos.getZ());
-        guiGraphics.text(font, Component.literal(typeStr), left + 10, top + 25, 0xAAAAAA, false);
-        guiGraphics.text(font, Component.literal(posStr), left + 10, top + 37, 0xAAAAAA, false);
+        guiGraphics.text(font, Component.literal(posStr), left + 10, top + 37, 0xFFAAAAAA);
 
         // 绘制方向图标（带滚动）
-        drawDirectionIcons(guiGraphics, left, top);
+        drawDirectionIcons(guiGraphics, mouthX, mouthY, left, top);
     }
 
     private BlockPos getCurrentPos() {
@@ -151,7 +161,7 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         }
     }
 
-    private void drawDirectionIcons(GuiGraphicsExtractor guiGraphics, int left, int top) {
+    private void drawDirectionIcons(GuiGraphicsExtractor guiGraphics, int mouthX, int mouthY, int left, int top) {
         List<Direction> directions = getCurrentDirections();
         int total = directions.size();
         if (total == 0) return;
@@ -161,23 +171,34 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         if (startIndex > maxStart) startIndex = maxStart;
         if (startIndex < 0) startIndex = 0;
 
-        int startX = left + 30;
-        int startY = top + 14; // 第一个图标的Y坐标
+        int startX = left + 31;
+        int startY = top + 15; // 第一个图标的Y坐标
 
         for (int i = 0; i < VISIBLE_ROWS; i++) {
             int idx = startIndex + i;
             if (idx >= total) break;
             Direction dir = directions.get(idx);
-            BlockPos adjacentPos = getCurrentPos().relative(dir);
+            BlockPos nodePos = getCurrentPos(), adjacentPos = nodePos.relative(dir);
             BlockState blockState = menu.getLevel().getBlockState(adjacentPos);
             guiGraphics.fakeItem(new ItemStack(blockState.getBlock()), startX, startY + i * ITEM_SIZE);
-            // 可选：在旁边绘制方向名称和传输模式
-            String text = dir.getName();
-            if (!isInsert) {
-                PipeNet.TransferMode mode = menu.getExtract().get(getCurrentPos()).get(dir);
-                text += " : " + mode.getSerializedName();
-            }
-            guiGraphics.text(font, Component.literal(text), startX + 20, startY + i * ITEM_SIZE + 4, 0xDDDDDD, false);
+            if(!isInsert)
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == getIndex(mouthX, mouthY) ? getOn(nodePos, dir) : getNormal(nodePos, dir), startX + 18, startY + i * ITEM_SIZE, 18, 18);
+        }
+    }
+
+    private Identifier getNormal(BlockPos nodePos, Direction dir) {
+        switch (menu.getExtract().get(nodePos).get(dir)){
+            case FARTHEST : return FARTHEST;
+            case POLLING : return POLLING;
+            case null, default : return NEAREST;
+        }
+    }
+
+    private Identifier getOn(BlockPos nodePos, Direction dir) {
+        switch (menu.getExtract().get(nodePos).get(dir)){
+            case FARTHEST : return FARTHEST_ON;
+            case POLLING : return POLLING_ON;
+            case null, default : return NEAREST_ON;
         }
     }
 
@@ -189,10 +210,10 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        int left = (width - imageWidth) / 2;
+        int top = (height - imageHeight) / 2;
         // 处理滚动条点击
         if (isScrollBarActive()) {
-            int left = (width - imageWidth) / 2;
-            int top = (height - imageHeight) / 2;
             int scrollerX = left + 119;
             int scrollerY = top + 14;
             if (event.x() >= scrollerX && event.x() < scrollerX + SCROLLER_WIDTH &&
@@ -218,20 +239,22 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
                 }
             }
             return true;
-        } else if (event.button() == 2) { // 中键
-            isInsert = !isInsert;
-            posSelect = 0;
-            resetScroll();
-            return true;
         }
-        else if(event.button() == 0 && !isInsert){
-            int index = getChangeIndex(event.x(), event.y());
-            if(index != -1 && index < getTotalDirections()) {
-                Direction direction = getCurrentDirections().get(index);
-                BlockPos pos = getCurrentPos();
-                menu.getExtract().get(pos).compute(direction, (k, transferMode) -> transferMode.next());
-                ClientPacketDistributor.sendToServer(new MoePacket.NetChangePacket(pos, direction));
-                int i = 1;
+        else if(event.button() == 0){
+            if(!isInsert) {
+                int index = getIndex(event.x(), event.y());
+                if (index != -1 && index < getTotalDirections()) {
+                    Direction direction = getCurrentDirections().get(index);
+                    BlockPos pos = getCurrentPos();
+                    menu.getExtract().get(pos).compute(direction, (k, transferMode) -> transferMode.next());
+                    ClientPacketDistributor.sendToServer(new MoePacket.NetChangePacket(pos, direction));
+                }
+            }
+            if(isOnChange(event.x(), event.y(), left, top)){
+                isInsert = !isInsert;
+                posSelect = 0;
+                resetScroll();
+                return true;
             }
         }
 
@@ -281,13 +304,24 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         if (this.startIndex > maxStart) this.startIndex = maxStart;
     }
 
-    private int getChangeIndex(double mouthX, double mouthY){
+    private int getIndex(double mouthX, double mouthY){
         int left = (width - imageWidth) / 2, top = (height - imageHeight) / 2;
-        int index = -1, startX = left + 30, startY = top + 14;
+        int index = -1, startX = left + 49, startY = top + 15;
         if(mouthX < startX || mouthX > startX + ITEM_SIZE) return index;
         if(mouthY > startY && mouthY < startY + ITEM_SIZE) index = startIndex;
         else if (mouthY < startY + ITEM_SIZE * 2) index = startIndex + 1;
         else if ((mouthY < startY + ITEM_SIZE * 3)) index = startIndex + 2;
         return index;
+    }
+
+    private boolean isOnChange(double mouthX, double mouthY, int left, int top){
+        int lx = isInsert ? left + 31 : left + 81, ly = top + 13, height = 11;
+        if(mouthY > ly || mouthY < ly - height) return false;
+        int dy = ly - (int) mouthY, leftPx = lx + dy, rightPx = lx + 61 - dy;
+        if(dy < 6){
+            if(isInsert) rightPx = rightPx - 11 + 2 * dy;
+            else leftPx = leftPx + 11 - 2 * dy;
+        }
+        return mouthX >= leftPx & mouthX <= rightPx;
     }
 }
