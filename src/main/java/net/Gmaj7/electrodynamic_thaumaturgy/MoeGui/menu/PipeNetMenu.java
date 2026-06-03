@@ -51,8 +51,8 @@ public class PipeNetMenu extends AbstractContainerMenu {
         this.insert = new LinkedHashMap<>(insert);
         this.extract = new LinkedHashMap<>(extract);
 
-        addPlayerHotbar(inventory);
         addPlayerInventory(inventory);
+        addPlayerHotbar(inventory);
 
     }
 

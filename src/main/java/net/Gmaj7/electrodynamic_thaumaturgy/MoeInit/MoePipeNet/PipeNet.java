@@ -281,7 +281,7 @@ public abstract class PipeNet implements MenuProvider {
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new PipeNetMenu(netId, inventory, extract, insert);
+        return new PipeNetMenu(i, inventory, extract, insert);
     }
 
     @Override
