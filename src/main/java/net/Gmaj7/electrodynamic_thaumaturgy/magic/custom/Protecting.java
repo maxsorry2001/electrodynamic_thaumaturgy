@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ProtectingPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +23,7 @@ public class Protecting extends AbstractSelfMagic{
         if(!livingEntity.level().isClientSide()) {
             float p = MoeFunction.getMagicAmount(itemStack);
             ((MoeDataGet) livingEntity).getProtective().setProtecting(p);
-            PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(p));
+            PacketDistributor.sendToAllPlayers(new ProtectingPacket(p));
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
         }
@@ -34,7 +34,7 @@ public class Protecting extends AbstractSelfMagic{
         if(!source.level().isClientSide()) {
             float p = MoeFunction.getMagicAmount(itemStack);
             ((MoeDataGet) source).getProtective().setProtecting(p);
-            PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(p));
+            PacketDistributor.sendToAllPlayers(new ProtectingPacket(p));
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
             thread.start();
         }

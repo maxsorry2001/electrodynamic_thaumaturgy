@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.BioReplicationVatBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -56,7 +56,7 @@ public class BioReplicationVatBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof BioReplicationVatBE bioReplicationVatBE && !level.isClientSide()) {
                 EnergyHandler energyStorage = bioReplicationVatBE.getEnergy();
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energyStorage.getAmountAsInt(), bioReplicationVatBE.getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(energyStorage.getAmountAsInt(), bioReplicationVatBE.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(bioReplicationVatBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

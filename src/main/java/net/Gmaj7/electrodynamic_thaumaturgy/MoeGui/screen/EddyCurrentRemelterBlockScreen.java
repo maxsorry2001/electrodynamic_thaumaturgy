@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.EddyCurrentRemelterBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.DirectionSetPacket;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -121,7 +121,7 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         Direction direction = getFocusedDirection(event.x(), event.y());
         if(direction != null)
-            ClientPacketDistributor.sendToServer(new MoePacket.DirectionSetPacket(menu.blockEntity.getBlockPos(), direction));
+            ClientPacketDistributor.sendToServer(new DirectionSetPacket(menu.blockEntity.getBlockPos(), direction));
         return super.mouseClicked(event, doubleClick);
     }
 }

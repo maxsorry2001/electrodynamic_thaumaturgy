@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
@@ -21,7 +21,7 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(energy, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(energy, getBlockPos()));
             }
         }
     };

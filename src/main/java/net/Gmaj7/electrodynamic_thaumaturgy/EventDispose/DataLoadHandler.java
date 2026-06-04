@@ -6,7 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeDirec
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,18 +24,19 @@ public class DataLoadHandler {
     public static void register(final RegisterPayloadHandlersEvent event){
         final PayloadRegistrar payloadRegistrar = event.registrar(ElectrodynamicThaumaturgy.MODID).versioned("1.0.0").optional();
 
-        payloadRegistrar.playToServer(MoePacket.MoeSelectMagicPacket.TYPE, MoePacket.MoeSelectMagicPacket.STREAM_CODEC, MoePacket.MoeSelectMagicPacket::handle);
-        payloadRegistrar.playToServer(MoePacket.DirectionSetPacket.TYPE, MoePacket.DirectionSetPacket.STREAM_CODEC, MoePacket.DirectionSetPacket::handle);
-        payloadRegistrar.playToServer(MoePacket.NetChangePacket.TYPE, MoePacket.NetChangePacket.STREAM_CODEC, MoePacket.NetChangePacket ::handle);
+        payloadRegistrar.playToServer(MoeSelectMagicPacket.TYPE, MoeSelectMagicPacket.STREAM_CODEC, MoeSelectMagicPacket::handle);
+        payloadRegistrar.playToServer(DirectionSetPacket.TYPE, DirectionSetPacket.STREAM_CODEC, DirectionSetPacket::handle);
+        payloadRegistrar.playToServer(NetChangePacket.TYPE, NetChangePacket.STREAM_CODEC, NetChangePacket ::handle);
+        payloadRegistrar.playToServer(ItemPipeNetFilterPacket.TYPE, ItemPipeNetFilterPacket.STREAM_CODEC, ItemPipeNetFilterPacket::handle);
 
-        payloadRegistrar.playToClient(MoePacket.ProtectingPacket.TYPE, MoePacket.ProtectingPacket.STREAM_CODEC, MoePacket.ProtectingPacket::handle);
-        payloadRegistrar.playToClient(MoePacket.EnergySetPacket.TYPE, MoePacket.EnergySetPacket.STREAM_CODEC, MoePacket.EnergySetPacket::handle);
-        payloadRegistrar.playToClient(MoePacket.ThermalSetPacket.TYPE, MoePacket.ThermalSetPacket.STREAM_CODEC, MoePacket.ThermalSetPacket::handle);
-        payloadRegistrar.playToClient(MoePacket.CastTickPacket.TYPE, MoePacket.CastTickPacket.STREAM_CODEC, MoePacket.CastTickPacket::handle);
-        payloadRegistrar.playToClient(MoePacket.BiomassSetPacket.TYPE, MoePacket.BiomassSetPacket.STREAM_CODEC, MoePacket.BiomassSetPacket::handle);
-        payloadRegistrar.playToClient(MoePacket.AtomicPacket.TYPE, MoePacket.AtomicPacket.STREAM_CODEC, MoePacket.AtomicPacket::handle);
+        payloadRegistrar.playToClient(ProtectingPacket.TYPE, ProtectingPacket.STREAM_CODEC, ProtectingPacket::handle);
+        payloadRegistrar.playToClient(EnergySetPacket.TYPE, EnergySetPacket.STREAM_CODEC, EnergySetPacket::handle);
+        payloadRegistrar.playToClient(ThermalSetPacket.TYPE, ThermalSetPacket.STREAM_CODEC, ThermalSetPacket::handle);
+        payloadRegistrar.playToClient(CastTickPacket.TYPE, CastTickPacket.STREAM_CODEC, CastTickPacket::handle);
+        payloadRegistrar.playToClient(BiomassSetPacket.TYPE, BiomassSetPacket.STREAM_CODEC, BiomassSetPacket::handle);
+        payloadRegistrar.playToClient(AtomicPacket.TYPE, AtomicPacket.STREAM_CODEC, AtomicPacket::handle);
 
-        payloadRegistrar.playBidirectional(MoePacket.ExtractorPacket.TYPE, MoePacket.ExtractorPacket.STREAM_CODEC, MoePacket.ExtractorPacket::handle, MoePacket.ExtractorPacket::handle);
+        payloadRegistrar.playBidirectional(ExtractorPacket.TYPE, ExtractorPacket.STREAM_CODEC, ExtractorPacket::handle, ExtractorPacket::handle);
     }
 
 

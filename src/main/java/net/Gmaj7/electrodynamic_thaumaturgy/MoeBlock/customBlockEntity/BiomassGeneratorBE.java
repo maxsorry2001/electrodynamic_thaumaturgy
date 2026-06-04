@@ -5,7 +5,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGenerato
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.BiomassGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.BiomassSetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -36,7 +37,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
@@ -81,7 +82,7 @@ public class BiomassGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
                 else fullBiomassTime = 0;
             }
             level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGeneratorBlock.LIT, biomassTime > 0));
-            PacketDistributor.sendToAllPlayers(new MoePacket.BiomassSetPacket(biomassTime, fullBiomassTime, getBlockPos()));
+            PacketDistributor.sendToAllPlayers(new BiomassSetPacket(biomassTime, fullBiomassTime, getBlockPos()));
         }
         return biomassTime > 0;
     }

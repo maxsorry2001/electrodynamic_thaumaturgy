@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEnt
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MirageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ProtectingPacket;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -34,12 +35,12 @@ public class DamageEvent {
             if(protecting > damage){
                 float newProtecting = protecting - damage;
                 ((MoeDataGet)eventTarget).getProtective().setProtecting(newProtecting);
-                PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(newProtecting));
+                PacketDistributor.sendToAllPlayers(new ProtectingPacket(newProtecting));
                 event.setNewDamage(0);
             }
             else {
                 ((MoeDataGet)eventTarget).getProtective().setProtecting(0);
-                PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(0));
+                PacketDistributor.sendToAllPlayers(new ProtectingPacket(0));
                 event.setNewDamage(damage - protecting);
             }
         }

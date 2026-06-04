@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.PipeNetMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.NetChangePacket;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -215,12 +215,12 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
         }
         else if(event.button() == 0){
             if(!isInsert) {
-                int index = getIndex(event.x(), event.y());
+                int index = getChangeIndex(event.x(), event.y());
                 if (index != -1 && index < getTotalDirections()) {
                     Direction direction = getCurrentDirections().get(index);
                     BlockPos pos = getCurrentPos();
                     menu.getExtract().get(pos).compute(direction, (k, transferMode) -> transferMode.next());
-                    ClientPacketDistributor.sendToServer(new MoePacket.NetChangePacket(pos, direction));
+                    ClientPacketDistributor.sendToServer(new NetChangePacket(pos, direction));
                 }
             }
             if(isOnChange(event.x(), event.y(), left, top)){
@@ -277,10 +277,19 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
         if (this.startIndex > maxStart) this.startIndex = maxStart;
     }
 
-    protected int getIndex(double mouthX, double mouthY){
+    protected int getChangeIndex(double mouthX, double mouthY){
         int left = (width - imageWidth) / 2, top = (height - imageHeight) / 2;
         int index = -1, startX = left + 48, startY = top + 14;
         if(mouthX < startX || mouthX > startX + ITEM_SIZE) return index;
+        if(mouthY > startY && mouthY < startY + ITEM_SIZE) index = startIndex;
+        else if (mouthY < startY + ITEM_SIZE * 2) index = startIndex + 1;
+        else if ((mouthY < startY + ITEM_SIZE * 3)) index = startIndex + 2;
+        return index;
+    }
+
+    protected int getIndex(double mouthY){
+        int top = (height - imageHeight) / 2;
+        int index = -1,startY = top + 14;
         if(mouthY > startY && mouthY < startY + ITEM_SIZE) index = startIndex;
         else if (mouthY < startY + ITEM_SIZE * 2) index = startIndex + 1;
         else if ((mouthY < startY + ITEM_SIZE * 3)) index = startIndex + 2;

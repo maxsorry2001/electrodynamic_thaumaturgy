@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.EnergyPipeNetMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.PipeNetMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.BlockPos;
@@ -40,7 +39,7 @@ public class EnergyPipeNetScreen extends PipeNetScreen<EnergyPipeNetMenu> {
             BlockState blockState = menu.getLevel().getBlockState(adjacentPos);
             guiGraphics.fakeItem(new ItemStack(blockState.getBlock()), startX, startY + i * ITEM_SIZE);
             if(!isInsert)
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == getIndex(mouthX, mouthY) ? getOn(nodePos, dir) : getNormal(nodePos, dir), startX + 17, startY + i * ITEM_SIZE - 1, 18, 18);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == getChangeIndex(mouthX, mouthY) ? getOn(nodePos, dir) : getNormal(nodePos, dir), startX + 17, startY + i * ITEM_SIZE - 1, 18, 18);
         }
     }
 }

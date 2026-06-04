@@ -4,7 +4,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticExtractorBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ExtractorPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ColorParticleOption;
@@ -65,7 +66,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
@@ -231,7 +232,7 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        PacketDistributor.sendToAllPlayers(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        PacketDistributor.sendToAllPlayers(new ExtractorPacket(this.width, this.depth, this.getBlockPos()));
         return new ElectromagneticExtractorBlockMenu(i, inventory, this);
     }
 
@@ -247,12 +248,12 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
 
     public void addWidth(boolean quick){
         this.width = quick ? Math.min(width + 5, MAX_WIDTH) : Math.min(width + 1, MAX_WIDTH);
-        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void reduceWidth(boolean quick){
         this.width = quick ? Math.max(width - 5, MIN_WIDTH) : Math.max(width - 1, MIN_WIDTH);
-        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void setWidth(int width) {
@@ -261,16 +262,16 @@ public class ElectromagneticExtractorBE extends BlockEntity implements IMoeEnerg
 
     public void addDepth(boolean quick){
         this.depth = quick ?  Math.min(depth + 10, MAX_DEPTH) : Math.min(depth + 1, MAX_DEPTH);
-        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void reduceDepth(boolean quick){
         this.depth = quick ? Math.max(depth - 10, 1) : Math.max(depth - 1, 1);
-        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     private void dealChange(){
-        ClientPacketDistributor.sendToServer(new MoePacket.ExtractorPacket(this.width, this.depth, this.getBlockPos()));
+        ClientPacketDistributor.sendToServer(new ExtractorPacket(this.width, this.depth, this.getBlockPos()));
     }
 
     public void setDepth(int depth) {

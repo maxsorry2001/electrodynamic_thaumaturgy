@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.hud;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.MoeSelectMagicPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.MoeMagicTypeModuleItem;
 import net.minecraft.client.DeltaTracker;
@@ -70,7 +70,7 @@ public class MoeMagicWheelHud implements GuiLayer {
     public void close(){
         active = false;
         if(selection > 1)
-            ClientPacketDistributor.sendToServer(new MoePacket.MoeSelectMagicPacket(selection, useHand));
+            ClientPacketDistributor.sendToServer(new MoeSelectMagicPacket(selection, useHand));
         Minecraft.getInstance().mouseHandler.grabMouse();
     }
 

@@ -34,6 +34,6 @@ public class EnergyPipeNetMenu extends PipeNetMenu{
     }
 
     public EnergyPipeNetMenu(int containerId, Inventory inventory, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, Map<BlockPos, Set<Direction>> insert) {
-        super(MoeMenuType.ENERGY_BLOCK_MENU.get(), containerId, inventory, extract, insert);
+        super(MoeMenuType.ENERGY_PIPE_NET_MENU.get(), containerId, inventory, extract, insert);
     }
 }

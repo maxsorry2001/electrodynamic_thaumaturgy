@@ -1,6 +1,5 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.PipeNetMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -8,12 +7,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.resource.Resource;
-import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -297,12 +293,14 @@ public abstract class PipeNet implements MenuProvider {
         extract.get(pos).put(direction, transferMode);
     }
 
-    protected static class PosAndResourceHandler<T extends Resource>{
+    protected static class ResourceExtractSet<T extends Resource>{
         protected BlockPos pos;
+        protected Direction direction;
         protected ResourceHandler<T> resourceHandler;
 
-        protected PosAndResourceHandler(BlockPos pos, ResourceHandler<T> resourceHandler){
+        protected ResourceExtractSet(BlockPos pos, Direction direction, ResourceHandler<T> resourceHandler){
             this.pos = pos;
+            this.direction = direction;
             this.resourceHandler = resourceHandler;
         }
 
@@ -312,6 +310,10 @@ public abstract class PipeNet implements MenuProvider {
 
         protected ResourceHandler<T> getResourceHandler() {
             return resourceHandler;
+        }
+
+        public Direction getDirection() {
+            return direction;
         }
     }
 

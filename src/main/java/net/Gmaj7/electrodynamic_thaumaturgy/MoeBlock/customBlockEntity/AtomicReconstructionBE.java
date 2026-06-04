@@ -4,7 +4,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.AtomicReconstructionBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.AtomicPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -34,7 +35,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
@@ -83,7 +84,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
         if(energyStorage.getAmountAsInt() < progressUse) return;
         blockEntity.progressTick ++;
         if(blockEntity.progressTick > 5 && blockEntity.progress == 0)
-            PacketDistributor.sendToAllPlayers(new MoePacket.AtomicPacket(pos, blockEntity.progress));
+            PacketDistributor.sendToAllPlayers(new AtomicPacket(pos, blockEntity.progress));
         if(blockEntity.progressTick != 10) return;
         blockEntity.progressTick = 0;
         if(!blockEntity.canUpProgress()) return;
@@ -101,7 +102,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IMoeEnergyBlo
             if(lastStep) blockEntity.progress = 0;
             else blockEntity.progress ++;
         }
-        PacketDistributor.sendToAllPlayers(new MoePacket.AtomicPacket(pos, blockEntity.progress));
+        PacketDistributor.sendToAllPlayers(new AtomicPacket(pos, blockEntity.progress));
     }
 
     private boolean canUpProgress() {

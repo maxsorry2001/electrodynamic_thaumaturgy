@@ -11,7 +11,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttachmentType;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttributes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ProtectingPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.HydrogenBondParticle;
@@ -98,7 +98,7 @@ public class ElectrodynamicThaumaturgy
     @SubscribeEvent
     public void entityJoin(EntityJoinLevelEvent event){
         if(!event.getLevel().isClientSide() && event.getEntity() instanceof Player player){
-            PacketDistributor.sendToAllPlayers(new MoePacket.ProtectingPacket(((MoeDataGet)player).getProtective().getProtecting()));
+            PacketDistributor.sendToAllPlayers(new ProtectingPacket(((MoeDataGet)player).getProtective().getProtecting()));
         }
     }
 

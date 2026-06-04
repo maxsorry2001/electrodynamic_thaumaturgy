@@ -36,21 +36,33 @@ public class ItemPipeNet extends PipeNet{
     // 为每个连接的机器存储其对应的缓存
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> extractCaches;
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> insertCaches;
-    private Map<BlockPos, Map<Direction, List<ItemStack>>> filter;
+    private LinkedHashMap<BlockPos, Map<Direction, List<ItemStack>>> filter;
     public ItemPipeNet(int id) {
         super(id);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
-        this.filter = new HashMap<>();
+        this.filter = new LinkedHashMap<>();
     }
 
     public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter, Map<BlockPos, Map<Direction, List<ItemStack>>> filter) {
         super(id, posSet, adj, insert, extract, tickCounter);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
-        this.filter = filter;
+        this.filter = new LinkedHashMap<>();
+        for (Map.Entry<BlockPos, Map<Direction, List<ItemStack>>> entry : filter.entrySet()) {
+            BlockPos pos = entry.getKey();
+            Map<Direction, List<ItemStack>> innerMap = entry.getValue();
+            Map<Direction, List<ItemStack>> newInnerMap = new HashMap<>();
+            for (Map.Entry<Direction, List<ItemStack>> innerEntry : innerMap.entrySet()) {
+                Direction dir = innerEntry.getKey();
+                List<ItemStack> originalList = innerEntry.getValue();
+                // 复制为 ArrayList（可变）
+                List<ItemStack> newList = new ArrayList<>(originalList);
+                newInnerMap.put(dir, newList);
+            }
+            this.filter.put(pos, newInnerMap);
+        }
     }
-
     public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter) {
         this(id, posSet, adj, insert, extract, tickCounter, new HashMap<>());
     }
@@ -143,13 +155,13 @@ public class ItemPipeNet extends PipeNet{
     protected void work() {
         if(extract.isEmpty() || insert.isEmpty()) return;
         if(insertCaches.isEmpty() || extractCaches.isEmpty()) return;
-        List<PosAndResourceHandler<ItemResource>> extractors = new ArrayList<>();
+        List<ResourceExtractSet<ItemResource>> extractors = new ArrayList<>();
         List<TransferMode> transferModes = new ArrayList<>();
         for (Map.Entry<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> entry : extractCaches.entrySet()) {
             for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry1 : entry.getValue().entrySet()) {
                 ResourceHandler<ItemResource> h = entry1.getValue().getCapability();
                 if (h != null) {
-                    extractors.add(new PosAndResourceHandler<>(entry.getKey(), h));
+                    extractors.add(new ResourceExtractSet<>(entry.getKey(), entry1.getKey(), h));
                     transferModes.add(extract.get(entry.getKey()).get(entry1.getKey()));
                 }
             }
@@ -163,6 +175,9 @@ public class ItemPipeNet extends PipeNet{
             ItemResource resource = ItemResource.EMPTY;
             var extractSet = extractors.get(processedBefore);
             TransferMode transferMode = transferModes.get(processedBefore);
+            List<ItemStack> filterItemWhite = new ArrayList<>();
+            if(filter.containsKey(extractSet.getPos()) && filter.get(extractSet.getPos()).containsKey(extractSet.getDirection()))
+                filterItemWhite= filter.get(extractSet.getPos()).get(extractSet.getDirection());
             if(transferMode != TransferMode.POLLING){
                 int insertCount = 0;
                 ResourceHandler<ItemResource> insertHandler = null;
@@ -171,7 +186,7 @@ public class ItemPipeNet extends PipeNet{
                     // 找到第一个非空槽位
                     for (int i = 0; i < extractHandler.size(); i++) {
                         resource = extractHandler.getResource(i);
-                        if (!resource.isEmpty()) break;
+                        if (!resource.isEmpty() && checkFilter(filterItemWhite, resource)) break;
                     }
                     if (!resource.isEmpty()) {
                         // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
@@ -187,7 +202,10 @@ public class ItemPipeNet extends PipeNet{
                                 for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : dirMap.entrySet()) {
                                     ResourceHandler<ItemResource> inserter = entry.getValue().getCapability();
                                     if (inserter == null) continue;
-                                    int inserted = inserter.insert(resource, extracted, transaction);
+                                    List<ItemStack> insertFilterWhite = new ArrayList<>();
+                                    if(filter.containsKey(checkPos) && filter.get(checkPos).containsKey(entry.getKey()))
+                                        insertFilterWhite = filter.get(checkPos).get(entry.getKey());
+                                    int inserted = checkFilter(insertFilterWhite, resource) ? inserter.insert(resource, extracted, transaction) : 0;
                                     if (inserted == extracted) {
                                         insertHandler = inserter;
                                         insertCount = inserted;
@@ -206,11 +224,13 @@ public class ItemPipeNet extends PipeNet{
                 }
             }
             else {
-                Set<BlockPos> list = distances.get(extractSet.getPos()).keySet();
+                List<BlockPos> list = new ArrayList<>(distances.get(extractSet.getPos()).keySet());
                 List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
+                List<Direction> directions = new ArrayList<>();
                 for (BlockPos pos : list){
                     for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : insertCaches.get(pos).entrySet()){
                         inserters.add(entry.getValue().getCapability());
+                        directions.add(entry.getKey());
                     }
                 }
                 if(inserters.isEmpty()) break;
@@ -225,7 +245,7 @@ public class ItemPipeNet extends PipeNet{
                     // 找到第一个非空槽位
                     for (int i = 0; i < extractHandler.size(); i++) {
                         resource = extractHandler.getResource(i);
-                        if (!resource.isEmpty()) break;
+                        if (!resource.isEmpty() && checkFilter(filterItemWhite, resource)) break;
                     }
                     if (!resource.isEmpty()) {
                         // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
@@ -238,7 +258,10 @@ public class ItemPipeNet extends PipeNet{
                                 while (iterator.hasNext()){
                                     testPolling = iterator.next();
                                     var insertHandler = inserters.get(testPolling);
-                                    int inserted = insertHandler.insert(resource, baseInsertCount, transaction);
+                                    List<ItemStack> insertFilterWhite = new ArrayList<>();
+                                    if(filter.containsKey(list.get(testPolling)) && filter.get(list.get(testPolling)).containsKey(directions.get(testPolling)))
+                                        insertFilterWhite = filter.get(list.get(testPolling)).get(directions.get(testPolling));
+                                    int inserted = checkFilter(insertFilterWhite, resource) ? insertHandler.insert(resource, baseInsertCount, transaction) : 0;
                                     insertCounts[testPolling] += inserted;
                                     trueExtract += inserted;
                                     extracted -= inserted;
@@ -253,7 +276,10 @@ public class ItemPipeNet extends PipeNet{
                                     if(extracted == 0) break;
                                     testPolling = iterator.next();
                                     var insertHandler = inserters.get(testPolling);
-                                    int inserted = insertHandler.insert(resource, 1, transaction);
+                                    List<ItemStack> insertFilterWhite = new ArrayList<>();
+                                    if(filter.containsKey(list.get(testPolling)) && filter.get(list.get(testPolling)).containsKey(directions.get(testPolling)))
+                                        insertFilterWhite = filter.get(list.get(testPolling)).get(directions.get(testPolling));
+                                    int inserted = checkFilter(insertFilterWhite, resource) ? insertHandler.insert(resource, 1, transaction) : 0;
                                     insertCounts[testPolling] += inserted;
                                     trueExtract += inserted;
                                     extracted -= inserted;
@@ -278,6 +304,18 @@ public class ItemPipeNet extends PipeNet{
         }
     }
 
+    private boolean checkFilter(List<ItemStack> filterItem, ItemResource resource) {
+        if(filterItem.isEmpty()) return true;
+        boolean flag = false;
+        for (ItemStack itemStack : filterItem){
+            if(itemStack.is(resource.getItem())) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
     @Override
     public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
         super.writeClientSideData(menu, buffer);
@@ -300,6 +338,21 @@ public class ItemPipeNet extends PipeNet{
 
     public void addFilter(BlockPos pos, Direction direction, ItemStack itemStack, int slot){
         if(slot < 0 || slot > 2) return;
+        if(itemStack.isEmpty()){
+            if(filter.isEmpty() || !filter.containsKey(pos)) return;
+            Map<Direction, List<ItemStack>> posFilter = filter.get(pos);
+            if(!posFilter.containsKey(direction)) return;
+            List<ItemStack> dirFilter = posFilter.get(direction);
+            if(dirFilter.size() < slot) return;
+            dirFilter.remove(slot);
+            if(dirFilter.isEmpty()){
+                posFilter.remove(direction);
+                if(posFilter.isEmpty()) {
+                    this.filter.remove(pos);
+                }
+            }
+            return;
+        }
         ItemStack filterItem = itemStack.copy();
         filterItem.setCount(1);
         if(filter.isEmpty() || !filter.containsKey(pos)){
@@ -318,10 +371,20 @@ public class ItemPipeNet extends PipeNet{
             return;
         }
         List<ItemStack> dirFilter = posFilter.get(direction);
-        if(dirFilter.contains(filterItem)) return;
+        if(containItem(dirFilter, filterItem)) return;
         if(dirFilter.size() > slot)
             dirFilter.set(slot, filterItem);
         else dirFilter.add(filterItem);
-        filter.get(pos).put(direction, dirFilter);
+    }
+
+    private boolean containItem(List<ItemStack> filter, ItemStack stack){
+        boolean flag = false;
+        for (ItemStack itemStack : filter){
+            if(itemStack.is(stack.getItem())){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 }

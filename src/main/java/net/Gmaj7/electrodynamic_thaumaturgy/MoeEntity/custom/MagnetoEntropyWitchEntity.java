@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.CastTickPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
@@ -126,7 +126,7 @@ public class MagnetoEntropyWitchEntity extends AbstractSovereignEntity implement
             level().registryAccess().lookupOrThrow(MoeRegistries.MAGIC_KEY).getOrThrow(magicDefinition.behaviorKey()).value().mobCast(this, target, MoeTabs.getCopperRod(), magicDefinition);
         this.castTick = 10;
         this.castAnim = random.nextInt(2);
-        PacketDistributor.sendToAllPlayers(new MoePacket.CastTickPacket(this.getId(), this.castTick));
+        PacketDistributor.sendToAllPlayers(new CastTickPacket(this.getId(), this.castTick));
         this.coolDown[magicSelect] = magicDefinition.baseCooldown();
     }
 

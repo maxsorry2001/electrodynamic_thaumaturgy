@@ -5,7 +5,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGenerato
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ThermalGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ThermalSetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -34,7 +35,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new MoePacket.EnergySetPacket(previousAmount, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(previousAmount, getBlockPos()));
             }
         }
     };
@@ -80,7 +81,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
                 } else fullBurnTime = 0;
             }
             level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGeneratorBlock.LIT, burnTime > 0));
-            PacketDistributor.sendToAllPlayers(new MoePacket.ThermalSetPacket(burnTime, fullBurnTime, getBlockPos()));
+            PacketDistributor.sendToAllPlayers(new ThermalSetPacket(burnTime, fullBurnTime, getBlockPos()));
         }
         return burnTime > 0;
     }
