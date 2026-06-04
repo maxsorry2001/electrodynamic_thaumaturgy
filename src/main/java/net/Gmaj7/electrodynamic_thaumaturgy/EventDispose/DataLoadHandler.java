@@ -35,6 +35,8 @@ public class DataLoadHandler {
         payloadRegistrar.playToClient(CastTickPacket.TYPE, CastTickPacket.STREAM_CODEC, CastTickPacket::handle);
         payloadRegistrar.playToClient(BiomassSetPacket.TYPE, BiomassSetPacket.STREAM_CODEC, BiomassSetPacket::handle);
         payloadRegistrar.playToClient(AtomicPacket.TYPE, AtomicPacket.STREAM_CODEC, AtomicPacket::handle);
+        payloadRegistrar.playToClient(ItemPipeNetSynPacket.TYPE, ItemPipeNetSynPacket.STREAM_CODEC, ItemPipeNetSynPacket::handle);
+        payloadRegistrar.playToClient(PipeNetSynPacket.TYPE, PipeNetSynPacket.STREAM_CODEC, PipeNetSynPacket::handle);
 
         payloadRegistrar.playBidirectional(ExtractorPacket.TYPE, ExtractorPacket.STREAM_CODEC, ExtractorPacket::handle, ExtractorPacket::handle);
     }

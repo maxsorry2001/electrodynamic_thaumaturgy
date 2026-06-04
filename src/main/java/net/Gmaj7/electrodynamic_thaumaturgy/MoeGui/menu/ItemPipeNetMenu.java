@@ -1,11 +1,13 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.PipeNet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
@@ -15,6 +17,7 @@ public class ItemPipeNetMenu extends PipeNetMenu{
     protected LinkedHashMap<BlockPos, Map<Direction, List<ItemStack>>> filter;
 
     public ItemPipeNetMenu(int containerId, Inventory inventory, FriendlyByteBuf buffer) {
+        int netId = buffer.readInt();
         Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract = buffer.readMap(
             buf -> buf.readBlockPos(),
             buf -> buf.readMap(
@@ -46,12 +49,12 @@ public class ItemPipeNetMenu extends PipeNetMenu{
                         }
                 )
         );
-        this(containerId, inventory, extract, insert, filters);
+        this(containerId, inventory, extract, insert, filters, netId);
     }
 
-    public ItemPipeNetMenu(int containerId, Inventory inventory, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, List<ItemStack>>> filter) {
+    public ItemPipeNetMenu(int containerId, Inventory inventory, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, List<ItemStack>>> filter, int netId) {
         this.filter = new LinkedHashMap<>(filter);
-        super(MoeMenuType.ITEM_PIPE_NET_MENU.get(), containerId, inventory, extract, insert);
+        super(MoeMenuType.ITEM_PIPE_NET_MENU.get(), containerId, inventory, extract, insert, netId, PipeNet.PipeNetType.ITEM);
     }
 
     public Map<BlockPos, Map<Direction, List<ItemStack>>> getFilter() {
@@ -60,48 +63,6 @@ public class ItemPipeNetMenu extends PipeNetMenu{
 
     public List<ItemStack> getFilterItemOfPosAndDir(BlockPos pos, Direction direction){
         return filter.get(pos).get(direction);
-    }
-
-    public void addFilter(BlockPos pos, Direction direction, int slot){
-        if(slot < 0 || slot > 2) return;
-        ItemStack itemStack = getCarried();
-        if(itemStack.isEmpty()){
-            if(filter.isEmpty() || !filter.containsKey(pos)) return;
-            Map<Direction, List<ItemStack>> posFilter = filter.get(pos);
-            if(!posFilter.containsKey(direction)) return;
-            List<ItemStack> dirFilter = posFilter.get(direction);
-            if(dirFilter.size() < slot) return;
-            dirFilter.remove(slot);
-            if(dirFilter.isEmpty()){
-                posFilter.remove(direction);
-                if(posFilter.isEmpty()) {
-                    this.filter.remove(pos);
-                }
-            }
-            return;
-        }
-        ItemStack filterItem = itemStack.copy();
-        filterItem.setCount(1);
-        if(filter.isEmpty() || !filter.containsKey(pos)){
-            List<ItemStack> filters = new ArrayList<>();
-            filters.add(filterItem);
-            Map<Direction, List<ItemStack>> map = new HashMap<>();
-            map.put(direction, filters);
-            this.filter.put(pos, map);
-            return;
-        }
-        Map<Direction, List<ItemStack>> posFilter = filter.get(pos);
-        if(!posFilter.containsKey(direction)){
-            List<ItemStack> filters = new ArrayList<>();
-            filters.add(filterItem);
-            filter.get(pos).put(direction, filters);
-            return;
-        }
-        List<ItemStack> dirFilter = posFilter.get(direction);
-        if(containItem(dirFilter, filterItem)) return;
-        if(dirFilter.size() > slot)
-            dirFilter.set(slot, filterItem);
-        else dirFilter.add(filterItem);
     }
 
     private boolean containItem(List<ItemStack> filter, ItemStack stack){
@@ -113,5 +74,20 @@ public class ItemPipeNetMenu extends PipeNetMenu{
             }
         }
         return flag;
+    }
+
+    @Override
+    protected ItemPipeNetSaveData getPipeNetData(ServerPlayer player) {
+        return player.level().getDataStorage().get(ItemPipeNetSaveData.ITEM_PIPE_NETS);
+    }
+
+    @Override
+    protected void removeLookingPlayer(ServerPlayer player) {
+        player.level().getDataStorage().get(ItemPipeNetSaveData.ITEM_PIPE_NETS).getNet(getNetId()).removeLookingPlayer(player);
+    }
+
+    public void itemPipeReset(LinkedHashMap<BlockPos, Set<Direction>> insert, LinkedHashMap<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, LinkedHashMap<BlockPos, Map<Direction, List<ItemStack>>> filter){
+        super.pipeReset(insert, extract);
+        this.filter = filter;
     }
 }

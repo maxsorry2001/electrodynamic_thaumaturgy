@@ -17,22 +17,26 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public class NetChangePacket implements CustomPacketPayload {
     BlockPos blockPos;
     Direction direction;
+    int netId;
     public static final CustomPacketPayload.Type<NetChangePacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "pipe_net_change"));
     public static final StreamCodec<RegistryFriendlyByteBuf, NetChangePacket> STREAM_CODEC = CustomPacketPayload.codec(NetChangePacket::write, NetChangePacket::new);
 
-    public NetChangePacket(BlockPos blockPos, Direction direction){
+    public NetChangePacket(BlockPos blockPos, Direction direction, int netId){
         this.blockPos = blockPos;
         this.direction = direction;
+        this.netId = netId;
     }
 
     public NetChangePacket(FriendlyByteBuf buf){
         this.blockPos = buf.readBlockPos();
         this.direction = buf.readEnum(Direction.class);
+        this.netId = buf.readInt();
     }
 
     public void write(FriendlyByteBuf buf){
         buf.writeBlockPos(blockPos);
         buf.writeEnum(direction);
+        buf.writeInt(netId);
     }
 
     @Override

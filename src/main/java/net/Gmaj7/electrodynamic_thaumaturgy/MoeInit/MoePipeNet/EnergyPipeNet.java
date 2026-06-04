@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.EnergyPipeNetMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,13 +33,13 @@ public class EnergyPipeNet extends PipeNet{
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> extractCaches;
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<EnergyHandler, Direction>>> insertCaches;
     public EnergyPipeNet(int id) {
-        super(id);
+        super(id, PipeNetType.ENERGY);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
     }
 
     public EnergyPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter) {
-        super(id, posSet, adj, insert, extract, tickCounter);
+        super(id, posSet, adj, insert, extract, tickCounter, PipeNetType.ENERGY);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
     }
@@ -221,7 +222,8 @@ public class EnergyPipeNet extends PipeNet{
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new EnergyPipeNetMenu(i, inventory, extract, insert);
+        addLookingPlayer((ServerPlayer) player);
+        return new EnergyPipeNetMenu(i, inventory, extract, insert, netId);
     }
 
     @Override

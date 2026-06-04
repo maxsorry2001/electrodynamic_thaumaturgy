@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -38,14 +39,14 @@ public class ItemPipeNet extends PipeNet{
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> insertCaches;
     private LinkedHashMap<BlockPos, Map<Direction, List<ItemStack>>> filter;
     public ItemPipeNet(int id) {
-        super(id);
+        super(id, PipeNetType.ITEM);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
         this.filter = new LinkedHashMap<>();
     }
 
     public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter, Map<BlockPos, Map<Direction, List<ItemStack>>> filter) {
-        super(id, posSet, adj, insert, extract, tickCounter);
+        super(id, posSet, adj, insert, extract, tickCounter, PipeNetType.ITEM);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
         this.filter = new LinkedHashMap<>();
@@ -184,9 +185,13 @@ public class ItemPipeNet extends PipeNet{
                 try (Transaction transaction = Transaction.openRoot()) {
                     ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
                     // 找到第一个非空槽位
+                    ItemResource checkResource;
                     for (int i = 0; i < extractHandler.size(); i++) {
-                        resource = extractHandler.getResource(i);
-                        if (!resource.isEmpty() && checkFilter(filterItemWhite, resource)) break;
+                        checkResource = extractHandler.getResource(i);
+                        if (!checkResource.isEmpty() && checkFilter(filterItemWhite, checkResource)) {
+                            resource = checkResource;
+                            break;
+                        }
                     }
                     if (!resource.isEmpty()) {
                         // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
@@ -243,9 +248,13 @@ public class ItemPipeNet extends PipeNet{
                 try (Transaction transaction = Transaction.openRoot()) {
                     ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
                     // 找到第一个非空槽位
+                    ItemResource checkResource;
                     for (int i = 0; i < extractHandler.size(); i++) {
-                        resource = extractHandler.getResource(i);
-                        if (!resource.isEmpty() && checkFilter(filterItemWhite, resource)) break;
+                        checkResource = extractHandler.getResource(i);
+                        if (!checkResource.isEmpty() && checkFilter(filterItemWhite, checkResource)) {
+                            resource = checkResource;
+                            break;
+                        }
                     }
                     if (!resource.isEmpty()) {
                         // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
@@ -333,7 +342,8 @@ public class ItemPipeNet extends PipeNet{
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new ItemPipeNetMenu(i, inventory, extract, insert, filter);
+        addLookingPlayer((ServerPlayer) player);
+        return new ItemPipeNetMenu(i, inventory, extract, insert, filter, netId);
     }
 
     public void addFilter(BlockPos pos, Direction direction, ItemStack itemStack, int slot){

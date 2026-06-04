@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -237,14 +238,25 @@ public abstract class AbstractPipe extends Block {
     @Override
     public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
         if(level.isClientSide()) return;
-        getPipeNetSaveData((ServerLevel) level).breakPipe(pos);
+        removeFromNet((ServerLevel) level, pos, state);
         super.destroy(level, pos, state);
+    }
+
+    @Override
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
+        removeFromNet(level, pos, state);
+        super.onBlockExploded(state, level, pos, explosion);
+    }
+
+    protected void removeFromNet(ServerLevel level, BlockPos pos, BlockState state){
+        getPipeNetSaveData(level).breakPipe(pos);
         for (Direction direction : Direction.values()){
             BlockPos neighbor = pos.relative(direction);
             BlockState neighborState = level.getBlockState(neighbor);
             if(isSamePipe(neighborState) && neighborState.getValue(DIR_TO_PROP.get(direction.getOpposite())) == LinkState.LINK)
                 level.setBlock(neighbor, changeDirection(direction.getOpposite(), neighborState, LinkState.NULL_AUTO), 2);
         }
+
     }
 
     private List<Direction> checkLinkDirection(Level level, BlockPos pos){

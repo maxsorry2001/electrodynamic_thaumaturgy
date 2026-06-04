@@ -33,6 +33,8 @@ public class MoeBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get());
         dropSelf(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get());
         dropSelf(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get());
+        dropSelf(MoeBlocks.ITEM_PIPE.get());
+        dropSelf(MoeBlocks.ENERGY_PIPE.get());
         //add(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), block -> createOreDrop(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), MoeItems.EMPTY_MODULE.get()))
     }
 

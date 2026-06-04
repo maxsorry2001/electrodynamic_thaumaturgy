@@ -1,19 +1,23 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.PipeNetSynPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.resource.Resource;
 
 import java.util.*;
 
 public abstract class PipeNet implements MenuProvider {
+    protected final PipeNetType netType;
     protected final int netId;
     protected Set<BlockPos> posSet;
     protected LinkedHashMap<BlockPos, Set<BlockPos>> adj;
@@ -22,9 +26,11 @@ public abstract class PipeNet implements MenuProvider {
     protected Map<BlockPos, LinkedHashMap<BlockPos, Integer>> distances;
     protected int tickCounter;
     protected Map<BlockPos, Integer> pollingIndexes;
+    protected List<ServerPlayer> lookingPlayer;
 
-    public PipeNet(int id){
+    public PipeNet(int id, PipeNetType netType){
         this.netId = id;
+        this.netType = netType;
         this.posSet = new LinkedHashSet<>();
         this.adj = new LinkedHashMap<>();
         this.insert = new LinkedHashMap<>();
@@ -32,10 +38,12 @@ public abstract class PipeNet implements MenuProvider {
         this.distances = new HashMap<>();
         this.tickCounter = 0;
         this.pollingIndexes = new HashMap<>();
+        this.lookingPlayer = new ArrayList<>();
     }
 
-    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter){
+    public PipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter, PipeNetType netType){
         this.netId = id;
+        this.netType = netType;
         this.posSet = new HashSet<>(posSet);
         this.adj = new LinkedHashMap<>();
         this.insert = new LinkedHashMap<>();
@@ -55,6 +63,7 @@ public abstract class PipeNet implements MenuProvider {
             this.extract.put(entry.getKey(), map);
             this.pollingIndexes.put(entry.getKey(), 0);
         }
+        this.lookingPlayer = new ArrayList<>();
     }
 
     public void addPos(BlockPos blockPos, Set<BlockPos> links){
@@ -234,6 +243,8 @@ public abstract class PipeNet implements MenuProvider {
             distances.put(start, bfsDistances(start));
             pollingIndexes.put(start, 0);
         }
+        for (ServerPlayer serverPlayer : lookingPlayer)
+            PacketDistributor.sendToPlayer(serverPlayer, new PipeNetSynPacket(netId, netType, insert, extract));
     }
 
     protected abstract void removeInsertCache(BlockPos pos, Direction direction);
@@ -277,6 +288,7 @@ public abstract class PipeNet implements MenuProvider {
 
     @Override
     public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+        buffer.writeInt(netId);
         buffer.writeMap(extract, (buf, pos) -> buf.writeBlockPos(pos),
                 (buf, map) -> buf.writeMap(map,
                     (b, dir) -> b.writeEnum(dir),
@@ -291,6 +303,24 @@ public abstract class PipeNet implements MenuProvider {
     public void loopTransferMod(BlockPos pos, Direction direction) {
         TransferMode transferMode = extract.get(pos).get(direction).next();
         extract.get(pos).put(direction, transferMode);
+        for (ServerPlayer serverPlayer : lookingPlayer)
+            PacketDistributor.sendToPlayer(serverPlayer, new PipeNetSynPacket(netId, netType, insert, extract));
+    }
+
+    public List<ServerPlayer> getLookingPlayer() {
+        return lookingPlayer;
+    }
+
+    public void addLookingPlayer(ServerPlayer player){
+        if (!lookingPlayer.contains(player))lookingPlayer.add(player);
+    }
+
+    public void removeLookingPlayer(ServerPlayer player){
+        if(lookingPlayer.contains(player)) lookingPlayer.remove(player);
+    }
+
+    public PipeNetType getNetType() {
+        return netType;
     }
 
     protected static class ResourceExtractSet<T extends Resource>{
@@ -341,6 +371,23 @@ public abstract class PipeNet implements MenuProvider {
                 case FARTHEST -> POLLING;
                 default -> NEAREST;
             };
+        }
+    }
+
+    public enum PipeNetType implements StringRepresentable{
+        ITEM("item"),
+        ENERGY("energy");
+        public static final StringRepresentable.EnumCodec<PipeNetType> CODEC = StringRepresentable.fromEnum(PipeNetType::values);
+
+        private final String name;
+
+        PipeNetType(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return name;
         }
     }
 }

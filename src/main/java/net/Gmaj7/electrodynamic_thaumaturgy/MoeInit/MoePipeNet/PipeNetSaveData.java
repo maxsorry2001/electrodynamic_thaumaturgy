@@ -21,7 +21,7 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
 
     public abstract T createNet();
 
-    public PipeNet getNet(int id){
+    public T getNet(int id){
         return pipeNets.containsKey(id) ? pipeNets.get(id) : null;
     }
 
@@ -251,5 +251,9 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
         if(net == null) return;
         net.loopTransferMod(pos, direction);
         setDirty();
+    }
+
+    public boolean containNet(int netId) {
+        return pipeNets.containsKey(netId);
     }
 }

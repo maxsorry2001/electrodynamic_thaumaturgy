@@ -61,8 +61,8 @@ public class ItemPipeNetScreen extends PipeNetScreen<ItemPipeNetMenu> {
             int idx = startIndex + getIndex(event.y());
             if (idx < directions.size()) {
                 Direction dir = directions.get(idx);
-                this.menu.addFilter(pos, dir, slot);
-                ClientPacketDistributor.sendToServer(new ItemPipeNetFilterPacket(pos, dir, slot, stack));
+                //this.menu.addFilter(pos, dir, slot);
+                ClientPacketDistributor.sendToServer(new ItemPipeNetFilterPacket(pos, dir, slot, stack, menu.getNetId()));
                 return true;
             }
         }

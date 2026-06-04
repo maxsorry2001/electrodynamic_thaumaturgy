@@ -220,7 +220,7 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
                     Direction direction = getCurrentDirections().get(index);
                     BlockPos pos = getCurrentPos();
                     menu.getExtract().get(pos).compute(direction, (k, transferMode) -> transferMode.next());
-                    ClientPacketDistributor.sendToServer(new NetChangePacket(pos, direction));
+                    ClientPacketDistributor.sendToServer(new NetChangePacket(pos, direction, menu.getNetId()));
                 }
             }
             if(isOnChange(event.x(), event.y(), left, top)){
@@ -305,5 +305,10 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
             else leftPx = leftPx + 11 - 2 * dy;
         }
         return mouthX >= leftPx & mouthX <= rightPx;
+    }
+
+    @Override
+    public T getMenu() {
+        return super.getMenu();
     }
 }
