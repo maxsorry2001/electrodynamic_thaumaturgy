@@ -94,7 +94,7 @@ public abstract class AbstractPipe extends Block {
     @Override
     protected InteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if(level.isClientSide()) return InteractionResult.CONSUME;
-        if(!itemStack.isEmpty() && !itemStack.is(Tags.Items.TOOLS_WRENCH)) return useWithoutItem(state, level, pos, player, hitResult);
+        if(!itemStack.is(Tags.Items.TOOLS_WRENCH)) return useWithoutItem(state, level, pos, player, hitResult);
         Direction direction = getSelection(state, level, pos, player);
         if (direction == null) {
             direction = hitResult.getDirection(); // 回退

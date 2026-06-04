@@ -103,10 +103,9 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
-        this.extractBlurredBackground(guiGraphics);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, a);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, isInsert ? INSERT_GRAND : EXTRACT_GRAND, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
 
         // 绘制滚动条
         drawScrollBar(guiGraphics, mouseX, mouseY, x, y);
@@ -115,13 +114,20 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         drawNodeInfo(guiGraphics, mouseX, mouseY, x, y);
     }
 
+    @Override
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
+        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, isInsert ? INSERT_GRAND : EXTRACT_GRAND, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+        this.extractBlurredBackground(guiGraphics);
+    }
+
     private void drawScrollBar(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int left, int top) {
         if (!isScrollBarActive()) return;
 
-        int scrollerX = left + 119;      // 滚动条X坐标（可根据实际背景调整）
+        int scrollerX = left + 129;      // 滚动条X坐标（可根据实际背景调整）
         int scrollerY = top + 14;        // 滚动条区域起始Y
         int sliderOffset = (int)(scrollOffs * (SCROLLER_AREA_HEIGHT - SCROLLER_HEIGHT));
-        Identifier sprite = SCROLLER_SPRITE;
+        Identifier sprite = isOnScroller(mouseX, mouseY, left, top) ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite,
                 scrollerX, scrollerY + sliderOffset, SCROLLER_WIDTH, SCROLLER_HEIGHT);
 
@@ -182,7 +188,7 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
             BlockState blockState = menu.getLevel().getBlockState(adjacentPos);
             guiGraphics.fakeItem(new ItemStack(blockState.getBlock()), startX, startY + i * ITEM_SIZE);
             if(!isInsert)
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == getIndex(mouthX, mouthY) ? getOn(nodePos, dir) : getNormal(nodePos, dir), startX + 18, startY + i * ITEM_SIZE, 18, 18);
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == getIndex(mouthX, mouthY) ? getOn(nodePos, dir) : getNormal(nodePos, dir), startX + 17, startY + i * ITEM_SIZE - 1, 18, 18);
         }
     }
 
@@ -202,10 +208,9 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         }
     }
 
-    @Override
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-        super.extractRenderState(graphics, mouseX, mouseY, a);
-        // 可添加其他每帧渲染
+    private boolean isOnScroller(double mouthX, double mouthY, int left, int top){
+        return (mouthX >= left + 129 && mouthX < left + 129 + SCROLLER_WIDTH &&
+                mouthY >= top + 14 && mouthY < top + 14 + SCROLLER_AREA_HEIGHT);
     }
 
     @Override
@@ -214,10 +219,7 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
         int top = (height - imageHeight) / 2;
         // 处理滚动条点击
         if (isScrollBarActive()) {
-            int scrollerX = left + 119;
-            int scrollerY = top + 14;
-            if (event.x() >= scrollerX && event.x() < scrollerX + SCROLLER_WIDTH &&
-                    event.y() >= scrollerY && event.y() < scrollerY + SCROLLER_AREA_HEIGHT) {
+            if(isOnScroller(event.x(), event.y(), left, top)){
                 this.scrolling = true;
                 return true; // 吞噬事件，不继续传递
             }
@@ -306,7 +308,7 @@ public class PipeNetScreen extends AbstractContainerScreen<PipeNetMenu> {
 
     private int getIndex(double mouthX, double mouthY){
         int left = (width - imageWidth) / 2, top = (height - imageHeight) / 2;
-        int index = -1, startX = left + 49, startY = top + 15;
+        int index = -1, startX = left + 48, startY = top + 14;
         if(mouthX < startX || mouthX > startX + ITEM_SIZE) return index;
         if(mouthY > startY && mouthY < startY + ITEM_SIZE) index = startIndex;
         else if (mouthY < startY + ITEM_SIZE * 2) index = startIndex + 1;
