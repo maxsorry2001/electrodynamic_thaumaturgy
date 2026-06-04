@@ -9,6 +9,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,34 +20,13 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class PipeNetMenu extends AbstractContainerMenu {
+public abstract class PipeNetMenu extends AbstractContainerMenu {
     private final Level level;
     protected LinkedHashMap<BlockPos, Set<Direction>> insert;
     protected LinkedHashMap<BlockPos, Map<Direction, PipeNet.TransferMode>> extract;
 
-    public PipeNetMenu(int containerId, Inventory inventory, FriendlyByteBuf buffer){
-        Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract = buffer.readMap(
-                buf -> buf.readBlockPos(),
-                buf -> buf.readMap(
-                        buf2 -> buf2.readEnum(Direction.class),
-                        buf2 -> buf2.readEnum(PipeNet.TransferMode.class)
-                )
-        );
-        Map<BlockPos, Set<Direction>> insert = buffer.readMap(
-                buf -> buf.readBlockPos(),
-                buf -> {
-                    int size = buf.readVarInt();
-                    Set<Direction> set = new LinkedHashSet<>();
-                    for (int i = 0; i < size; i++) {
-                        set.add(buf.readEnum(Direction.class));
-                    }
-                    return set;
-                });
-    this(containerId, inventory, extract, insert);
-}
-
-    public PipeNetMenu(int containerId, Inventory inventory, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, Map<BlockPos, Set<Direction>> insert) {
-        super(MoeMenuType.PIPE_NET_MENU.get(), containerId);
+    public PipeNetMenu(MenuType<?> menuType, int containerId, Inventory inventory, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> extract, Map<BlockPos, Set<Direction>> insert) {
+        super(menuType, containerId);
         this.level = inventory.player.level();
         this.insert = new LinkedHashMap<>(insert);
         this.extract = new LinkedHashMap<>(extract);
@@ -64,11 +44,11 @@ public class PipeNetMenu extends AbstractContainerMenu {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index >= 0 && index < 9) {
+            if (index >= 0 && index < 27) {
                 if (!this.moveItemStackTo(itemstack1, 9, 36, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 9 && index < 36 && !this.moveItemStackTo(itemstack1, 0, 9, false)) {
+            } else if (index >= 27 && index < 36 && !this.moveItemStackTo(itemstack1, 0, 9, false)) {
                 return ItemStack.EMPTY;
             }
 

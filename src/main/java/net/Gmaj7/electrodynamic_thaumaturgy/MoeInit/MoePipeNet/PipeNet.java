@@ -276,12 +276,7 @@ public abstract class PipeNet implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("item.electrodynamic_thaumaturgy.energy_block");
-    }
-
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new PipeNetMenu(i, inventory, extract, insert);
+        return Component.empty();
     }
 
     @Override

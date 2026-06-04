@@ -2,14 +2,21 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ItemPipeNetMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -21,22 +28,35 @@ public class ItemPipeNet extends PipeNet{
             Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey), Direction.CODEC.listOf().xmap(Set::copyOf, ArrayList::new)).fieldOf("insert").forGetter(ItemPipeNet::getInsert),
             Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey),
                     Codec.unboundedMap(Direction.CODEC, TransferMode.CODEC)).fieldOf("extract").forGetter(ItemPipeNet::getExtract),
-            Codec.INT.fieldOf("tick_counter").forGetter(ItemPipeNet::getTickCounter)
+            Codec.INT.fieldOf("tick_counter").forGetter(ItemPipeNet::getTickCounter),
+            Codec.unboundedMap(Codec.STRING.xmap(ItemPipeNet::keyToPos, ItemPipeNet::posToKey),
+                    Codec.unboundedMap(Direction.CODEC, ItemStack.CODEC.listOf().xmap(List::copyOf, ArrayList::new))).fieldOf("filter").forGetter(ItemPipeNet::getFilter)
     ).apply(i, ItemPipeNet::new));
 
     // 为每个连接的机器存储其对应的缓存
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> extractCaches;
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>>> insertCaches;
+    private Map<BlockPos, Map<Direction, List<ItemStack>>> filter;
     public ItemPipeNet(int id) {
         super(id);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
+        this.filter = new HashMap<>();
     }
 
-    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter) {
+    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter, Map<BlockPos, Map<Direction, List<ItemStack>>> filter) {
         super(id, posSet, adj, insert, extract, tickCounter);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
+        this.filter = filter;
+    }
+
+    public ItemPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter) {
+        this(id, posSet, adj, insert, extract, tickCounter, new HashMap<>());
+    }
+
+    public Map<BlockPos, Map<Direction, List<ItemStack>>> getFilter() {
+        return filter;
     }
 
     @Override
@@ -256,5 +276,52 @@ public class ItemPipeNet extends PipeNet{
                 }
             }
         }
+    }
+
+    @Override
+    public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+        super.writeClientSideData(menu, buffer);
+        buffer.writeMap(filter, (buf, pos) -> buf.writeBlockPos(pos),
+                (buf, map) -> buf.writeMap(map,
+                        (b, direction) -> b.writeEnum(direction),
+                        (b, list) -> {
+                            RegistryFriendlyByteBuf b1 = (RegistryFriendlyByteBuf)b;// 编码 List<ItemStack>
+                            b1.writeVarInt(list.size());     // 写入列表大小
+                            for (ItemStack stack : list) {
+                                ItemStack.STREAM_CODEC.encode(b1, stack); // 编码每个 ItemStack
+                            }
+                        }));
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new ItemPipeNetMenu(i, inventory, extract, insert, filter);
+    }
+
+    public void addFilter(BlockPos pos, Direction direction, ItemStack itemStack, int slot){
+        if(slot < 0 || slot > 2) return;
+        ItemStack filterItem = itemStack.copy();
+        filterItem.setCount(1);
+        if(filter.isEmpty() || !filter.containsKey(pos)){
+            List<ItemStack> filters = new ArrayList<>();
+            filters.add(filterItem);
+            Map<Direction, List<ItemStack>> map = new HashMap<>();
+            map.put(direction, filters);
+            this.filter.put(pos, map);
+            return;
+        }
+        Map<Direction, List<ItemStack>> posFilter = filter.get(pos);
+        if(!posFilter.containsKey(direction)){
+            List<ItemStack> filters = new ArrayList<>();
+            filters.add(filterItem);
+            filter.get(pos).put(direction, filters);
+            return;
+        }
+        List<ItemStack> dirFilter = posFilter.get(direction);
+        if(dirFilter.contains(filterItem)) return;
+        if(dirFilter.size() > slot)
+            dirFilter.set(slot, filterItem);
+        else dirFilter.add(filterItem);
+        filter.get(pos).put(direction, dirFilter);
     }
 }

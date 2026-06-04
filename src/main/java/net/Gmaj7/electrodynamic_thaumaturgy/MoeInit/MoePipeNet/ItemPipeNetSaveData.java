@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedDataType;
 
 import java.util.Map;
@@ -42,5 +43,10 @@ public class ItemPipeNetSaveData extends PipeNetSaveData<ItemPipeNet>{
     @Override
     protected ItemPipeNet createNetWith(int newId, Set<BlockPos> comp, Map<BlockPos, Set<BlockPos>> subAdj, Map<BlockPos, Set<Direction>> newInsert, Map<BlockPos, Map<Direction, PipeNet.TransferMode>> newExtract) {
         return new ItemPipeNet(newId, comp, subAdj, newInsert, newExtract, 0);
+    }
+
+    public void addFilter(BlockPos pos, Direction direction, ItemStack itemStack, int slot){
+        ((ItemPipeNet)getNetOfPos(pos)).addFilter(pos, direction, itemStack, slot);
+        setDirty();
     }
 }
