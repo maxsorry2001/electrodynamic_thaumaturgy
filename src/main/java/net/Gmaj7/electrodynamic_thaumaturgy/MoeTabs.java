@@ -144,7 +144,7 @@ public class MoeTabs {
         for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
             list.add(new ItemStack(MoeItems.EMPTY_MAGIC_MODULE.get()));
         }
-        itemStack.set(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.fromItems(list));
+        itemStack.set(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.fromItems(list));
         return itemStack;
     }
 
@@ -167,7 +167,7 @@ public class MoeTabs {
         for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
             list.add(new ItemStack(MoeItems.EMPTY_MAGIC_MODULE.get()));
         }
-        itemStack.set(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.fromItems(list));
+        itemStack.set(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.fromItems(list));
         return itemStack;
     }
 }

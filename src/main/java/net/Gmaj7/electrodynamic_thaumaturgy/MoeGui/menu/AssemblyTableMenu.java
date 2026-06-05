@@ -202,7 +202,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                     }
                     else newList.add(itemStack);
                 }
-                toolSlot.set(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.fromItems(newList));
+                toolSlot.set(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.fromItems(newList));
             }
         });
     }
@@ -214,7 +214,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
             ItemStack toolStack = container.getItem(toolSlotNum);
             if(!toolStack.isEmpty() && toolStack.getItem() instanceof MagicCastItem){
                 this.access.execute((level1, blockPos) -> {
-                    ItemContainerContents contents = toolStack.get(MoeDataComponentTypes.ROD_SETTING.get());
+                    ItemContainerContents contents = toolStack.get(MoeDataComponentTypes.MOE_CONTAINER.get());
                     for (int i = powerSlotNum; i < typeSlotEndNum; i++){
                         ItemStack menuSlot = contents.getStackInSlot(i).copy();
                         if(menuSlot.getItem() instanceof IMoeModuleItem && ((IMoeModuleItem) menuSlot.getItem()).isEmpty())

@@ -107,8 +107,8 @@ public class MagicCastItem extends Item {
     }
 
     private ItemStack getMagic(ItemStack itemStack){
-        if(itemStack.has(MoeDataComponentTypes.ROD_SETTING.get()) && itemStack.has(MoeDataComponentTypes.MAGIC_SELECT)) {
-            ItemContainerContents contents = itemStack.getOrDefault(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.EMPTY);
+        if(itemStack.has(MoeDataComponentTypes.MOE_CONTAINER.get()) && itemStack.has(MoeDataComponentTypes.MAGIC_SELECT)) {
+            ItemContainerContents contents = itemStack.getOrDefault(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.EMPTY);
             ItemStack typeStack = contents.getStackInSlot(itemStack.get(MoeDataComponentTypes.MAGIC_SELECT));
             return typeStack;
         }

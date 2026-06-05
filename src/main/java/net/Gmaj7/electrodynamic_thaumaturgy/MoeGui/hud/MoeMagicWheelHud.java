@@ -41,7 +41,7 @@ public class MoeMagicWheelHud implements GuiLayer {
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY / 2;
         double alpha = - 0.375 * Math.PI;
-        ItemContainerContents contents = stack.get(MoeDataComponentTypes.ROD_SETTING.get());
+        ItemContainerContents contents = stack.get(MoeDataComponentTypes.MOE_CONTAINER.get());
         for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
             ItemStack type = contents.getStackInSlot(i);
             if(type.getItem() instanceof MoeMagicTypeModuleItem item && !item.isEmpty()){

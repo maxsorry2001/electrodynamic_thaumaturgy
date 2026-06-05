@@ -39,8 +39,11 @@ public class MoeDataComponentTypes {
     public static final Supplier<DataComponentType<Identifier>> MAGIC_DEF_LOCATION = MOE_DATA_COMPONENT_TYPE.register("magic",
             () -> DataComponentType.<Identifier>builder().persistent(Identifier.CODEC).build());
 
-    public static final Supplier<DataComponentType<ItemContainerContents>> ROD_SETTING = MOE_DATA_COMPONENT_TYPE.register("container",
+    public static final Supplier<DataComponentType<ItemContainerContents>> MOE_CONTAINER = MOE_DATA_COMPONENT_TYPE.register("container",
             () -> DataComponentType.<ItemContainerContents>builder().persistent(ItemContainerContents.CODEC).networkSynchronized(ItemContainerContents.STREAM_CODEC).cacheEncoding().build());
+
+    public static final Supplier<DataComponentType<Boolean>> FILTER_WHITE = MOE_DATA_COMPONENT_TYPE.register("filter_white",
+            () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).build());
 
 
     public static void register(IEventBus eventBus){

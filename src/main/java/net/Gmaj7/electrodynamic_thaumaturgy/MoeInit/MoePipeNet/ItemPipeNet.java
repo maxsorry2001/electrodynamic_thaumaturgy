@@ -3,8 +3,11 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ItemPipeNetMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
@@ -176,153 +180,172 @@ public class ItemPipeNet extends PipeNet{
             ItemResource resource = ItemResource.EMPTY;
             var extractSet = extractors.get(processedBefore);
             TransferMode transferMode = transferModes.get(processedBefore);
-            List<ItemStack> filterItemWhite = new ArrayList<>();
-            if(filter.containsKey(extractSet.getPos()) && filter.get(extractSet.getPos()).containsKey(extractSet.getDirection()))
-                filterItemWhite= filter.get(extractSet.getPos()).get(extractSet.getDirection());
+            FilterSetting extractFilter = getFilterSetting(extractSet.getPos(), extractSet.direction);
             if(transferMode != TransferMode.POLLING){
-                int insertCount = 0;
-                ResourceHandler<ItemResource> insertHandler = null;
-                try (Transaction transaction = Transaction.openRoot()) {
-                    ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
-                    // 找到第一个非空槽位
-                    ItemResource checkResource;
-                    for (int i = 0; i < extractHandler.size(); i++) {
-                        checkResource = extractHandler.getResource(i);
-                        if (!checkResource.isEmpty() && checkFilter(filterItemWhite, checkResource)) {
-                            resource = checkResource;
-                            break;
-                        }
-                    }
-                    if (!resource.isEmpty()) {
-                        // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
-                        int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
-                        if (extracted > 0) {
-                            int size = distances.get(extractSet.getPos()).size();
-                            // 按距离顺序尝试插入
-                            outer:
-                            for (int i = 0; i < size; i++) {
-                                BlockPos checkPos = getNearestInsert(extractSet.getPos(), transferMode == TransferMode.NEAREST ? i : size - i);
-                                Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> dirMap = insertCaches.get(checkPos);
-                                if (dirMap == null) continue;
-                                for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : dirMap.entrySet()) {
-                                    ResourceHandler<ItemResource> inserter = entry.getValue().getCapability();
-                                    if (inserter == null) continue;
-                                    List<ItemStack> insertFilterWhite = new ArrayList<>();
-                                    if(filter.containsKey(checkPos) && filter.get(checkPos).containsKey(entry.getKey()))
-                                        insertFilterWhite = filter.get(checkPos).get(entry.getKey());
-                                    int inserted = checkFilter(insertFilterWhite, resource) ? inserter.insert(resource, extracted, transaction) : 0;
-                                    if (inserted == extracted) {
-                                        insertHandler = inserter;
-                                        insertCount = inserted;
-                                        break outer;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (resource.isEmpty() || insertCount == 0) break;
-                try (Transaction transaction = Transaction.openRoot()) {
-                    extractSet.getResourceHandler().extract(resource, insertCount, transaction);
-                    insertHandler.insert(resource, insertCount, transaction);
-                    transaction.commit();
-                }
+                if (dealDistance(extractSet, extractFilter, resource, transferMode)) break;
             }
             else {
-                List<BlockPos> list = new ArrayList<>(distances.get(extractSet.getPos()).keySet());
-                List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
-                List<Direction> directions = new ArrayList<>();
-                for (BlockPos pos : list){
-                    for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : insertCaches.get(pos).entrySet()){
-                        inserters.add(entry.getValue().getCapability());
-                        directions.add(entry.getKey());
-                    }
-                }
-                if(inserters.isEmpty()) break;
-                int trueExtract = 0;
-                int[] insertCounts = new int[inserters.size()];
-                List<Integer> available = new ArrayList<>();
-                for (int i = 0; i < inserters.size(); i++)
-                    available.add((pollingIndexes.get(extractSet.getPos()) + i) % inserters.size());
-                int testPolling = (pollingIndexes.get(extractSet.getPos()));
-                try (Transaction transaction = Transaction.openRoot()) {
-                    ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
-                    // 找到第一个非空槽位
-                    ItemResource checkResource;
-                    for (int i = 0; i < extractHandler.size(); i++) {
-                        checkResource = extractHandler.getResource(i);
-                        if (!checkResource.isEmpty() && checkFilter(filterItemWhite, checkResource)) {
-                            resource = checkResource;
-                            break;
-                        }
-                    }
-                    if (!resource.isEmpty()) {
-                        // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
-                        int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
-                        while (extracted > 0) {
-                            if(available.isEmpty()) break;
-                            int baseInsertCount = extracted / available.size(), remainingCount = extracted % available.size();
-                            if(baseInsertCount > 0) {
-                                Iterator<Integer> iterator = available.iterator();
-                                while (iterator.hasNext()){
-                                    testPolling = iterator.next();
-                                    var insertHandler = inserters.get(testPolling);
-                                    List<ItemStack> insertFilterWhite = new ArrayList<>();
-                                    if(filter.containsKey(list.get(testPolling)) && filter.get(list.get(testPolling)).containsKey(directions.get(testPolling)))
-                                        insertFilterWhite = filter.get(list.get(testPolling)).get(directions.get(testPolling));
-                                    int inserted = checkFilter(insertFilterWhite, resource) ? insertHandler.insert(resource, baseInsertCount, transaction) : 0;
-                                    insertCounts[testPolling] += inserted;
-                                    trueExtract += inserted;
-                                    extracted -= inserted;
-                                    if (inserted < baseInsertCount) {
-                                        iterator.remove();
-                                    }
-                                }
-                            }
-                            else {
-                                Iterator<Integer> iterator = available.iterator();
-                                while (iterator.hasNext()){
-                                    if(extracted == 0) break;
-                                    testPolling = iterator.next();
-                                    var insertHandler = inserters.get(testPolling);
-                                    List<ItemStack> insertFilterWhite = new ArrayList<>();
-                                    if(filter.containsKey(list.get(testPolling)) && filter.get(list.get(testPolling)).containsKey(directions.get(testPolling)))
-                                        insertFilterWhite = filter.get(list.get(testPolling)).get(directions.get(testPolling));
-                                    int inserted = checkFilter(insertFilterWhite, resource) ? insertHandler.insert(resource, 1, transaction) : 0;
-                                    insertCounts[testPolling] += inserted;
-                                    trueExtract += inserted;
-                                    extracted -= inserted;
-                                    if (inserted == 0) {
-                                        iterator.remove();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if(trueExtract == 0) break;
-                pollingIndexes.put(extractSet.getPos(), (testPolling + 1) % inserters.size());
-                try (Transaction transaction = Transaction.openRoot()){
-                    extractSet.resourceHandler.extract(resource, trueExtract, transaction);
-                    for (int i = 0; i < insertCounts.length; i++){
-                        inserters.get(i).insert(resource, insertCounts[i], transaction);
-                    }
-                    transaction.commit();
-                }
+                if (dealPolling(extractSet, extractFilter, resource)) break;
             }
         }
     }
 
-    private boolean checkFilter(List<ItemStack> filterItem, ItemResource resource) {
-        if(filterItem.isEmpty()) return true;
-        boolean flag = false;
-        for (ItemStack itemStack : filterItem){
-            if(itemStack.is(resource.getItem())) {
-                flag = true;
+    private boolean dealPolling(ResourceExtractSet<ItemResource> extractSet, FilterSetting filterSetting, ItemResource resource) {
+        List<BlockPos> list = new ArrayList<>(distances.get(extractSet.getPos()).keySet());
+        List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
+        List<Direction> directions = new ArrayList<>();
+        for (BlockPos pos : list){
+            for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : insertCaches.get(pos).entrySet()){
+                inserters.add(entry.getValue().getCapability());
+                directions.add(entry.getKey());
+            }
+        }
+        if(inserters.isEmpty()) return true;
+        int trueExtract = 0, order = 0;
+        int[] insertCounts = new int[inserters.size()];
+        List<Integer> availableInsert = new ArrayList<>();
+        for (int i = 0; i < inserters.size(); i++)
+            availableInsert.add((pollingIndexes.get(extractSet.getPos()) + i) % inserters.size());
+        int testPolling = (pollingIndexes.get(extractSet.getPos()));
+        try (Transaction transaction = Transaction.openRoot()) {
+            while (trueExtract == 0){
+                List<Integer> available = new ArrayList<>(availableInsert);
+                ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
+                ResourceAndIndex resourceAndIndex = getAvailableExtract(filterSetting, extractHandler, order);
+                if(resourceAndIndex.index() > extractHandler.size()) break;
+                resource = resourceAndIndex.resource;
+                order = resourceAndIndex.index;
+                if (!resource.isEmpty()) {
+                    int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
+                    while (extracted > 0) {
+                        if (available.isEmpty()) break;
+                        int baseInsertCount = extracted / available.size();
+                        Iterator<Integer> iterator = available.iterator();
+                        while (iterator.hasNext()) {
+                            testPolling = iterator.next();
+                            var insertHandler = inserters.get(testPolling);
+                            FilterSetting insertFilter = getFilterSetting(list.get(testPolling), directions.get(testPolling));
+                            int inserted = checkFilter(insertFilter, resource) ? insertHandler.insert(resource, Math.max(baseInsertCount, 1), transaction) : 0;
+                            insertCounts[testPolling] += inserted;
+                            trueExtract += inserted;
+                            extracted -= inserted;
+                            boolean flag = baseInsertCount > 0;
+                            if ((flag && inserted < baseInsertCount) || (!flag && inserted == 0)) {
+                                iterator.remove();
+                            }
+                            if(extracted <= 0) break;
+                        }
+                    }
+                }
+            }
+        }
+        if(trueExtract == 0) return true;
+        pollingIndexes.put(extractSet.getPos(), (testPolling + 1) % inserters.size());
+        try (Transaction transaction = Transaction.openRoot()){
+            extractSet.resourceHandler.extract(resource, trueExtract, transaction);
+            for (int i = 0; i < insertCounts.length; i++){
+                inserters.get(i).insert(resource, insertCounts[i], transaction);
+            }
+            transaction.commit();
+        }
+        return false;
+    }
+
+    private boolean dealDistance(ResourceExtractSet<ItemResource> extractSet, FilterSetting filterSetting, ItemResource resource, TransferMode transferMode) {
+        int insertCount = 0, order = 0;
+        ResourceHandler<ItemResource> insertHandler = null;
+        try (Transaction transaction = Transaction.openRoot()) {
+            while (insertCount == 0){
+                ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
+                ResourceAndIndex resourceAndIndex = getAvailableExtract(filterSetting, extractHandler, order);
+                resource = resourceAndIndex.resource;
+                order = resourceAndIndex.index;
+                if(order >= extractHandler.size()) break;
+                if (!resource.isEmpty()) {
+                    // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
+                    int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
+                    if (extracted > 0) {
+                        int size = distances.get(extractSet.getPos()).size();
+                        // 按距离顺序尝试插入
+                        outer:
+                        for (int i = 0; i < size; i++) {
+                            BlockPos checkPos = getNearestInsert(extractSet.getPos(), transferMode == TransferMode.NEAREST ? i : size - i);
+                            Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> dirMap = insertCaches.get(checkPos);
+                            if (dirMap == null) continue;
+                            for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : dirMap.entrySet()) {
+                                ResourceHandler<ItemResource> inserter = entry.getValue().getCapability();
+                                if (inserter == null) continue;
+                                FilterSetting insertFilter = getFilterSetting(checkPos, entry.getKey());
+                                int inserted = checkFilter(insertFilter, resource) ? inserter.insert(resource, extracted, transaction) : 0;
+                                if (inserted == extracted) {
+                                    insertHandler = inserter;
+                                    insertCount = inserted;
+                                    break outer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (resource.isEmpty() || insertCount == 0) return true;
+        try (Transaction transaction = Transaction.openRoot()) {
+            extractSet.getResourceHandler().extract(resource, insertCount, transaction);
+            insertHandler.insert(resource, insertCount, transaction);
+            transaction.commit();
+        }
+        return false;
+    }
+
+    private boolean checkFilter(FilterSetting filterSetting, ItemResource resource) {
+        if(filterSetting.isEmpty()) return true;
+        boolean flagWhite = filterSetting.whiteEmpty(), flagBlack = false;
+        if(!flagWhite){
+            for (ItemStack itemStack : filterSetting.white()) {
+                if (itemStack.is(resource.getItem())) {
+                    flagWhite = true;
+                    break;
+                }
+            }
+        }
+        for (ItemStack itemStack : filterSetting.black()){
+            if(itemStack.is(resource.getItem())){
+                flagBlack = true;
                 break;
             }
         }
-        return flag;
+        return flagWhite && !flagBlack;
+    }
+
+    private FilterSetting getFilterSetting(BlockPos pos, Direction direction){
+        if(filter.containsKey(pos) && filter.get(pos).containsKey(direction)) {
+            List<ItemStack> white = new ArrayList<>(), black = new ArrayList<>();
+            for (ItemStack itemStack : filter.get(pos).get(direction)){
+                if(!itemStack.is(MoeItems.FILTER_SETTING)) white.add(itemStack.copy());
+                else {
+                    ItemContainerContents contents = itemStack.get(MoeDataComponentTypes.MOE_CONTAINER);
+                    NonNullList<ItemStack> list = NonNullList.create();
+                    contents.copyInto(list);
+                    if(itemStack.getOrDefault(MoeDataComponentTypes.FILTER_WHITE.get(), true)) white.addAll(list);
+                    else black.addAll(list);
+                }
+            }
+            return new FilterSetting(white, black);
+        }
+        return new FilterSetting(new ArrayList<>(), new ArrayList<>());
+    }
+
+    private ResourceAndIndex getAvailableExtract(FilterSetting filterSetting, ResourceHandler<ItemResource> extractHandler, int index){
+        // 找到第一个非空槽位
+        ItemResource checkResource = ItemResource.EMPTY;
+        for (; index < extractHandler.size(); index++) {
+            checkResource = extractHandler.getResource(index);
+            if (!checkResource.isEmpty() && checkFilter(filterSetting, checkResource)) {
+                index ++;
+                break;
+            }
+        }
+        return new ResourceAndIndex(checkResource, index);
     }
 
     @Override
@@ -396,5 +419,21 @@ public class ItemPipeNet extends PipeNet{
             }
         }
         return flag;
+    }
+
+    private record ResourceAndIndex(ItemResource resource, int index){};
+
+    private record FilterSetting(List<ItemStack> white, List<ItemStack> black){
+        private boolean isEmpty(){
+            return this.white.isEmpty() && this.black.isEmpty();
+        }
+
+        private boolean whiteEmpty(){
+            return this.white.isEmpty();
+        }
+
+        private boolean blackEmpty(){
+            return this.black.isEmpty();
+        }
     }
 }

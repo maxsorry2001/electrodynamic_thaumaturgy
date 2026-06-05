@@ -104,6 +104,10 @@ public class MoeItems {
             (properties) -> new BatteryItem(properties.stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
     public static final DeferredItem<Item> GENETIC_RECORDER = MOE_ITEM.registerItem("genetic_recorder",
             (properties) -> new Item(properties.stacksTo(1)));
+    public static final DeferredItem<Item> FILTER_SETTING = MOE_ITEM.registerItem("filter_setting",
+            (properties) -> new FilterSettingItem(properties.stacksTo(1)
+                    .component(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.EMPTY)
+                    .component(MoeDataComponentTypes.FILTER_WHITE.get(), true)));
 
     public static final DeferredItem<Item> MAGNO_WRENCH = MOE_ITEM.registerItem("magno_wrench",
             (properties) -> new MagnoWrenchItem(properties.stacksTo(1)));
@@ -120,7 +124,7 @@ public class MoeItems {
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)
-                    .component(MoeDataComponentTypes.ROD_SETTING.get(), ItemContainerContents.EMPTY)
+                    .component(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.EMPTY)
                     .component(MoeDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(MoeDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 
