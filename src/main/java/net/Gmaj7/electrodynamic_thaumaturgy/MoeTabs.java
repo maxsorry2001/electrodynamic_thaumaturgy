@@ -119,6 +119,7 @@ public class MoeTabs {
                         output.accept(MoeItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
 
                         output.accept(MoeItems.MAGNO_WRENCH);
+                        output.accept(MoeItems.FILTER_SETTING);
                         output.accept(MoeBlocks.ENERGY_PIPE);
                         output.accept(MoeBlocks.ITEM_PIPE);
                     }))

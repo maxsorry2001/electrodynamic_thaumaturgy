@@ -60,6 +60,7 @@ public class ClientEventHandler {
             event.register(MoeMenuType.EDDY_CURRENT_REMELTER_BLOCK_MENU.get(), EddyCurrentRemelterBlockScreen::new);
             event.register(MoeMenuType.ITEM_PIPE_NET_MENU.get(), ItemPipeNetScreen::new);
             event.register(MoeMenuType.ENERGY_PIPE_NET_MENU.get(), EnergyPipeNetScreen::new);
+            event.register(MoeMenuType.FILTER_SETTING_MENU.get(), FilterSettingScreen::new);
         }
 
 
