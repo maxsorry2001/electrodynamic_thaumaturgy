@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -81,5 +82,13 @@ public class FilterSettingMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return true;
+    }
+
+    public List<ItemStack> getFilterList(){
+        return new ArrayList<>(filter.get(MoeDataComponentTypes.MOE_CONTAINER).allItemsCopyStream().toList());
+    }
+
+    public ItemStack getFilter() {
+        return filter;
     }
 }
