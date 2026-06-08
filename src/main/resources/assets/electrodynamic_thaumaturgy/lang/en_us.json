@@ -63,6 +63,12 @@
   "item.electrodynamic_thaumaturgy.magneto_entropy_witch_entity_spawn_egg": "Magneto‑Entropy Witch Spawn Egg",
   "item.electrodynamic_thaumaturgy.magno_wrench": "Magno Wrench",
   "item.electrodynamic_thaumaturgy.net_filter": "Network Filter",
+  "item.electrodynamic_thaumaturgy.resonant_crystal": "Resonant Crystal",
+  "item.electrodynamic_thaumaturgy.polar_crystal": "Polar Crystal",
+  "item.electrodynamic_thaumaturgy.glowing_essence": "Glowing Essence",
+  "item.electrodynamic_thaumaturgy.magnetic_essence": "Magnetic Essence",
+  "item.electrodynamic_thaumaturgy.monopole_n": "North Monopole",
+  "item.electrodynamic_thaumaturgy.monopole_s": "South Monopole",
 
   "effect.electrodynamic_thaumaturgy.exciting": "Exciting",
   "effect.electrodynamic_thaumaturgy.electric_energy_release" : "Electric Energy Release",

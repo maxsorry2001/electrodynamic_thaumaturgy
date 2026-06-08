@@ -121,6 +121,13 @@ public class MoeItems {
     public static final DeferredItem<Item> GOLD_DUST = MOE_ITEM.registerSimpleItem("gold_dust");
     public static final DeferredItem<Item> NETHERITE_DUST = MOE_ITEM.registerSimpleItem("netherite_dust");
 
+    public static final DeferredItem<Item> RESONANT_CRYSTAL = MOE_ITEM.registerSimpleItem("resonant_crystal");
+    public static final DeferredItem<Item> POLAR_CRYSTAL = MOE_ITEM.registerSimpleItem("polar_crystal");
+    public static final DeferredItem<Item> GLOWING_ESSENCE = MOE_ITEM.registerSimpleItem("glowing_essence");
+    public static final DeferredItem<Item> MAGNETIC_ESSENCE = MOE_ITEM.registerSimpleItem("magnetic_essence");
+    public static final DeferredItem<Item> MONOPOLE_N = MOE_ITEM.registerSimpleItem("monopole_n");
+    public static final DeferredItem<Item> MONOPOLE_S = MOE_ITEM.registerSimpleItem("monopole_s");
+
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = MOE_ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)

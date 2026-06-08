@@ -63,6 +63,12 @@
   "item.electrodynamic_thaumaturgy.magneto_entropy_witch_entity_spawn_egg": "生成磁熵魔女",
   "item.electrodynamic_thaumaturgy.magno_wrench": "磁序扳手",
   "item.electrodynamic_thaumaturgy.net_filter": "网络过滤器",
+  "item.electrodynamic_thaumaturgy.resonant_crystal": "谐振水晶",
+  "item.electrodynamic_thaumaturgy.polar_crystal": "极性水晶",
+  "item.electrodynamic_thaumaturgy.glowing_essence": "光耀精华",
+  "item.electrodynamic_thaumaturgy.magnetic_essence": "磁极精华",
+  "item.electrodynamic_thaumaturgy.monopole_n": "N磁单极子",
+  "item.electrodynamic_thaumaturgy.monopole_s": "S磁单极子",
 
   "effect.electrodynamic_thaumaturgy.exciting": "激发",
   "effect.electrodynamic_thaumaturgy.electric_energy_release" : "电能释放",
