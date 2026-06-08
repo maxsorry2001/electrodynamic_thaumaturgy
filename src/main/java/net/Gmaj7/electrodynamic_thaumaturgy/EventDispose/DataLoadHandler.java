@@ -29,6 +29,7 @@ public class DataLoadHandler {
         payloadRegistrar.playToServer(NetChangePacket.TYPE, NetChangePacket.STREAM_CODEC, NetChangePacket ::handle);
         payloadRegistrar.playToServer(ItemPipeNetFilterPacket.TYPE, ItemPipeNetFilterPacket.STREAM_CODEC, ItemPipeNetFilterPacket::handle);
         payloadRegistrar.playToServer(FilterSettingItemPacket.TYPE, FilterSettingItemPacket.STREAM_CODEC, FilterSettingItemPacket::handle);
+        payloadRegistrar.playToServer(FilterSettingWhitePacket.TYPE, FilterSettingWhitePacket.STREAM_CODEC, FilterSettingWhitePacket::handle);
 
         payloadRegistrar.playToClient(ProtectingPacket.TYPE, ProtectingPacket.STREAM_CODEC, ProtectingPacket::handle);
         payloadRegistrar.playToClient(EnergySetPacket.TYPE, EnergySetPacket.STREAM_CODEC, EnergySetPacket::handle);

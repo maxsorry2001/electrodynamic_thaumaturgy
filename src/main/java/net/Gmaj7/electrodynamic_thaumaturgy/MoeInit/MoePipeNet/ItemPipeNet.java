@@ -324,8 +324,7 @@ public class ItemPipeNet extends PipeNet{
                 if(!itemStack.is(MoeItems.FILTER_SETTING)) white.add(itemStack.copy());
                 else {
                     ItemContainerContents contents = itemStack.get(MoeDataComponentTypes.MOE_CONTAINER);
-                    NonNullList<ItemStack> list = NonNullList.create();
-                    contents.copyInto(list);
+                    List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().toList());
                     if(itemStack.getOrDefault(MoeDataComponentTypes.FILTER_WHITE.get(), true)) white.addAll(list);
                     else black.addAll(list);
                 }

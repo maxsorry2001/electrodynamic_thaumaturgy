@@ -1,23 +1,15 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ItemPipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNet;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.FilterSettingItem;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.ArrayList;
@@ -27,7 +19,7 @@ public class FilterSettingItemPacket implements CustomPacketPayload {
     int slot;
     boolean isEmpty;
     ItemStack itemStack;
-    public static final CustomPacketPayload.Type<FilterSettingItemPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "filter_setting_item"));
+    public static final CustomPacketPayload.Type<FilterSettingItemPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "net_filter_item"));
     public static final StreamCodec<RegistryFriendlyByteBuf, FilterSettingItemPacket> STREAM_CODEC = CustomPacketPayload.codec(FilterSettingItemPacket::write, FilterSettingItemPacket::new);
 
     public FilterSettingItemPacket(int slot, ItemStack itemStack){
@@ -55,14 +47,14 @@ public class FilterSettingItemPacket implements CustomPacketPayload {
 
     public static void handle(FilterSettingItemPacket packet, IPayloadContext context){
         context.enqueueWork(() -> {
-            if(context.player().level() instanceof ServerLevel serverLevel) {
+            if(context.player().level() instanceof ServerLevel) {
                 if(context.player().getMainHandItem().getItem() instanceof FilterSettingItem) {
                     List<ItemStack> list = new ArrayList<>(context.player().getMainHandItem().get(MoeDataComponentTypes.MOE_CONTAINER).allItemsCopyStream().toList());
                     if(packet.isEmpty && packet.slot < list.size()){
                         list.remove(packet.slot);
                     }
                     else {
-                        if (packet.slot > list.size()) list.add(packet.itemStack);
+                        if (packet.slot >= list.size()) list.add(packet.itemStack);
                         else list.set(packet.slot, packet.itemStack);
                     }
                     ItemContainerContents contents = ItemContainerContents.fromItems(list);

@@ -102,7 +102,6 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
-        super.extractRenderState(guiGraphics, mouseX, mouseY, a);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
 
         // 绘制滚动条
@@ -110,6 +109,7 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
 
         // 绘制节点信息（序号、类型、坐标）
         drawNodeInfo(guiGraphics, mouseX, mouseY, x, y);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, a);
     }
 
     @Override

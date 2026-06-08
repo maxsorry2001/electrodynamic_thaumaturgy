@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.FilterSettingMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.FilterSettingItemPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.FilterSettingWhitePacket;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -19,10 +20,12 @@ import java.util.List;
 
 public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMenu> {
 
-    private static final Identifier BACKGROUND = Identifier.fromNamespaceAndPath(
+    private static final Identifier BACKGROUND_WHITE = Identifier.fromNamespaceAndPath(
             ElectrodynamicThaumaturgy.MODID, "textures/gui/net_gui_extract.png");
+    private static final Identifier BACKGROUND_BLACK = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "textures/gui/net_gui_insert.png");
     private static final int ITEM_SIZE = 18;
-    private static final int COLS = 4;
+    private static final int COLS = 6;
     private static final int ROWS = 3;
     private static final int START_X_OFFSET = 31;
     private static final int START_Y_OFFSET = 15;
@@ -39,7 +42,7 @@ public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMe
         int top = (height - imageHeight) / 2;
 
         // 绘制主背景图
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, left, top, 0, 0, imageWidth, imageHeight, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, menu.isWhite() ? BACKGROUND_WHITE : BACKGROUND_BLACK, left, top, 0, 0, imageWidth, imageHeight, 256, 256);
 
         // 绘制过滤物品网格
         drawFilterItems(guiGraphics, left, top);
@@ -93,7 +96,14 @@ public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMe
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        int left = (width - imageWidth) / 2;
+        int top = (height - imageHeight) / 2;
         if(event.button() == 0){
+            if(isOnChange(event.x(), event.y(), left, top)){
+                ClientPacketDistributor.sendToServer(new FilterSettingWhitePacket());
+                boolean flag = menu.isWhite();
+                menu.getFilter().set(MoeDataComponentTypes.FILTER_WHITE, !flag);
+            }
             int slot = getSlotIndex(event.x(), event.y());
             if(slot != -1){
                 ItemStack itemStack = menu.getCarried();
@@ -103,7 +113,7 @@ public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMe
                     list.remove(slot);
                 }
                 else {
-                    if (slot > list.size()) list.add(itemStack);
+                    if (slot >= list.size()) list.add(itemStack);
                     else list.set(slot, itemStack);
                 }
                 ItemContainerContents contents = ItemContainerContents.fromItems(list);
@@ -112,5 +122,16 @@ public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMe
             }
         }
         return super.mouseClicked(event, doubleClick);
+    }
+
+    protected boolean isOnChange(double mouthX, double mouthY, int left, int top){
+        int lx = !menu.isWhite() ? left + 31 : left + 81, ly = top + 13, height = 11;
+        if(mouthY > ly || mouthY < ly - height) return false;
+        int dy = ly - (int) mouthY, leftPx = lx + dy, rightPx = lx + 61 - dy;
+        if(dy < 6){
+            if(!menu.isWhite()) rightPx = rightPx - 11 + 2 * dy;
+            else leftPx = leftPx + 11 - 2 * dy;
+        }
+        return mouthX >= leftPx & mouthX <= rightPx;
     }
 }

@@ -104,7 +104,7 @@ public class MoeItems {
             (properties) -> new BatteryItem(properties.stacksTo(1).component(MoeDataComponentTypes.MOE_ENERGY.get(), 0)));
     public static final DeferredItem<Item> GENETIC_RECORDER = MOE_ITEM.registerItem("genetic_recorder",
             (properties) -> new Item(properties.stacksTo(1)));
-    public static final DeferredItem<Item> FILTER_SETTING = MOE_ITEM.registerItem("filter_setting",
+    public static final DeferredItem<Item> FILTER_SETTING = MOE_ITEM.registerItem("net_filter",
             (properties) -> new FilterSettingItem(properties.stacksTo(1)
                     .component(MoeDataComponentTypes.MOE_CONTAINER.get(), ItemContainerContents.EMPTY)
                     .component(MoeDataComponentTypes.FILTER_WHITE.get(), true)));

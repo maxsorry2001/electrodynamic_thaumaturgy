@@ -33,7 +33,7 @@ public class MoeMenuType {
     public static final DeferredHolder<MenuType<?>, MenuType<EddyCurrentRemelterBlockMenu>> EDDY_CURRENT_REMELTER_BLOCK_MENU = registerMenuType("eddy_current_remelter_block_menu", EddyCurrentRemelterBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ItemPipeNetMenu>> ITEM_PIPE_NET_MENU = registerMenuType("item_pipe_net_menu", ItemPipeNetMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<EnergyPipeNetMenu>> ENERGY_PIPE_NET_MENU = registerMenuType("energy_pipe_net_menu", EnergyPipeNetMenu::new);
-    public static final DeferredHolder<MenuType<?>, MenuType<FilterSettingMenu>> FILTER_SETTING_MENU = registerMenuType("filter_setting_menu", FilterSettingMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<FilterSettingMenu>> FILTER_SETTING_MENU = registerMenuType("net_filter_menu", FilterSettingMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory){
         return MENU_TYPE.register(name, () -> IMenuTypeExtension.create(factory));
