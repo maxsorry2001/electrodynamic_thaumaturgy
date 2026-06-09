@@ -17,8 +17,13 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jspecify.annotations.Nullable;
+
+import java.util.List;
 
 public class ElectromagneticDissociationRecipeCategory implements IRecipeCategory<RecipeHolder<ElectromagneticDissociationRecipe>> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_encode");
@@ -59,12 +64,17 @@ public class ElectromagneticDissociationRecipeCategory implements IRecipeCategor
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<ElectromagneticDissociationRecipe> recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().ingredient());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
+        List<ItemStackTemplate> outputs = recipe.value().outputs();
+        if(recipe.value().needCatalyst()){
+            builder.addSlot(RecipeIngredientRole.INPUT, 81, 20).add(Ingredient.of(Items.NETHER_STAR));
+        }
+        for (int i = 0; i < outputs.size(); i++){
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 104 + 18 * i, 34).add(outputs.get(i));
+        }
     }
 
     @Override
     public void draw(RecipeHolder<ElectromagneticDissociationRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.background.draw(guiGraphics);
-        guiGraphics.fillGradient(156, 50, 164, 56, 0xffb51500, 0xff600b00);
     }
 }

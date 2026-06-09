@@ -2,8 +2,8 @@
   "type": "electrodynamic_thaumaturgy:magno_fusion",
   "ingredients": [
     "electrodynamic_thaumaturgy:radiant_magno_ingot",
-    "minecraft:ender_pearl",
-    "minecraft:amethyst_shard"
+    "electrodynamic_thaumaturgy:monopole_n",
+    "electrodynamic_thaumaturgy:monopole_s"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:stellar_magno_ingot"

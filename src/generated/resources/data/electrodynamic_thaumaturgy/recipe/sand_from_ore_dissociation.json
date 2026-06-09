@@ -1,7 +1,10 @@
 {
   "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
   "ingredient": "#c:gravels",
-  "output": {
-    "id": "minecraft:sand"
-  }
+  "need_catalyst": false,
+  "outputs": [
+    {
+      "id": "minecraft:sand"
+    }
+  ]
 }

@@ -153,9 +153,11 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
 
     protected BlockPos getCurrentPos() {
         if (isInsert) {
+            if(menu.getInsert().isEmpty()) return null;
             List<BlockPos> poses = new ArrayList<>(menu.getInsert().keySet());
             return poses.get(posSelect % poses.size());
         } else {
+            if(menu.getExtract().isEmpty()) return null;
             List<BlockPos> poses = new ArrayList<>(menu.getExtract().keySet());
             return poses.get(posSelect % poses.size());
         }
@@ -219,6 +221,7 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
                 if (index != -1 && index < getTotalDirections()) {
                     Direction direction = getCurrentDirections().get(index);
                     BlockPos pos = getCurrentPos();
+                    if(pos == null) return true;
                     menu.getExtract().get(pos).compute(direction, (k, transferMode) -> transferMode.next());
                     ClientPacketDistributor.sendToServer(new NetChangePacket(pos, direction, menu.getNetId()));
                 }

@@ -90,6 +90,12 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.NETHERITE_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.MAGNO_WRENCH.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MoeItems.FILTER_SETTING.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.RESONANT_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.POLAR_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.GLOWING_ESSENCE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.MAGNETIC_ESSENCE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.MONOPOLE_N.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MoeItems.MONOPOLE_S.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 

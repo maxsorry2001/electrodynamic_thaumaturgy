@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "minecraft:emerald",
+    "electrodynamic_thaumaturgy:magno_ingot"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:polar_crystal"
+  }
+}

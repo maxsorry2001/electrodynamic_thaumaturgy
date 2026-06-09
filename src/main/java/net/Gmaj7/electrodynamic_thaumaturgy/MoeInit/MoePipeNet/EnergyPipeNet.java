@@ -74,102 +74,112 @@ public class EnergyPipeNet extends PipeNet{
             var extractSet = extractors.get(processedBefore);
             TransferMode transferMode = transferModes.get(processedBefore);
             if(transferMode != TransferMode.POLLING){
-                int insertCount = 0;
-                EnergyHandler insertHandler = null;
-                try (Transaction transaction = Transaction.openRoot()) {
-                    EnergyHandler extractHandler = extractSet.getEnergyHandler();
-                    int extracted = extractHandler.extract(16777216, transaction);
-                    if (extracted > 0) {
-                        int size = distances.get(extractSet.getPos()).size();
-                        // 按距离顺序尝试插入
-                        outer:
-                        for (int i = 0; i < size; i++) {
-                            BlockPos checkPos = getNearestInsert(extractSet.getPos(), transferMode == TransferMode.NEAREST ? i : size - i);
-                            Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>> dirMap = insertCaches.get(checkPos);
-                            if (dirMap == null) continue;
-                            for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry : dirMap.entrySet()) {
-                                EnergyHandler inserter = entry.getValue().getCapability();
-                                if (inserter == null) continue;
-                                int inserted = inserter.insert(extracted, transaction);
-                                if (inserted == extracted) {
-                                    insertHandler = inserter;
-                                    insertCount = inserted;
-                                    break outer;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (insertCount == 0) break;
-                try (Transaction transaction = Transaction.openRoot()) {
-                    extractSet.getEnergyHandler().extract(insertCount, transaction);
-                    insertHandler.insert(insertCount, transaction);
-                    transaction.commit();
-                }
+                if (dealDistance(extractSet, transferMode)) break;
             }
             else {
-                Set<BlockPos> list = distances.get(extractSet.getPos()).keySet();
-                List<EnergyHandler> inserters = new ArrayList<>();
-                for (BlockPos pos : list){
-                    for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry : insertCaches.get(pos).entrySet()){
-                        inserters.add(entry.getValue().getCapability());
-                    }
-                }
-                if(inserters.isEmpty()) break;
-                int trueExtract = 0;
-                int[] insertCounts = new int[inserters.size()];
-                List<Integer> available = new ArrayList<>();
-                for (int i = 0; i < inserters.size(); i++)
-                    available.add((pollingIndexes.get(extractSet.getPos()) + i) % inserters.size());
-                int testPolling = (pollingIndexes.get(extractSet.getPos()));
-                try (Transaction transaction = Transaction.openRoot()) {
-                    EnergyHandler extractHandler = extractSet.getEnergyHandler();
-                    int extracted = extractHandler.extract(16777216, transaction);
-                    while (extracted > 0) {
-                        if(available.isEmpty()) break;
-                        int baseInsertCount = extracted / available.size(), remainingCount = extracted % available.size();
-                        if(baseInsertCount > 0) {
-                            Iterator<Integer> iterator = available.iterator();
-                            while (iterator.hasNext()){
-                                testPolling = iterator.next();
-                                var insertHandler = inserters.get(testPolling);
-                                int inserted = insertHandler.insert(baseInsertCount, transaction);
-                                insertCounts[testPolling] += inserted;
-                                trueExtract += inserted;
-                                extracted -= inserted;
-                                if (inserted < baseInsertCount) {
-                                    iterator.remove();
-                                }
-                            }
-                        }
-                        else {
-                            Iterator<Integer> iterator = available.iterator();
-                            while (iterator.hasNext()){
-                                if(extracted == 0) break;
-                                testPolling = iterator.next();
-                                var insertHandler = inserters.get(testPolling);
-                                int inserted = insertHandler.insert(1, transaction);
-                                insertCounts[testPolling] += inserted;
-                                trueExtract += inserted;
-                                extracted -= inserted;
-                                if (inserted == 0) {
-                                    iterator.remove();
-                                }
-                            }
+                if (dealPolling(extractSet)) break;
+            }
+        }
+    }
+
+    private boolean dealPolling(PosAndEnergyHandler extractSet) {
+        Set<BlockPos> list = distances.get(extractSet.getPos()).keySet();
+        List<EnergyHandler> inserters = new ArrayList<>();
+        for (BlockPos pos : list){
+            for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry : insertCaches.get(pos).entrySet()){
+                inserters.add(entry.getValue().getCapability());
+            }
+        }
+        if(inserters.isEmpty()) return true;
+        int trueExtract = 0;
+        int[] insertCounts = new int[inserters.size()];
+        List<Integer> available = new ArrayList<>();
+        for (int i = 0; i < inserters.size(); i++)
+            available.add((pollingIndexes.get(extractSet.getPos()) + i) % inserters.size());
+        int testPolling = (pollingIndexes.get(extractSet.getPos()));
+        try (Transaction transaction = Transaction.openRoot()) {
+            EnergyHandler extractHandler = extractSet.getEnergyHandler();
+            int extracted = extractHandler.extract(16777216, transaction);
+            while (extracted > 0) {
+                if(available.isEmpty()) break;
+                int baseInsertCount = extracted / available.size(), remainingCount = extracted % available.size();
+                if(baseInsertCount > 0) {
+                    Iterator<Integer> iterator = available.iterator();
+                    while (iterator.hasNext()){
+                        testPolling = iterator.next();
+                        var insertHandler = inserters.get(testPolling);
+                        int inserted = insertHandler.insert(baseInsertCount, transaction);
+                        insertCounts[testPolling] += inserted;
+                        trueExtract += inserted;
+                        extracted -= inserted;
+                        if (inserted < baseInsertCount) {
+                            iterator.remove();
                         }
                     }
                 }
-                if(trueExtract == 0) break;
-                pollingIndexes.put(extractSet.getPos(), (testPolling + 1) % inserters.size());
-                try (Transaction transaction = Transaction.openRoot()){
-                    extractSet.getEnergyHandler().extract(trueExtract, transaction);
-                    for (int i = 0; i < insertCounts.length; i++){
-                        inserters.get(i).insert(insertCounts[i], transaction);
+                else {
+                    Iterator<Integer> iterator = available.iterator();
+                    while (iterator.hasNext()){
+                        if(extracted == 0) break;
+                        testPolling = iterator.next();
+                        var insertHandler = inserters.get(testPolling);
+                        int inserted = insertHandler.insert(1, transaction);
+                        insertCounts[testPolling] += inserted;
+                        trueExtract += inserted;
+                        extracted -= inserted;
+                        if (inserted == 0) {
+                            iterator.remove();
+                        }
                     }
-                    transaction.commit();
                 }
             }
         }
+        if(trueExtract == 0) return true;
+        pollingIndexes.put(extractSet.getPos(), (testPolling + 1) % inserters.size());
+        try (Transaction transaction = Transaction.openRoot()){
+            extractSet.getEnergyHandler().extract(trueExtract, transaction);
+            for (int i = 0; i < insertCounts.length; i++){
+                inserters.get(i).insert(insertCounts[i], transaction);
+            }
+            transaction.commit();
+        }
+        return false;
+    }
+
+    private boolean dealDistance(PosAndEnergyHandler extractSet, TransferMode transferMode) {
+        int insertCount = 0;
+        EnergyHandler insertHandler = null;
+        try (Transaction transaction = Transaction.openRoot()) {
+            EnergyHandler extractHandler = extractSet.getEnergyHandler();
+            int extracted = extractHandler.extract(16777216, transaction);
+            if (extracted > 0) {
+                int size = distances.get(extractSet.getPos()).size();
+                // 按距离顺序尝试插入
+                outer:
+                for (int i = 0; i < size; i++) {
+                    BlockPos checkPos = getNearestInsert(extractSet.getPos(), transferMode == TransferMode.NEAREST ? i : size - i);
+                    Map<Direction, BlockCapabilityCache<EnergyHandler, Direction>> dirMap = insertCaches.get(checkPos);
+                    if (dirMap == null) continue;
+                    for (Map.Entry<Direction, BlockCapabilityCache<EnergyHandler, Direction>> entry : dirMap.entrySet()) {
+                        EnergyHandler inserter = entry.getValue().getCapability();
+                        if (inserter == null) continue;
+                        int inserted = inserter.insert(extracted, transaction);
+                        if (inserted <= extracted) {
+                            insertHandler = inserter;
+                            insertCount = inserted;
+                            break outer;
+                        }
+                    }
+                }
+            }
+        }
+        if (insertCount == 0) return true;
+        try (Transaction transaction = Transaction.openRoot()) {
+            extractSet.getEnergyHandler().extract(insertCount, transaction);
+            insertHandler.insert(insertCount, transaction);
+            transaction.commit();
+        }
+        return false;
     }
 
     @Override

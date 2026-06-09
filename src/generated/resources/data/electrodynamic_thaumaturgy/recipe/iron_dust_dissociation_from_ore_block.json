@@ -1,8 +1,11 @@
 {
   "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
   "ingredient": "#c:ores/iron",
-  "output": {
-    "count": 4,
-    "id": "electrodynamic_thaumaturgy:iron_dust"
-  }
+  "need_catalyst": false,
+  "outputs": [
+    {
+      "count": 4,
+      "id": "electrodynamic_thaumaturgy:iron_dust"
+    }
+  ]
 }

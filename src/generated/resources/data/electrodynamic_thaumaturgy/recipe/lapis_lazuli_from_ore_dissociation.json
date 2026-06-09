@@ -1,8 +1,11 @@
 {
   "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
   "ingredient": "#c:ores/lapis",
-  "output": {
-    "count": 3,
-    "id": "minecraft:lapis_lazuli"
-  }
+  "need_catalyst": false,
+  "outputs": [
+    {
+      "count": 3,
+      "id": "minecraft:lapis_lazuli"
+    }
+  ]
 }

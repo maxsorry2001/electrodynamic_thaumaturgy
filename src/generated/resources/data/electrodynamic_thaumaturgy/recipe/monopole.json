@@ -1,0 +1,13 @@
+{
+  "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
+  "ingredient": "minecraft:lodestone",
+  "need_catalyst": true,
+  "outputs": [
+    {
+      "id": "electrodynamic_thaumaturgy:monopole_n"
+    },
+    {
+      "id": "electrodynamic_thaumaturgy:monopole_s"
+    }
+  ]
+}

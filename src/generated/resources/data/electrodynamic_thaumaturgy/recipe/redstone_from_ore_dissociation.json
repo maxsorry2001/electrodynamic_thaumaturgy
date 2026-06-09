@@ -1,8 +1,11 @@
 {
   "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
   "ingredient": "#c:ores/redstone",
-  "output": {
-    "count": 8,
-    "id": "minecraft:redstone"
-  }
+  "need_catalyst": false,
+  "outputs": [
+    {
+      "count": 8,
+      "id": "minecraft:redstone"
+    }
+  ]
 }

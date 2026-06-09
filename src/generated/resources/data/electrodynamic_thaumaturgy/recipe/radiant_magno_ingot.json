@@ -2,8 +2,8 @@
   "type": "electrodynamic_thaumaturgy:magno_fusion",
   "ingredients": [
     "electrodynamic_thaumaturgy:magno_ingot",
-    "minecraft:glowstone_dust",
-    "minecraft:quartz"
+    "electrodynamic_thaumaturgy:polar_crystal",
+    "electrodynamic_thaumaturgy:resonant_crystal"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:radiant_magno_ingot"

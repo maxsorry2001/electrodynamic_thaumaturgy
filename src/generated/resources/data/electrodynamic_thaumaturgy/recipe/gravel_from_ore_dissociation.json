@@ -1,7 +1,10 @@
 {
   "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
   "ingredient": "#c:cobblestones",
-  "output": {
-    "id": "minecraft:gravel"
-  }
+  "need_catalyst": false,
+  "outputs": [
+    {
+      "id": "minecraft:gravel"
+    }
+  ]
 }
