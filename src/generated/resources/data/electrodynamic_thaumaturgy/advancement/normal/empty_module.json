@@ -1,5 +1,5 @@
 {
-  "parent": "electrodynamic_thaumaturgy:normal/lithography_table",
+  "parent": "electrodynamic_thaumaturgy:normal/encode_table",
   "criteria": {
     "has_empty_module_0": {
       "conditions": {

@@ -99,9 +99,9 @@
   "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine": "Eddy Current Remelter Machine",
   "block.electrodynamic_thaumaturgy.electromagnetic_infuser_machine": "Electromagnetic Infuser Machine",
 
-
   "block.electrodynamic_thaumaturgy.energy_pipe": "Energy Pipe",
   "block.electrodynamic_thaumaturgy.item_pipe": "Item Pipe",
+  "block.electrodynamic_thaumaturgy.fluid_pipe": "Fluid Pipe",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "Pulsed Plasma",
@@ -126,9 +126,9 @@
   "advancements.electrodynamic_thaumaturgy.magic_cast.description": "The casting tool, and wrench",
   "advancements.electrodynamic_thaumaturgy.assembly_table.title": "Toll Customization",
   "advancements.electrodynamic_thaumaturgy.assembly_table.description": "Set tool by using the assembly table",
-  "advancements.electrodynamic_thaumaturgy.lithography_table.title": "Lithography Rules",
-  "advancements.electrodynamic_thaumaturgy.lithography_table.description": "Lithography rules which you want on the lithography table",
-  "advancements.electrodynamic_thaumaturgy.empty_module.title": "Rule Module",
+  "advancements.electrodynamic_thaumaturgy.encode_table.title": "Lithography Rules",
+  "advancements.electrodynamic_thaumaturgy.encode_table.description": "Lithography rules which you want on the lithography table",
+  "advancements.electrodynamic_thaumaturgy.empty_module.title": "Empty Module",
   "advancements.electrodynamic_thaumaturgy.empty_module.description": "put it in lithography table",
   "advancements.electrodynamic_thaumaturgy.generator.title": "Energy Source",
   "advancements.electrodynamic_thaumaturgy.generator.description": "Build a generator",

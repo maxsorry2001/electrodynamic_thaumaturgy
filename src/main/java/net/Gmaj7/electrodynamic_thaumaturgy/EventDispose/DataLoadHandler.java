@@ -69,7 +69,8 @@ public class DataLoadHandler {
                 MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
                 MoeBlocks.MAGNETO_FUSION_MACHINE.get(),
                 MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
-                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get());
+                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
+                MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),

@@ -50,8 +50,8 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             register(MoeItems.ENERGY_CORE.get(), "normal", "root", "energy_core", "has_energy_core", AdvancementType.TASK, output, MoeItems.ENERGY_CORE.get());
             register(MoeItems.ELECTROMAGNETIC_ROD.get(), "normal", "energy_core", "magic_cast", "has_magic_cast", AdvancementType.TASK, output, MoeItems.ELECTROMAGNETIC_ROD.get());
             register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.asItem(), "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
-            register(MoeBlocks.MAGIC_ENCODE_TABLE.asItem(), "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, output, MoeBlocks.MAGIC_ENCODE_TABLE);
-            register(MoeItems.PRIMARY_CODE_MODULE.get(), "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, output, MoeItems.PRIMARY_CODE_MODULE.get());
+            register(MoeBlocks.MAGIC_ENCODE_TABLE.asItem(), "normal", "energy_core", "encode_table", "has_encode_table", AdvancementType.TASK, output, MoeBlocks.MAGIC_ENCODE_TABLE);
+            register(MoeItems.PRIMARY_CODE_MODULE.get(), "normal", "encode_table", "empty_module", "has_empty_module", AdvancementType.TASK, output, MoeItems.PRIMARY_CODE_MODULE.get());
             register(MoeBlocks.PHOTOVOLTAIC_GENERATOR.asItem(), "normal", "energy_core", "generator", "has_generator", AdvancementType.TASK, output, MoeBlocks.PHOTOVOLTAIC_GENERATOR, MoeBlocks.TEMPERATURE_GENERATOR, MoeBlocks.THERMAL_GENERATOR, MoeBlocks.BIOMASS_GENERATOR);
             register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem(), "normal", "generator", "energy_send", "has_energy_antenna", AdvancementType.TASK, output, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA);
             register(MoeBlocks.ENERGY_BLOCK.asItem(), "normal", "generator", "energy_save", "has_energy_block", AdvancementType.TASK, output, MoeBlocks.ENERGY_BLOCK);

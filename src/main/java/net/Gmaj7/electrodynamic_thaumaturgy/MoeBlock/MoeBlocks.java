@@ -78,6 +78,9 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ITEM_PIPE = registerBlock("item_pipe",
             (properties -> new ItemPipe(properties.noOcclusion())));
 
+    public static final DeferredBlock<Block> FLUID_PIPE = registerBlock("fluid_pipe",
+            (properties -> new FluidPipe(properties.noOcclusion())));
+
     public static final DeferredBlock<Block> LIGHT_AIR = registerBlock("light_air",
             (properties) -> new AirBlock(properties.air().lightLevel(p -> 15).replaceable().noCollision().noLootTable()), null);
 

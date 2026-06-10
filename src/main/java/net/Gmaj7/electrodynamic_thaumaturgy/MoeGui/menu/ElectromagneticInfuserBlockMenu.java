@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDissociationBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticInfuserBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,25 +14,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
-public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu {
+public class ElectromagneticInfuserBlockMenu extends AbstractContainerMenu {
     private final Level level;
     private final int inNum = 0;
     private final int outNum = 1;
-    public  final ElectromagneticDissociationBE blockEntity;
-    public ElectromagneticDissociationBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+    public  final ElectromagneticInfuserBE blockEntity;
+    public ElectromagneticInfuserBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public ElectromagneticDissociationBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
-        super(MoeMenuType.ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU.get(), containerId);
-        this.blockEntity = (ElectromagneticDissociationBE) blockEntity;
+    public ElectromagneticInfuserBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(MoeMenuType.ELECTROMAGNETIC_INFUSER_BLOCK_MENU.get(), containerId);
+        this.blockEntity = (ElectromagneticInfuserBE) blockEntity;
         this.level = inventory.player.level();
 
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 40, 33));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerCatalyst(), (slot, resource, amount) -> this.blockEntity.getItemHandlerCatalyst().set(slot, resource, amount), 0, 70, 20));
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 102, 33));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 1, 120, 33));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 2, 138, 33));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -82,7 +78,7 @@ public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu 
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

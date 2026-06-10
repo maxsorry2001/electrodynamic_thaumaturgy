@@ -1,0 +1,115 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_part",
+        "x": 270
+      },
+      "when": {
+        "link_state_up": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_part",
+        "x": 90
+      },
+      "when": {
+        "link_state_down": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_part",
+        "y": 90
+      },
+      "when": {
+        "link_state_east": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_part",
+        "y": 270
+      },
+      "when": {
+        "link_state_west": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_part"
+      },
+      "when": {
+        "link_state_north": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_part",
+        "y": 180
+      },
+      "when": {
+        "link_state_south": "link"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_extract",
+        "x": 270
+      },
+      "when": {
+        "link_state_up": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_extract",
+        "x": 90
+      },
+      "when": {
+        "link_state_down": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_extract",
+        "y": 90
+      },
+      "when": {
+        "link_state_east": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_extract",
+        "y": 270
+      },
+      "when": {
+        "link_state_west": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_extract"
+      },
+      "when": {
+        "link_state_north": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "electrodynamic_thaumaturgy:block/fluid_pipe_extract",
+        "y": 180
+      },
+      "when": {
+        "link_state_south": "extract"
+      }
+    }
+  ]
+}

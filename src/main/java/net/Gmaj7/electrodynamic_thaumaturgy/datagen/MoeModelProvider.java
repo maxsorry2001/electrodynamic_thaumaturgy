@@ -189,6 +189,19 @@ public class MoeModelProvider extends ModelProvider {
                 .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
                 .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract"))
                 .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(MoeBlocks.FLUID_PIPE.get()).with(getModel("fluid_pipe"))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_180))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
     }
 
     protected MultiVariant getModel(String name){

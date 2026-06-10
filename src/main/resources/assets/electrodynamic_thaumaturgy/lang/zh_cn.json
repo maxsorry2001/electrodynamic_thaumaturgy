@@ -101,6 +101,7 @@
 
   "block.electrodynamic_thaumaturgy.energy_pipe": "能量管道",
   "block.electrodynamic_thaumaturgy.item_pipe": "物品管道",
+  "block.electrodynamic_thaumaturgy.fluid_pipe": "流体管道",
 
   "entity.electrodynamic_thaumaturgy.moe_ray_entity": "电磁射线",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "脉冲等离子体",
@@ -125,9 +126,9 @@
   "advancements.electrodynamic_thaumaturgy.magic_cast.description": "施法的媒介，以及本模组的扳手",
   "advancements.electrodynamic_thaumaturgy.assembly_table.title": "工具自定义",
   "advancements.electrodynamic_thaumaturgy.assembly_table.description": "利用装配台你的魔导工具",
-  "advancements.electrodynamic_thaumaturgy.lithography_table.title": "法则光刻",
-  "advancements.electrodynamic_thaumaturgy.lithography_table.description": "在模板上刻出你想要的电磁操纵法则",
-  "advancements.electrodynamic_thaumaturgy.empty_module.title": "法则模板",
+  "advancements.electrodynamic_thaumaturgy.encode_table.title": "法术编码",
+  "advancements.electrodynamic_thaumaturgy.encode_table.description": "在模板上刻出你想要的电磁操纵法则",
+  "advancements.electrodynamic_thaumaturgy.empty_module.title": "空代码",
   "advancements.electrodynamic_thaumaturgy.empty_module.description": "把他放光刻台",
   "advancements.electrodynamic_thaumaturgy.generator.title": "能量源泉",
   "advancements.electrodynamic_thaumaturgy.generator.description": "制造一台发电机",

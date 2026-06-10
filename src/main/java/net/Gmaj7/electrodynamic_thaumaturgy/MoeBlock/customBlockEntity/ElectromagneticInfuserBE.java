@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDissociationBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticInfuserBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
@@ -115,6 +116,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IMoeEnergyB
                 }
                 if(commit && !blockEntity.itemHandlerInput.getStackInSlot(0).isEmpty()) {
                     blockEntity.itemHandlerInput.extract(0, blockEntity.itemHandlerInput.getResource(0), 1, transaction);
+                    blockEntity.fluidHandlerInput.extract(0, blockEntity.fluidHandlerInput.getResource(0), recipe.value().fluidCost(), transaction);
                     transaction.commit();
                 }
             }
@@ -127,6 +129,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IMoeEnergyB
         itemHandlerInput.serializeWithKey("input_item", output);
         itemHandlerOutput.serializeWithKey("output_item", output);
         energy.serialize(output);
+        fluidHandlerInput.serialize(output);
         output.putInt("direction_set", MoeFunction.encodeDirection(directionOutputSet));
     }
 
@@ -136,6 +139,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IMoeEnergyB
         itemHandlerInput.deserializeWithKey("input_item", input);
         itemHandlerOutput.deserializeWithKey("output_item", input);
         energy.deserialize(input);
+        fluidHandlerInput.deserialize(input);
         directionOutputSet = MoeFunction.decodeDirection(input.getIntOr("direction_set", 0x03));
     }
 
@@ -178,7 +182,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IMoeEnergyB
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new ElectromagneticDissociationBlockMenu(i, inventory, this);
+        return new ElectromagneticInfuserBlockMenu(i, inventory, this);
     }
 
     public MoeBlockEntityItemHandler getItemHandlerInput() {

@@ -35,6 +35,7 @@ public class MoeBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get());
         dropSelf(MoeBlocks.ITEM_PIPE.get());
         dropSelf(MoeBlocks.ENERGY_PIPE.get());
+        dropSelf(MoeBlocks.FLUID_PIPE.get());
         dropSelf(MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
         //add(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), block -> createOreDrop(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), MoeItems.EMPTY_MODULE.get()))
     }

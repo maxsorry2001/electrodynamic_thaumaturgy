@@ -1,7 +1,7 @@
 {
   "parent": "electrodynamic_thaumaturgy:normal/energy_core",
   "criteria": {
-    "has_lithography_table_0": {
+    "has_encode_table_0": {
       "conditions": {
         "items": [
           {
@@ -14,18 +14,18 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.electrodynamic_thaumaturgy.lithography_table.description"
+      "translate": "advancements.electrodynamic_thaumaturgy.encode_table.description"
     },
     "icon": {
       "id": "electrodynamic_thaumaturgy:magic_encode_table"
     },
     "title": {
-      "translate": "advancements.electrodynamic_thaumaturgy.lithography_table.title"
+      "translate": "advancements.electrodynamic_thaumaturgy.encode_table.title"
     }
   },
   "requirements": [
     [
-      "has_lithography_table_0"
+      "has_encode_table_0"
     ]
   ],
   "sends_telemetry_event": true

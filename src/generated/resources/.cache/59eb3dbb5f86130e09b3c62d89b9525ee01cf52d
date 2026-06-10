@@ -1,4 +1,4 @@
-// 26.1.2	2026-06-10T17:59:26.3879806	Loot Tables
+// 26.1.2	2026-06-10T20:23:05.4578018	Loot Tables
 f4360c538efdc136aaa439572001aa0b51f08f05 data/electrodynamic_thaumaturgy/loot_table/blocks/atomic_reconstruction_machine.json
 cdcb45ce4b24934e48f5f0179884a1bc202ed70d data/electrodynamic_thaumaturgy/loot_table/blocks/biomass_generator.json
 5f4e74df31f8ee454576d194dfcecb90d23306f5 data/electrodynamic_thaumaturgy/loot_table/blocks/bio_replication_vat_machine.json
@@ -12,6 +12,7 @@ d1aedddead96f9245d5267c846443d0e18f76d45 data/electrodynamic_thaumaturgy/loot_ta
 ee613f3e1b240d735ec34a37a07ef03543ae28f7 data/electrodynamic_thaumaturgy/loot_table/blocks/energy_block.json
 7ff8a6f62fd23523cd79d9dbcec5d1474c62d3f1 data/electrodynamic_thaumaturgy/loot_table/blocks/energy_pipe.json
 40a73000387991dfdf640d70c4b927019df2a0ac data/electrodynamic_thaumaturgy/loot_table/blocks/energy_transmission_antenna.json
+6ec3cffbc330c866fc6713b459aa92ae0d82e81b data/electrodynamic_thaumaturgy/loot_table/blocks/fluid_pipe.json
 d3449602f958b859f7cc3bf290da9faa82440e11 data/electrodynamic_thaumaturgy/loot_table/blocks/item_pipe.json
 f92d610b47791d99919b780d9c501d2ef4c5bdef data/electrodynamic_thaumaturgy/loot_table/blocks/magic_encode_table.json
 e0a3aeb96061513b7e01cb7a33f2b9ae4ef504f8 data/electrodynamic_thaumaturgy/loot_table/blocks/magneto_core.json

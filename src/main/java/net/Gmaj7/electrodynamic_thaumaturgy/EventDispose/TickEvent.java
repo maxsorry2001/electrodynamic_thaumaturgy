@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.EnergyPipeNetSaveData;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.FluidPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.Holder;
@@ -56,6 +57,9 @@ public class TickEvent {
             ItemPipeNetSaveData itemPipe = serverLevel.getDataStorage().get(ItemPipeNetSaveData.ITEM_PIPE_NETS);
             if(itemPipe != null)
                 itemPipe.tick(serverLevel);
+            FluidPipeNetSaveData fluidPipe = serverLevel.getDataStorage().get(FluidPipeNetSaveData.FLUID_PIPE_NETS);
+            if(fluidPipe != null)
+                fluidPipe.tick(serverLevel);
         }
     }
 }
