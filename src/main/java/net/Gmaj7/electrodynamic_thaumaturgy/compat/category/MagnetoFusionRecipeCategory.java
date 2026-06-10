@@ -67,6 +67,5 @@ public class MagnetoFusionRecipeCategory implements IRecipeCategory<RecipeHolder
     @Override
     public void draw(RecipeHolder<MagnetoFusionRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.background.draw(guiGraphics);
-        guiGraphics.fillGradient(156, 50, 164, 56, 0xffb51500, 0xff600b00);
     }
 }

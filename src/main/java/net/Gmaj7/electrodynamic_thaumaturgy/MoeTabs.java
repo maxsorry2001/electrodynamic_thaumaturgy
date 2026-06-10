@@ -32,6 +32,12 @@ public class MoeTabs {
                         output.accept(MoeItems.MAGNO_INGOT);
                         output.accept(MoeItems.RADIANT_MAGNO_INGOT);
                         output.accept(MoeItems.STELLAR_MAGNO_INGOT);
+                        output.accept(MoeItems.RESONANT_CRYSTAL);
+                        output.accept(MoeItems.POLAR_CRYSTAL);
+                        output.accept(MoeItems.GLOWING_ESSENCE);
+                        output.accept(MoeItems.MAGNETIC_ESSENCE);
+                        output.accept(MoeItems.MONOPOLE_N);
+                        output.accept(MoeItems.MONOPOLE_S);
 
                         output.accept(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get())));

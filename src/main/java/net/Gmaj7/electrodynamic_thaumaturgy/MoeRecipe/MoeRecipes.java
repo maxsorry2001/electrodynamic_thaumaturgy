@@ -37,8 +37,15 @@ public class MoeRecipes {
     public static final DeferredHolder<RecipeType<?>, RecipeType<ElectromagneticDissociationRecipe>> ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE =
             TYPE.register("electromagnetic_dissociation", () -> new RecipeType<ElectromagneticDissociationRecipe>() {
                 @Override
+                public String toString() {return "electromagnetic_dissociation";}
+            });
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ElectromagneticInfusionRecipe>> ELECTROMAGNETIC_INFUSION_RECIPE_SERIALIZER =
+            SERIALIZER.register("electromagnetic_infusion", () -> new RecipeSerializer<>(ElectromagneticInfusionRecipe.CODEC, ElectromagneticInfusionRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ElectromagneticInfusionRecipe>> ELECTROMAGNETIC_INFUSION_RECIPE_TYPE =
+            TYPE.register("electromagnetic_infusion", () -> new RecipeType<ElectromagneticInfusionRecipe>() {
+                @Override
                 public String toString() {
-                    return "electromagnetic_dissociation";
+                    return "electromagnetic_infusion";
                 }
             });
 

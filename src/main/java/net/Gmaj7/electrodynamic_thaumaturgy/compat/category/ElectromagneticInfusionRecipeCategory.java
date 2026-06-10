@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.ElectromagneticInfusionRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.JEIRecipeTypes;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
@@ -20,20 +20,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<MagicEncodeRecipe>> {
+public class ElectromagneticInfusionRecipeCategory implements IRecipeCategory<RecipeHolder<ElectromagneticInfusionRecipe>> {
     public static final Identifier UID = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_encode");
     public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magic_encode_gui.png");
     private final IDrawable background;
     private final IDrawable icon;
 
-    public MagicEncodeRecipeCategory(IGuiHelper helper) {
+    public ElectromagneticInfusionRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.ENERGY_BLOCK));
     }
 
     @Override
-    public IRecipeType<RecipeHolder<MagicEncodeRecipe>> getRecipeType() {
-        return JEIRecipeTypes.MAGIC_ENCODE;
+    public IRecipeType<RecipeHolder<ElectromagneticInfusionRecipe>> getRecipeType() {
+        return JEIRecipeTypes.ELECTROMAGNETIC_INFUSION;
     }
 
     @Override
@@ -57,15 +57,14 @@ public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<M
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<MagicEncodeRecipe> recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 16).add(recipe.value().base());
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().code1());
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 52).add(recipe.value().code2());
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<ElectromagneticInfusionRecipe> recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 16).add(recipe.value().inputItem());
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().inputFluid().fluids().get(0).value(), recipe.value().fluidCost());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
     }
 
     @Override
-    public void draw(RecipeHolder<MagicEncodeRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+    public void draw(RecipeHolder<ElectromagneticInfusionRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.background.draw(guiGraphics);
     }
 }

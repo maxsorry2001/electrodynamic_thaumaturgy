@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.ElectromagneticDissociationRecipeBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.ElectromagneticInfusionRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.MagicEncodeRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder.MagnetoFusionRecipeBuilder;
 import net.minecraft.core.HolderLookup;
@@ -23,6 +24,7 @@ import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -437,6 +439,8 @@ public class MoeRecipeProvider extends RecipeProvider {
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.GRAVELS).result(Blocks.SAND.asItem()).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Blocks.SAND.asItem(), "from_ore_dissociation"));
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.COBBLESTONES).result(Blocks.GRAVEL.asItem()).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Blocks.GRAVEL.asItem(), "from_ore_dissociation"));
         ElectromagneticDissociationRecipeBuilder.creat(items, Blocks.LODESTONE, true).result(MoeItems.MONOPOLE_N).result(MoeItems.MONOPOLE_S).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithName(output, "monopole");
+
+        ElectromagneticInfusionRecipeBuilder.creat(items, MoeItems.GLOWING_ESSENCE, 2, MoeItems.POLAR_CRYSTAL, Fluids.WATER).unlockedBy("has_crystal", has(MoeItems.POLAR_CRYSTAL)).save(output);
     }
 
     protected static class Runner extends RecipeProvider.Runner{
