@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "electrodynamic_thaumaturgy:radiant_magno_ingot",
+    "b": "minecraft:rotten_flesh",
+    "c": "electrodynamic_thaumaturgy:energy_core",
+    "d": "electrodynamic_thaumaturgy:magno_ingot"
+  },
+  "pattern": [
+    "aba",
+    "bcb",
+    "ada"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:bio_replication_vat_machine"
+  }
+}

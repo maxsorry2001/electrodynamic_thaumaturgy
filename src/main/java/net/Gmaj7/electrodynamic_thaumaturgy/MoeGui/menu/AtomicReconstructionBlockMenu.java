@@ -89,7 +89,7 @@ public class AtomicReconstructionBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

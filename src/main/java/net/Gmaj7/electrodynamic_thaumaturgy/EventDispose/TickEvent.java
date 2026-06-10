@@ -24,7 +24,7 @@ public class TickEvent {
 
     @SubscribeEvent
     public static void toolTip(ItemTooltipEvent event){
-        if(event.getItemStack().is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem())){
+        if(event.getItemStack().is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem())){
             event.getToolTip().add(Component.translatable("advancements.electrodynamic_thaumaturgy.energy_send.description"));
         }
         if(event.getItemStack().is(MoeItems.GENETIC_RECORDER.get()) && event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE) != null)

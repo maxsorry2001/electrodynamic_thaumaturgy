@@ -82,7 +82,7 @@ public class BiomassGeneratorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIOMASS_GENERATOR.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

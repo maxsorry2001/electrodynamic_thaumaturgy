@@ -27,47 +27,50 @@ public class MoeBlocks {
     public static final DeferredBlock<Block> ENERGY_BLOCK = registerBlockNoItem("energy_block",
             (properties) ->  new EnergyBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
 
-    public static final DeferredBlock<Block> TEMPERATURE_GENERATOR_BLOCK = registerBlock("temperature_generator_block",
-            (properties) ->  new TemperatureGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> TEMPERATURE_GENERATOR = registerBlock("temperature_generator",
+            (properties) ->  new TemperatureGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> THERMAL_GENERATOR_BLOCK = registerBlock("thermal_generator_block",
-            (properties) ->  new ThermalGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> THERMAL_GENERATOR = registerBlock("thermal_generator",
+            (properties) ->  new ThermalGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> BIOMASS_GENERATOR_BLOCK = registerBlock("biomass_generator_block",
-            (properties) ->  new BiomassGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> BIOMASS_GENERATOR = registerBlock("biomass_generator",
+            (properties) ->  new BiomassGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR_BLOCK = registerBlock("photovoltaic_generator_block",
-            (properties) ->  new PhotovoltaicGeneratorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR = registerBlock("photovoltaic_generator",
+            (properties) ->  new PhotovoltaicGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA_BLOCK = registerBlock("energy_transmission_antenna_block",
-            (properties) ->  new EnergyTransmissionAtennaBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 16);
+    public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA = registerBlock("energy_transmission_antenna",
+            (properties) ->  new EnergyTransmissionAtenna(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 16);
 
     public static final DeferredBlock<Block> MAGIC_ENCODE_TABLE = registerBlock("magic_encode_table",
-            (properties) -> new MagicEncodeTableBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)), 1);
+            (properties) -> new MagicEncodeTable(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F)), 1);
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK = registerBlock("electromagnetic_driver_machine_block",
-            (properties) -> new ElectromagneticDriverBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE = registerBlock("electromagnetic_driver_machine",
+            (properties) -> new ElectromagneticDriver(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE_BLOCK = registerBlock("bio_replication_vat_machine_block",
-            (properties) -> new BioReplicationVatBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE = registerBlock("bio_replication_vat_machine",
+            (properties) -> new BioReplicationVat(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> MAGNETO_CORE_BLOCK = registerBlock("magneto_core_block",
-            (properties) -> new HarmonicCoreBlock(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);
+    public static final DeferredBlock<Block> MAGNETO_CORE = registerBlock("magneto_core",
+            (properties) -> new HarmonicCore(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK = registerBlock("electromagnetic_extractor_machine_block",
-            (properties) -> new ElectromagneticExtractorBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_EXTRACTOR_MACHINE = registerBlock("electromagnetic_extractor_machine",
+            (properties) -> new ElectromagneticExtractor(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> ATOMIC_RECONSTRUCTION_MACHINE_BLOCK = registerBlock("atomic_reconstruction_machine_block",
-            (properties) -> new AtomicReconstructionBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> ATOMIC_RECONSTRUCTION_MACHINE = registerBlock("atomic_reconstruction_machine",
+            (properties) -> new AtomicReconstruction(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
 
-    public static final DeferredBlock<Block> MAGNETO_FUSION_MACHINE_BLOCK = registerBlock("magneto_fusion_machine_block",
-            (properties -> new MagnetoFusionBlock(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
+    public static final DeferredBlock<Block> MAGNETO_FUSION_MACHINE = registerBlock("magneto_fusion_machine",
+            (properties -> new MagnetoFusion(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
-    public static final DeferredBlock<Block> ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK = registerBlock("electromagnetic_dissociation_machine_block",
-            (properties -> new ElectromagneticDissociationBlock(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_DISSOCIATION_MACHINE = registerBlock("electromagnetic_dissociation_machine",
+            (properties -> new ElectromagneticDissociation(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
-    public static final DeferredBlock<Block> EDDY_CURRENT_REMELTER_MACHINE_BLOCK = registerBlock("eddy_current_remelter_machine_block",
-            (properties -> new EddyCurrentRemelterBlock(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
+    public static final DeferredBlock<Block> EDDY_CURRENT_REMELTER_MACHINE = registerBlock("eddy_current_remelter_machine",
+            (properties -> new EddyCurrentRemelter(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
+
+    public static final DeferredBlock<Block> ELECTROMAGNETIC_INFUSER_MACHINE = registerBlock("electromagnetic_infuser_machine",
+            (properties -> new ElectromagneticInfuser(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
     public static final DeferredBlock<Block> ENERGY_PIPE = registerBlock("energy_pipe",
             (properties -> new EnergyPipe(properties.noOcclusion())));

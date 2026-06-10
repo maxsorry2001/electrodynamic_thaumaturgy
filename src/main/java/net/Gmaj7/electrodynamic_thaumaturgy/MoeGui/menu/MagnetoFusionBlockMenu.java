@@ -80,7 +80,7 @@ public class MagnetoFusionBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.MAGNETO_FUSION_MACHINE.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

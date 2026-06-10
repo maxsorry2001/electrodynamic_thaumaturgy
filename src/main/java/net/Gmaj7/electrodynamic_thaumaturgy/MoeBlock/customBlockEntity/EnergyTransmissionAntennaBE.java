@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import com.mojang.serialization.Codec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.EnergyTransmissionAtennaBlock;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.EnergyTransmissionAtenna;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -33,8 +33,8 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
     public static void tick(Level level, BlockPos pos, BlockState state, EnergyTransmissionAntennaBE energyTransmissionAntennaBE){
         EnergyHandler energyStorage = energyTransmissionAntennaBE.getLinkStorage();
         if(energyStorage != null){
-            if(!state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.receivePos.isEmpty()) energyTransmissionAntennaBE.clear();
-            else if(state.getValue(EnergyTransmissionAtennaBlock.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
+            if(!state.getValue(EnergyTransmissionAtenna.SEND) && !energyTransmissionAntennaBE.receivePos.isEmpty()) energyTransmissionAntennaBE.clear();
+            else if(state.getValue(EnergyTransmissionAtenna.SEND) && !energyTransmissionAntennaBE.getReceivePos().isEmpty()){
                 try (Transaction transaction = Transaction.openRoot()){
                     Iterator<BlockPos> iterator = energyTransmissionAntennaBE.getReceivePos().iterator();
                     boolean commit = true;
@@ -42,7 +42,7 @@ public class EnergyTransmissionAntennaBE extends BlockEntity {
                         BlockPos target = iterator.next();
                         if (target == energyTransmissionAntennaBE.getBlockPos()) continue;
                         BlockEntity blockEntity = level.getBlockEntity(target);
-                        if (blockEntity instanceof EnergyTransmissionAntennaBE && !level.getBlockState(target).getValue(EnergyTransmissionAtennaBlock.SEND)) {
+                        if (blockEntity instanceof EnergyTransmissionAntennaBE && !level.getBlockState(target).getValue(EnergyTransmissionAtenna.SEND)) {
                             EnergyHandler targetStorage = ((EnergyTransmissionAntennaBE) blockEntity).getLinkStorage();
                             if (targetStorage != null) {
                                 if (energyStorage.getAmountAsInt() > 0) {

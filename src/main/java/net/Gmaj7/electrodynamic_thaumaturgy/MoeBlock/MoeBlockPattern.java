@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 public class MoeBlockPattern {
     public static final BlockPattern HARMONIC_SOVEREIGN_SUMMON = BlockPatternBuilder.start()
             .aisle(new String[]{"a", "b", "b"})
-            .where('a', BlockInWorld.hasState(BlockStatePredicate.forBlock(MoeBlocks.MAGNETO_CORE_BLOCK.get())))
+            .where('a', BlockInWorld.hasState(BlockStatePredicate.forBlock(MoeBlocks.MAGNETO_CORE.get())))
             .where('b', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.EMERALD_BLOCK)))
             .build();
 }

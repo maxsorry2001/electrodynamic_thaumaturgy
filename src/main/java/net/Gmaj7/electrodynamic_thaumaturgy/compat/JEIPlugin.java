@@ -55,8 +55,8 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGNETO_FUSION_MACHINE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(MoeBlocks.ENERGY_BLOCK.asItem()));
     }
 

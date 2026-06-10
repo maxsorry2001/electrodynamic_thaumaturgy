@@ -52,12 +52,12 @@ public class MoeAdvancementProvider extends AdvancementProvider {
             register(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.asItem(), "normal", "energy_core", "assembly_table", "has_assembly_table", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE);
             register(MoeBlocks.MAGIC_ENCODE_TABLE.asItem(), "normal", "energy_core", "lithography_table", "has_lithography_table", AdvancementType.TASK, output, MoeBlocks.MAGIC_ENCODE_TABLE);
             register(MoeItems.PRIMARY_CODE_MODULE.get(), "normal", "lithography_table", "empty_module", "has_empty_module", AdvancementType.TASK, output, MoeItems.PRIMARY_CODE_MODULE.get());
-            register(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.asItem(), "normal", "energy_core", "generator", "has_generator", AdvancementType.TASK, output, MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK, MoeBlocks.TEMPERATURE_GENERATOR_BLOCK, MoeBlocks.THERMAL_GENERATOR_BLOCK, MoeBlocks.BIOMASS_GENERATOR_BLOCK);
-            register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem(), "normal", "generator", "energy_send", "has_energy_antenna", AdvancementType.TASK, output, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK);
+            register(MoeBlocks.PHOTOVOLTAIC_GENERATOR.asItem(), "normal", "energy_core", "generator", "has_generator", AdvancementType.TASK, output, MoeBlocks.PHOTOVOLTAIC_GENERATOR, MoeBlocks.TEMPERATURE_GENERATOR, MoeBlocks.THERMAL_GENERATOR, MoeBlocks.BIOMASS_GENERATOR);
+            register(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem(), "normal", "generator", "energy_send", "has_energy_antenna", AdvancementType.TASK, output, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA);
             register(MoeBlocks.ENERGY_BLOCK.asItem(), "normal", "generator", "energy_save", "has_energy_block", AdvancementType.TASK, output, MoeBlocks.ENERGY_BLOCK);
-            register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.asItem(), "normal", "energy_core", "modem_table", "has_modem_block", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
-            register(MoeItems.EFFICIENCY_ENHANCE.get(), "normal", "modem_table", "enhance_module", "has_enhancement_block", AdvancementType.TASK, output, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
-            register(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get().asItem(), "normal", "energy_core", "machine_block", "has_machine", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK);
+            register(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.asItem(), "normal", "energy_core", "modem_table", "has_modem", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE);
+            register(MoeItems.EFFICIENCY_ENHANCE.get(), "normal", "modem_table", "enhance_module", "has_enhancement", AdvancementType.TASK, output, MoeItems.ENHANCE_MODEM_BASEBOARD.get());
+            register(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get().asItem(), "normal", "energy_core", "machine", "has_machine", AdvancementType.TASK, output, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE, MoeBlocks.BIO_REPLICATION_VAT_MACHINE, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE);
 
         }
 

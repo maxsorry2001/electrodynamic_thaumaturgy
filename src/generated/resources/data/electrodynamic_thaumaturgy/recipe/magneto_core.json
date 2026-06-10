@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "electrodynamic_thaumaturgy:stellar_magno_ingot",
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "minecraft:nether_star"
+  },
+  "pattern": [
+    "aba",
+    "aca",
+    "aba"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:magneto_core"
+  }
+}

@@ -106,47 +106,47 @@ public class MoeModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_MODEM_TABLE.get(),
                 getModel("electromagnetic_modem_table")));
         blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.get())
-                        .with(PropertyDispatch.initial(EnergyTransmissionAtennaBlock.SEND).select(true, getModel("energy_transmission_antenna_send_block")).select(false, getModel("energy_transmission_antenna_receive_block")))
-                        .with(PropertyDispatch.modify(EnergyTransmissionAtennaBlock.FACING).select(Direction.DOWN, BlockModelGenerators.X_ROT_180)
+                MultiVariantGenerator.dispatch(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA.get())
+                        .with(PropertyDispatch.initial(EnergyTransmissionAtenna.SEND).select(true, getModel("energy_transmission_antenna_send")).select(false, getModel("energy_transmission_antenna_receive")))
+                        .with(PropertyDispatch.modify(EnergyTransmissionAtenna.FACING).select(Direction.DOWN, BlockModelGenerators.X_ROT_180)
                                 .select(Direction.UP, BlockModelGenerators.NOP)
                                 .select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90))
                                 .select(Direction.WEST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
                                 .select(Direction.SOUTH, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_180))
                                 .select(Direction.NORTH, BlockModelGenerators.X_ROT_90)));
-        itemModels.itemModelOutput.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK.asItem(), setNormalBlockModule("energy_transmission_antenna_send_block"));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(),
-                getModel("photovoltaic_generator_block")));
+        itemModels.itemModelOutput.accept(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem(), setNormalBlockModule("energy_transmission_antenna_send"));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.PHOTOVOLTAIC_GENERATOR.get(),
+                getModel("photovoltaic_generator")));
         blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get())
-                                .with(PropertyDispatch.initial(TemperatureGeneratorBlock.WORK_TYPE).select(TemperatureGeneratorBlock.WorkType.NORMAL, getModel("temperature_generator_block_normal"))
-                                        .select(TemperatureGeneratorBlock.WorkType.HOT, getModel("temperature_generator_block_hot"))
-                                        .select(TemperatureGeneratorBlock.WorkType.COLD, getModel("temperature_generator_block_cold"))
-                                        .select(TemperatureGeneratorBlock.WorkType.WORK_A, getModel("temperature_generator_block_work_a"))
-                                        .select(TemperatureGeneratorBlock.WorkType.WORK_B, getModel("temperature_generator_block_work_b"))));
-        itemModels.itemModelOutput.accept(MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.asItem(), setNormalBlockModule("temperature_generator_block_normal"));
+                MultiVariantGenerator.dispatch(MoeBlocks.TEMPERATURE_GENERATOR.get())
+                                .with(PropertyDispatch.initial(TemperatureGenerator.WORK_TYPE).select(TemperatureGenerator.WorkType.NORMAL, getModel("temperature_generator_normal"))
+                                        .select(TemperatureGenerator.WorkType.HOT, getModel("temperature_generator_hot"))
+                                        .select(TemperatureGenerator.WorkType.COLD, getModel("temperature_generator_cold"))
+                                        .select(TemperatureGenerator.WorkType.WORK_A, getModel("temperature_generator_work_a"))
+                                        .select(TemperatureGenerator.WorkType.WORK_B, getModel("temperature_generator_work_b"))));
+        itemModels.itemModelOutput.accept(MoeBlocks.TEMPERATURE_GENERATOR.asItem(), setNormalBlockModule("temperature_generator_normal"));
         blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(MoeBlocks.THERMAL_GENERATOR_BLOCK.get())
-                                .with(PropertyDispatch.initial(ThermalGeneratorBlock.LIT).select(true, getModel("thermal_generator_block_true"))
-                                        .select(false, getModel("thermal_generator_block_false"))));
-        itemModels.itemModelOutput.accept(MoeBlocks.THERMAL_GENERATOR_BLOCK.asItem(), setNormalBlockModule("thermal_generator_block_false"));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_CORE_BLOCK.get(),
-                getModel("magneto_core_block")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
-                getModel("atomic_reconstruction_machine_block")));
+                MultiVariantGenerator.dispatch(MoeBlocks.THERMAL_GENERATOR.get())
+                                .with(PropertyDispatch.initial(ThermalGenerator.LIT).select(true, getModel("thermal_generator_true"))
+                                        .select(false, getModel("thermal_generator_false"))));
+        itemModels.itemModelOutput.accept(MoeBlocks.THERMAL_GENERATOR.asItem(), setNormalBlockModule("thermal_generator_false"));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_CORE.get(),
+                getModel("magneto_core")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
+                getModel("atomic_reconstruction_machine")));
         blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(MoeBlocks.BIOMASS_GENERATOR_BLOCK.get())
-                                .with(PropertyDispatch.initial(BiomassGeneratorBlock.LIT).select(true, getModel("biomass_generator_block_true"))
-                                        .select(false, getModel("biomass_generator_block_false"))));
-        itemModels.itemModelOutput.accept(MoeBlocks.BIOMASS_GENERATOR_BLOCK.asItem(), setNormalBlockModule("biomass_generator_block_false"));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
-                getModel("bio_replication_vat_machine_block")));
+                MultiVariantGenerator.dispatch(MoeBlocks.BIOMASS_GENERATOR.get())
+                                .with(PropertyDispatch.initial(BiomassGenerator.LIT).select(true, getModel("biomass_generator_true"))
+                                        .select(false, getModel("biomass_generator_false"))));
+        itemModels.itemModelOutput.accept(MoeBlocks.BIOMASS_GENERATOR.asItem(), setNormalBlockModule("biomass_generator_false"));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
+                getModel("bio_replication_vat_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGIC_ENCODE_TABLE.get(),
                 getModel("magic_encode_table")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
-                getModel("electromagnetic_driver_machine_block")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
+                getModel("electromagnetic_driver_machine")));
         blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(), getModel("electromagnetic_extractor_machine_block"))
+                MultiVariantGenerator.dispatch(MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(), getModel("electromagnetic_extractor_machine"))
                                 .with(PropertyDispatch.modify(BlockStateProperties.FACING).select(Direction.DOWN, BlockModelGenerators.NOP)
                                         .select(Direction.UP, BlockModelGenerators.X_ROT_180)
                                         .select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
@@ -155,12 +155,14 @@ public class MoeModelProvider extends ModelProvider {
                                         .select(Direction.SOUTH, BlockModelGenerators.X_ROT_90)
                                 ));
         blockModels.createTrivialCube(MoeBlocks.LIGHT_AIR.get());
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
-                getModel("magneto_fusion_machine_block")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get(),
-                getModel("electromagnetic_dissociation_machine_block")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get(),
-                getModel("eddy_current_remelter_machine_block")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.MAGNETO_FUSION_MACHINE.get(),
+                getModel("magneto_fusion_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
+                getModel("electromagnetic_dissociation_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
+                getModel("eddy_current_remelter_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
+                getModel("electromagnetic_infuser_machine")));
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(MoeBlocks.ENERGY_PIPE.get()).with(getModel("energy_pipe"))
                 .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_270))
                 .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_90))

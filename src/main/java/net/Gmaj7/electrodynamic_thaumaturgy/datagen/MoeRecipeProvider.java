@@ -80,7 +80,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 能量发射天线
-        shaped(RecipeCategory.MISC, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA_BLOCK, 2)
+        shaped(RecipeCategory.MISC, MoeBlocks.ENERGY_TRANSMISSION_ANTENNA, 2)
                 .pattern("a")
                 .pattern("a")
                 .pattern("b")
@@ -90,7 +90,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 光伏发电机
-        shaped(RecipeCategory.MISC, MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.PHOTOVOLTAIC_GENERATOR)
                 .pattern("aaa")
                 .pattern("bdb")
                 .pattern("ccc")
@@ -102,7 +102,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 温差发电机
-        shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_GENERATOR_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.TEMPERATURE_GENERATOR)
                 .pattern("aaa")
                 .pattern("bcb")
                 .pattern("aaa")
@@ -113,7 +113,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 生物质发电机
-        shaped(RecipeCategory.MISC, MoeBlocks.BIOMASS_GENERATOR_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.BIOMASS_GENERATOR)
                 .pattern("aaa")
                 .pattern("bcb")
                 .pattern("aaa")
@@ -124,7 +124,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 电磁驱动器
-        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE)
                 .pattern("ada")
                 .pattern("aca")
                 .pattern("aea")
@@ -136,7 +136,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 生物繁殖槽
-        shaped(RecipeCategory.MISC, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.BIO_REPLICATION_VAT_MACHINE)
                 .pattern("aba")
                 .pattern("bcb")
                 .pattern("ada")
@@ -148,7 +148,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 热力发电机
-        shaped(RecipeCategory.MISC, MoeBlocks.THERMAL_GENERATOR_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.THERMAL_GENERATOR)
                 .pattern(" a ")
                 .pattern("aba")
                 .pattern(" c ")
@@ -159,7 +159,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 电磁挖掘机
-        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE)
                 .pattern("aca")
                 .pattern("cbc")
                 .pattern("aaa")
@@ -169,7 +169,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_energy_core", has(MoeItems.ENERGY_CORE))
                 .save(output);
 
-        shaped(RecipeCategory.MISC, MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.asItem())
+        shaped(RecipeCategory.MISC, MoeBlocks.MAGNETO_FUSION_MACHINE.asItem())
                 .pattern("aba")
                 .pattern("bcb")
                 .pattern("aba")
@@ -179,7 +179,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_magno_ingot", has(MoeItems.MAGNO_INGOT))
                 .save(output);
 
-        shaped(RecipeCategory.MISC, MoeBlocks.MAGNETO_CORE_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.MAGNETO_CORE)
                 .pattern("aba")
                 .pattern("aca")
                 .pattern("aba")
@@ -190,7 +190,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .save(output);
 
         // 原子重构机
-        shaped(RecipeCategory.MISC, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE)
                 .pattern("aba")
                 .pattern("bcb")
                 .pattern("aba")
@@ -211,7 +211,7 @@ public class MoeRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(output);
 
-        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)
+        shaped(RecipeCategory.MISC, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)
                 .pattern("aba")
                 .pattern("c c")
                 .pattern("aba")
@@ -423,22 +423,22 @@ public class MoeRecipeProvider extends RecipeProvider {
         MagnetoFusionRecipeBuilder.result(items, MoeItems.POLAR_CRYSTAL).items(Items.EMERALD).items(MoeItems.MAGNO_INGOT).save(output);
         MagnetoFusionRecipeBuilder.result(items, MoeItems.RESONANT_CRYSTAL).items(Items.QUARTZ).items(MoeItems.MAGNO_INGOT).save(output);
 
-        ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_COPPER).result(MoeItems.COPPER_DUST, 2).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithAddition(output, "from_raw");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COPPER).result(MoeItems.COPPER_DUST, 4).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithAddition(output, "from_ore_block");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_IRON).result(MoeItems.IRON_DUST, 2).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithAddition(output, "from_raw");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_IRON).result(MoeItems.IRON_DUST, 4).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithAddition(output, "from_ore_block");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_GOLD).result(MoeItems.GOLD_DUST, 2).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithAddition(output, "from_raw");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_GOLD).result(MoeItems.GOLD_DUST, 4).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithAddition(output, "from_ore_block");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_NETHERITE_SCRAP).result(MoeItems.NETHERITE_DUST, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output);
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_EMERALD).result(Items.EMERALD, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Items.EMERALD, "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COAL).result(Items.COAL, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Items.COAL, "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_QUARTZ).result(Items.QUARTZ, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Items.QUARTZ, "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_REDSTONE).result(Items.REDSTONE, 8).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Items.REDSTONE, "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_DIAMOND).result(Items.DIAMOND, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Items.DIAMOND, "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_LAPIS).result(Items.LAPIS_LAZULI, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Items.LAPIS_LAZULI, "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.GRAVELS).result(Blocks.SAND.asItem()).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Blocks.SAND.asItem(), "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.COBBLESTONES).result(Blocks.GRAVEL.asItem()).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).save(output, getVanillaItemWithAddition(Blocks.GRAVEL.asItem(), "from_ore_dissociation"));
-        ElectromagneticDissociationRecipeBuilder.creat(items, Blocks.LODESTONE, true).result(MoeItems.MONOPOLE_N).result(MoeItems.MONOPOLE_S).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK)).saveWithName(output, "monopole");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_COPPER).result(MoeItems.COPPER_DUST, 2).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COPPER).result(MoeItems.COPPER_DUST, 4).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_IRON).result(MoeItems.IRON_DUST, 2).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_IRON).result(MoeItems.IRON_DUST, 4).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_GOLD).result(MoeItems.GOLD_DUST, 2).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_GOLD).result(MoeItems.GOLD_DUST, 4).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_NETHERITE_SCRAP).result(MoeItems.NETHERITE_DUST, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output);
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_EMERALD).result(Items.EMERALD, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.EMERALD, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COAL).result(Items.COAL, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.COAL, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_QUARTZ).result(Items.QUARTZ, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.QUARTZ, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_REDSTONE).result(Items.REDSTONE, 8).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.REDSTONE, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_DIAMOND).result(Items.DIAMOND, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.DIAMOND, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_LAPIS).result(Items.LAPIS_LAZULI, 3).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.LAPIS_LAZULI, "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.GRAVELS).result(Blocks.SAND.asItem()).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Blocks.SAND.asItem(), "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.COBBLESTONES).result(Blocks.GRAVEL.asItem()).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Blocks.GRAVEL.asItem(), "from_ore_dissociation"));
+        ElectromagneticDissociationRecipeBuilder.creat(items, Blocks.LODESTONE, true).result(MoeItems.MONOPOLE_N).result(MoeItems.MONOPOLE_S).unlockedBy("has_dissociation", has(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithName(output, "monopole");
 
         ElectromagneticInfusionRecipeBuilder.creat(items, MoeItems.GLOWING_ESSENCE, 2, MoeItems.POLAR_CRYSTAL, Fluids.WATER).unlockedBy("has_crystal", has(MoeItems.POLAR_CRYSTAL)).save(output);
     }

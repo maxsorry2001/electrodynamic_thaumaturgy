@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeDirectionFluidBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeDirectionItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeItemBlockEntity;
@@ -59,29 +60,32 @@ public class DataLoadHandler {
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),
-                MoeBlocks.TEMPERATURE_GENERATOR_BLOCK.get(),
-                MoeBlocks.PHOTOVOLTAIC_GENERATOR_BLOCK.get(),
-                MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
-                MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
-                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
-                MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
-                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get());
+                MoeBlocks.TEMPERATURE_GENERATOR.get(),
+                MoeBlocks.PHOTOVOLTAIC_GENERATOR.get(),
+                MoeBlocks.THERMAL_GENERATOR.get(),
+                MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
+                MoeBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
+                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
+                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
+                MoeBlocks.MAGNETO_FUSION_MACHINE.get(),
+                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
+                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),
-                MoeBlocks.THERMAL_GENERATOR_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE_BLOCK.get(),
-                MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get(),
-                MoeBlocks.BIOMASS_GENERATOR_BLOCK.get());
+                MoeBlocks.THERMAL_GENERATOR.get(),
+                MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
+                MoeBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
+                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
+                MoeBlocks.BIOMASS_GENERATOR.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
-                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE_BLOCK.get(),
-                MoeBlocks.MAGNETO_FUSION_MACHINE_BLOCK.get(),
-                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get(),
-                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get());
+                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
+                MoeBlocks.MAGNETO_FUSION_MACHINE.get(),
+                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
+                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get());
+        event.registerBlock(Capabilities.Fluid.BLOCK, ((level, pos, state, blockEntity, direction) ->
+                        blockEntity instanceof IMoeDirectionFluidBlockEntity ? ((IMoeDirectionFluidBlockEntity) blockEntity).getFluidHandlerWithDirection(direction) : null),
+                MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
     }
 }

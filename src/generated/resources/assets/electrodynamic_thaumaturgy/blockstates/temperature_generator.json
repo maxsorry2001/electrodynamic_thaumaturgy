@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "work_type=cold": {
+      "model": "electrodynamic_thaumaturgy:block/temperature_generator_cold"
+    },
+    "work_type=hot": {
+      "model": "electrodynamic_thaumaturgy:block/temperature_generator_hot"
+    },
+    "work_type=normal": {
+      "model": "electrodynamic_thaumaturgy:block/temperature_generator_normal"
+    },
+    "work_type=work_a": {
+      "model": "electrodynamic_thaumaturgy:block/temperature_generator_work_a"
+    },
+    "work_type=work_b": {
+      "model": "electrodynamic_thaumaturgy:block/temperature_generator_work_b"
+    }
+  }
+}

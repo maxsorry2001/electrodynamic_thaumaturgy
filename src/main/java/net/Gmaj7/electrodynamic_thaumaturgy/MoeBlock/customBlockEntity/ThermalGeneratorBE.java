@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGeneratorBlock;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ThermalGenerator;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ThermalGeneratorMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
@@ -80,7 +80,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
                     }
                 } else fullBurnTime = 0;
             }
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGeneratorBlock.LIT, burnTime > 0));
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ThermalGenerator.LIT, burnTime > 0));
             PacketDistributor.sendToAllPlayers(new ThermalSetPacket(burnTime, fullBurnTime, getBlockPos()));
         }
         return burnTime > 0;
@@ -136,7 +136,7 @@ public class ThermalGeneratorBE extends AbstractGeneratorBE implements IMoeItemB
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.electrodynamic_thaumaturgy.thermal_generator_block");
+        return Component.translatable("block.electrodynamic_thaumaturgy.thermal_generator");
     }
 
     public int getBurnTime() {

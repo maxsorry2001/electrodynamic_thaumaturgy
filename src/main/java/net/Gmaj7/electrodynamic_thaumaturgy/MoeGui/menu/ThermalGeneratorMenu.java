@@ -82,7 +82,7 @@ public class ThermalGeneratorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.THERMAL_GENERATOR_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.THERMAL_GENERATOR.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGeneratorBlock;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.TemperatureGenerator;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeTags;
@@ -54,22 +54,22 @@ public class TemperatureGeneratorBE extends AbstractGeneratorBE {
         BlockState blockStateDown = level.getBlockState(getBlockPos().below());
         BlockState blockState = level.getBlockState(getBlockPos());
         boolean upHot = isHot(blockStateUp), downHot = isHot(blockStateDown), upCold = isCold(blockStateUp), downCold = isCold(blockStateDown);
-        TemperatureGeneratorBlock.WorkType workType;
+        TemperatureGenerator.WorkType workType;
         if(upHot){
-            if(!downCold) workType = TemperatureGeneratorBlock.WorkType.HOT;
-            else workType = TemperatureGeneratorBlock.WorkType.WORK_B;
+            if(!downCold) workType = TemperatureGenerator.WorkType.HOT;
+            else workType = TemperatureGenerator.WorkType.WORK_B;
         }
         else if(upCold){
-            if(!downHot) workType = TemperatureGeneratorBlock.WorkType.COLD;
-            else workType = TemperatureGeneratorBlock.WorkType.WORK_A;
+            if(!downHot) workType = TemperatureGenerator.WorkType.COLD;
+            else workType = TemperatureGenerator.WorkType.WORK_A;
         }
         else {
-            if(downCold) workType = TemperatureGeneratorBlock.WorkType.COLD;
-            else if (downHot) workType = TemperatureGeneratorBlock.WorkType.HOT;
-            else workType = TemperatureGeneratorBlock.WorkType.NORMAL;
+            if(downCold) workType = TemperatureGenerator.WorkType.COLD;
+            else if (downHot) workType = TemperatureGenerator.WorkType.HOT;
+            else workType = TemperatureGenerator.WorkType.NORMAL;
         }
-        if(blockState.getValue(TemperatureGeneratorBlock.WORK_TYPE) != workType)
-            level.setBlockAndUpdate(getBlockPos(), blockState.setValue(TemperatureGeneratorBlock.WORK_TYPE, workType));
+        if(blockState.getValue(TemperatureGenerator.WORK_TYPE) != workType)
+            level.setBlockAndUpdate(getBlockPos(), blockState.setValue(TemperatureGenerator.WORK_TYPE, workType));
         return (upCold && downHot) || (upHot && downCold);
     }
     private boolean isHot(BlockState blockState) {

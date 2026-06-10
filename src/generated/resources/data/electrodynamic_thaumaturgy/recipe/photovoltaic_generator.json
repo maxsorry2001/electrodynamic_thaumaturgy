@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "minecraft:glass",
+    "b": "electrodynamic_thaumaturgy:magno_ingot",
+    "c": "minecraft:iron_ingot",
+    "d": "electrodynamic_thaumaturgy:energy_core"
+  },
+  "pattern": [
+    "aaa",
+    "bdb",
+    "ccc"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:photovoltaic_generator"
+  }
+}

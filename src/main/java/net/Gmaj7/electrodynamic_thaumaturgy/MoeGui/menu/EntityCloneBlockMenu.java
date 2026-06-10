@@ -82,7 +82,7 @@ public class EntityCloneBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIO_REPLICATION_VAT_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.BIO_REPLICATION_VAT_MACHINE.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

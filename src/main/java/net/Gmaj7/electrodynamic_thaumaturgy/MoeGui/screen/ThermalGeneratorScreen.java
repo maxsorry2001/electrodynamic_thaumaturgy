@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class ThermalGeneratorScreen extends AbstractContainerScreen<ThermalGeneratorMenu> {
-    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator_block.png");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
     Identifier fireTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/fire.png");
 

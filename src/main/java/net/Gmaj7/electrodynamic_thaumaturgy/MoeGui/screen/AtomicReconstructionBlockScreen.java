@@ -13,9 +13,9 @@ import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import java.util.List;
 
 public class AtomicReconstructionBlockScreen extends AbstractContainerScreen<AtomicReconstructionBlockMenu> {
-    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block.png");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
-    Identifier progressTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_block_progress.png");
+    Identifier progressTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_progress.png");
 
     public AtomicReconstructionBlockScreen(AtomicReconstructionBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

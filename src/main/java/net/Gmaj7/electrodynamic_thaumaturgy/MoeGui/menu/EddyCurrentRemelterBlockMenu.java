@@ -84,7 +84,7 @@ public class EddyCurrentRemelterBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

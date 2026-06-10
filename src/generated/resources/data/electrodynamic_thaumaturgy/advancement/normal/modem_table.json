@@ -1,7 +1,7 @@
 {
   "parent": "electrodynamic_thaumaturgy:normal/energy_core",
   "criteria": {
-    "has_modem_block_0": {
+    "has_modem_0": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_modem_block_0"
+      "has_modem_0"
     ]
   ],
   "sends_telemetry_event": true

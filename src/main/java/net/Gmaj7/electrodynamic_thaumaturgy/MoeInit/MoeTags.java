@@ -16,8 +16,8 @@ public class MoeTags {
         }
     }
     public class moeBlockTags{
-        public static final TagKey<Block> HOT_BLOCK = creat("hot_block");
-        public static final TagKey<Block> COLD_BLOCK = creat("cold_block");
+        public static final TagKey<Block> HOT_BLOCK = creat("hot");
+        public static final TagKey<Block> COLD_BLOCK = creat("cold");
         public static TagKey<Block> creat(String name){
             return BlockTags.create(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name));
         }

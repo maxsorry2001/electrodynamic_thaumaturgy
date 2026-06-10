@@ -1,7 +1,7 @@
 {
   "parent": "electrodynamic_thaumaturgy:normal/modem_table",
   "criteria": {
-    "has_enhancement_block_0": {
+    "has_enhancement_0": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_enhancement_block_0"
+      "has_enhancement_0"
     ]
   ],
   "sends_telemetry_event": true

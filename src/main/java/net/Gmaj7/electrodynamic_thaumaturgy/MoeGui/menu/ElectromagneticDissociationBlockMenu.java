@@ -81,7 +81,7 @@ public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu 
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get());
     }
 
     private void addPlayerInventory(Inventory inventory){

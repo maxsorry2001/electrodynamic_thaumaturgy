@@ -161,7 +161,7 @@ public class MagnetoFusionBE extends BlockEntity implements IMoeEnergyBlockEntit
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.electrodynamic_thaumaturgy.magneto_fusion_machine_block");
+        return Component.translatable("block.electrodynamic_thaumaturgy.magneto_fusion_machine");
     }
 
     @Override

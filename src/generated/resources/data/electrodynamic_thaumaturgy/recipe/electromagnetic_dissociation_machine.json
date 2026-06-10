@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "electrodynamic_thaumaturgy:magno_ingot",
+    "b": "minecraft:piston",
+    "c": "electrodynamic_thaumaturgy:energy_core"
+  },
+  "pattern": [
+    "aba",
+    "c c",
+    "aba"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:electromagnetic_dissociation_machine"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "electrodynamic_thaumaturgy:block/thermal_generator_false"
+    },
+    "lit=true": {
+      "model": "electrodynamic_thaumaturgy:block/thermal_generator_true"
+    }
+  }
+}

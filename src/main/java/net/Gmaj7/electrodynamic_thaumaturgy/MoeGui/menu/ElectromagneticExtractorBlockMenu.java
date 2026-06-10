@@ -83,7 +83,7 @@ public class ElectromagneticExtractorBlockMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get());
     }
 
     private void addMachineSlot(StacksResourceHandler<ItemStack, ItemResource> itemHandler){
