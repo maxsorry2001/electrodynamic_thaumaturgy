@@ -73,7 +73,7 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
         scrolling = false;
     }
 
-    protected List<Direction> getCurrentDirections() {
+    public List<Direction> getCurrentDirections() {
         if (isInsert) {
             List<BlockPos> poses = new ArrayList<>(menu.getInsert().keySet());
             if (poses.isEmpty()) return List.of();
@@ -151,7 +151,7 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
         drawDirectionIcons(guiGraphics, mouthX, mouthY, left, top);
     }
 
-    protected BlockPos getCurrentPos() {
+    public BlockPos getCurrentPos() {
         if (isInsert) {
             if(menu.getInsert().isEmpty()) return null;
             List<BlockPos> poses = new ArrayList<>(menu.getInsert().keySet());
@@ -313,5 +313,13 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
     @Override
     public T getMenu() {
         return super.getMenu();
+    }
+
+    public int getStartIndex() {
+        return startIndex;
+    }
+
+    public static int getVisibleRows() {
+        return VISIBLE_ROWS;
     }
 }

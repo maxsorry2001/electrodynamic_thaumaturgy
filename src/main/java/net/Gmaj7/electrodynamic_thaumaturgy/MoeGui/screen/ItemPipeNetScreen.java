@@ -9,6 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerInput;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -77,5 +79,10 @@ public class ItemPipeNetScreen extends PipeNetScreen<ItemPipeNetMenu> {
         else if (mouthX < startX + ITEM_SIZE * 2) slot = 1;
         else slot = 2;
         return slot;
+    }
+
+    @Override
+    protected void slotClicked(Slot slot, int slotId, int buttonNum, ContainerInput containerInput) {
+        super.slotClicked(slot, slotId, buttonNum, containerInput);
     }
 }

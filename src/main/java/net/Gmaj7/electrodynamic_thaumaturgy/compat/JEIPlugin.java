@@ -2,16 +2,19 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.ItemPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticDissociationRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticInfusionRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagicEncodeRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagnetoFusionRecipeCategory;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.ItemPipeNetHandler;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -58,6 +61,11 @@ public class JEIPlugin implements IModPlugin {
         registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGNETO_FUSION_MACHINE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(MoeBlocks.ENERGY_BLOCK.asItem()));
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addGhostIngredientHandler(ItemPipeNetScreen.class, new ItemPipeNetHandler());
     }
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
