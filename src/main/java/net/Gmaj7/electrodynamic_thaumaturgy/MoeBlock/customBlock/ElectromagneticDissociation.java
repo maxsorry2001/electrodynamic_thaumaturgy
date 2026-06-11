@@ -3,7 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDissociationBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticInfuserBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

@@ -1,6 +1,5 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit;
 
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;

@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedDataType;
-import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Map;
 import java.util.Set;

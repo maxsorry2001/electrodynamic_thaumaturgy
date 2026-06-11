@@ -8,12 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FilterSettingWhitePacket implements CustomPacketPayload {
     public static final Type<FilterSettingWhitePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "net_filter_white"));

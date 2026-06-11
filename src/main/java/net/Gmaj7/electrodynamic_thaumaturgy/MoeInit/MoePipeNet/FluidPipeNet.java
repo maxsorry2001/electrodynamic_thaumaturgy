@@ -3,7 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.FluidPipeNetMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ItemPipeNetMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.BlockPos;
@@ -15,12 +14,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
@@ -215,7 +215,6 @@ public class FluidPipeNet extends PipeNet{
                 List<Integer> available = new ArrayList<>(availableInsert);
                 ResourceHandler<FluidResource> extractHandler = extractSet.getResourceHandler();
                 ResourceAndIndex resourceAndIndex = getAvailableExtract(filterSetting, extractHandler, order);
-                if(resourceAndIndex.index() > extractHandler.size()) break;
                 resource = resourceAndIndex.resource;
                 order = resourceAndIndex.index;
                 if (!resource.isEmpty()) {
@@ -240,6 +239,7 @@ public class FluidPipeNet extends PipeNet{
                         }
                     }
                 }
+                if(resourceAndIndex.index() >= extractHandler.size()) break;
             }
         }
         if(trueExtract == 0) return true;
@@ -263,7 +263,6 @@ public class FluidPipeNet extends PipeNet{
                 ResourceAndIndex resourceAndIndex = getAvailableExtract(filterSetting, extractHandler, order);
                 resource = resourceAndIndex.resource;
                 order = resourceAndIndex.index;
-                if(order >= extractHandler.size()) break;
                 if (!resource.isEmpty()) {
                     int extracted = extractHandler.extract(resource, 10000, transaction);
                     if (extracted > 0) {
@@ -288,6 +287,7 @@ public class FluidPipeNet extends PipeNet{
                         }
                     }
                 }
+                if(order >= extractHandler.size()) break;
             }
         }
         if (resource.isEmpty() || insertCount == 0) return true;
@@ -310,11 +310,23 @@ public class FluidPipeNet extends PipeNet{
                         break;
                     }
                 }
+                else if(itemStack.getItem() instanceof BucketItem item && item.content != Fluids.EMPTY){
+                    if(item.content.getFluidType() == resource.getFluidType()){
+                        flagWhite = true;
+                        break;
+                    }
+                }
             }
         }
         for (ItemStack itemStack : filterSetting.black()){
             if(itemStack.getItem() instanceof BlockItem && ((BlockItem)itemStack.getItem()).getBlock() instanceof LiquidBlock liquidBlock) {
                 if (liquidBlock.fluid.getFluidType() == resource.getFluidType()) {
+                    flagBlack = true;
+                    break;
+                }
+            }
+            else if(itemStack.getItem() instanceof BucketItem item && item.content != Fluids.EMPTY){
+                if(item.content.getFluidType() == resource.getFluidType()){
                     flagBlack = true;
                     break;
                 }
@@ -327,12 +339,13 @@ public class FluidPipeNet extends PipeNet{
         if(filter.containsKey(pos) && filter.get(pos).containsKey(direction)) {
             List<ItemStack> white = new ArrayList<>(), black = new ArrayList<>();
             for (ItemStack fluidStack : filter.get(pos).get(direction)){
-                if(!(fluidStack.getItem() instanceof BlockItem) || (!(((BlockItem)fluidStack.getItem()).getBlock() instanceof LiquidBlock))) continue;
-                if(!fluidStack.is(MoeItems.FILTER_SETTING))
-                    white.add(fluidStack.copy());
+                if(!fluidStack.is(MoeItems.FILTER_SETTING)) {
+                    if((fluidStack.getItem() instanceof BucketItem && ((BucketItem)fluidStack.getItem()).content != Fluids.EMPTY) || (fluidStack.getItem() instanceof BlockItem && ((BlockItem)fluidStack.getItem()).getBlock() instanceof LiquidBlock))
+                        white.add(fluidStack.copy());
+                }
                 else {
                     ItemContainerContents contents = fluidStack.get(MoeDataComponentTypes.MOE_CONTAINER);
-                    List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().toList());
+                    List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().filter(stack -> (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || (stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof LiquidBlock)).toList());
                     if(fluidStack.getOrDefault(MoeDataComponentTypes.FILTER_WHITE.get(), true)) white.addAll(list);
                     else black.addAll(list);
                 }

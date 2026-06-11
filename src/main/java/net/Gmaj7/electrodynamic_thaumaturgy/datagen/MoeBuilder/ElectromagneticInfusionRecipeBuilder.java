@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen.MoeBuilder;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.ElectromagneticInfusionRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jspecify.annotations.Nullable;
 

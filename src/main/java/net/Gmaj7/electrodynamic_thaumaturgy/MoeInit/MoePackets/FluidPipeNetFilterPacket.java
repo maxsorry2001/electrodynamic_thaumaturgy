@@ -2,11 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.FluidPipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock.ItemPipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.FluidPipeNet;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.FluidPipeNetSaveData;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNet;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -75,7 +72,7 @@ public class FluidPipeNetFilterPacket implements CustomPacketPayload {
                     FluidPipeNet net = data.getNet(packet.netId);
                     List<ServerPlayer> observers = new ArrayList<>(net.getLookingPlayer());
                     for (ServerPlayer serverPlayer : observers)
-                        PacketDistributor.sendToPlayer(serverPlayer, new ItemPipeNetSynPacket(net.getInsert(), net.getExtract(), net.getFilter(), net.getNetId()));
+                        PacketDistributor.sendToPlayer(serverPlayer, new FluidPipeNetSynPacket(net.getInsert(), net.getExtract(), net.getFilter(), net.getNetId()));
                 }
             }
         });

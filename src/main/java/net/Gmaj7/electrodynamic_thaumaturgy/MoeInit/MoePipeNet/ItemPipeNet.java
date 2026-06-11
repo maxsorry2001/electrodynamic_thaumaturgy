@@ -7,7 +7,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -212,7 +211,6 @@ public class ItemPipeNet extends PipeNet{
                 List<Integer> available = new ArrayList<>(availableInsert);
                 ResourceHandler<ItemResource> extractHandler = extractSet.getResourceHandler();
                 ResourceAndIndex resourceAndIndex = getAvailableExtract(filterSetting, extractHandler, order);
-                if(resourceAndIndex.index() > extractHandler.size()) break;
                 resource = resourceAndIndex.resource;
                 order = resourceAndIndex.index;
                 if (!resource.isEmpty()) {
@@ -237,6 +235,7 @@ public class ItemPipeNet extends PipeNet{
                         }
                     }
                 }
+                if(resourceAndIndex.index() >= extractHandler.size()) break;
             }
         }
         if(trueExtract == 0) return true;
@@ -260,7 +259,6 @@ public class ItemPipeNet extends PipeNet{
                 ResourceAndIndex resourceAndIndex = getAvailableExtract(filterSetting, extractHandler, order);
                 resource = resourceAndIndex.resource;
                 order = resourceAndIndex.index;
-                if(order >= extractHandler.size()) break;
                 if (!resource.isEmpty()) {
                     // 先模拟提取（最大尝试一组，但实际提取量可能小于maxStackSize）
                     int extracted = extractHandler.extract(resource, resource.getMaxStackSize(), transaction);
@@ -286,6 +284,7 @@ public class ItemPipeNet extends PipeNet{
                         }
                     }
                 }
+                if(order >= extractHandler.size()) break;
             }
         }
         if (resource.isEmpty() || insertCount == 0) return true;

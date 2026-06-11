@@ -1,14 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticDissociationBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.ElectromagneticInfuserBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeBlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.EnergySetPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.ElectromagneticDissociationRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.ElectromagneticInfusionRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.ElectromagneticInfusionRecipeInput;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
@@ -40,7 +38,6 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ElectromagneticInfuserBE extends BlockEntity implements IMoeEnergyBlockEntity, IMoeDirectionItemBlockEntity, IMoeDirectionFluidBlockEntity, MenuProvider{

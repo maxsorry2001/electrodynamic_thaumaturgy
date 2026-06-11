@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.FluidPipeNetMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.FluidPipeNetFilterPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ItemPipeNetFilterPacket;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -10,10 +9,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.List;
 
@@ -58,13 +60,15 @@ public class FluidPipeNetScreen extends PipeNetScreen<FluidPipeNetMenu> {
         int left = (width - imageWidth) / 2, top = (height - imageHeight) / 2, slot = getSlot(event.x(), event.y(), left, top);
         if(slot != -1){
             ItemStack stack = this.menu.getCarried();
-            BlockPos pos = getCurrentPos();
-            List<Direction> directions = getCurrentDirections();
-            int idx = startIndex + getIndex(event.y());
-            if (idx < directions.size()) {
-                Direction dir = directions.get(idx);
-                ClientPacketDistributor.sendToServer(new FluidPipeNetFilterPacket(pos, dir, slot, stack, menu.getNetId()));
-                return true;
+            if((stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof LiquidBlock) || (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.isEmpty()) {
+                BlockPos pos = getCurrentPos();
+                List<Direction> directions = getCurrentDirections();
+                int idx = startIndex + getIndex(event.y());
+                if (idx < directions.size()) {
+                    Direction dir = directions.get(idx);
+                    ClientPacketDistributor.sendToServer(new FluidPipeNetFilterPacket(pos, dir, slot, stack, menu.getNetId()));
+                    return true;
+                }
             }
         }
         return super.mouseClicked(event, doubleClick);

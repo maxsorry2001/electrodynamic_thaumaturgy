@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlock;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.FluidPipeNetSaveData;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
