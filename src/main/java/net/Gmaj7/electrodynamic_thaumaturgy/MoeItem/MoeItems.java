@@ -11,8 +11,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 public class MoeItems {
     public static final DeferredRegister.Items MOE_ITEM = DeferredRegister.createItems(ElectrodynamicThaumaturgy.MODID);
@@ -137,6 +139,9 @@ public class MoeItems {
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = MOE_ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));
+
+    public static final DeferredItem<Item> FLUID_FILTER_FAKE_ITEM = MOE_ITEM.registerItem("fluid_stack_fake_item",
+            (properties -> new FluidFilterFakeItem(properties.stacksTo(1).component(MoeDataComponentTypes.FLUID_FILTER, FluidResource.EMPTY))));
 
     private static DeferredItem<Item> registerMagicModule(String name){
         return MOE_ITEM.registerItem(name + "_module", (properties -> new MoeMagicTypeModuleItem(properties.stacksTo(1).component(MoeDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name)))));

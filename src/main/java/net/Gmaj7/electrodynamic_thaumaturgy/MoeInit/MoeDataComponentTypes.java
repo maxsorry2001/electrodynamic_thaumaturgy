@@ -9,7 +9,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 import java.util.function.Supplier;
 
@@ -44,6 +46,9 @@ public class MoeDataComponentTypes {
 
     public static final Supplier<DataComponentType<Boolean>> FILTER_WHITE = MOE_DATA_COMPONENT_TYPE.register("filter_white",
             () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).build());
+
+    public static final Supplier<DataComponentType<FluidResource>> FLUID_FILTER = MOE_DATA_COMPONENT_TYPE.register("fluid_filter",
+            () -> DataComponentType.<FluidResource>builder().persistent(FluidResource.CODEC).build());
 
 
     public static void register(IEventBus eventBus){

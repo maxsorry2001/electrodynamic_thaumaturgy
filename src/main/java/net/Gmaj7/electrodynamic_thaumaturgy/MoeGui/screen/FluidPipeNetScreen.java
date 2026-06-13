@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.menu.FluidPipeNetMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.FluidPipeNetFilterPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.FluidFilterFakeItem;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -60,7 +61,7 @@ public class FluidPipeNetScreen extends PipeNetScreen<FluidPipeNetMenu> {
         int left = (width - imageWidth) / 2, top = (height - imageHeight) / 2, slot = getSlot(event.x(), event.y(), left, top);
         if(slot != -1){
             ItemStack stack = this.menu.getCarried();
-            if((stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof LiquidBlock) || (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.isEmpty()) {
+            if(stack.getItem() instanceof FluidFilterFakeItem || (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.isEmpty()) {
                 BlockPos pos = getCurrentPos();
                 List<Direction> directions = getCurrentDirections();
                 int idx = startIndex + getIndex(event.y());

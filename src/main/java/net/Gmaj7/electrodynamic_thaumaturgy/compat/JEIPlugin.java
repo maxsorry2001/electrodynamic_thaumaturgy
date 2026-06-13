@@ -8,12 +8,14 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.FluidPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.ItemPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticDissociationRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticInfusionRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagicEncodeRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagnetoFusionRecipeCategory;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.FluidPipeNetHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.ItemPipeNetHandler;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -66,6 +68,7 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(ItemPipeNetScreen.class, new ItemPipeNetHandler());
+        registration.addGhostIngredientHandler(FluidPipeNetScreen.class, new FluidPipeNetHandler());
     }
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)

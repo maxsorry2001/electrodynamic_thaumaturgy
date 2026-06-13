@@ -1,25 +1,23 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.ingredients.ITypedIngredient;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.FluidPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.ItemPipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.FluidPipeNetFilterPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ItemPipeNetFilterPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.FluidFilterFakeItem;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
-public class ItemPipeNetHandler extends PipeNetHandler<ItemPipeNetScreen>{
-
-    @Override
-    protected ItemPipeNetFilterTarget getTarget(BlockPos currentPos, Direction dir, Rect2i area, int finalSlot, ItemPipeNetScreen gui) {
-        return new ItemPipeNetFilterTarget(currentPos, dir, area, finalSlot, gui);
-    }
-
+public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
     @Override
     protected ItemStack wrapDraggedItem(ITypedIngredient<?> ingredient) {
         var stack = ingredient.getIngredient(ingredient.getType());
@@ -29,9 +27,14 @@ public class ItemPipeNetHandler extends PipeNetHandler<ItemPipeNetScreen>{
         return itemStack;
     }
 
-    protected static class ItemPipeNetFilterTarget<T extends MutableDataComponentHolder> extends TargetFilter<T,ItemPipeNetScreen>{
+    @Override
+    protected <I> TargetFilter<I, FluidPipeNetScreen> getTarget(BlockPos currentPos, Direction dir, Rect2i area, int finalSlot, FluidPipeNetScreen gui) {
+        return new FluidPipeNetFilterTarget(currentPos, dir, area, finalSlot, gui);
+    }
 
-        ItemPipeNetFilterTarget(BlockPos pos, Direction direction, Rect2i area, int slot, ItemPipeNetScreen screen) {
+    protected static class FluidPipeNetFilterTarget<T extends MutableDataComponentHolder> extends TargetFilter<T, FluidPipeNetScreen>{
+
+        FluidPipeNetFilterTarget(BlockPos pos, Direction direction, Rect2i area, int slot, FluidPipeNetScreen screen) {
             super(pos, direction, area, slot, screen);
         }
 
@@ -39,8 +42,9 @@ public class ItemPipeNetHandler extends PipeNetHandler<ItemPipeNetScreen>{
         public void accept(T ingredient) {
             ItemStack itemStack = ItemStack.EMPTY;
             if(ingredient instanceof ItemStack) itemStack = (ItemStack) ingredient;
-            if(itemStack.isEmpty()) return;
-            ClientPacketDistributor.sendToServer(new ItemPipeNetFilterPacket(pos, direction, slot, itemStack, screen.getMenu().getNetId()));
+            else if (ingredient instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter(FluidResource.of((FluidStack) ingredient));
+            if(itemStack.isEmpty() && !itemStack.is(MoeItems.FLUID_FILTER_FAKE_ITEM) && !itemStack.is(MoeItems.FILTER_SETTING) && !(itemStack.getItem() instanceof BucketItem)) return;
+            ClientPacketDistributor.sendToServer(new FluidPipeNetFilterPacket(pos, direction, slot, itemStack, screen.getMenu().getNetId()));
         }
     }
 }
