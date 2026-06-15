@@ -8,10 +8,13 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 public class ItemPipeNetHandler extends PipeNetHandler<ItemPipeNetScreen>{
 
@@ -25,7 +28,11 @@ public class ItemPipeNetHandler extends PipeNetHandler<ItemPipeNetScreen>{
         var stack = ingredient.getIngredient(ingredient.getType());
         ItemStack itemStack = ItemStack.EMPTY;
         if(stack.get() instanceof ItemStack) itemStack = (ItemStack) stack.get();
-        else if(stack.get() instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter(FluidResource.of((FluidStack)stack.get()));
+        else if(stack.get() instanceof FluidStack) {
+            itemStack = FluidFilterFakeItem.creatFluidFilter((FluidStack) stack.get());
+            FluidResource resource = itemStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forStack(itemStack)).getResource(0);
+            int i = 1;
+        }
         return itemStack;
     }
 

@@ -14,11 +14,17 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
+
+import java.util.Optional;
 
 public class MoeModelProvider extends ModelProvider {
     public MoeModelProvider(PackOutput output) {
@@ -98,6 +104,22 @@ public class MoeModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MoeItems.MONOPOLE_S.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(MoeItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+
+        itemModels.itemModelOutput.accept(
+                MoeItems.FLUID_FILTER_FAKE_ITEM.get(),
+                new DynamicFluidContainerModel.Unbaked(
+                        new DynamicFluidContainerModel.Textures(
+                                Optional.empty(),
+                                Optional.of(new Material(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "item/fluid_outline"))),
+                                Optional.of(new Material(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "item/fluid_mask"))),
+                                Optional.empty()
+                        ),
+                        Fluids.WATER,
+                        true,
+                        true,
+                        false
+                )
+        );
 
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(MoeBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(),
                 getModel("electromagnetic_assembly_table")));

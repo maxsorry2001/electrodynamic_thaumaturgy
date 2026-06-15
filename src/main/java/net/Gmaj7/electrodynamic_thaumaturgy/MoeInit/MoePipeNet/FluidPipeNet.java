@@ -23,6 +23,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
@@ -397,7 +398,7 @@ public class FluidPipeNet extends PipeNet{
             Map<Direction, List<ItemStack>> posFilter = filter.get(pos);
             if(!posFilter.containsKey(direction)) return;
             List<ItemStack> dirFilter = posFilter.get(direction);
-            if(dirFilter.size() < slot) return;
+            if(dirFilter.size() <= slot) return;
             dirFilter.remove(slot);
             if(dirFilter.isEmpty()){
                 posFilter.remove(direction);
@@ -425,21 +426,9 @@ public class FluidPipeNet extends PipeNet{
             return;
         }
         List<ItemStack> dirFilter = posFilter.get(direction);
-        if(containItem(dirFilter, filterFluid)) return;
         if(dirFilter.size() > slot)
             dirFilter.set(slot, filterFluid);
         else dirFilter.add(filterFluid);
-    }
-
-    private boolean containItem(List<ItemStack> filter, ItemStack stack){
-        boolean flag = false;
-        for (ItemStack fluidStack : filter){
-            if(fluidStack.is(stack.getItem())){
-                flag = true;
-                break;
-            }
-        }
-        return flag;
     }
 
     private record ResourceAndIndex(FluidResource resource, int index){};

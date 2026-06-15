@@ -17,6 +17,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.ItemAccessEnergyHandler;
+import net.neoforged.neoforge.transfer.fluid.ItemAccessFluidHandler;
 
 @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
 public class DataLoadHandler {
@@ -49,16 +50,18 @@ public class DataLoadHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
                 MoeItems.ELECTROMAGNETIC_ROD.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
                 MoeItems.POTATO_BATTERY.get(),
                 MoeItems.CARROT_BATTERY.get(),
                 MoeItems.SOLUTION_BATTERY.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
                 MoeItems.POWER_BANK.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, unused) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 536870912)),
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 536870912)),
                 MoeBlocks.ENERGY_BLOCK.get());
+        event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.FLUID_FILTER.get(), 1)),
+                MoeItems.FLUID_FILTER_FAKE_ITEM.get());
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
                 MoeBlocks.ENERGY_BLOCK.get(),

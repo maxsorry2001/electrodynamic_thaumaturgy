@@ -130,6 +130,8 @@ public class MoeTabs {
                         output.accept(MoeBlocks.ENERGY_PIPE);
                         output.accept(MoeBlocks.ITEM_PIPE);
                         output.accept(MoeBlocks.FLUID_PIPE);
+
+                        output.accept(MoeItems.FLUID_FILTER_FAKE_ITEM);
                     }))
                     .build());
 
@@ -162,9 +164,11 @@ public class MoeTabs {
     }
     public static final ItemStack getGoldRod(){
         return getRod(MoeItems.INTERMEDIATE_LC.get(), MoeItems.INTERMEDIATE_POWER.get());
-    }public static final ItemStack getCopperRod(){
+    }
+    public static final ItemStack getCopperRod(){
         return getRod(MoeItems.ADVANCED_LC.get(), MoeItems.ADVANCED_POWER.get());
-    }public static final ItemStack getSuperconductingRod(){
+    }
+    public static final ItemStack getSuperconductingRod(){
         return getRod(MoeItems.SUPERCONDUCTING_LC.get(), MoeItems.SUPERCONDUCTING_POWER.get());
     }
 

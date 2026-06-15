@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "neoforge:fluid_container",
+    "apply_fluid_luminosity": false,
+    "flip_gas": true,
+    "fluid": "minecraft:water",
+    "textures": {
+      "base": "electrodynamic_thaumaturgy:item/fluid_outline",
+      "fluid": "electrodynamic_thaumaturgy:item/fluid_mask"
+    }
+  }
+}

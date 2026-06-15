@@ -402,21 +402,9 @@ public class ItemPipeNet extends PipeNet{
             return;
         }
         List<ItemStack> dirFilter = posFilter.get(direction);
-        if(containItem(dirFilter, filterItem)) return;
         if(dirFilter.size() > slot)
             dirFilter.set(slot, filterItem);
         else dirFilter.add(filterItem);
-    }
-
-    private boolean containItem(List<ItemStack> filter, ItemStack stack){
-        boolean flag = false;
-        for (ItemStack itemStack : filter){
-            if(itemStack.is(stack.getItem())){
-                flag = true;
-                break;
-            }
-        }
-        return flag;
     }
 
     private record ResourceAndIndex(ItemResource resource, int index){};

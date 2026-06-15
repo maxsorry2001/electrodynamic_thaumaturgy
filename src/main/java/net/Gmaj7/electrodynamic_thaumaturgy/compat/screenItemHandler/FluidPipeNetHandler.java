@@ -23,7 +23,7 @@ public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
         var stack = ingredient.getIngredient(ingredient.getType());
         ItemStack itemStack = ItemStack.EMPTY;
         if(stack.get() instanceof ItemStack) itemStack = (ItemStack) stack.get();
-        else if(stack.get() instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter(FluidResource.of((FluidStack)stack.get()));
+        else if(stack.get() instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter((FluidStack)stack.get());
         return itemStack;
     }
 
@@ -42,7 +42,7 @@ public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
         public void accept(T ingredient) {
             ItemStack itemStack = ItemStack.EMPTY;
             if(ingredient instanceof ItemStack) itemStack = (ItemStack) ingredient;
-            else if (ingredient instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter(FluidResource.of((FluidStack) ingredient));
+            else if (ingredient instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter((FluidStack) ingredient);
             if(itemStack.isEmpty() && !itemStack.is(MoeItems.FLUID_FILTER_FAKE_ITEM) && !itemStack.is(MoeItems.FILTER_SETTING) && !(itemStack.getItem() instanceof BucketItem)) return;
             ClientPacketDistributor.sendToServer(new FluidPipeNetFilterPacket(pos, direction, slot, itemStack, screen.getMenu().getNetId()));
         }

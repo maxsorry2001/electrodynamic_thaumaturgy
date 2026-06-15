@@ -51,8 +51,10 @@ public class FluidPipeNetScreen extends PipeNetScreen<FluidPipeNetMenu> {
             if(!menu.getFilter().containsKey(nodePos) || ! menu.getFilter().get(nodePos).containsKey(dir)) continue;
             List<ItemStack> filter = menu.getFilterItemOfPosAndDir(nodePos, dir);
             if(filter.isEmpty()) continue;
-            for (int j = 0; j < filter.size(); j++)
+            for (int j = 0; j < filter.size(); j++) {
+                ItemStack itemStack = filter.get(j);
                 guiGraphics.fakeItem(filter.get(j), startX + (j + 2) * ITEM_SIZE, startY + i * ITEM_SIZE);
+            }
         }
     }
 
