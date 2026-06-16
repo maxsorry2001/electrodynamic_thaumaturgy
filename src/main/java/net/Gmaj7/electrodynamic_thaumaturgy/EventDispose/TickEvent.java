@@ -1,13 +1,13 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.EnergyPipeNetSaveData;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.FluidPipeNetSaveData;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePipeNet.ItemPipeNetSaveData;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.PipeNet.EnergyPipeNetSaveData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.PipeNet.FluidPipeNetSaveData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.PipeNet.ItemPipeNetSaveData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -25,17 +25,17 @@ public class TickEvent {
 
     @SubscribeEvent
     public static void toolTip(ItemTooltipEvent event){
-        if(event.getItemStack().is(MoeBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem())){
+        if(event.getItemStack().is(EtBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem())){
             event.getToolTip().add(Component.translatable("advancements.electrodynamic_thaumaturgy.energy_send.description"));
         }
-        if(event.getItemStack().is(MoeItems.GENETIC_RECORDER.get()) && event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE) != null)
-            event.getToolTip().add(event.getItemStack().get(MoeDataComponentTypes.ENTITY_TYPE).getDescription());
+        if(event.getItemStack().is(EtItems.GENETIC_RECORDER.get()) && event.getItemStack().get(EtDataComponentTypes.ENTITY_TYPE) != null)
+            event.getToolTip().add(event.getItemStack().get(EtDataComponentTypes.ENTITY_TYPE).getDescription());
     }
 
     @SubscribeEvent
     public static void effectRemoveDeal(MobEffectEvent.Remove event){
         Holder<MobEffect> holder = event.getEffect();
-        if(holder == MoeEffects.MAGNETIC_LEVITATION_EFFECT){
+        if(holder == EtEffects.MAGNETIC_LEVITATION_EFFECT){
             event.getEntity().getAttribute(NeoForgeMod.CREATIVE_FLIGHT).setBaseValue(0);
         }
     }
@@ -43,7 +43,7 @@ public class TickEvent {
     @SubscribeEvent
     public static void effectExpiredDeal(MobEffectEvent.Expired event){
         MobEffectInstance effectInstance = event.getEffectInstance();
-        if(effectInstance.is(MoeEffects.MAGNETIC_LEVITATION_EFFECT)){
+        if(effectInstance.is(EtEffects.MAGNETIC_LEVITATION_EFFECT)){
             event.getEntity().getAttribute(NeoForgeMod.CREATIVE_FLIGHT).setBaseValue(0);
         }
     }

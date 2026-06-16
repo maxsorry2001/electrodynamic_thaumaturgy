@@ -1,23 +1,23 @@
 package net.Gmaj7.electrodynamic_thaumaturgy;
 
 import com.mojang.logging.LogUtils;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.MoeEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.render.*;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.MoeMenuType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttachmentType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeAttributes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ProtectingPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.HydrogenBondParticle;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticle;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticle;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.render.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.EtMenuTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.AttachmentType;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Attributes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.ProtectingPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.EtParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.HydrogenBondParticle;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticle;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticle;
+import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.Magics;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
@@ -62,18 +62,18 @@ public class ElectrodynamicThaumaturgy
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
-        MoeTabs.MOE_CREATIVE_TABS.register(modEventBus);
-        MoeBlocks.MOE_BLOCKS.register(modEventBus);
-        MoeItems.MOE_ITEM.register(modEventBus);
-        MoeAttachmentType.register(modEventBus);
-        MoeEffects.register(modEventBus);
-        MoeEntities.register(modEventBus);
-        MoeDataComponentTypes.register(modEventBus);
-        MoeMenuType.register(modEventBus);
-        MoeParticles.register(modEventBus);
-        MoeBlockEntities.register(modEventBus);
-        MoeRecipes.register(modEventBus);
-        MoeAttributes.register(modEventBus);
+        EtTabs.MOE_CREATIVE_TABS.register(modEventBus);
+        EtBlocks.BLOCKS.register(modEventBus);
+        EtItems.ITEM.register(modEventBus);
+        AttachmentType.register(modEventBus);
+        EtEffects.register(modEventBus);
+        EtEntities.register(modEventBus);
+        EtDataComponentTypes.register(modEventBus);
+        EtMenuTypes.register(modEventBus);
+        EtParticles.register(modEventBus);
+        EtBlockEntities.register(modEventBus);
+        EtRecipes.register(modEventBus);
+        Attributes.register(modEventBus);
         Magics.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
@@ -98,7 +98,7 @@ public class ElectrodynamicThaumaturgy
     @SubscribeEvent
     public void entityJoin(EntityJoinLevelEvent event){
         if(!event.getLevel().isClientSide() && event.getEntity() instanceof Player player){
-            PacketDistributor.sendToAllPlayers(new ProtectingPacket(((MoeDataGet)player).getProtective().getProtecting()));
+            PacketDistributor.sendToAllPlayers(new ProtectingPacket(((DataGet)player).getProtective().getProtecting()));
         }
     }
 
@@ -109,34 +109,34 @@ public class ElectrodynamicThaumaturgy
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            EntityRenderers.register(MoeEntities.MOE_RAY_ENTITY.get(), MoeRayEntityRender::new);
-            EntityRenderers.register(MoeEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
-            EntityRenderers.register(MoeEntities.ATTRACT_BEACON_ENTITY.get(), MagnetArrowRender::new);
-            EntityRenderers.register(MoeEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), MagneticRecombinationCannonBeaconRender::new);
-            EntityRenderers.register(MoeEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), MagmaLightingBeaconRender::new);
-            EntityRenderers.register(MoeEntities.COULOMB_DOMAIN_BEACON_ENTITY.get(), CoulombDomainRender::new);
-            EntityRenderers.register(MoeEntities.MIRAGE_ENTITY.get(), MirageEntityRender::new);
-            EntityRenderers.register(MoeEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), MagneticFluxCascadeRender::new);
-            EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), FrequencyDivisionArrowRender::new);
-            EntityRenderers.register(MoeEntities.FREQUENCY_DIVISION_BEACON_ENTITY.get(), FrequencyDivisionBeaconRender::new);
-            EntityRenderers.register(MoeEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), MagnetoEntropyWitchEntityRender::new);
-            EntityRenderers.register(MoeEntities.MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY.get(), MagnetoEntropyWitchSummonRender::new);
-            EntityRenderers.register(MoeEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), MagnetoOrderSageEntityRender::new);
-            EntityRenderers.register(MoeEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), PhotoacousticPulseBeaconEntityRender::new);
-            EntityRenderers.register(MoeEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), PhotoCorrosiveNovaEntityRender::new);
+            EntityRenderers.register(EtEntities.ET_RAY_ENTITY.get(), EtRayEntityRender::new);
+            EntityRenderers.register(EtEntities.PULSED_PLASMA_ENTITY.get(), PulsedPlasmaEntityRender::new);
+            EntityRenderers.register(EtEntities.ATTRACT_BEACON_ENTITY.get(), MagnetArrowRender::new);
+            EntityRenderers.register(EtEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), MagneticRecombinationCannonBeaconRender::new);
+            EntityRenderers.register(EtEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), MagmaLightingBeaconRender::new);
+            EntityRenderers.register(EtEntities.COULOMB_DOMAIN_BEACON_ENTITY.get(), CoulombDomainRender::new);
+            EntityRenderers.register(EtEntities.MIRAGE_ENTITY.get(), MirageEntityRender::new);
+            EntityRenderers.register(EtEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), MagneticFluxCascadeRender::new);
+            EntityRenderers.register(EtEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), FrequencyDivisionArrowRender::new);
+            EntityRenderers.register(EtEntities.FREQUENCY_DIVISION_BEACON_ENTITY.get(), FrequencyDivisionBeaconRender::new);
+            EntityRenderers.register(EtEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), MagnetoEntropyWitchEntityRender::new);
+            EntityRenderers.register(EtEntities.MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY.get(), MagnetoEntropyWitchSummonRender::new);
+            EntityRenderers.register(EtEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), MagnetoOrderSageEntityRender::new);
+            EntityRenderers.register(EtEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), PhotoacousticPulseBeaconEntityRender::new);
+            EntityRenderers.register(EtEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), PhotoCorrosiveNovaEntityRender::new);
         }
 
         @SubscribeEvent
         public static void registerParticleProviders(RegisterParticleProvidersEvent event){
-            event.registerSpriteSet(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), HydrogenBondParticle.Provider::new);
-            event.registerSpriteSet(MoeParticles.POINT_ROTATE_PARTICLE.get(), PointRotateParticle.Provider::new);
-            event.registerSpriteSet(MoeParticles.POINT_LINE_PARTICLE.get(), PointLineParticle.Provider::new);
+            event.registerSpriteSet(EtParticles.HYDROGEN_BOND_PARTICLE.get(), HydrogenBondParticle.Provider::new);
+            event.registerSpriteSet(EtParticles.POINT_ROTATE_PARTICLE.get(), PointRotateParticle.Provider::new);
+            event.registerSpriteSet(EtParticles.POINT_LINE_PARTICLE.get(), PointLineParticle.Provider::new);
         }
 
         @SubscribeEvent
         public static void attributeAdd(EntityAttributeModificationEvent event){
             for (EntityType<? extends LivingEntity> entityType : event.getTypes()){
-                event.add(entityType, MoeAttributes.CORROSION);
+                event.add(entityType, Attributes.CORROSION);
             }
         }
     }

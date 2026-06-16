@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeRegistries;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.IMoeMagic;
 import net.minecraft.core.HolderLookup;
@@ -53,7 +53,7 @@ public class MagicDefinitionProvider extends JsonCodecProvider<MagicDefinition> 
 
     private void register(String name, int energyCost, int coolDown){
         Identifier identifier = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name);
-        ResourceKey<IMoeMagic> resourceKey = ResourceKey.create(MoeRegistries.MAGIC_KEY, identifier);
+        ResourceKey<IMoeMagic> resourceKey = ResourceKey.create(EtRegistries.MAGIC_KEY, identifier);
         MagicDefinition magicDefinition = new MagicDefinition(resourceKey, energyCost, coolDown, "item." + ElectrodynamicThaumaturgy.MODID + "." + name + "_module");
         unconditional(identifier, magicDefinition);
     }

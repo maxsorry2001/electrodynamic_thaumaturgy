@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -21,7 +21,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void playerCast(Player player, ItemStack itemStack, MagicDefinition magicDefinition) {
-        List<Mob> list = player.level().getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(MoeFunction.getMagicAmount(itemStack)));
+        List<Mob> list = player.level().getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(Function.getMagicAmount(itemStack)));
         list.remove(player);
         for (int i = 0; i < list.size(); i++){
             Mob target = list.get(i);
@@ -37,7 +37,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        List<Mob> list = source.level().getEntitiesOfClass(Mob.class, source.getBoundingBox().inflate(MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)));
+        List<Mob> list = source.level().getEntitiesOfClass(Mob.class, source.getBoundingBox().inflate(Function.getMagicAmount(ElectromagneticDriverBE.magicItem)));
         list.remove(source);
         if(target instanceof  Mob) list.add((Mob) target);
         if(list.isEmpty()) return;
@@ -60,7 +60,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE, MagicDefinition magicDefinition) {
-        List<Mob> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(Mob.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)));
+        List<Mob> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(Mob.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(Function.getMagicAmount(ElectromagneticDriverBE.magicItem)));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
@@ -79,9 +79,9 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){
         float xRot = Mth.PI / 2, yRot = 0;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, 0), xRot, yRot);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, Mth.PI), xRot, yRot);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(30, 2), xRot, yRot);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 2, 0), xRot, yRot);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 2, Mth.PI), xRot, yRot);
         int i;
         Vec3 center = livingEntity.getEyePosition();
         for (i = 0; i < circle.size(); i++) {
@@ -89,8 +89,8 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
             level.sendParticles(new PointLineParticleOption(center.toVector3f(), new Vector3f(255, 128, 171), circle.get(i).scale(-0.1).toVector3f(), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));

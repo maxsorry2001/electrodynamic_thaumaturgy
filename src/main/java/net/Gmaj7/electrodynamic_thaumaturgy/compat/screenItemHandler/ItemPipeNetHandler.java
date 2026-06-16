@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.ingredients.ITypedIngredient;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.ItemPipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ItemPipeNetFilterPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.FluidFilterFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.ItemPipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.ItemPipeNetFilterPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFilterFakeItem;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +14,6 @@ import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
-import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 public class ItemPipeNetHandler extends PipeNetHandler<ItemPipeNetScreen>{
 

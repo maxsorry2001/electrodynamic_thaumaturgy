@@ -1,14 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeDirectionFluidBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeDirectionItemBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeEnergyBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.IMoeItemBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.*;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IDirectionFluidBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IDirectionItemBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IEnergyBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IItemBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -26,7 +26,7 @@ public class DataLoadHandler {
     public static void register(final RegisterPayloadHandlersEvent event){
         final PayloadRegistrar payloadRegistrar = event.registrar(ElectrodynamicThaumaturgy.MODID).versioned("1.0.0").optional();
 
-        payloadRegistrar.playToServer(MoeSelectMagicPacket.TYPE, MoeSelectMagicPacket.STREAM_CODEC, MoeSelectMagicPacket::handle);
+        payloadRegistrar.playToServer(SelectMagicPacket.TYPE, SelectMagicPacket.STREAM_CODEC, SelectMagicPacket::handle);
         payloadRegistrar.playToServer(DirectionSetPacket.TYPE, DirectionSetPacket.STREAM_CODEC, DirectionSetPacket::handle);
         payloadRegistrar.playToServer(NetChangePacket.TYPE, NetChangePacket.STREAM_CODEC, NetChangePacket ::handle);
         payloadRegistrar.playToServer(ItemPipeNetFilterPacket.TYPE, ItemPipeNetFilterPacket.STREAM_CODEC, ItemPipeNetFilterPacket::handle);
@@ -50,48 +50,48 @@ public class DataLoadHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 49152)),
-                MoeItems.ELECTROMAGNETIC_ROD.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 16384, 0, 16384)),
-                MoeItems.POTATO_BATTERY.get(),
-                MoeItems.CARROT_BATTERY.get(),
-                MoeItems.SOLUTION_BATTERY.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 65536)),
-                MoeItems.POWER_BANK.get());
-        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.MOE_ENERGY.get(), 536870912)),
-                MoeBlocks.ENERGY_BLOCK.get());
-        event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), MoeDataComponentTypes.FLUID_FILTER.get(), 1)),
-                MoeItems.FLUID_FILTER_FAKE_ITEM.get());
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 49152)),
+                EtItems.ELECTROMAGNETIC_ROD.get());
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 16384, 0, 16384)),
+                EtItems.POTATO_BATTERY.get(),
+                EtItems.CARROT_BATTERY.get(),
+                EtItems.SOLUTION_BATTERY.get());
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 65536)),
+                EtItems.POWER_BANK.get());
+        event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 536870912)),
+                EtBlocks.ENERGY_BLOCK.get());
+        event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.FLUID_FILTER.get(), 1)),
+                EtItems.FLUID_FILTER_FAKE_ITEM.get());
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
-                        blockEntity instanceof IMoeEnergyBlockEntity ? ((IMoeEnergyBlockEntity) blockEntity).getEnergy() : null),
-                MoeBlocks.ENERGY_BLOCK.get(),
-                MoeBlocks.TEMPERATURE_GENERATOR.get(),
-                MoeBlocks.PHOTOVOLTAIC_GENERATOR.get(),
-                MoeBlocks.THERMAL_GENERATOR.get(),
-                MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
-                MoeBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
-                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
-                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
-                MoeBlocks.MAGNETO_FUSION_MACHINE.get(),
-                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
-                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
-                MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
+                        blockEntity instanceof IEnergyBlockEntity ? ((IEnergyBlockEntity) blockEntity).getEnergy() : null),
+                EtBlocks.ENERGY_BLOCK.get(),
+                EtBlocks.TEMPERATURE_GENERATOR.get(),
+                EtBlocks.PHOTOVOLTAIC_GENERATOR.get(),
+                EtBlocks.THERMAL_GENERATOR.get(),
+                EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
+                EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
+                EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
+                EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
+                EtBlocks.MAGNETO_FUSION_MACHINE.get(),
+                EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
+                EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
+                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
-                        blockEntity instanceof IMoeItemBlockEntity ? ((IMoeItemBlockEntity) blockEntity).getItemHandler() : null),
-                MoeBlocks.ENERGY_BLOCK.get(),
-                MoeBlocks.THERMAL_GENERATOR.get(),
-                MoeBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
-                MoeBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
-                MoeBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
-                MoeBlocks.BIOMASS_GENERATOR.get());
+                        blockEntity instanceof IItemBlockEntity ? ((IItemBlockEntity) blockEntity).getItemHandler() : null),
+                EtBlocks.ENERGY_BLOCK.get(),
+                EtBlocks.THERMAL_GENERATOR.get(),
+                EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
+                EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
+                EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
+                EtBlocks.BIOMASS_GENERATOR.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
-                        blockEntity instanceof IMoeDirectionItemBlockEntity ? ((IMoeDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
-                MoeBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
-                MoeBlocks.MAGNETO_FUSION_MACHINE.get(),
-                MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
-                MoeBlocks.EDDY_CURRENT_REMELTER_MACHINE.get());
+                        blockEntity instanceof IDirectionItemBlockEntity ? ((IDirectionItemBlockEntity) blockEntity).getItemHandlerWithDirection(direction) : null),
+                EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
+                EtBlocks.MAGNETO_FUSION_MACHINE.get(),
+                EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
+                EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get());
         event.registerBlock(Capabilities.Fluid.BLOCK, ((level, pos, state, blockEntity, direction) ->
-                        blockEntity instanceof IMoeDirectionFluidBlockEntity ? ((IMoeDirectionFluidBlockEntity) blockEntity).getFluidHandlerWithDirection(direction) : null),
-                MoeBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
+                        blockEntity instanceof IDirectionFluidBlockEntity ? ((IDirectionFluidBlockEntity) blockEntity).getFluidHandlerWithDirection(direction) : null),
+                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
     }
 }

@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.AttractBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.AttractBeaconEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,7 +19,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(player.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), player);
-        attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
+        attractBeaconEntity.setLiveTime((int) Function.getMagicAmount(itemStack) * 10);
         player.level().addFreshEntity(attractBeaconEntity);
     }
 
@@ -28,14 +28,14 @@ public class Attract extends AbstractBlockBeaconMagic {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), source);
-        attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(itemStack) * 10);
+        attractBeaconEntity.setLiveTime((int) Function.getMagicAmount(itemStack) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
     }
 
     protected BlockHitResult getBlock(LivingEntity livingEntity){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(8).add(start);
-        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+        return Function.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), (LivingEntity) electromagneticDriverBE.getOwner());
-        attractBeaconEntity.setLiveTime((int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 10);
+        attractBeaconEntity.setLiveTime((int) Function.getMagicAmount(ElectromagneticDriverBE.magicItem) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
     }

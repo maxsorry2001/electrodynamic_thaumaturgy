@@ -23,12 +23,12 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         dataGenerator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
-                List.of(new LootTableProvider.SubProviderEntry(MoeBlockLootTableProvider::new, LootContextParamSets.BLOCK),
-                        new LootTableProvider.SubProviderEntry(MoeLivingEntityLootTable::new, LootContextParamSets.ENTITY)), lookupProvider));
+                List.of(new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                        new LootTableProvider.SubProviderEntry(LivingEntityLootTable::new, LootContextParamSets.ENTITY)), lookupProvider));
 
-        dataGenerator.addProvider(true, new MoeModelProvider(packOutput));
-        dataGenerator.addProvider(true, new MoeRecipeProvider.Runner(packOutput, lookupProvider));
-        dataGenerator.addProvider(true, new MoeAdvancementProvider(packOutput, lookupProvider));
+        dataGenerator.addProvider(true, new ModelProvider(packOutput));
+        dataGenerator.addProvider(true, new RecipeProvider.Runner(packOutput, lookupProvider));
+        dataGenerator.addProvider(true, new AdvancementProvider(packOutput, lookupProvider));
         dataGenerator.addProvider(true, new MagicDefinitionProvider(packOutput, lookupProvider));
     }
 }

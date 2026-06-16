@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoCorrosiveNovaEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.PhotoCorrosiveNovaEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -22,7 +22,7 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
     protected BlockHitResult getBlock(LivingEntity livingEntity) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.3, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(7).add(start);
-        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+        return Function.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
     @Override
@@ -74,8 +74,8 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
     }
 
     private void makeParticle(ServerLevel level, PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity) {
-        List<Vec3> circle1 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 0.5), 0, 0),
-                circle2 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 0.5), 0, Mth.PI / 2);
+        List<Vec3> circle1 = Function.rotatePointsYX(Function.getCirclePoints(30, 0.5), 0, 0),
+                circle2 = Function.rotatePointsYX(Function.getCirclePoints(30, 0.5), 0, Mth.PI / 2);
         Vec3 center = photoCorrosiveNovaEntity.position().add(0, 1, 0);
         for (int i = 0; i < circle1.size(); i++) {
             Vec3 pos1 = center.add(circle1.get(i)), pos2 = center.add(circle2.get(i));

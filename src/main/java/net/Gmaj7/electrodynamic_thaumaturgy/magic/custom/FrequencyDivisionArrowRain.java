@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.FrequencyDivisionBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.FrequencyDivisionBeaconEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -21,7 +21,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     protected BlockHitResult getBlock(LivingEntity livingEntity) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.3, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(8).add(start);
-        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+        return Function.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
     @Override
@@ -68,11 +68,11 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     }
 
     private void makeParticle(ServerLevel level, FrequencyDivisionBeaconEntity frequencyDivisionBeaconEntity){
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, 4), Mth.PI / 2, 0);
-        List<Vec3> circle2 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(45, 2.828), Mth.PI / 2, 0);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, 0), Mth.PI / 2, 0);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
-        List<Vec3> polygon3 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(4, 2.828, Mth.PI), Mth.PI / 2, 0);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(60, 4), Mth.PI / 2, 0);
+        List<Vec3> circle2 = Function.rotatePointsYX(Function.getCirclePoints(45, 2.828), Mth.PI / 2, 0);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, 0), Mth.PI / 2, 0);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
+        List<Vec3> polygon3 = Function.rotatePointsYX(Function.getPolygonVertices(4, 2.828, Mth.PI), Mth.PI / 2, 0);
         Vec3 center = new Vec3(frequencyDivisionBeaconEntity.getX(), frequencyDivisionBeaconEntity.getY() + 0.8, frequencyDivisionBeaconEntity.getZ());
         int i = 0;
         for (; i < circle.size(); i++) {
@@ -84,8 +84,8 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
             }
         }
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 20);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 20);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 20);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 20);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j)).add(0, 10, 0);
                 Vec3 pos2 = center.add(line2.get(j)).add(0, 10, 0);
@@ -94,7 +94,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
             }
         }
         for (i = 0; i < polygon3.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon3.get(i), polygon3.get((i + 1) % polygon3.size()), 14);
+            List<Vec3> line = Function.getLinePoints(polygon3.get(i), polygon3.get((i + 1) % polygon3.size()), 14);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(184, 206, 11), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 60), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);

@@ -103,7 +103,7 @@
   "block.electrodynamic_thaumaturgy.item_pipe": "Item Pipe",
   "block.electrodynamic_thaumaturgy.fluid_pipe": "Fluid Pipe",
 
-  "entity.electrodynamic_thaumaturgy.moe_ray_entity": "Electromagnetic Ray",
+  "entity.electrodynamic_thaumaturgy.et_ray_entity": "Electromagnetic Ray",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "Pulsed Plasma",
   "entity.electrodynamic_thaumaturgy.attract_beacon_entity": "Attract Beacon",
   "entity.electrodynamic_thaumaturgy.magnetic_recombination_cannon_beacon_entity": "Plasma Torch Beacon",
@@ -160,7 +160,7 @@
   "moe_extractor_width": "Diameter",
   "moe_extractor_depth": "Depth",
 
-  "key.category.electrodynamic_thaumaturgy.moe": "Electrodynamic Thaumatury",
+  "key.category.electrodynamic_thaumaturgy.et": "Electrodynamic Thaumatury",
   "key.electrodynamic_thaumaturgy.switch_magic": "Switch magic",
   "magic_encode": "Magic Encode",
   "binding": "binding:",

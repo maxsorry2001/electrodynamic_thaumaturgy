@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,19 +30,19 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = livingEntity.getLookAngle().normalize().scale(MoeFunction.getMagicAmount(itemStack) / 2).add(start);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(Function.getMagicAmount(itemStack) / 2).add(start);
         Level level = livingEntity.level();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
+        Function.RayHitResult hitResult = Function.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack) * 0.5F);
-                    MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
+                    target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack) * 0.5F);
+                    Function.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
         }
-        BlockHitResult blockHitResult = MoeFunction.getHitBlock(level, livingEntity, start, end);
+        BlockHitResult blockHitResult = Function.getHitBlock(level, livingEntity, start, end);
         BlockPos blockPos = blockHitResult.getBlockPos(), targetPos;
         if (blockHitResult.getType() != HitResult.Type.MISS) {
             Direction direction = blockHitResult.getDirection();
@@ -55,25 +55,25 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             thread.start();
         }
         livingEntity.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
-        livingEntity.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 200));
+        livingEntity.addEffect(new MobEffectInstance(EtEffects.MAGNETIC_LEVITATION_EFFECT, 200));
     }
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 start = source.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = source.getLookAngle().normalize().scale(MoeFunction.getMagicAmount(itemStack) * 2).add(start);
+        Vec3 end = source.getLookAngle().normalize().scale(Function.getMagicAmount(itemStack) * 2).add(start);
         Level level = source.level();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, source, start, end, true, 0.5F);
+        Function.RayHitResult hitResult = Function.getLineHitResult(level, source, start, end, true, 0.5F);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(itemStack) * 0.5F);
-                    MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
+                    entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getMagicAmount(itemStack) * 0.5F);
+                    Function.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
         }
-        BlockHitResult blockHitResult = MoeFunction.getHitBlock(level, source, start, end);
+        BlockHitResult blockHitResult = Function.getHitBlock(level, source, start, end);
         BlockPos blockPos = blockHitResult.getBlockPos(), targetPos;
         if (blockHitResult.getType() != HitResult.Type.MISS) {
             Direction direction = blockHitResult.getDirection();
@@ -86,7 +86,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
             thread.start();
         }
         source.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
-        source.addEffect(new MobEffectInstance(MoeEffects.MAGNETIC_LEVITATION_EFFECT, 200));
+        source.addEffect(new MobEffectInstance(EtEffects.MAGNETIC_LEVITATION_EFFECT, 200));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, Vec3 start, Vec3 vec3, int length){
-        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(120, 2), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
+        List<Vec3> list = Function.rotatePointsYX(Function.getCirclePoints(120, 2), livingEntity.getXRot() * Mth.PI / 180, -livingEntity.getYRot() * Mth.PI / 180);
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < list.size(); j++) {
                 Vec3 center = start.add(vec3.scale(i));

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeRegistries;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class Magics {
     public static final DeferredRegister<IMoeMagic> MAGIC =
-            DeferredRegister.create(MoeRegistries.MAGIC_KEY, ElectrodynamicThaumaturgy.MODID);
+            DeferredRegister.create(EtRegistries.MAGIC_KEY, ElectrodynamicThaumaturgy.MODID);
 
     public static final Supplier<IMoeMagic> RAY = MAGIC.register("ray", ElectromagneticRay::new);
     public static final Supplier<IMoeMagic> PULSED_PLASMA = MAGIC.register("pulsed_plasma", PulsedPlasma::new);

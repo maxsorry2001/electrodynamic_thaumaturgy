@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +17,7 @@ public abstract class AbstractFrontEntityMagic implements IMoeMagic{
     protected static LivingEntity getNearestFrontTarget(LivingEntity livingEntity, double length){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(length).add(start);
-        MoeFunction.RayHitResult result = MoeFunction.getLineHitResult(livingEntity.level(), livingEntity, start, end, false, 0.5F);
+        Function.RayHitResult result = Function.getLineHitResult(livingEntity.level(), livingEntity, start, end, false, 0.5F);
         HitResult hitResult = result.getNearest(livingEntity);
         if(hitResult instanceof EntityHitResult){
             Entity entity = ((EntityHitResult) hitResult).getEntity();

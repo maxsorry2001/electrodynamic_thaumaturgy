@@ -1,11 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagmaLightingBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeTabs;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagmaLightingBeaconEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,7 +48,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(source.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) source);
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(source.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), EtTabs.getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) source);
         magmaLightingBeaconEntity.setDirection(Direction.UP);
         source.level().addFreshEntity(magmaLightingBeaconEntity);
         if(!source.level().isClientSide()) {
@@ -68,7 +68,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     protected BlockHitResult getBlock(LivingEntity livingEntity){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.3, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(8).add(start);
-        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+        return Function.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), MoeTabs.getDefaultMagicUse(MoeItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) electromagneticDriverBE.getOwner());
+        MagmaLightingBeaconEntity magmaLightingBeaconEntity = new MagmaLightingBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), EtTabs.getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get()), (LivingEntity) electromagneticDriverBE.getOwner());
         magmaLightingBeaconEntity.setDirection(Direction.UP);
         electromagneticDriverBE.getLevel().addFreshEntity(magmaLightingBeaconEntity);
         if(!electromagneticDriverBE.getLevel().isClientSide()) {
@@ -101,7 +101,7 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
     }
 
     private void makeCircleParticle(ServerLevel level, MagmaLightingBeaconEntity magmaLightingBeaconEntity, int height, double radius, float omega){
-        List<Vec3> point = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints((int) (30 * radius), radius), Mth.PI / 2, 0);
+        List<Vec3> point = Function.rotatePointsYX(Function.getCirclePoints((int) (30 * radius), radius), Mth.PI / 2, 0);
         Vec3 center = new Vec3(magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ()).add(0, height, 0);
         for (int i = 0; i < point.size(); i++){
             Vec3 pos = center.add(point.get(i));
@@ -109,13 +109,13 @@ public class MagmaLighting extends AbstractBlockBeaconMagic {
         }
     }
     private void makeInParticle(ServerLevel level, MagmaLightingBeaconEntity magmaLightingBeaconEntity, int height, double radius, float omega){
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(4, radius, 0), Mth.PI / 2, 0);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(4, radius, Mth.PI / 4), Mth.PI / 2, 0);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(4, radius, 0), Mth.PI / 2, 0);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(4, radius, Mth.PI / 4), Mth.PI / 2, 0);
         Vec3 center = new Vec3(magmaLightingBeaconEntity.getX(), magmaLightingBeaconEntity.getY(), magmaLightingBeaconEntity.getZ()).add(0, height, 0);
         int i;
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), (int) (10 * radius));
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), (int) (10 * radius));
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), (int) (10 * radius));
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), (int) (10 * radius));
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));

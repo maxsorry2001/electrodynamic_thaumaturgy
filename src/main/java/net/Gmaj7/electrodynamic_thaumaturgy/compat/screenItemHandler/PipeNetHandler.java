@@ -2,14 +2,11 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
 import mezz.jei.api.ingredients.ITypedIngredient;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.PipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.FluidFilterFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.PipeNetScreen;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 import java.util.ArrayList;
 import java.util.List;

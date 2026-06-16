@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.mixin;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeProtective;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.Protective;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Attackable;
@@ -21,23 +21,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity implements Attackable, net.neoforged.neoforge.common.extensions.ILivingEntityExtension, MoeDataGet {
+public abstract class LivingEntityMixin extends Entity implements Attackable, net.neoforged.neoforge.common.extensions.ILivingEntityExtension, DataGet {
     public LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
-    @Unique private MoeProtective protective = new MoeProtective(0);
+    @Unique private Protective protective = new Protective(0);
 
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> effect);
 
     @Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
     public void isCurrentlyGlowingMixin(CallbackInfoReturnable<Boolean> info){
-        if(!this.level().isClientSide() && this.hasEffect(MoeEffects.EXCITING))
+        if(!this.level().isClientSide() && this.hasEffect(EtEffects.EXCITING))
             info.setReturnValue(true);
     }
 
     @Unique
-    public MoeProtective getProtective() {
+    public Protective getProtective() {
         return this.protective;
     }
 

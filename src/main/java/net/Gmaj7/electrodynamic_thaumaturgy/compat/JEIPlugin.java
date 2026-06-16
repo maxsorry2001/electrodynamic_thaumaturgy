@@ -7,12 +7,12 @@ import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.FluidPipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.ItemPipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MoeRecipes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FluidPipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.ItemPipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticDissociationRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticInfusionRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagicEncodeRecipeCategory;
@@ -28,7 +28,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 
-import java.util.Collections;
 import java.util.List;
 
 @JeiPlugin
@@ -54,19 +53,19 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, List.of(new ItemStack(MoeItems.FLUID_FILTER_FAKE_ITEM.get())));
-        registration.addRecipes(JEIRecipeTypes.MAGIC_ENCODE, this.getRecipes(recipeMap, MoeRecipes.MAGIC_ENCODE_TYPE.get()));
-        registration.addRecipes(JEIRecipeTypes.MAGNETO_FUSION, this.getRecipes(recipeMap, MoeRecipes.MAGNO_FUSION_TYPE.get()));
-        registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, this.getRecipes(recipeMap, MoeRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get()));
-        registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, this.getRecipes(recipeMap, MoeRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get()));
+        registration.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, List.of(new ItemStack(EtItems.FLUID_FILTER_FAKE_ITEM.get())));
+        registration.addRecipes(JEIRecipeTypes.MAGIC_ENCODE, this.getRecipes(recipeMap, EtRecipes.MAGIC_ENCODE_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.MAGNETO_FUSION, this.getRecipes(recipeMap, EtRecipes.MAGNO_FUSION_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get()));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(MoeBlocks.MAGNETO_FUSION_MACHINE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(MoeBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(MoeBlocks.ENERGY_BLOCK.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(EtBlocks.MAGIC_ENCODE_TABLE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(EtBlocks.MAGNETO_FUSION_MACHINE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(EtBlocks.ENERGY_BLOCK.asItem()));
     }
 
     @Override
@@ -79,10 +78,10 @@ public class JEIPlugin implements IModPlugin {
     public static class ServerRecipeSync {
         @SubscribeEvent
         public static void onDatapackSync(OnDatapackSyncEvent event) {
-            event.sendRecipes(MoeRecipes.MAGIC_ENCODE_TYPE.get());
-            event.sendRecipes(MoeRecipes.MAGNO_FUSION_TYPE.get());
-            event.sendRecipes(MoeRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get());
-            event.sendRecipes(MoeRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get());
+            event.sendRecipes(EtRecipes.MAGIC_ENCODE_TYPE.get());
+            event.sendRecipes(EtRecipes.MAGNO_FUSION_TYPE.get());
+            event.sendRecipes(EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get());
+            event.sendRecipes(EtRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get());
         }
     }
 

@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagneticRecombinationCannonBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagneticRecombinationCannonBeaconEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +33,7 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
     protected BlockHitResult getBlock(LivingEntity livingEntity){
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(8).add(start);
-        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+        return Function.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
     @Override

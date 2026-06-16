@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,8 +24,8 @@ public class ClickDispose {
         Entity target = event.getTarget();
         InteractionHand hand = event.getHand();
         ItemStack handStack = player.getItemInHand(hand);
-        if(handStack.is(MoeItems.GENETIC_RECORDER.get()) && target instanceof LivingEntity && target.isAlive()){
-            handStack.set(MoeDataComponentTypes.ENTITY_TYPE, target.getType());
+        if(handStack.is(EtItems.GENETIC_RECORDER.get()) && target instanceof LivingEntity && target.isAlive()){
+            handStack.set(EtDataComponentTypes.ENTITY_TYPE, target.getType());
             player.swing(event.getHand());
             event.setCanceled(true);
         }
@@ -38,7 +38,7 @@ public class ClickDispose {
             ItemStack itemStack = player.getItemInHand(event.getHand());
             BlockHitResult hitResult = event.getHitVec();
             if(player.level().getBlockState(hitResult.getBlockPos()).is(Blocks.LODESTONE) && itemStack.is(Items.IRON_INGOT)) {
-                player.addItem(new ItemStack(MoeItems.MAGNO_INGOT.asItem()));
+                player.addItem(new ItemStack(EtItems.MAGNO_INGOT.asItem()));
                 itemStack.shrink(1);
             }
         }

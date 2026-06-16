@@ -1,0 +1,8 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.Entity.renderState;
+
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
+
+public class MagnetoEntropyWitchSummonRenderState extends ArrowRenderState {
+    public double boxYHalf;
+    public int tickCount;
+}

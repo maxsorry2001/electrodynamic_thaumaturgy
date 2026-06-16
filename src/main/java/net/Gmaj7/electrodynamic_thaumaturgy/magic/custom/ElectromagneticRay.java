@@ -1,10 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MoeRayEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.EtRayEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -31,16 +31,16 @@ public class ElectromagneticRay extends AbstractWideMagic{
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(20).add(start);
         Level level = livingEntity.level();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, hitResult.getEnd(), livingEntity, true);
-        level.addFreshEntity(moeRayEntity);
+        Function.RayHitResult hitResult = Function.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
+        EtRayEntity etRayEntity = new EtRayEntity(level, start, hitResult.getEnd(), livingEntity, true);
+        level.addFreshEntity(etRayEntity);
         if(!level.isClientSide()){
             for (HitResult result : hitResult.getTargets()) {
                 if (result instanceof EntityHitResult) {
                     Entity target = ((EntityHitResult) result).getEntity();
                     if (target instanceof LivingEntity) {
-                        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack));
-                        MoeFunction.checkTargetEnhancement(itemStack, (LivingEntity) target);
+                        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack));
+                        Function.checkTargetEnhancement(itemStack, (LivingEntity) target);
                     }
                 }
             }
@@ -54,15 +54,15 @@ public class ElectromagneticRay extends AbstractWideMagic{
         Vec3 start = new Vec3(source.getX(), source.getY() + 1, source.getZ());
         Vec3 end = new Vec3(target.getX(), (target.getY() + target.getEyeY()) / 2, target.getZ());
         Level level = source.level();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getLineHitResult(level, source, start, end, true, 0.5F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, source, false);
-        level.addFreshEntity(moeRayEntity);
+        Function.RayHitResult hitResult = Function.getLineHitResult(level, source, start, end, true, 0.5F);
+        EtRayEntity etRayEntity = new EtRayEntity(level, start, end, source, false);
+        level.addFreshEntity(etRayEntity);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
-                    MoeFunction.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
+                    entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getMagicAmount(ElectromagneticDriverBE.magicItem));
+                    Function.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
         }
@@ -87,15 +87,15 @@ public class ElectromagneticRay extends AbstractWideMagic{
         Vec3 start = new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ());
         Vec3 end = new Vec3(lineTarget.getX(), (lineTarget.getY() + lineTarget.getEyeY()) / 2, lineTarget.getZ());
         Level level = electromagneticDriverBE.getLevel();
-        MoeFunction.RayHitResult hitResult = MoeFunction.getBlockLineHitResult(level, electromagneticDriverBE, start, end, true, 0.5F);
-        MoeRayEntity moeRayEntity = new MoeRayEntity(level, start, end, (LivingEntity) electromagneticDriverBE.getOwner(), false);
-        level.addFreshEntity(moeRayEntity);
+        Function.RayHitResult hitResult = Function.getBlockLineHitResult(level, electromagneticDriverBE, start, end, true, 0.5F);
+        EtRayEntity etRayEntity = new EtRayEntity(level, start, end, (LivingEntity) electromagneticDriverBE.getOwner(), false);
+        level.addFreshEntity(etRayEntity);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
-                    MoeFunction.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
+                    target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getMagicAmount(ElectromagneticDriverBE.magicItem));
+                    Function.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
         }
@@ -105,9 +105,9 @@ public class ElectromagneticRay extends AbstractWideMagic{
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = livingEntity.getXRot() * Mth.PI / 180;
         float yRot = -livingEntity.getYRot() * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(30, 1), xRot, yRot);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, 0), xRot, yRot);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
         int i;
         Vec3 center = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2));
         for (i = 0; i < circle.size(); i++) {
@@ -115,8 +115,8 @@ public class ElectromagneticRay extends AbstractWideMagic{
             level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));

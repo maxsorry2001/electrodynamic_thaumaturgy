@@ -1,12 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MirageEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.*;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ProtectingPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoOrderSageEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MirageEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.ProtectingPacket;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -29,32 +29,32 @@ public class DamageEvent {
         LivingEntity eventTarget = event.getEntity();
         DamageSource source = event.getSource();
         Entity sourceEntity = source.getEntity();
-        float protecting = ((MoeDataGet)eventTarget).getProtective().getProtecting();
+        float protecting = ((DataGet)eventTarget).getProtective().getProtecting();
         if (protecting > 0){
             float damage = event.getNewDamage();
             if(protecting > damage){
                 float newProtecting = protecting - damage;
-                ((MoeDataGet)eventTarget).getProtective().setProtecting(newProtecting);
+                ((DataGet)eventTarget).getProtective().setProtecting(newProtecting);
                 PacketDistributor.sendToAllPlayers(new ProtectingPacket(newProtecting));
                 event.setNewDamage(0);
             }
             else {
-                ((MoeDataGet)eventTarget).getProtective().setProtecting(0);
+                ((DataGet)eventTarget).getProtective().setProtecting(0);
                 PacketDistributor.sendToAllPlayers(new ProtectingPacket(0));
                 event.setNewDamage(damage - protecting);
             }
         }
-        if(eventTarget.hasEffect(MoeEffects.MAGNET_RESONANCE) && sourceEntity instanceof Player && !source.is(MoeDamageType.magnet_resonance)){
-            int l = eventTarget.getEffect(MoeEffects.MAGNET_RESONANCE).getAmplifier();
+        if(eventTarget.hasEffect(EtEffects.MAGNET_RESONANCE) && sourceEntity instanceof Player && !source.is(EtDamageType.magnet_resonance)){
+            int l = eventTarget.getEffect(EtEffects.MAGNET_RESONANCE).getAmplifier();
             List<LivingEntity> list = eventTarget.level().getEntitiesOfClass(LivingEntity.class, eventTarget.getBoundingBox().inflate(5, 2, 5));
             list.remove(eventTarget);
             list.remove(sourceEntity);
             for(LivingEntity target : list){
                 if((target instanceof Mob && ((Mob) target).getTarget() == eventTarget) || target instanceof Enemy)
-                    target.hurt(new DamageSource(MoeFunction.getHolder(eventTarget.level(), Registries.DAMAGE_TYPE, MoeDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
+                    target.hurt(new DamageSource(Function.getHolder(eventTarget.level(), Registries.DAMAGE_TYPE, EtDamageType.magnet_resonance), sourceEntity), event.getNewDamage() * l / (l + 5));
             }
         }
-        if(sourceEntity != null && !source.is(MoeDamageType.mirage)){
+        if(sourceEntity != null && !source.is(EtDamageType.mirage)){
             List<MirageEntity> list = eventTarget.level().getEntitiesOfClass(MirageEntity.class, sourceEntity.getBoundingBox().inflate(0, 3, 0));
             if (!list.isEmpty()) {
                 for (MirageEntity mirage : list) {
@@ -64,15 +64,15 @@ public class DamageEvent {
                 }
             }
         }
-        if(source.is(MoeDamageType.origin_thaumaturgy) && sourceEntity instanceof LivingEntity livingEntity){
-            EnhancementData enhancementData = livingEntity.getMainHandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
-            if(enhancementData == null) enhancementData = livingEntity.getOffhandItem().get(MoeDataComponentTypes.ENHANCEMENT_DATA);
+        if(source.is(EtDamageType.origin_thaumaturgy) && sourceEntity instanceof LivingEntity livingEntity){
+            EnhancementData enhancementData = livingEntity.getMainHandItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
+            if(enhancementData == null) enhancementData = livingEntity.getOffhandItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
             if(enhancementData != null) livingEntity.heal(event.getNewDamage() * 0.2F * enhancementData.lifeExtraction());
         }
         if(sourceEntity instanceof MagnetoOrderSageEntity && ((MagnetoOrderSageEntity) sourceEntity).getOwner() instanceof Player){
             eventTarget.setLastHurtByPlayer((Player) ((MagnetoOrderSageEntity) sourceEntity).getOwner(), 100);
         }
-        double corrosion = eventTarget.getAttribute(MoeAttributes.CORROSION).getValue();
+        double corrosion = eventTarget.getAttribute(Attributes.CORROSION).getValue();
         if(corrosion > 1) event.setNewDamage((float) (event.getNewDamage() * corrosion));
     }
 }

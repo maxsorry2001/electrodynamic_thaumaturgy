@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -25,10 +25,10 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(2));
         for (LivingEntity target : list){
             if(target == livingEntity) {
-                livingEntity.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 15)));
+                livingEntity.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (Function.getMagicAmount(itemStack) * 15)));
                 continue;
             }
-            target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
+            target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack) / 4);
             target.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
         if(livingEntity.level() instanceof ServerLevel) {
@@ -42,10 +42,10 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(2));
         for (LivingEntity livingEntity : list){
             if(livingEntity == source) {
-                source.addEffect(new MobEffectInstance(MoeEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (MoeFunction.getMagicAmount(itemStack) * 15)));
+                source.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (Function.getMagicAmount(itemStack) * 15)));
                 continue;
             }
-            livingEntity.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack) / 4);
+            livingEntity.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack) / 4);
             livingEntity.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
         if(source.level() instanceof ServerLevel) {
@@ -61,8 +61,8 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = 9 * Mth.PI / 16, yRot = (90 - livingEntity.getYRot()) * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, 2), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(6, 2, 0),-xRot, yRot);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(60, 2), xRot, yRot);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(6, 2, 0),-xRot, yRot);
         Vec3 center = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         int i;
         for (i = 0; i < circle.size(); i++) {
@@ -70,7 +70,7 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
             level.sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(191, 62, 255), circle.get(i).scale(0.2).toVector3f(), 20), center.x(), center.y(), center.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++){
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
             for (int j = 0; j < line.size(); j++){
                 Vec3 pos = center.add(line.get(j));
                 level.sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(191, 62, 255), line.get(j).scale(0.2).toVector3f(), 20), center.x(), center.y(), center.z(), 1, 0, 0, 0, 0);

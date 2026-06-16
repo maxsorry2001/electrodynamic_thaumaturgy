@@ -1,10 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoOrderSageEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -27,8 +27,8 @@ public class NerveBlocking extends AbstractWideMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(7));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
-                target.addEffect(new MobEffectInstance(MoeEffects.NERVE_BLOCKING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (1 * MoeFunction.getStrengthRate(itemStack))));
-                MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
+                target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(itemStack)), (int) (1 * Function.getStrengthRate(itemStack))));
+                Function.checkTargetEnhancement(itemStack, livingEntity);
             }
         }
         if(!livingEntity.level().isClientSide()){
@@ -48,8 +48,8 @@ public class NerveBlocking extends AbstractWideMagic{
         if(source instanceof MagnetoOrderSageEntity) list.remove(((MagnetoOrderSageEntity) source).getOwner());
         list.add(target);
         for (LivingEntity livingEntity : list){
-            target.addEffect(new MobEffectInstance(MoeEffects.NERVE_BLOCKING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (1 * MoeFunction.getStrengthRate(itemStack))));
-            MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
+            target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(itemStack)), (int) (1 * Function.getStrengthRate(itemStack))));
+            Function.checkTargetEnhancement(itemStack, livingEntity);
         }
         if(!source.level().isClientSide()){
             Thread thread = new Thread(() -> {
@@ -74,7 +74,7 @@ public class NerveBlocking extends AbstractWideMagic{
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
-                target.addEffect(new MobEffectInstance(MoeEffects.NERVE_BLOCKING, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (1 * MoeFunction.getStrengthRate(ElectromagneticDriverBE.magicItem))));
+                target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (1 * Function.getStrengthRate(ElectromagneticDriverBE.magicItem))));
             }
         }
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
@@ -89,7 +89,7 @@ public class NerveBlocking extends AbstractWideMagic{
     }
 
     private void makeParticle(ServerLevel serverLevel, Vec3 center, float radius){
-        List<Vec3> partial1 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints((int) (10 * radius), radius), Mth.PI / 2, 0);
+        List<Vec3> partial1 = Function.rotatePointsYX(Function.getCirclePoints((int) (10 * radius), radius), Mth.PI / 2, 0);
         for (int i = 0; i < partial1.size(); i++){
             Vec3 pos = center.add(partial1.get(i));
             serverLevel.sendParticles(new PointLineParticleOption(pos.toVector3f(), new Vector3f(255), new Vector3f(0, -1F, 0), 10), pos.x(), pos.y() + radius, pos.z(), 1, 0, 0 , 0, 0);

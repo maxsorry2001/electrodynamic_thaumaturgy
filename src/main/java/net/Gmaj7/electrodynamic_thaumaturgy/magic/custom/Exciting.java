@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -29,8 +29,8 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
-                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
-                MoeFunction.checkTargetEnhancement(itemStack, livingEntity);
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getMagicAmount(itemStack)) - 7));
+                Function.checkTargetEnhancement(itemStack, livingEntity);
                 if(livingEntity.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;
@@ -47,8 +47,8 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {
-                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) (MoeFunction.getMagicAmount(itemStack)) - 7));
-                MoeFunction.checkTargetEnhancement(itemStack, source);
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getMagicAmount(itemStack)) - 7));
+                Function.checkTargetEnhancement(itemStack, source);
                 if(source.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;
@@ -73,7 +73,7 @@ public class Exciting extends AbstractWideMagic{
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
-                target.addEffect(new MobEffectInstance(MoeEffects.EXCITING, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)) - 7));
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (Function.getMagicAmount(ElectromagneticDriverBE.magicItem)) - 7));
                 if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;
@@ -87,7 +87,7 @@ public class Exciting extends AbstractWideMagic{
     }
 
     public void makeParticle(Level level, LivingEntity livingEntity, int radius, float xRot, float yRot){
-        List<Vec3> list = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, radius), xRot, -yRot);
+        List<Vec3> list = Function.rotatePointsYX(Function.getCirclePoints(60, radius), xRot, -yRot);
         Vec3 center =  new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         for (int j = 0; j < list.size(); j++) {
             Vec3 pos = center.add(list.get(j));

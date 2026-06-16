@@ -1,11 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.MoeParticles;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.EtParticles;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -27,7 +27,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 40);
         Level level = livingEntity.level();
-        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack) * 2);
+        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack) * 2);
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) level, livingEntity);
@@ -36,7 +36,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
             thread.start();
             for (int i = 0; i < 10; i++){
                 RandomSource randomSource = RandomSource.create();
-                ((ServerLevel) level).sendParticles(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
+                ((ServerLevel) level).sendParticles(EtParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
             }
         }
     }
@@ -44,7 +44,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Level level = source.level();
-        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 2);
+        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getMagicAmount(ElectromagneticDriverBE.magicItem) * 2);
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) level, source);
@@ -53,7 +53,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
             thread.start();
             for (int i = 0; i < 10; i++){
                 RandomSource randomSource = RandomSource.create();
-                ((ServerLevel) level).sendParticles(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
+                ((ServerLevel) level).sendParticles(EtParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
             }
         }
     }
@@ -75,7 +75,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         Level level = electromagneticDriverBE.getLevel();
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
-        target.hurt(new DamageSource(MoeFunction.getHolder(level, Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem) * 2);
+        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getMagicAmount(ElectromagneticDriverBE.magicItem) * 2);
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {
                 makeTargetParticle((ServerLevel) level, target);
@@ -83,7 +83,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
             thread.start();
             for (int i = 0; i < 10; i++){
                 RandomSource randomSource = RandomSource.create();
-                ((ServerLevel) level).sendParticles(MoeParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
+                ((ServerLevel) level).sendParticles(EtParticles.HYDROGEN_BOND_PARTICLE.get(), target.getX() + 4 * (randomSource.nextFloat() - 0.5), target.getY() + 2 * randomSource.nextFloat(), target.getZ() + 4 * (randomSource.nextFloat() - 0.5), 7, 0, 0, 0, 0);
             }
         }
     }
@@ -91,9 +91,9 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = livingEntity.getXRot() * Mth.PI / 180;
         float yRot = -livingEntity.getYRot() * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(15, 1), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(15, 1), xRot, yRot);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, 0), xRot, yRot);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
         int i;
         Vec3 center = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2));
         for (i = 0; i < circle.size(); i++) {
@@ -101,8 +101,8 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
             level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(128, 128, 255), new Vector3f(xRot, yRot, Mth.PI / 16), 5), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 5);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 5);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 5);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 5);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));
@@ -113,13 +113,13 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     }
 
     private void makeTargetParticle(ServerLevel level, LivingEntity livingEntity){
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, 0), Mth.PI / 2, 0);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, 0), Mth.PI / 2, 0);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
         int i;
         Vec3 center = new Vec3(livingEntity.getX(), (livingEntity.getY() + livingEntity.getEyeY()) / 2, livingEntity.getZ());
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));

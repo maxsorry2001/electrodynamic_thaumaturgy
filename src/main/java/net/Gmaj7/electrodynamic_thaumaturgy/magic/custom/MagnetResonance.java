@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEffect.MoeEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -21,7 +21,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
-        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(itemStack)), (int) MoeFunction.getMagicAmount(itemStack)));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(itemStack)), (int) Function.getMagicAmount(itemStack)));
         if(!livingEntity.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), target));
             thread.start();
@@ -30,7 +30,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) Function.getMagicAmount(ElectromagneticDriverBE.magicItem)));
         if(!source.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), target));
             thread.start();
@@ -52,7 +52,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
-        target.addEffect(new MobEffectInstance(MoeEffects.MAGNET_RESONANCE, (int) (200 * MoeFunction.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem)));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) Function.getMagicAmount(ElectromagneticDriverBE.magicItem)));
         if(!electromagneticDriverBE.getLevel().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), target));
             thread.start();
@@ -61,13 +61,13 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     }
 
     private void makeParticle(ServerLevel serverLevel, LivingEntity livingEntity){
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), Mth.PI / 2, 0);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), Mth.PI / 2, 0);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), Mth.PI / 2, Mth.PI / 2);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(30, 1), Mth.PI / 2, 0);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, 0), Mth.PI / 2, 0);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, 0), Mth.PI / 2, Mth.PI / 2);
         Vec3 center = livingEntity.getEyePosition(), centerBottom = center.add(0, -1.5, 0);
         for (int i = 0; i < polygon.size(); i++){
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get(i + 1 >= polygon.size() ? 0 : i + 1), 10);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get(i + 1 >= polygon2.size() ? 0 : i + 1), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get(i + 1 >= polygon.size() ? 0 : i + 1), 10);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get(i + 1 >= polygon2.size() ? 0 : i + 1), 10);
             for (int j = 0; j < line.size(); j++){
                 Vec3 posCircleUp = center.add(circle.get(j + i * 10)), posCircleBottom = centerBottom.add(circle.get(j + i * 10)),
                         posLineUp = center.add(line.get(j)), poaLineBottom = centerBottom.add(line2.get(j));

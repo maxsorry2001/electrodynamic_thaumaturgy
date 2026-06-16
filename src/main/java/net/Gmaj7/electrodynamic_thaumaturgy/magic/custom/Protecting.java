@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeData.MoeDataGet;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ProtectingPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.ProtectingPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -21,8 +21,8 @@ public class Protecting extends AbstractSelfMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         if(!livingEntity.level().isClientSide()) {
-            float p = MoeFunction.getMagicAmount(itemStack);
-            ((MoeDataGet) livingEntity).getProtective().setProtecting(p);
+            float p = Function.getMagicAmount(itemStack);
+            ((DataGet) livingEntity).getProtective().setProtecting(p);
             PacketDistributor.sendToAllPlayers(new ProtectingPacket(p));
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
@@ -32,8 +32,8 @@ public class Protecting extends AbstractSelfMagic{
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         if(!source.level().isClientSide()) {
-            float p = MoeFunction.getMagicAmount(itemStack);
-            ((MoeDataGet) source).getProtective().setProtecting(p);
+            float p = Function.getMagicAmount(itemStack);
+            ((DataGet) source).getProtective().setProtecting(p);
             PacketDistributor.sendToAllPlayers(new ProtectingPacket(p));
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
             thread.start();
@@ -47,8 +47,8 @@ public class Protecting extends AbstractSelfMagic{
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = 9 * Mth.PI / 16, yRot = (90 - livingEntity.getYRot()) * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(60, 2), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(6, 2, 0),-xRot, yRot);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(60, 2), xRot, yRot);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(6, 2, 0),-xRot, yRot);
         Vec3 start = new Vec3(livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ());
         int i;
         for (i = 0; i < circle.size(); i++) {
@@ -56,7 +56,7 @@ public class Protecting extends AbstractSelfMagic{
             level.sendParticles(new PointRotateParticleOption(start.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(xRot, yRot, Mth.PI / 8), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++){
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
             for (int j = 0; j < line.size(); j++){
                 Vec3 pos = start.add(line.get(j));
                 level.sendParticles(new PointRotateParticleOption(start.toVector3f(), new Vector3f(255, 255, 255), new Vector3f(-xRot, yRot, Mth.PI / 8), 20), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);

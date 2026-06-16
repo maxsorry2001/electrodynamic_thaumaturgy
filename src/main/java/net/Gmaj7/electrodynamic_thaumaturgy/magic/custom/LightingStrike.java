@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeDamageType;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +26,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target == null) return;
-        target.hurt(new DamageSource(MoeFunction.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), livingEntity), MoeFunction.getMagicAmount(itemStack));
+        target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack));
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level(), EntitySpawnReason.TRIGGERED);
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -39,7 +39,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        target.hurt(new DamageSource(MoeFunction.getHolder(source.level(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), source), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
+        target.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getMagicAmount(ElectromagneticDriverBE.magicItem));
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(source.level(), EntitySpawnReason.TRIGGERED);
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -65,7 +65,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target != null && !electromagneticDriverBE.getLevel().isClientSide()) {
             if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
-            target.hurt(new DamageSource(MoeFunction.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, MoeDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), MoeFunction.getMagicAmount(ElectromagneticDriverBE.magicItem));
+            target.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getMagicAmount(ElectromagneticDriverBE.magicItem));
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(electromagneticDriverBE.getLevel(), EntitySpawnReason.TRIGGERED);
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -77,9 +77,9 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     private void makeParticle(ServerLevel level, LivingEntity livingEntity) {
         float xRot = livingEntity.getXRot() * Mth.PI / 180;
         float yRot = -livingEntity.getYRot() * Mth.PI / 180;
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 1), xRot, yRot);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, 0), xRot, yRot);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(30, 1), xRot, yRot);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, 0), xRot, yRot);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 1, Mth.PI), xRot, yRot);
         int i;
         Vec3 center = livingEntity.getEyePosition().add(livingEntity.getLookAngle().normalize().scale(2));
         for (i = 0; i < circle.size(); i++) {
@@ -87,8 +87,8 @@ public class LightingStrike extends AbstractFrontEntityMagic {
             level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(138, 43, 226), new Vector3f(xRot, yRot, Mth.PI / 16), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));

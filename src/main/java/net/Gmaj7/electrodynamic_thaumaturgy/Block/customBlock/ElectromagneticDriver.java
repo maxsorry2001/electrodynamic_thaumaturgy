@@ -1,0 +1,87 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlock;
+
+import com.mojang.serialization.MapCodec;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import org.jetbrains.annotations.Nullable;
+
+public class ElectromagneticDriver extends BaseEntityBlock {
+    public static final MapCodec<ElectromagneticDriver> CODEC = simpleCodec(ElectromagneticDriver::new);
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    public ElectromagneticDriver(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if(level.isClientSide())
+            return InteractionResult.SUCCESS;
+        else {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ElectromagneticDriverBE electromagneticDriverBE && !level.isClientSide()) {
+                EnergyHandler energyStorage = electromagneticDriverBE.getEnergy();
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(energyStorage.getAmountAsInt(), electromagneticDriverBE.getBlockPos()));
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticDriverBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
+            }
+            return InteractionResult.CONSUME;
+        }
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if(blockEntity instanceof ElectromagneticDriverBE && placer != null){
+            ((ElectromagneticDriverBE) blockEntity).setOwner(placer);
+        }
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return blockEntityType == EtBlockEntities.ELECTROMAGNETIC_DRIVER_BE.get() ? createTickerHelper(blockEntityType, EtBlockEntities.ELECTROMAGNETIC_DRIVER_BE.get(), ElectromagneticDriverBE::tick) : null;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new ElectromagneticDriverBE(blockPos, blockState);
+    }
+}

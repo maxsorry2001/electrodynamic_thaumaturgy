@@ -1,12 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.ingredients.ITypedIngredient;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.FluidPipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeGui.screen.ItemPipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.FluidPipeNetFilterPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoePackets.ItemPipeNetFilterPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.MoeItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeItem.custom.FluidFilterFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FluidPipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidPipeNetFilterPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFilterFakeItem;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
     @Override
@@ -43,7 +40,7 @@ public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
             ItemStack itemStack = ItemStack.EMPTY;
             if(ingredient instanceof ItemStack) itemStack = (ItemStack) ingredient;
             else if (ingredient instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter((FluidStack) ingredient);
-            if(itemStack.isEmpty() && !itemStack.is(MoeItems.FLUID_FILTER_FAKE_ITEM) && !itemStack.is(MoeItems.FILTER_SETTING) && !(itemStack.getItem() instanceof BucketItem)) return;
+            if(itemStack.isEmpty() && !itemStack.is(EtItems.FLUID_FILTER_FAKE_ITEM) && !itemStack.is(EtItems.FILTER_SETTING) && !(itemStack.getItem() instanceof BucketItem)) return;
             ClientPacketDistributor.sendToServer(new FluidPipeNetFilterPacket(pos, direction, slot, itemStack, screen.getMenu().getNetId()));
         }
     }

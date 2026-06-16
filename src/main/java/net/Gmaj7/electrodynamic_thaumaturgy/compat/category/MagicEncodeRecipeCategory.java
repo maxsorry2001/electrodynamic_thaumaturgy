@@ -10,8 +10,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.MoeBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeRecipe.MagicEncodeRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.MagicEncodeRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.JEIRecipeTypes;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
@@ -28,7 +28,7 @@ public class MagicEncodeRecipeCategory implements IRecipeCategory<RecipeHolder<M
 
     public MagicEncodeRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MoeBlocks.MAGIC_ENCODE_TABLE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EtBlocks.MAGIC_ENCODE_TABLE));
     }
 
     @Override

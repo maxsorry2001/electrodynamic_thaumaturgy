@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.MagnetoOrderSageEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoOrderSageEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -36,9 +36,9 @@ public class SageSMagnetismSeal extends AbstractSelfMagic{
     }
 
     private void makeParticle(ServerLevel level, LivingEntity livingEntity){
-        List<Vec3> circle = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), Mth.PI / 2, 0);
-        List<Vec3> polygon = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, 0), Mth.PI / 2, 0);
-        List<Vec3> polygon2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
+        List<Vec3> circle = Function.rotatePointsYX(Function.getCirclePoints(30, 2), Mth.PI / 2, 0);
+        List<Vec3> polygon = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, 0), Mth.PI / 2, 0);
+        List<Vec3> polygon2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
         int i;
         Vec3 center = livingEntity.position().add(0, 0.2, 0);
         for (i = 0; i < circle.size(); i++) {
@@ -46,8 +46,8 @@ public class SageSMagnetismSeal extends AbstractSelfMagic{
             level.sendParticles(new PointRotateParticleOption(center.toVector3f(), new Vector3f(184, 206, 11), new Vector3f(Mth.PI / 2, 0, Mth.PI / 32), 10), pos.x(), pos.y(), pos.z(), 1, 0, 0, 0, 0);
         }
         for (i = 0; i < polygon.size(); i++) {
-            List<Vec3> line = MoeFunction.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
-            List<Vec3> line2 = MoeFunction.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
+            List<Vec3> line = Function.getLinePoints(polygon.get(i), polygon.get((i + 1) % polygon.size()), 10);
+            List<Vec3> line2 = Function.getLinePoints(polygon2.get(i), polygon2.get((i + 1) % polygon2.size()), 10);
             for (int j = 0; j < line.size(); j++) {
                 Vec3 pos = center.add(line.get(j));
                 Vec3 pos2 = center.add(line2.get(j));

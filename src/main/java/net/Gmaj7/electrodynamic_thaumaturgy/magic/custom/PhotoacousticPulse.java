@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeBlock.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeEntity.custom.PhotoacousticPulseBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeInit.MoeFunction;
-import net.Gmaj7.electrodynamic_thaumaturgy.MoeParticle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.PhotoacousticPulseBeaconEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -22,7 +22,7 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
     protected BlockHitResult getBlock(LivingEntity livingEntity) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.3, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(8).add(start);
-        return MoeFunction.getHitBlock(livingEntity.level(), livingEntity, start, end);
+        return Function.getHitBlock(livingEntity.level(), livingEntity, start, end);
     }
 
     @Override
@@ -70,15 +70,15 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
 
     private void makeParticle(ServerLevel serverLevel, PhotoacousticPulseBeaconEntity entity){
         Vec3 center =new Vec3(entity.getX(), entity.getY() + 0.1, entity.getZ());
-        List<Vec3> circle1 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(30, 2), Mth.PI / 2, 0);
-        List<Vec3> circle2 = MoeFunction.rotatePointsYX(MoeFunction.getCirclePoints(45, 4), Mth.PI / 2, 0);
-        List<Vec3> triangle = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 2, 0), Mth.PI / 2, 0);
-        List<Vec3> triangle2 = MoeFunction.rotatePointsYX(MoeFunction.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
+        List<Vec3> circle1 = Function.rotatePointsYX(Function.getCirclePoints(30, 2), Mth.PI / 2, 0);
+        List<Vec3> circle2 = Function.rotatePointsYX(Function.getCirclePoints(45, 4), Mth.PI / 2, 0);
+        List<Vec3> triangle = Function.rotatePointsYX(Function.getPolygonVertices(3, 2, 0), Mth.PI / 2, 0);
+        List<Vec3> triangle2 = Function.rotatePointsYX(Function.getPolygonVertices(3, 4, Mth.PI), Mth.PI / 2, 0);
         dealParticle(serverLevel, center, circle1, Mth.PI / 16);
         dealParticle(serverLevel, center, circle2, -Mth.PI / 16);
         for (int i = 1; i < triangle.size(); i++){
-            List<Vec3> line = MoeFunction.rotatePointsYX(MoeFunction.getLinePoints(triangle.get(i), triangle.get(i + 1 >= triangle.size() ? 1 : i + 1), 10), Mth.PI / 2, 0);
-            List<Vec3> line2 = MoeFunction.rotatePointsYX(MoeFunction.getLinePoints(triangle.get(i), triangle.get(i + 1 >= triangle2.size() ? 1 : i + 1), 15), Mth.PI / 2, 0);
+            List<Vec3> line = Function.rotatePointsYX(Function.getLinePoints(triangle.get(i), triangle.get(i + 1 >= triangle.size() ? 1 : i + 1), 10), Mth.PI / 2, 0);
+            List<Vec3> line2 = Function.rotatePointsYX(Function.getLinePoints(triangle.get(i), triangle.get(i + 1 >= triangle2.size() ? 1 : i + 1), 15), Mth.PI / 2, 0);
             dealParticle(serverLevel, center, line, Mth.PI / 16);
             dealParticle(serverLevel, center, line2, -Mth.PI / 16);
         }
