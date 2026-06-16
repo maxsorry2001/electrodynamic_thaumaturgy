@@ -19,6 +19,7 @@ import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<EddyCurrentRemelterBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_dissociation.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
     protected static final WidgetSprites SPRITES_INPUT = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_input"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_input_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_input_highlighted"));
     protected static final WidgetSprites SPRITES_OUTPUT = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_output"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_output_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_output_highlighted"));
 
@@ -31,7 +32,7 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
         extractTooltip(guiGraphics, mouseX, mouseY);
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
+        if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
         guiGraphics.text(this.font, Component.literal(String.valueOf(menu.getProgress())), x + 145, y + 40, 0xFFFFFFFF);
         var itemSet = Function.decodeDirection(menu.getItemSet());
@@ -113,8 +114,8 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
-        guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
+        int renderY = (int) (50 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
+        guiGraphics.blit(energyTexture, x + 13, y + 21, x + 18 , y + 21 + renderY, 0, 0, 6, renderY);
     }
 
     @Override

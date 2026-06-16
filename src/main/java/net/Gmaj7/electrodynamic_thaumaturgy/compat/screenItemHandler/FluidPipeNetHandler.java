@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.ITypedIngredient;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FluidPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidPipeNetFilterPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFilterFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFakeItem;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,7 @@ public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
         var stack = ingredient.getIngredient(ingredient.getType());
         ItemStack itemStack = ItemStack.EMPTY;
         if(stack.get() instanceof ItemStack) itemStack = (ItemStack) stack.get();
-        else if(stack.get() instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter((FluidStack)stack.get());
+        else if(stack.get() instanceof FluidStack) itemStack = FluidFakeItem.creatFluidFilter((FluidStack)stack.get());
         return itemStack;
     }
 
@@ -39,8 +39,8 @@ public class FluidPipeNetHandler extends PipeNetHandler<FluidPipeNetScreen>{
         public void accept(T ingredient) {
             ItemStack itemStack = ItemStack.EMPTY;
             if(ingredient instanceof ItemStack) itemStack = (ItemStack) ingredient;
-            else if (ingredient instanceof FluidStack) itemStack = FluidFilterFakeItem.creatFluidFilter((FluidStack) ingredient);
-            if(itemStack.isEmpty() && !itemStack.is(EtItems.FLUID_FILTER_FAKE_ITEM) && !itemStack.is(EtItems.FILTER_SETTING) && !(itemStack.getItem() instanceof BucketItem)) return;
+            else if (ingredient instanceof FluidStack) itemStack = FluidFakeItem.creatFluidFilter((FluidStack) ingredient);
+            if(itemStack.isEmpty() && !itemStack.is(EtItems.FLUID_FAKE_ITEM) && !itemStack.is(EtItems.FILTER_SETTING) && !(itemStack.getItem() instanceof BucketItem)) return;
             ClientPacketDistributor.sendToServer(new FluidPipeNetFilterPacket(pos, direction, slot, itemStack, screen.getMenu().getNetId()));
         }
     }

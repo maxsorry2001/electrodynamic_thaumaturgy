@@ -13,6 +13,7 @@ import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 public class ThermalGeneratorScreen extends AbstractContainerScreen<ThermalGeneratorMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
     Identifier fireTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/fire.png");
 
     public ThermalGeneratorScreen(ThermalGeneratorMenu menu, Inventory playerInventory, Component title) {
@@ -25,7 +26,7 @@ public class ThermalGeneratorScreen extends AbstractContainerScreen<ThermalGener
         extractTooltip(graphics, mouseX, mouseY);
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
+        if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             graphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
     }
 
@@ -46,8 +47,9 @@ public class ThermalGeneratorScreen extends AbstractContainerScreen<ThermalGener
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), fireX = menu.blockEntity.getFullBurnTime() == 0 ? 0 : 150 * menu.blockEntity.getBurnTime() / menu.blockEntity.getFullBurnTime();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
-        guiGraphics.blit(fireTexture, x + 16, y + 31, x + 16 + fireX, y + 38, 0 , fireX, 0, 7);
+        int renderY = (int) (50 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
+        guiGraphics.blit(energyTexture, x + 13, y + 71 - renderY, x + 18 , y + 71, 0, 0, 6, renderY);
+        if(renderY < 50)
+            guiGraphics.blit(energyNullTexture, x + 13, y + 21, x + 18, y + 71 - renderY, 0, 0, 6, 50 - renderY);
     }
 }

@@ -421,6 +421,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         MagnetoFusionRecipeBuilder.result(items, EtItems.ADVANCED_CODE_MODULE).items(EtItems.INTERMEDIATE_CODE_MODULE).items(EtItems.STELLAR_MAGNO_INGOT).items(Items.COPPER_INGOT).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.POLAR_CRYSTAL).items(Items.EMERALD).items(EtItems.MAGNO_INGOT).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.RESONANT_CRYSTAL).items(Items.QUARTZ).items(EtItems.MAGNO_INGOT).save(output);
+        MagnetoFusionRecipeBuilder.result(items, EtItems.FILTER_SETTING).items(Items.REDSTONE).items(EtItems.MAGNO_INGOT).items(Items.REDSTONE).save(output);
 
         ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_COPPER).result(EtItems.COPPER_DUST, 2).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COPPER).result(EtItems.COPPER_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");

@@ -13,6 +13,7 @@ import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 public class BiomassGeneratorScreen extends AbstractContainerScreen<BiomassGeneratorMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/thermal_generator.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
     Identifier fireTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/fire.png");
 
     public BiomassGeneratorScreen(BiomassGeneratorMenu menu, Inventory playerInventory, Component title) {
@@ -24,7 +25,7 @@ public class BiomassGeneratorScreen extends AbstractContainerScreen<BiomassGener
         extractTooltip(guiGraphics, mouseX, mouseY);
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
+        if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
     }
 
@@ -45,7 +46,9 @@ public class BiomassGeneratorScreen extends AbstractContainerScreen<BiomassGener
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        guiGraphics.blit(energyTexture, x + 16, y + 20, 0, 0,  (int) (150 * (float)energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), 7, 150, 7);
-        guiGraphics.blit(fireTexture, x + 16, y + 31, 0, 0,  menu.blockEntity.getFullBiomassTime() == 0 ? 0 : 150 * menu.blockEntity.getBiomassTime() / menu.blockEntity.getFullBiomassTime(), 7, 150, 7);
+        int renderY = (int) (50 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
+        guiGraphics.blit(energyTexture, x + 13, y + 71 - renderY, x + 18 , y + 71, 0, 0, 6, renderY);
+        if(renderY < 50)
+            guiGraphics.blit(energyNullTexture, x + 13, y + 21, x + 18, y + 71 - renderY, 0, 0, 6, 50 - renderY);
     }
 }

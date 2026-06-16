@@ -139,8 +139,8 @@ public class EtItems {
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));
 
-    public static final DeferredItem<Item> FLUID_FILTER_FAKE_ITEM = ITEM.registerItem("fluid_stack_fake_item",
-            (properties -> new FluidFilterFakeItem(properties.stacksTo(1).component(EtDataComponentTypes.FLUID_FILTER.get(), SimpleFluidContent.EMPTY))));
+    public static final DeferredItem<Item> FLUID_FAKE_ITEM = ITEM.registerItem("fluid_fake_item",
+            (properties -> new FluidFakeItem(properties.stacksTo(1).component(EtDataComponentTypes.FLUID_FILTER.get(), SimpleFluidContent.EMPTY))));
 
     private static DeferredItem<Item> registerMagicModule(String name){
         return ITEM.registerItem(name + "_module", (properties -> new EtMagicTypeModuleItem(properties.stacksTo(1).component(EtDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name)))));

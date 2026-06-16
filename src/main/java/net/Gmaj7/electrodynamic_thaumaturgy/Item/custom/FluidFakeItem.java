@@ -11,8 +11,8 @@ import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
-public class FluidFilterFakeItem extends Item {
-    public FluidFilterFakeItem(Properties properties) {
+public class FluidFakeItem extends Item {
+    public FluidFakeItem(Properties properties) {
         super(properties);
     }
 
@@ -21,7 +21,7 @@ public class FluidFilterFakeItem extends Item {
     }
 
     public static ItemStack creatFluidFilter(FluidStack fluidStack){
-        ItemStack itemStack = new ItemStack(EtItems.FLUID_FILTER_FAKE_ITEM.get());
+        ItemStack itemStack = new ItemStack(EtItems.FLUID_FAKE_ITEM.get());
         try (Transaction transaction = Transaction.openRoot()){
             itemStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forStack(itemStack)).insert(FluidResource.of(fluidStack), 1, transaction);
             transaction.commit();

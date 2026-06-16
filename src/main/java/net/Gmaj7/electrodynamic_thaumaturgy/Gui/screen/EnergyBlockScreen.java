@@ -12,7 +12,8 @@ import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class EnergyBlockScreen extends AbstractContainerScreen<EnergyBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_energy_block.png");
-    Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_block_show.png");
+    Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_block_null.png");
 
     public EnergyBlockScreen(EnergyBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -46,5 +47,7 @@ public class EnergyBlockScreen extends AbstractContainerScreen<EnergyBlockMenu> 
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
         guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
+        if(renderX < 150)
+            guiGraphics.blit(energyNullTexture, x + 16 + renderX, y + 20, x + 166, y + 27, 0, 0, 150 - renderX, 7);
     }
 }

@@ -104,7 +104,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         itemModels.itemModelOutput.accept(
-                EtItems.FLUID_FILTER_FAKE_ITEM.get(),
+                EtItems.FLUID_FAKE_ITEM.get(),
                 new DynamicFluidContainerModel.Unbaked(
                         new DynamicFluidContainerModel.Textures(
                                 Optional.empty(),

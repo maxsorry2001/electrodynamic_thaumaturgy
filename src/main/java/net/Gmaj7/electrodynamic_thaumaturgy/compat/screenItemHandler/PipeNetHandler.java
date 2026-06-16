@@ -39,8 +39,8 @@ public abstract class PipeNetHandler<T extends PipeNetScreen<?>> implements IGho
         // 计算过滤槽的起始坐标（需要与 drawDirectionIcons 中的计算保持一致）
         int left = (gui.width - gui.getImageWidth()) / 2;
         int top = (gui.height - gui.getImageHeight()) / 2;
-        int baseX = left + 31 + 2 * ITEM_SIZE;  // 第一个过滤槽的 X 坐标（参考您的代码）
-        int baseY = top + 15;                  // 第一行的 Y 坐标
+        int baseX = left + 30 + 2 * ITEM_SIZE;  // 第一个过滤槽的 X 坐标（参考您的代码）
+        int baseY = top + 14;                  // 第一行的 Y 坐标
 
         for (int row = 0; row < visibleRows; row++) {
             int idx = startIndex + row;

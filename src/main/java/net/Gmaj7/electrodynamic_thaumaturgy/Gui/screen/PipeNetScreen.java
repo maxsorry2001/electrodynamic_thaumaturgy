@@ -36,6 +36,14 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
             ElectrodynamicThaumaturgy.MODID, "container/pipe_net/polling");
     protected static final Identifier POLLING_ON = Identifier.fromNamespaceAndPath(
             ElectrodynamicThaumaturgy.MODID, "container/pipe_net/polling_on");
+    protected static final Identifier NEXT = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/next");
+    protected static final Identifier NEXT_ON = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/next_on");
+    protected static final Identifier LAST = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/last");
+    protected static final Identifier LAST_ON = Identifier.fromNamespaceAndPath(
+            ElectrodynamicThaumaturgy.MODID, "container/pipe_net/last_on");
     protected static final Identifier SCROLLER_SPRITE = Identifier.withDefaultNamespace("container/stonecutter/scroller");
     protected static final Identifier SCROLLER_DISABLED_SPRITE = Identifier.withDefaultNamespace("container/stonecutter/scroller_disabled");
 
@@ -137,15 +145,7 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
     }
 
     protected void drawNodeInfo(GuiGraphicsExtractor guiGraphics, int mouthX, int mouthY, int left, int top) {
-        if (getTotalDirections() == 0) {
-            guiGraphics.text(font, Component.literal("无连接"), left + 10, top + 40, 0xFFFFFFFF);
-            return;
-        }
-
-        // 显示选中节点序号/总数
-        int totalNodes = isInsert ? menu.getInsert().size() : menu.getExtract().size();
-        String indexStr = (posSelect + 1) + "/" + totalNodes;
-        guiGraphics.text(font, Component.literal(indexStr), left + 10, top + 10, 0xFFFFFFFF);
+        if (getTotalDirections() == 0) return;
 
         // 绘制方向图标（带滚动）
         drawDirectionIcons(guiGraphics, mouthX, mouthY, left, top);
@@ -199,21 +199,22 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
         }
 
         // 节点切换逻辑
-        if (event.button() == 1) { // 右键
-            if (!isInsert) {
-                int total = menu.getExtract().size();
-                if (total > 0) {
-                    posSelect = (posSelect + 1) % total;
-                    resetScroll();
-                }
-            } else {
-                int total = menu.getInsert().size();
-                if (total > 0) {
-                    posSelect = (posSelect + 1) % total;
-                    resetScroll();
-                }
+        if (isOnNext(event.x(), event.y(), left, top)) {
+            int total = isInsert ? menu.getInsert().size() : menu.getExtract().size();
+            if (total > 0) {
+                posSelect = (posSelect + 1) % total;
+                resetScroll();
             }
             return true;
+        }
+        else if (isOnLast(event.x(), event.y(), left, top)){
+            int total = isInsert ? menu.getInsert().size() : menu.getExtract().size();
+            if (total > 0) {
+                posSelect = posSelect - 1 <= 0 ? total : posSelect - 1;
+                resetScroll();
+            }
+            return true;
+
         }
         else if(event.button() == 0){
             if(!isInsert) {
@@ -321,5 +322,18 @@ public abstract class PipeNetScreen<T extends PipeNetMenu> extends AbstractConta
 
     public static int getVisibleRows() {
         return VISIBLE_ROWS;
+    }
+
+    protected boolean isOnNext(double mouthX, double mouthY, int left, int top){
+        int x = left + 141;
+        int y = top + 32;
+        return mouthX >= x && mouthX <= x + 18 && mouthY >= y && mouthY <= y + 18;
+    }
+
+    protected boolean isOnLast(double mouthX, double mouthY, int left, int top){
+        int x = left + 12;
+        int y = top + 32;
+        return mouthX >= x && mouthX <= x + 18 && mouthY >= y && mouthY <= y + 18;
+
     }
 }

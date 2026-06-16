@@ -36,6 +36,7 @@ public class DataLoadHandler {
 
         payloadRegistrar.playToClient(ProtectingPacket.TYPE, ProtectingPacket.STREAM_CODEC, ProtectingPacket::handle);
         payloadRegistrar.playToClient(EnergySetPacket.TYPE, EnergySetPacket.STREAM_CODEC, EnergySetPacket::handle);
+        payloadRegistrar.playToClient(FluidSetPacket.TYPE, FluidSetPacket.STREAM_CODEC, FluidSetPacket::handle);
         payloadRegistrar.playToClient(ThermalSetPacket.TYPE, ThermalSetPacket.STREAM_CODEC, ThermalSetPacket::handle);
         payloadRegistrar.playToClient(CastTickPacket.TYPE, CastTickPacket.STREAM_CODEC, CastTickPacket::handle);
         payloadRegistrar.playToClient(BiomassSetPacket.TYPE, BiomassSetPacket.STREAM_CODEC, BiomassSetPacket::handle);
@@ -61,7 +62,7 @@ public class DataLoadHandler {
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 536870912)),
                 EtBlocks.ENERGY_BLOCK.get());
         event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.FLUID_FILTER.get(), 1)),
-                EtItems.FLUID_FILTER_FAKE_ITEM.get());
+                EtItems.FLUID_FAKE_ITEM.get());
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IEnergyBlockEntity ? ((IEnergyBlockEntity) blockEntity).getEnergy() : null),
                 EtBlocks.ENERGY_BLOCK.get(),
@@ -89,7 +90,8 @@ public class DataLoadHandler {
                 EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
                 EtBlocks.MAGNETO_FUSION_MACHINE.get(),
                 EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
-                EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get());
+                EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
+                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
         event.registerBlock(Capabilities.Fluid.BLOCK, ((level, pos, state, blockEntity, direction) ->
                         blockEntity instanceof IDirectionFluidBlockEntity ? ((IDirectionFluidBlockEntity) blockEntity).getFluidHandlerWithDirection(direction) : null),
                 EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());

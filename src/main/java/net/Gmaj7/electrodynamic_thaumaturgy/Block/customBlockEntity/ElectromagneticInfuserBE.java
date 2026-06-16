@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.ElectromagneticInfuserBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidSetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticInfusionRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticInfusionRecipeInput;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
@@ -25,8 +26,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
@@ -45,7 +48,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
         protected void onEnergyChanged(int previousAmount) {
             setChanged();
             if(!level.isClientSide()){
-                PacketDistributor.sendToAllPlayers(new EnergySetPacket(previousAmount, getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new EnergySetPacket(getAmountAsInt(), getBlockPos()));
             }
         }
     };
@@ -67,7 +70,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
         protected void onContentsChanged(int index, FluidStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                PacketDistributor.sendToAllPlayers(new FluidSetPacket(getStackInSlot(0), getBlockPos()));
             }
         }
     };
@@ -92,7 +95,10 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticInfuserBE blockEntity){
-        if(level.isClientSide()) return;
+        if(level.isClientSide()) {
+            int i = 1;
+            return;
+        }
         if(blockEntity.energy.getAmountAsLong() < tickUse) return;
         ServerLevel serverLevel = (ServerLevel)level;
         ElectromagneticInfusionRecipeInput input = new ElectromagneticInfusionRecipeInput(blockEntity.getInputItem(), blockEntity.getInputFluid());
@@ -198,5 +204,10 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     @Override
     public StacksResourceHandler<FluidStack, FluidResource> getFluidHandlerWithDirection(Direction direction) {
         return fluidHandlerInput;
+    }
+
+    @Override
+    public void setFluid(FluidStack fluidStack) {
+        this.fluidHandlerInput.setStackInSlot(0, fluidStack);
     }
 }

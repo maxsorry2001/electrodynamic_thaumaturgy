@@ -163,6 +163,9 @@
   "key.category.electrodynamic_thaumaturgy.et": "Electrodynamic Thaumatury",
   "key.electrodynamic_thaumaturgy.switch_magic": "Switch magic",
   "magic_encode": "Magic Encode",
+  "magneto_fusion": "magneto fusion",
+  "electromagnetic_dissociation": "electromagnetic dissociation",
+  "electromagnetic_infusion": "electromagnetic infusion",
   "binding": "binding:",
 
   "patchouli.et.how_start": "Basic Preparation",

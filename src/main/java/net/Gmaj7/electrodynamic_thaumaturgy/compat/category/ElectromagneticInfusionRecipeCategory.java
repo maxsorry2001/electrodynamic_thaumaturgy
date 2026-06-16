@@ -28,7 +28,7 @@ public class ElectromagneticInfusionRecipeCategory implements IRecipeCategory<Re
 
     public ElectromagneticInfusionRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EtBlocks.ENERGY_BLOCK));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ElectromagneticInfusionRecipeCategory implements IRecipeCategory<Re
 
     @Override
     public Component getTitle() {
-        return Component.translatable("magic_encode");
+        return Component.translatable("electromagnetic_infusion");
     }
 
     @Override

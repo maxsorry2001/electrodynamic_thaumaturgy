@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.FluidPipeNetMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFilterFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFakeItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -303,8 +303,8 @@ public class FluidPipeNet extends PipeNet{
         boolean flagWhite = filterSetting.whiteEmpty(), flagBlack = false;
         if(!flagWhite){
             for (ItemStack itemStack : filterSetting.white()) {
-                if(itemStack.getItem() instanceof FluidFilterFakeItem) {
-                    if (FluidFilterFakeItem.getFluidFilter(itemStack).getFluidType() == resource.getFluidType()) {
+                if(itemStack.getItem() instanceof FluidFakeItem) {
+                    if (FluidFakeItem.getFluidFilter(itemStack).getFluidType() == resource.getFluidType()) {
                         flagWhite = true;
                         break;
                     }
@@ -318,8 +318,8 @@ public class FluidPipeNet extends PipeNet{
             }
         }
         for (ItemStack itemStack : filterSetting.black()){
-            if(itemStack.getItem() instanceof FluidFilterFakeItem) {
-                if (FluidFilterFakeItem.getFluidFilter(itemStack).getFluidType() == resource.getFluidType()) {
+            if(itemStack.getItem() instanceof FluidFakeItem) {
+                if (FluidFakeItem.getFluidFilter(itemStack).getFluidType() == resource.getFluidType()) {
                     flagBlack = true;
                     break;
                 }
@@ -339,12 +339,12 @@ public class FluidPipeNet extends PipeNet{
             List<ItemStack> white = new ArrayList<>(), black = new ArrayList<>();
             for (ItemStack fluidStack : filter.get(pos).get(direction)){
                 if(!fluidStack.is(EtItems.FILTER_SETTING)) {
-                    if((fluidStack.getItem() instanceof BucketItem && ((BucketItem)fluidStack.getItem()).content != Fluids.EMPTY) || fluidStack.getItem() instanceof FluidFilterFakeItem)
+                    if((fluidStack.getItem() instanceof BucketItem && ((BucketItem)fluidStack.getItem()).content != Fluids.EMPTY) || fluidStack.getItem() instanceof FluidFakeItem)
                         white.add(fluidStack.copy());
                 }
                 else {
                     ItemContainerContents contents = fluidStack.get(EtDataComponentTypes.ET_CONTAINER);
-                    List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().filter(stack -> (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.getItem() instanceof FluidFilterFakeItem).toList());
+                    List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().filter(stack -> (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.getItem() instanceof FluidFakeItem).toList());
                     if(fluidStack.getOrDefault(EtDataComponentTypes.FILTER_WHITE.get(), true)) white.addAll(list);
                     else black.addAll(list);
                 }

@@ -9,6 +9,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FilterSettingScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FluidPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.ItemPipeNetScreen;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
@@ -17,6 +18,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticDisso
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticInfusionRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagicEncodeRecipeCategory;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagnetoFusionRecipeCategory;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.FilterSettingHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.FluidPipeNetHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.ItemPipeNetHandler;
 import net.minecraft.resources.Identifier;
@@ -53,7 +55,7 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, List.of(new ItemStack(EtItems.FLUID_FILTER_FAKE_ITEM.get())));
+        registration.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, List.of(new ItemStack(EtItems.FLUID_FAKE_ITEM.get())));
         registration.addRecipes(JEIRecipeTypes.MAGIC_ENCODE, this.getRecipes(recipeMap, EtRecipes.MAGIC_ENCODE_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.MAGNETO_FUSION, this.getRecipes(recipeMap, EtRecipes.MAGNO_FUSION_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get()));
@@ -72,6 +74,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(ItemPipeNetScreen.class, new ItemPipeNetHandler());
         registration.addGhostIngredientHandler(FluidPipeNetScreen.class, new FluidPipeNetHandler());
+        registration.addGhostIngredientHandler(FilterSettingScreen.class, new FilterSettingHandler());
     }
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)

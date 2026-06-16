@@ -130,8 +130,6 @@ public class EtTabs {
                         output.accept(EtBlocks.ENERGY_PIPE);
                         output.accept(EtBlocks.ITEM_PIPE);
                         output.accept(EtBlocks.FLUID_PIPE);
-
-                        output.accept(EtItems.FLUID_FILTER_FAKE_ITEM);
                     }))
                     .build());
 

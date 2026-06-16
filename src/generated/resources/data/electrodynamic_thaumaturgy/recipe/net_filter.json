@@ -1,0 +1,11 @@
+{
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "minecraft:redstone",
+    "electrodynamic_thaumaturgy:magno_ingot",
+    "minecraft:redstone"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:net_filter"
+  }
+}

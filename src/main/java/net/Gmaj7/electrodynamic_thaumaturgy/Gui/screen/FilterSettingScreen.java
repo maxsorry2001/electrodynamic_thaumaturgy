@@ -21,9 +21,9 @@ import java.util.List;
 public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMenu> {
 
     private static final Identifier BACKGROUND_WHITE = Identifier.fromNamespaceAndPath(
-            ElectrodynamicThaumaturgy.MODID, "textures/gui/net_gui_extract.png");
+            ElectrodynamicThaumaturgy.MODID, "textures/gui/filter_setting_white.png");
     private static final Identifier BACKGROUND_BLACK = Identifier.fromNamespaceAndPath(
-            ElectrodynamicThaumaturgy.MODID, "textures/gui/net_gui_insert.png");
+            ElectrodynamicThaumaturgy.MODID, "textures/gui/filter_setting_black.png");
     private static final int ITEM_SIZE = 18;
     private static final int COLS = 6;
     private static final int ROWS = 3;

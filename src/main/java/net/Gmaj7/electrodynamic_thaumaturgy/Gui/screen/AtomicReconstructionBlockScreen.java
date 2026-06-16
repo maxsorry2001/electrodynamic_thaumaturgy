@@ -15,6 +15,7 @@ import java.util.List;
 public class AtomicReconstructionBlockScreen extends AbstractContainerScreen<AtomicReconstructionBlockMenu> {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
+    Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
     Identifier progressTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/atomic_reconstruction_machine_progress.png");
 
     public AtomicReconstructionBlockScreen(AtomicReconstructionBlockMenu menu, Inventory playerInventory, Component title) {
@@ -26,7 +27,7 @@ public class AtomicReconstructionBlockScreen extends AbstractContainerScreen<Ato
         extractTooltip(guiGraphics, mouseX, mouseY);
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
+        if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, List.of(), mouseX, mouseY);
     }
 
@@ -47,8 +48,9 @@ public class AtomicReconstructionBlockScreen extends AbstractContainerScreen<Ato
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
-        int renderX = (int) (150 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt()), progressX = (int) (58 * (float) menu.blockEntity.getProgressPer());
-        guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
-        guiGraphics.blit(progressTexture, x + 60, y + 56, x + 60 + progressX, y + 62, 0, progressX, 0, 6);
+        int renderY = (int) (50 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
+        guiGraphics.blit(energyTexture, x + 13, y + 71 - renderY, x + 18 , y + 71, 0, 0, 6, renderY);
+        if(renderY < 50)
+            guiGraphics.blit(energyNullTexture, x + 13, y + 21, x + 18, y + 71 - renderY, 0, 0, 6, 50 - renderY);
     }
 }

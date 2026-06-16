@@ -51,6 +51,11 @@ public class ItemPipeNetScreen extends PipeNetScreen<ItemPipeNetMenu> {
             for (int j = 0; j < filter.size(); j++)
                 guiGraphics.fakeItem(filter.get(j), startX + (j + 2) * ITEM_SIZE, startY + i * ITEM_SIZE);
         }
+        int totalPos = isInsert ? menu.getInsert().size() : menu.getExtract().size();
+        if(totalPos > 1){
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, isOnNext(mouthX, mouthY, left, top) ? NEXT_ON : NEXT, left + 141, top + 32, 18, 18);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, isOnLast(mouthX, mouthY, left, top) ? LAST_ON : LAST, left + 12, top + 32, 18, 18);
+        }
     }
 
     @Override

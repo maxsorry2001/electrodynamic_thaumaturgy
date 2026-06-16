@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.FluidPipeNetMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidPipeNetFilterPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFilterFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFakeItem;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -49,10 +49,13 @@ public class FluidPipeNetScreen extends PipeNetScreen<FluidPipeNetMenu> {
             if(!menu.getFilter().containsKey(nodePos) || ! menu.getFilter().get(nodePos).containsKey(dir)) continue;
             List<ItemStack> filter = menu.getFilterItemOfPosAndDir(nodePos, dir);
             if(filter.isEmpty()) continue;
-            for (int j = 0; j < filter.size(); j++) {
-                ItemStack itemStack = filter.get(j);
+            for (int j = 0; j < filter.size(); j++)
                 guiGraphics.fakeItem(filter.get(j), startX + (j + 2) * ITEM_SIZE, startY + i * ITEM_SIZE);
-            }
+        }
+        int totalPos = isInsert ? menu.getInsert().size() : menu.getExtract().size();
+        if(totalPos > 1){
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, isOnNext(mouthX, mouthY, left, top) ? NEXT_ON : NEXT, left + 141, top + 32, 18, 18);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, isOnLast(mouthX, mouthY, left, top) ? LAST_ON : LAST, left + 12, top + 32, 18, 18);
         }
     }
 
@@ -61,7 +64,7 @@ public class FluidPipeNetScreen extends PipeNetScreen<FluidPipeNetMenu> {
         int left = (width - imageWidth) / 2, top = (height - imageHeight) / 2, slot = getSlot(event.x(), event.y(), left, top);
         if(slot != -1){
             ItemStack stack = this.menu.getCarried();
-            if(stack.getItem() instanceof FluidFilterFakeItem || (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.isEmpty()) {
+            if(stack.getItem() instanceof FluidFakeItem || (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.isEmpty()) {
                 BlockPos pos = getCurrentPos();
                 List<Direction> directions = getCurrentDirections();
                 int idx = startIndex + getIndex(event.y());
