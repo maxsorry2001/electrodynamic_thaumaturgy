@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.ProtectingPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;

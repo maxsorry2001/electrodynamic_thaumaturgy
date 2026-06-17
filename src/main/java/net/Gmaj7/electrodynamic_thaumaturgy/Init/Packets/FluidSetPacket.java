@@ -1,10 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IDirectionFluidBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -12,7 +10,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 public class FluidSetPacket implements CustomPacketPayload {
     BlockPos blockPos;

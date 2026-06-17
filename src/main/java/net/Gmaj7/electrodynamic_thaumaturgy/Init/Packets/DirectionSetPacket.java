@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IDirectionItemBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
@@ -42,7 +42,7 @@ public class DirectionSetPacket implements CustomPacketPayload {
         context.enqueueWork(() -> {
             BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
             if(blockEntity instanceof IDirectionItemBlockEntity) {
-                ((IDirectionItemBlockEntity) blockEntity).changeDirectionSet(packet.direction);
+                ((IDirectionItemBlockEntity) blockEntity).changeItemDirectionSet(packet.direction);
             }
         });
     }

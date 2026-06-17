@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Block;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +16,11 @@ public class EtBlockEntities {
     public static final Supplier<BlockEntityType<EnergyBlockEntity>> ENERGY_BLOCK_BE =
             MOE_BLOCK_ENTITY.register("energy_block_be", () -> new BlockEntityType<>(
                     EnergyBlockEntity::new, EtBlocks.ENERGY_BLOCK.get()));
+
+
+    public static final Supplier<BlockEntityType<FluidBlockEntity>> FLUID_BLOCK_BE =
+            MOE_BLOCK_ENTITY.register("fluid_block_be", () -> new BlockEntityType<>(
+                    FluidBlockEntity::new, EtBlocks.FLUID_BLOCK.get()));
 
     public static final Supplier<BlockEntityType<TemperatureGeneratorBE>> TEMPERATURE_GENERATOR_BLOCK_BE =
             MOE_BLOCK_ENTITY.register("temperature_generator_be", () -> new BlockEntityType<>(

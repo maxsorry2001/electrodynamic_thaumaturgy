@@ -148,7 +148,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
     }
 
     @Override
-    public void changeDirectionSet(Direction direction) {
+    public void changeItemDirectionSet(Direction direction) {
 
     }
 

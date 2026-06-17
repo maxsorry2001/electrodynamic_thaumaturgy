@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Block;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlock.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.AirBlock;
@@ -26,6 +26,9 @@ public class EtBlocks {
 
     public static final DeferredBlock<Block> ENERGY_BLOCK = registerBlockNoItem("energy_block",
             (properties) ->  new EnergyBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
+
+    public static final DeferredBlock<Block> FLUID_BLOCK = registerBlockNoItem("fluid_block",
+            (properties) ->  new FluidBlock(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).noOcclusion()));
 
     public static final DeferredBlock<Block> TEMPERATURE_GENERATOR = registerBlock("temperature_generator",
             (properties) ->  new TemperatureGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);

@@ -223,7 +223,7 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IEnergyBlockEn
     }
 
     @Override
-    public void changeDirectionSet(Direction direction){
+    public void changeItemDirectionSet(Direction direction){
         this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
         setChanged();
         if(!level.isClientSide())

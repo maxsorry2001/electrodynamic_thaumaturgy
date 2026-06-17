@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.EtRayEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;

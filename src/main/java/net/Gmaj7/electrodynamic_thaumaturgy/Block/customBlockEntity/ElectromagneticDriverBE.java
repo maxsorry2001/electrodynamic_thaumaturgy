@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.ElectromagneticDriverBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityItemHandler;
@@ -8,7 +9,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.EtMagicTypeModuleItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.core.BlockPos;

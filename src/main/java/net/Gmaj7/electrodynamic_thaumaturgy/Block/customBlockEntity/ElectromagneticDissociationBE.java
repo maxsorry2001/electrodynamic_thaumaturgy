@@ -6,9 +6,9 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticDissociationRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticDissociationRecipeInput;
-import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -216,7 +216,7 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IEnerg
     }
 
     @Override
-    public void changeDirectionSet(Direction direction){
+    public void changeItemDirectionSet(Direction direction){
         this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
         setChanged();
         if(!level.isClientSide())

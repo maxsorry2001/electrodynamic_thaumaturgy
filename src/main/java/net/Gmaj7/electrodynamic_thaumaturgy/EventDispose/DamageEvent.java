@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MirageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.*;

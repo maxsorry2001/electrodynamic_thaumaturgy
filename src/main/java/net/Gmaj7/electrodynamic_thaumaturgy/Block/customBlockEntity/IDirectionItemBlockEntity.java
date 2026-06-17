@@ -10,5 +10,5 @@ public interface IDirectionItemBlockEntity {
 
     void drops();
 
-    void changeDirectionSet(Direction direction);
+    void changeItemDirectionSet(Direction direction);
 }

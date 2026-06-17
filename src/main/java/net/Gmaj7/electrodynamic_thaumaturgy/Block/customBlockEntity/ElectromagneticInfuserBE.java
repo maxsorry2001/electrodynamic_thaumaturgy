@@ -2,12 +2,15 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.ElectromagneticInfuserBlockMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityEnergyHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityFluidHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityItemHandler;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidSetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticInfusionRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticInfusionRecipeInput;
-import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.EtRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -27,10 +30,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
@@ -38,7 +39,6 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -95,7 +95,8 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
         @Override
         public int get(int i) {
             return switch (i){
-                case 0 -> Function.encodeDirection(directionOutputSet);
+                case 0 -> Function.encodeDirection(directionItemOutputSet);
+                case 1 -> Function.encodeDirection(directionFluidOutputSet);
                 default -> 0;
             };
         }
@@ -103,22 +104,25 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
         @Override
         public void set(int dataId, int value) {
             switch (dataId){
-                case 0 -> ElectromagneticInfuserBE.this.directionOutputSet = Function.decodeDirection(value);
+                case 0 -> ElectromagneticInfuserBE.this.directionItemOutputSet = Function.decodeDirection(value);
+                case 2 -> ElectromagneticInfuserBE.this.directionFluidOutputSet = Function.decodeDirection(value);
             }
         }
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
     };
 
-    private Map<Direction, Boolean> directionOutputSet = new HashMap<>();
+    private Map<Direction, Boolean> directionItemOutputSet;
+    private Map<Direction, Boolean> directionFluidOutputSet;
     private static final int tickUse = 1024;
 
     public ElectromagneticInfuserBE(BlockPos worldPosition, BlockState blockState) {
         super(EtBlockEntities.ELECTROMAGNETIC_INFUSER_BE.get(), worldPosition, blockState);
-        directionOutputSet = Function.decodeDirection(0x03);
+        directionItemOutputSet = Function.decodeDirection(0x03);
+        directionFluidOutputSet = Function.decodeDirection(0x03);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticInfuserBE blockEntity){
@@ -157,7 +161,8 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
         itemHandlerOutput.serializeWithKey("output_item", output);
         energy.serialize(output);
         fluidHandlerInput.serialize(output);
-        output.putInt("direction_set", Function.encodeDirection(directionOutputSet));
+        output.putInt("direction_set_item", Function.encodeDirection(directionItemOutputSet));
+        output.putInt("direction_set_fluid", Function.encodeDirection(directionFluidOutputSet));
     }
 
     @Override
@@ -167,7 +172,8 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
         itemHandlerOutput.deserializeWithKey("output_item", input);
         energy.deserialize(input);
         fluidHandlerInput.deserialize(input);
-        directionOutputSet = Function.decodeDirection(input.getIntOr("direction_set", 0x03));
+        directionItemOutputSet = Function.decodeDirection(input.getIntOr("direction_set_item", 0x03));
+        directionFluidOutputSet = Function.decodeDirection(input.getIntOr("direction_set_fluid", 0x03));
     }
 
     @Override
@@ -191,7 +197,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     @Override
     public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction) {
         if(direction == null) return getItemHandlerOutput();
-        return directionOutputSet.getOrDefault(direction, true) ? getItemHandlerOutput() : getItemHandlerInput();
+        return directionItemOutputSet.getOrDefault(direction, true) ? getItemHandlerOutput() : getItemHandlerInput();
     }
 
     @Override
@@ -221,8 +227,16 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     }
 
     @Override
-    public void changeDirectionSet(Direction direction){
-        this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
+    public void changeItemDirectionSet(Direction direction){
+        this.directionItemOutputSet.put(direction, !directionItemOutputSet.get(direction));
+        setChanged();
+        if(!level.isClientSide())
+            invalidateCapabilities();
+    }
+
+    @Override
+    public void changeFluidDirectionSet(Direction direction) {
+        this.directionFluidOutputSet.put(direction, !directionFluidOutputSet.get(direction));
         setChanged();
         if(!level.isClientSide())
             invalidateCapabilities();
@@ -237,6 +251,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     public void setFluid(FluidStack fluidStack) {
         this.fluidHandlerInput.setStackInSlot(0, fluidStack);
     }
+
 
     public ContainerData getData() {
         return data;

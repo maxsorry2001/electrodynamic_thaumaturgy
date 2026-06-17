@@ -2,9 +2,9 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.CastTickPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.network.chat.Component;

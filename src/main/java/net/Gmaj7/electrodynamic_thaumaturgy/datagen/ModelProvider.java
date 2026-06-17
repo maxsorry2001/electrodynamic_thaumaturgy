@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlock.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;

@@ -1,11 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IDirectionFluidBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IDirectionItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.IItemBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;

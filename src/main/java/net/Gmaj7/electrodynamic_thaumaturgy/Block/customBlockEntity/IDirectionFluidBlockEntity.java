@@ -9,4 +9,6 @@ public interface IDirectionFluidBlockEntity {
     public StacksResourceHandler<FluidStack, FluidResource> getFluidHandlerWithDirection(Direction direction);
 
     void setFluid(FluidStack fluidStack);
+
+    void changeFluidDirectionSet(Direction direction);
 }

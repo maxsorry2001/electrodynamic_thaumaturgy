@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.EddyCurrentRemelterBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.MagnetoFusionBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.EtMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;

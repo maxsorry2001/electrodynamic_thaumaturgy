@@ -41,7 +41,7 @@ public class ElectromagneticInfuser extends BaseEntityBlock {
             if (blockEntity instanceof ElectromagneticInfuserBE electromagneticInfuserBE && !level.isClientSide()) {
                 EnergyHandler energyStorage = electromagneticInfuserBE.getEnergy();
                 PacketDistributor.sendToAllPlayers(new EnergySetPacket(energyStorage.getAmountAsInt(), electromagneticInfuserBE.getBlockPos()));
-                if(player.isShiftKeyDown()) electromagneticInfuserBE.changeDirectionSet(hitResult.getDirection());
+                if(player.isShiftKeyDown()) electromagneticInfuserBE.changeItemDirectionSet(hitResult.getDirection());
                 else ((ServerPlayer) player).openMenu(new SimpleMenuProvider(electromagneticInfuserBE, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

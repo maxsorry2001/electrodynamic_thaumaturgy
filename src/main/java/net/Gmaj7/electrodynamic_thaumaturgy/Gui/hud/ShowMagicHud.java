@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Gui.hud;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.EtMagicTypeModuleItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

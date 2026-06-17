@@ -1,11 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
-import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;

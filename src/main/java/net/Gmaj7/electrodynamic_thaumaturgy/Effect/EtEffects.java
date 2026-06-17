@@ -1,10 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Effect;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Effect.custom.ElectricFieldDomainEffect;
 import net.Gmaj7.electrodynamic_thaumaturgy.Effect.custom.ExcitingEffect;
 import net.Gmaj7.electrodynamic_thaumaturgy.Effect.custom.MagneticLevitationEffect;
 import net.Gmaj7.electrodynamic_thaumaturgy.Effect.custom.StElmo_sFireEffect;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Attributes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
