@@ -19,6 +19,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -34,10 +35,7 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MagnetoFusionBE extends BlockEntity implements IEnergyBlockEntity, IDirectionItemBlockEntity, MenuProvider {
     private final BlockEntityEnergyHandler energy = new BlockEntityEnergyHandler(1048576) {
@@ -69,6 +67,31 @@ public class MagnetoFusionBE extends BlockEntity implements IEnergyBlockEntity, 
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
+        }
+    };
+
+    protected final ContainerData data = new ContainerData() {
+        {
+            Objects.requireNonNull(MagnetoFusionBE.this);
+        }
+        @Override
+        public int get(int i) {
+            return switch (i){
+                case 0 -> Function.encodeDirection(directionOutputSet);
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int dataId, int value) {
+            switch (dataId){
+                case 0 -> MagnetoFusionBE.this.directionOutputSet = Function.decodeDirection(value);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 1;
         }
     };
     private static final int tickUse = 128;
@@ -198,5 +221,9 @@ public class MagnetoFusionBE extends BlockEntity implements IEnergyBlockEntity, 
         setChanged();
         if(!level.isClientSide())
             invalidateCapabilities();
+    }
+
+    public ContainerData getData() {
+        return data;
     }
 }

@@ -16,7 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
-public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<EddyCurrentRemelterBlockMenu> {
+public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<EddyCurrentRemelterBlockMenu> implements IEtDirectionItemScreen {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_dissociation.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
     Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
@@ -35,13 +35,8 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
         if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
         guiGraphics.text(this.font, Component.literal(String.valueOf(menu.getProgress())), x + 145, y + 40, 0xFFFFFFFF);
-        var itemSet = Function.decodeDirection(menu.getItemSet());
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.UP), isMouseFocusedSetting(Direction.UP, mouseX, mouseY)), x + 100, y + 50, 10, 10);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.DOWN), isMouseFocusedSetting(Direction.DOWN, mouseX, mouseY)), x + 100, y + 74, 10, 10);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.EAST), isMouseFocusedSetting(Direction.EAST, mouseX, mouseY)), x + 100, y + 62, 10, 10);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.NORTH), isMouseFocusedSetting(Direction.NORTH, mouseX, mouseY)), x + 112, y + 62, 10, 10);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.WEST), isMouseFocusedSetting(Direction.WEST, mouseX, mouseY)), x + 124, y + 62, 10, 10);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.SOUTH), isMouseFocusedSetting(Direction.SOUTH, mouseX, mouseY)), x + 136, y + 62, 10, 10);
+        renderEnergy(guiGraphics, x, y);
+        renderIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
     }
 
     @Override
@@ -51,76 +46,28 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
         super.init();
     }
 
+    @Override
     public Identifier getSprites(boolean input, boolean isFocused){
         return input ? SPRITES_INPUT.get(true, isFocused) : SPRITES_OUTPUT.get(true, isFocused);
-    }
-
-    private boolean isMouseFocusedSetting(Direction direction, double mouseX, double mouseY){
-        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double d0, d1;
-        switch (direction){
-            case UP -> {
-                d0 = mouseX - x - 100;
-                d1 = mouseY - y - 50;
-            }
-            case DOWN -> {
-                d0 = mouseX - x - 100;
-                d1 = mouseY - y - 74;
-            }
-            case EAST -> {
-                d0 = mouseX - x - 100;
-                d1 = mouseY - y - 62;
-            }
-            case NORTH -> {
-                d0 = mouseX - x - 112;
-                d1 = mouseY - y - 62;
-            }
-            case WEST -> {
-                d0 = mouseX - x - 124;
-                d1 = mouseY - y - 62;
-            }
-            case SOUTH -> {
-                d0 = mouseX - x - 136;
-                d1 = mouseY - y - 62;
-            }
-            default -> {d0 = 0; d1 = 0;}
-        }
-        return d0 > 0 && d0 < 10 && d1 > 0 && d1 < 10;
-    }
-
-    private Direction getFocusedDirection(double mouseX, double mouseY){
-        int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        double dx = mouseX - x, dy = mouseY - y;
-        Direction direction = null;
-        if(dx > 100 && dx < 110){
-            if(dy > 50 && dy < 60) direction = Direction.UP;
-            else if(dy > 62 && dy < 72) direction = Direction.EAST;
-            else if(dy > 74 && dy < 84) direction = Direction.DOWN;
-        }
-        else if(dy > 62 && dy < 72){
-            if(dx > 112 && dx < 122) direction = Direction.NORTH;
-            else if(dx > 124 && dx < 134) direction = Direction.WEST;
-            else if (dx > 136 && dx < 146) direction = Direction.SOUTH;
-        }
-        return direction;
     }
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderEnergy(guiGraphics, x, y);
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int renderY = (int) (50 * (float) energyHandler.getAmountAsInt() / energyHandler.getCapacityAsInt());
-        guiGraphics.blit(energyTexture, x + 13, y + 21, x + 18 , y + 21 + renderY, 0, 0, 6, renderY);
+        guiGraphics.blit(energyTexture, x + 13, y + 71 - renderY, x + 18 , y + 71, 0, 0, 6, renderY);
+        if(renderY < 50)
+            guiGraphics.blit(energyNullTexture, x + 13, y + 21, x + 18, y + 71 - renderY, 0, 0, 6, 50 - renderY);
     }
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        Direction direction = getFocusedDirection(event.x(), event.y());
+        Direction direction = getFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
         if(direction != null)
             ClientPacketDistributor.sendToServer(new DirectionSetPacket(menu.blockEntity.getBlockPos(), direction));
         return super.mouseClicked(event, doubleClick);

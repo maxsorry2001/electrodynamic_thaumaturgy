@@ -1,12 +1,14 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.EddyCurrentRemelterBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.MagnetoFusionBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.EtMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +21,7 @@ public class MagnetoFusionBlockMenu extends AbstractContainerMenu {
     private final int inNum = 0;
     private final int outNum = 3;
     public  final MagnetoFusionBE blockEntity;
+    private ContainerData data;
     public MagnetoFusionBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
@@ -27,6 +30,7 @@ public class MagnetoFusionBlockMenu extends AbstractContainerMenu {
         super(EtMenuTypes.MAGNETO_FUSION_BLOCK_MENU.get(), containerId);
         this.blockEntity = (MagnetoFusionBE) blockEntity;
         this.level = inventory.player.level();
+        this.data = ((MagnetoFusionBE)blockEntity).getData();
 
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 40, 35));
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 1, 60, 35));
@@ -93,5 +97,9 @@ public class MagnetoFusionBlockMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+
+    public int getItemSet(){
+        return data.get(0);
     }
 }

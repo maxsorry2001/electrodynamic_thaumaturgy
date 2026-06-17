@@ -133,6 +133,7 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IEnergyBlockEn
             }
             return;
         }
+        if(blockEntity.energy.getAmountAsInt() < tickUse) return;
         ServerLevel serverLevel = (ServerLevel)level;
         SingleRecipeInput input = blockEntity.getInput();
 
@@ -142,8 +143,7 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IEnergyBlockEn
         ItemStack result = recipe.value().assemble(input);
         if (result.isEmpty() || !result.isItemEnabled(serverLevel.enabledFeatures())) return;
         try (Transaction transaction = Transaction.openRoot()) {
-            //int energyUse = blockEntity.energy.extract(tickUse, transaction);
-            //if(energyUse != tickUse) return;
+            blockEntity.energy.extract(tickUse, transaction);
             if (blockEntity.progress + 1 >= blockEntity.maxProgress) {
                 int insert = blockEntity.itemHandlerOutput.insert(0, ItemResource.of(result), result.getCount(), transaction);
                 if (insert == result.getCount()) {
@@ -154,7 +154,8 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IEnergyBlockEn
                         setChanged(level, pos, state);
                     }
                 }
-            } else {
+            }
+            else {
                 transaction.commit();
                 blockEntity.progress++;
                 setChanged(level, pos, state);

@@ -18,6 +18,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -39,6 +40,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBlockEntity, IDirectionItemBlockEntity, IDirectionFluidBlockEntity, MenuProvider{
 
@@ -83,6 +85,31 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
+        }
+    };
+
+    protected final ContainerData data = new ContainerData() {
+        {
+            Objects.requireNonNull(ElectromagneticInfuserBE.this);
+        }
+        @Override
+        public int get(int i) {
+            return switch (i){
+                case 0 -> Function.encodeDirection(directionOutputSet);
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int dataId, int value) {
+            switch (dataId){
+                case 0 -> ElectromagneticInfuserBE.this.directionOutputSet = Function.decodeDirection(value);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 1;
         }
     };
 
@@ -209,5 +236,9 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     @Override
     public void setFluid(FluidStack fluidStack) {
         this.fluidHandlerInput.setStackInSlot(0, fluidStack);
+    }
+
+    public ContainerData getData() {
+        return data;
     }
 }

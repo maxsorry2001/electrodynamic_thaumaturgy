@@ -7,6 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +19,7 @@ public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu 
     private final Level level;
     private final int inNum = 0;
     private final int outNum = 1;
+    private ContainerData data;
     public  final ElectromagneticDissociationBE blockEntity;
     public ElectromagneticDissociationBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -27,6 +29,7 @@ public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu 
         super(EtMenuTypes.ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU.get(), containerId);
         this.blockEntity = (ElectromagneticDissociationBE) blockEntity;
         this.level = inventory.player.level();
+        this.data = ((ElectromagneticDissociationBE) blockEntity).getData();
 
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 40, 33));
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerCatalyst(), (slot, resource, amount) -> this.blockEntity.getItemHandlerCatalyst().set(slot, resource, amount), 0, 70, 20));
@@ -94,5 +97,9 @@ public class ElectromagneticDissociationBlockMenu extends AbstractContainerMenu 
     private void addPlayerHotbar(Inventory inventory){
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+
+    public int getItemSet(){
+        return data.get(0);
     }
 }
