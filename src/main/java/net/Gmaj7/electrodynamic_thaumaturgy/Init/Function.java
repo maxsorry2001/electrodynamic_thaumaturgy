@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Function {
-    public static float getMagicAmount(ItemStack itemStack){
+    public static float getDamageAmount(ItemStack itemStack){
         float result = getBaseAmount(itemStack) * getBasePower(itemStack) * getStrengthRate(itemStack);
         return result;
     }

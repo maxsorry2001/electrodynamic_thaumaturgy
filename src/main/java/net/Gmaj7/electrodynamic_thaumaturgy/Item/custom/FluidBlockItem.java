@@ -1,6 +1,5 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Item.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.FluidBlockEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
-import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 import java.util.function.Consumer;

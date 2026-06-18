@@ -102,6 +102,8 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.MONOPOLE_S.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(EtItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.createFlatItemModel(EtItems.PULSE_BOW.get(), ModelTemplates.BOW);
+        itemModels.generateBow(EtItems.PULSE_BOW.get());
 
         itemModels.itemModelOutput.accept(
                 EtItems.FLUID_FAKE_ITEM.get(),

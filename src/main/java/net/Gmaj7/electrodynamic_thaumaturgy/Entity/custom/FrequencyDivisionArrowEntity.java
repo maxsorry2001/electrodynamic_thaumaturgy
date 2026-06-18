@@ -60,7 +60,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
             if(list.contains(getOwner())) list.remove(getOwner());
             if (this.getOwner() instanceof MagnetoOrderSageEntity && list.contains(((MagnetoOrderSageEntity) this.getOwner()).getOwner())) list.remove(((MagnetoOrderSageEntity) this.getOwner()));
             for (LivingEntity target : list)
-                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getMagicAmount(magicItem) / 7);
+                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem) / 7);
             this.discard();
         }
     }
@@ -97,7 +97,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity livingEntity && livingEntity != getOwner()){
             if(magicItem != null)
-                livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner() instanceof OwnableEntity ? ((OwnableEntity) this.getOwner()).getOwner() : this.getOwner()), Function.getMagicAmount(magicItem));
+                livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner() instanceof OwnableEntity ? ((OwnableEntity) this.getOwner()).getOwner() : this.getOwner()), Function.getDamageAmount(magicItem));
             this.discard();
         }
     }

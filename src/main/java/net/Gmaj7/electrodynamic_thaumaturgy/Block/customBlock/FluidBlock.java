@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.FluidBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
 import net.minecraft.core.BlockPos;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import org.jspecify.annotations.Nullable;
 

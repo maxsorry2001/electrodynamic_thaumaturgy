@@ -28,7 +28,7 @@ public class DomainReconstruction extends AbstractSelfMagic{
                 if(!mobEffectInstance.getEffect().value().isBeneficial())
                     livingEntity.removeEffect(mobEffectInstance.getEffect());
             }
-            livingEntity.heal(Function.getMagicAmount(itemStack));
+            livingEntity.heal(Function.getDamageAmount(itemStack));
             if(livingEntity.level() instanceof ServerLevel) {
                 Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
                 thread.start();
@@ -46,7 +46,7 @@ public class DomainReconstruction extends AbstractSelfMagic{
                 if(!mobEffectInstance.getEffect().value().isBeneficial())
                     source.removeEffect(mobEffectInstance.getEffect());
             }
-            source.heal(Function.getMagicAmount(itemStack));
+            source.heal(Function.getDamageAmount(itemStack));
             if(source.level() instanceof ServerLevel) {
                 Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
                 thread.start();

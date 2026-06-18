@@ -41,6 +41,8 @@ public class EtTabs {
 
                         output.accept(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())));
+                        output.accept(EtItems.PULSE_BOW);
+                        output.accept(setFullEnergyItem(getDefaultBow(EtItems.PULSE_BOW)));
                         output.accept(EtItems.PRIMARY_CODE_MODULE);
                         output.accept(EtItems.INTERMEDIATE_CODE_MODULE);
                         output.accept(EtItems.ADVANCED_CODE_MODULE);
@@ -154,6 +156,15 @@ public class EtTabs {
         for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
             list.add(new ItemStack(EtItems.EMPTY_MAGIC_MODULE.get()));
         }
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
+        return itemStack;
+    }
+
+    public static ItemStack getDefaultBow(ItemLike item){
+        ItemStack itemStack = new ItemStack(item);
+        List<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(EtItems.SUPERCONDUCTING_POWER.get()));
+        list.add(new ItemStack(EtItems.SUPERCONDUCTING_LC.get()));
         itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
         return itemStack;
     }

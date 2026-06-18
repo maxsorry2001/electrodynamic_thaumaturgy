@@ -81,6 +81,13 @@ public class EtEntities {
                     .noSave()
                     .noLootTable()
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "frequency_division_arrow_entity"))));
+    public static final Supplier<EntityType<PulseArrowEntity>> PULSE_ARROW_ENTITY =
+            ENTITY_TYPES.register("pulse_arrow_entity", () -> EntityType.Builder.<PulseArrowEntity>of(PulseArrowEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .noSave()
+                    .noLootTable()
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "frequency_division_arrow_entity"))));
     public static final Supplier<EntityType<FrequencyDivisionBeaconEntity>> FREQUENCY_DIVISION_BEACON_ENTITY =
             ENTITY_TYPES.register("frequency_division_beacon_entity", () -> EntityType.Builder.<FrequencyDivisionBeaconEntity>of(FrequencyDivisionBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)

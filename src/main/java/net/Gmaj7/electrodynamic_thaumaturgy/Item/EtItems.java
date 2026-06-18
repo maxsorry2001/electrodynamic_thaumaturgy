@@ -138,6 +138,10 @@ public class EtItems {
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.EMPTY)
                     .component(EtDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+    public static final DeferredItem<Item> PULSE_BOW = ITEM.registerItem("pulse_bow",
+            (properties) -> new PulseBow(properties.stacksTo(1)
+                    .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.EMPTY)));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));

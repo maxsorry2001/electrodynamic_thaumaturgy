@@ -52,7 +52,8 @@ public class DataLoadHandler {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 49152)),
-                EtItems.ELECTROMAGNETIC_ROD.get());
+                EtItems.ELECTROMAGNETIC_ROD.get(),
+                EtItems.PULSE_BOW.get());
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 16384, 0, 16384)),
                 EtItems.POTATO_BATTERY.get(),
                 EtItems.CARROT_BATTERY.get(),

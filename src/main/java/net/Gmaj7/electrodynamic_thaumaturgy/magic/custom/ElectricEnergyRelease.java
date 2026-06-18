@@ -25,10 +25,10 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(2));
         for (LivingEntity target : list){
             if(target == livingEntity) {
-                livingEntity.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (Function.getMagicAmount(itemStack) * 15)));
+                livingEntity.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (Function.getDamageAmount(itemStack) * 15)));
                 continue;
             }
-            target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack) / 4);
+            target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack) / 4);
             target.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
         if(livingEntity.level() instanceof ServerLevel) {
@@ -42,10 +42,10 @@ public class ElectricEnergyRelease extends AbstractSelfMagic{
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(2));
         for (LivingEntity livingEntity : list){
             if(livingEntity == source) {
-                source.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (Function.getMagicAmount(itemStack) * 15)));
+                source.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_ELECTRIC_RELEASE.getDelegate(), (int) (Function.getDamageAmount(itemStack) * 15)));
                 continue;
             }
-            livingEntity.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getMagicAmount(itemStack) / 4);
+            livingEntity.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack) / 4);
             livingEntity.knockback(0.5, livingEntity.getX() - target.getX(), livingEntity.getZ() - target.getZ());
         }
         if(source.level() instanceof ServerLevel) {
