@@ -21,6 +21,9 @@ public class EtItems {
     public static final DeferredItem<BlockItem> ENERGY_BLOCK = ITEM.registerItem("energy_block",
             (properties -> new EnergyBlockItem(EtBlocks.ENERGY_BLOCK.get(), properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0))));
+    public static final DeferredItem<BlockItem> FLUID_BLOCK = ITEM.registerItem("fluid_block",
+            (properties -> new FluidBlockItem(EtBlocks.FLUID_BLOCK.get(), properties.stacksTo(1)
+                    .component(EtDataComponentTypes.FLUID_CONTAINER.get(), SimpleFluidContent.EMPTY))));
 
     public static final DeferredItem<Item> RAY_MODULE = registerMagicModule("ray");
     public static final DeferredItem<Item> PULSED_PLASMA_MODULE = registerMagicModule("pulsed_plasma");
@@ -140,7 +143,7 @@ public class EtItems {
             (properties) -> new SpawnEggItem(properties));
 
     public static final DeferredItem<Item> FLUID_FAKE_ITEM = ITEM.registerItem("fluid_fake_item",
-            (properties -> new FluidFakeItem(properties.stacksTo(1).component(EtDataComponentTypes.FLUID_FILTER.get(), SimpleFluidContent.EMPTY))));
+            (properties -> new FluidFakeItem(properties.stacksTo(1).component(EtDataComponentTypes.FLUID_CONTAINER.get(), SimpleFluidContent.EMPTY))));
 
     private static DeferredItem<Item> registerMagicModule(String name){
         return ITEM.registerItem(name + "_module", (properties -> new EtMagicTypeModuleItem(properties.stacksTo(1).component(EtDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name)))));

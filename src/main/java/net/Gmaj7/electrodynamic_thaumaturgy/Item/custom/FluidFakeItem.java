@@ -17,7 +17,7 @@ public class FluidFakeItem extends Item {
     }
 
     public static SimpleFluidContent getFluidFilter(ItemStack itemStack){
-        return itemStack.get(EtDataComponentTypes.FLUID_FILTER);
+        return itemStack.get(EtDataComponentTypes.FLUID_CONTAINER);
     }
 
     public static ItemStack creatFluidFilter(FluidStack fluidStack){

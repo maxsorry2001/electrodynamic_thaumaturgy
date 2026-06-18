@@ -123,6 +123,8 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                 getModel("electromagnetic_assembly_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ENERGY_BLOCK.get(),
                 getModel("energy_block")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.FLUID_BLOCK.get(),
+                getModel("fluid_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_MODEM_TABLE.get(),
                 getModel("electromagnetic_modem_table")));
         blockModels.blockStateOutput.accept(

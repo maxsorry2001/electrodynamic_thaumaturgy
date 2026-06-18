@@ -40,8 +40,6 @@ import java.util.Objects;
 
 
 public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBlockEntity, IDirectionItemBlockEntity, MenuProvider {
-    private final int tickEnergyTranslate = 1024;
-    
     private final BlockEntityItemHandler itemHandler = new BlockEntityItemHandler(2){
 
         @Override
@@ -212,6 +210,10 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     @Override
     public StacksResourceHandler<FluidStack, FluidResource> getFluidHandlerWithDirection(Direction direction) {
         return fluidHandler;
+    }
+
+    public BlockEntityItemHandler getItemHandler() {
+        return itemHandler;
     }
 
     @Override

@@ -102,6 +102,7 @@ public class EtTabs {
                         output.accept(EtBlocks.ELECTROMAGNETIC_MODEM_TABLE);
                         output.accept(EtBlocks.MAGIC_ENCODE_TABLE);
                         output.accept(EtBlocks.ENERGY_BLOCK);
+                        output.accept(EtBlocks.FLUID_BLOCK);
                         output.accept(setFullEnergyItem(new ItemStack(EtBlocks.ENERGY_BLOCK)));
                         output.accept(EtBlocks.TEMPERATURE_GENERATOR);
                         output.accept(EtBlocks.PHOTOVOLTAIC_GENERATOR);

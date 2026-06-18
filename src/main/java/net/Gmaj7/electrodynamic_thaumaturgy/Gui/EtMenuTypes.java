@@ -21,6 +21,7 @@ public class EtMenuTypes {
     public static final DeferredHolder<net.minecraft.world.inventory.MenuType<?>, net.minecraft.world.inventory.MenuType<MagicEncodeTableMenu>> MAGIC_ENCODE_TABLE_MENU = MENU_TYPE.register("magic_encode_table_menu",
             () -> new net.minecraft.world.inventory.MenuType<>(MagicEncodeTableMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<net.minecraft.world.inventory.MenuType<?>, net.minecraft.world.inventory.MenuType<EnergyBlockMenu>> ENERGY_BLOCK_MENU = registerMenuType("energy_block_menu", EnergyBlockMenu::new);
+    public static final DeferredHolder<net.minecraft.world.inventory.MenuType<?>, net.minecraft.world.inventory.MenuType<FluidBlockMenu>> FLUID_BLOCK_MENU = registerMenuType("fluid_block_menu", FluidBlockMenu::new);
     public static final DeferredHolder<net.minecraft.world.inventory.MenuType<?>, net.minecraft.world.inventory.MenuType<ThermalGeneratorMenu>> THERMAL_GENERATOR_MENU = registerMenuType("thermal_generator_menu", ThermalGeneratorMenu::new);
     public static final DeferredHolder<net.minecraft.world.inventory.MenuType<?>, net.minecraft.world.inventory.MenuType<BiomassGeneratorMenu>> BIOMASS_GENERATOR_MENU = registerMenuType("biomass_generator_menu", BiomassGeneratorMenu::new);
     public static final DeferredHolder<net.minecraft.world.inventory.MenuType<?>, net.minecraft.world.inventory.MenuType<ElectromagneticDriverBlockMenu>> ELECTROMAGNETIC_DRIVER_MACHINE_MENU = registerMenuType("electromagnetic_driver_machine_menu", ElectromagneticDriverBlockMenu::new);

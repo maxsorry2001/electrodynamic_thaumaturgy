@@ -46,7 +46,7 @@ public class EtDataComponentTypes {
     public static final Supplier<DataComponentType<Boolean>> FILTER_WHITE = MOE_DATA_COMPONENT_TYPE.register("filter_white",
             () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).build());
 
-    public static final Supplier<DataComponentType<SimpleFluidContent>> FLUID_FILTER = MOE_DATA_COMPONENT_TYPE.register("fluid_filter",
+    public static final Supplier<DataComponentType<SimpleFluidContent>> FLUID_CONTAINER = MOE_DATA_COMPONENT_TYPE.register("fluid_filter",
             () -> DataComponentType.<SimpleFluidContent>builder().persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC).cacheEncoding().build());
 
 

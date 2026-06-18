@@ -61,8 +61,10 @@ public class DataLoadHandler {
                 EtItems.POWER_BANK.get());
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 536870912)),
                 EtBlocks.ENERGY_BLOCK.get());
-        event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.FLUID_FILTER.get(), 1)),
+        event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.FLUID_CONTAINER.get(), 1)),
                 EtItems.FLUID_FAKE_ITEM.get());
+        event.registerItem(Capabilities.Fluid.ITEM,((itemStack, access) -> new ItemAccessFluidHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.FLUID_CONTAINER.get(), 50000)),
+                EtItems.FLUID_BLOCK.get());
         event.registerBlock(Capabilities.Energy.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IEnergyBlockEntity ? ((IEnergyBlockEntity) blockEntity).getEnergy() : null),
                 EtBlocks.ENERGY_BLOCK.get(),
@@ -91,9 +93,11 @@ public class DataLoadHandler {
                 EtBlocks.MAGNETO_FUSION_MACHINE.get(),
                 EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
                 EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
-                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
+                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
+                EtBlocks.FLUID_BLOCK.get());
         event.registerBlock(Capabilities.Fluid.BLOCK, ((level, pos, state, blockEntity, direction) ->
                         blockEntity instanceof IDirectionFluidBlockEntity ? ((IDirectionFluidBlockEntity) blockEntity).getFluidHandlerWithDirection(direction) : null),
-                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
+                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
+                EtBlocks.FLUID_BLOCK.get());
     }
 }

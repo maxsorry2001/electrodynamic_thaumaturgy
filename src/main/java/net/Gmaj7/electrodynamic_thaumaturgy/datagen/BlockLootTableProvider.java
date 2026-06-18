@@ -19,6 +19,7 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(EtBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get());
         dropSelf(EtBlocks.ELECTROMAGNETIC_MODEM_TABLE.get());
         dropSelf(EtBlocks.ENERGY_BLOCK.get());
+        dropSelf(EtBlocks.FLUID_BLOCK.get());
         dropSelf(EtBlocks.PHOTOVOLTAIC_GENERATOR.get());
         dropSelf(EtBlocks.TEMPERATURE_GENERATOR.get());
         dropSelf(EtBlocks.ENERGY_TRANSMISSION_ANTENNA.get());
