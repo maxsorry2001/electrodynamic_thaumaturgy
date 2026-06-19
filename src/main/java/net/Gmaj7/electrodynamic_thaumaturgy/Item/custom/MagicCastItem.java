@@ -6,15 +6,21 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -22,7 +28,10 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class MagicCastItem extends Item {
@@ -65,8 +74,29 @@ public class MagicCastItem extends Item {
     }
 
     @Override
+    public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
+        if(itemStack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 9){
+            setEmptyContainer(itemStack);
+        }
+        super.inventoryTick(itemStack, level, owner, slot);
+    }
+
+    private static void setEmptyContainer(ItemStack itemStack) {
+        List<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(EtItems.EMPTY_POWER.get()));
+        list.add(new ItemStack(EtItems.EMPTY_LC.get()));
+        for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
+            list.add(new ItemStack(EtItems.EMPTY_MAGIC_MODULE.get()));
+        }
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, builder, tooltipFlag);
+        if(stack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 9){
+            setEmptyContainer(stack);
+        }
         builder.accept(getTranslate(stack));
         EnergyHandler energyHandler = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
         int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
