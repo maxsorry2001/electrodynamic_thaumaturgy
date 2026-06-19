@@ -48,6 +48,7 @@ public class ClientEventHandler {
             event.register(EtMenuTypes.ASSEMBLY_TABLE_MENU.get(), AssemblyTableScreen::new);
             event.register(EtMenuTypes.MODEM_TABLE_MENU.get(), ModemTableScreen::new);
             event.register(EtMenuTypes.ENERGY_BLOCK_MENU.get(), EnergyBlockScreen::new);
+            event.register(EtMenuTypes.FLUID_BLOCK_MENU.get(), FluidBlockScreen::new);
             event.register(EtMenuTypes.MAGIC_ENCODE_TABLE_MENU.get(), MagicEncodeTableScreen::new);
             event.register(EtMenuTypes.THERMAL_GENERATOR_MENU.get(), ThermalGeneratorScreen::new);
             event.register(EtMenuTypes.BIOMASS_GENERATOR_MENU.get(), BiomassGeneratorScreen::new);

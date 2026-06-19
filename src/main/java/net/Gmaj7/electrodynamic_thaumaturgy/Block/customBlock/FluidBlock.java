@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.FluidBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidSetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -54,7 +55,7 @@ public class FluidBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof FluidBlockEntity fluidBlockEntity && !level.isClientSide()) {
                 ResourceHandler<FluidResource> fluidHandler = fluidBlockEntity.getFluidHandler();
-                PacketDistributor.sendToAllPlayers(new EnergySetPacket(fluidHandler.getAmountAsInt(0), fluidBlockEntity.getBlockPos()));
+                PacketDistributor.sendToAllPlayers(new FluidSetPacket(fluidHandler.getResource(0).toStack(fluidHandler.getAmountAsInt(0)), fluidBlockEntity.getBlockPos()));
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(fluidBlockEntity, Component.translatable("block.electrodynamic_thaumaturgy.energy_block")), pos);
             }
             return InteractionResult.CONSUME;

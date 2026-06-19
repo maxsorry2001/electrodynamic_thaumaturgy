@@ -103,4 +103,8 @@ public class FluidBlockMenu extends AbstractContainerMenu {
         for (int i = 0; i < 9; i++)
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
     }
+
+    public ContainerData getData() {
+        return data;
+    }
 }

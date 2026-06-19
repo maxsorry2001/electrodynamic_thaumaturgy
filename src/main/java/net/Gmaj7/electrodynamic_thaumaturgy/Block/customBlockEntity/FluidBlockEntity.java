@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.EnergyBlockMenu;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.FluidBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
@@ -93,15 +94,15 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
-        fluidHandler.serialize(output);
-        itemHandler.serialize(output);
+        fluidHandler.serializeWithKey("fluid_handler", output);
+        itemHandler.serializeWithKey("item_handler", output);
     }
 
     @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
-        fluidHandler.deserialize(input);
-        itemHandler.deserialize(input);
+        fluidHandler.deserializeWithKey("fluid_handler", input);
+        itemHandler.deserializeWithKey("item_handler", input);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, FluidBlockEntity energyBlockEntity){
@@ -113,11 +114,12 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
             inStorage= inStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forStack(inStack));
         if(!outStack.isEmpty())
             outStorage  = outStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forStack(outStack));
-        if(outStorage != null && !outStack.isEmpty()){
+        if(outStorage != null && !outStack.isEmpty() && !fluidHandler.getResource(0).isEmpty()){
             int amount;
             FluidResource resource = fluidHandler.getResource(0);
+            if(resource.isEmpty()) return;
             try(Transaction transactionOut = Transaction.openRoot()) {
-                amount = Math.min(outStorage.insert(resource, 500, transactionOut), fluidHandler.extract(resource, 500, transactionOut));
+                amount = Math.min(outStorage.insert(resource, 1000, transactionOut), fluidHandler.extract(resource, 1000, transactionOut));
             }
             if(amount <= 0) return;
             try (Transaction transaction = Transaction.openRoot()){
@@ -128,9 +130,11 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
         }
         if (inStorage != null){
             int amount;
-            FluidResource resource = fluidHandler.getResource(0);
+            FluidResource resource = inStorage.getResource(0);
+            if(resource.isEmpty()) return;
             try(Transaction transactionIn = Transaction.openRoot()) {
-                amount = Math.min(inStorage.extract(resource, 500, transactionIn), fluidHandler.insert(resource, 500, transactionIn));
+                int e = inStorage.extract(resource, 1000, transactionIn), h = fluidHandler.insert(resource, 1000, transactionIn);
+                amount = Math.min(e, h);
             }
             if(amount <= 0) return;
             try(Transaction transaction = Transaction.openRoot()){
@@ -167,7 +171,7 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new EnergyBlockMenu(i, inventory, this);
+        return new FluidBlockMenu(i, inventory, this);
     }
 
     @Override
@@ -188,7 +192,7 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     
     @Override
     public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction) {
-        return null;
+        return itemHandler;
     }
 
     @Override
