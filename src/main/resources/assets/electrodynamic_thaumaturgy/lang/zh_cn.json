@@ -83,6 +83,8 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_modem_table": "强化调制台",
   "block.electrodynamic_thaumaturgy.energy_block": "储能立方",
   "item.electrodynamic_thaumaturgy.energy_block": "储能立方",
+  "block.electrodynamic_thaumaturgy.fluid_block": "流体立方",
+  "item.electrodynamic_thaumaturgy.fluid_block": "流体立方",
   "block.electrodynamic_thaumaturgy.temperature_generator": "温差发电机",
   "block.electrodynamic_thaumaturgy.photovoltaic_generator": "光伏发电机",
   "block.electrodynamic_thaumaturgy.thermal_generator": "火力发电机",

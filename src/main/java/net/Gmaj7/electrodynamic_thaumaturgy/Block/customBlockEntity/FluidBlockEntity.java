@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.EnergyBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.FluidBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityItemHandler;
@@ -111,9 +110,9 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
         ItemStack inStack = itemHandler.getStackInSlot(1), outStack = itemHandler.getStackInSlot(0);
         ResourceHandler<FluidResource> inStorage = null, outStorage = null;
         if(!inStack.isEmpty())
-            inStorage= inStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forStack(inStack));
+            inStorage= inStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forHandlerIndex(itemHandler, 1));
         if(!outStack.isEmpty())
-            outStorage  = outStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forStack(outStack));
+            outStorage  = outStack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forHandlerIndex(itemHandler, 0));
         if(outStorage != null && !outStack.isEmpty() && !fluidHandler.getResource(0).isEmpty()){
             int amount;
             FluidResource resource = fluidHandler.getResource(0);

@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.EnergyBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.FluidBlockMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> {

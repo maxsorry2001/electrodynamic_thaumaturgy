@@ -83,6 +83,8 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_modem_table": "Enhancement Modem Table",
   "block.electrodynamic_thaumaturgy.energy_block": "Energy Block",
   "item.electrodynamic_thaumaturgy.energy_block": "Energy Block",
+  "block.electrodynamic_thaumaturgy.fluid_block": "Fluid Block",
+  "item.electrodynamic_thaumaturgy.fluid_block": "Fluid Block",
   "block.electrodynamic_thaumaturgy.temperature_generator": "Temperature Difference Generator",
   "block.electrodynamic_thaumaturgy.photovoltaic_generator": "Photovoltaic Generator",
   "block.electrodynamic_thaumaturgy.thermal_generator": "Thermal Generator",
