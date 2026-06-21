@@ -190,13 +190,12 @@ public class ItemPipeNet extends PipeNet{
     }
 
     private boolean dealPolling(ResourceExtractSet<ItemResource> extractSet, FilterSetting filterSetting, ItemResource resource) {
-        List<BlockPos> list = new ArrayList<>(distances.get(extractSet.getPos()).keySet());
         List<ResourceHandler<ItemResource>> inserters = new ArrayList<>();
-        List<Direction> directions = new ArrayList<>();
-        for (BlockPos pos : list){
+        List<PosAndDirection> posAndDirections = new ArrayList<>();
+        for (BlockPos pos : distances.get(extractSet.getPos()).keySet()){
             for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, Direction>> entry : insertCaches.get(pos).entrySet()){
                 inserters.add(entry.getValue().getCapability());
-                directions.add(entry.getKey());
+                posAndDirections.add(new PosAndDirection(pos, entry.getKey()));
             }
         }
         if(inserters.isEmpty()) return true;
@@ -222,7 +221,7 @@ public class ItemPipeNet extends PipeNet{
                         while (iterator.hasNext()) {
                             testPolling = iterator.next();
                             var insertHandler = inserters.get(testPolling);
-                            FilterSetting insertFilter = getFilterSetting(list.get(testPolling), directions.get(testPolling));
+                            FilterSetting insertFilter = getFilterSetting(posAndDirections.get(testPolling).pos, posAndDirections.get(testPolling).direction);
                             int inserted = checkFilter(insertFilter, resource) ? insertHandler.insert(resource, Math.max(baseInsertCount, 1), transaction) : 0;
                             insertCounts[testPolling] += inserted;
                             trueExtract += inserted;
@@ -407,7 +406,9 @@ public class ItemPipeNet extends PipeNet{
         else dirFilter.add(filterItem);
     }
 
-    private record ResourceAndIndex(ItemResource resource, int index){};
+    private record ResourceAndIndex(ItemResource resource, int index){}
+
+    private record PosAndDirection(BlockPos pos, Direction direction){}
 
     private record FilterSetting(List<ItemStack> white, List<ItemStack> black){
         private boolean isEmpty(){

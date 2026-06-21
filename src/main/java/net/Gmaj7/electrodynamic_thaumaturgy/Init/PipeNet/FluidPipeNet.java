@@ -193,13 +193,12 @@ public class FluidPipeNet extends PipeNet{
     }
 
     private boolean dealPolling(ResourceExtractSet<FluidResource> extractSet, FilterSetting filterSetting, FluidResource resource) {
-        List<BlockPos> list = new ArrayList<>(distances.get(extractSet.getPos()).keySet());
         List<ResourceHandler<FluidResource>> inserters = new ArrayList<>();
-        List<Direction> directions = new ArrayList<>();
-        for (BlockPos pos : list){
+        List<PosAndDirection> posAndDirections = new ArrayList<>();
+        for (BlockPos pos : distances.get(extractSet.getPos()).keySet()){
             for (Map.Entry<Direction, BlockCapabilityCache<ResourceHandler<FluidResource>, Direction>> entry : insertCaches.get(pos).entrySet()){
                 inserters.add(entry.getValue().getCapability());
-                directions.add(entry.getKey());
+                posAndDirections.add(new PosAndDirection(pos, entry.getKey()));
             }
         }
         if(inserters.isEmpty()) return true;
@@ -225,7 +224,7 @@ public class FluidPipeNet extends PipeNet{
                         while (iterator.hasNext()) {
                             testPolling = iterator.next();
                             var insertHandler = inserters.get(testPolling);
-                            FilterSetting insertFilter = getFilterSetting(list.get(testPolling), directions.get(testPolling));
+                            FilterSetting insertFilter = getFilterSetting(posAndDirections.get(testPolling).pos, posAndDirections.get(testPolling).direction);
                             int inserted = checkFilter(insertFilter, resource) ? insertHandler.insert(resource, Math.max(baseInsertCount, 1), transaction) : 0;
                             insertCounts[testPolling] += inserted;
                             trueExtract += inserted;
@@ -428,7 +427,9 @@ public class FluidPipeNet extends PipeNet{
         else dirFilter.add(filterFluid);
     }
 
-    private record ResourceAndIndex(FluidResource resource, int index){};
+    private record ResourceAndIndex(FluidResource resource, int index){}
+
+    private record PosAndDirection(BlockPos pos, Direction direction){}
 
     private record FilterSetting(List<ItemStack> white, List<ItemStack> black){
         private boolean isEmpty(){
