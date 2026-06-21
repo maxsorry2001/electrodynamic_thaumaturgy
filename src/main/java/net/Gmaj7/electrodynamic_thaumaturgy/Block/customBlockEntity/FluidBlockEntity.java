@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu.FluidBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.BlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidSetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
@@ -53,7 +55,15 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     private final BlockEntityFluidHandler fluidHandler = new BlockEntityFluidHandler(1, 50000) {
         @Override
         public FluidStack getStackInSlot(int slot) {
-            return super.getStackInSlot(0);
+            return super.getStackInSlot(slot);
+        }
+
+        @Override
+        protected void onContentsChanged(int index, FluidStack previousContents) {
+            setChanged();
+            if(!level.isClientSide()){
+                PacketDistributor.sendToAllPlayers(new FluidSetPacket(getStackInSlot(0), getBlockPos()));
+            }
         }
     };
 
@@ -74,7 +84,7 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
         public void set(int dataId, int value) {
             switch (dataId){
                 case 0 -> FluidBlockEntity.this.directionItemOutputSet = Function.decodeDirection(value);
-                case 2 -> FluidBlockEntity.this.directionFluidOutputSet = Function.decodeDirection(value);
+                case 1 -> FluidBlockEntity.this.directionFluidOutputSet = Function.decodeDirection(value);
             }
         }
 
@@ -178,6 +188,11 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
         return super.getUpdateTag(registries);
     }
 
+    @Override
+    public void handleUpdateTag(ValueInput input) {
+        super.handleUpdateTag(input);
+    }
+
     @Nullable
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
@@ -223,7 +238,6 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     public void setFluid(FluidStack fluidStack) {
         this.fluidHandler.setStackInSlot(0, fluidStack);
     }
-
 
     public ContainerData getData() {
         return data;

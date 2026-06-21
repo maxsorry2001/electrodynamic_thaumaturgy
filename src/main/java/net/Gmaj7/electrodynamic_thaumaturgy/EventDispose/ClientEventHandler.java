@@ -1,5 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.EventDispose;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlockEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.Block.blockEntityRender.FluidBlockRender;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MagnetoEntropyWitchEntity;
@@ -66,6 +68,10 @@ public class ClientEventHandler {
             event.register(EtMenuTypes.FILTER_SETTING_MENU.get(), FilterSettingScreen::new);
         }
 
+        @SubscribeEvent
+        public static void registerRenders(EntityRenderersEvent.RegisterRenderers event){
+            event.registerBlockEntityRenderer(EtBlockEntities.FLUID_BLOCK_BE.get(), FluidBlockRender::new);
+        }
 
         @SubscribeEvent
         public static void registerKey(RegisterKeyMappingsEvent event){
