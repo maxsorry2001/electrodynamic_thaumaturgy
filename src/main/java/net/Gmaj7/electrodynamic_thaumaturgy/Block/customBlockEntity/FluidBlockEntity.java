@@ -185,7 +185,7 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        return super.getUpdateTag(registries);
+        return this.saveWithoutMetadata(registries);
     }
 
     @Override
