@@ -9,6 +9,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Entity.model.PhotoCorrosiveNovaEntit
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.render.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.EtMenuTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Gui.hud.BowWheelHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.hud.MagicWheelHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.hud.ProtectHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.hud.ShowMagicHud;
@@ -18,6 +19,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Init.KeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.KeyState;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.PulseBow;
 import net.Gmaj7.electrodynamic_thaumaturgy.Particle.EtParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.HydrogenBondParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticle;
@@ -80,13 +82,14 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerKey(RegisterKeyMappingsEvent event){
-            event.register(KeyMapping.SELECT_MAGIC);
+            event.register(KeyMapping.TOOL_SWITCH);
         }
 
         @SubscribeEvent
         public static void registerHud(RegisterGuiLayersEvent event){
             event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "type_show"), new ShowMagicHud());
             event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_select"), MagicWheelHud.instance);
+            event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "bow_select"), BowWheelHud.instance);
             event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "protect_show"), new ProtectHud());
         }
 
@@ -139,7 +142,7 @@ public class ClientEventHandler {
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
     public static class notBusEvent{
-        private static final KeyState SELECT_MAGIC = new KeyState(KeyMapping.SELECT_MAGIC);
+        private static final KeyState SELECT_MAGIC = new KeyState(KeyMapping.TOOL_SWITCH);
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event){
             if(SELECT_MAGIC.wasPressed()){
@@ -149,11 +152,16 @@ public class ClientEventHandler {
                             MagicWheelHud.instance.open(hand);
                             break;
                         }
+                        else if (Minecraft.getInstance().player.getItemInHand(hand).getItem() instanceof PulseBow){
+                            BowWheelHud.instance.open(hand);
+                            break;
+                        }
                     }
                 }
             }
             if(SELECT_MAGIC.wasReleased()){
                 if(Minecraft.getInstance().screen == null && MagicWheelHud.instance.active) MagicWheelHud.instance.close();
+                else if(Minecraft.getInstance().screen == null && BowWheelHud.instance.active) BowWheelHud.instance.close();
             }
             SELECT_MAGIC.update();
         }

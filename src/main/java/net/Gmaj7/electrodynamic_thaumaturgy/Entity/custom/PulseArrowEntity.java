@@ -34,11 +34,13 @@ public class PulseArrowEntity extends Arrow {
     public PulseArrowEntity(EntityType<? extends Arrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
+        piercingIgnoreEntityIds = new IntOpenHashSet();
     }
 
     public PulseArrowEntity(Level level){
         super(EtEntities.PULSE_ARROW_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
+        piercingIgnoreEntityIds = new IntOpenHashSet();
     }
 
     public PulseArrowEntity(Level level, LivingEntity owner, float damage, int pattern){
@@ -52,6 +54,7 @@ public class PulseArrowEntity extends Arrow {
         this.setPos(x, y, z);
         this.pickup = Pickup.DISALLOWED;
         this.pattern = pattern;
+        piercingIgnoreEntityIds = new IntOpenHashSet();
     }
 
     @Override

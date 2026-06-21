@@ -102,8 +102,9 @@ public class PulseBow extends Item {
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
         EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
-        int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
+        int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt(), patter = itemStack.get(EtDataComponentTypes.BOW_WORK_PATTERN.get());
         builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+        builder.accept(Component.literal(String.valueOf(patter)));
     }
 
     private static void setEmptyContainer(ItemStack itemStack) {

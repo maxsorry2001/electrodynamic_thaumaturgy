@@ -6,7 +6,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -19,8 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -75,7 +72,7 @@ public class MagicCastItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
-        if(itemStack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 9){
+        if(itemStack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 10){
             setEmptyContainer(itemStack);
         }
         super.inventoryTick(itemStack, level, owner, slot);
@@ -94,7 +91,7 @@ public class MagicCastItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, builder, tooltipFlag);
-        if(stack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 9){
+        if(stack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 10){
             setEmptyContainer(stack);
         }
         builder.accept(getTranslate(stack));
