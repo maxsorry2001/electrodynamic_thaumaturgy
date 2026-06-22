@@ -32,7 +32,6 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
                 if (target1 == target || target1 == livingEntity) continue;
                 addParticle(target, target1);
                 target1.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack));
-                Function.checkTargetEnhancement(itemStack, target1);
             }
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
@@ -48,7 +47,6 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
             if (target1 == target || target1 == source || (source instanceof MagnetoOrderSageEntity && target1 == ((MagnetoOrderSageEntity) source).getOwner())) continue;
             addParticle(target, target1);
             target1.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(itemStack));
-            Function.checkTargetEnhancement(itemStack, target1);
         }
         if(!source.level().isClientSide()){
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));

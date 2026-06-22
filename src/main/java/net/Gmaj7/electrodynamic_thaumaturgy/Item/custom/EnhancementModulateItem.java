@@ -18,15 +18,11 @@ public class EnhancementModulateItem extends Item{
         float strength = enhancementData.strength();
         float coolDown = enhancementData.coolDown();
         float efficiency = enhancementData.efficiency();
-        int entropy = enhancementData.entropy();
-        int lifeExtraction = enhancementData.lifeExtraction();
         switch (enhancementType){
             case STRENGTH -> strength = strength + 0.25F;
             case COOLDOWN -> coolDown =  Math.max(coolDown - 0.15F, 0.1F);
             case EFFICIENCY -> efficiency = Math.max(efficiency - 0.1F, 0.1F);
-            case ENTROPY -> entropy += 1;
-            case LIFE_EXTRACTION -> lifeExtraction += 1;
         }
-        return new EnhancementData(strength, coolDown, efficiency, entropy, lifeExtraction);
+        return new EnhancementData(strength, coolDown, efficiency);
     }
 }

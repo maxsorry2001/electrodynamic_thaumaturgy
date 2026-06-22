@@ -50,7 +50,6 @@ public class PulsedPlasmaEntity extends AbstractArrow {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity && magicItem != null && entity != getOwner() && !(this.getOwner() instanceof MagnetoOrderSageEntity && entity == ((MagnetoOrderSageEntity) this.getOwner()).getOwner())) {
             entity.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem));
-            Function.checkTargetEnhancement(magicItem, (LivingEntity) entity);
         }
     }
 

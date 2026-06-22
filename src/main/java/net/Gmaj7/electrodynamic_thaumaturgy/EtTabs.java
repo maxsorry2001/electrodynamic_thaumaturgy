@@ -83,8 +83,6 @@ public class EtTabs {
                         output.accept(EtItems.COOLDOWN_ENHANCE);
                         output.accept(EtItems.STRENGTH_ENHANCE);
                         output.accept(EtItems.EFFICIENCY_ENHANCE);
-                        output.accept(EtItems.ENTROPY_ENHANCE);
-                        output.accept(EtItems.LIFE_EXTRACTION_ENHANCE);
 
                         output.accept(EtItems.PRIMARY_LC);
                         output.accept(EtItems.INTERMEDIATE_LC);

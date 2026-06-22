@@ -65,11 +65,6 @@ public class DamageEvent {
                 }
             }
         }
-        if(source.is(EtDamageType.origin_thaumaturgy) && sourceEntity instanceof LivingEntity livingEntity){
-            EnhancementData enhancementData = livingEntity.getMainHandItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
-            if(enhancementData == null) enhancementData = livingEntity.getOffhandItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
-            if(enhancementData != null) livingEntity.heal(event.getNewDamage() * 0.2F * enhancementData.lifeExtraction());
-        }
         if(sourceEntity instanceof MagnetoOrderSageEntity && ((MagnetoOrderSageEntity) sourceEntity).getOwner() instanceof Player){
             eventTarget.setLastHurtByPlayer((Player) ((MagnetoOrderSageEntity) sourceEntity).getOwner(), 100);
         }

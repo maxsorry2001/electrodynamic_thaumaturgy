@@ -69,7 +69,6 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.DOMAIN_RECONSTRUCTION_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MIRAGE_PURSUIT_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNET_RESONANCE_MODULE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(EtItems.LIFE_EXTRACTION_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNETIC_FLUX_CASCADE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.FREQUENCY_DIVISION_ARROW_RAIN_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.SAGE_S_MAGNETISM_SEAL.get(), ModelTemplates.FLAT_ITEM);
@@ -81,7 +80,6 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.STRENGTH_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.COOLDOWN_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.EFFICIENCY_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(EtItems.ENTROPY_ENHANCE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.ENHANCE_MODEM_BASEBOARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.RADIANT_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);

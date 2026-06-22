@@ -89,10 +89,6 @@ public class EtItems {
             (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.COOLDOWN, properties.stacksTo(1)));
     public static final DeferredItem<Item> EFFICIENCY_ENHANCE = ITEM.registerItem("efficiency_enhance",
             (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.EFFICIENCY, properties.stacksTo(1)));
-    public static final DeferredItem<Item> ENTROPY_ENHANCE = ITEM.registerItem("entropy_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.ENTROPY, properties.stacksTo(1)));
-    public static final DeferredItem<Item> LIFE_EXTRACTION_ENHANCE = ITEM.registerItem("life_extraction_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.LIFE_EXTRACTION, properties.stacksTo(1)));
     public static final DeferredItem<Item> ENHANCE_MODEM_BASEBOARD = ITEM.registerItem("enhance_modem_baseboard",
             (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.EMPTY, properties));
 
@@ -143,7 +139,8 @@ public class EtItems {
             (properties) -> new PulseBow(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
-                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())));
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));

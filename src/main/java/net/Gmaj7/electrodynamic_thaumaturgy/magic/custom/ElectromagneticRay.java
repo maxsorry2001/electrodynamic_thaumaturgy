@@ -40,7 +40,6 @@ public class ElectromagneticRay extends AbstractWideMagic{
                     Entity target = ((EntityHitResult) result).getEntity();
                     if (target instanceof LivingEntity) {
                         target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack));
-                        Function.checkTargetEnhancement(itemStack, (LivingEntity) target);
                     }
                 }
             }
@@ -62,7 +61,6 @@ public class ElectromagneticRay extends AbstractWideMagic{
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
                     entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
-                    Function.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
         }
@@ -95,7 +93,6 @@ public class ElectromagneticRay extends AbstractWideMagic{
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
                     target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
-                    Function.checkTargetEnhancement(ElectromagneticDriverBE.magicItem, (LivingEntity) target);
                 }
             }
         }

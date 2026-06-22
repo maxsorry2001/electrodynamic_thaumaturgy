@@ -28,7 +28,6 @@ public class NerveBlocking extends AbstractWideMagic{
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
                 target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(itemStack)), (int) (1 * Function.getStrengthRate(itemStack))));
-                Function.checkTargetEnhancement(itemStack, livingEntity);
             }
         }
         if(!livingEntity.level().isClientSide()){
@@ -49,7 +48,6 @@ public class NerveBlocking extends AbstractWideMagic{
         list.add(target);
         for (LivingEntity livingEntity : list){
             target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(itemStack)), (int) (1 * Function.getStrengthRate(itemStack))));
-            Function.checkTargetEnhancement(itemStack, livingEntity);
         }
         if(!source.level().isClientSide()){
             Thread thread = new Thread(() -> {

@@ -275,18 +275,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_enhance_baseboard", has(EtItems.ENHANCE_MODEM_BASEBOARD))
                 .save(output);
 
-        shapeless(RecipeCategory.MISC, EtItems.ENTROPY_ENHANCE)
-                .requires(Items.FLINT_AND_STEEL)
-                .requires(EtItems.ENHANCE_MODEM_BASEBOARD)
-                .unlockedBy("has_enhance_baseboard", has(EtItems.ENHANCE_MODEM_BASEBOARD))
-                .save(output);
-
-        shapeless(RecipeCategory.MISC, EtItems.LIFE_EXTRACTION_ENHANCE)
-                .requires(Items.GOLDEN_CARROT)
-                .requires(EtItems.ENHANCE_MODEM_BASEBOARD)
-                .unlockedBy("has_enhance_baseboard", has(EtItems.ENHANCE_MODEM_BASEBOARD))
-                .save(output);
-
         // ========== 各类电池 ==========
         shapeless(RecipeCategory.MISC, EtItems.CARROT_BATTERY)
                 .requires(Items.IRON_INGOT)

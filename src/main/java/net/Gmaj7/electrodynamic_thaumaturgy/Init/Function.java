@@ -70,14 +70,6 @@ public class Function {
         return enhancementData == null ? 1 : enhancementData.efficiency();
     }
 
-    public static void checkTargetEnhancement(ItemStack itemStack, LivingEntity livingEntity){
-        EnhancementData enhancementData = itemStack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
-        int entropy = enhancementData == null ? 0 : enhancementData.entropy();
-        if(entropy > 0){
-            livingEntity.igniteForTicks(entropy * 20);
-        }
-    }
-
     public static HitResult checkEntityIntersecting(Entity entity, Vec3 start, Vec3 end, float bbInflation) {
         Vec3 hitPos = null;
         if (entity.isMultipartEntity()) {

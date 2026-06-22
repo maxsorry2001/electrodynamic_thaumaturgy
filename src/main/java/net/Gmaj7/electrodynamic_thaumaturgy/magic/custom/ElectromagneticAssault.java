@@ -38,7 +38,6 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
                     target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack) * 0.5F);
-                    Function.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
         }
@@ -69,7 +68,6 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
                     entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(itemStack) * 0.5F);
-                    Function.checkTargetEnhancement(itemStack, (LivingEntity) target);
                 }
             }
         }

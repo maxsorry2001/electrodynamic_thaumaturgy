@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.EnhancementModulateItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.PulseBow;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -63,7 +64,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, toolSlotNum, 20, 37){
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof MagicCastItem;
+                return stack.getItem() instanceof MagicCastItem || stack.getItem() instanceof PulseBow;
             }
         });
         addPlayerInventory(inventory);

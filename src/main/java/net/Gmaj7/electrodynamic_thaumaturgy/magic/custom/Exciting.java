@@ -30,7 +30,6 @@ public class Exciting extends AbstractWideMagic{
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
                 target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getDamageAmount(itemStack)) - 7));
-                Function.checkTargetEnhancement(itemStack, livingEntity);
                 if(livingEntity.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;
@@ -48,7 +47,6 @@ public class Exciting extends AbstractWideMagic{
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {
                 target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getDamageAmount(itemStack)) - 7));
-                Function.checkTargetEnhancement(itemStack, source);
                 if(source.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;

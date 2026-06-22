@@ -82,8 +82,6 @@ public class MagicCastItem extends Item {
         builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
         builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
         builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.entropy_enhance").append(":" + enhancementData.entropy()));
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.life_extraction_enhance").append(":" + enhancementData.lifeExtraction()));
     }
 
     @Override
