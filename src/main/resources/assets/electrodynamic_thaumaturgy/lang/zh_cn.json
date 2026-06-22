@@ -27,6 +27,7 @@
   "item.electrodynamic_thaumaturgy.photo_corrosive_nova_module": "光蚀新星",
   "item.electrodynamic_thaumaturgy.sage_s_magnetism_seal_module": "贤者磁印",
 
+  "item.electrodynamic_thaumaturgy.pulse_bow": "脉冲弓",
   "item.electrodynamic_thaumaturgy.primary_code_module": "初级法术代码模块",
   "item.electrodynamic_thaumaturgy.intermediate_code_module": "中级法术代码模块",
   "item.electrodynamic_thaumaturgy.advanced_code_module": "高级法术代码模块",
@@ -163,7 +164,7 @@
   "moe_show_energy": "能量:",
 
   "key.category.electrodynamic_thaumaturgy.et": "电磁奇术",
-  "key.electrodynamic_thaumaturgy.switch_magic": "法术切换",
+  "key.electrodynamic_thaumaturgy.tool_switch": "法术切换",
   "magic_encode": "法术编码",
   "electromagnetic_infusion": "电磁浸润",
   "magneto_fusion": "磁力融合",

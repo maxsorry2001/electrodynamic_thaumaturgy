@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Item.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.minecraft.world.item.Item;
 
 public class EnhancementModulateItem extends Item{

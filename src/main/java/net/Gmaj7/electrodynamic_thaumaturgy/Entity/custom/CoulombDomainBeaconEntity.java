@@ -58,7 +58,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
             for (LivingEntity target : list){
                 if(target == getOwner()) continue;
                 if (this.getOwner() instanceof MagnetoOrderSageEntity && target == ((MagnetoOrderSageEntity) this.getOwner()).getOwner()) continue;
-                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getMagicAmount(magicItem) / 2);
+                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem) / 2);
                 Function.checkTargetEnhancement(magicItem, target);
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
                 lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

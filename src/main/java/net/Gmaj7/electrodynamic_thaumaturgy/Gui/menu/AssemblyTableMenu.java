@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.*;
 import net.minecraft.world.Container;
@@ -15,6 +16,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 
@@ -192,17 +194,17 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
         ItemStack toolStack = toolSlot.copy();
         this.access.execute((level1, blockPos) -> {
             if(toolStack.getItem() instanceof MagicCastItem) {
-                List<ItemStack> newList = new ArrayList<>();
+                List<ItemStackTemplate> newList = new ArrayList<>();
                 for (int i = powerSlotNum; i < typeSlotEndNum; i++){
                     ItemStack itemStack = this.slots.get(i).getItem();
                     if(itemStack.isEmpty()){
-                        if(i == powerSlotNum) newList.add(new ItemStack(EtItems.EMPTY_POWER.get()));
-                        else if (i == lcSlotNum) newList.add(new ItemStack(EtItems.EMPTY_LC.get()));
-                        else newList.add(new ItemStack(EtItems.EMPTY_MAGIC_MODULE.get()));
+                        if(i == powerSlotNum) newList.add(new ItemStackTemplate(EtItems.EMPTY_POWER.get()));
+                        else if (i == lcSlotNum) newList.add(new ItemStackTemplate(EtItems.EMPTY_LC.get()));
+                        else newList.add(new ItemStackTemplate(EtItems.EMPTY_MAGIC_MODULE.get()));
                     }
-                    else newList.add(itemStack);
+                    else newList.add(ItemStackTemplate.fromNonEmptyStack(itemStack));
                 }
-                toolSlot.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(newList));
+                toolSlot.set(EtDataComponentTypes.ET_CONTAINER.get(), new ItemContainerData(newList));
             }
         });
     }
@@ -214,7 +216,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
             ItemStack toolStack = container.getItem(toolSlotNum);
             if(!toolStack.isEmpty() && toolStack.getItem() instanceof MagicCastItem){
                 this.access.execute((level1, blockPos) -> {
-                    ItemContainerContents contents = toolStack.get(EtDataComponentTypes.ET_CONTAINER.get());
+                    ItemContainerData contents = toolStack.get(EtDataComponentTypes.ET_CONTAINER.get());
                     for (int i = powerSlotNum; i < typeSlotEndNum; i++){
                         ItemStack menuSlot = contents.getStackInSlot(i).copy();
                         if(menuSlot.getItem() instanceof IEtModuleItem && ((IEtModuleItem) menuSlot.getItem()).isEmpty())

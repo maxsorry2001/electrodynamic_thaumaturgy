@@ -342,7 +342,7 @@ public class FluidPipeNet extends PipeNet{
                         white.add(fluidStack.copy());
                 }
                 else {
-                    ItemContainerContents contents = fluidStack.get(EtDataComponentTypes.ET_CONTAINER);
+                    ItemContainerContents contents = fluidStack.get(EtDataComponentTypes.FILTER_CONTAINER);
                     List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().filter(stack -> (stack.getItem() instanceof BucketItem && ((BucketItem)stack.getItem()).content != Fluids.EMPTY) || stack.getItem() instanceof FluidFakeItem).toList());
                     if(fluidStack.getOrDefault(EtDataComponentTypes.FILTER_WHITE.get(), true)) white.addAll(list);
                     else black.addAll(list);

@@ -29,7 +29,7 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
-                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getMagicAmount(itemStack)) - 7));
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getDamageAmount(itemStack)) - 7));
                 Function.checkTargetEnhancement(itemStack, livingEntity);
                 if(livingEntity.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
@@ -47,7 +47,7 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {
-                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getMagicAmount(itemStack)) - 7));
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getDamageAmount(itemStack)) - 7));
                 Function.checkTargetEnhancement(itemStack, source);
                 if(source.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
@@ -73,7 +73,7 @@ public class Exciting extends AbstractWideMagic{
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == electromagneticDriverBE.getOwner())) {
-                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (Function.getMagicAmount(ElectromagneticDriverBE.magicItem)) - 7));
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (Function.getDamageAmount(ElectromagneticDriverBE.magicItem)) - 7));
                 if(electromagneticDriverBE.getLevel() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;

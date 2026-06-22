@@ -27,6 +27,7 @@ public class DataLoadHandler {
         final PayloadRegistrar payloadRegistrar = event.registrar(ElectrodynamicThaumaturgy.MODID).versioned("1.0.0").optional();
 
         payloadRegistrar.playToServer(SelectMagicPacket.TYPE, SelectMagicPacket.STREAM_CODEC, SelectMagicPacket::handle);
+        payloadRegistrar.playToServer(SelectBowPacket.TYPE, SelectBowPacket.STREAM_CODEC, SelectBowPacket::handle);
         payloadRegistrar.playToServer(DirectionSetPacket.TYPE, DirectionSetPacket.STREAM_CODEC, DirectionSetPacket::handle);
         payloadRegistrar.playToServer(NetChangePacket.TYPE, NetChangePacket.STREAM_CODEC, NetChangePacket ::handle);
         payloadRegistrar.playToServer(ItemPipeNetFilterPacket.TYPE, ItemPipeNetFilterPacket.STREAM_CODEC, ItemPipeNetFilterPacket::handle);
@@ -52,7 +53,8 @@ public class DataLoadHandler {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 49152)),
-                EtItems.ELECTROMAGNETIC_ROD.get());
+                EtItems.ELECTROMAGNETIC_ROD.get(),
+                EtItems.PULSE_BOW.get());
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 16384, 0, 16384)),
                 EtItems.POTATO_BATTERY.get(),
                 EtItems.CARROT_BATTERY.get(),

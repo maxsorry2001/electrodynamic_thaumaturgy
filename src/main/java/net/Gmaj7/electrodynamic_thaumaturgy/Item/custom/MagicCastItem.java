@@ -1,15 +1,19 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Item.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +26,10 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class MagicCastItem extends Item {
@@ -108,7 +115,8 @@ public class MagicCastItem extends Item {
 
     private ItemStack getMagic(ItemStack itemStack){
         if(itemStack.has(EtDataComponentTypes.ET_CONTAINER.get()) && itemStack.has(EtDataComponentTypes.MAGIC_SELECT)) {
-            ItemContainerContents contents = itemStack.getOrDefault(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.EMPTY);
+            ItemContainerData contents = itemStack.getOrDefault(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.EMPTY);
+            if(contents.isEmpty()) return ItemStack.EMPTY;
             ItemStack typeStack = contents.getStackInSlot(itemStack.get(EtDataComponentTypes.MAGIC_SELECT));
             return typeStack;
         }

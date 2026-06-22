@@ -27,6 +27,7 @@
   "item.electrodynamic_thaumaturgy.photo_corrosive_nova_module": "Photo Corrosive Nova",
   "item.electrodynamic_thaumaturgy.sage_s_magnetism_seal_module": "Sage’s Magnetism Seal",
 
+  "item.electrodynamic_thaumaturgy.pulse_bow": "Pulse Bow",
   "item.electrodynamic_thaumaturgy.primary_code_module": "Primary Magic Code Module",
   "item.electrodynamic_thaumaturgy.intermediate_code_module": "Intermediate Magic Code Module",
   "item.electrodynamic_thaumaturgy.advanced_code_module": "Advanced Magic Code Module",
@@ -163,7 +164,7 @@
   "moe_extractor_depth": "Depth",
 
   "key.category.electrodynamic_thaumaturgy.et": "Electrodynamic Thaumatury",
-  "key.electrodynamic_thaumaturgy.switch_magic": "Switch magic",
+  "key.electrodynamic_thaumaturgy.tool_switch": "Switch magic",
   "magic_encode": "Magic Encode",
   "magneto_fusion": "magneto fusion",
   "electromagnetic_dissociation": "electromagnetic dissociation",

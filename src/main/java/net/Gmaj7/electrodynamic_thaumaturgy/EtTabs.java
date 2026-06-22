@@ -2,12 +2,15 @@ package net.Gmaj7.electrodynamic_thaumaturgy;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -41,6 +44,8 @@ public class EtTabs {
 
                         output.accept(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD));
                         output.accept(setFullEnergyItem(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())));
+                        output.accept(EtItems.PULSE_BOW);
+                        output.accept(setFullEnergyItem(getDefaultBow(EtItems.PULSE_BOW)));
                         output.accept(EtItems.PRIMARY_CODE_MODULE);
                         output.accept(EtItems.INTERMEDIATE_CODE_MODULE);
                         output.accept(EtItems.ADVANCED_CODE_MODULE);
@@ -145,16 +150,13 @@ public class EtTabs {
 
     public static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
-        List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(EtItems.SUPERCONDUCTING_POWER.get()));
-        list.add(new ItemStack(EtItems.SUPERCONDUCTING_LC.get()));
-        if (item == EtItems.ELECTROMAGNETIC_ROD.get()){
-            list.add(new ItemStack(EtItems.RAY_MODULE.get()));
-        }
-        for (int i = 3 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(EtItems.EMPTY_MAGIC_MODULE.get()));
-        }
-        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultRod());
+        return itemStack;
+    }
+
+    public static ItemStack getDefaultBow(ItemLike item){
+        ItemStack itemStack = new ItemStack(item);
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultBow());
         return itemStack;
     }
 
@@ -171,15 +173,15 @@ public class EtTabs {
         return getRod(EtItems.SUPERCONDUCTING_LC.get(), EtItems.SUPERCONDUCTING_POWER.get());
     }
 
-    public static final ItemStack getRod(ItemLike lc, ItemLike power){
+    public static final ItemStack getRod(Item lc, Item power){
         ItemStack itemStack = new ItemStack(EtItems.ELECTROMAGNETIC_ROD.get());
-        List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(lc));
-        list.add(new ItemStack(power));
+        List<ItemStackTemplate> list = new ArrayList<>();
+        list.add(new ItemStackTemplate(lc));
+        list.add(new ItemStackTemplate(power));
         for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(EtItems.EMPTY_MAGIC_MODULE.get()));
+            list.add(new ItemStackTemplate(EtItems.EMPTY_MAGIC_MODULE.get()));
         }
-        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), new ItemContainerData(list));
         return itemStack;
     }
 }

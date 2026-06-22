@@ -109,7 +109,7 @@ public class FilterSettingHandler implements IGhostIngredientHandler<FilterSetti
                 else list.set(slot, itemStack);
             }
             ItemContainerContents contents = ItemContainerContents.fromItems(list);
-            screen.getMenu().getFilter().set(EtDataComponentTypes.ET_CONTAINER, contents);
+            screen.getMenu().getFilter().set(EtDataComponentTypes.FILTER_CONTAINER, contents);
 
         }
     }

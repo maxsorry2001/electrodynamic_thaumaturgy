@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "electrodynamic_thaumaturgy:item/pulse_bow_pulling_1"
+  }
+}

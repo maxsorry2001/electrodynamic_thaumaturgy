@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen.Builder;
 import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.MagnetoFusionRecipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -33,6 +34,10 @@ public class MagnetoFusionRecipeBuilder implements RecipeBuilder {
 
     public static MagnetoFusionRecipeBuilder result(HolderGetter<Item> items, ItemLike result) {
         return new MagnetoFusionRecipeBuilder(items, new ItemStackTemplate(result.asItem()));
+    }
+
+    public static MagnetoFusionRecipeBuilder result(HolderGetter<Item> items, ItemLike result, DataComponentPatch patch) {
+        return new MagnetoFusionRecipeBuilder(items, new ItemStackTemplate(result.asItem(), patch));
     }
 
     public static MagnetoFusionRecipeBuilder result(HolderGetter<Item> items, ItemLike result, int count) {

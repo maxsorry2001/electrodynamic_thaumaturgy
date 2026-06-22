@@ -54,7 +54,7 @@ public class PhotoacousticPulseBeaconEntity extends AbstractArrow {
             Vec3 vec3Start = new Vec3(this.getX(), this.getY() + 1, this.getZ());
             if(magicItem != null && !this.level().isClientSide()){
                 for (LivingEntity target : list) {
-                    target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM)), Function.getMagicAmount(this.magicItem));
+                    target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM)), Function.getDamageAmount(this.magicItem));
                     Vec3 vec3End = target.getEyePosition();
                     Vec3 vec3Throw = vec3Start.vectorTo(vec3End);
                     Vec3 vec3Per = vec3Throw.normalize();

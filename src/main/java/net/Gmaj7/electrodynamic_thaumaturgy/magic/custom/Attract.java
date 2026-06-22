@@ -19,7 +19,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(player.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), player);
-        attractBeaconEntity.setLiveTime((int) Function.getMagicAmount(itemStack) * 10);
+        attractBeaconEntity.setLiveTime((int) Function.getDamageAmount(itemStack) * 10);
         player.level().addFreshEntity(attractBeaconEntity);
     }
 
@@ -28,7 +28,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), source);
-        attractBeaconEntity.setLiveTime((int) Function.getMagicAmount(itemStack) * 10);
+        attractBeaconEntity.setLiveTime((int) Function.getDamageAmount(itemStack) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
     }
 
@@ -51,7 +51,7 @@ public class Attract extends AbstractBlockBeaconMagic {
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         Vec3 vec3 = blockPos.getCenter();
         AttractBeaconEntity attractBeaconEntity = new AttractBeaconEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), (LivingEntity) electromagneticDriverBE.getOwner());
-        attractBeaconEntity.setLiveTime((int) Function.getMagicAmount(ElectromagneticDriverBE.magicItem) * 10);
+        attractBeaconEntity.setLiveTime((int) Function.getDamageAmount(ElectromagneticDriverBE.magicItem) * 10);
         target.level().addFreshEntity(attractBeaconEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
     }

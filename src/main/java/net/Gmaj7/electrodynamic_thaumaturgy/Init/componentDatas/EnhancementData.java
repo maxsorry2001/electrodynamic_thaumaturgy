@@ -1,4 +1,4 @@
-package net.Gmaj7.electrodynamic_thaumaturgy.Init;
+package net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

@@ -3,8 +3,9 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Item;
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.ElectromagneticLevel;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
@@ -110,7 +111,7 @@ public class EtItems {
             (properties) -> new Item(properties.stacksTo(1)));
     public static final DeferredItem<Item> FILTER_SETTING = ITEM.registerItem("net_filter",
             (properties) -> new FilterSettingItem(properties.stacksTo(1)
-                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.EMPTY)
+                    .component(EtDataComponentTypes.FILTER_CONTAINER.get(), ItemContainerContents.EMPTY)
                     .component(EtDataComponentTypes.FILTER_WHITE.get(), true)));
 
     public static final DeferredItem<Item> MAGNO_WRENCH = ITEM.registerItem("magno_wrench",
@@ -135,9 +136,14 @@ public class EtItems {
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = ITEM.registerItem("electromagnetic_rod",
             (properties) -> new MagicCastItem(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
-                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.EMPTY)
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyRod())
                     .component(EtDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+    public static final DeferredItem<Item> PULSE_BOW = ITEM.registerItem("pulse_bow",
+            (properties) -> new PulseBow(properties.stacksTo(1)
+                    .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
+                    .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));

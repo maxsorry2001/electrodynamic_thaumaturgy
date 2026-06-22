@@ -49,7 +49,7 @@ public class FilterSettingItemPacket implements CustomPacketPayload {
         context.enqueueWork(() -> {
             if(context.player().level() instanceof ServerLevel) {
                 if(context.player().getMainHandItem().getItem() instanceof FilterSettingItem) {
-                    List<ItemStack> list = new ArrayList<>(context.player().getMainHandItem().get(EtDataComponentTypes.ET_CONTAINER).allItemsCopyStream().toList());
+                    List<ItemStack> list = new ArrayList<>(context.player().getMainHandItem().get(EtDataComponentTypes.FILTER_CONTAINER).allItemsCopyStream().toList());
                     if(packet.isEmpty && packet.slot < list.size()){
                         list.remove(packet.slot);
                     }
@@ -58,7 +58,7 @@ public class FilterSettingItemPacket implements CustomPacketPayload {
                         else list.set(packet.slot, packet.itemStack);
                     }
                     ItemContainerContents contents = ItemContainerContents.fromItems(list);
-                    context.player().getMainHandItem().set(EtDataComponentTypes.ET_CONTAINER, contents);
+                    context.player().getMainHandItem().set(EtDataComponentTypes.FILTER_CONTAINER, contents);
                 }
             }
         });
