@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 public class BowWheelHud implements GuiLayer {
     public static BowWheelHud instance = new BowWheelHud();
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud_bow.png");
     public boolean active;
     private int selection;
     private InteractionHand useHand;

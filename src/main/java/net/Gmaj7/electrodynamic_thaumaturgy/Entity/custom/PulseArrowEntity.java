@@ -124,7 +124,7 @@ public class PulseArrowEntity extends Arrow {
                     if(getOwner() instanceof LivingEntity) list.remove(getOwner());
                     if(getDamageOwner() instanceof LivingEntity) list.remove(getDamageOwner());
                     for (LivingEntity target : list){
-                        target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), getDamageOwner()), damage);
+                        target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), getDamageOwner()), damage * 0.7F);
                     }
                     this.discard();
                 }
@@ -133,7 +133,7 @@ public class PulseArrowEntity extends Arrow {
                     if(count > 0 && !piercingIgnoreEntityIds.contains(livingEntity.getId())){
                         count --;
                         piercingIgnoreEntityIds.add(livingEntity.getId());
-                        this.damage = Math.max(2, damage / 2);
+                        this.damage = Math.max(2, damage * 0.75F);
                         if(!startCount) startCount = true;
                     }
                 }
