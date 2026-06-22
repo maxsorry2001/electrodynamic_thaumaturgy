@@ -2,6 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Init;
 
 import com.mojang.serialization.Codec;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -39,8 +41,11 @@ public class EtDataComponentTypes {
     public static final Supplier<DataComponentType<Identifier>> MAGIC_DEF_LOCATION = ET_DATA_COMPONENT_TYPE.register("magic",
             () -> DataComponentType.<Identifier>builder().persistent(Identifier.CODEC).build());
 
-    public static final Supplier<DataComponentType<ItemContainerContents>> ET_CONTAINER = ET_DATA_COMPONENT_TYPE.register("et_container",
-            () -> DataComponentType.<ItemContainerContents>builder().persistent(ItemContainerContents.CODEC).networkSynchronized(ItemContainerContents.STREAM_CODEC).cacheEncoding().build());
+    public static final Supplier<DataComponentType<ItemContainerData>> ET_CONTAINER = ET_DATA_COMPONENT_TYPE.register("et_container",
+            () -> DataComponentType.<ItemContainerData>builder().persistent(ItemContainerData.CODEC).networkSynchronized(ItemContainerData.STREAM_CODEC).cacheEncoding().build());
+
+    public static final Supplier<DataComponentType<ItemContainerContents>> FILTER_CONTAINER = ET_DATA_COMPONENT_TYPE.register("et_filter_container",
+            () -> DataComponentType.<ItemContainerContents>builder().persistent(ItemContainerContents.CODEC).networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
 
     public static final Supplier<DataComponentType<Boolean>> FILTER_WHITE = ET_DATA_COMPONENT_TYPE.register("filter_white",
             () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).build());

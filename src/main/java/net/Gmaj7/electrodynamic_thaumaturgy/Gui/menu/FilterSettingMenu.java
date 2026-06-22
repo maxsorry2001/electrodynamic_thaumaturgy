@@ -84,7 +84,7 @@ public class FilterSettingMenu extends AbstractContainerMenu {
     }
 
     public List<ItemStack> getFilterList(){
-        return new ArrayList<>(filter.get(EtDataComponentTypes.ET_CONTAINER).allItemsCopyStream().toList());
+        return new ArrayList<>(filter.get(EtDataComponentTypes.FILTER_CONTAINER).allItemsCopyStream().toList());
     }
 
     public ItemStack getFilter() {

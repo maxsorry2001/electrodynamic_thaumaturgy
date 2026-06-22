@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Item.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.PulseArrowEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -105,12 +106,5 @@ public class PulseBow extends Item {
         int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt(), patter = itemStack.get(EtDataComponentTypes.BOW_WORK_PATTERN.get());
         builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         builder.accept(Component.literal(String.valueOf(patter)));
-    }
-
-    private static void setEmptyContainer(ItemStack itemStack) {
-        List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(EtItems.EMPTY_POWER.get()));
-        list.add(new ItemStack(EtItems.EMPTY_LC.get()));
-        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
     }
 }

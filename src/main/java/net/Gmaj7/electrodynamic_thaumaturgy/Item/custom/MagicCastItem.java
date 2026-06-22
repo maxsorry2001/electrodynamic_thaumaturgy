@@ -1,8 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Item.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
@@ -71,29 +72,8 @@ public class MagicCastItem extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
-        if(itemStack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 10){
-            setEmptyContainer(itemStack);
-        }
-        super.inventoryTick(itemStack, level, owner, slot);
-    }
-
-    private static void setEmptyContainer(ItemStack itemStack) {
-        List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(EtItems.EMPTY_POWER.get()));
-        list.add(new ItemStack(EtItems.EMPTY_LC.get()));
-        for (int i = 2 ; i < MagicCastItem.getMaxMagicSlots(); i ++){
-            list.add(new ItemStack(EtItems.EMPTY_MAGIC_MODULE.get()));
-        }
-        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.fromItems(list));
-    }
-
-    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, builder, tooltipFlag);
-        if(stack.get(EtDataComponentTypes.ET_CONTAINER).getSlots() != 10){
-            setEmptyContainer(stack);
-        }
         builder.accept(getTranslate(stack));
         EnergyHandler energyHandler = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
         int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
@@ -135,7 +115,8 @@ public class MagicCastItem extends Item {
 
     private ItemStack getMagic(ItemStack itemStack){
         if(itemStack.has(EtDataComponentTypes.ET_CONTAINER.get()) && itemStack.has(EtDataComponentTypes.MAGIC_SELECT)) {
-            ItemContainerContents contents = itemStack.getOrDefault(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerContents.EMPTY);
+            ItemContainerData contents = itemStack.getOrDefault(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.EMPTY);
+            if(contents.isEmpty()) return ItemStack.EMPTY;
             ItemStack typeStack = contents.getStackInSlot(itemStack.get(EtDataComponentTypes.MAGIC_SELECT));
             return typeStack;
         }

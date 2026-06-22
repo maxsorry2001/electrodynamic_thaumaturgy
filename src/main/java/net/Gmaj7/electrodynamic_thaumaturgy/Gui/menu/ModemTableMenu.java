@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Gui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.Gui.EtMenuTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.EnhancementModulateItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;

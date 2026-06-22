@@ -7,6 +7,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MirageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.ProtectingPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

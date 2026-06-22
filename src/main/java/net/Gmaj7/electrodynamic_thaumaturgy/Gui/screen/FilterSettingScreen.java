@@ -117,7 +117,7 @@ public class FilterSettingScreen extends AbstractContainerScreen<FilterSettingMe
                     else list.set(slot, itemStack);
                 }
                 ItemContainerContents contents = ItemContainerContents.fromItems(list);
-                menu.getFilter().set(EtDataComponentTypes.ET_CONTAINER, contents);
+                menu.getFilter().set(EtDataComponentTypes.FILTER_CONTAINER, contents);
                 return true;
             }
         }

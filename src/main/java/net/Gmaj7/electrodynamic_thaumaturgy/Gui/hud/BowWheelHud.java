@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.Gui.hud;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.SelectBowPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -39,7 +40,7 @@ public class BowWheelHud implements GuiLayer {
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY / 2;
         double alpha = - 0.375 * Math.PI;
-        ItemContainerContents contents = stack.get(EtDataComponentTypes.ET_CONTAINER.get());
+        ItemContainerData contents = stack.get(EtDataComponentTypes.ET_CONTAINER.get());
         //for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
         //    ItemStack type = contents.getStackInSlot(i);
         //    if(type.getItem() instanceof EtMagicTypeModuleItem item && !item.isEmpty()){

@@ -322,7 +322,7 @@ public class ItemPipeNet extends PipeNet{
             for (ItemStack itemStack : filter.get(pos).get(direction)){
                 if(!itemStack.is(EtItems.FILTER_SETTING)) white.add(itemStack.copy());
                 else {
-                    ItemContainerContents contents = itemStack.get(EtDataComponentTypes.ET_CONTAINER);
+                    ItemContainerContents contents = itemStack.get(EtDataComponentTypes.FILTER_CONTAINER);
                     List<ItemStack> list = new ArrayList<>(contents.allItemsCopyStream().toList());
                     if(itemStack.getOrDefault(EtDataComponentTypes.FILTER_WHITE.get(), true)) white.addAll(list);
                     else black.addAll(list);

@@ -1,6 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.Init;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.LcOscillatorModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
@@ -34,7 +36,7 @@ public class Function {
     private static float getBaseAmount(ItemStack itemStack){
         float amount = 0;
         if(itemStack.has(EtDataComponentTypes.ET_CONTAINER.get())){
-            ItemContainerContents contents = itemStack.get(EtDataComponentTypes.ET_CONTAINER.get());
+            ItemContainerData contents = itemStack.get(EtDataComponentTypes.ET_CONTAINER.get());
             ItemStack lcModule = contents.getStackInSlot(MagicCastItem.getLcNum());
             Item item = lcModule.getItem();
             if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
@@ -45,7 +47,7 @@ public class Function {
     private static float getBasePower(ItemStack itemStack){
         float power = 1;
         if(itemStack.has(EtDataComponentTypes.ET_CONTAINER.get())){
-            ItemContainerContents contents = itemStack.get(EtDataComponentTypes.ET_CONTAINER.get());
+            ItemContainerData contents = itemStack.get(EtDataComponentTypes.ET_CONTAINER.get());
             ItemStack powerModule = contents.getStackInSlot(MagicCastItem.getPowerNum());
             Item item = powerModule.getItem();
             if(item instanceof PowerAmplifierItem) power = ((PowerAmplifierItem) item).getMagnification();
