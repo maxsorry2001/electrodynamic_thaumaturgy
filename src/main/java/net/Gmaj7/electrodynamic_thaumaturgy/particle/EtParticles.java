@@ -1,0 +1,48 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.particle;
+
+import com.mojang.serialization.MapCodec;
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticleOption;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
+
+public class EtParticles {
+    public static final DeferredRegister<ParticleType<?>> PARTICLE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, ElectrodynamicThaumaturgy.MODID);
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HYDROGEN_BOND_PARTICLE = PARTICLE.register("hydrogen_bond_particle",
+            () -> new SimpleParticleType(true));
+    public static final Supplier<ParticleType<PointRotateParticleOption>> POINT_ROTATE_PARTICLE = PARTICLE.register("point_rotate_particle", () -> new ParticleType<>(true) {
+        @Override
+        public MapCodec<PointRotateParticleOption> codec() {
+            return PointRotateParticleOption.CODEC;
+        }
+
+        @Override
+        public StreamCodec<? super RegistryFriendlyByteBuf, PointRotateParticleOption> streamCodec() {
+            return PointRotateParticleOption.STREAM_CODEC;
+        }
+    });
+    public static final Supplier<ParticleType<PointLineParticleOption>> POINT_LINE_PARTICLE = PARTICLE.register("point_line_particle", () -> new ParticleType<>(true) {
+        @Override
+        public MapCodec<PointLineParticleOption> codec() {
+            return PointLineParticleOption.CODEC;
+        }
+
+        @Override
+        public StreamCodec<? super RegistryFriendlyByteBuf, PointLineParticleOption> streamCodec() {
+            return PointLineParticleOption.STREAM_CODEC;
+        }
+    });
+
+    public static void register(IEventBus eventBus){
+        PARTICLE.register(eventBus);}
+}

@@ -2,10 +2,10 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat;
 
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticDissociationRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.ElectromagneticInfusionRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.MagicEncodeRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.Recipe.custom.MagnetoFusionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticInfusionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagicEncodeRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagnetoFusionRecipe;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;

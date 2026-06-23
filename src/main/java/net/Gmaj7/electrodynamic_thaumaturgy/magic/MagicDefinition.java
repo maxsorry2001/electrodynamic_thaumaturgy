@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtRegistries;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.IMoeMagic;
 import net.minecraft.resources.ResourceKey;
 

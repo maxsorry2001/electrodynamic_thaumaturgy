@@ -1,0 +1,53 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock;
+
+import com.mojang.serialization.MapCodec;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockPattern;
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MagnetoEntropyWitchSummonEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+public class HarmonicCore extends Block {
+    public static final MapCodec<HarmonicCore> CODEC = simpleCodec(HarmonicCore::new);
+    protected static final VoxelShape AABB = Block.box(5.0, 5.0, 5.0, 11.0, 11.0, 11.0);
+    public HarmonicCore(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends Block> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return AABB;
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        BlockPattern.BlockPatternMatch match = EtBlockPattern.HARMONIC_SOVEREIGN_SUMMON.find(level, pos);
+        if(match != null){
+            BlockPos blockPos = match.getBlock(0, 2, 0).getPos();
+            MagnetoEntropyWitchSummonEntity magnetoEntropyWitchSummonEntity = EtEntities.MAGNETO_ENTROPY_WITCH_SUMMON_ENTITY.get().create(level, EntitySpawnReason.MOB_SUMMONED);
+            magnetoEntropyWitchSummonEntity.teleportTo(blockPos.getX() + 0.5, blockPos.getY() + 0.05, blockPos.getZ() + 0.5);
+            level.addFreshEntity(magnetoEntropyWitchSummonEntity);
+            for(int i = 0; i < match.getWidth(); ++i) {
+                for(int j = 0; j < match.getHeight(); ++j) {
+                    BlockInWorld blockinworld = match.getBlock(i, j, 0);
+                    level.setBlock(blockinworld.getPos(), Blocks.AIR.defaultBlockState(), 2);
+                    level.levelEvent(2001, blockinworld.getPos(), Block.getId(blockinworld.getState()));
+                }
+            }
+        }
+    }
+}

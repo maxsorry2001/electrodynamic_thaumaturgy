@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.MirageEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
-import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointLineParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MirageEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;

@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.mixin;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Effect.EtEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.DataGet;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.MixinData.Protective;
+import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.mixinData.DataGet;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.mixinData.Protective;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Attackable;

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtRegistries;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;

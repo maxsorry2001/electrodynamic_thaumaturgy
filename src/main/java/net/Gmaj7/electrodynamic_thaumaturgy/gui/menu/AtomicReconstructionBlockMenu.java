@@ -1,0 +1,106 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.gui.menu;
+
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.AtomicReconstructionBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
+import net.minecraft.core.Direction;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
+
+public class AtomicReconstructionBlockMenu extends AbstractContainerMenu {
+    private final Level level;
+    private final int targetSlot = 2;
+    private final int outSlot = 1;
+    private final int inSlot = 0;
+    public  final AtomicReconstructionBE blockEntity;
+
+    public AtomicReconstructionBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
+        this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
+    }
+
+    public AtomicReconstructionBlockMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(EtMenuTypes.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), containerId);
+        this.blockEntity = (AtomicReconstructionBE) blockEntity;
+        this.level = inventory.player.level();
+
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.UP), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.UP).set(slot, resource, amount), 0, 42, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.NORTH).set(slot, resource, amount), 0, 80, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.DOWN).set(slot, resource, amount), 0, 118, 47));
+
+        addPlayerInventory(inventory);
+        addPlayerHotbar(inventory);
+
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
+            Item item = itemstack1.getItem();
+            itemstack = itemstack1.copy();
+            if (index < targetSlot + 1) {
+                if (!this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 37, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+            else if (index >= targetSlot + 1 && index < targetSlot + 28) {
+                if (!this.moveItemStackTo(itemstack1, targetSlot + 28, targetSlot + 37, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (index >= targetSlot + 28 && index < targetSlot + 37 && !this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 28, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            }
+
+            slot.setChanged();
+            if (itemstack1.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(player, itemstack1);
+            this.broadcastChanges();
+        }
+
+        return itemstack;
+    }
+
+
+
+    @Override
+    public void slotsChanged(Container container) {
+        super.slotsChanged(container);
+
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get());
+    }
+
+    private void addPlayerInventory(Inventory inventory){
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 9; j++)
+                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+        }
+    }
+
+    private void addPlayerHotbar(Inventory inventory){
+        for (int i = 0; i < 9; i++)
+            this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    }
+}

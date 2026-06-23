@@ -2,7 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
 import mezz.jei.api.ingredients.ITypedIngredient;
-import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.PipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.gui.screen.PipeNetScreen;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

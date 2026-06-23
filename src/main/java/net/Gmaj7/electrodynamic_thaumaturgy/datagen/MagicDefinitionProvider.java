@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtRegistries;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.IMoeMagic;
 import net.minecraft.core.HolderLookup;

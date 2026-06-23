@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Entity.EtEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;

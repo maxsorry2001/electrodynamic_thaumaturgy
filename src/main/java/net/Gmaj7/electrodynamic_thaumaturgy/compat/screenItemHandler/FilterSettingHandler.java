@@ -2,10 +2,10 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
 import mezz.jei.api.ingredients.ITypedIngredient;
-import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FilterSettingScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FilterSettingItemPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.gui.screen.FilterSettingScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.FilterSettingItemPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.FluidFakeItem;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;

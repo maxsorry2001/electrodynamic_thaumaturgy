@@ -1,9 +1,9 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.customBlockEntity.ElectromagneticDriverBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.Entity.custom.PhotoacousticPulseBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.Function;
-import net.Gmaj7.electrodynamic_thaumaturgy.Particle.custom.PointRotateParticleOption;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.PhotoacousticPulseBeaconEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

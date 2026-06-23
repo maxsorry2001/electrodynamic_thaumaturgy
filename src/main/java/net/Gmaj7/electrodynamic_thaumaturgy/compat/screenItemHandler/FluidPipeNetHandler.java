@@ -1,10 +1,10 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler;
 
 import mezz.jei.api.ingredients.ITypedIngredient;
-import net.Gmaj7.electrodynamic_thaumaturgy.Gui.screen.FluidPipeNetScreen;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.Packets.FluidPipeNetFilterPacket;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.FluidFakeItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.gui.screen.FluidPipeNetScreen;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.FluidPipeNetFilterPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.FluidFakeItem;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

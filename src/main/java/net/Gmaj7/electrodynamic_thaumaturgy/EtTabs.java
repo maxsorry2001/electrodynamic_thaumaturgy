@@ -1,17 +1,16 @@
 package net.Gmaj7.electrodynamic_thaumaturgy;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.Init.componentDatas.ItemContainerData;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.Item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.registries.DeferredHolder;

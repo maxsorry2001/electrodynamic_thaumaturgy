@@ -1,6 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.Block.EtBlocks;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
