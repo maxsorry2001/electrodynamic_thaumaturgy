@@ -2,15 +2,14 @@ package net.Gmaj7.electrodynamic_thaumaturgy.item;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.ElectromagneticLevel;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -112,6 +111,8 @@ public class EtItems {
 
     public static final DeferredItem<Item> MAGNO_WRENCH = ITEM.registerItem("magno_wrench",
             (properties) -> new MagnoWrenchItem(properties.stacksTo(1)));
+    public static final DeferredItem<Item> MAGNETIC_FLUX_BUCKET = ITEM.registerItem("magnetic_flux_bucket",
+            (properties -> new BucketItem(EtFluids.MAGNETIC_FLUX_SOURCE.get(), properties.stacksTo(1).craftRemainder(Items.BUCKET))));
 
     public static final DeferredItem<Item> MAGNO_INGOT = ITEM.registerSimpleItem("magno_ingot");
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = ITEM.registerSimpleItem("radiant_magno_ingot");

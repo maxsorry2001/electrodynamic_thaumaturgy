@@ -5,6 +5,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluidTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.AttachmentType;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
@@ -63,6 +65,8 @@ public class ElectrodynamicThaumaturgy
         EtRecipes.register(modEventBus);
         Attributes.register(modEventBus);
         Magics.register(modEventBus);
+        EtFluidTypes.register(modEventBus);
+        EtFluids.register(modEventBus);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

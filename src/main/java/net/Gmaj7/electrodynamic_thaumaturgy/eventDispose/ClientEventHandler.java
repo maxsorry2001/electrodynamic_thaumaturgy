@@ -10,6 +10,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.entity.model.MagnetoEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.model.PhotoCorrosiveNovaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.model.PulsedPlasmaEntityModel;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.render.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluidTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.BowWheelHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.MagicWheelHud;
@@ -27,7 +29,9 @@ import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.HydrogenBondParticle
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticle;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -38,6 +42,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 
@@ -144,6 +149,22 @@ public class ClientEventHandler {
             for (EntityType<? extends LivingEntity> entityType : event.getTypes()){
                 event.add(entityType, Attributes.CORROSION);
             }
+        }
+
+        @SubscribeEvent
+        public static void registerOnClientExtensions(RegisterClientExtensionsEvent event){
+            event.registerFluidType(EtFluidTypes.MAGNETIC_FLUX_EXTENSION, EtFluidTypes.MAGNETIC_FLUX_FLUID_TYPE.get());
+        }
+
+        @SubscribeEvent
+        public static void registerFluidModel(RegisterFluidModelsEvent event){
+            FluidModel.Unbaked model = new FluidModel.Unbaked(
+                    new Material(Identifier.withDefaultNamespace("block/water_still")),
+                    new Material(Identifier.withDefaultNamespace("block/water_flow")),
+                    new Material(Identifier.withDefaultNamespace("block/water_overlay")),
+                    state -> 0xA1EB1734);
+            event.register(model, EtFluids.MAGNETIC_FLUX_SOURCE.get());
+            event.register(model, EtFluids.MAGNETIC_FLUX_FLOWING.get());
         }
     }
 

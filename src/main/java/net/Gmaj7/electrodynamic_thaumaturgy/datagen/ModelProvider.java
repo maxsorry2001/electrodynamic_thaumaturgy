@@ -103,6 +103,8 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.createFlatItemModel(EtItems.PULSE_BOW.get(), ModelTemplates.BOW);
         itemModels.generateBow(EtItems.PULSE_BOW.get());
 
+        itemModels.generateFlatItem(EtItems.MAGNETIC_FLUX_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+
         itemModels.itemModelOutput.accept(
                 EtItems.FLUID_FAKE_ITEM.get(),
                 new DynamicFluidContainerModel.Unbaked(
@@ -224,6 +226,8 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                 .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
                 .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract"))
                 .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
+
+        blockModels.createNonTemplateModelBlock(EtBlocks.MAGNETIC_FLUX_FLUID_BLOCK.get());
     }
 
     protected MultiVariant getModel(String name){
