@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.eventDispose;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.EnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.FluidBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;

@@ -4,8 +4,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.Electromagne
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
-import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;

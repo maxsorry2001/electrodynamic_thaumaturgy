@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.init.packets;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock.FluidPipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock.FluidPipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.FluidPipeNet;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.FluidPipeNetSaveData;
 import net.minecraft.core.BlockPos;

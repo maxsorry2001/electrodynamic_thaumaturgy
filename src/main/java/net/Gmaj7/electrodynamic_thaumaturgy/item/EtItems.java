@@ -1,11 +1,11 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.item;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.ElectromagneticLevel;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
 import net.minecraft.resources.Identifier;

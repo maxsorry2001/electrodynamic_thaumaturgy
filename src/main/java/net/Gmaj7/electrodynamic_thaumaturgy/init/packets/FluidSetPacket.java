@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.init.packets;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionFluidBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionFluidBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

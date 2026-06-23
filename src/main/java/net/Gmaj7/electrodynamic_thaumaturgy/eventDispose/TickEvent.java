@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.eventDispose;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.EnergyPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.FluidPipeNetSaveData;

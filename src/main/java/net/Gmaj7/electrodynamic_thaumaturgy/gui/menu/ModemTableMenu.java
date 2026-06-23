@@ -2,8 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.gui.menu;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EnhancementModulateItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;

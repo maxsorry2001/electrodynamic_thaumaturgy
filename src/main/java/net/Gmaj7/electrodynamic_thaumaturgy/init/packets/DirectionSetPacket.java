@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.init.packets;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionItemBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;

@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtRegistries;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.CastTickPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;

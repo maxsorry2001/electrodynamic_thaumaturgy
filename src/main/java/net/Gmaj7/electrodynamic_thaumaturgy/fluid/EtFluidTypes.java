@@ -2,16 +2,13 @@ package net.Gmaj7.electrodynamic_thaumaturgy.fluid;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.joml.Vector4f;
-import org.jspecify.annotations.Nullable;
 
 import java.util.function.Supplier;
 

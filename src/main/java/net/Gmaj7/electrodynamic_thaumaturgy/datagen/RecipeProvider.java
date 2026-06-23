@@ -1,12 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.ElectromagneticDissociationRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.ElectromagneticInfusionRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.MagicEncodeRecipeBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.MagnetoFusionRecipeBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

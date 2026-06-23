@@ -121,6 +121,8 @@
   "entity.electrodynamic_thaumaturgy.magneto_entropy_witch_entity_summon_entity": "电磁核心",
   "entity.electrodynamic_thaumaturgy.magneto_order_sage_entity": "磁序贤者",
 
+  "fluid_type.electrodynamic_thaumaturgy.magnetic_flux_fluid_type": "磁流质",
+
   "advancements.electrodynamic_thaumaturgy.root.title": "电磁奇术",
   "advancements.electrodynamic_thaumaturgy.root.description": "",
   "advancements.electrodynamic_thaumaturgy.energy_core.title": "能量核心",

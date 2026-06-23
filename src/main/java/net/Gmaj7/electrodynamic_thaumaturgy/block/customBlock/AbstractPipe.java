@@ -4,20 +4,24 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.PipeNetSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -29,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
-public abstract class AbstractPipe extends Block {
+public abstract class AbstractPipe extends Block implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<LinkState> UP = EnumProperty.create("link_state_up", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> DOWN = EnumProperty.create("link_state_down", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
@@ -37,6 +41,7 @@ public abstract class AbstractPipe extends Block {
     public static final EnumProperty<LinkState> WEST = EnumProperty.create("link_state_west", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> NORTH = EnumProperty.create("link_state_north", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
     public static final EnumProperty<LinkState> SOUTH = EnumProperty.create("link_state_south", LinkState.class, LinkState.NULL_AUTO, LinkState.LINK, LinkState.EXTRACT, LinkState.NULL_PLAYER);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     protected static final VoxelShape CORE = Block.box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
     protected static final VoxelShape SHAPE_NORTH = Block.box(6.0, 6.0, 0.0, 10.0, 10.0, 6.0);
     protected static final VoxelShape SHAPE_SOUTH = Block.box(6.0, 6.0, 10.0, 10.0, 10.0, 16.0);
@@ -67,7 +72,8 @@ public abstract class AbstractPipe extends Block {
                 .setValue(EAST, LinkState.NULL_AUTO)
                 .setValue(WEST, LinkState.NULL_AUTO)
                 .setValue(NORTH, LinkState.NULL_AUTO)
-                .setValue(SOUTH, LinkState.NULL_AUTO));
+                .setValue(SOUTH, LinkState.NULL_AUTO)
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -90,6 +96,13 @@ public abstract class AbstractPipe extends Block {
             }
         }
         return shape;
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+        if (state.getValue(WATERLOGGED))
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
     @Override
@@ -153,7 +166,7 @@ public abstract class AbstractPipe extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(UP).add(DOWN).add(EAST).add(WEST).add(NORTH).add(SOUTH);
+        builder.add(UP).add(DOWN).add(EAST).add(WEST).add(NORTH).add(SOUTH).add(WATERLOGGED);
     }
 
     @Override
@@ -314,6 +327,16 @@ public abstract class AbstractPipe extends Block {
             }
         }
         return bestDir;
+    }
+
+    @Override
+    protected FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    protected boolean canBeReplaced(BlockState state, Fluid fluid) {
+        return fluid == Fluids.WATER;
     }
 
     public abstract boolean isSamePipe(BlockState state);

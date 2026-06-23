@@ -1,10 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.eventDispose;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MagnetoOrderSageEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MirageEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.mixinData.DataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.ProtectingPacket;
 import net.minecraft.core.registries.Registries;

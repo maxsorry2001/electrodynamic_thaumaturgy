@@ -134,7 +134,7 @@ public class EtTabs {
                         output.accept(EtBlocks.ITEM_PIPE);
                         output.accept(EtBlocks.FLUID_PIPE);
 
-                        output.accept(EtItems.FLUID_FAKE_ITEM);
+                        output.accept(EtItems.MAGNETIC_FLUX_BUCKET);
                     }))
                     .build());
 

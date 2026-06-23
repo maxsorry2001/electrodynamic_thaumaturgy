@@ -121,6 +121,8 @@
   "entity.electrodynamic_thaumaturgy.magneto_entropy_witch_entity_summon_entity": "Magneto Core",
   "entity.electrodynamic_thaumaturgy.magneto_order_sage_entity": "Magneto‑Order Sage",
 
+  "fluid_type.electrodynamic_thaumaturgy.magnetic_flux_fluid_type": "Magnetic Flux",
+
   "advancements.electrodynamic_thaumaturgy.root.title": "Electrodynamic Thaumatury",
   "advancements.electrodynamic_thaumaturgy.root.description": "",
   "advancements.electrodynamic_thaumaturgy.energy_core.title": "Energy Core",

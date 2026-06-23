@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.block;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.minecraft.world.item.BlockItem;
@@ -63,11 +63,11 @@ public class EtBlocks {
             (properties) -> new HarmonicCore(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);
 
     public static final DeferredBlock<Block> ENERGY_PIPE = registerBlock("energy_pipe",
-            (properties -> new EnergyPipe(properties.noOcclusion())));
+            (properties -> new EnergyPipe(properties.noOcclusion().strength(1.0F))));
     public static final DeferredBlock<Block> ITEM_PIPE = registerBlock("item_pipe",
-            (properties -> new ItemPipe(properties.noOcclusion())));
+            (properties -> new ItemPipe(properties.noOcclusion().strength(1.0F))));
     public static final DeferredBlock<Block> FLUID_PIPE = registerBlock("fluid_pipe",
-            (properties -> new FluidPipe(properties.noOcclusion())));
+            (properties -> new FluidPipe(properties.noOcclusion().strength(1.0F))));
 
     public static final DeferredBlock<Block> ENERGY_TRANSMISSION_ANTENNA = registerBlock("energy_transmission_antenna",
             (properties) ->  new EnergyTransmissionAtenna(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 16);

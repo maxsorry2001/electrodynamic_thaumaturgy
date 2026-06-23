@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.block;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;

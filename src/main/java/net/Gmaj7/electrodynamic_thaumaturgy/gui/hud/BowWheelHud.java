@@ -2,8 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.gui.hud;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectBowPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectBowPacket;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.menu.ElectromagneticDriverBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityItemHandler;

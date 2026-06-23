@@ -1,12 +1,12 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.ElectromagneticDriverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MagmaLightingBeaconEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.EtTabs;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticleOption;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

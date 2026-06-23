@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.eventDispose;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.blockEntityRender.FluidBlockRender;
-import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MagnetoEntropyWitchEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.MagnetoOrderSageEntity;
@@ -162,7 +162,7 @@ public class ClientEventHandler {
                     new Material(Identifier.withDefaultNamespace("block/water_still")),
                     new Material(Identifier.withDefaultNamespace("block/water_flow")),
                     new Material(Identifier.withDefaultNamespace("block/water_overlay")),
-                    state -> 0xA1EB1734);
+                    state -> 0xA133BBFF);
             event.register(model, EtFluids.MAGNETIC_FLUX_SOURCE.get());
             event.register(model, EtFluids.MAGNETIC_FLUX_FLOWING.get());
         }

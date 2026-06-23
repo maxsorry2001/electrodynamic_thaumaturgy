@@ -1,8 +1,8 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.item.custom;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
