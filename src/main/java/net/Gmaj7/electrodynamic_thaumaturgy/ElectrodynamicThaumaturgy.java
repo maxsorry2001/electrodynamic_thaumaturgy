@@ -52,9 +52,9 @@ public class ElectrodynamicThaumaturgy
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
-        EtTabs.MOE_CREATIVE_TABS.register(modEventBus);
-        EtBlocks.BLOCKS.register(modEventBus);
         EtItems.ITEM.register(modEventBus);
+        EtBlocks.BLOCKS.register(modEventBus);
+        EtTabs.MOE_CREATIVE_TABS.register(modEventBus);
         AttachmentType.register(modEventBus);
         EtEffects.register(modEventBus);
         EtEntities.register(modEventBus);
