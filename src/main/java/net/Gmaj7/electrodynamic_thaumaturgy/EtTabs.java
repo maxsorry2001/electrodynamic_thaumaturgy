@@ -2,6 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementDataLoader;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
@@ -78,11 +80,6 @@ public class EtTabs {
                         output.accept(EtItems.PHOTO_CORROSIVE_NOVA_MODULE);
                         output.accept(EtItems.SAGE_S_MAGNETISM_SEAL);
 
-                        output.accept(EtItems.ENHANCE_MODEM_BASEBOARD);
-                        output.accept(EtItems.COOLDOWN_ENHANCE);
-                        output.accept(EtItems.STRENGTH_ENHANCE);
-                        output.accept(EtItems.EFFICIENCY_ENHANCE);
-
                         output.accept(EtItems.PRIMARY_LC);
                         output.accept(EtItems.INTERMEDIATE_LC);
                         output.accept(EtItems.ADVANCED_LC);
@@ -135,6 +132,7 @@ public class EtTabs {
                         output.accept(EtBlocks.FLUID_PIPE);
 
                         output.accept(EtItems.MAGNETIC_FLUX_BUCKET);
+                        addEnhanceBoard(output);
                     }))
                     .build());
 
@@ -182,5 +180,13 @@ public class EtTabs {
         }
         itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), new ItemContainerData(list));
         return itemStack;
+    }
+
+    public static void addEnhanceBoard(CreativeModeTab.Output output){
+        for (EnhancementData data : EnhancementDataLoader.getDataMap().values()){
+            ItemStack stack = new ItemStack(EtItems.ENHANCE_BOARD.get());
+            stack.set(EtDataComponentTypes.ENHANCEMENT_DATA, data);
+            output.accept(stack);
+        }
     }
 }

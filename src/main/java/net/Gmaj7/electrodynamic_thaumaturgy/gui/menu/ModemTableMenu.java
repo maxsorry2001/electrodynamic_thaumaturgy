@@ -18,6 +18,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModemTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
@@ -133,13 +136,12 @@ public class ModemTableMenu extends AbstractContainerMenu {
         ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
         this.access.execute((level1, blockPos) -> {
             if(toolSlot.getItem() instanceof MagicCastItem) {
-                EnhancementData enhancementData = EnhancementData.defaultData;
+                List<EnhancementData> list = new ArrayList<>();
                 for (int i = enhanceStartNum; i < enhanceEndNum; i++){
-                    ItemStack itemStack = this.slots.get(i).getItem();
-                    if(itemStack.getItem() instanceof EnhancementModulateItem item){
-                        enhancementData = item.modemEnhancementData(enhancementData);
-                    }
+                    EnhancementData data = this.slots.get(i).getItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
+                    if(data != null) list.add(data);
                 }
+                EnhancementData enhancementData = EnhancementData.defaultData.add(list);
                 toolSlot.set(EtDataComponentTypes.ENHANCEMENT_DATA, enhancementData);
             }
         });

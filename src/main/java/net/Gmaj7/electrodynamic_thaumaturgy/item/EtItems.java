@@ -82,14 +82,8 @@ public class EtItems {
     public static final DeferredItem<Item> EMPTY_POWER = ITEM.registerItem("empty_power",
             (properties) -> new PowerAmplifierItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
-    public static final DeferredItem<Item> STRENGTH_ENHANCE = ITEM.registerItem("strength_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.STRENGTH, properties.stacksTo(1)));
-    public static final DeferredItem<Item> COOLDOWN_ENHANCE = ITEM.registerItem("cooldown_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.COOLDOWN, properties.stacksTo(1)));
-    public static final DeferredItem<Item> EFFICIENCY_ENHANCE = ITEM.registerItem("efficiency_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.EFFICIENCY, properties.stacksTo(1)));
-    public static final DeferredItem<Item> ENHANCE_MODEM_BASEBOARD = ITEM.registerItem("enhance_modem_baseboard",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.EMPTY, properties));
+    public static final DeferredItem<Item> ENHANCE_BOARD = ITEM.registerItem("enhance_board",
+            (properties -> new EnhancementModulateItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.defaultData))));
 
     public static final DeferredItem<Item> ENERGY_CORE = ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = ITEM.registerItem("superconducting_update",

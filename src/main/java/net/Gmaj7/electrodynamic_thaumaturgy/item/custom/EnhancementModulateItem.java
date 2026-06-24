@@ -1,28 +1,28 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.item.custom;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 public class EnhancementModulateItem extends Item{
-    private final EnhancementData.EnhancementType enhancementType;
-    public EnhancementModulateItem(EnhancementData.EnhancementType enhancementType, Properties properties) {
+    public EnhancementModulateItem(Properties properties) {
         super(properties);
-        this.enhancementType = enhancementType;
     }
 
-    public EnhancementData.EnhancementType getEnhancementType() {
-        return enhancementType;
-    }
-
-    public EnhancementData modemEnhancementData(EnhancementData enhancementData) {
-        float strength = enhancementData.strength();
-        float coolDown = enhancementData.coolDown();
-        float efficiency = enhancementData.efficiency();
-        switch (enhancementType){
-            case STRENGTH -> strength = strength + 0.25F;
-            case COOLDOWN -> coolDown =  Math.max(coolDown - 0.15F, 0.1F);
-            case EFFICIENCY -> efficiency = Math.max(efficiency - 0.1F, 0.1F);
-        }
-        return new EnhancementData(strength, coolDown, efficiency);
+    @Override
+    public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+        EnhancementData enhancementData = itemStack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
+        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
     }
 }
