@@ -93,7 +93,7 @@ public class EtItems {
 
     public static final DeferredItem<Item> ENERGY_CORE = ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = ITEM.registerItem("superconducting_update",
-            (properties) -> new SuperconductingUpdateItem(properties));
+            SuperconductingUpdateItem::new);
     public static final DeferredItem<Item> POTATO_BATTERY = ITEM.registerItem("potato_battery",
             (properties) -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
     public static final DeferredItem<Item> CARROT_BATTERY = ITEM.registerItem("carrot_battery",

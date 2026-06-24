@@ -9,10 +9,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticDissociationRecipeCategory;
-import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.ElectromagneticInfusionRecipeCategory;
-import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagicEncodeRecipeCategory;
-import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.MagnetoFusionRecipeCategory;
+import net.Gmaj7.electrodynamic_thaumaturgy.compat.category.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.FilterSettingHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.FluidPipeNetHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.screenItemHandler.ItemPipeNetHandler;
@@ -24,6 +21,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.recipe.EtRecipes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -51,6 +49,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new MagnetoFusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new ElectromagneticDissociationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new ElectromagneticInfusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new MagneticDissolutionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -60,6 +59,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipes(JEIRecipeTypes.MAGNETO_FUSION, this.getRecipes(recipeMap, EtRecipes.MAGNO_FUSION_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.MAGNETIC_DISSOLUTION, this.getRecipes(recipeMap, EtRecipes.MAGNETIC_DISSOLUTION_RECIPE_TYPE.get()));
     }
 
     @Override
@@ -67,7 +67,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addCraftingStation(JEIRecipeTypes.MAGIC_ENCODE, new ItemStack(EtBlocks.MAGIC_ENCODE_TABLE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(EtBlocks.MAGNETO_FUSION_MACHINE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(EtBlocks.ENERGY_BLOCK.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.asItem()));
+        registration.addCraftingStation(JEIRecipeTypes.MAGNETIC_DISSOLUTION, new ItemStack(Blocks.CRAFTING_TABLE));
     }
 
     @Override
@@ -85,6 +86,7 @@ public class JEIPlugin implements IModPlugin {
             event.sendRecipes(EtRecipes.MAGNO_FUSION_TYPE.get());
             event.sendRecipes(EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get());
             event.sendRecipes(EtRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get());
+            event.sendRecipes(EtRecipes.MAGNETIC_DISSOLUTION_RECIPE_TYPE.get());
         }
     }
 

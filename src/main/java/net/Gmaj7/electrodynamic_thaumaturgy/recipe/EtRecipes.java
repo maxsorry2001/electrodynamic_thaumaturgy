@@ -1,10 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.recipe;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticInfusionRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagicEncodeRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagnetoFusionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -50,6 +47,15 @@ public class EtRecipes {
                 @Override
                 public String toString() {
                     return "electromagnetic_infusion";
+                }
+            });
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagneticDissolutionRecipe>> MAGNETIC_DISSOLUTION_RECIPE_SERIALIZER =
+            SERIALIZER.register("magnetic_dissolution", () -> new RecipeSerializer<>(MagneticDissolutionRecipe.CODEC, MagneticDissolutionRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MagneticDissolutionRecipe>> MAGNETIC_DISSOLUTION_RECIPE_TYPE =
+            TYPE.register("magnetic_dissolution", () -> new RecipeType<MagneticDissolutionRecipe>() {
+                @Override
+                public String toString() {
+                    return "magnetic_dissolution";
                 }
             });
 

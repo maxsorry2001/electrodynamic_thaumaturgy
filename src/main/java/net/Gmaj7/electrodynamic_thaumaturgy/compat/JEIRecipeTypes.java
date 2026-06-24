@@ -2,10 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.compat;
 
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticInfusionRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagicEncodeRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagnetoFusionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -19,6 +16,8 @@ public class JEIRecipeTypes {
             create(ElectrodynamicThaumaturgy.MODID, "electromagnetic_dissociation", ElectromagneticDissociationRecipe.class);
     public static final IRecipeType<RecipeHolder<ElectromagneticInfusionRecipe>> ELECTROMAGNETIC_INFUSION =
             create(ElectrodynamicThaumaturgy.MODID, "electromagnetic_infusion", ElectromagneticInfusionRecipe.class);
+    public static final IRecipeType<RecipeHolder<MagneticDissolutionRecipe>> MAGNETIC_DISSOLUTION =
+            create(ElectrodynamicThaumaturgy.MODID, "magnetic_dissolution", MagneticDissolutionRecipe.class);
 
 
     public static <R extends Recipe<?>> IRecipeType<RecipeHolder<R>> create(String modid, String name, Class<? extends R> recipeClass) {

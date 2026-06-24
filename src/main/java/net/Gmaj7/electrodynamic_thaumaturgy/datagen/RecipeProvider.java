@@ -2,10 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.ElectromagneticDissociationRecipeBuilder;
-import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.ElectromagneticInfusionRecipeBuilder;
-import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.MagicEncodeRecipeBuilder;
-import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.MagnetoFusionRecipeBuilder;
+import net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -429,6 +427,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         ElectromagneticDissociationRecipeBuilder.creat(items, Blocks.LODESTONE, true).result(EtItems.MONOPOLE_N).result(EtItems.MONOPOLE_S).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithName(output, "monopole");
 
         ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GLOWING_ESSENCE, 2, EtItems.POLAR_CRYSTAL, Fluids.WATER).unlockedBy("has_crystal", has(EtItems.POLAR_CRYSTAL)).save(output);
+
+        MagneticDissolutionRecipeBuilder.creat(items, EtFluids.MAGNETIC_FLUX_SOURCE.get(), 1000, EtItems.MAGNO_INGOT, Fluids.WATER).unlockedBy("has_magneto_ingot", has(EtItems.MAGNO_INGOT)).save(output);
     }
 
     protected static class Runner extends net.minecraft.data.recipes.RecipeProvider.Runner{

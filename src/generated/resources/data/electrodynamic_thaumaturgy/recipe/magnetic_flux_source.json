@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:magnetic_dissolution",
+  "fluid": "minecraft:water",
+  "fluid_cost": 1000,
+  "item": "electrodynamic_thaumaturgy:magno_ingot",
+  "output": {
+    "amount": 1000,
+    "id": "electrodynamic_thaumaturgy:magnetic_flux_source"
+  }
+}
