@@ -141,7 +141,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
                     EnhancementData data = this.slots.get(i).getItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
                     if(data != null) list.add(data);
                 }
-                EnhancementData enhancementData = EnhancementData.defaultData.add(list);
+                EnhancementData enhancementData = EnhancementData.savvedData.add(list);
                 toolSlot.set(EtDataComponentTypes.ENHANCEMENT_DATA, enhancementData);
             }
         });

@@ -24,12 +24,16 @@ public class EnhancementDataProvider extends JsonCodecProvider<EnhancementData> 
 
     @Override
     protected void gather() {
-        register("tt", 1F, 1F, 1F);
+        register("base_strength", 0.2F, 0F, 0F, 0F, 0F);
+        register("base_cooldown", 0F, 0.2F, 0F, 0F, 0F);
+        register("base_efficiency", 0F, 0F, 0.2F, 0F, 0F);
+        register("base_critical_rate", 0F, 0F, 0F, 0.2F, 0F);
+        register("base_critical_damage", 0F, 0F, 0F, 0F, 0.2F);
     }
 
-    private void register(String name, float strength, float coolDown, float efficiency){
+    private void register(String name, float strength, float coolDown, float efficiency, float criticalRate, float criticalDamage){
         Identifier identifier = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name);
-        EnhancementData enhancementData = new EnhancementData(strength, coolDown, efficiency);
+        EnhancementData enhancementData = new EnhancementData(strength, coolDown, efficiency, criticalRate, criticalDamage,name);
         unconditional(identifier, enhancementData);
     }
 }

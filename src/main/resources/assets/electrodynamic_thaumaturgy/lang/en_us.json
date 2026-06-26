@@ -57,8 +57,8 @@
   "item.electrodynamic_thaumaturgy.cooldown_enhance": "Cooldown",
   "item.electrodynamic_thaumaturgy.strength_enhance": "Strength",
   "item.electrodynamic_thaumaturgy.efficiency_enhance": "Efficiency",
-  "item.electrodynamic_thaumaturgy.entropy_enhance": "Entropy Increase Curse",
-  "item.electrodynamic_thaumaturgy.life_extraction_enhance": "Life Extraction",
+  "item.electrodynamic_thaumaturgy.critical_rate_enhance": "Critical Rate",
+  "item.electrodynamic_thaumaturgy.critical_damage_enhance": "Critical Damage",
   "item.electrodynamic_thaumaturgy.enhance_modem_baseboard": "Enhance Modem Baseboard",
   "item.electrodynamic_thaumaturgy.genetic_recorder": "Genetic Recorder",
   "item.electrodynamic_thaumaturgy.magneto_entropy_witch_entity_spawn_egg": "Magneto‑Entropy Witch Spawn Egg",
@@ -172,6 +172,12 @@
   "electromagnetic_dissociation": "electromagnetic dissociation",
   "electromagnetic_infusion": "electromagnetic infusion",
   "binding": "binding:",
+
+  "enhance_module.electrodynamic_thaumaturgy.base_strength" : "Base Strength",
+  "enhance_module.electrodynamic_thaumaturgy.base_cooldown" : "Base Cooldown",
+  "enhance_module.electrodynamic_thaumaturgy.base_efficiency" : "Base Efficiency",
+  "enhance_module.electrodynamic_thaumaturgy.base_critical_rate" : "Base Critical Rate",
+  "enhance_module.electrodynamic_thaumaturgy.base_critical_damage" : "Base Critical Damage",
 
   "patchouli.et.how_start": "Basic Preparation",
   "patchouli.et.how_start.description": "The basic preparation",

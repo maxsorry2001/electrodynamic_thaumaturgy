@@ -21,8 +21,11 @@ public class EnhancementModulateItem extends Item{
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
         EnhancementData enhancementData = itemStack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
+        builder.accept(Component.translatable("enhance_module.electrodynamic_thaumaturgy." + enhancementData.name()));
+        if(enhancementData.coolDown() != 0) builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
+        if(enhancementData.strength() != 0) builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
+        if(enhancementData.efficiency() != 0) builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
+        if(enhancementData.criticalRate() != 0) builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.critical_rate_enhance").append(":" + enhancementData.efficiency()));
+        if(enhancementData.criticalDamage() != 0) builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.critical_damage_enhance").append(":" + enhancementData.efficiency()));
     }
 }

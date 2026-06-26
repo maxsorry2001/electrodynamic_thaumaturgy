@@ -1,0 +1,8 @@
+{
+  "cooldown": 0.0,
+  "critical_damage": 0.0,
+  "critical_rate": 0.2,
+  "efficiency": 0.0,
+  "name": "base_critical_rate",
+  "strength": 0.0
+}

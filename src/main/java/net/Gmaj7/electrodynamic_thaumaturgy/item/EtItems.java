@@ -83,7 +83,7 @@ public class EtItems {
             (properties) -> new PowerAmplifierItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
     public static final DeferredItem<Item> ENHANCE_BOARD = ITEM.registerItem("enhance_board",
-            (properties -> new EnhancementModulateItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.defaultData))));
+            (properties -> new EnhancementModulateItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.savvedData))));
 
     public static final DeferredItem<Item> ENERGY_CORE = ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = ITEM.registerItem("superconducting_update",
@@ -129,13 +129,13 @@ public class EtItems {
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyRod())
                     .component(EtDataComponentTypes.MAGIC_SELECT.get(), 2)
-                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
     public static final DeferredItem<Item> PULSE_BOW = ITEM.registerItem("pulse_bow",
             (properties) -> new PulseBow(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())
-                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));
