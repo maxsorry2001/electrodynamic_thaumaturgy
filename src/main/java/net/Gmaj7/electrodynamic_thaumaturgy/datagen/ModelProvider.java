@@ -187,6 +187,8 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                 getModel("eddy_current_remelter_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
                 getModel("electromagnetic_infuser_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(),
+                getModel("magnetic_dissolver_machine")));
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ENERGY_PIPE.get()).with(getModel("energy_pipe"))
                 .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_270))
                 .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_90))

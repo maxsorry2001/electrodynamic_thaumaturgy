@@ -58,6 +58,8 @@ public class EtBlocks {
             (properties -> new EddyCurrentRemelter(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
     public static final DeferredBlock<Block> ELECTROMAGNETIC_INFUSER_MACHINE = registerBlock("electromagnetic_infuser_machine",
             (properties -> new ElectromagneticInfuser(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
+    public static final DeferredBlock<Block> MAGNETIC_DISSOLVER_MACHINE = registerBlock("magnetic_dissolver_machine",
+            (properties -> new MagneticDissolver(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
     public static final DeferredBlock<Block> MAGNETO_CORE = registerBlock("magneto_core",
             (properties) -> new HarmonicCore(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);

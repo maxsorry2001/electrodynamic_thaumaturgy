@@ -28,7 +28,7 @@ public class MagneticDissolutionRecipeCategory implements IRecipeCategory<Recipe
 
     public MagneticDissolutionRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EtBlocks.MAGNETIC_DISSOLVER_MACHINE));
     }
 
     @Override

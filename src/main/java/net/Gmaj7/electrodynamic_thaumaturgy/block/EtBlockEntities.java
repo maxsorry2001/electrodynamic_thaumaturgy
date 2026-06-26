@@ -74,6 +74,10 @@ public class EtBlockEntities {
             MOE_BLOCK_ENTITY.register("eddy_infuser_be", () -> new BlockEntityType<>(
                     ElectromagneticInfuserBE::new, EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get()));
 
+    public static final Supplier<BlockEntityType<MagneticDissolverBE>> MAGNETIC_DISSOLVER_BE =
+            MOE_BLOCK_ENTITY.register("magnetic_dissolver_be", () -> new BlockEntityType<>(
+                    MagneticDissolverBE::new, EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get()));
+
     public static void register(IEventBus eventBus){
         MOE_BLOCK_ENTITY.register(eventBus);
     }

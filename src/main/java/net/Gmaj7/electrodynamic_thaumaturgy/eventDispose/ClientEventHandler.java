@@ -85,6 +85,7 @@ public class ClientEventHandler {
             event.register(EtMenuTypes.ITEM_PIPE_NET_MENU.get(), ItemPipeNetScreen::new);
             event.register(EtMenuTypes.ENERGY_PIPE_NET_MENU.get(), EnergyPipeNetScreen::new);
             event.register(EtMenuTypes.FILTER_SETTING_MENU.get(), FilterSettingScreen::new);
+            event.register(EtMenuTypes.MAGNETIC_DISSOLVER_BLOCK_MENU.get(), MagneticDissolverBlockScreen::new);
         }
 
         @SubscribeEvent

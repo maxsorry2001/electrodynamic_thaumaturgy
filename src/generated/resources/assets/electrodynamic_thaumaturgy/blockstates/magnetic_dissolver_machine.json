@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "electrodynamic_thaumaturgy:block/magnetic_dissolver_machine"
+    }
+  }
+}

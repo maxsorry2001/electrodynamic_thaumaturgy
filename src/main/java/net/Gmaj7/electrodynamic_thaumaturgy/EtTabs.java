@@ -118,6 +118,7 @@ public class EtTabs {
                         output.accept(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE);
                         output.accept(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE);
                         output.accept(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE);
+                        output.accept(EtBlocks.MAGNETIC_DISSOLVER_MACHINE);
                         output.accept(EtBlocks.ENERGY_TRANSMISSION_ANTENNA);
                         output.accept(EtBlocks.MAGNETO_CORE);
 

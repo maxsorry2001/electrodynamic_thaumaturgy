@@ -32,6 +32,7 @@ public class EtMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<MagnetoFusionBlockMenu>> MAGNETO_FUSION_BLOCK_MENU = registerMenuType("maneto_fusion_machine_menu", MagnetoFusionBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ElectromagneticDissociationBlockMenu>> ELECTROMAGNETIC_DISSOCIATION_BLOCK_MENU = registerMenuType("electromagnetic_dissociation_machine_menu", ElectromagneticDissociationBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ElectromagneticInfuserBlockMenu>> ELECTROMAGNETIC_INFUSER_BLOCK_MENU = registerMenuType("electromagnetic_infuser_machine_menu", ElectromagneticInfuserBlockMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<MagneticDissolverBlockMenu>> MAGNETIC_DISSOLVER_BLOCK_MENU = registerMenuType("magnetic_dissolve_machine_menu", MagneticDissolverBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<EddyCurrentRemelterBlockMenu>> EDDY_CURRENT_REMELTER_BLOCK_MENU = registerMenuType("eddy_current_remelter_menu", EddyCurrentRemelterBlockMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ItemPipeNetMenu>> ITEM_PIPE_NET_MENU = registerMenuType("item_pipe_net_menu", ItemPipeNetMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<FluidPipeNetMenu>> FLUID_PIPE_NET_MENU = registerMenuType("fluid_pipe_net_menu", FluidPipeNetMenu::new);
