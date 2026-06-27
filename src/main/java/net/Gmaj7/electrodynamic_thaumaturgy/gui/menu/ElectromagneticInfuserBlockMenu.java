@@ -37,6 +37,7 @@ public class ElectromagneticInfuserBlockMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
+        addDataSlots(((ElectromagneticInfuserBE) blockEntity).getData());
     }
 
     @Override

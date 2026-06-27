@@ -36,6 +36,7 @@ public class MagneticDissolverBlockMenu extends AbstractContainerMenu {
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
+        addDataSlots(((MagneticDissolverBE) blockEntity).getData());
     }
 
     @Override

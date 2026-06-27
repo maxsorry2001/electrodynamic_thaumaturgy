@@ -126,10 +126,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ElectromagneticInfuserBE blockEntity){
-        if(level.isClientSide()) {
-            int i = 1;
-            return;
-        }
+        if(level.isClientSide()) return;
         if(blockEntity.energy.getAmountAsLong() < tickUse) return;
         ServerLevel serverLevel = (ServerLevel)level;
         ElectromagneticInfusionRecipeInput input = new ElectromagneticInfusionRecipeInput(blockEntity.getInputItem(), blockEntity.getInputFluid());

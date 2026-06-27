@@ -80,7 +80,8 @@ public class DataLoadHandler {
                 EtBlocks.MAGNETO_FUSION_MACHINE.get(),
                 EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
                 EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
-                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
+                EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
+                EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get());
         event.registerBlock(Capabilities.Item.BLOCK, ((level, blockPos, blockState, blockEntity, direction) ->
                         blockEntity instanceof IItemBlockEntity ? ((IItemBlockEntity) blockEntity).getItemHandler() : null),
                 EtBlocks.ENERGY_BLOCK.get(),
@@ -96,10 +97,12 @@ public class DataLoadHandler {
                 EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
                 EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
                 EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
-                EtBlocks.FLUID_BLOCK.get());
+                EtBlocks.FLUID_BLOCK.get(),
+                EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get());
         event.registerBlock(Capabilities.Fluid.BLOCK, ((level, pos, state, blockEntity, direction) ->
                         blockEntity instanceof IDirectionFluidBlockEntity ? ((IDirectionFluidBlockEntity) blockEntity).getFluidHandlerWithDirection(direction) : null),
                 EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
+                EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(),
                 EtBlocks.FLUID_BLOCK.get());
     }
 }

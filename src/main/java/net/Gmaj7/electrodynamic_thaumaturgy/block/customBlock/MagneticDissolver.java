@@ -2,12 +2,10 @@ package net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.ElectromagneticInfuserBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.MagneticDissolverBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergySetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;

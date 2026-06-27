@@ -9,7 +9,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.FluidSetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.EtRecipes;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagneticDissolutionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagneticDissolutionRecipeInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -22,11 +23,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -105,7 +104,7 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
         public void set(int dataId, int value) {
             switch (dataId){
                 case 0 -> MagneticDissolverBE.this.directionItemOutputSet = Function.decodeDirection(value);
-                case 2 -> MagneticDissolverBE.this.directionFluidOutputSet = Function.decodeDirection(value);
+                case 1 -> MagneticDissolverBE.this.directionFluidOutputSet = Function.decodeDirection(value);
             }
         }
 
@@ -157,14 +156,11 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
 
     @Override
     public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction) {
-        return null;
+        return getItemHandlerInput();
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, MagneticDissolverBE blockEntity){
-        if(level.isClientSide()) {
-            int i = 1;
-            return;
-        }
+        if(level.isClientSide()) return;
         if(blockEntity.energy.getAmountAsLong() < tickUse) return;
         ServerLevel serverLevel = (ServerLevel)level;
         MagneticDissolutionRecipeInput input = new MagneticDissolutionRecipeInput(blockEntity.getInputFluid(), blockEntity.getInputItem());
@@ -222,7 +218,7 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
 
     @Override
     public StacksResourceHandler<FluidStack, FluidResource> getFluidHandlerWithDirection(Direction direction) {
-        return fluidHandlerInput;
+        return directionFluidOutputSet.getOrDefault(direction, true) ? fluidHandlerOutput : fluidHandlerInput;
     }
 
     @Override

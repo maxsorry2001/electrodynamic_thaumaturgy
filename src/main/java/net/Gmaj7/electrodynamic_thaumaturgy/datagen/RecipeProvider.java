@@ -426,7 +426,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.COBBLESTONES).result(Blocks.GRAVEL.asItem()).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Blocks.GRAVEL.asItem(), "from_ore_dissociation"));
         ElectromagneticDissociationRecipeBuilder.creat(items, Blocks.LODESTONE, true).result(EtItems.MONOPOLE_N).result(EtItems.MONOPOLE_S).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithName(output, "monopole");
 
-        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GLOWING_ESSENCE, 2, EtItems.POLAR_CRYSTAL, Fluids.WATER).unlockedBy("has_crystal", has(EtItems.POLAR_CRYSTAL)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GLOWING_ESSENCE, 2, EtItems.POLAR_CRYSTAL, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtItems.POLAR_CRYSTAL)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNETIC_ESSENCE, 2, EtItems.RESONANT_CRYSTAL, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtItems.RESONANT_CRYSTAL)).save(output);
 
         MagneticDissolutionRecipeBuilder.creat(items, EtFluids.MAGNETIC_FLUX_SOURCE.get(), 1000, EtItems.MAGNO_INGOT, Fluids.WATER).unlockedBy("has_magneto_ingot", has(EtItems.MAGNO_INGOT)).save(output);
     }
