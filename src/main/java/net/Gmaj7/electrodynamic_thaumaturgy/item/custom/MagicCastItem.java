@@ -55,7 +55,7 @@ public class MagicCastItem extends Item {
                 int i = energyHandler.extract(cost, transaction);
                 if(i == cost){
                     transaction.commit();
-                    player.getCooldowns().addCooldown(typeStack, (int) (magicDefinition.baseCooldown() * Function.getCoolDownRate(itemStack)));
+                    player.getCooldowns().addCooldown(typeStack, (int) (magicDefinition.baseCooldown() / Function.getCoolDownRate(itemStack)));
                     player.swing(usedHand);
                 }
             }

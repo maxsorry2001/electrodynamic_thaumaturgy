@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.gui.screen;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.menu.ModemTableMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -44,7 +45,8 @@ public class ModemTableScreen extends AbstractContainerScreen<ModemTableMenu> {
     }
 
     @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        if(this.menu.getToolSlot().hasItem() && this.menu.getToolSlot().getItem().getItem() instanceof MagicCastItem || this.menu.getToolSlot().getItem().getItem() instanceof PulseBow) {
         double mouseX = event.x(), mouseY = event.y();
         if(isMouseFocused(mouseX, mouseY)){
             if (this.menu.clickMenuButton(this.minecraft.player, 0)) {

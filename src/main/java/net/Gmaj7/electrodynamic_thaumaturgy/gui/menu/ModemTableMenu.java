@@ -135,7 +135,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
     public boolean clickMenuButton(Player player, int id) {
         ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
         this.access.execute((level1, blockPos) -> {
-            if(toolSlot.getItem() instanceof MagicCastItem) {
+            if(!toolSlot.isEmpty()) {
                 List<EnhancementData> list = new ArrayList<>();
                 for (int i = enhanceStartNum; i < enhanceEndNum; i++){
                     EnhancementData data = this.slots.get(i).getItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);

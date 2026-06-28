@@ -23,7 +23,7 @@ public class EnhancementChipItem extends Item{
         if(enhancementData.coolDown() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
         if(enhancementData.strength() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
         if(enhancementData.efficiency() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
-        if(enhancementData.criticalRate() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.critical_rate_enhance").append(":" + enhancementData.efficiency()));
-        if(enhancementData.criticalDamage() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.critical_damage_enhance").append(":" + enhancementData.efficiency()));
+        if(enhancementData.criticalRate() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.critical_rate_enhance").append(":" + enhancementData.criticalRate()));
+        if(enhancementData.criticalDamage() != 0) builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.critical_damage_enhance").append(":" + enhancementData.criticalDamage()));
     }
 }
