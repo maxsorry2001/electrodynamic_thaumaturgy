@@ -13,7 +13,11 @@ import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagneticDissolutionRec
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagneticDissolutionRecipeInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -254,5 +258,21 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new MagneticDissolverBlockMenu(i, inventory, this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return this.saveWithoutMetadata(registries);
+    }
+
+    @Override
+    public void handleUpdateTag(ValueInput input) {
+        super.handleUpdateTag(input);
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return super.getUpdatePacket();
     }
 }
