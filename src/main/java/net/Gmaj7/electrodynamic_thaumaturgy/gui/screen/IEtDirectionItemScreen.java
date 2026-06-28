@@ -9,18 +9,18 @@ import java.util.Map;
 
 public interface IEtDirectionItemScreen {
 
-    default void renderIcon(GuiGraphicsExtractor guiGraphics, Map<Direction, Boolean> itemSet, int mouseX, int mouseY, int left, int top){
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.UP), isMouseFocusedSetting(Direction.UP, mouseX, mouseY, left, top)), left + 100, top + 50, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.DOWN), isMouseFocusedSetting(Direction.DOWN, mouseX, mouseY, left, top)), left + 100, top + 64, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.EAST), isMouseFocusedSetting(Direction.EAST, mouseX, mouseY, left, top)), left + 100, top + 57, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.NORTH), isMouseFocusedSetting(Direction.NORTH, mouseX, mouseY, left, top)), left + 107, top + 57, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.WEST), isMouseFocusedSetting(Direction.WEST, mouseX, mouseY, left, top)), left + 114, top + 57, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.SOUTH), isMouseFocusedSetting(Direction.SOUTH, mouseX, mouseY, left, top)), left + 121, top + 57, 5, 5);
+    default void renderItemIcon(GuiGraphicsExtractor guiGraphics, Map<Direction, Boolean> itemSet, int mouseX, int mouseY, int left, int top){
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getItemOutputSprites(itemSet.get(Direction.UP), isMouseFocusedItemSetting(Direction.UP, mouseX, mouseY, left, top)), left + 100, top + 50, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getItemOutputSprites(itemSet.get(Direction.DOWN), isMouseFocusedItemSetting(Direction.DOWN, mouseX, mouseY, left, top)), left + 100, top + 64, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getItemOutputSprites(itemSet.get(Direction.EAST), isMouseFocusedItemSetting(Direction.EAST, mouseX, mouseY, left, top)), left + 100, top + 57, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getItemOutputSprites(itemSet.get(Direction.NORTH), isMouseFocusedItemSetting(Direction.NORTH, mouseX, mouseY, left, top)), left + 107, top + 57, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getItemOutputSprites(itemSet.get(Direction.WEST), isMouseFocusedItemSetting(Direction.WEST, mouseX, mouseY, left, top)), left + 114, top + 57, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getItemOutputSprites(itemSet.get(Direction.SOUTH), isMouseFocusedItemSetting(Direction.SOUTH, mouseX, mouseY, left, top)), left + 121, top + 57, 5, 5);
     }
 
-    Identifier getSprites(boolean input, boolean isFocused);
+    Identifier getItemOutputSprites(boolean input, boolean isFocused);
 
-    default boolean isMouseFocusedSetting(Direction direction, double mouseX, double mouseY, int left, int top){
+    default boolean isMouseFocusedItemSetting(Direction direction, double mouseX, double mouseY, int left, int top){
         double d0, d1;
         switch (direction){
             case UP -> {
@@ -52,7 +52,7 @@ public interface IEtDirectionItemScreen {
         return d0 > 0 && d0 < 5 && d1 > 0 && d1 < 5;
     }
 
-    default Direction getFocusedDirection(double mouseX, double mouseY, int left, int top){
+    default Direction getItemFocusedDirection(double mouseX, double mouseY, int left, int top){
         double dx = mouseX - left, dy = mouseY - top;
         Direction direction = null;
         if(dx > 100 && dx < 105){

@@ -276,7 +276,7 @@ public class FluidPipeNet extends PipeNet{
                                 if (inserter == null) continue;
                                 FilterSetting insertFilter = getFilterSetting(checkPos, entry.getKey());
                                 int inserted = checkFilter(insertFilter, resource) ? inserter.insert(resource, extracted, transaction) : 0;
-                                if (inserted == extracted) {
+                                if (inserted <= extracted) {
                                     insertHandler = inserter;
                                     insertCount = inserted;
                                     break outer;

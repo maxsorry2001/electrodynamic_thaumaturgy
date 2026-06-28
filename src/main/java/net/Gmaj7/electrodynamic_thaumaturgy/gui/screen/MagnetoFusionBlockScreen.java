@@ -34,7 +34,7 @@ public class MagnetoFusionBlockScreen extends AbstractContainerScreen<MagnetoFus
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
-        renderIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
+        renderItemIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
     }
 
     @Override
@@ -61,13 +61,13 @@ public class MagnetoFusionBlockScreen extends AbstractContainerScreen<MagnetoFus
     }
 
     @Override
-    public Identifier getSprites(boolean input, boolean isFocused){
+    public Identifier getItemOutputSprites(boolean input, boolean isFocused){
         return input ? SPRITES_INPUT.get(true, isFocused) : SPRITES_OUTPUT.get(true, isFocused);
     }
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        Direction direction = getFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
+        Direction direction = getItemFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
         if(direction != null)
             ClientPacketDistributor.sendToServer(new DirectionSetPacket(menu.blockEntity.getBlockPos(), direction));
         return super.mouseClicked(event, doubleClick);

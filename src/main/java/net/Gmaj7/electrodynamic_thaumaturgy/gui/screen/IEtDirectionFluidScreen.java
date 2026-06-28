@@ -7,20 +7,20 @@ import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 
-public interface IEtDirectionFluidScreen {
+public interface IEtDirectionFluidScreen extends IEtFluidScreen{
 
-    default void renderIcon(GuiGraphicsExtractor guiGraphics, Map<Direction, Boolean> itemSet, int mouseX, int mouseY, int left, int top){
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.UP), isMouseFocusedSetting(Direction.UP, mouseX, mouseY, left, top)), left + 100, top + 50, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.DOWN), isMouseFocusedSetting(Direction.DOWN, mouseX, mouseY, left, top)), left + 100, top + 64, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.EAST), isMouseFocusedSetting(Direction.EAST, mouseX, mouseY, left, top)), left + 100, top + 57, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.NORTH), isMouseFocusedSetting(Direction.NORTH, mouseX, mouseY, left, top)), left + 107, top + 57, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.WEST), isMouseFocusedSetting(Direction.WEST, mouseX, mouseY, left, top)), left + 114, top + 57, 5, 5);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getSprites(itemSet.get(Direction.SOUTH), isMouseFocusedSetting(Direction.SOUTH, mouseX, mouseY, left, top)), left + 121, top + 57, 5, 5);
+    default void renderFluidIcon(GuiGraphicsExtractor guiGraphics, Map<Direction, Boolean> itemSet, int mouseX, int mouseY, int left, int top){
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getFluidOutputSprites(itemSet.get(Direction.UP), isMouseFocusedFluidSetting(Direction.UP, mouseX, mouseY, left, top)), left + 100, top + 50, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getFluidOutputSprites(itemSet.get(Direction.DOWN), isMouseFocusedFluidSetting(Direction.DOWN, mouseX, mouseY, left, top)), left + 100, top + 64, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getFluidOutputSprites(itemSet.get(Direction.EAST), isMouseFocusedFluidSetting(Direction.EAST, mouseX, mouseY, left, top)), left + 100, top + 57, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getFluidOutputSprites(itemSet.get(Direction.NORTH), isMouseFocusedFluidSetting(Direction.NORTH, mouseX, mouseY, left, top)), left + 107, top + 57, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getFluidOutputSprites(itemSet.get(Direction.WEST), isMouseFocusedFluidSetting(Direction.WEST, mouseX, mouseY, left, top)), left + 114, top + 57, 5, 5);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, getFluidOutputSprites(itemSet.get(Direction.SOUTH), isMouseFocusedFluidSetting(Direction.SOUTH, mouseX, mouseY, left, top)), left + 121, top + 57, 5, 5);
     }
 
-    Identifier getSprites(boolean input, boolean isFocused);
+    Identifier getFluidOutputSprites(boolean input, boolean isFocused);
 
-    default boolean isMouseFocusedSetting(Direction direction, double mouseX, double mouseY, int left, int top){
+    default boolean isMouseFocusedFluidSetting(Direction direction, double mouseX, double mouseY, int left, int top){
         double d0, d1;
         switch (direction){
             case UP -> {
@@ -52,7 +52,7 @@ public interface IEtDirectionFluidScreen {
         return d0 > 0 && d0 < 5 && d1 > 0 && d1 < 5;
     }
 
-    default Direction getFocusedDirection(double mouseX, double mouseY, int left, int top){
+    default Direction getFluidFocusedDirection(double mouseX, double mouseY, int left, int top){
         double dx = mouseX - left, dy = mouseY - top;
         Direction direction = null;
         if(dx > 100 && dx < 105){

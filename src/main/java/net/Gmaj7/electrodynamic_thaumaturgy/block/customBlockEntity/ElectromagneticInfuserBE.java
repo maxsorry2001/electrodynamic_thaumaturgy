@@ -32,6 +32,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
@@ -252,5 +253,9 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
 
     public ContainerData getData() {
         return data;
+    }
+
+    public ResourceHandler<FluidResource> getFluidHandlerInput() {
+        return fluidHandlerInput;
     }
 }

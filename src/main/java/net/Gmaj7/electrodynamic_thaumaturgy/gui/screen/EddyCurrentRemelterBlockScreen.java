@@ -36,7 +36,7 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
         guiGraphics.text(this.font, Component.literal(String.valueOf(menu.getProgress())), x + 145, y + 40, 0xFFFFFFFF);
         renderEnergy(guiGraphics, x, y);
-        renderIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
+        renderItemIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
     }
 
     @Override
-    public Identifier getSprites(boolean input, boolean isFocused){
+    public Identifier getItemOutputSprites(boolean input, boolean isFocused){
         return input ? SPRITES_INPUT.get(true, isFocused) : SPRITES_OUTPUT.get(true, isFocused);
     }
 
@@ -67,7 +67,7 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        Direction direction = getFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
+        Direction direction = getItemFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
         if(direction != null)
             ClientPacketDistributor.sendToServer(new DirectionSetPacket(menu.blockEntity.getBlockPos(), direction));
         return super.mouseClicked(event, doubleClick);

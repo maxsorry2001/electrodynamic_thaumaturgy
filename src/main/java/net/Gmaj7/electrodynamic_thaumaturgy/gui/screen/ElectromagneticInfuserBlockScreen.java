@@ -14,11 +14,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
-public class ElectromagneticInfuserBlockScreen extends AbstractContainerScreen<ElectromagneticInfuserBlockMenu> implements IEtDirectionItemScreen{
+public class ElectromagneticInfuserBlockScreen extends AbstractContainerScreen<ElectromagneticInfuserBlockMenu> implements IEtDirectionItemScreen, IEtDirectionFluidScreen{
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_infuser.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
     Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
@@ -35,10 +33,10 @@ public class ElectromagneticInfuserBlockScreen extends AbstractContainerScreen<E
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         renderEnergy(guiGraphics, x, y);
-        renderFluid(guiGraphics, x, y);
+        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerInput(), 0, x + 60, y + 16, 48, 16);
         if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
-        renderIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
+        renderItemIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
     }
 
     @Override
@@ -63,20 +61,19 @@ public class ElectromagneticInfuserBlockScreen extends AbstractContainerScreen<E
             guiGraphics.blit(energyNullTexture, x + 13, y + 21, x + 18, y + 71 - renderY, 0, 0, 6, 50 - renderY);
     }
 
-    private void renderFluid(GuiGraphicsExtractor guiGraphics, int x, int y){
-        ResourceHandler<FluidResource> fluidHandler = menu.blockEntity.getFluidHandlerWithDirection(Direction.EAST);
-        int renderX = (int) (150 * (float) fluidHandler.getAmountAsInt(0) / fluidHandler.getCapacityAsInt(0, fluidHandler.getResource(0)));
-        guiGraphics.blit(energyTexture, x + 16, y + 30, x + 16 + renderX, y + 37, 0, 0, renderX, 7);
+    @Override
+    public Identifier getItemOutputSprites(boolean input, boolean isFocused){
+        return input ? SPRITES_INPUT.get(true, isFocused) : SPRITES_OUTPUT.get(true, isFocused);
     }
 
     @Override
-    public Identifier getSprites(boolean input, boolean isFocused){
+    public Identifier getFluidOutputSprites(boolean input, boolean isFocused) {
         return input ? SPRITES_INPUT.get(true, isFocused) : SPRITES_OUTPUT.get(true, isFocused);
     }
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        Direction direction = getFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
+        Direction direction = getItemFocusedDirection(event.x(), event.y(), (width - imageWidth) / 2, (height - imageHeight) / 2);
         if(direction != null)
             ClientPacketDistributor.sendToServer(new DirectionSetPacket(menu.blockEntity.getBlockPos(), direction));
         return super.mouseClicked(event, doubleClick);

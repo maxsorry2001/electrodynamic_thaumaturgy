@@ -11,10 +11,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
-public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> {
+public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> implements IEtFluidScreen {
     Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_fluid_block.png");
-    Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_block_show.png");
-    Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_block_null.png");
 
     public FluidBlockScreen(FluidBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -41,14 +39,6 @@ public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> {
         this.extractBlurredBackground(guiGraphics);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderEnergy(guiGraphics, x, y);
-    }
-
-    private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){
-        ResourceHandler<FluidResource> fluidHandler = menu.blockEntity.getFluidHandler();
-        int renderX = (int) (150 * (float) fluidHandler.getAmountAsInt(0) / fluidHandler.getCapacityAsInt(0, fluidHandler.getResource(0)));
-        guiGraphics.blit(energyTexture, x + 16, y + 20, x + 16 + renderX, y + 27, 0, 0, renderX, 7);
-        if(renderX < 150)
-            guiGraphics.blit(energyNullTexture, x + 16 + renderX, y + 20, x + 166, y + 27, 0, 0, 150 - renderX, 7);
+        renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x + 80, y + 20, 48, 16);
     }
 }

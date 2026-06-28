@@ -32,6 +32,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
@@ -150,8 +151,12 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
         return itemHandlerInput;
     }
 
-    public BlockEntityFluidHandler getFluidHandlerOutput() {
+    public ResourceHandler<FluidResource> getFluidHandlerOutput() {
         return fluidHandlerOutput;
+    }
+
+    public ResourceHandler<FluidResource> getFluidHandlerInput() {
+        return fluidHandlerInput;
     }
 
     @Override
