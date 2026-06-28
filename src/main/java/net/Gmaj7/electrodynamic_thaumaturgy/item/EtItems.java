@@ -82,8 +82,8 @@ public class EtItems {
     public static final DeferredItem<Item> EMPTY_POWER = ITEM.registerItem("empty_power",
             (properties) -> new PowerAmplifierItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
-    public static final DeferredItem<Item> ENHANCE_BOARD = ITEM.registerItem("enhance_board",
-            (properties -> new EnhancementModulateItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.savvedData))));
+    public static final DeferredItem<Item> ENHANCE_CHIP = ITEM.registerItem("enhance_chip",
+            (properties -> new EnhancementChipItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.savvedData))));
 
     public static final DeferredItem<Item> ENERGY_CORE = ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = ITEM.registerItem("superconducting_update",

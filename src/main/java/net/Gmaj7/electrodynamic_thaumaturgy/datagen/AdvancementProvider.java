@@ -55,7 +55,7 @@ public class AdvancementProvider extends net.minecraft.data.advancements.Advance
             register(EtBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem(), "normal", "generator", "energy_send", "has_energy_antenna", AdvancementType.TASK, output, EtBlocks.ENERGY_TRANSMISSION_ANTENNA);
             register(EtBlocks.ENERGY_BLOCK.asItem(), "normal", "generator", "energy_save", "has_energy_block", AdvancementType.TASK, output, EtBlocks.ENERGY_BLOCK);
             register(EtBlocks.ELECTROMAGNETIC_MODEM_TABLE.asItem(), "normal", "energy_core", "modem_table", "has_modem", AdvancementType.TASK, output, EtBlocks.ELECTROMAGNETIC_MODEM_TABLE);
-            register(EtItems.ENHANCE_BOARD.get(), "normal", "modem_table", "enhance_module", "has_enhancement", AdvancementType.TASK, output, EtItems.ENHANCE_BOARD.get());
+            register(EtItems.ENHANCE_CHIP.get(), "normal", "modem_table", "enhance_chip", "has_enhancement", AdvancementType.TASK, output, EtItems.ENHANCE_CHIP.get());
             register(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get().asItem(), "normal", "energy_core", "machine", "has_machine", AdvancementType.TASK, output, EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE, EtBlocks.BIO_REPLICATION_VAT_MACHINE, EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE, EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE);
 
         }

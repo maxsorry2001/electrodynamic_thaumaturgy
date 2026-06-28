@@ -132,7 +132,7 @@ public class EtTabs {
                         output.accept(EtBlocks.FLUID_PIPE);
 
                         output.accept(EtItems.MAGNETIC_FLUX_BUCKET);
-                        addEnhanceBoard(output);
+                        addEnhanceChip(output);
                     }))
                     .build());
 
@@ -182,9 +182,9 @@ public class EtTabs {
         return itemStack;
     }
 
-    public static void addEnhanceBoard(CreativeModeTab.Output output){
+    public static void addEnhanceChip(CreativeModeTab.Output output){
         for (EnhancementData data : EnhancementDataLoader.getDataMap().values()){
-            ItemStack stack = new ItemStack(EtItems.ENHANCE_BOARD.get());
+            ItemStack stack = new ItemStack(EtItems.ENHANCE_CHIP.get());
             stack.set(EtDataComponentTypes.ENHANCEMENT_DATA, data);
             output.accept(stack);
         }

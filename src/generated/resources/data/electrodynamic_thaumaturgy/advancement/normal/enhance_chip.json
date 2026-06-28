@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "electrodynamic_thaumaturgy:enhance_board"
+            "items": "electrodynamic_thaumaturgy:enhance_chip"
           }
         ]
       },
@@ -14,13 +14,13 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.electrodynamic_thaumaturgy.enhance_module.description"
+      "translate": "advancements.electrodynamic_thaumaturgy.enhance_chip.description"
     },
     "icon": {
-      "id": "electrodynamic_thaumaturgy:enhance_board"
+      "id": "electrodynamic_thaumaturgy:enhance_chip"
     },
     "title": {
-      "translate": "advancements.electrodynamic_thaumaturgy.enhance_module.title"
+      "translate": "advancements.electrodynamic_thaumaturgy.enhance_chip.title"
     }
   },
   "requirements": [

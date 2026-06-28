@@ -221,7 +221,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(output);
 
         // ========== 增强模块基板 ==========
-        shaped(RecipeCategory.MISC, EtItems.ENHANCE_BOARD, 4)
+        shaped(RecipeCategory.MISC, EtItems.ENHANCE_CHIP, 4)
                 .pattern("aba")
                 .pattern("ccc")
                 .define('a', Items.COPPER_INGOT)

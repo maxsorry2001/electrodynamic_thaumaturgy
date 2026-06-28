@@ -77,7 +77,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.PHOTO_CORROSIVE_NOVA_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.LIGHTING_STRIKE_MODULE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.BLOCK_NERVE_MODULE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(EtItems.ENHANCE_BOARD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.ENHANCE_CHIP.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.RADIANT_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.STELLAR_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
