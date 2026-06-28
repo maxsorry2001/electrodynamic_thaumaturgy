@@ -4,7 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EnhancementModulateItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EnhancementChipItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;
 import net.minecraft.world.Container;
@@ -17,6 +17,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModemTableMenu extends AbstractContainerMenu {
     private final Level level;
@@ -57,7 +60,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
             }this.addSlot(new Slot(this.container, i , dx, dy){
                 @Override
                 public boolean mayPlace(ItemStack stack) {
-                    return stack.getItem() instanceof EnhancementModulateItem;
+                    return stack.getItem() instanceof EnhancementChipItem;
                 }
             });
         }
@@ -87,7 +90,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
             else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
                 return ItemStack.EMPTY;
             }
-            else if (item instanceof EnhancementModulateItem){
+            else if (item instanceof EnhancementChipItem){
                 boolean flag = moveModuleItem(enhanceStartNum, enhanceEndNum, itemstack1);
                 if (flag) return ItemStack.EMPTY;
             }
@@ -132,14 +135,13 @@ public class ModemTableMenu extends AbstractContainerMenu {
     public boolean clickMenuButton(Player player, int id) {
         ItemStack toolSlot = this.slots.get(toolSlotNum).getItem();
         this.access.execute((level1, blockPos) -> {
-            if(toolSlot.getItem() instanceof MagicCastItem) {
-                EnhancementData enhancementData = EnhancementData.defaultData;
+            if(!toolSlot.isEmpty()) {
+                List<EnhancementData> list = new ArrayList<>();
                 for (int i = enhanceStartNum; i < enhanceEndNum; i++){
-                    ItemStack itemStack = this.slots.get(i).getItem();
-                    if(itemStack.getItem() instanceof EnhancementModulateItem item){
-                        enhancementData = item.modemEnhancementData(enhancementData);
-                    }
+                    EnhancementData data = this.slots.get(i).getItem().get(EtDataComponentTypes.ENHANCEMENT_DATA);
+                    if(data != null) list.add(data);
                 }
+                EnhancementData enhancementData = EnhancementData.savvedData.add(list);
                 toolSlot.set(EtDataComponentTypes.ENHANCEMENT_DATA, enhancementData);
             }
         });

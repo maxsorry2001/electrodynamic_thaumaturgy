@@ -7,12 +7,16 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionIt
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IEnergyBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IItemBlockEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementDataLoader;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
@@ -104,5 +108,11 @@ public class DataLoadHandler {
                 EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
                 EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(),
                 EtBlocks.FLUID_BLOCK.get());
+    }
+
+    @SubscribeEvent
+    public static void addReloadListeners(AddServerReloadListenersEvent event){
+        event.addListener(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_definition_loader"), new MagicDefinitionLoader());
+        event.addListener(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "enhancement_data"), new EnhancementDataLoader());
     }
 }

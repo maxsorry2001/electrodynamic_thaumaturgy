@@ -13,7 +13,6 @@ import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-@EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
 public class MagicDefinitionLoader extends SimpleJsonResourceReloadListener<MagicDefinition> {
     private static final FileToIdConverter CONVERTER = FileToIdConverter.json("magic_definition");
     private static Map<Identifier, MagicDefinition> definitionMap = new HashMap<>();
@@ -36,10 +35,5 @@ public class MagicDefinitionLoader extends SimpleJsonResourceReloadListener<Magi
 
     public static MagicDefinition get(Identifier id){
         return definitionMap.getOrDefault(id, null);
-    }
-
-    @SubscribeEvent
-    public static void addReloadListeners(AddServerReloadListenersEvent event){
-        event.addListener(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_definition_loader"), new MagicDefinitionLoader());
     }
 }

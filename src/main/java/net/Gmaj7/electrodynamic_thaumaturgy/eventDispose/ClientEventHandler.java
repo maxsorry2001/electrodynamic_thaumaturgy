@@ -19,6 +19,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.ProtectHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.ShowMagicHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.screen.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyState;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
@@ -110,7 +111,7 @@ public class ClientEventHandler {
         public static void onComputeFovModifierEvent(ComputeFovModifierEvent event) {
             if (event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == EtItems.PULSE_BOW.get()) {
                 float fovModifier = 1f;
-                int ticksUsingItem = event.getPlayer().getTicksUsingItem();
+                int ticksUsingItem = (int) (event.getPlayer().getTicksUsingItem() * event.getPlayer().getUseItem().get(EtDataComponentTypes.ENHANCEMENT_DATA).coolDown());
                 float scale = Math.min(ticksUsingItem / 20.0F, 1.0F);
                 fovModifier *= 1.0F - Mth.square(scale) * 0.15F;
                 event.setNewFovModifier(Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get().floatValue(), 1.0F, fovModifier));

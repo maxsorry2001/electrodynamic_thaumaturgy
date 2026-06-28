@@ -219,7 +219,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(output);
 
         // ========== 增强模块基板 ==========
-        shaped(RecipeCategory.MISC, EtItems.ENHANCE_MODEM_BASEBOARD, 4)
+        shaped(RecipeCategory.MISC, EtItems.ENHANCE_CHIP, 4)
                 .pattern("aba")
                 .pattern("ccc")
                 .define('a', Items.COPPER_INGOT)
@@ -252,25 +252,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .define('a', EtItems.MAGNO_INGOT)
                 .define('b', EtItems.ENERGY_CORE)
                 .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
-                .save(output);
-
-        // 各种增强插件（使用基板 + 特定原版物品）
-        shapeless(RecipeCategory.MISC, EtItems.STRENGTH_ENHANCE)
-                .requires(Items.GLOWSTONE_DUST)
-                .requires(EtItems.ENHANCE_MODEM_BASEBOARD)
-                .unlockedBy("has_enhance_baseboard", has(EtItems.ENHANCE_MODEM_BASEBOARD))
-                .save(output);
-
-        shapeless(RecipeCategory.MISC, EtItems.COOLDOWN_ENHANCE)
-                .requires(Items.ENDER_PEARL)
-                .requires(EtItems.ENHANCE_MODEM_BASEBOARD)
-                .unlockedBy("has_enhance_baseboard", has(EtItems.ENHANCE_MODEM_BASEBOARD))
-                .save(output);
-
-        shapeless(RecipeCategory.MISC, EtItems.EFFICIENCY_ENHANCE)
-                .requires(Items.AMETHYST_SHARD)
-                .requires(EtItems.ENHANCE_MODEM_BASEBOARD)
-                .unlockedBy("has_enhance_baseboard", has(EtItems.ENHANCE_MODEM_BASEBOARD))
                 .save(output);
 
         // ========== 各类电池 ==========

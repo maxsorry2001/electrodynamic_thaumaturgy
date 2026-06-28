@@ -55,7 +55,7 @@ public class MagicCastItem extends Item {
                 int i = energyHandler.extract(cost, transaction);
                 if(i == cost){
                     transaction.commit();
-                    player.getCooldowns().addCooldown(typeStack, (int) (magicDefinition.baseCooldown() * Function.getCoolDownRate(itemStack)));
+                    player.getCooldowns().addCooldown(typeStack, (int) (magicDefinition.baseCooldown() / Function.getCoolDownRate(itemStack)));
                     player.swing(usedHand);
                 }
             }
@@ -72,9 +72,9 @@ public class MagicCastItem extends Item {
         int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
         builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         EnhancementData enhancementData = stack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
-        builder.accept(Component.translatable("item.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
+        builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
+        builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
+        builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
     }
 
     @Override

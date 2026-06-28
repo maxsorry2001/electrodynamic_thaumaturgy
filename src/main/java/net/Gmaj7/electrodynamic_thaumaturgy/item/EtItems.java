@@ -82,14 +82,8 @@ public class EtItems {
     public static final DeferredItem<Item> EMPTY_POWER = ITEM.registerItem("empty_power",
             (properties) -> new PowerAmplifierItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
-    public static final DeferredItem<Item> STRENGTH_ENHANCE = ITEM.registerItem("strength_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.STRENGTH, properties.stacksTo(1)));
-    public static final DeferredItem<Item> COOLDOWN_ENHANCE = ITEM.registerItem("cooldown_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.COOLDOWN, properties.stacksTo(1)));
-    public static final DeferredItem<Item> EFFICIENCY_ENHANCE = ITEM.registerItem("efficiency_enhance",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.EFFICIENCY, properties.stacksTo(1)));
-    public static final DeferredItem<Item> ENHANCE_MODEM_BASEBOARD = ITEM.registerItem("enhance_modem_baseboard",
-            (properties) -> new EnhancementModulateItem(EnhancementData.EnhancementType.EMPTY, properties));
+    public static final DeferredItem<Item> ENHANCE_CHIP = ITEM.registerItem("enhance_chip",
+            (properties -> new EnhancementChipItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.savvedData).stacksTo(1))));
 
     public static final DeferredItem<Item> ENERGY_CORE = ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = ITEM.registerItem("superconducting_update",
@@ -135,13 +129,13 @@ public class EtItems {
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyRod())
                     .component(EtDataComponentTypes.MAGIC_SELECT.get(), 2)
-                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
     public static final DeferredItem<Item> PULSE_BOW = ITEM.registerItem("pulse_bow",
             (properties) -> new PulseBow(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())
-                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.defaultData)));
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             (properties) -> new SpawnEggItem(properties));

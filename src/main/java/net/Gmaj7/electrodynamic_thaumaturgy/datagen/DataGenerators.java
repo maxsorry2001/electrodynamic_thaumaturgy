@@ -30,5 +30,6 @@ public class DataGenerators {
         dataGenerator.addProvider(true, new RecipeProvider.Runner(packOutput, lookupProvider));
         dataGenerator.addProvider(true, new AdvancementProvider(packOutput, lookupProvider));
         dataGenerator.addProvider(true, new MagicDefinitionProvider(packOutput, lookupProvider));
+        dataGenerator.addProvider(true, new EnhancementDataProvider(packOutput, lookupProvider));
     }
 }
