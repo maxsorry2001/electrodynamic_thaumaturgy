@@ -16,7 +16,7 @@ public class SuperconductingUpdateItem extends Item {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         if(usedHand == InteractionHand.MAIN_HAND && player.getOffhandItem().getItem() instanceof ElectromagneticTierItem item){
-            if(item instanceof LcOscillatorModuleItem) player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(EtItems.SUPERCONDUCTING_LC.get()));
+            if(item instanceof LcOscillatorItem) player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(EtItems.SUPERCONDUCTING_LC.get()));
             else if(item instanceof PowerAmplifierItem) player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(EtItems.SUPERCONDUCTING_POWER.get()));
             player.swing(usedHand);
             return InteractionResult.SUCCESS;

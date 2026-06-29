@@ -5,12 +5,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
@@ -18,12 +16,11 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
-import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.function.Consumer;
 
-public class PulseBow extends Item {
+public class PulseBow extends ElectromagneticWeaponItem {
     private static int shootUse = 1024;
     public PulseBow(Properties properties) {
         super(properties);
@@ -42,7 +39,7 @@ public class PulseBow extends Item {
     @Override
     public boolean releaseUsing(ItemStack itemStack, Level level, LivingEntity entity, int remainingTime) {
         if (entity instanceof Player player) {
-            float damage = Function.getDamageAmount(itemStack);
+            float damage = Function.getResultAmount(itemStack);
             PulseArrowEntity arrow = new PulseArrowEntity(level, entity, damage, itemStack.getOrDefault(EtDataComponentTypes.BOW_WORK_PATTERN, 0));
             arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(itemStack, entity) - remainingTime, itemStack), 0.0F);
             level.addFreshEntity(arrow);
@@ -68,39 +65,22 @@ public class PulseBow extends Item {
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        ItemStack itemStack = player.getItemInHand(hand);
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
+        if(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof ElectromagneticTierItem item) {
+            changeModule(level, player, item.getChangeSlot());
+            return InteractionResult.CONSUME;
+        }
+        ItemStack itemStack = player.getItemInHand(usedHand);
         if(itemStack.getItem() instanceof PulseBow && itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack)).getCapacityAsInt() > shootUse)
-            player.startUsingItem(hand);
+            player.startUsingItem(usedHand);
         return InteractionResult.CONSUME;
     }
 
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
-    }
-
-    @Override
-    public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
-        return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
-    }
-
-    @Override
-    public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
-        float f = Math.max(0.0F, (float) i / stackMaxEnergy);
-        return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
-    }
 
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-        EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
-        int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt(), patter = itemStack.get(EtDataComponentTypes.BOW_WORK_PATTERN.get());
-        builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
+        int patter = itemStack.get(EtDataComponentTypes.BOW_WORK_PATTERN.get());
         builder.accept(Component.literal(String.valueOf(patter)));
         EnhancementData enhancementData = itemStack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));

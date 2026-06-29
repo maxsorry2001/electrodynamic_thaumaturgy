@@ -1,6 +1,6 @@
 {
   "type": "electrodynamic_thaumaturgy:electromagnetic_infusion",
-  "fluid": "minecraft:water",
+  "fluid": "electrodynamic_thaumaturgy:magnetic_flux_source",
   "fluid_cost": 1000,
   "item": "electrodynamic_thaumaturgy:polar_crystal",
   "output": {

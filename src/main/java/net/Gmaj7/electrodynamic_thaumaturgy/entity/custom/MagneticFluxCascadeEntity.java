@@ -26,6 +26,7 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
     private final int hitTick = 10;
     private int hitTime = 5;
     protected LivingEntity target;
+    protected float rate;
     public MagneticFluxCascadeEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
@@ -35,12 +36,13 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public MagneticFluxCascadeEntity(Level level, LivingEntity owner, ItemStack itemStack) {
+    public MagneticFluxCascadeEntity(Level level, LivingEntity owner, ItemStack itemStack, float rate) {
         super(EtEntities.MAGNETIC_FLUX_CASCADE_ENTITY.get(), level);
         this.magicItem = itemStack.copy();
         this.setOwner(owner);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.pickup = Pickup.DISALLOWED;
+        this.rate = rate;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class MagneticFluxCascadeEntity extends AbstractArrow {
             thread.start();
         }
         if(this.tickCount % hitTick == 0 && magicItem != null){
-            float damage = Function.getDamageAmount(magicItem);
+            float damage = Function.getResultAmount(magicItem) * rate;
             target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), damage);
             hitTime --;
             if(hitTime == 0){

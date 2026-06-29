@@ -4,7 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.Electromagne
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.LcOscillatorModuleItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.LcOscillatorItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PowerAmplifierItem;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Function {
-    public static float getDamageAmount(ItemStack itemStack){
+    public static float getResultAmount(ItemStack itemStack){
         float result = getBaseAmount(itemStack) * getBasePower(itemStack) * getStrengthRate(itemStack);
         return result;
     }
@@ -39,7 +39,7 @@ public class Function {
             ItemContainerData contents = itemStack.get(EtDataComponentTypes.ET_CONTAINER.get());
             ItemStack lcModule = contents.getStackInSlot(MagicCastItem.getLcNum());
             Item item = lcModule.getItem();
-            if(item instanceof LcOscillatorModuleItem) amount = ((LcOscillatorModuleItem) item).getBasicAmount();
+            if(item instanceof LcOscillatorItem) amount = ((LcOscillatorItem) item).getBasicAmount();
         }
         return amount;
     }

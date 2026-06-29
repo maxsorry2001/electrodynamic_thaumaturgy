@@ -1,4 +1,5 @@
 {
+  "amountRate": 40.0,
   "behavior": "electrodynamic_thaumaturgy:refraction",
   "cooldown": 50,
   "energy_cost": 128,

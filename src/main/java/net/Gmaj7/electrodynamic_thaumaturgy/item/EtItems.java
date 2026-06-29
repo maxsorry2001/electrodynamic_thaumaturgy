@@ -61,15 +61,15 @@ public class EtItems {
             properties -> new Item(properties.stacksTo(16)));
 
     public static final DeferredItem<Item> PRIMARY_LC = ITEM.registerItem("primary_lc",
-            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
+            properties -> new LcOscillatorItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
     public static final DeferredItem<Item> INTERMEDIATE_LC = ITEM.registerItem("intermediate_lc",
-            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.INTERMEDIATE, properties.stacksTo(1)));
+            properties -> new LcOscillatorItem(ElectromagneticLevel.INTERMEDIATE, properties.stacksTo(1)));
     public static final DeferredItem<Item> ADVANCED_LC = ITEM.registerItem("advanced_lc",
-            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.ADVANCED, properties.stacksTo(1)));
+            properties -> new LcOscillatorItem(ElectromagneticLevel.ADVANCED, properties.stacksTo(1)));
     public static final DeferredItem<Item> SUPERCONDUCTING_LC = ITEM.registerItem("superconducting_lc",
-            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.SUPERCONDUCTING, properties.stacksTo(1)));
+            properties -> new LcOscillatorItem(ElectromagneticLevel.SUPERCONDUCTING, properties.stacksTo(1)));
     public static final DeferredItem<Item> EMPTY_LC = ITEM.registerItem("empty_lc",
-            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
+            properties -> new LcOscillatorItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
     public static final DeferredItem<Item> PRIMARY_POWER = ITEM.registerItem("primary_power",
             properties -> new PowerAmplifierItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));

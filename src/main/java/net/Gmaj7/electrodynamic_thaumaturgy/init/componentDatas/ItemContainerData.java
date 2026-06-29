@@ -20,6 +20,10 @@ public record ItemContainerData(List<ItemStackTemplate> list) {
     public static final StreamCodec<? super RegistryFriendlyByteBuf, ItemContainerData> STREAM_CODEC = ItemStackTemplate.STREAM_CODEC.apply(ByteBufCodecs.list()).map(ItemContainerData::new, ItemContainerData::list);
     public static final ItemContainerData EMPTY = new ItemContainerData(List.of());
 
+    public ItemContainerData {
+        list = List.copyOf(list);
+    }
+
     public static ItemContainerData getDefaultRod(){
         List<ItemStackTemplate> list = new ArrayList<>();
         list.add(new ItemStackTemplate(EtItems.SUPERCONDUCTING_POWER.get()));
@@ -59,7 +63,17 @@ public record ItemContainerData(List<ItemStackTemplate> list) {
         return list.isEmpty();
     }
 
-    public ItemStack getStackInSlot(Integer integer) {
-        return list.get(integer).create();
+    public ItemStack getStackInSlot(int i) {
+        return list.get(i).create();
+    }
+
+    public ItemStackTemplate getTemplateInSlot(int i){
+        return list.get(i);
+    }
+
+    public ItemContainerData getNewWithSlot(int slot, ItemStackTemplate template){
+        List<ItemStackTemplate> newList = new ArrayList<>(list);
+        newList.set(slot, template);
+        return new ItemContainerData(newList);
     }
 }

@@ -1,4 +1,5 @@
 {
+  "amountRate": 1.0,
   "behavior": "electrodynamic_thaumaturgy:tree_current",
   "cooldown": 50,
   "energy_cost": 128,

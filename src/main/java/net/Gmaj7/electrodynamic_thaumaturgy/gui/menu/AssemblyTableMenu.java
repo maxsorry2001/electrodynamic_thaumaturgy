@@ -5,7 +5,9 @@ import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EtMagicTypeModuleItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.IEtModuleItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
@@ -26,11 +28,9 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
     private final Level level;
     public final Container container;
     private final ContainerLevelAccess access;
-    private final int toolSlotNum = 10;
-    private final int typeSlotStartNum = 2;
-    private final int lcSlotNum = 1;
-    private final int powerSlotNum = 0;
-    private final int typeSlotEndNum = 10;
+    private final int toolSlotNum = 8;
+    private final int typeSlotStartNum = 0;
+    private final int typeSlotEndNum = 8;
     Runnable slotUpdateListener;
 
     public AssemblyTableMenu(int containerId, Inventory inventory){
@@ -68,36 +68,14 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 return result;
             }
         };
-        this.addSlot(new Slot(this.container, powerSlotNum, 54, 26){
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof PowerAmplifierItem;
-            }
-
-            @Override
-            public void setChanged() {
-                moduleChanged(this.container);
-            }
-        });
-        this.addSlot(new Slot(this.container, lcSlotNum, 54, 44){
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return !this.container.getSlot(toolSlotNum).get().isEmpty() && stack.getItem() instanceof LcOscillatorModuleItem;
-            }
-
-            @Override
-            public void setChanged() {
-                moduleChanged(this.container);
-            }
-        });
         for (int i = typeSlotStartNum; i < typeSlotEndNum; i++) {
             int dx, dy;
-            if(i < 6) {
-                dx = 18 * i + 46;
+            if(i < 4) {
+                dx = 18 * i + 69;
                 dy = 26;
             }
             else {
-                dx = 18 * i - 26;
+                dx = 18 * i - 3;
                 dy = 44;
             }
             this.addSlot(new Slot(this.container, i , dx, dy){
@@ -112,7 +90,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 }
             });
         }
-        this.addSlot(new Slot(this.container, toolSlotNum, 20, 34){
+        this.addSlot(new Slot(this.container, toolSlotNum, 33, 34){
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() instanceof MagicCastItem;
@@ -136,10 +114,6 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 }
             }
             else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
-                return ItemStack.EMPTY;
-            }else if (!this.slots.get(lcSlotNum).hasItem() && item instanceof LcOscillatorModuleItem && !this.moveItemStackTo(itemstack1, lcSlotNum, lcSlotNum + 1, false)){
-                return ItemStack.EMPTY;
-            }else if (!this.slots.get(powerSlotNum).hasItem() && item instanceof PowerAmplifierItem && !this.moveItemStackTo(itemstack1, powerSlotNum, powerSlotNum + 1, false)){
                 return ItemStack.EMPTY;
             }else if (item instanceof EtMagicTypeModuleItem){
                 boolean flag = moveModuleItem(typeSlotStartNum, typeSlotEndNum, itemstack1);
@@ -194,12 +168,13 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
         this.access.execute((level1, blockPos) -> {
             if(toolStack.getItem() instanceof MagicCastItem) {
                 List<ItemStackTemplate> newList = new ArrayList<>();
-                for (int i = powerSlotNum; i < typeSlotEndNum; i++){
+                ItemContainerData data = toolSlot.get(EtDataComponentTypes.ET_CONTAINER);
+                newList.add(data.getTemplateInSlot(0));
+                newList.add(data.getTemplateInSlot(1));
+                for (int i = typeSlotStartNum; i < typeSlotEndNum; i++){
                     ItemStack itemStack = this.slots.get(i).getItem();
                     if(itemStack.isEmpty()){
-                        if(i == powerSlotNum) newList.add(new ItemStackTemplate(EtItems.EMPTY_POWER.get()));
-                        else if (i == lcSlotNum) newList.add(new ItemStackTemplate(EtItems.EMPTY_LC.get()));
-                        else newList.add(new ItemStackTemplate(EtItems.EMPTY_MAGIC_MODULE.get()));
+                        newList.add(new ItemStackTemplate(EtItems.EMPTY_MAGIC_MODULE.get()));
                     }
                     else newList.add(ItemStackTemplate.fromNonEmptyStack(itemStack));
                 }
@@ -216,8 +191,8 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
             if(!toolStack.isEmpty() && toolStack.getItem() instanceof MagicCastItem){
                 this.access.execute((level1, blockPos) -> {
                     ItemContainerData contents = toolStack.get(EtDataComponentTypes.ET_CONTAINER.get());
-                    for (int i = powerSlotNum; i < typeSlotEndNum; i++){
-                        ItemStack menuSlot = contents.getStackInSlot(i).copy();
+                    for (int i = typeSlotStartNum; i < typeSlotEndNum; i++){
+                        ItemStack menuSlot = contents.getStackInSlot(i + 2).copy();
                         if(menuSlot.getItem() instanceof IEtModuleItem && ((IEtModuleItem) menuSlot.getItem()).isEmpty())
                             menuSlot = ItemStack.EMPTY;
                         this.container.setItem(i, menuSlot);
@@ -225,7 +200,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 });
             }
             else
-                for (int i = powerSlotNum; i < typeSlotEndNum; i++)
+                for (int i = typeSlotStartNum; i < typeSlotEndNum; i++)
                     this.container.setItem(i, ItemStack.EMPTY);
         }
     }

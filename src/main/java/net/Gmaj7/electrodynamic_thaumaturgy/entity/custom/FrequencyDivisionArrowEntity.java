@@ -26,6 +26,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
     private int maxTime;
     private int explodeTime = 5;
     private Vec3 startPos;
+    private float rate;
     public FrequencyDivisionArrowEntity(EntityType<? extends Arrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
@@ -36,7 +37,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public FrequencyDivisionArrowEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner, int maxTime){
+    public FrequencyDivisionArrowEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner, int maxTime, float rate){
         super(EtEntities.FREQUENCY_DIVISION_ARROW_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
@@ -44,6 +45,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         this.pickup = Pickup.DISALLOWED;
         this.maxTime = maxTime;
         this.startPos = new Vec3(x,y, z);
+        this.rate = rate;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
             if(list.contains(getOwner())) list.remove(getOwner());
             if (this.getOwner() instanceof MagnetoOrderSageEntity && list.contains(((MagnetoOrderSageEntity) this.getOwner()).getOwner())) list.remove(((MagnetoOrderSageEntity) this.getOwner()));
             for (LivingEntity target : list)
-                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem) / 7);
+                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getResultAmount(magicItem) * rate);
             this.discard();
         }
     }
@@ -97,7 +99,7 @@ public class FrequencyDivisionArrowEntity extends Arrow {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity livingEntity && livingEntity != getOwner()){
             if(magicItem != null)
-                livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner() instanceof OwnableEntity ? ((OwnableEntity) this.getOwner()).getOwner() : this.getOwner()), Function.getDamageAmount(magicItem));
+                livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner() instanceof OwnableEntity ? ((OwnableEntity) this.getOwner()).getOwner() : this.getOwner()), Function.getResultAmount(magicItem));
             this.discard();
         }
     }

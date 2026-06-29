@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.item.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.ElectromagneticLevel;
 import net.minecraft.world.item.Item;
 
-public class ElectromagneticTierItem extends Item implements IEtModuleItem {
+public abstract class ElectromagneticTierItem extends Item implements IEtModuleItem {
     private final ElectromagneticLevel tier;
     public ElectromagneticTierItem(ElectromagneticLevel tier, Properties properties) {
         super(properties);
@@ -17,4 +17,6 @@ public class ElectromagneticTierItem extends Item implements IEtModuleItem {
     public boolean isEmpty(){
         return tier == ElectromagneticLevel.EMPTY;
     }
+
+    protected abstract int getChangeSlot();
 }

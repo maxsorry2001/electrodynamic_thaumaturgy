@@ -7,6 +7,11 @@ public class PowerAmplifierItem extends ElectromagneticTierItem{
         super(tier, properties);
     }
 
+    @Override
+    protected int getChangeSlot() {
+        return 0;
+    }
+
     public float getMagnification(){
         float result;
         switch (this.getTier()){

@@ -4,9 +4,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticWeaponItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EnhancementChipItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -67,7 +66,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, toolSlotNum, 20, 37){
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof MagicCastItem || stack.getItem() instanceof PulseBow;
+                return stack.getItem() instanceof ElectromagneticWeaponItem;
             }
         });
         addPlayerInventory(inventory);
@@ -87,7 +86,7 @@ public class ModemTableMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof MagicCastItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
+            else if (!this.slots.get(toolSlotNum).hasItem() && item instanceof ElectromagneticWeaponItem && !this.moveItemStackTo(itemstack1, toolSlotNum, toolSlotNum + 1, false)){
                 return ItemStack.EMPTY;
             }
             else if (item instanceof EnhancementChipItem){

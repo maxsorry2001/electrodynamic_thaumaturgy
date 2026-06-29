@@ -5,10 +5,9 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
-import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinitionLoader;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -25,11 +24,9 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.function.Consumer;
 
-public class MagicCastItem extends Item {
+public class MagicCastItem extends ElectromagneticWeaponItem {
     private static final int maxMagicSlots = 10;
     private static final int magicBaseSlots = 2;
-    private static final int powerNum = 0;
-    private static final int lcNum = 1;
     public MagicCastItem(Properties properties) {
         super(properties);
     }
@@ -41,10 +38,15 @@ public class MagicCastItem extends Item {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
+        if(level.isClientSide()) return  InteractionResult.CONSUME;
         ItemStack itemStack = player.getItemInHand(usedHand);
         ItemStack typeStack = getMagic(itemStack);
         EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
         MagicDefinition magicDefinition = MagicDefinitionLoader.get(typeStack.get(EtDataComponentTypes.MAGIC_DEF_LOCATION));
+        if(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof ElectromagneticTierItem item) {
+            changeModule(level, player, item.getChangeSlot());
+            return InteractionResult.CONSUME;
+        }
         if(typeStack.getItem() instanceof EtMagicTypeModuleItem item && !item.isEmpty()
                 && energyHandler.getAmountAsInt() >= magicDefinition.baseEnergyCost() && !player.getCooldowns().isOnCooldown(typeStack)
                 && !(usedHand == InteractionHand.OFF_HAND && player.getMainHandItem().getItem() instanceof BatteryItem)
@@ -68,33 +70,10 @@ public class MagicCastItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, builder, tooltipFlag);
         builder.accept(getTranslate(stack));
-        EnergyHandler energyHandler = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack));
-        int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
-        builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
         EnhancementData enhancementData = stack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
-    }
-
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt() < stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
-    }
-
-    @Override
-    public int getBarWidth(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
-        return Math.round(13.0F - (stackMaxEnergy - i) * 13.0F / stackMaxEnergy);
-    }
-
-    @Override
-    public int getBarColor(ItemStack stack) {
-        int i = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getAmountAsInt();
-        int stackMaxEnergy = stack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(stack)).getCapacityAsInt();
-        float f = Math.max(0.0F, (float) i / stackMaxEnergy);
-        return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
 
     private Component getTranslate(ItemStack itemStack){
@@ -104,7 +83,7 @@ public class MagicCastItem extends Item {
         return Component.translatable("moe_no_magic");
     }
 
-    private ItemStack getMagic(ItemStack itemStack){
+    public static ItemStack getMagic(ItemStack itemStack){
         if(itemStack.has(EtDataComponentTypes.ET_CONTAINER.get()) && itemStack.has(EtDataComponentTypes.MAGIC_SELECT)) {
             ItemContainerData contents = itemStack.getOrDefault(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.EMPTY);
             if(contents.isEmpty()) return ItemStack.EMPTY;
@@ -116,13 +95,5 @@ public class MagicCastItem extends Item {
 
     public static int getMaxMagicSlots() {
         return maxMagicSlots;
-    }
-
-    public static int getPowerNum() {
-        return powerNum;
-    }
-
-    public static int getLcNum() {
-        return lcNum;
     }
 }

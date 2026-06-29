@@ -1,0 +1,19 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.magic.custom;
+
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.ElectromagneticDriverBE;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+
+public abstract class AbstractWideMagic implements IMoeMagic{
+
+    @Override
+    public boolean success(LivingEntity livingEntity, ItemStack itemStack) {
+        return true;
+    }
+
+    @Override
+    public boolean canBlockCast(ElectromagneticDriverBE electromagneticDriverBE, MagicDefinition magicDefinition) {
+        return true;
+    }
+}
