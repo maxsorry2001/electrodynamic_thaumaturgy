@@ -27,7 +27,6 @@ public abstract class UseDurationMixin implements RangeSelectItemModelProperty {
 
         float speedMultiplier = itemStack.get(EtDataComponentTypes.ENHANCEMENT_DATA).coolDown();
         float accelerated = original * speedMultiplier;
-        System.out.println(original + " //" + accelerated);
         cir.setReturnValue(accelerated);
     }
 }

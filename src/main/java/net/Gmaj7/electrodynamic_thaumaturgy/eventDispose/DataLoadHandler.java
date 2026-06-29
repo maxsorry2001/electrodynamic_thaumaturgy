@@ -10,7 +10,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementDataLoader;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinitionLoader;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

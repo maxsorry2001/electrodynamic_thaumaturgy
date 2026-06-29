@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.init;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.custom.IMoeMagic;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.custom.IMoeMagic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;

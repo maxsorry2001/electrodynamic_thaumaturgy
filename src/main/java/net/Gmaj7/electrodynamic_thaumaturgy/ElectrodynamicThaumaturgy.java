@@ -14,7 +14,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.mixinData.DataGet;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.ProtectingPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.Magics;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.Magics;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.EtParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.EtRecipes;
 import net.minecraft.world.entity.player.Player;

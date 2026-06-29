@@ -19,11 +19,11 @@ public class EtItems {
     public static final DeferredRegister.Items ITEM = DeferredRegister.createItems(ElectrodynamicThaumaturgy.MODID);
 
     public static final DeferredItem<BlockItem> ENERGY_BLOCK = ITEM.registerItem("energy_block",
-            (properties -> new EnergyBlockItem(EtBlocks.ENERGY_BLOCK.get(), properties.stacksTo(1)
-                    .component(EtDataComponentTypes.ET_ENERGY.get(), 0))));
+            properties -> new EnergyBlockItem(EtBlocks.ENERGY_BLOCK.get(), properties.stacksTo(1)
+                    .component(EtDataComponentTypes.ET_ENERGY.get(), 0)));
     public static final DeferredItem<BlockItem> FLUID_BLOCK = ITEM.registerItem("fluid_block",
-            (properties -> new FluidBlockItem(EtBlocks.FLUID_BLOCK.get(), properties.stacksTo(1)
-                    .component(EtDataComponentTypes.FLUID_CONTAINER.get(), SimpleFluidContent.EMPTY))));
+            properties -> new FluidBlockItem(EtBlocks.FLUID_BLOCK.get(), properties.stacksTo(1)
+                    .component(EtDataComponentTypes.FLUID_CONTAINER.get(), SimpleFluidContent.EMPTY)));
 
     public static final DeferredItem<Item> RAY_MODULE = registerMagicModule("ray");
     public static final DeferredItem<Item> PULSED_PLASMA_MODULE = registerMagicModule("pulsed_plasma");
@@ -52,61 +52,61 @@ public class EtItems {
     public static final DeferredItem<Item> PHOTOACOUSTIC_PULSE_MODULE = registerMagicModule("photoacoustic_pulse");
     public static final DeferredItem<Item> PHOTO_CORROSIVE_NOVA_MODULE = registerMagicModule("photo_corrosive_nova");
     public static final DeferredItem<Item> EMPTY_MAGIC_MODULE = ITEM.registerItem("empty_module",
-            (properties -> new EtMagicTypeModuleItem(properties.stacksTo(1), true)));
+            properties -> new EtMagicTypeModuleItem(properties.stacksTo(1), true));
     public static final DeferredItem<Item> PRIMARY_CODE_MODULE = ITEM.registerItem("primary_code_module",
-            (properties) -> new Item(properties.stacksTo(16)));
+            properties -> new Item(properties.stacksTo(16)));
     public static final DeferredItem<Item> INTERMEDIATE_CODE_MODULE = ITEM.registerItem("intermediate_code_module",
-            (properties) -> new Item(properties.stacksTo(16)));
+            properties -> new Item(properties.stacksTo(16)));
     public static final DeferredItem<Item> ADVANCED_CODE_MODULE = ITEM.registerItem("advanced_code_module",
-            (properties) -> new Item(properties.stacksTo(16)));
+            properties -> new Item(properties.stacksTo(16)));
 
     public static final DeferredItem<Item> PRIMARY_LC = ITEM.registerItem("primary_lc",
-            (properties) -> new LcOscillatorModuleItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
+            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
     public static final DeferredItem<Item> INTERMEDIATE_LC = ITEM.registerItem("intermediate_lc",
-            (properties) -> new LcOscillatorModuleItem(ElectromagneticLevel.INTERMEDIATE, properties.stacksTo(1)));
+            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.INTERMEDIATE, properties.stacksTo(1)));
     public static final DeferredItem<Item> ADVANCED_LC = ITEM.registerItem("advanced_lc",
-            (properties) -> new LcOscillatorModuleItem(ElectromagneticLevel.ADVANCED, properties.stacksTo(1)));
+            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.ADVANCED, properties.stacksTo(1)));
     public static final DeferredItem<Item> SUPERCONDUCTING_LC = ITEM.registerItem("superconducting_lc",
-            (properties) -> new LcOscillatorModuleItem(ElectromagneticLevel.SUPERCONDUCTING, properties.stacksTo(1)));
+            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.SUPERCONDUCTING, properties.stacksTo(1)));
     public static final DeferredItem<Item> EMPTY_LC = ITEM.registerItem("empty_lc",
-            (properties) -> new LcOscillatorModuleItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
+            properties -> new LcOscillatorModuleItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
     public static final DeferredItem<Item> PRIMARY_POWER = ITEM.registerItem("primary_power",
-            (properties) -> new PowerAmplifierItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
+            properties -> new PowerAmplifierItem(ElectromagneticLevel.PRIMARY, properties.stacksTo(1)));
     public static final DeferredItem<Item> INTERMEDIATE_POWER = ITEM.registerItem("intermediate_power",
-            (properties) -> new PowerAmplifierItem(ElectromagneticLevel.INTERMEDIATE, properties.stacksTo(1)));
+            properties -> new PowerAmplifierItem(ElectromagneticLevel.INTERMEDIATE, properties.stacksTo(1)));
     public static final DeferredItem<Item> ADVANCED_POWER = ITEM.registerItem("advanced_power",
-            (properties) -> new PowerAmplifierItem(ElectromagneticLevel.ADVANCED, properties.stacksTo(1)));
+            properties -> new PowerAmplifierItem(ElectromagneticLevel.ADVANCED, properties.stacksTo(1)));
     public static final DeferredItem<Item> SUPERCONDUCTING_POWER = ITEM.registerItem("superconducting_power",
-            (properties) -> new PowerAmplifierItem(ElectromagneticLevel.SUPERCONDUCTING, properties.stacksTo(1)));
+            properties -> new PowerAmplifierItem(ElectromagneticLevel.SUPERCONDUCTING, properties.stacksTo(1)));
     public static final DeferredItem<Item> EMPTY_POWER = ITEM.registerItem("empty_power",
-            (properties) -> new PowerAmplifierItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
+            properties -> new PowerAmplifierItem(ElectromagneticLevel.EMPTY, properties.stacksTo(1)));
 
     public static final DeferredItem<Item> ENHANCE_CHIP = ITEM.registerItem("enhance_chip",
-            (properties -> new EnhancementChipItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.savvedData).stacksTo(1))));
+            properties -> new EnhancementChipItem(properties.component(EtDataComponentTypes.ENHANCEMENT_DATA, EnhancementData.savvedData).stacksTo(1)));
 
     public static final DeferredItem<Item> ENERGY_CORE = ITEM.registerSimpleItem("energy_core");
     public static final DeferredItem<Item> SUPERCONDUCTING_UPDATE = ITEM.registerItem("superconducting_update",
             SuperconductingUpdateItem::new);
     public static final DeferredItem<Item> POTATO_BATTERY = ITEM.registerItem("potato_battery",
-            (properties) -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
+            properties -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
     public static final DeferredItem<Item> CARROT_BATTERY = ITEM.registerItem("carrot_battery",
-            (properties) -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
+            properties -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
     public static final DeferredItem<Item> SOLUTION_BATTERY = ITEM.registerItem("solution_battery",
-            (properties) -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
+            properties -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 16384)));
     public static final DeferredItem<Item> POWER_BANK = ITEM.registerItem("power_bank",
-            (properties) -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 0)));
+            properties -> new BatteryItem(properties.stacksTo(1).component(EtDataComponentTypes.ET_ENERGY.get(), 0)));
     public static final DeferredItem<Item> GENETIC_RECORDER = ITEM.registerItem("genetic_recorder",
-            (properties) -> new Item(properties.stacksTo(1)));
+            properties -> new Item(properties.stacksTo(1)));
     public static final DeferredItem<Item> FILTER_SETTING = ITEM.registerItem("net_filter",
-            (properties) -> new FilterSettingItem(properties.stacksTo(1)
+            properties -> new FilterSettingItem(properties.stacksTo(1)
                     .component(EtDataComponentTypes.FILTER_CONTAINER.get(), ItemContainerContents.EMPTY)
                     .component(EtDataComponentTypes.FILTER_WHITE.get(), true)));
 
     public static final DeferredItem<Item> MAGNO_WRENCH = ITEM.registerItem("magno_wrench",
-            (properties) -> new MagnoWrenchItem(properties.stacksTo(1)));
+            properties -> new MagnoWrenchItem(properties.stacksTo(1)));
     public static final DeferredItem<Item> MAGNETIC_FLUX_BUCKET = ITEM.registerItem("magnetic_flux_bucket",
-            (properties -> new BucketItem(EtFluids.MAGNETIC_FLUX_SOURCE.get(), properties.stacksTo(1).craftRemainder(Items.BUCKET))));
+            properties -> new BucketItem(EtFluids.MAGNETIC_FLUX_SOURCE.get(), properties.stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final DeferredItem<Item> MAGNO_INGOT = ITEM.registerSimpleItem("magno_ingot");
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = ITEM.registerSimpleItem("radiant_magno_ingot");
@@ -125,23 +125,23 @@ public class EtItems {
     public static final DeferredItem<Item> MONOPOLE_S = ITEM.registerSimpleItem("monopole_s");
 
     public static final DeferredItem<Item> ELECTROMAGNETIC_ROD = ITEM.registerItem("electromagnetic_rod",
-            (properties) -> new MagicCastItem(properties.stacksTo(1)
+            properties -> new MagicCastItem(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyRod())
                     .component(EtDataComponentTypes.MAGIC_SELECT.get(), 2)
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
     public static final DeferredItem<Item> PULSE_BOW = ITEM.registerItem("pulse_bow",
-            (properties) -> new PulseBow(properties.stacksTo(1)
+            properties -> new PulseBow(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
-            (properties) -> new SpawnEggItem(properties));
+            SpawnEggItem::new);
 
     public static final DeferredItem<Item> FLUID_FAKE_ITEM = ITEM.registerItem("fluid_fake_item",
-            (properties -> new FluidFakeItem(properties.stacksTo(1).component(EtDataComponentTypes.FLUID_CONTAINER.get(), SimpleFluidContent.EMPTY))));
+            properties -> new FluidFakeItem(properties.stacksTo(1).component(EtDataComponentTypes.FLUID_CONTAINER.get(), SimpleFluidContent.EMPTY)));
 
     private static DeferredItem<Item> registerMagicModule(String name){
         return ITEM.registerItem(name + "_module", (properties -> new EtMagicTypeModuleItem(properties.stacksTo(1).component(EtDataComponentTypes.MAGIC_DEF_LOCATION.get(), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name)))));
