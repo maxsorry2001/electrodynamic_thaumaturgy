@@ -33,7 +33,7 @@ public class ElectromagneticInfuserBlockScreen extends AbstractContainerScreen<E
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         renderEnergy(guiGraphics, x, y);
-        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerInput(), 0, x + 60, y + 16, 48, 16);
+        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerInput(), 0, x + 41, y + 18, 48, 16);
         if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
         renderItemIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);

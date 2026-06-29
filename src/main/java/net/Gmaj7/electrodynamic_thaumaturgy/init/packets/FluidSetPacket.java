@@ -12,25 +12,33 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class FluidSetPacket implements CustomPacketPayload {
+    int slot;
     BlockPos blockPos;
     FluidStack fluidStack;
     boolean isEmpty;
     public static final Type<FluidSetPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "flluid_set"));
     public static final StreamCodec<RegistryFriendlyByteBuf, FluidSetPacket> STREAM_CODEC = CustomPacketPayload.codec(FluidSetPacket::write, FluidSetPacket::new);
 
-    public FluidSetPacket(FluidStack fluidStack, BlockPos blockPos){
+    public FluidSetPacket(FluidStack fluidStack, BlockPos blockPos, int slot){
+        this.slot = slot;
         this.fluidStack = fluidStack;
         this.blockPos = blockPos;
         isEmpty = fluidStack.isEmpty();
     }
 
+    public FluidSetPacket(FluidStack fluidStack, BlockPos blockPos){
+        this(fluidStack, blockPos, 0);
+    }
+
     public FluidSetPacket(RegistryFriendlyByteBuf buf){
+        this.slot = buf.readInt();
         this.isEmpty = buf.readBoolean();
         if(!isEmpty) this.fluidStack = FluidStack.STREAM_CODEC.decode(buf);
         this.blockPos = buf.readBlockPos();
     }
 
     public void write(RegistryFriendlyByteBuf buf){
+        buf.writeInt(slot);
         buf.writeBoolean(isEmpty);
         if(!isEmpty) FluidStack.STREAM_CODEC.encode(buf, fluidStack);
         buf.writeBlockPos(blockPos);
@@ -46,7 +54,7 @@ public class FluidSetPacket implements CustomPacketPayload {
             if(context.player().level().isClientSide()){
                 BlockEntity blockEntity = context.player().level().getBlockEntity(packet.blockPos);
                 if(blockEntity instanceof IDirectionFluidBlockEntity) {
-                    ((IDirectionFluidBlockEntity) blockEntity).setFluid(packet.isEmpty ? FluidStack.EMPTY : packet.fluidStack);
+                    ((IDirectionFluidBlockEntity) blockEntity).setFluid(packet.isEmpty ? FluidStack.EMPTY : packet.fluidStack, packet.slot);
                 }
             }
         });

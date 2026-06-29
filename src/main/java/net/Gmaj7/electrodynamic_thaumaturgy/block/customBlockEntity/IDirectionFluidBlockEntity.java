@@ -8,7 +8,11 @@ import net.neoforged.neoforge.transfer.fluid.FluidResource;
 public interface IDirectionFluidBlockEntity {
     public StacksResourceHandler<FluidStack, FluidResource> getFluidHandlerWithDirection(Direction direction);
 
-    void setFluid(FluidStack fluidStack);
+    default void setFluid(FluidStack fluidStack){
+        setFluid(fluidStack, 0);
+    }
+
+    void setFluid(FluidStack fluidStack, int slot);
 
     void changeFluidDirectionSet(Direction direction);
 }

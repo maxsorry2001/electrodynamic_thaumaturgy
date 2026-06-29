@@ -34,8 +34,8 @@ public class FluidBlockMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         this.data = ((FluidBlockEntity) blockEntity).getData();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 60, 35));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 1, 100, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 0, 50, 35));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandler(), (slot, resource, amount) -> this.blockEntity.getItemHandler().set(slot, resource, amount), 1, 110, 35));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

@@ -235,7 +235,7 @@ public class FluidBlockEntity extends BlockEntity implements IDirectionFluidBloc
     }
 
     @Override
-    public void setFluid(FluidStack fluidStack) {
+    public void setFluid(FluidStack fluidStack, int slot) {
         this.fluidHandler.setStackInSlot(0, fluidStack);
     }
 

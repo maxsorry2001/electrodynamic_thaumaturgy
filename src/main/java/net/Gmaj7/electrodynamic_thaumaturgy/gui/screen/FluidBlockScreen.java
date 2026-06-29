@@ -39,6 +39,6 @@ public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> im
         this.extractBlurredBackground(guiGraphics);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x + 80, y + 20, 48, 16);
+        renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x + 40, y + 19, 48, 32);
     }
 }

@@ -103,6 +103,7 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_dissociation_machine": "Electromagnetic Dissociation Machine",
   "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine": "Eddy Current Remelter Machine",
   "block.electrodynamic_thaumaturgy.electromagnetic_infuser_machine": "Electromagnetic Infuser Machine",
+  "block.electrodynamic_thaumaturgy.magnetic_dissolver_machine": "Magnetic Dissolver Machine",
 
   "block.electrodynamic_thaumaturgy.energy_pipe": "Energy Pipe",
   "block.electrodynamic_thaumaturgy.item_pipe": "Item Pipe",

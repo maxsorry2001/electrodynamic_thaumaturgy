@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
 public class MagneticDissolverBlockScreen extends AbstractContainerScreen<MagneticDissolverBlockMenu> implements IEtDirectionItemScreen, IEtDirectionFluidScreen{
-    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/electromagnetic_infuser.png");
+    Identifier backGrand = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/magnetic_dissolver.png");
     Identifier energyTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy.png");
     Identifier energyNullTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/energy_null.png");
     protected static final WidgetSprites SPRITES_INPUT = new WidgetSprites(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_input"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_input_disabled"), Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "widget/item_input_highlighted"));
@@ -33,8 +33,8 @@ public class MagneticDissolverBlockScreen extends AbstractContainerScreen<Magnet
         EnergyHandler energyHandler = menu.blockEntity.getEnergy();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         renderEnergy(guiGraphics, x, y);
-        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerInput(), 0, x + 60, y + 16, 48, 16);
-        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerOutput(), 0, x + 90, y + 16, 48, 16);
+        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerInput(), 0, x + 41, y + 18, 48, 16);
+        renderFluid(guiGraphics, menu.blockEntity.getFluidHandlerOutput(), 0, x + 121, y + 18, 48, 16);
         if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
         renderItemIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);

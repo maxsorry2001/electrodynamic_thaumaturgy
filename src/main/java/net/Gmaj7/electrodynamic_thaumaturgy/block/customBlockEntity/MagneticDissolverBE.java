@@ -87,7 +87,7 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
         protected void onContentsChanged(int index, FluidStack previousContents) {
             setChanged();
             if(!level.isClientSide()){
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                PacketDistributor.sendToAllPlayers(new FluidSetPacket(getStackInSlot(0), getBlockPos(), 1));
             }
         }
     };
@@ -231,8 +231,12 @@ public class MagneticDissolverBE extends BlockEntity implements IEnergyBlockEnti
     }
 
     @Override
-    public void setFluid(FluidStack fluidStack) {
-        this.fluidHandlerInput.setStackInSlot(0, fluidStack);
+    public void setFluid(FluidStack fluidStack, int slot) {
+        if (slot == 1) {
+            this.fluidHandlerOutput.setStackInSlot(0, fluidStack);
+        } else {
+            this.fluidHandlerInput.setStackInSlot(0, fluidStack);
+        }
     }
 
 

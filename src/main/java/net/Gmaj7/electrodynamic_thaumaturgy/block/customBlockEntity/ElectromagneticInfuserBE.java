@@ -250,7 +250,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
     }
 
     @Override
-    public void setFluid(FluidStack fluidStack) {
+    public void setFluid(FluidStack fluidStack, int slot) {
         this.fluidHandlerInput.setStackInSlot(0, fluidStack);
     }
 

@@ -31,7 +31,7 @@ public class MagneticDissolverBlockMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         this.data = ((MagneticDissolverBE) blockEntity).getData();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 40, 33));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 66, 34));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

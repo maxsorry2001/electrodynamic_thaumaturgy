@@ -103,6 +103,7 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_dissociation_machine": "电磁解离器",
   "block.electrodynamic_thaumaturgy.eddy_current_remelter_machine": "涡流重熔器",
   "block.electrodynamic_thaumaturgy.electromagnetic_infuser_machine": "电磁浸润器",
+  "block.electrodynamic_thaumaturgy.magnetic_dissolver_machine": "磁力溶解器",
 
   "block.electrodynamic_thaumaturgy.energy_pipe": "能量管道",
   "block.electrodynamic_thaumaturgy.item_pipe": "物品管道",
