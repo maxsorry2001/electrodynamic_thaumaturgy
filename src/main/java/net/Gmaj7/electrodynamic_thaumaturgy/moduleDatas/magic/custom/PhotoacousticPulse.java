@@ -29,7 +29,7 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
-        PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
+        PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity, magicDefinition.amountRate());
         livingEntity.level().addFreshEntity(photoacousticPulseBeaconEntity);
         if(!livingEntity.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), photoacousticPulseBeaconEntity));
@@ -40,7 +40,7 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 vec3 = target.getOnPos().getCenter();
-        PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, source);
+        PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, source, magicDefinition.amountRate());
         source.level().addFreshEntity(photoacousticPulseBeaconEntity);
         if(!source.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), photoacousticPulseBeaconEntity));
@@ -59,7 +59,7 @@ public class PhotoacousticPulse extends AbstractBlockBeaconMagic{
         if(target == null) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         Vec3 vec3 = target.getOnPos().getCenter();
-        PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner());
+        PhotoacousticPulseBeaconEntity photoacousticPulseBeaconEntity = new PhotoacousticPulseBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner(), magicDefinition.amountRate());
         electromagneticDriverBE.getLevel().addFreshEntity(photoacousticPulseBeaconEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
         if(!electromagneticDriverBE.getLevel().isClientSide()) {

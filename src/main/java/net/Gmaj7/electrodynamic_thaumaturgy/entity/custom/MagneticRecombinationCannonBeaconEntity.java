@@ -5,6 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -28,6 +29,7 @@ import java.util.List;
 public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
     private int startTime;
     private ItemStack magicItem;
+    private float rate;
     public MagneticRecombinationCannonBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
@@ -40,13 +42,14 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
         this.magicItem = EtTabs.getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
     }
 
-    public MagneticRecombinationCannonBeaconEntity(Level level, double x, double y, double z, ItemStack magicItem, LivingEntity owner){
+    public MagneticRecombinationCannonBeaconEntity(Level level, double x, double y, double z, ItemStack magicItem, LivingEntity owner, float rate){
         super(EtEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
         this.magicItem = magicItem.copy();
         this.pickup = Pickup.DISALLOWED;
         this.startTime = -1;
+        this.rate = rate;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
             List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.blockPosition()).inflate(7));
             for (LivingEntity target : list){
                 if(target != this.getOwner() && target.getY() >= this.getBlockY() - 3 && !(this.getOwner() instanceof MagnetoOrderSageEntity && target == ((MagnetoOrderSageEntity) this.getOwner()).getOwner())) {
-                    target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), (int) Function.getDamageAmount(magicItem) * 2);
+                    target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getResultAmount(magicItem) * rate);
                 }
             }
         }

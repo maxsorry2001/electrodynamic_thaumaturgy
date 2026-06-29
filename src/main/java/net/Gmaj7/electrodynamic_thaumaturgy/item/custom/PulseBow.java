@@ -42,7 +42,7 @@ public class PulseBow extends Item {
     @Override
     public boolean releaseUsing(ItemStack itemStack, Level level, LivingEntity entity, int remainingTime) {
         if (entity instanceof Player player) {
-            float damage = Function.getDamageAmount(itemStack);
+            float damage = Function.getResultAmount(itemStack);
             PulseArrowEntity arrow = new PulseArrowEntity(level, entity, damage, itemStack.getOrDefault(EtDataComponentTypes.BOW_WORK_PATTERN, 0));
             arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(itemStack, entity) - remainingTime, itemStack), 0.0F);
             level.addFreshEntity(arrow);

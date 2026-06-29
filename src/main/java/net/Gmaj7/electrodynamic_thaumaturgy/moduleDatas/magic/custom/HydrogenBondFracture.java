@@ -27,7 +27,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 40);
         Level level = livingEntity.level();
-        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack) * 2);
+        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) level, livingEntity);
@@ -44,7 +44,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Level level = source.level();
-        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(ElectromagneticDriverBE.magicItem) * 2);
+        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate());
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {
                 makeParticle((ServerLevel) level, source);
@@ -75,7 +75,7 @@ public class HydrogenBondFracture extends AbstractFrontEntityMagic {
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         Level level = electromagneticDriverBE.getLevel();
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
-        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getDamageAmount(ElectromagneticDriverBE.magicItem) * 2);
+        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate());
         if(level instanceof ServerLevel){
             Thread thread = new Thread(() -> {
                 makeTargetParticle((ServerLevel) level, target);

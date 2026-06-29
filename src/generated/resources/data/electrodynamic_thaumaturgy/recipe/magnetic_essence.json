@@ -2,9 +2,9 @@
   "type": "electrodynamic_thaumaturgy:electromagnetic_infusion",
   "fluid": "electrodynamic_thaumaturgy:magnetic_flux_source",
   "fluid_cost": 1000,
-  "item": "electrodynamic_thaumaturgy:polar_crystal",
+  "item": "electrodynamic_thaumaturgy:resonant_crystal",
   "output": {
     "count": 2,
-    "id": "electrodynamic_thaumaturgy:glowing_essence"
+    "id": "electrodynamic_thaumaturgy:magnetic_essence"
   }
 }

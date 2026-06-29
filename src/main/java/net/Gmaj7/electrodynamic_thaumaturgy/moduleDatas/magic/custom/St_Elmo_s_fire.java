@@ -18,7 +18,7 @@ import java.util.List;
 public class St_Elmo_s_fire extends AbstractSelfMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
-        livingEntity.addEffect(new MobEffectInstance(EtEffects.ST_ELMO_S_FIRE, (int) (200 * Function.getEfficiency(itemStack)), (int) Function.getDamageAmount(itemStack)));
+        livingEntity.addEffect(new MobEffectInstance(EtEffects.ST_ELMO_S_FIRE, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate())));
         if(livingEntity.level() instanceof ServerLevel) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
@@ -27,7 +27,7 @@ public class St_Elmo_s_fire extends AbstractSelfMagic{
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        source.addEffect(new MobEffectInstance(EtEffects.ST_ELMO_S_FIRE, (int) (200 * Function.getEfficiency(itemStack)), (int) Function.getDamageAmount(itemStack)));
+        source.addEffect(new MobEffectInstance(EtEffects.ST_ELMO_S_FIRE, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate())));
         if(source.level() instanceof ServerLevel) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
             thread.start();

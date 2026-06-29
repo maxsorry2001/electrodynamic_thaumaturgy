@@ -1,4 +1,5 @@
 {
+  "amountRate": 1.0,
   "behavior": "electrodynamic_thaumaturgy:electric_field_domain",
   "cooldown": 50,
   "energy_cost": 128,

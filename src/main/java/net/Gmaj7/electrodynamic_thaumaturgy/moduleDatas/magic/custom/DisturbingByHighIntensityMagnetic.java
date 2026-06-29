@@ -21,7 +21,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void playerCast(Player player, ItemStack itemStack, MagicDefinition magicDefinition) {
-        List<Mob> list = player.level().getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(Function.getDamageAmount(itemStack)));
+        List<Mob> list = player.level().getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(Function.getResultAmount(itemStack) * magicDefinition.amountRate()));
         list.remove(player);
         for (int i = 0; i < list.size(); i++){
             Mob target = list.get(i);
@@ -37,7 +37,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        List<Mob> list = source.level().getEntitiesOfClass(Mob.class, source.getBoundingBox().inflate(Function.getDamageAmount(ElectromagneticDriverBE.magicItem)));
+        List<Mob> list = source.level().getEntitiesOfClass(Mob.class, source.getBoundingBox().inflate(Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate()));
         list.remove(source);
         if(target instanceof  Mob) list.add((Mob) target);
         if(list.isEmpty()) return;
@@ -60,7 +60,7 @@ public class DisturbingByHighIntensityMagnetic extends AbstractWideMagic{
 
     @Override
     public void blockCast(ElectromagneticDriverBE electromagneticDriverBE, MagicDefinition magicDefinition) {
-        List<Mob> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(Mob.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(Function.getDamageAmount(ElectromagneticDriverBE.magicItem)));
+        List<Mob> list = electromagneticDriverBE.getLevel().getEntitiesOfClass(Mob.class, new AABB(electromagneticDriverBE.getBlockPos()).inflate(Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate()));
         list.remove(electromagneticDriverBE.getOwner());
         if(list.isEmpty()) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;

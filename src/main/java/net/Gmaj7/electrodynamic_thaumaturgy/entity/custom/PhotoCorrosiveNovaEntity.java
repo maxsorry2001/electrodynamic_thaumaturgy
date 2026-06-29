@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,10 +30,10 @@ public class PhotoCorrosiveNovaEntity extends Entity {
         super(entityType, level);
     }
 
-    public PhotoCorrosiveNovaEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner){
+    public PhotoCorrosiveNovaEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner, float rate){
         super(EtEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), level);
         this.setOwner(owner);
-        this.amplifier = Math.max ((int) Function.getDamageAmount(itemStack) / 2, 1);
+        this.amplifier = Math.max ((int) (Function.getResultAmount(itemStack) * rate), 1);
         this.setPos(x, y, z);
     }
 

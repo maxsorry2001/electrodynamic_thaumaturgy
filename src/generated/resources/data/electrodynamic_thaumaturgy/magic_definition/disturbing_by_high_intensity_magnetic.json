@@ -1,4 +1,5 @@
 {
+  "amountRate": 1.0,
   "behavior": "electrodynamic_thaumaturgy:disturbing_by_high_intensity_magnetic",
   "cooldown": 50,
   "energy_cost": 128,

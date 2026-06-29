@@ -28,7 +28,7 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
-        PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(livingEntity.level(), blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY() + 1, blockHitResult.getBlockPos().getZ(), itemStack, livingEntity);
+        PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(livingEntity.level(), blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY() + 1, blockHitResult.getBlockPos().getZ(), itemStack, livingEntity, magicDefinition.amountRate());
         livingEntity.level().addFreshEntity(photoCorrosiveNovaEntity);
         if(!livingEntity.level().isClientSide()){
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), photoCorrosiveNovaEntity));
@@ -39,7 +39,7 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         BlockHitResult blockHitResult = getBlock(source);
-        PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(source.level(), blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ(), itemStack, source);
+        PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(source.level(), blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ(), itemStack, source, magicDefinition.amountRate());
         source.level().addFreshEntity(photoCorrosiveNovaEntity);
         if(!source.level().isClientSide()){
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), photoCorrosiveNovaEntity));
@@ -59,7 +59,7 @@ public class PhotoCorrosiveNova extends AbstractBlockBeaconMagic{
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem ,(LivingEntity) electromagneticDriverBE.getOwner());
+        PhotoCorrosiveNovaEntity photoCorrosiveNovaEntity = new PhotoCorrosiveNovaEntity(target.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem ,(LivingEntity) electromagneticDriverBE.getOwner(), magicDefinition.amountRate());
         target.level().addFreshEntity(photoCorrosiveNovaEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
         if(!electromagneticDriverBE.getLevel().isClientSide()){

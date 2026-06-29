@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -24,6 +25,7 @@ import java.util.List;
 public class PhotoacousticPulseBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
     private static final int maxTime = 30;
+    private float rate;
     public PhotoacousticPulseBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
@@ -34,12 +36,13 @@ public class PhotoacousticPulseBeaconEntity extends AbstractArrow {
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public PhotoacousticPulseBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner){
+    public PhotoacousticPulseBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner, float rate){
         super(EtEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
         this.magicItem = itemStack.copy();
         this.pickup = Pickup.DISALLOWED;
+        this.rate = rate;
     }
 
     @Override
@@ -54,7 +57,7 @@ public class PhotoacousticPulseBeaconEntity extends AbstractArrow {
             Vec3 vec3Start = new Vec3(this.getX(), this.getY() + 1, this.getZ());
             if(magicItem != null && !this.level().isClientSide()){
                 for (LivingEntity target : list) {
-                    target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM)), Function.getDamageAmount(this.magicItem));
+                    target.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM)), Function.getResultAmount(this.magicItem) * rate);
                     Vec3 vec3End = target.getEyePosition();
                     Vec3 vec3Throw = vec3Start.vectorTo(vec3End);
                     Vec3 vec3Per = vec3Throw.normalize();

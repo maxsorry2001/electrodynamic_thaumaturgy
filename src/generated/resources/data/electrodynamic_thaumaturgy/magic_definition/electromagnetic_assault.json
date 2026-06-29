@@ -1,4 +1,5 @@
 {
+  "amountRate": 2.0,
   "behavior": "electrodynamic_thaumaturgy:electromagnetic_assault",
   "cooldown": 50,
   "energy_cost": 128,

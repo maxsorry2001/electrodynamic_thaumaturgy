@@ -21,7 +21,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
-        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(itemStack)), (int) Function.getDamageAmount(itemStack)));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate())));
         if(!livingEntity.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), target));
             thread.start();
@@ -30,7 +30,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) Function.getDamageAmount(ElectromagneticDriverBE.magicItem)));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate())));
         if(!source.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), target));
             thread.start();
@@ -52,7 +52,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
-        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) Function.getDamageAmount(ElectromagneticDriverBE.magicItem)));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(ElectromagneticDriverBE.magicItem)), (int) (Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate())));
         if(!electromagneticDriverBE.getLevel().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) electromagneticDriverBE.getLevel(), target));
             thread.start();

@@ -26,7 +26,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target == null) return;
-        target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack));
+        target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(livingEntity.level(), EntitySpawnReason.TRIGGERED);
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -39,7 +39,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        target.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
+        target.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getResultAmount(ElectromagneticDriverBE.magicItem));
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(source.level(), EntitySpawnReason.TRIGGERED);
         lightningBolt.setVisualOnly(true);
         lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
@@ -65,7 +65,7 @@ public class LightingStrike extends AbstractFrontEntityMagic {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target != null && !electromagneticDriverBE.getLevel().isClientSide()) {
             if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
-            target.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
+            target.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getResultAmount(ElectromagneticDriverBE.magicItem));
             LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(electromagneticDriverBE.getLevel(), EntitySpawnReason.TRIGGERED);
             lightningBolt.setVisualOnly(true);
             lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());

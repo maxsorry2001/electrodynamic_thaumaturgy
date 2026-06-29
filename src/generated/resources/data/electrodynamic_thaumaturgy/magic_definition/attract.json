@@ -1,4 +1,5 @@
 {
+  "amountRate": 10.0,
   "behavior": "electrodynamic_thaumaturgy:attract",
   "cooldown": 50,
   "energy_cost": 128,

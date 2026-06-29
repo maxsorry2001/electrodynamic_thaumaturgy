@@ -2,7 +2,11 @@ package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinitionLoader;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
@@ -24,6 +28,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class PulsedPlasmaEntity extends AbstractArrow {
     private ItemStack magicItem;
+    private float rate;
     public PulsedPlasmaEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
@@ -31,25 +36,28 @@ public class PulsedPlasmaEntity extends AbstractArrow {
     public PulsedPlasmaEntity(Level pLevel) {
         super(EtEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
     }
-    public PulsedPlasmaEntity(LivingEntity pOwner, Level pLevel, ItemStack itemStack) {
+
+    public PulsedPlasmaEntity(LivingEntity pOwner, Level pLevel, ItemStack itemStack, float rate) {
         super(EtEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
         this.setOwner(pOwner);
         this.setPos(pOwner.getX(), pOwner.getEyeY() - 0.1, pOwner.getZ());
         this.magicItem = itemStack.copy();
+        this.rate = rate;
     }
 
-    public PulsedPlasmaEntity(LivingEntity pOwner, Vec3 start, Level pLevel, ItemStack itemStack) {
+    public PulsedPlasmaEntity(LivingEntity pOwner, Vec3 start, Level pLevel, ItemStack itemStack, float rate) {
         super(EtEntities.PULSED_PLASMA_ENTITY.get(), pLevel);
         this.setOwner(pOwner);
         this.setPos(start.x(), start.y(), start.z());
         this.magicItem = itemStack.copy();
+        this.rate = rate;
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity && magicItem != null && entity != getOwner() && !(this.getOwner() instanceof MagnetoOrderSageEntity && entity == ((MagnetoOrderSageEntity) this.getOwner()).getOwner())) {
-            entity.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem));
+            entity.hurt(new DamageSource(Function.getHolder(this.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getResultAmount(magicItem) * rate);
         }
     }
 

@@ -30,14 +30,14 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = livingEntity.getLookAngle().normalize().scale(Function.getDamageAmount(itemStack) / 2).add(start);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(Function.getResultAmount(itemStack) * magicDefinition.amountRate()).add(start);
         Level level = livingEntity.level();
         Function.RayHitResult hitResult = Function.getLineHitResult(level, livingEntity, start, end, true, 0.5F);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack) * 0.5F);
+                    target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getResultAmount(itemStack) / magicDefinition.amountRate());
                 }
             }
         }
@@ -60,14 +60,14 @@ public class ElectromagneticAssault extends AbstractSelfMagic{
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 start = source.getEyePosition().subtract(0, 0.25, 0);
-        Vec3 end = source.getLookAngle().normalize().scale(Function.getDamageAmount(itemStack) * 2).add(start);
+        Vec3 end = source.getLookAngle().normalize().scale(Function.getResultAmount(itemStack) * magicDefinition.amountRate()).add(start);
         Level level = source.level();
         Function.RayHitResult hitResult = Function.getLineHitResult(level, source, start, end, true, 0.5F);
         for (HitResult result : hitResult.getTargets()) {
             if (result instanceof EntityHitResult) {
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(itemStack) * 0.5F);
+                    entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getResultAmount(itemStack) / magicDefinition.amountRate());
                 }
             }
         }

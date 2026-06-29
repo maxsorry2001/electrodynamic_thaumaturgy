@@ -18,7 +18,7 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         BlockPos blockPos = blockHitResult.getBlockPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity);
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(livingEntity.level(), vec3.x(), blockPos.getY() + 1, vec3.z(), itemStack, livingEntity, magicDefinition.amountRate());
         livingEntity.level().addFreshEntity(magneticRecombinationCannonBeaconEntity);
     }
 
@@ -26,7 +26,7 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(source.level(),vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem, source);
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(source.level(),vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem, source, magicDefinition.amountRate());
         source.level().addFreshEntity(magneticRecombinationCannonBeaconEntity);
     }
 
@@ -48,7 +48,7 @@ public class MagneticRecombinationCannon extends AbstractBlockBeaconMagic {
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         BlockPos blockPos = target.getOnPos();
         Vec3 vec3 = blockPos.getCenter();
-        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner());
+        MagneticRecombinationCannonBeaconEntity magneticRecombinationCannonBeaconEntity = new MagneticRecombinationCannonBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), blockPos.getY() + 1, vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner(), magicDefinition.amountRate());
         electromagneticDriverBE.getLevel().addFreshEntity(magneticRecombinationCannonBeaconEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
     }

@@ -13,7 +13,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
-        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(livingEntity.level(), livingEntity, itemStack);
+        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(livingEntity.level(), livingEntity, itemStack, magicDefinition.amountRate());
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         livingEntity.level().addFreshEntity(magneticFluxCascadeEntity);
@@ -25,7 +25,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(source.level(), source, ElectromagneticDriverBE.magicItem);
+        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(source.level(), source, ElectromagneticDriverBE.magicItem, magicDefinition.amountRate());
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         source.level().addFreshEntity(magneticFluxCascadeEntity);
@@ -50,7 +50,7 @@ public class MagneticFluxCascade extends AbstractFrontEntityMagic{
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
-        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(electromagneticDriverBE.getLevel(), (LivingEntity) electromagneticDriverBE.getOwner(), ElectromagneticDriverBE.magicItem);
+        MagneticFluxCascadeEntity magneticFluxCascadeEntity = new MagneticFluxCascadeEntity(electromagneticDriverBE.getLevel(), (LivingEntity) electromagneticDriverBE.getOwner(), ElectromagneticDriverBE.magicItem, magicDefinition.amountRate());
         magneticFluxCascadeEntity.setTarget(target);
         magneticFluxCascadeEntity.teleportTo(target.getX(), target.getY(), target.getZ());
         electromagneticDriverBE.getLevel().addFreshEntity(magneticFluxCascadeEntity);

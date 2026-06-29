@@ -1,4 +1,5 @@
 {
+  "amountRate": 0.25,
   "behavior": "electrodynamic_thaumaturgy:electric_energy_release",
   "cooldown": 50,
   "energy_cost": 128,

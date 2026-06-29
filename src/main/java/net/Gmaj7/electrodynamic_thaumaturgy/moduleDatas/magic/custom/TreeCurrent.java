@@ -25,13 +25,13 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
         if(target != null && !livingEntity.level().isClientSide()) {
-            target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack));
+            target.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
             addParticle(livingEntity, target);
             List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
             for (LivingEntity target1 : list) {
                 if (target1 == target || target1 == livingEntity) continue;
                 addParticle(target, target1);
-                target1.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack));
+                target1.hurt(new DamageSource(Function.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
             }
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
@@ -40,13 +40,13 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        target.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source instanceof MagnetoOrderSageEntity ? ((MagnetoOrderSageEntity) source).getOwner() : source), Function.getDamageAmount(itemStack));
+        target.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source instanceof MagnetoOrderSageEntity ? ((MagnetoOrderSageEntity) source).getOwner() : source), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
         addParticle(source, target);
         List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
         for (LivingEntity target1 : list) {
             if (target1 == target || target1 == source || (source instanceof MagnetoOrderSageEntity && target1 == ((MagnetoOrderSageEntity) source).getOwner())) continue;
             addParticle(target, target1);
-            target1.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(itemStack));
+            target1.hurt(new DamageSource(Function.getHolder(source.level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
         }
         if(!source.level().isClientSide()){
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
@@ -86,13 +86,13 @@ public class TreeCurrent extends AbstractFrontEntityMagic {
         LivingEntity target = getBlockTarget(electromagneticDriverBE);
         if(target == null) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
-        target.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
+        target.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate());
         blockParticle(new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 1, electromagneticDriverBE.getBlockPos().getZ()), target);
         List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(5));
         for (LivingEntity target1 : list) {
             if (target1 == target || target1 == electromagneticDriverBE.getOwner()) continue;
             addParticle(target, target1);
-            target1.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
+            target1.hurt(new DamageSource(Function.getHolder(electromagneticDriverBE.getLevel(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate());
         }
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
     }

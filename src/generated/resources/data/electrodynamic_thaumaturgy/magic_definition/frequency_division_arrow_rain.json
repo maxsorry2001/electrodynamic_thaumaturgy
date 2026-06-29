@@ -1,4 +1,5 @@
 {
+  "amountRate": 0.4,
   "behavior": "electrodynamic_thaumaturgy:frequency_division_arrow_rain",
   "cooldown": 50,
   "energy_cost": 128,

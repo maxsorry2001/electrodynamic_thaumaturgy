@@ -19,7 +19,7 @@ public class ElectricFieldDomain extends AbstractSelfMagic{
 
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
-        livingEntity.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_FIELD_DOMAIN, (int) (200 * Function.getEfficiency(itemStack)), (int) (1 * Function.getStrengthRate(itemStack))));
+        livingEntity.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_FIELD_DOMAIN, (int) (200 * Function.getEfficiency(itemStack)), (int) (magicDefinition.amountRate() * Function.getStrengthRate(itemStack))));
         if(livingEntity.level() instanceof ServerLevel) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
             thread.start();
@@ -28,7 +28,7 @@ public class ElectricFieldDomain extends AbstractSelfMagic{
 
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
-        source.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_FIELD_DOMAIN, (int) (200 * Function.getEfficiency(itemStack)), (int) (1 * Function.getStrengthRate(itemStack))));
+        source.addEffect(new MobEffectInstance(EtEffects.ELECTRIC_FIELD_DOMAIN, (int) (200 * Function.getEfficiency(itemStack)), (int) (magicDefinition.amountRate() * Function.getStrengthRate(itemStack))));
         if(source.level() instanceof ServerLevel) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));
             thread.start();

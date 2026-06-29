@@ -21,7 +21,7 @@ public class Protecting extends AbstractSelfMagic{
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         if(!livingEntity.level().isClientSide()) {
-            float p = Function.getDamageAmount(itemStack);
+            float p = Function.getResultAmount(itemStack) * magicDefinition.amountRate();
             ((DataGet) livingEntity).getProtective().setProtecting(p);
             PacketDistributor.sendToAllPlayers(new ProtectingPacket(p));
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), livingEntity));
@@ -32,7 +32,7 @@ public class Protecting extends AbstractSelfMagic{
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         if(!source.level().isClientSide()) {
-            float p = Function.getDamageAmount(itemStack);
+            float p = Function.getResultAmount(itemStack) * magicDefinition.amountRate();
             ((DataGet) source).getProtective().setProtecting(p);
             PacketDistributor.sendToAllPlayers(new ProtectingPacket(p));
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), source));

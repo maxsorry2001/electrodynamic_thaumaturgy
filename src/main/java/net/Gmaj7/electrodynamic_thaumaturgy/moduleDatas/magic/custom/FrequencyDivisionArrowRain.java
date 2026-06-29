@@ -28,7 +28,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         BlockHitResult blockHitResult = getBlock(livingEntity);
         Vec3 vec3 = blockHitResult.getBlockPos().getCenter();
-        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(livingEntity.level(), vec3.x(), vec3.y(), vec3.z(), itemStack, livingEntity);
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(livingEntity.level(), vec3.x(), vec3.y(), vec3.z(), itemStack, livingEntity, magicDefinition.amountRate());
         livingEntity.level().addFreshEntity(frequencyDivisionArrowEntity);
         if(!livingEntity.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), frequencyDivisionArrowEntity));
@@ -39,7 +39,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 vec3 = target.getOnPos().getCenter();
-        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, source);
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(source.level(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, source, magicDefinition.amountRate());
         source.level().addFreshEntity(frequencyDivisionArrowEntity);
         if(!source.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) source.level(), frequencyDivisionArrowEntity));
@@ -58,7 +58,7 @@ public class FrequencyDivisionArrowRain extends AbstractBlockBeaconMagic {
         if(target == null) return;
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         Vec3 vec3 = target.getOnPos().getCenter();
-        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner());
+        FrequencyDivisionBeaconEntity frequencyDivisionArrowEntity = new FrequencyDivisionBeaconEntity(electromagneticDriverBE.getLevel(), vec3.x(), vec3.y(), vec3.z(), ElectromagneticDriverBE.magicItem, (LivingEntity) electromagneticDriverBE.getOwner(), magicDefinition.amountRate());
         electromagneticDriverBE.getLevel().addFreshEntity(frequencyDivisionArrowEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());
         if(!electromagneticDriverBE.getLevel().isClientSide()) {

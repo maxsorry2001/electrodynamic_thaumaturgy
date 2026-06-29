@@ -39,7 +39,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
                 if (result instanceof EntityHitResult) {
                     Entity target = ((EntityHitResult) result).getEntity();
                     if (target instanceof LivingEntity) {
-                        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getDamageAmount(itemStack));
+                        target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), livingEntity), Function.getResultAmount(itemStack) * magicDefinition.amountRate());
                     }
                 }
             }
@@ -60,7 +60,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
             if (result instanceof EntityHitResult) {
                 Entity entity = ((EntityHitResult) result).getEntity();
                 if (entity instanceof LivingEntity) {
-                    entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
+                    entity.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), source), Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate());
                 }
             }
         }
@@ -92,7 +92,7 @@ public class ElectromagneticRay extends AbstractWideMagic{
             if (result instanceof EntityHitResult) {
                 Entity target = ((EntityHitResult) result).getEntity();
                 if (target instanceof LivingEntity) {
-                    target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getDamageAmount(ElectromagneticDriverBE.magicItem));
+                    target.hurt(new DamageSource(Function.getHolder(level, Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), electromagneticDriverBE.getOwner()), Function.getResultAmount(ElectromagneticDriverBE.magicItem) * magicDefinition.amountRate());
                 }
             }
         }

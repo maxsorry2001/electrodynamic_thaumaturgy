@@ -1,4 +1,5 @@
 {
+  "amountRate": 1.0,
   "behavior": "electrodynamic_thaumaturgy:st_elmo_s_fire",
   "cooldown": 50,
   "energy_cost": 128,

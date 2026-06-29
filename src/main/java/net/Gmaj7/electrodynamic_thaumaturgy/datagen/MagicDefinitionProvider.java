@@ -23,38 +23,38 @@ public class MagicDefinitionProvider extends JsonCodecProvider<MagicDefinition> 
 
     @Override
     protected void gather() {
-        register("ray", 128, 50);
-        register("pulsed_plasma", 128, 50);
-        register("protecting", 128, 50);
-        register("exciting", 128, 50);
-        register("electric_field_domain", 128, 50);
-        register("attract", 128, 50);
-        register("tree_current", 128, 50);
-        register("refraction", 128, 50);
-        register("electric_energy_release", 128, 50);
-        register("magnetic_recombination_cannon", 128, 50);
-        register("electromagnetic_assault", 128, 50);
-        register("magma_lighting", 128, 50);
-        register("st_elmo_s_fire", 128, 50);
-        register("hydrogen_bond_fracture", 128, 50);
-        register("lighting_strike", 128, 50);
-        register("magnet_resonance", 128, 50);
-        register("block_nerve", 128, 50);
-        register("disturbing_by_high_intensity_magnetic", 128, 50);
-        register("coulomb_domain", 128, 50);
-        register("domain_reconstruction", 128, 50);
-        register("mirage_pursuit", 128, 50);
-        register("magnetic_flux_cascade", 128, 50);
-        register("frequency_division_arrow_rain", 128, 50);
-        register("sage_s_magnetism_seal", 128, 50);
-        register("photoacoustic_pulse", 128, 50);
-        register("photo_corrosive_nova", 128, 50);
+        register("ray", 128, 50, 1F);
+        register("pulsed_plasma", 128, 50, 1F);
+        register("protecting", 128, 50, 1F);
+        register("exciting", 128, 50, 1F);
+        register("electric_field_domain", 128, 50, 1F);
+        register("attract", 128, 50, 10F);
+        register("tree_current", 128, 50, 1F);
+        register("refraction", 128, 50, 40F);
+        register("electric_energy_release", 128, 50, 0.25F);
+        register("magnetic_recombination_cannon", 128, 50, 2F);
+        register("electromagnetic_assault", 128, 50, 2F);
+        register("magma_lighting", 128, 50, 1F);
+        register("st_elmo_s_fire", 128, 50, 1F);
+        register("hydrogen_bond_fracture", 128, 50, 2F);
+        register("lighting_strike", 128, 50, 1F);
+        register("magnet_resonance", 128, 50, 1F);
+        register("block_nerve", 128, 50, 1F);
+        register("disturbing_by_high_intensity_magnetic", 128, 50, 1F);
+        register("coulomb_domain", 128, 50, 0.5F);
+        register("domain_reconstruction", 128, 50, 1F);
+        register("mirage_pursuit", 128, 50, 1F);
+        register("magnetic_flux_cascade", 128, 50, 1F);
+        register("frequency_division_arrow_rain", 128, 50, 0.4F);
+        register("sage_s_magnetism_seal", 128, 50, 1F);
+        register("photoacoustic_pulse", 128, 50, 1F);
+        register("photo_corrosive_nova", 128, 50, 0.5F);
     }
 
-    private void register(String name, int energyCost, int coolDown){
+    private void register(String name, int energyCost, int coolDown, float amountRate){
         Identifier identifier = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, name);
         ResourceKey<IMoeMagic> resourceKey = ResourceKey.create(EtRegistries.MAGIC_KEY, identifier);
-        MagicDefinition magicDefinition = new MagicDefinition(resourceKey, energyCost, coolDown, "item." + ElectrodynamicThaumaturgy.MODID + "." + name + "_module");
+        MagicDefinition magicDefinition = new MagicDefinition(resourceKey, energyCost, coolDown, amountRate, "item." + ElectrodynamicThaumaturgy.MODID + "." + name + "_module");
         unconditional(identifier, magicDefinition);
     }
 }

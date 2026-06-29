@@ -104,7 +104,7 @@ public class MagicCastItem extends Item {
         return Component.translatable("moe_no_magic");
     }
 
-    private ItemStack getMagic(ItemStack itemStack){
+    public static ItemStack getMagic(ItemStack itemStack){
         if(itemStack.has(EtDataComponentTypes.ET_CONTAINER.get()) && itemStack.has(EtDataComponentTypes.MAGIC_SELECT)) {
             ItemContainerData contents = itemStack.getOrDefault(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.EMPTY);
             if(contents.isEmpty()) return ItemStack.EMPTY;

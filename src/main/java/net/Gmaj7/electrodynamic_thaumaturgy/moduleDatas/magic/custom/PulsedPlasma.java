@@ -21,7 +21,7 @@ public class PulsedPlasma extends AbstractWideMagic{
 
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
-        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(livingEntity, livingEntity.level(), itemStack);
+        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(livingEntity, livingEntity.level(), itemStack, magicDefinition.amountRate());
         pulsedPlasmaEntity.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, 5, 1.5F);
         livingEntity.level().addFreshEntity(pulsedPlasmaEntity);
         if(!livingEntity.level().isClientSide()){
@@ -33,7 +33,7 @@ public class PulsedPlasma extends AbstractWideMagic{
     @Override
     public void mobCast(LivingEntity source, LivingEntity target, ItemStack itemStack, MagicDefinition magicDefinition) {
         Vec3 vec3 = new Vec3(target.getX() - source.getX(), target.getY() - source.getY() - 3, target.getZ() - source.getZ()).normalize();
-        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(source, source.level(), itemStack);
+        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity(source, source.level(), itemStack, magicDefinition.amountRate());
         pulsedPlasmaEntity.shootFromRotation(source, source.getXRot(), source.getYRot(), 0, 5, 1.5F);
         source.level().addFreshEntity(pulsedPlasmaEntity);
         if(!source.level().isClientSide()) {
@@ -55,7 +55,7 @@ public class PulsedPlasma extends AbstractWideMagic{
         if(!electromagneticDriverBE.extract(magicDefinition.baseEnergyCost())) return;
         LivingEntity target = list.get(RandomSource.create().nextInt(list.size()));
         Vec3 vec3 = new Vec3(target.getX() - electromagneticDriverBE.getBlockPos().getX(), target.getY() - electromagneticDriverBE.getBlockPos().getY() - 3, target.getZ() - electromagneticDriverBE.getBlockPos().getZ()).normalize();
-        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity((LivingEntity) electromagneticDriverBE.getOwner(), new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 3, electromagneticDriverBE.getBlockPos().getZ()), electromagneticDriverBE.getLevel(), ElectromagneticDriverBE.magicItem);
+        PulsedPlasmaEntity pulsedPlasmaEntity = new PulsedPlasmaEntity((LivingEntity) electromagneticDriverBE.getOwner(), new Vec3(electromagneticDriverBE.getBlockPos().getX(), electromagneticDriverBE.getBlockPos().getY() + 3, electromagneticDriverBE.getBlockPos().getZ()), electromagneticDriverBE.getLevel(), ElectromagneticDriverBE.magicItem, magicDefinition.amountRate());
         pulsedPlasmaEntity.shoot(vec3.x(), vec3.y(), vec3.z(), 2, 5);
         electromagneticDriverBE.getLevel().addFreshEntity(pulsedPlasmaEntity);
         electromagneticDriverBE.setCooldown(magicDefinition.baseCooldown());

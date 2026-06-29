@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,17 +26,19 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
     private int opentick = 0;
     private Direction direction = Direction.UP;
+    private float rate;
 
     public MagmaLightingBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
 
-    public MagmaLightingBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner){
+    public MagmaLightingBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner, float rate){
         super(EtEntities.MAGMA_LIGHTING_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
         this.magicItem = itemStack.copy();
         this.pickup = Pickup.DISALLOWED;
+        this.rate = rate;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class MagmaLightingBeaconEntity extends AbstractArrow {
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(5));
             for (LivingEntity target : list){
                 if(target != getOwner() && magicItem != null){
-                    target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem));
+                    target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getResultAmount(magicItem) * rate);
                     LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
                     lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
                     lightningBolt.setVisualOnly(true);

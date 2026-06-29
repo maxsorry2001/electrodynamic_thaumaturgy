@@ -3,6 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointRotateParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -31,17 +32,19 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
     private ItemStack magicItem;
     private int liveTick = 101;
     private static RandomSource randomSource = RandomSource.create();
+    private float rate;
 
     public CoulombDomainBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
 
-    public CoulombDomainBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner){
+    public CoulombDomainBeaconEntity(Level level, double x, double y, double z, ItemStack itemStack, LivingEntity owner, float rate){
         super(EtEntities.COULOMB_DOMAIN_BEACON_ENTITY.get(), level);
         this.setOwner(owner);
         this.setPos(x, y, z);
         this.magicItem = itemStack.copy();
         this.pickup = Pickup.DISALLOWED;
+        this.rate = rate;
     }
 
     @Override
@@ -58,7 +61,7 @@ public class CoulombDomainBeaconEntity extends AbstractArrow {
             for (LivingEntity target : list){
                 if(target == getOwner()) continue;
                 if (this.getOwner() instanceof MagnetoOrderSageEntity && target == ((MagnetoOrderSageEntity) this.getOwner()).getOwner()) continue;
-                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getDamageAmount(magicItem) / 2);
+                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), this.getOwner()), Function.getResultAmount(magicItem) * rate);
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
                 lightningBolt.teleportTo(target.getX(), target.getY(), target.getZ());
                 lightningBolt.setVisualOnly(true);
