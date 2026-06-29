@@ -45,14 +45,14 @@ public class FluidPipeNet extends PipeNet{
     private LinkedHashMap<BlockPos, LinkedHashMap<Direction, BlockCapabilityCache<ResourceHandler<FluidResource>, Direction>>> insertCaches;
     private LinkedHashMap<BlockPos, Map<Direction, List<ItemStack>>> filter;
     public FluidPipeNet(int id) {
-        super(id, PipeNetType.ITEM);
+        super(id, PipeNetType.FLUID);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
         this.filter = new LinkedHashMap<>();
     }
 
     public FluidPipeNet(int id, Set<BlockPos> posSet, Map<BlockPos, Set<BlockPos>> adj, Map<BlockPos, Set<Direction>> insert, Map<BlockPos, Map<Direction, TransferMode>> extract, int tickCounter, Map<BlockPos, Map<Direction, List<ItemStack>>> filter) {
-        super(id, posSet, adj, insert, extract, tickCounter, PipeNetType.ITEM);
+        super(id, posSet, adj, insert, extract, tickCounter, PipeNetType.FLUID);
         this.insertCaches = new LinkedHashMap<>();
         this.extractCaches = new LinkedHashMap<>();
         this.filter = new LinkedHashMap<>();
@@ -276,7 +276,7 @@ public class FluidPipeNet extends PipeNet{
                                 if (inserter == null) continue;
                                 FilterSetting insertFilter = getFilterSetting(checkPos, entry.getKey());
                                 int inserted = checkFilter(insertFilter, resource) ? inserter.insert(resource, extracted, transaction) : 0;
-                                if (inserted <= extracted) {
+                                if (inserted <= extracted && inserted > 0) {
                                     insertHandler = inserter;
                                     insertCount = inserted;
                                     break outer;

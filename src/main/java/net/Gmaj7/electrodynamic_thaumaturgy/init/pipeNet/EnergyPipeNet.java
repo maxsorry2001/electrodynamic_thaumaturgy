@@ -164,7 +164,7 @@ public class EnergyPipeNet extends PipeNet{
                         EnergyHandler inserter = entry.getValue().getCapability();
                         if (inserter == null) continue;
                         int inserted = inserter.insert(extracted, transaction);
-                        if (inserted <= extracted) {
+                        if (inserted <= extracted && inserted > 0) {
                             insertHandler = inserter;
                             insertCount = inserted;
                             break outer;

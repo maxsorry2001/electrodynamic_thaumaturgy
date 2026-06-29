@@ -23,8 +23,7 @@ public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> im
         extractTooltip(guiGraphics, mouseX, mouseY);
         ResourceHandler<FluidResource> fluidHandler = menu.blockEntity.getFluidHandler();
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
-        if((mouseX > x + 16 && mouseY > y + 20) && (mouseX < x + 176 && mouseY < y + 27))
-            guiGraphics.setTooltipForNextFrame(this.font, Component.literal(fluidHandler.getAmountAsInt(0) + "B / " + fluidHandler.getCapacityAsInt(0, fluidHandler.getResource(0)) + "B"), mouseX, mouseY);
+        renderFluidWithTip(guiGraphics, fluidHandler, mouseX, mouseY, 0, x + 72, y + 19, 48, 32);
     }
 
     @Override
@@ -39,6 +38,5 @@ public class FluidBlockScreen extends AbstractContainerScreen<FluidBlockMenu> im
         this.extractBlurredBackground(guiGraphics);
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x + 40, y + 19, 48, 32);
     }
 }

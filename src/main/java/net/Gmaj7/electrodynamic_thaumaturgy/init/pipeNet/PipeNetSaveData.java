@@ -249,7 +249,7 @@ public abstract class PipeNetSaveData<T extends PipeNet> extends SavedData {
             if(pipeNet.containPos(pos))
                 net = pipeNet;
         if(net == null) return;
-        net.loopTransferMod(pos, direction);
+        net.loopTransferMode(pos, direction);
         setDirty();
     }
 

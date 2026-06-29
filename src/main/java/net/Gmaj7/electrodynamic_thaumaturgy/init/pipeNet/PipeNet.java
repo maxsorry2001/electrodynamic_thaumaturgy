@@ -272,11 +272,11 @@ public abstract class PipeNet implements MenuProvider {
         Map<BlockPos, Integer> dis = distances.get(extractPos);
         BlockPos blockPos = extractPos;
         for (Map.Entry<BlockPos, Integer> entry : dis.entrySet()){
-            order --;
             if(order <= 0) {
                 blockPos = entry.getKey();
                 break;
             }
+            order --;
         }
         return blockPos;
     }
@@ -300,7 +300,7 @@ public abstract class PipeNet implements MenuProvider {
                 });
     }
 
-    public void loopTransferMod(BlockPos pos, Direction direction) {
+    public void loopTransferMode(BlockPos pos, Direction direction) {
         TransferMode transferMode = extract.get(pos).get(direction).next();
         extract.get(pos).put(direction, transferMode);
         for (ServerPlayer serverPlayer : lookingPlayer)
@@ -376,7 +376,8 @@ public abstract class PipeNet implements MenuProvider {
 
     public enum PipeNetType implements StringRepresentable{
         ITEM("item"),
-        ENERGY("energy");
+        ENERGY("energy"),
+        FLUID("fluid");
         public static final StringRepresentable.EnumCodec<PipeNetType> CODEC = StringRepresentable.fromEnum(PipeNetType::values);
 
         private final String name;
