@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
