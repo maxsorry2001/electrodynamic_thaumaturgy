@@ -8,6 +8,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.minecraft.resources.Identifier;
@@ -136,7 +137,12 @@ public class EtItems {
             properties -> new PulseBow(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
-                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyBow())
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
+    public static final DeferredItem<Item> FOCUS_GUN = ITEM.registerItem("focus_gun",
+            properties -> new FocusGun(properties.stacksTo(1)
+                    .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",

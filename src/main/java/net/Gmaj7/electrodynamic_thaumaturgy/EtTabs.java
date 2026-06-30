@@ -47,6 +47,7 @@ public class EtTabs {
                         output.accept(setFullEnergyItem(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())));
                         output.accept(EtItems.PULSE_BOW);
                         output.accept(setFullEnergyItem(getDefaultBow(EtItems.PULSE_BOW)));
+                        output.accept(EtItems.FOCUS_GUN);
                         output.accept(EtItems.PRIMARY_CODE_MODULE);
                         output.accept(EtItems.INTERMEDIATE_CODE_MODULE);
                         output.accept(EtItems.ADVANCED_CODE_MODULE);
@@ -148,13 +149,13 @@ public class EtTabs {
 
     public static ItemStack getDefaultMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
-        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultRod());
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultRodForTab());
         return itemStack;
     }
 
     public static ItemStack getDefaultBow(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
-        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultBow());
+        itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultWeaponForTab());
         return itemStack;
     }
 

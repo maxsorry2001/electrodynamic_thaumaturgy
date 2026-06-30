@@ -38,6 +38,7 @@ public class DataLoadHandler {
         payloadRegistrar.playToServer(FluidPipeNetFilterPacket.TYPE, FluidPipeNetFilterPacket.STREAM_CODEC, FluidPipeNetFilterPacket::handle);
         payloadRegistrar.playToServer(FilterSettingItemPacket.TYPE, FilterSettingItemPacket.STREAM_CODEC, FilterSettingItemPacket::handle);
         payloadRegistrar.playToServer(FilterSettingWhitePacket.TYPE, FilterSettingWhitePacket.STREAM_CODEC, FilterSettingWhitePacket::handle);
+        payloadRegistrar.playToServer(GunShootPacket.TYPE, GunShootPacket.STREAM_CODEC, GunShootPacket::handle);
 
         payloadRegistrar.playToClient(ProtectingPacket.TYPE, ProtectingPacket.STREAM_CODEC, ProtectingPacket::handle);
         payloadRegistrar.playToClient(EnergySetPacket.TYPE, EnergySetPacket.STREAM_CODEC, EnergySetPacket::handle);
@@ -58,7 +59,8 @@ public class DataLoadHandler {
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 49152)),
                 EtItems.ELECTROMAGNETIC_ROD.get(),
-                EtItems.PULSE_BOW.get());
+                EtItems.PULSE_BOW.get(),
+                EtItems.FOCUS_GUN.get());
         event.registerItem(Capabilities.Energy.ITEM, ((itemStack, access) -> new ItemAccessEnergyHandler(ItemAccess.forStack(itemStack), EtDataComponentTypes.ET_ENERGY.get(), 16384, 0, 16384)),
                 EtItems.POTATO_BATTERY.get(),
                 EtItems.CARROT_BATTERY.get(),

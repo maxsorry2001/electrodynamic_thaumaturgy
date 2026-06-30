@@ -3,6 +3,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.eventDispose;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID)
@@ -32,7 +35,7 @@ public class ClickDispose {
     }
 
     @SubscribeEvent
-    public static void rightClickDispose(PlayerInteractEvent.RightClickBlock event){
+    public static void rightClickBlockDispose(PlayerInteractEvent.RightClickBlock event){
         Player player = event.getEntity();
         if(!player.level().isClientSide()) {
             ItemStack itemStack = player.getItemInHand(event.getHand());
@@ -40,6 +43,17 @@ public class ClickDispose {
             if(player.level().getBlockState(hitResult.getBlockPos()).is(Blocks.LODESTONE) && itemStack.is(Items.IRON_INGOT)) {
                 player.addItem(new ItemStack(EtItems.MAGNO_INGOT.asItem()));
                 itemStack.shrink(1);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void leftClickBlockDispose(InputEvent.InteractionKeyMappingTriggered event){
+        if(event.isAttack()){
+            Player player = Minecraft.getInstance().player;
+            if (player != null && player.getMainHandItem().getItem() instanceof ElectromagneticWeaponItem) {
+                event.setSwingHand(false);
+                event.setCanceled(true);
             }
         }
     }

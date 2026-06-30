@@ -24,7 +24,7 @@ public record ItemContainerData(List<ItemStackTemplate> list) {
         list = List.copyOf(list);
     }
 
-    public static ItemContainerData getDefaultRod(){
+    public static ItemContainerData getDefaultRodForTab(){
         List<ItemStackTemplate> list = new ArrayList<>();
         list.add(new ItemStackTemplate(EtItems.SUPERCONDUCTING_POWER.get()));
         list.add(new ItemStackTemplate(EtItems.SUPERCONDUCTING_LC.get()));
@@ -45,14 +45,14 @@ public record ItemContainerData(List<ItemStackTemplate> list) {
         return new ItemContainerData(list);
     }
 
-    public static ItemContainerData getDefaultBow(){
+    public static ItemContainerData getDefaultWeaponForTab(){
         List<ItemStackTemplate> list = new ArrayList<>();
         list.add(new ItemStackTemplate(EtItems.SUPERCONDUCTING_POWER.get()));
         list.add(new ItemStackTemplate(EtItems.SUPERCONDUCTING_LC.get()));
         return new ItemContainerData(list);
     }
 
-    public static ItemContainerData getEmptyBow(){
+    public static ItemContainerData getEmptyWeapon(){
         List<ItemStackTemplate> list = new ArrayList<>();
         list.add(new ItemStackTemplate(EtItems.EMPTY_POWER.get()));
         list.add(new ItemStackTemplate(EtItems.EMPTY_LC.get()));

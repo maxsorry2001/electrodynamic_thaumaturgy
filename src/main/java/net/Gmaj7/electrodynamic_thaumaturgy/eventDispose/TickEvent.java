@@ -4,10 +4,13 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.GunShootPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.EnergyPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.FluidPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.ItemPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -15,6 +18,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -61,5 +66,16 @@ public class TickEvent {
             if(fluidPipe != null)
                 fluidPipe.tick(serverLevel);
         }
+    }
+
+    @SubscribeEvent
+    public static void clientTick(ClientTickEvent.Pre event){
+            Minecraft mc = Minecraft.getInstance();
+            if(mc.player == null || mc.level == null) return;
+            if(mc.options.keyAttack.isDown()){
+                if(mc.player.getMainHandItem().getItem() instanceof FocusGun){
+                    ClientPacketDistributor.sendToServer(new GunShootPacket());
+                }
+            }
     }
 }

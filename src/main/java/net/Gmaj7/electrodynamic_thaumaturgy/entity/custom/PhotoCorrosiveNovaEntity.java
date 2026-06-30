@@ -4,7 +4,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
-import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;

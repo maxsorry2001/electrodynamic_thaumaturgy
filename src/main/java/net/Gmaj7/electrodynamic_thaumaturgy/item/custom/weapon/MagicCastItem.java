@@ -41,7 +41,7 @@ public class MagicCastItem extends ElectromagneticWeaponItem {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
-        if(level.isClientSide()) return  InteractionResult.CONSUME;
+        if(level.isClientSide()) return InteractionResult.CONSUME;
         ItemStack itemStack = player.getItemInHand(usedHand);
         ItemStack typeStack = getMagic(itemStack);
         EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
