@@ -2,8 +2,8 @@ package net.Gmaj7.electrodynamic_thaumaturgy.gui.screen;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.menu.ModemTableMenu;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

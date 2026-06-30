@@ -8,6 +8,8 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;

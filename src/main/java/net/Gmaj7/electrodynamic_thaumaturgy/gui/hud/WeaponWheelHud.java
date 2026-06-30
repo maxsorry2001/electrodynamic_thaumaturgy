@@ -15,9 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
-public class BowWheelHud implements GuiLayer {
-    public static BowWheelHud instance = new BowWheelHud();
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud_bow.png");
+public class WeaponWheelHud implements GuiLayer {
+    public static WeaponWheelHud instance = new WeaponWheelHud();
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud_weapon.png");
     public boolean active;
     private int selection;
     private InteractionHand useHand;

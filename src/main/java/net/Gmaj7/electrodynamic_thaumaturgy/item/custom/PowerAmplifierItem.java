@@ -8,7 +8,7 @@ public class PowerAmplifierItem extends ElectromagneticTierItem{
     }
 
     @Override
-    protected int getChangeSlot() {
+    public int getChangeSlot() {
         return 0;
     }
 

@@ -6,7 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementDataLoader;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

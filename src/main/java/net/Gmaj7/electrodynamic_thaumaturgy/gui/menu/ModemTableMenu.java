@@ -4,7 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticWeaponItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EnhancementChipItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

@@ -5,7 +5,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectMagicPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EtMagicTypeModuleItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 public class MagicWheelHud implements GuiLayer {
     public static MagicWheelHud instance = new MagicWheelHud();
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/select_hud_magic.png");
     public boolean active;
     private int selection;
     private InteractionHand useHand;

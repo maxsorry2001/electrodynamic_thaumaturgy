@@ -1,9 +1,10 @@
-package net.Gmaj7.electrodynamic_thaumaturgy.item.custom;
+package net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.PulseArrowEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticTierItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

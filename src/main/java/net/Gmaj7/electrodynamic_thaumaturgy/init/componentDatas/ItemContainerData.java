@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

@@ -1,7 +1,8 @@
-package net.Gmaj7.electrodynamic_thaumaturgy.item.custom;
+package net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticTierItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -28,9 +29,9 @@ public abstract class ElectromagneticWeaponItem extends Item {
         ItemContainerData oldData = player.getOffhandItem().get(EtDataComponentTypes.ET_CONTAINER), data = oldData.getNewWithSlot(changeSlot, ItemStackTemplate.fromNonEmptyStack(player.getMainHandItem()));
         ItemStack changedStack = oldData.getStackInSlot(changeSlot);
         player.getOffhandItem().set(EtDataComponentTypes.ET_CONTAINER, data);
+        player.getMainHandItem().shrink(1);
         if(changedStack.getItem() instanceof  ElectromagneticTierItem item && !item.isEmpty())
             player.addItem(changedStack);
-        player.getMainHandItem().shrink(1);
     }
 
     @Override

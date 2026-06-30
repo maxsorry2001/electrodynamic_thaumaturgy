@@ -7,7 +7,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerDat
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EtMagicTypeModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.IEtModuleItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;

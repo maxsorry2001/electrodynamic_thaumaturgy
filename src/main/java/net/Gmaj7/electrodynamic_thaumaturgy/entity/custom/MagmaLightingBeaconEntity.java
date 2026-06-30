@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
-import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageSource;

@@ -13,18 +13,18 @@ import net.Gmaj7.electrodynamic_thaumaturgy.entity.render.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluidTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.BowWheelHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.MagicWheelHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.ProtectHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.ShowMagicHud;
+import net.Gmaj7.electrodynamic_thaumaturgy.gui.hud.WeaponWheelHud;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.screen.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyMapping;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtKeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyState;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.EtParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.HydrogenBondParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticle;
@@ -96,14 +96,14 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerKey(RegisterKeyMappingsEvent event){
-            event.register(KeyMapping.TOOL_SWITCH);
+            event.register(EtKeyMapping.TOOL_SWITCH);
         }
 
         @SubscribeEvent
         public static void registerHud(RegisterGuiLayersEvent event){
             event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "type_show"), new ShowMagicHud());
             event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magic_select"), MagicWheelHud.instance);
-            event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "bow_select"), BowWheelHud.instance);
+            event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "bow_select"), WeaponWheelHud.instance);
             event.registerAboveAll(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "protect_show"), new ProtectHud());
         }
 
@@ -172,7 +172,7 @@ public class ClientEventHandler {
 
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
     public static class notBusEvent{
-        private static final KeyState SELECT_MAGIC = new KeyState(KeyMapping.TOOL_SWITCH);
+        private static final KeyState SELECT_MAGIC = new KeyState(EtKeyMapping.TOOL_SWITCH);
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event){
             if(SELECT_MAGIC.wasPressed()){
@@ -182,8 +182,8 @@ public class ClientEventHandler {
                             MagicWheelHud.instance.open(hand);
                             break;
                         }
-                        else if (Minecraft.getInstance().player.getItemInHand(hand).getItem() instanceof PulseBow){
-                            BowWheelHud.instance.open(hand);
+                        else if (Minecraft.getInstance().player.getItemInHand(hand).getItem() instanceof ElectromagneticWeaponItem){
+                            WeaponWheelHud.instance.open(hand);
                             break;
                         }
                     }
@@ -191,7 +191,7 @@ public class ClientEventHandler {
             }
             if(SELECT_MAGIC.wasReleased()){
                 if(Minecraft.getInstance().screen == null && MagicWheelHud.instance.active) MagicWheelHud.instance.close();
-                else if(Minecraft.getInstance().screen == null && BowWheelHud.instance.active) BowWheelHud.instance.close();
+                else if(Minecraft.getInstance().screen == null && WeaponWheelHud.instance.active) WeaponWheelHud.instance.close();
             }
             SELECT_MAGIC.update();
         }

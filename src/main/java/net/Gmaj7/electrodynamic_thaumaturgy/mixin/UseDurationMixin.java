@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.mixin;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.PulseBow;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.client.renderer.item.properties.numeric.UseDuration;

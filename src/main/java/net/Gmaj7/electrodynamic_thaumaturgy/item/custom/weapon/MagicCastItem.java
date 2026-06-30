@@ -1,10 +1,13 @@
-package net.Gmaj7.electrodynamic_thaumaturgy.item.custom;
+package net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.BatteryItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticTierItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EtMagicTypeModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.network.chat.Component;

@@ -18,5 +18,5 @@ public abstract class ElectromagneticTierItem extends Item implements IEtModuleI
         return tier == ElectromagneticLevel.EMPTY;
     }
 
-    protected abstract int getChangeSlot();
+    public abstract int getChangeSlot();
 }

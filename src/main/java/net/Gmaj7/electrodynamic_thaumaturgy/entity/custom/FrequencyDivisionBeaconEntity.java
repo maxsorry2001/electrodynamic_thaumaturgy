@@ -1,7 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.moduleDatas.magic.MagicDefinition;
+import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.arrow.Arrow;

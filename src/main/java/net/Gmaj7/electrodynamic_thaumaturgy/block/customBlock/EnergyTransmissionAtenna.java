@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.EnergyTransmissionAntennaBE;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
