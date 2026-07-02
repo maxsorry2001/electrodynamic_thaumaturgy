@@ -136,12 +136,13 @@ public class EtItems {
     public static final DeferredItem<Item> PULSE_BOW = ITEM.registerItem("pulse_bow",
             properties -> new PulseBow(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
-                    .component(EtDataComponentTypes.BOW_WORK_PATTERN.get(), 0)
+                    .component(EtDataComponentTypes.WEAPON_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
     public static final DeferredItem<Item> FOCUS_GUN = ITEM.registerItem("focus_gun",
             properties -> new FocusGun(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
+                    .component(EtDataComponentTypes.WEAPON_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
 

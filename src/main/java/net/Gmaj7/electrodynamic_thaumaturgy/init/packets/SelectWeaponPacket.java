@@ -13,18 +13,18 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public class SelectBowPacket implements CustomPacketPayload {
+public class SelectWeaponPacket implements CustomPacketPayload {
     private final int magicSelect;
     private final InteractionHand hand;
-    public static final Type<SelectBowPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "bow_select"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, SelectBowPacket> STREAM_CODEC = CustomPacketPayload.codec(SelectBowPacket::write, SelectBowPacket::new);
+    public static final Type<SelectWeaponPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "bow_select"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, SelectWeaponPacket> STREAM_CODEC = CustomPacketPayload.codec(SelectWeaponPacket::write, SelectWeaponPacket::new);
 
-    public SelectBowPacket(int magicSelect, InteractionHand hand) {
+    public SelectWeaponPacket(int magicSelect, InteractionHand hand) {
         this.magicSelect = magicSelect;
         this.hand = hand;
     }
 
-    public SelectBowPacket(FriendlyByteBuf buf){
+    public SelectWeaponPacket(FriendlyByteBuf buf){
         this.magicSelect = buf.readInt();
         this.hand = buf.readBoolean() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
@@ -34,11 +34,11 @@ public class SelectBowPacket implements CustomPacketPayload {
         buf.writeBoolean(hand == InteractionHand.MAIN_HAND);
     }
 
-    public static void handle(SelectBowPacket packet, IPayloadContext context){
+    public static void handle(SelectWeaponPacket packet, IPayloadContext context){
         context.enqueueWork(() -> {
             if(context.player() instanceof ServerPlayer serverPlayer){
                 ItemStack itemInHand = serverPlayer.getItemInHand(packet.hand);
-                itemInHand.set(EtDataComponentTypes.BOW_WORK_PATTERN, packet.magicSelect);
+                itemInHand.set(EtDataComponentTypes.WEAPON_WORK_PATTERN, packet.magicSelect);
             }
         });
     }

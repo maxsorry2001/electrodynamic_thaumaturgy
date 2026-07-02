@@ -16,6 +16,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -73,7 +75,9 @@ public class TickEvent {
             Minecraft mc = Minecraft.getInstance();
             if(mc.player == null || mc.level == null) return;
             if(mc.options.keyAttack.isDown()){
-                if(mc.player.getMainHandItem().getItem() instanceof FocusGun){
+                Player player = mc.player;
+                ItemStack stack = player.getMainHandItem();
+                if(stack.getItem() instanceof FocusGun && !player.getCooldowns().isOnCooldown(stack)){
                     ClientPacketDistributor.sendToServer(new GunShootPacket());
                 }
             }

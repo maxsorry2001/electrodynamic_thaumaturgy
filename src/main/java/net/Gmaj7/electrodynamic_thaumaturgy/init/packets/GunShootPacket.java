@@ -33,7 +33,7 @@ public class GunShootPacket implements CustomPacketPayload {
         context.enqueueWork(() -> {
             Player player = context.player();
             ItemStack itemStack = player.getMainHandItem();
-            if( player.level() instanceof ServerLevel level && itemStack.getItem() instanceof FocusGun gun){
+            if(player.level() instanceof ServerLevel level && itemStack.getItem() instanceof FocusGun gun){
                 gun.shoot(level, player, itemStack);
             }
         });

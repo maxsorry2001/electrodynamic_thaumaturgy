@@ -41,7 +41,7 @@ public class PulseBow extends ElectromagneticWeaponItem {
     public boolean releaseUsing(ItemStack itemStack, Level level, LivingEntity entity, int remainingTime) {
         if (entity instanceof Player player) {
             float damage = Function.getResultAmount(itemStack);
-            PulseArrowEntity arrow = new PulseArrowEntity(level, entity, damage, itemStack.getOrDefault(EtDataComponentTypes.BOW_WORK_PATTERN, 0));
+            PulseArrowEntity arrow = new PulseArrowEntity(level, entity, damage, itemStack.getOrDefault(EtDataComponentTypes.WEAPON_WORK_PATTERN, 0));
             arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(itemStack, entity) - remainingTime, itemStack), 0.0F);
             level.addFreshEntity(arrow);
             try (Transaction transaction = Transaction.openRoot()){
@@ -81,7 +81,7 @@ public class PulseBow extends ElectromagneticWeaponItem {
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-        int patter = itemStack.get(EtDataComponentTypes.BOW_WORK_PATTERN.get());
+        int patter = itemStack.get(EtDataComponentTypes.WEAPON_WORK_PATTERN.get());
         builder.accept(Component.literal(String.valueOf(patter)));
         EnhancementData enhancementData = itemStack.get(EtDataComponentTypes.ENHANCEMENT_DATA);
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));

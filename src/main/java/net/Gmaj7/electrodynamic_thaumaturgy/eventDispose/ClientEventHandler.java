@@ -52,14 +52,6 @@ public class ClientEventHandler {
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
     public static class busEvent{
         @SubscribeEvent
-        public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
-            event.registerLayerDefinition(EtRayEntityRender.MODEL_LAYER_LOCATION, EtRayEntityRender::createBodyLayer);
-            event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
-            event.registerLayerDefinition(MagnetoEntityModel.LAYER_LOCATION, MagnetoEntityModel::createBodyLayer);
-            event.registerLayerDefinition(PhotoCorrosiveNovaEntityModel.LAYER_LOCATION, PhotoCorrosiveNovaEntityModel::createBodyLayer);
-        }
-
-        @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event){
             event.put(EtEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), MagnetoEntropyWitchEntity.createAttributes().build());
             event.put(EtEntities.MAGNETO_ORDER_SAGE_ENTITY.get(), MagnetoOrderSageEntity.createAttributes().build());
@@ -119,6 +111,14 @@ public class ClientEventHandler {
         }
 
         @SubscribeEvent
+        public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
+            event.registerLayerDefinition(EtRayEntityRender.MODEL_LAYER_LOCATION, EtRayEntityRender::createBodyLayer);
+            event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
+            event.registerLayerDefinition(MagnetoEntityModel.LAYER_LOCATION, MagnetoEntityModel::createBodyLayer);
+            event.registerLayerDefinition(PhotoCorrosiveNovaEntityModel.LAYER_LOCATION, PhotoCorrosiveNovaEntityModel::createBodyLayer);
+        }
+
+        @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(EtEntities.ET_RAY_ENTITY.get(), EtRayEntityRender::new);
@@ -137,6 +137,7 @@ public class ClientEventHandler {
             EntityRenderers.register(EtEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), PhotoacousticPulseBeaconEntityRender::new);
             EntityRenderers.register(EtEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), PhotoCorrosiveNovaEntityRender::new);
             EntityRenderers.register(EtEntities.PULSE_ARROW_ENTITY.get(), PulseArrowRender::new);
+            EntityRenderers.register(EtEntities.FOCUS_BULLET_ENTITY.get(), FocusBulletRender::new);
         }
 
         @SubscribeEvent
