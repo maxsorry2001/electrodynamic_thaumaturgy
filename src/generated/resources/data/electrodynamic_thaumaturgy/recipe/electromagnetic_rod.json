@@ -3,7 +3,7 @@
   "ingredients": [
     "electrodynamic_thaumaturgy:magno_ingot",
     "electrodynamic_thaumaturgy:energy_core",
-    "#minecraft:copper"
+    "electrodynamic_thaumaturgy:glowing_essence"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:electromagnetic_rod"
