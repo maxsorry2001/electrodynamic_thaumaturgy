@@ -3,6 +3,7 @@
   "fluid": "electrodynamic_thaumaturgy:magnetic_flux_source",
   "fluid_cost": 1000,
   "item": "electrodynamic_thaumaturgy:polar_crystal",
+  "item_cost": 1,
   "output": {
     "count": 2,
     "id": "electrodynamic_thaumaturgy:glowing_essence"

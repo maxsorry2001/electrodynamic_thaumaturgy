@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:electromagnetic_infusion",
+  "fluid": "electrodynamic_thaumaturgy:magnetic_flux_source",
+  "fluid_cost": 1000,
+  "item": "minecraft:gravel",
+  "item_cost": 32,
+  "output": {
+    "id": "electrodynamic_thaumaturgy:iron_dust"
+  }
+}

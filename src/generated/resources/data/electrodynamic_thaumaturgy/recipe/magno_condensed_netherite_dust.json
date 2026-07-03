@@ -1,0 +1,11 @@
+{
+  "type": "electrodynamic_thaumaturgy:electromagnetic_infusion",
+  "fluid": "electrodynamic_thaumaturgy:magnetic_flux_source",
+  "fluid_cost": 1000,
+  "item": "electrodynamic_thaumaturgy:netherite_dust",
+  "item_cost": 2,
+  "output": {
+    "count": 3,
+    "id": "electrodynamic_thaumaturgy:magno_condensed_netherite_dust"
+  }
+}
