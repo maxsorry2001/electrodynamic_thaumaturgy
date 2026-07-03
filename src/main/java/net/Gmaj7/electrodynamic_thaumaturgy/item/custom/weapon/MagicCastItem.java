@@ -56,7 +56,7 @@ public class MagicCastItem extends ElectromagneticWeaponItem {
                 && item.success(player, typeStack)) {
             item.cast(player, itemStack, typeStack);
             try (Transaction transaction = Transaction.openRoot()){
-                int cost = (int) (magicDefinition.baseEnergyCost() * Function.getEfficiency(itemStack));
+                int cost = (int) (magicDefinition.baseEnergyCost() / Function.getEfficiency(itemStack));
                 int i = energyHandler.extract(cost, transaction);
                 if(i == cost){
                     transaction.commit();

@@ -26,7 +26,7 @@ public class EtDataComponentTypes {
     public static final Supplier<DataComponentType<Integer>> MAGIC_SELECT = ET_DATA_COMPONENT_TYPE.register("et_magic_slot",
                     () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
-    public static final Supplier<DataComponentType<Integer>> BOW_WORK_PATTERN = ET_DATA_COMPONENT_TYPE.register("bow_work_pattern",
+    public static final Supplier<DataComponentType<Integer>> WEAPON_WORK_PATTERN = ET_DATA_COMPONENT_TYPE.register("weapon_work_pattern",
                     () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
     public static final Supplier<DataComponentType<EnhancementData>> ENHANCEMENT_DATA = ET_DATA_COMPONENT_TYPE.register("et_enhancement_data",

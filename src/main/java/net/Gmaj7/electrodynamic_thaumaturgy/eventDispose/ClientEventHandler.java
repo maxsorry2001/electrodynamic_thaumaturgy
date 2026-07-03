@@ -22,9 +22,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtKeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyState;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.EtParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.HydrogenBondParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticle;
@@ -38,6 +39,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -51,14 +53,6 @@ import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 public class ClientEventHandler {
     @EventBusSubscriber(modid = ElectrodynamicThaumaturgy.MODID, value = Dist.CLIENT)
     public static class busEvent{
-        @SubscribeEvent
-        public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
-            event.registerLayerDefinition(EtRayEntityRender.MODEL_LAYER_LOCATION, EtRayEntityRender::createBodyLayer);
-            event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
-            event.registerLayerDefinition(MagnetoEntityModel.LAYER_LOCATION, MagnetoEntityModel::createBodyLayer);
-            event.registerLayerDefinition(PhotoCorrosiveNovaEntityModel.LAYER_LOCATION, PhotoCorrosiveNovaEntityModel::createBodyLayer);
-        }
-
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event){
             event.put(EtEntities.MAGNETO_ENTROPY_WITCH_ENTITY.get(), MagnetoEntropyWitchEntity.createAttributes().build());
@@ -109,13 +103,26 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void onComputeFovModifierEvent(ComputeFovModifierEvent event) {
-            if (event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == EtItems.PULSE_BOW.get()) {
-                float fovModifier = 1f;
-                int ticksUsingItem = (int) (event.getPlayer().getTicksUsingItem() * event.getPlayer().getUseItem().get(EtDataComponentTypes.ENHANCEMENT_DATA).coolDown());
-                float scale = Math.min(ticksUsingItem / 20.0F, 1.0F);
-                fovModifier *= 1.0F - Mth.square(scale) * 0.15F;
-                event.setNewFovModifier(Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get().floatValue(), 1.0F, fovModifier));
+            if (event.getPlayer().isUsingItem()) {
+                ItemStack stack = event.getPlayer().getUseItem();
+                if(stack.getItem() instanceof PulseBow) {
+                    float fovModifier = 1f;
+                    int ticksUsingItem = (int) (event.getPlayer().getTicksUsingItem() * event.getPlayer().getUseItem().get(EtDataComponentTypes.ENHANCEMENT_DATA).coolDown());
+                    float scale = Math.min(ticksUsingItem / 20.0F, 1.0F);
+                    fovModifier *= 1.0F - Mth.square(scale) * 0.15F;
+                    event.setNewFovModifier(Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get().floatValue(), 1.0F, fovModifier));
+                }
+                else if (stack.getItem() instanceof FocusGun)
+                    event.setNewFovModifier(0.5F);
             }
+        }
+
+        @SubscribeEvent
+        public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
+            event.registerLayerDefinition(EtRayEntityRender.MODEL_LAYER_LOCATION, EtRayEntityRender::createBodyLayer);
+            event.registerLayerDefinition(PulsedPlasmaEntityModel.LAYER_LOCATION, PulsedPlasmaEntityModel::createBodyLayer);
+            event.registerLayerDefinition(MagnetoEntityModel.LAYER_LOCATION, MagnetoEntityModel::createBodyLayer);
+            event.registerLayerDefinition(PhotoCorrosiveNovaEntityModel.LAYER_LOCATION, PhotoCorrosiveNovaEntityModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -137,6 +144,7 @@ public class ClientEventHandler {
             EntityRenderers.register(EtEntities.PHOTOACOUSTIC_PULSE_BEACON_ENTITY.get(), PhotoacousticPulseBeaconEntityRender::new);
             EntityRenderers.register(EtEntities.PHOTO_CORROSIVE_NOVA_ENTITY.get(), PhotoCorrosiveNovaEntityRender::new);
             EntityRenderers.register(EtEntities.PULSE_ARROW_ENTITY.get(), PulseArrowRender::new);
+            EntityRenderers.register(EtEntities.FOCUS_BULLET_ENTITY.get(), FocusBulletRender::new);
         }
 
         @SubscribeEvent

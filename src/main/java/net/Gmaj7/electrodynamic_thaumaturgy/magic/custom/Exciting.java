@@ -29,7 +29,7 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
-                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate()) - 7));
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 / Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate()) - 7));
                 if(livingEntity.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;
@@ -46,7 +46,7 @@ public class Exciting extends AbstractWideMagic{
         List<LivingEntity> list = source.level().getEntitiesOfClass(LivingEntity.class, new AABB(source.blockPosition()).inflate(20));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == source)) {
-                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate()) - 7));
+                target.addEffect(new MobEffectInstance(EtEffects.EXCITING, (int) (200 / Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate()) - 7));
                 if(source.level() instanceof ServerLevel){
                     int radius = randomSource.nextInt(2) + 1;
                     float xRot = randomSource.nextFloat() * Mth.PI * 2;

@@ -21,7 +21,7 @@ public class MagnetResonance extends AbstractFrontEntityMagic {
     @Override
     public void playerCast(Player livingEntity, ItemStack itemStack, MagicDefinition magicDefinition) {
         LivingEntity target = getNearestFrontTarget(livingEntity, 20);
-        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 * Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate())));
+        target.addEffect(new MobEffectInstance(EtEffects.MAGNET_RESONANCE, (int) (200 / Function.getEfficiency(itemStack)), (int) (Function.getResultAmount(itemStack) * magicDefinition.amountRate())));
         if(!livingEntity.level().isClientSide()) {
             Thread thread = new Thread(() -> makeParticle((ServerLevel) livingEntity.level(), target));
             thread.start();

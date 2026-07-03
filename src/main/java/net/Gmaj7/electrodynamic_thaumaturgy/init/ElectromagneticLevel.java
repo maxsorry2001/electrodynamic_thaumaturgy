@@ -5,7 +5,6 @@ public enum ElectromagneticLevel {
     INTERMEDIATE,
     ADVANCED,
     SUPERCONDUCTING,
-    NULL,
     EMPTY;
-    private ElectromagneticLevel(){}
+    ElectromagneticLevel(){}
 }

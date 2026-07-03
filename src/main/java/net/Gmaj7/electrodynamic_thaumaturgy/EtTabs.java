@@ -30,7 +30,7 @@ public class EtTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ElectrodynamicThaumaturgy.MODID);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MOE_TAB = MOE_CREATIVE_TABS.register("moe_tab",
-            () -> CreativeModeTab.builder().icon(() -> setFullEnergyItem(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())))
+            () -> CreativeModeTab.builder().icon(() -> setFullEnergyItem(getTabMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())))
                     .title(Component.translatable(MOE_TAB_STRING))
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(EtItems.MAGNO_INGOT);
@@ -43,11 +43,12 @@ public class EtTabs {
                         output.accept(EtItems.MONOPOLE_N);
                         output.accept(EtItems.MONOPOLE_S);
 
-                        output.accept(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD));
-                        output.accept(setFullEnergyItem(getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())));
+                        output.accept(getTabMagicUse(EtItems.ELECTROMAGNETIC_ROD));
+                        output.accept(setFullEnergyItem(getTabMagicUse(EtItems.ELECTROMAGNETIC_ROD.get())));
                         output.accept(EtItems.PULSE_BOW);
-                        output.accept(setFullEnergyItem(getDefaultBow(EtItems.PULSE_BOW)));
+                        output.accept(setFullEnergyItem(getTabWeapon(EtItems.PULSE_BOW)));
                         output.accept(EtItems.FOCUS_GUN);
+                        output.accept(setFullEnergyItem(getTabWeapon(EtItems.FOCUS_GUN)));
                         output.accept(EtItems.PRIMARY_CODE_MODULE);
                         output.accept(EtItems.INTERMEDIATE_CODE_MODULE);
                         output.accept(EtItems.ADVANCED_CODE_MODULE);
@@ -152,13 +153,13 @@ public class EtTabs {
         return itemStack;
     }
 
-    public static ItemStack getDefaultMagicUse(ItemLike item){
+    public static ItemStack getTabMagicUse(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
         itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultRodForTab());
         return itemStack;
     }
 
-    public static ItemStack getDefaultBow(ItemLike item){
+    public static ItemStack getTabWeapon(ItemLike item){
         ItemStack itemStack = new ItemStack(item);
         itemStack.set(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getDefaultWeaponForTab());
         return itemStack;

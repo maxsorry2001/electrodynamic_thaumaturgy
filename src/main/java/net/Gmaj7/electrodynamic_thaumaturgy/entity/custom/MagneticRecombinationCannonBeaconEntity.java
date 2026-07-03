@@ -32,13 +32,13 @@ public class MagneticRecombinationCannonBeaconEntity extends AbstractArrow {
     public MagneticRecombinationCannonBeaconEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
-        this.magicItem = EtTabs.getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
+        this.magicItem = EtTabs.getTabMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
     }
 
     public MagneticRecombinationCannonBeaconEntity(Level level){
         super(EtEntities.MAGNETIC_RECOMBINATION_CANNON_BEACON_ENTITY.get(), level);
         this.pickup = Pickup.DISALLOWED;
-        this.magicItem = EtTabs.getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
+        this.magicItem = EtTabs.getTabMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
     }
 
     public MagneticRecombinationCannonBeaconEntity(Level level, double x, double y, double z, ItemStack magicItem, LivingEntity owner, float rate){

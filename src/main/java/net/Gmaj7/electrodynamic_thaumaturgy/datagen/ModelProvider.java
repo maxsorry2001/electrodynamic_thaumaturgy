@@ -102,6 +102,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
 
         itemModels.generateFlatItem(EtItems.ELECTROMAGNETIC_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.createFlatItemModel(EtItems.PULSE_BOW.get(), ModelTemplates.BOW);
+        itemModels.itemModelOutput.accept(EtItems.FOCUS_GUN.get(), setNormalItemModule("focus_gun"));
         itemModels.generateBow(EtItems.PULSE_BOW.get());
 
         itemModels.generateFlatItem(EtItems.MAGNETIC_FLUX_BUCKET.get(), ModelTemplates.FLAT_ITEM);
@@ -123,16 +124,16 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         );
 
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(),
-                getModel("electromagnetic_assembly_table")));
+                getBlockModel("electromagnetic_assembly_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ENERGY_BLOCK.get(),
-                getModel("energy_block")));
+                getBlockModel("energy_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.FLUID_BLOCK.get(),
-                getModel("fluid_block")));
+                getBlockModel("fluid_block")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_MODEM_TABLE.get(),
-                getModel("electromagnetic_modem_table")));
+                getBlockModel("electromagnetic_modem_table")));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.ENERGY_TRANSMISSION_ANTENNA.get())
-                        .with(PropertyDispatch.initial(EnergyTransmissionAtenna.SEND).select(true, getModel("energy_transmission_antenna_send")).select(false, getModel("energy_transmission_antenna_receive")))
+                        .with(PropertyDispatch.initial(EnergyTransmissionAtenna.SEND).select(true, getBlockModel("energy_transmission_antenna_send")).select(false, getBlockModel("energy_transmission_antenna_receive")))
                         .with(PropertyDispatch.modify(EnergyTransmissionAtenna.FACING).select(Direction.DOWN, BlockModelGenerators.X_ROT_180)
                                 .select(Direction.UP, BlockModelGenerators.NOP)
                                 .select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90))
@@ -141,37 +142,37 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                                 .select(Direction.NORTH, BlockModelGenerators.X_ROT_90)));
         itemModels.itemModelOutput.accept(EtBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem(), setNormalBlockModule("energy_transmission_antenna_send"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.PHOTOVOLTAIC_GENERATOR.get(),
-                getModel("photovoltaic_generator")));
+                getBlockModel("photovoltaic_generator")));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.TEMPERATURE_GENERATOR.get())
-                                .with(PropertyDispatch.initial(TemperatureGenerator.WORK_TYPE).select(TemperatureGenerator.WorkType.NORMAL, getModel("temperature_generator_normal"))
-                                        .select(TemperatureGenerator.WorkType.HOT, getModel("temperature_generator_hot"))
-                                        .select(TemperatureGenerator.WorkType.COLD, getModel("temperature_generator_cold"))
-                                        .select(TemperatureGenerator.WorkType.WORK_A, getModel("temperature_generator_work_a"))
-                                        .select(TemperatureGenerator.WorkType.WORK_B, getModel("temperature_generator_work_b"))));
+                                .with(PropertyDispatch.initial(TemperatureGenerator.WORK_TYPE).select(TemperatureGenerator.WorkType.NORMAL, getBlockModel("temperature_generator_normal"))
+                                        .select(TemperatureGenerator.WorkType.HOT, getBlockModel("temperature_generator_hot"))
+                                        .select(TemperatureGenerator.WorkType.COLD, getBlockModel("temperature_generator_cold"))
+                                        .select(TemperatureGenerator.WorkType.WORK_A, getBlockModel("temperature_generator_work_a"))
+                                        .select(TemperatureGenerator.WorkType.WORK_B, getBlockModel("temperature_generator_work_b"))));
         itemModels.itemModelOutput.accept(EtBlocks.TEMPERATURE_GENERATOR.asItem(), setNormalBlockModule("temperature_generator_normal"));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.THERMAL_GENERATOR.get())
-                                .with(PropertyDispatch.initial(ThermalGenerator.LIT).select(true, getModel("thermal_generator_true"))
-                                        .select(false, getModel("thermal_generator_false"))));
+                                .with(PropertyDispatch.initial(ThermalGenerator.LIT).select(true, getBlockModel("thermal_generator_true"))
+                                        .select(false, getBlockModel("thermal_generator_false"))));
         itemModels.itemModelOutput.accept(EtBlocks.THERMAL_GENERATOR.asItem(), setNormalBlockModule("thermal_generator_false"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETO_CORE.get(),
-                getModel("magneto_core")));
+                getBlockModel("magneto_core")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
-                getModel("atomic_reconstruction_machine")));
+                getBlockModel("atomic_reconstruction_machine")));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.BIOMASS_GENERATOR.get())
-                                .with(PropertyDispatch.initial(BiomassGenerator.LIT).select(true, getModel("biomass_generator_true"))
-                                        .select(false, getModel("biomass_generator_false"))));
+                                .with(PropertyDispatch.initial(BiomassGenerator.LIT).select(true, getBlockModel("biomass_generator_true"))
+                                        .select(false, getBlockModel("biomass_generator_false"))));
         itemModels.itemModelOutput.accept(EtBlocks.BIOMASS_GENERATOR.asItem(), setNormalBlockModule("biomass_generator_false"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
-                getModel("bio_replication_vat_machine")));
+                getBlockModel("bio_replication_vat_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGIC_ENCODE_TABLE.get(),
-                getModel("magic_encode_table")));
+                getBlockModel("magic_encode_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
-                getModel("electromagnetic_driver_machine")));
+                getBlockModel("electromagnetic_driver_machine")));
         blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(), getModel("electromagnetic_extractor_machine"))
+                MultiVariantGenerator.dispatch(EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(), getBlockModel("electromagnetic_extractor_machine"))
                                 .with(PropertyDispatch.modify(BlockStateProperties.FACING).select(Direction.DOWN, BlockModelGenerators.NOP)
                                         .select(Direction.UP, BlockModelGenerators.X_ROT_180)
                                         .select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
@@ -181,63 +182,67 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                                 ));
         blockModels.createTrivialCube(EtBlocks.LIGHT_AIR.get());
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETO_FUSION_MACHINE.get(),
-                getModel("magneto_fusion_machine")));
+                getBlockModel("magneto_fusion_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
-                getModel("electromagnetic_dissociation_machine")));
+                getBlockModel("electromagnetic_dissociation_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
-                getModel("eddy_current_remelter_machine")));
+                getBlockModel("eddy_current_remelter_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
-                getModel("electromagnetic_infuser_machine")));
+                getBlockModel("electromagnetic_infuser_machine")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(),
-                getModel("magnetic_dissolver_machine")));
-        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ENERGY_PIPE.get()).with(getModel("energy_pipe"))
-                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part"))
-                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getModel("energy_pipe_part").with(BlockModelGenerators.Y_ROT_180))
-                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getModel("energy_pipe_extract").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getModel("energy_pipe_extract").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getModel("energy_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getModel("energy_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getModel("energy_pipe_extract"))
-                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getModel("energy_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
-        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ITEM_PIPE.get()).with(getModel("item_pipe"))
-                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getModel("item_pipe_part").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getModel("item_pipe_part").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getModel("item_pipe_part").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getModel("item_pipe_part").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getModel("item_pipe_part"))
-                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getModel("item_pipe_part").with(BlockModelGenerators.Y_ROT_180))
-                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract"))
-                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
-        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.FLUID_PIPE.get()).with(getModel("fluid_pipe"))
-                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part"))
-                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_180))
-                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.X_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.X_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
-                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
-                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract"))
-                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
+                getBlockModel("magnetic_dissolver_machine")));
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ENERGY_PIPE.get()).with(getBlockModel("energy_pipe"))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.Y_ROT_180))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getBlockModel("energy_pipe_extract").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getBlockModel("energy_pipe_extract").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getBlockModel("energy_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getBlockModel("energy_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("energy_pipe_extract"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("energy_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ITEM_PIPE.get()).with(getBlockModel("item_pipe"))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getBlockModel("item_pipe_part").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getBlockModel("item_pipe_part").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getBlockModel("item_pipe_part").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getBlockModel("item_pipe_part").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getBlockModel("item_pipe_part"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getBlockModel("item_pipe_part").with(BlockModelGenerators.Y_ROT_180))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getBlockModel("item_pipe_extract").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getBlockModel("item_pipe_extract").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getBlockModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getBlockModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("item_pipe_extract"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("item_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.FLUID_PIPE.get()).with(getBlockModel("fluid_pipe"))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getBlockModel("fluid_pipe_part").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getBlockModel("fluid_pipe_part").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.LINK), getBlockModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.LINK), getBlockModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.LINK), getBlockModel("fluid_pipe_part"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.LINK), getBlockModel("fluid_pipe_part").with(BlockModelGenerators.Y_ROT_180))
+                .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract").with(BlockModelGenerators.X_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract").with(BlockModelGenerators.X_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.EAST, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_90))
+                .with(new ConditionBuilder().term(AbstractPipe.WEST, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_270))
+                .with(new ConditionBuilder().term(AbstractPipe.NORTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract"))
+                .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
 
         blockModels.createNonTemplateModelBlock(EtBlocks.MAGNETIC_FLUX_FLUID_BLOCK.get());
     }
 
-    protected MultiVariant getModel(String name){
+    protected MultiVariant getBlockModel(String name){
         return BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/" + name));
     }
 
     protected ItemModel.Unbaked setNormalBlockModule(String name){
         return ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "block/" + name));
+    }
+
+    protected ItemModel.Unbaked setNormalItemModule(String name){
+        return ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "item/" + name));
     }
 }

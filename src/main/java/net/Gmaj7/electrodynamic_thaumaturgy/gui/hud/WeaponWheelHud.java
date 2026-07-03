@@ -3,7 +3,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.gui.hud;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectBowPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectWeaponPacket;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -62,7 +62,7 @@ public class WeaponWheelHud implements GuiLayer {
     public void close(){
         active = false;
         if(selection > -1)
-            ClientPacketDistributor.sendToServer(new SelectBowPacket(selection, useHand));
+            ClientPacketDistributor.sendToServer(new SelectWeaponPacket(selection, useHand));
         Minecraft.getInstance().mouseHandler.grabMouse();
     }
 

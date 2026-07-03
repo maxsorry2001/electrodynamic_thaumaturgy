@@ -1,0 +1,131 @@
+package net.Gmaj7.electrodynamic_thaumaturgy.entity.custom;
+
+import net.Gmaj7.electrodynamic_thaumaturgy.entity.EtEntities;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDamageType;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+
+import java.util.List;
+
+public class FocusBulletEntity extends AbstractArrow {
+    private float damage;
+    private int pattern;
+    public FocusBulletEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+        super(entityType, level);
+        this.pickup = Pickup.DISALLOWED;
+    }
+
+    public FocusBulletEntity(Level level){
+        super(EtEntities.FOCUS_BULLET_ENTITY.get(), level);
+        this.pickup = Pickup.DISALLOWED;
+    }
+
+    public FocusBulletEntity(Level level, LivingEntity owner, float damage, int pattern){
+        this(level, owner.getX(), owner.getEyeY() - 0.1, owner.getZ(), owner, damage, pattern);
+    }
+
+    public FocusBulletEntity(Level level, double x, double y, double z, LivingEntity owner, float damage, int pattern){
+        super(EtEntities.FOCUS_BULLET_ENTITY.get(), level);
+        this.setOwner(owner);
+        this.damage = damage;
+        this.setPos(x, y, z);
+        this.pickup = Pickup.DISALLOWED;
+        this.pattern = pattern;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(pattern == 2 && tickCount % 5 == 0){
+            List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(getOnPos()).inflate(2));
+            if(getOwner() instanceof LivingEntity) list.remove(getOwner());
+            if(getDamageOwner() instanceof LivingEntity) list.remove(getDamageOwner());
+            for (LivingEntity target : list){
+                target.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), getDamageOwner()), damage / 3F);
+            }
+        }
+        if(tickCount % 60 == 0) this.discard();
+    }
+
+    @Override
+    public boolean isPickable() {
+        return false;
+    }
+
+    @Override
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.BEACON_ACTIVATE;
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
+    }
+
+    @Override
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putFloat("damage", damage);
+        output.putInt("pattern", pattern);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        damage = input.getFloatOr("damage", 2F);
+        pattern = input.getIntOr("pattern", 0);
+    }
+
+    @Override
+    protected void onHitBlock(BlockHitResult result) {
+        this.discard();
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult result) {
+        Entity entity = result.getEntity();
+        if(entity instanceof LivingEntity livingEntity && livingEntity != getOwner()){
+            switch (pattern) {
+                case 0 -> {
+                    livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), getDamageOwner()), damage / 5);
+                    this.discard();
+                }
+                case 1 -> {
+                    livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), getDamageOwner()), damage * 2);
+                    this.discard();
+                }
+                default -> livingEntity.hurt(new DamageSource(Function.getHolder(level(), Registries.DAMAGE_TYPE, EtDamageType.origin_thaumaturgy), getDamageOwner()), damage);
+            }
+        }
+    }
+
+    private Entity getDamageOwner(){
+        return this.getOwner() instanceof OwnableEntity ? ((OwnableEntity) this.getOwner()).getOwner() : this.getOwner();
+    }
+
+    @Override
+    protected ItemStack getPickupItem() {
+        return new ItemStack(Items.ARROW);
+    }
+
+    @Override
+    protected ItemStack getDefaultPickupItem() {
+        return ItemStack.EMPTY;
+    }
+}

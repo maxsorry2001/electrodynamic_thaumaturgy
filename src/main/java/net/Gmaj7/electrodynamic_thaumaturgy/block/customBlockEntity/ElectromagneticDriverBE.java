@@ -39,7 +39,7 @@ public class ElectromagneticDriverBE extends BlockEntity implements IEnergyBlock
     protected Entity owner;
     protected UUID ownerUUID;
     protected int cooldown = 0;
-    public static ItemStack magicItem = EtTabs.getDefaultMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
+    public static ItemStack magicItem = EtTabs.getTabMagicUse(EtItems.ELECTROMAGNETIC_ROD.get());
     private final BlockEntityEnergyHandler energy = new BlockEntityEnergyHandler(1048576) {
 
         @Override
