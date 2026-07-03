@@ -409,6 +409,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GLOWING_ESSENCE, 2, EtItems.POLAR_CRYSTAL, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtItems.POLAR_CRYSTAL)).save(output);
         ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNETIC_ESSENCE, 2, EtItems.RESONANT_CRYSTAL, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtItems.RESONANT_CRYSTAL)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_IRON_DUST, 3, EtItems.IRON_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_COPPER_DUST, 3, EtItems.COPPER_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_GOLD_DUST, 3, EtItems.GOLD_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_NETHERITE_DUST, 3, EtItems.NETHERITE_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
 
         MagneticDissolutionRecipeBuilder.creat(items, EtFluids.MAGNETIC_FLUX_SOURCE.get(), 1000, EtItems.MAGNO_INGOT, Fluids.WATER).unlockedBy("has_magneto_ingot", has(EtItems.MAGNO_INGOT)).save(output);
     }

@@ -125,6 +125,11 @@ public class EtTabs {
                         output.accept(EtItems.GOLD_DUST);
                         output.accept(EtItems.NETHERITE_DUST);
 
+                        output.accept(EtItems.MAGNO_CONDENSED_COPPER_DUST);
+                        output.accept(EtItems.MAGNO_CONDENSED_IRON_DUST);
+                        output.accept(EtItems.MAGNO_CONDENSED_GOLD_DUST);
+                        output.accept(EtItems.MAGNO_CONDENSED_NETHERITE_DUST);
+
                         output.accept(EtItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG);
 
                         output.accept(EtItems.MAGNO_WRENCH);

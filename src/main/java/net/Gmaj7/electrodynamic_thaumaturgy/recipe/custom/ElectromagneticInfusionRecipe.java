@@ -13,9 +13,10 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
-public record ElectromagneticInfusionRecipe(Ingredient inputItem, FluidIngredient inputFluid, int fluidCost, ItemStackTemplate output) implements Recipe<ElectromagneticInfusionRecipeInput> {
+public record ElectromagneticInfusionRecipe(Ingredient inputItem, int itemCost, FluidIngredient inputFluid, int fluidCost, ItemStackTemplate output) implements Recipe<ElectromagneticInfusionRecipeInput> {
     public static final MapCodec<ElectromagneticInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
             Ingredient.CODEC.fieldOf("item").forGetter(ElectromagneticInfusionRecipe::inputItem),
+            Codec.INT.fieldOf("item_cost").forGetter(ElectromagneticInfusionRecipe::itemCost),
             FluidIngredient.CODEC.fieldOf("fluid").forGetter(ElectromagneticInfusionRecipe::inputFluid),
             Codec.INT.fieldOf("fluid_cost").forGetter(ElectromagneticInfusionRecipe::fluidCost),
             ItemStackTemplate.CODEC.fieldOf("output").forGetter(ElectromagneticInfusionRecipe::output)
@@ -24,13 +25,14 @@ public record ElectromagneticInfusionRecipe(Ingredient inputItem, FluidIngredien
     public static final StreamCodec<RegistryFriendlyByteBuf, ElectromagneticInfusionRecipe> STREAM_CODEC =
             StreamCodec.composite(
                     Ingredient.CONTENTS_STREAM_CODEC, ElectromagneticInfusionRecipe::inputItem,
+                    ByteBufCodecs.INT, ElectromagneticInfusionRecipe::itemCost,
                     FluidIngredient.STREAM_CODEC, ElectromagneticInfusionRecipe::inputFluid,
                     ByteBufCodecs.INT, ElectromagneticInfusionRecipe::fluidCost,
                     ItemStackTemplate.STREAM_CODEC, ElectromagneticInfusionRecipe::output,
                     ElectromagneticInfusionRecipe::new);
     @Override
     public boolean matches(ElectromagneticInfusionRecipeInput input, Level level) {
-        return this.inputItem.test(input.inputItem()) && this.inputFluid.test(input.inputFluid());
+        return this.inputItem.test(input.inputItem()) && input.enoughItemCount(itemCost) && this.inputFluid.test(input.inputFluid()) && input.enoughFluidCount(fluidCost);
     }
 
     @Override

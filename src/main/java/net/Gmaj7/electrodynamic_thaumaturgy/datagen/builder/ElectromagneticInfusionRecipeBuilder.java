@@ -21,33 +21,43 @@ import java.util.Map;
 public class ElectromagneticInfusionRecipeBuilder implements RecipeBuilder {
     private final HolderGetter<Item> items;
     private final Ingredient inputItem;
+    private final int itemCost;
     private final FluidIngredient inputFluid;
     private final int fluidCost;
     private final ItemStackTemplate output;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public ElectromagneticInfusionRecipeBuilder(HolderGetter<Item> items, ItemLike output, int outputCount, ItemLike inputItem, Fluid inputFluid, int fluidCost) {
+    public ElectromagneticInfusionRecipeBuilder(HolderGetter<Item> items, ItemLike output, int outputCount, ItemLike inputItem, int itemCost, Fluid inputFluid, int fluidCost) {
         this.items = items;
         this.inputItem = Ingredient.of(inputItem);
+        this.itemCost = itemCost;
         this.inputFluid = FluidIngredient.of(inputFluid);
         this.fluidCost = fluidCost;
         this.output = new ItemStackTemplate(output.asItem(), outputCount);
     }
 
     public static ElectromagneticInfusionRecipeBuilder creat(HolderGetter<Item> items, ItemLike output, ItemLike inputItem, Fluid inputFluid){
-        return new ElectromagneticInfusionRecipeBuilder(items, output, 1, inputItem, inputFluid, 1000);
+        return new ElectromagneticInfusionRecipeBuilder(items, output, 1, inputItem, 1, inputFluid, 1000);
     }
 
     public static ElectromagneticInfusionRecipeBuilder creat(HolderGetter<Item> items, ItemLike output, int outputCount, ItemLike inputItem, Fluid inputFluid){
-        return new ElectromagneticInfusionRecipeBuilder(items, output, outputCount, inputItem, inputFluid, 1000);
+        return new ElectromagneticInfusionRecipeBuilder(items, output, outputCount, inputItem, 1, inputFluid, 1000);
     }
 
     public static ElectromagneticInfusionRecipeBuilder creat(HolderGetter<Item> items, ItemLike output, ItemLike inputItem, Fluid inputFluid, int fluidCost){
-        return new ElectromagneticInfusionRecipeBuilder(items, output, 1, inputItem, inputFluid, fluidCost);
+        return new ElectromagneticInfusionRecipeBuilder(items, output, 1, inputItem, 1, inputFluid, fluidCost);
     }
 
     public static ElectromagneticInfusionRecipeBuilder creat(HolderGetter<Item> items, ItemLike output, int outputCount, ItemLike inputItem, Fluid inputFluid, int fluidCost){
-        return new ElectromagneticInfusionRecipeBuilder(items, output, outputCount, inputItem, inputFluid, fluidCost);
+        return new ElectromagneticInfusionRecipeBuilder(items, output, outputCount, inputItem, 1, inputFluid, fluidCost);
+    }
+
+    public static ElectromagneticInfusionRecipeBuilder creat(HolderGetter<Item> items, ItemLike output, int outputCount, ItemLike inputItem, int itemCost, Fluid inputFluid, int fluidCost){
+        return new ElectromagneticInfusionRecipeBuilder(items, output, outputCount, inputItem, itemCost, inputFluid, fluidCost);
+    }
+
+    public static ElectromagneticInfusionRecipeBuilder creat(HolderGetter<Item> items, ItemLike output, int outputCount, ItemLike inputItem, int itemCost, Fluid inputFluid){
+        return new ElectromagneticInfusionRecipeBuilder(items, output, outputCount, inputItem, itemCost, inputFluid, 1000);
     }
 
     @Override
@@ -68,7 +78,7 @@ public class ElectromagneticInfusionRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
-        ElectromagneticInfusionRecipe recipe = new ElectromagneticInfusionRecipe(inputItem, inputFluid, fluidCost, output);
+        ElectromagneticInfusionRecipe recipe = new ElectromagneticInfusionRecipe(inputItem, itemCost, inputFluid, fluidCost, output);
         recipeOutput.accept(resourceKey, recipe, null);
     }
 }
