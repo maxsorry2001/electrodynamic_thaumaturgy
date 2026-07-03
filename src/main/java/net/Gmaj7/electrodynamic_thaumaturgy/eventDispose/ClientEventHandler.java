@@ -22,9 +22,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtKeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyState;
-import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.EtParticles;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.HydrogenBondParticle;
 import net.Gmaj7.electrodynamic_thaumaturgy.particle.custom.PointLineParticle;
@@ -38,6 +39,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -101,12 +103,17 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void onComputeFovModifierEvent(ComputeFovModifierEvent event) {
-            if (event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == EtItems.PULSE_BOW.get()) {
-                float fovModifier = 1f;
-                int ticksUsingItem = (int) (event.getPlayer().getTicksUsingItem() * event.getPlayer().getUseItem().get(EtDataComponentTypes.ENHANCEMENT_DATA).coolDown());
-                float scale = Math.min(ticksUsingItem / 20.0F, 1.0F);
-                fovModifier *= 1.0F - Mth.square(scale) * 0.15F;
-                event.setNewFovModifier(Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get().floatValue(), 1.0F, fovModifier));
+            if (event.getPlayer().isUsingItem()) {
+                ItemStack stack = event.getPlayer().getUseItem();
+                if(stack.getItem() instanceof PulseBow) {
+                    float fovModifier = 1f;
+                    int ticksUsingItem = (int) (event.getPlayer().getTicksUsingItem() * event.getPlayer().getUseItem().get(EtDataComponentTypes.ENHANCEMENT_DATA).coolDown());
+                    float scale = Math.min(ticksUsingItem / 20.0F, 1.0F);
+                    fovModifier *= 1.0F - Mth.square(scale) * 0.15F;
+                    event.setNewFovModifier(Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get().floatValue(), 1.0F, fovModifier));
+                }
+                else if (stack.getItem() instanceof FocusGun)
+                    event.setNewFovModifier(0.5F);
             }
         }
 

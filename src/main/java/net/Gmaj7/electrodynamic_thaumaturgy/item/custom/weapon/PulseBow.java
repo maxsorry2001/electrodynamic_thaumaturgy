@@ -45,7 +45,7 @@ public class PulseBow extends ElectromagneticWeaponItem {
             arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(itemStack, entity) - remainingTime, itemStack), 0.0F);
             level.addFreshEntity(arrow);
             try (Transaction transaction = Transaction.openRoot()){
-                itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack)).extract((int) (shootUse * Function.getEfficiency(itemStack)), transaction);
+                itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack)).extract((int) (shootUse / Function.getEfficiency(itemStack)), transaction);
                 transaction.commit();
             }
             return true;

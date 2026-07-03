@@ -27,7 +27,7 @@ public class NerveBlocking extends AbstractWideMagic{
         List<LivingEntity> list = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.blockPosition()).inflate(7));
         for (LivingEntity target : list){
             if(target instanceof Enemy || (target instanceof Mob && ((Mob) target).getTarget() == livingEntity)) {
-                target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(itemStack)), (int) (magicDefinition.amountRate() * Function.getStrengthRate(itemStack))));
+                target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 / Function.getEfficiency(itemStack)), (int) (magicDefinition.amountRate() * Function.getStrengthRate(itemStack))));
             }
         }
         if(!livingEntity.level().isClientSide()){
@@ -47,7 +47,7 @@ public class NerveBlocking extends AbstractWideMagic{
         if(source instanceof MagnetoOrderSageEntity) list.remove(((MagnetoOrderSageEntity) source).getOwner());
         list.add(target);
         for (LivingEntity livingEntity : list){
-            target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 * Function.getEfficiency(itemStack)), (int) (magicDefinition.amountRate() * Function.getStrengthRate(itemStack))));
+            target.addEffect(new MobEffectInstance(EtEffects.NERVE_BLOCKING, (int) (200 / Function.getEfficiency(itemStack)), (int) (magicDefinition.amountRate() * Function.getStrengthRate(itemStack))));
         }
         if(!source.level().isClientSide()){
             Thread thread = new Thread(() -> {
