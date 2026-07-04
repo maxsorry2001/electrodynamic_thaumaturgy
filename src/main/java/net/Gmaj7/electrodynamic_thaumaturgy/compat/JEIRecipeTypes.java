@@ -18,6 +18,8 @@ public class JEIRecipeTypes {
             create(ElectrodynamicThaumaturgy.MODID, "electromagnetic_infusion", ElectromagneticInfusionRecipe.class);
     public static final IRecipeType<RecipeHolder<MagneticDissolutionRecipe>> MAGNETIC_DISSOLUTION =
             create(ElectrodynamicThaumaturgy.MODID, "magnetic_dissolution", MagneticDissolutionRecipe.class);
+    public static final IRecipeType<RecipeHolder<AtomicReconstructionRecipe>> ATOMIC_RECONSTRUCTION =
+            create(ElectrodynamicThaumaturgy.MODID, "atomic_reconstruction", AtomicReconstructionRecipe.class);
 
 
     public static <R extends Recipe<?>> IRecipeType<RecipeHolder<R>> create(String modid, String name, Class<? extends R> recipeClass) {

@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:atomic_reconstruction",
+  "energy_use": 8192,
+  "input": "electrodynamic_thaumaturgy:magno_condensed_netherite_dust",
+  "item_cost": 3,
+  "output": {
+    "id": "electrodynamic_thaumaturgy:magno_extracted_netherite_cluster"
+  },
+  "tick_use": 100
+}

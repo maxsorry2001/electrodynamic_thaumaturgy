@@ -24,6 +24,7 @@ public class EtRecipes {
                     return "magic_encode";
                 }
             });
+
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagnetoFusionRecipe>> MAGNO_FUSION_SERIALIZER =
             SERIALIZER.register("magno_fusion", () -> new RecipeSerializer<>(MagnetoFusionRecipe.CODEC, MagnetoFusionRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeType<?>, RecipeType<MagnetoFusionRecipe>> MAGNO_FUSION_TYPE =
@@ -33,6 +34,7 @@ public class EtRecipes {
                     return "magno_fusion";
                 }
             });
+
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ElectromagneticDissociationRecipe>> ELECTROMAGNETIC_DISSOCIATION_RECIPE_SERIALIZER =
             SERIALIZER.register("electromagnetic_dissociation", () -> new RecipeSerializer<>(ElectromagneticDissociationRecipe.CODEC, ElectromagneticDissociationRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeType<?>, RecipeType<ElectromagneticDissociationRecipe>> ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE =
@@ -40,6 +42,7 @@ public class EtRecipes {
                 @Override
                 public String toString() {return "electromagnetic_dissociation";}
             });
+
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ElectromagneticInfusionRecipe>> ELECTROMAGNETIC_INFUSION_RECIPE_SERIALIZER =
             SERIALIZER.register("electromagnetic_infusion", () -> new RecipeSerializer<>(ElectromagneticInfusionRecipe.CODEC, ElectromagneticInfusionRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeType<?>, RecipeType<ElectromagneticInfusionRecipe>> ELECTROMAGNETIC_INFUSION_RECIPE_TYPE =
@@ -49,6 +52,7 @@ public class EtRecipes {
                     return "electromagnetic_infusion";
                 }
             });
+
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MagneticDissolutionRecipe>> MAGNETIC_DISSOLUTION_RECIPE_SERIALIZER =
             SERIALIZER.register("magnetic_dissolution", () -> new RecipeSerializer<>(MagneticDissolutionRecipe.CODEC, MagneticDissolutionRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeType<?>, RecipeType<MagneticDissolutionRecipe>> MAGNETIC_DISSOLUTION_RECIPE_TYPE =
@@ -56,6 +60,16 @@ public class EtRecipes {
                 @Override
                 public String toString() {
                     return "magnetic_dissolution";
+                }
+            });
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AtomicReconstructionRecipe>> ATOMIC_RECONSTRUCTION_RECIPE_SERIALIZER =
+            SERIALIZER.register("atomic_reconstruction", () -> new RecipeSerializer<>(AtomicReconstructionRecipe.CODEC, AtomicReconstructionRecipe.STREAM_CODEC));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AtomicReconstructionRecipe>> ATOMIC_RECONSTRUCTION_RECIPE_TYPE =
+            TYPE.register("atomic_reconstruction", () -> new RecipeType<AtomicReconstructionRecipe>() {
+                @Override
+                public String toString() {
+                    return "atomic_reconstruction";
                 }
             });
 

@@ -50,6 +50,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new ElectromagneticDissociationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new ElectromagneticInfusionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new MagneticDissolutionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new AtomicReconstructionRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -60,6 +61,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, this.getRecipes(recipeMap, EtRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get()));
         registration.addRecipes(JEIRecipeTypes.MAGNETIC_DISSOLUTION, this.getRecipes(recipeMap, EtRecipes.MAGNETIC_DISSOLUTION_RECIPE_TYPE.get()));
+        registration.addRecipes(JEIRecipeTypes.ATOMIC_RECONSTRUCTION, this.getRecipes(recipeMap, EtRecipes.ATOMIC_RECONSTRUCTION_RECIPE_TYPE.get()));
     }
 
     @Override
@@ -68,7 +70,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addCraftingStation(JEIRecipeTypes.MAGNETO_FUSION, new ItemStack(EtBlocks.MAGNETO_FUSION_MACHINE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_DISSOCIATION, new ItemStack(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.asItem()));
         registration.addCraftingStation(JEIRecipeTypes.ELECTROMAGNETIC_INFUSION, new ItemStack(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.asItem()));
-        registration.addCraftingStation(JEIRecipeTypes.MAGNETIC_DISSOLUTION, new ItemStack(Blocks.CRAFTING_TABLE));
+        registration.addCraftingStation(JEIRecipeTypes.MAGNETIC_DISSOLUTION, new ItemStack(EtBlocks.MAGNETIC_DISSOLVER_MACHINE));
+        registration.addCraftingStation(JEIRecipeTypes.ATOMIC_RECONSTRUCTION, new ItemStack(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE));
     }
 
     @Override
@@ -87,6 +90,7 @@ public class JEIPlugin implements IModPlugin {
             event.sendRecipes(EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get());
             event.sendRecipes(EtRecipes.ELECTROMAGNETIC_INFUSION_RECIPE_TYPE.get());
             event.sendRecipes(EtRecipes.MAGNETIC_DISSOLUTION_RECIPE_TYPE.get());
+            event.sendRecipes(EtRecipes.ATOMIC_RECONSTRUCTION_RECIPE_TYPE.get());
         }
     }
 

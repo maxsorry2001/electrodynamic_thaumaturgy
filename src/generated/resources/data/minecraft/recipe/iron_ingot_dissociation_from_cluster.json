@@ -1,0 +1,11 @@
+{
+  "type": "electrodynamic_thaumaturgy:electromagnetic_dissociation",
+  "ingredient": "electrodynamic_thaumaturgy:magno_extracted_iron_cluster",
+  "need_catalyst": false,
+  "outputs": [
+    {
+      "count": 4,
+      "id": "minecraft:iron_ingot"
+    }
+  ]
+}

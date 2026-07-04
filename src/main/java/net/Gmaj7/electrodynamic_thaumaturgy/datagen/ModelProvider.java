@@ -91,6 +91,10 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.MAGNO_CONDENSED_COPPER_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNO_CONDENSED_GOLD_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNO_CONDENSED_NETHERITE_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.MAGNO_EXTRACTED_IRON_CLUSTER.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.MAGNO_EXTRACTED_COPPER_CLUSTER.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.MAGNO_EXTRACTED_GOLD_CLUSTER.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.MAGNO_EXTRACTED_NETHERITE_CLUSTER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNO_WRENCH.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.FILTER_SETTING.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.RESONANT_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);

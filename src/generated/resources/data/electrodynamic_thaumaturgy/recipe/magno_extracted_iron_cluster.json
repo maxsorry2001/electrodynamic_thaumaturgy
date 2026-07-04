@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:atomic_reconstruction",
+  "energy_use": 2048,
+  "input": "electrodynamic_thaumaturgy:magno_condensed_iron_dust",
+  "item_cost": 3,
+  "output": {
+    "id": "electrodynamic_thaumaturgy:magno_extracted_iron_cluster"
+  },
+  "tick_use": 60
+}

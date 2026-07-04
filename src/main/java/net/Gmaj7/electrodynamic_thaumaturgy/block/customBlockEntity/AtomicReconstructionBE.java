@@ -80,37 +80,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
 
     public static void tick(Level level, BlockPos pos, BlockState state, AtomicReconstructionBE blockEntity) {
         if(level.isClientSide()) return;
-        EnergyHandler energyStorage = blockEntity.getEnergy();
-        if(energyStorage.getAmountAsInt() < progressUse) return;
-        blockEntity.progressTick ++;
-        if(blockEntity.progressTick > 5 && blockEntity.progress == 0)
-            PacketDistributor.sendToAllPlayers(new AtomicPacket(pos, blockEntity.progress));
-        if(blockEntity.progressTick != 10) return;
-        blockEntity.progressTick = 0;
-        if(!blockEntity.canUpProgress()) return;
-        boolean lastStep = blockEntity.progress >= maxProgress;
-        try (Transaction transaction = Transaction.openRoot()){
-            int i = energyStorage.extract(progressUse, transaction);
-            if(i != progressUse)  return;
-            int j = blockEntity.inputItemHandler.extract(0, blockEntity.inputItemHandler.getResource(0), 1, transaction);
-            if(j != 1) return;
-            if(lastStep){
-                int k = blockEntity.outputItemHandler.insert(ItemResource.of(blockEntity.targetItemHandler.getStackInSlot(0)), 1, transaction);
-                if(k != 1) return;
-            }
-            transaction.commit();
-            if(lastStep) blockEntity.progress = 0;
-            else blockEntity.progress ++;
-        }
-        PacketDistributor.sendToAllPlayers(new AtomicPacket(pos, blockEntity.progress));
-    }
 
-    private boolean canUpProgress() {
-        return !this.inputItemHandler.getStackInSlot(0).isEmpty()
-                && this.inputItemHandler.getStackInSlot(0).is(Tags.Items.STONES)
-                && !this.targetItemHandler.getStackInSlot(0).isEmpty()
-                && (this.targetItemHandler.getStackInSlot(0).is(Tags.Items.INGOTS) || this.targetItemHandler.getStackInSlot(0).is(Tags.Items.GEMS))
-                && (this.outputItemHandler.getStackInSlot(0).isEmpty() || this.outputItemHandler.getStackInSlot(0).is(this.targetItemHandler.getStackInSlot(0).getItem()));
     }
 
     @Override
