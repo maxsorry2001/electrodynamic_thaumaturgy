@@ -22,6 +22,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.Attributes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtKeyMapping;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.KeyState;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
@@ -39,6 +40,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -113,7 +115,7 @@ public class ClientEventHandler {
                     event.setNewFovModifier(Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get().floatValue(), 1.0F, fovModifier));
                 }
                 else if (stack.getItem() instanceof FocusGun)
-                    event.setNewFovModifier(0.5F);
+                    event.setNewFovModifier(0.3F);
             }
         }
 
@@ -164,6 +166,8 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void registerOnClientExtensions(RegisterClientExtensionsEvent event){
             event.registerFluidType(EtFluidTypes.MAGNETIC_FLUX_EXTENSION, EtFluidTypes.MAGNETIC_FLUX_FLUID_TYPE.get());
+
+            event.registerItem(new FocusGun.Open(), EtItems.FOCUS_GUN);
         }
 
         @SubscribeEvent
@@ -175,6 +179,13 @@ public class ClientEventHandler {
                     state -> 0xA133BBFF);
             event.register(model, EtFluids.MAGNETIC_FLUX_SOURCE.get());
             event.register(model, EtFluids.MAGNETIC_FLUX_FLOWING.get());
+        }
+
+        @SubscribeEvent
+        public static void renderHandDeal(RenderHandEvent event){
+            Player player = Minecraft.getInstance().player;
+            if(player.isUsingItem() && player.getItemInHand(player.getUsedItemHand()).is(EtItems.FOCUS_GUN.get()))
+                event.setCanceled(true);
         }
     }
 

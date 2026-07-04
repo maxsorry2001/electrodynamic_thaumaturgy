@@ -18,10 +18,10 @@ public class GunShootPacket implements CustomPacketPayload {
     public GunShootPacket(){
     }
 
-    public GunShootPacket(RegistryFriendlyByteBuf registryFriendlyByteBuf) {
+    public GunShootPacket(RegistryFriendlyByteBuf buf) {
     }
 
-    private void write(RegistryFriendlyByteBuf registryFriendlyByteBuf) {
+    private void write(RegistryFriendlyByteBuf buf) {
     }
 
     @Override

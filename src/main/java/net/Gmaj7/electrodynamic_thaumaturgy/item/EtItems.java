@@ -11,9 +11,12 @@ import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -144,7 +147,8 @@ public class EtItems {
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.WEAPON_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())
-                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)
+                    .component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.MAINHAND).build())));
 
     public static final DeferredItem<Item> MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG = ITEM.registerItem("magneto_entropy_witch_entity_spawn_egg",
             SpawnEggItem::new);
