@@ -11,6 +11,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.EtMagicTypeModuleItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinition;
 import net.Gmaj7.electrodynamic_thaumaturgy.magic.MagicDefinitionLoader;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -98,5 +99,10 @@ public class MagicCastItem extends ElectromagneticWeaponItem {
 
     public static int getMaxMagicSlots() {
         return maxMagicSlots;
+    }
+
+    @Override
+    public Identifier getIcon(int pattern) {
+        return null;
     }
 }

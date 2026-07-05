@@ -4,13 +4,17 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectWeaponPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -36,18 +40,18 @@ public class WeaponWheelHud implements GuiLayer {
             close();
             return;
         }
+        Item item = stack.getItem();
+        if(!(item instanceof ElectromagneticWeaponItem) || item instanceof MagicCastItem) {
+            close();
+            return;
+        }
         int centerX = screenWidth / 2, centerY = screenHeight / 2;
         int r = centerY / 2;
-        double alpha = - 0.375 * Math.PI;
-        ItemContainerData contents = stack.get(EtDataComponentTypes.ET_CONTAINER.get());
-        //for (int i = 2; i < MagicCastItem.getMaxMagicSlots(); i++){
-        //    ItemStack type = contents.getStackInSlot(i);
-        //    if(type.getItem() instanceof EtMagicTypeModuleItem item && !item.isEmpty()){
-        //        guiGraphics.fakeItem(type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
-        //        guiGraphics.itemDecorations(Minecraft.getInstance().font, type, (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8);
-        //    }
-        //    alpha = alpha + 0.25 * Math.PI;
-        //}
+        double alpha = - 2 * Mth.PI / 3;
+        for (int i = 0; i <3; i++){
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, ((ElectromagneticWeaponItem) item).getIcon(i), (int) (centerX + r * Math.cos(alpha) - 8), (int) (centerY + r * Math.sin(alpha)) - 8, 18, 18);
+            alpha = alpha + 2 * Math.PI / 3;
+        }
         int textureWidth = 256, textureHeight = 256;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, centerX - textureWidth / 2, centerY - textureHeight / 2, 0, 0, textureWidth, textureHeight, 256, 256);
         double mouseX = Minecraft.getInstance().mouseHandler.xpos(), mouseY = Minecraft.getInstance().mouseHandler.ypos();

@@ -1,11 +1,13 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.PulseArrowEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticTierItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -87,5 +89,14 @@ public class PulseBow extends ElectromagneticWeaponItem {
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.cooldown_enhance").append(":" + enhancementData.coolDown()));
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.strength_enhance").append(":" + enhancementData.strength()));
         builder.accept(Component.translatable("enhance_chip.electrodynamic_thaumaturgy.efficiency_enhance").append(":" + enhancementData.efficiency()));
+    }
+
+    @Override
+    public Identifier getIcon(int pattern) {
+        return switch (pattern){
+            case 1 -> Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/weapon/pulse_bow_explode");
+            case 2 -> Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/weapon/pulse_bow_piercing");
+            default -> Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/weapon/pulse_bow_focus");
+        };
     }
 }

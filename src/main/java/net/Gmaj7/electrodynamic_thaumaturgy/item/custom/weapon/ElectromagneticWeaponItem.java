@@ -4,6 +4,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.ElectromagneticTierItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -70,4 +71,6 @@ public abstract class ElectromagneticWeaponItem extends Item {
         int i = energyHandler.getAmountAsInt(),j = energyHandler.getCapacityAsInt();
         builder.accept(Component.translatable("moe_show_energy").append(i + " FE / " + j + " FE"));
     }
+
+    public abstract Identifier getIcon(int pattern);
 }

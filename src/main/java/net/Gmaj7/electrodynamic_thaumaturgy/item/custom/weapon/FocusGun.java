@@ -1,5 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon;
 
+import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.entity.custom.FocusBulletEntity;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
@@ -53,13 +54,22 @@ public class FocusGun extends ElectromagneticWeaponItem{
         if(energyHandler.getAmountAsInt() < energyUse) return;
         float damage = Function.getResultAmount(itemStack);
         FocusBulletEntity bullet = new FocusBulletEntity(level, player, damage, pattern);
-        bullet.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5.0F, 0.0F);
+        bullet.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, pattern == 2 ? 0.5F : 5.0F, 0.0F);
         level.addFreshEntity(bullet);
         if(pattern != 0) player.getCooldowns().addCooldown(itemStack, (int) (20 / Function.getCoolDownRate(itemStack)));
         try (Transaction transaction = Transaction.openRoot()){
             energyHandler.extract(energyUse, transaction);
             transaction.commit();
         }
+    }
+
+    @Override
+    public Identifier getIcon(int pattern) {
+        return switch (pattern){
+            case 1 -> Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/weapon/focus_gun_semi");
+            case 2 -> Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/weapon/focus_gun_chain");
+            default -> Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "container/weapon/focus_gun_fast");
+        };
     }
 
     public static class Open implements IClientItemExtensions{
@@ -73,34 +83,17 @@ public class FocusGun extends ElectromagneticWeaponItem{
             int screenWidth = guiGraphics.guiWidth();
             int screenHeight = guiGraphics.guiHeight();
 
-            // 4. 设定覆盖图大小（可根据需要调整，这里使用屏幕较小边的一半）
-            float baseSize = Math.min(screenWidth, screenHeight) * 0.6F;
+            // 4. 设定覆盖图大小（根据需要调整）
+            float baseSize = Math.min(screenWidth, screenHeight) * 0.9F;
             int size = Mth.floor(baseSize);
 
             // 5. 计算绘制区域（居中）
             int left = (screenWidth - size) / 2;
             int top = (screenHeight - size) / 2;
-            int right = left + size;
-            int bottom = top + size;
 
-            // 7. 绘制自定义瞄准镜纹理（这里使用你指定的纹理）
-            Identifier scopeTexture = IClientItemExtensions.super.getScopeOverlayTexture(stack); // 或自定义
+            // 7. 绘制自定义瞄准镜纹理
+            Identifier scopeTexture = Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "textures/gui/focus_gun_scope.png");
             guiGraphics.blit(RenderPipelines.GUI_TEXTURED, scopeTexture, left, top, 0.0F, 0.0F, size, size, size, size);
-            // 上方
-            guiGraphics.fill(RenderPipelines.GUI, 0, 0, screenWidth, top, -16777216);
-            // 下方
-            guiGraphics.fill(RenderPipelines.GUI, 0, bottom, screenWidth, screenHeight, -16777216);
-            // 左方
-            guiGraphics.fill(RenderPipelines.GUI, 0, top, left, bottom, -16777216);
-            // 右方
-            guiGraphics.fill(RenderPipelines.GUI, right, top, screenWidth, bottom, -16777216);
-        }
-
-        private float getChargeProgress(Player player, ItemStack bow) {
-            int useDuration = bow.getUseDuration(player);
-            int ticksUsing = useDuration - player.getUseItemRemainingTicks();
-            float progress = (float) ticksUsing / 20.0F; // 弓满蓄力20刻
-            return Math.min(progress, 1.0F);
         }
     }
 }
