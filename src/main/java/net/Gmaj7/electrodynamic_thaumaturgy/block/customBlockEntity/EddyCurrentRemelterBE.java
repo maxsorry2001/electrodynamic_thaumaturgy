@@ -26,6 +26,8 @@ import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
@@ -228,5 +230,23 @@ public class EddyCurrentRemelterBE extends BlockEntity implements IEnergyBlockEn
         setChanged();
         if(!level.isClientSide())
             invalidateCapabilities();
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        energy.deserialize(input);
+        itemHandlerInput.deserializeWithKey("input_item", input);
+        itemHandlerInput.deserializeWithKey("output_item", input);
+        directionOutputSet = Function.decodeDirection(input.getIntOr("direction_set", 0x03));
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandlerInput.serializeWithKey("input_item", output);
+        itemHandlerInput.serializeWithKey("output_item", output);
+        output.putInt("direction_set", Function.encodeDirection(directionOutputSet));
     }
 }

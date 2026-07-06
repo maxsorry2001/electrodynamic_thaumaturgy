@@ -211,20 +211,21 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .pattern("aba")
                 .pattern("aca")
                 .pattern("aba")
-                .define('a', EtItems.STELLAR_MAGNO_INGOT)
-                .define('b', EtItems.ENERGY_CORE)
-                .define('c', Items.NETHER_STAR)
+                .define('a', EtItems.MONOPOLE_S)
+                .define('b', EtItems.MONOPOLE_N)
+                .define('c', EtItems.STELLAR_MAGNO_INGOT)
                 .unlockedBy("has_gold", has(Items.NETHER_STAR))
                 .save(output);
 
         // 原子重构机
         shaped(RecipeCategory.MISC, EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)
                 .pattern("aba")
-                .pattern("bcb")
+                .pattern("cdc")
                 .pattern("aba")
-                .define('a', EtItems.RADIANT_MAGNO_INGOT)
-                .define('b', Items.ENDER_EYE)
-                .define('c', EtItems.ENERGY_CORE)
+                .define('a', EtItems.STELLAR_MAGNO_INGOT)
+                .define('b', EtItems.MONOPOLE_S)
+                .define('c', EtItems.MONOPOLE_N)
+                .define('d', EtItems.ENERGY_CORE)
                 .unlockedBy("has_core", has(EtItems.ENERGY_CORE))
                 .save(output);
 
