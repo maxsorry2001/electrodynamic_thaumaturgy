@@ -148,7 +148,7 @@ public class ElectromagneticInfuserBE extends BlockEntity implements IEnergyBloc
                     commit = false;
                 }
                 if(commit && !blockEntity.itemHandlerInput.getStackInSlot(0).isEmpty()) {
-                    blockEntity.itemHandlerInput.extract(0, blockEntity.itemHandlerInput.getResource(0), 1, transaction);
+                    blockEntity.itemHandlerInput.extract(0, blockEntity.itemHandlerInput.getResource(0), recipe.value().itemCost(), transaction);
                     blockEntity.fluidHandlerInput.extract(0, blockEntity.fluidHandlerInput.getResource(0), recipe.value().fluidCost(), transaction);
                     transaction.commit();
                 }

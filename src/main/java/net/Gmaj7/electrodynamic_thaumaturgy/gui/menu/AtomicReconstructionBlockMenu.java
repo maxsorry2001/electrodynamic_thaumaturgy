@@ -9,6 +9,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
@@ -19,10 +20,11 @@ import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
 public class AtomicReconstructionBlockMenu extends AbstractContainerMenu {
     private final Level level;
-    private final int targetSlot = 2;
-    private final int outSlot = 1;
-    private final int inSlot = 0;
-    public  final AtomicReconstructionBE blockEntity;
+    private ContainerData data;
+    public final AtomicReconstructionBE blockEntity;
+    private static final int inputSlot = 0;
+    private static final int outputSlot = 1;
+
 
     public AtomicReconstructionBlockMenu(int containerId, Inventory inventory, FriendlyByteBuf buf){
         this(containerId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -32,14 +34,15 @@ public class AtomicReconstructionBlockMenu extends AbstractContainerMenu {
         super(EtMenuTypes.ATOMIC_RECONSTRUCTION_BLOCK_MENU.get(), containerId);
         this.blockEntity = (AtomicReconstructionBE) blockEntity;
         this.level = inventory.player.level();
+        this.data = ((AtomicReconstructionBE) blockEntity).getData();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.UP), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.UP).set(slot, resource, amount), 0, 42, 47));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.NORTH), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.NORTH).set(slot, resource, amount), 0, 80, 35));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerWithDirection(Direction.DOWN), (slot, resource, amount) -> this.blockEntity.getItemHandlerWithDirection(Direction.DOWN).set(slot, resource, amount), 0, 118, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 42, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 118, 47));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
+        addDataSlots(((AtomicReconstructionBE) blockEntity).getData());
     }
 
     @Override
@@ -50,17 +53,21 @@ public class AtomicReconstructionBlockMenu extends AbstractContainerMenu {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index < targetSlot + 1) {
-                if (!this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 37, false)) {
+            if (index < outputSlot + 1) {
+                if (!this.moveItemStackTo(itemstack1, outputSlot + 1, outputSlot + 37, false)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= targetSlot + 1 && index < targetSlot + 28) {
-                if (!this.moveItemStackTo(itemstack1, targetSlot + 28, targetSlot + 37, false)) {
-                    return ItemStack.EMPTY;
+            else if (index < outputSlot + 28) {
+                if (!this.moveItemStackTo(itemstack1, inputSlot, inputSlot + 1, false)) {
+                    if(!this.moveItemStackTo(itemstack1, outputSlot + 28, outputSlot + 37, false))
+                        return ItemStack.EMPTY;
                 }
-            } else if (index >= targetSlot + 28 && index < targetSlot + 37 && !this.moveItemStackTo(itemstack1, targetSlot + 1, targetSlot + 28, false)) {
-                return ItemStack.EMPTY;
+            } else if (index < outputSlot + 37) {
+                if (!this.moveItemStackTo(itemstack1, inputSlot, inputSlot + 1, false)) {
+                    if(!this.moveItemStackTo(itemstack1, outputSlot + 1, outputSlot + 28, false))
+                        return ItemStack.EMPTY;
+                }
             }
 
             if (itemstack1.isEmpty()) {

@@ -176,24 +176,56 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
                 .save(output);
 
+        shaped(RecipeCategory.MISC, EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.asItem())
+                .pattern("aba")
+                .pattern("dcd")
+                .pattern("aba")
+                .define('a', EtItems.MAGNO_INGOT)
+                .define('b', EtItems.ENERGY_CORE)
+                .define('c', Blocks.FURNACE)
+                .define('d', EtItems.POLAR_CRYSTAL)
+                .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
+                .save(output);
+
+        shaped(RecipeCategory.MISC, EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.asItem())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', EtItems.MAGNO_INGOT)
+                .define('b', EtItems.ENERGY_CORE)
+                .define('c', Blocks.LODESTONE)
+                .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
+                .save(output);
+
+        shaped(RecipeCategory.MISC, EtBlocks.MAGNETIC_DISSOLVER_MACHINE.asItem())
+                .pattern("aba")
+                .pattern("bcb")
+                .pattern("aba")
+                .define('a', EtItems.RADIANT_MAGNO_INGOT)
+                .define('b', EtItems.ENERGY_CORE)
+                .define('c', EtItems.POLAR_CRYSTAL)
+                .unlockedBy("has_magno_ingot", has(EtItems.RADIANT_MAGNO_INGOT))
+                .save(output);
+
         shaped(RecipeCategory.MISC, EtBlocks.MAGNETO_CORE)
                 .pattern("aba")
                 .pattern("aca")
                 .pattern("aba")
-                .define('a', EtItems.STELLAR_MAGNO_INGOT)
-                .define('b', EtItems.ENERGY_CORE)
-                .define('c', Items.NETHER_STAR)
+                .define('a', EtItems.MONOPOLE_S)
+                .define('b', EtItems.MONOPOLE_N)
+                .define('c', EtItems.STELLAR_MAGNO_INGOT)
                 .unlockedBy("has_gold", has(Items.NETHER_STAR))
                 .save(output);
 
         // 原子重构机
         shaped(RecipeCategory.MISC, EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)
                 .pattern("aba")
-                .pattern("bcb")
+                .pattern("cdc")
                 .pattern("aba")
-                .define('a', EtItems.RADIANT_MAGNO_INGOT)
-                .define('b', Items.ENDER_EYE)
-                .define('c', EtItems.ENERGY_CORE)
+                .define('a', EtItems.STELLAR_MAGNO_INGOT)
+                .define('b', EtItems.MONOPOLE_S)
+                .define('c', EtItems.MONOPOLE_N)
+                .define('d', EtItems.ENERGY_CORE)
                 .unlockedBy("has_core", has(EtItems.ENERGY_CORE))
                 .save(output);
 
@@ -254,6 +286,15 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
                 .save(output);
 
+        shaped(RecipeCategory.MISC, EtBlocks.FLUID_PIPE, 16)
+                .pattern(" a ")
+                .pattern("aba")
+                .pattern(" a ")
+                .define('a', EtItems.MAGNO_INGOT)
+                .define('b', Items.BUCKET)
+                .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
+                .save(output);
+
         // ========== 各类电池 ==========
         shapeless(RecipeCategory.MISC, EtItems.CARROT_BATTERY)
                 .requires(Items.IRON_INGOT)
@@ -295,6 +336,14 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(EtItems.GOLD_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.GOLD_INGOT), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.GOLD_INGOT, "from_dust_blasting"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(EtItems.NETHERITE_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.NETHERITE_SCRAP), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.NETHERITE_SCRAP, "from_dust_smithing"));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(EtItems.NETHERITE_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.NETHERITE_SCRAP), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.NETHERITE_SCRAP, "from_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(EtItems.MAGNO_CONDENSED_COPPER_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.COPPER_INGOT), 0.5F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.COPPER_INGOT, "from_magno_condensed_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(EtItems.MAGNO_CONDENSED_COPPER_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.COPPER_INGOT), 0.5F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.COPPER_INGOT, "from_magno_condensed_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(EtItems.MAGNO_CONDENSED_IRON_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.IRON_INGOT), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.IRON_INGOT, "from_magno_condensed_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(EtItems.MAGNO_CONDENSED_IRON_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.IRON_INGOT), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.IRON_INGOT, "from_magno_condensed_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(EtItems.MAGNO_CONDENSED_GOLD_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.GOLD_INGOT), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.GOLD_INGOT, "from_magno_condensed_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(EtItems.MAGNO_CONDENSED_GOLD_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.GOLD_INGOT), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.GOLD_INGOT, "from_magno_condensed_dust_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(EtItems.MAGNO_CONDENSED_NETHERITE_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.NETHERITE_SCRAP), 0.7F, 100).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(output, getVanillaItemWithAddition(Items.NETHERITE_SCRAP, "from_magno_condensed_dust_smithing"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(EtItems.MAGNO_CONDENSED_NETHERITE_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, new ItemStackTemplate(Items.NETHERITE_SCRAP), 0.7F, 50).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(output, getVanillaItemWithAddition(Items.NETHERITE_SCRAP, "from_magno_condensed_dust_blasting"));
 
         MagicEncodeRecipeBuilder.magicEncode(EtItems.ATTRACT_MODULE, EtItems.PRIMARY_CODE_MODULE, Items.IRON_INGOT, Items.GOLD_INGOT)
                 .unlockedBy("has_primary_code_module", has(EtItems.PRIMARY_CODE_MODULE))
@@ -371,8 +420,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         MagnetoFusionRecipeBuilder.result(items, EtItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.RADIANT_MAGNO_INGOT).items(EtItems.MAGNO_INGOT).items(EtItems.POLAR_CRYSTAL).items(EtItems.RESONANT_CRYSTAL).save(output);
-        MagnetoFusionRecipeBuilder.result(items, EtItems.STELLAR_MAGNO_INGOT).items(EtItems.RADIANT_MAGNO_INGOT).items(EtItems.MONOPOLE_N).items(EtItems.MONOPOLE_S).save(output);
-        MagnetoFusionRecipeBuilder.result(items, EtItems.ELECTROMAGNETIC_ROD).items(EtItems.MAGNO_INGOT).items(EtItems.ENERGY_CORE).tag(ItemTags.COPPER).save(output);
+        MagnetoFusionRecipeBuilder.result(items, EtItems.STELLAR_MAGNO_INGOT).items(EtItems.RADIANT_MAGNO_INGOT).items(EtItems.GLOWING_ESSENCE).items(EtItems.MAGNETIC_ESSENCE).save(output);
+        MagnetoFusionRecipeBuilder.result(items, EtItems.ELECTROMAGNETIC_ROD).items(EtItems.MAGNO_INGOT).items(EtItems.ENERGY_CORE).items(EtItems.GLOWING_ESSENCE).save(output);
+        MagnetoFusionRecipeBuilder.result(items, EtItems.PULSE_BOW).items(Items.BOW).items(EtItems.ENERGY_CORE).items(EtItems.POLAR_CRYSTAL).save(output);
+        MagnetoFusionRecipeBuilder.result(items, EtItems.FOCUS_GUN).items(EtItems.RADIANT_MAGNO_INGOT).items(EtItems.ENERGY_CORE).items(EtItems.POLAR_CRYSTAL).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.ENERGY_CORE, 4).items(Items.COPPER_INGOT).items(EtItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
 
         MagnetoFusionRecipeBuilder.result(items, EtItems.PRIMARY_LC).items(EtItems.MAGNO_INGOT).items(Items.REDSTONE).items(Items.EMERALD).save(output);
@@ -391,12 +442,16 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         MagnetoFusionRecipeBuilder.result(items, EtItems.FILTER_SETTING).items(Items.REDSTONE).items(EtItems.MAGNO_INGOT).items(Items.REDSTONE).save(output);
 
         ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_COPPER).result(EtItems.COPPER_DUST, 2).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COPPER).result(EtItems.COPPER_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COPPER).result(EtItems.COPPER_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_block");
+        ElectromagneticDissociationRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_COPPER_CLUSTER).result(Items.COPPER_INGOT, 4).unlockedBy("has_atomic_reconstruction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).saveWithAddition(output, "from_cluster");
         ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_IRON).result(EtItems.IRON_DUST, 2).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_IRON).result(EtItems.IRON_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_IRON).result(EtItems.IRON_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_block");
+        ElectromagneticDissociationRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_IRON_CLUSTER).result(Items.IRON_INGOT, 4).unlockedBy("has_atomic_reconstruction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).saveWithAddition(output, "from_cluster");
         ElectromagneticDissociationRecipeBuilder.creat(items, Items.RAW_GOLD).result(EtItems.GOLD_DUST, 2).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_raw");
-        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_GOLD).result(EtItems.GOLD_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_b_lock");
+        ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_GOLD).result(EtItems.GOLD_DUST, 4).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).saveWithAddition(output, "from_ore_block");
+        ElectromagneticDissociationRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_GOLD_CLUSTER).result(Items.GOLD_INGOT, 4).unlockedBy("has_atomic_reconstruction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).saveWithAddition(output, "from_cluster");
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_NETHERITE_SCRAP).result(EtItems.NETHERITE_DUST, 3).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output);
+        ElectromagneticDissociationRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_NETHERITE_CLUSTER).result(Items.NETHERITE_SCRAP, 4).unlockedBy("has_atomic_reconstruction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).saveWithAddition(output, "from_cluster");
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_EMERALD).result(Items.EMERALD, 3).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.EMERALD, "from_ore_dissociation"));
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_COAL).result(Items.COAL, 3).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.COAL, "from_ore_dissociation"));
         ElectromagneticDissociationRecipeBuilder.creat(items, Tags.Items.ORES_QUARTZ).result(Items.QUARTZ, 3).unlockedBy("has_dissociation", has(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE)).save(output, getVanillaItemWithAddition(Items.QUARTZ, "from_ore_dissociation"));
@@ -409,8 +464,21 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GLOWING_ESSENCE, 2, EtItems.POLAR_CRYSTAL, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtItems.POLAR_CRYSTAL)).save(output);
         ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNETIC_ESSENCE, 2, EtItems.RESONANT_CRYSTAL, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_crystal", has(EtItems.RESONANT_CRYSTAL)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_IRON_DUST, 3, EtItems.IRON_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_COPPER_DUST, 3, EtItems.COPPER_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_GOLD_DUST, 3, EtItems.GOLD_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.MAGNO_CONDENSED_NETHERITE_DUST, 3, EtItems.NETHERITE_DUST, 2, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).save(output);
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.IRON_DUST, Blocks.GRAVEL, 32, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).saveWithAddition(output, "from_infuser");
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GOLD_DUST, Tags.Items.SANDS, 32, EtFluids.MAGNETIC_FLUX_SOURCE.get()).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).saveWithAddition(output, "from_infuser");
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.IRON_DUST, Blocks.GRAVEL, 20, Fluids.WATER).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).saveWithAddition(output, "from_infuser_gravel");
+        ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GOLD_DUST, Tags.Items.SANDS, 20, Fluids.WATER).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).saveWithAddition(output, "from_infuser_sand");
 
         MagneticDissolutionRecipeBuilder.creat(items, EtFluids.MAGNETIC_FLUX_SOURCE.get(), 1000, EtItems.MAGNO_INGOT, Fluids.WATER).unlockedBy("has_magneto_ingot", has(EtItems.MAGNO_INGOT)).save(output);
+
+        AtomicReconstructionRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_COPPER_CLUSTER.get(), EtItems.MAGNO_CONDENSED_COPPER_DUST, 3, 1024, 40).unlockedBy("has_reconstruuction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).save(output);
+        AtomicReconstructionRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_IRON_CLUSTER.get(), EtItems.MAGNO_CONDENSED_IRON_DUST, 3, 2048, 60).unlockedBy("has_reconstruuction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).save(output);
+        AtomicReconstructionRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_GOLD_CLUSTER.get(), EtItems.MAGNO_CONDENSED_GOLD_DUST, 3, 4096, 80).unlockedBy("has_reconstruuction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).save(output);
+        AtomicReconstructionRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_NETHERITE_CLUSTER.get(), EtItems.MAGNO_CONDENSED_NETHERITE_DUST, 3, 8192, 100).unlockedBy("has_reconstruuction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).save(output);
     }
 
     protected static class Runner extends net.minecraft.data.recipes.RecipeProvider.Runner{

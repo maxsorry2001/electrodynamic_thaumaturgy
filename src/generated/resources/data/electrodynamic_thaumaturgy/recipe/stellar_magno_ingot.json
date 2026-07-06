@@ -2,8 +2,8 @@
   "type": "electrodynamic_thaumaturgy:magno_fusion",
   "ingredients": [
     "electrodynamic_thaumaturgy:radiant_magno_ingot",
-    "electrodynamic_thaumaturgy:monopole_n",
-    "electrodynamic_thaumaturgy:monopole_s"
+    "electrodynamic_thaumaturgy:glowing_essence",
+    "electrodynamic_thaumaturgy:magnetic_essence"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:stellar_magno_ingot"

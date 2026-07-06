@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "electrodynamic_thaumaturgy:radiant_magno_ingot",
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "electrodynamic_thaumaturgy:polar_crystal"
+  },
+  "pattern": [
+    "aba",
+    "bcb",
+    "aba"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:magnetic_dissolver_machine"
+  }
+}

@@ -14,4 +14,12 @@ public record ElectromagneticInfusionRecipeInput(ItemStack inputItem, FluidStack
     public int size() {
         return 1;
     }
+
+    public boolean enoughItemCount(int itemCont){
+        return itemCont <= inputItem.count();
+    }
+
+    public boolean enoughFluidCount(int fluidCount){
+        return fluidCount <= inputFluid.amount();
+    }
 }

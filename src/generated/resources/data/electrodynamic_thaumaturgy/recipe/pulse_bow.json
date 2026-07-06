@@ -1,0 +1,11 @@
+{
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "minecraft:bow",
+    "electrodynamic_thaumaturgy:energy_core",
+    "electrodynamic_thaumaturgy:polar_crystal"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:pulse_bow"
+  }
+}

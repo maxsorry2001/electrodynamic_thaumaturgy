@@ -123,6 +123,16 @@ public class EtItems {
     public static final DeferredItem<Item> GOLD_DUST = ITEM.registerSimpleItem("gold_dust");
     public static final DeferredItem<Item> NETHERITE_DUST = ITEM.registerSimpleItem("netherite_dust");
 
+    public static final DeferredItem<Item> MAGNO_CONDENSED_COPPER_DUST = ITEM.registerSimpleItem("magno_condensed_copper_dust");
+    public static final DeferredItem<Item> MAGNO_CONDENSED_IRON_DUST = ITEM.registerSimpleItem("magno_condensed_iron_dust");
+    public static final DeferredItem<Item> MAGNO_CONDENSED_GOLD_DUST = ITEM.registerSimpleItem("magno_condensed_gold_dust");
+    public static final DeferredItem<Item> MAGNO_CONDENSED_NETHERITE_DUST = ITEM.registerSimpleItem("magno_condensed_netherite_dust");
+
+    public static final DeferredItem<Item> MAGNO_EXTRACTED_COPPER_CLUSTER = ITEM.registerSimpleItem("magno_extracted_copper_cluster");
+    public static final DeferredItem<Item> MAGNO_EXTRACTED_IRON_CLUSTER = ITEM.registerSimpleItem("magno_extracted_iron_cluster");
+    public static final DeferredItem<Item> MAGNO_EXTRACTED_GOLD_CLUSTER = ITEM.registerSimpleItem("magno_extracted_gold_cluster");
+    public static final DeferredItem<Item> MAGNO_EXTRACTED_NETHERITE_CLUSTER = ITEM.registerSimpleItem("magno_extracted_netherite_cluster");
+
     public static final DeferredItem<Item> RESONANT_CRYSTAL = ITEM.registerSimpleItem("resonant_crystal");
     public static final DeferredItem<Item> POLAR_CRYSTAL = ITEM.registerSimpleItem("polar_crystal");
     public static final DeferredItem<Item> GLOWING_ESSENCE = ITEM.registerSimpleItem("glowing_essence");

@@ -4,30 +4,39 @@ import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.menu.AtomicReconstructionBlockMenu;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityItemHandler;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.AtomicPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.EtRecipes;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.AtomicReconstructionRecipe;
+import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.AtomicReconstructionRecipeInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.Objects;
 
 public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockEntity, MenuProvider, IDirectionItemBlockEntity {
     private final BlockEntityEnergyHandler energy = new BlockEntityEnergyHandler(1048576) {
@@ -40,7 +49,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
         }
     };
 
-    private final BlockEntityItemHandler inputItemHandler = new BlockEntityItemHandler(1){
+    private final BlockEntityItemHandler itemHandlerInput = new BlockEntityItemHandler(1){
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
@@ -50,7 +59,7 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
             }
         }
     };
-    private final BlockEntityItemHandler outputItemHandler = new BlockEntityItemHandler(1){
+    private final BlockEntityItemHandler itemHandlerOutput = new BlockEntityItemHandler(1){
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
@@ -60,75 +69,101 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
             }
         }
     };
-    private final BlockEntityItemHandler targetItemHandler = new BlockEntityItemHandler(1){
+
+    protected final ContainerData data = new ContainerData() {
+        {
+            Objects.requireNonNull(AtomicReconstructionBE.this);
+        }
+        @Override
+        public int get(int i) {
+            return switch (i){
+                case 0 -> progress;
+                case 1 -> maxProgress;
+                case 2 -> Function.encodeDirection(directionOutputSet);
+                default -> 0;
+            };
+        }
 
         @Override
-        protected void onContentsChanged(int index, ItemStack previousContents) {
-            setChanged();
-            if(!level.isClientSide()){
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        public void set(int dataId, int value) {
+            switch (dataId){
+                case 0 -> AtomicReconstructionBE.this.progress = value;
+                case 1 -> AtomicReconstructionBE.this.maxProgress = value;
+                case 2 -> AtomicReconstructionBE.this.directionOutputSet = Function.decodeDirection(value);
             }
         }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
     };
-    private int progressTick = 1;
     private int progress = 0;
-    private static final int maxProgress = 8;
-    private static final int progressUse = 2048;
+    private int maxProgress;
+    private Map<Direction, Boolean> directionOutputSet;
     public AtomicReconstructionBE(BlockPos pos, BlockState blockState) {
         super(EtBlockEntities.ATOMIC_RECONSTRUCTION_BE.get(), pos, blockState);
+        this.directionOutputSet = Function.decodeDirection(0x03);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, AtomicReconstructionBE blockEntity) {
         if(level.isClientSide()) return;
-        EnergyHandler energyStorage = blockEntity.getEnergy();
-        if(energyStorage.getAmountAsInt() < progressUse) return;
-        blockEntity.progressTick ++;
-        if(blockEntity.progressTick > 5 && blockEntity.progress == 0)
-            PacketDistributor.sendToAllPlayers(new AtomicPacket(pos, blockEntity.progress));
-        if(blockEntity.progressTick != 10) return;
-        blockEntity.progressTick = 0;
-        if(!blockEntity.canUpProgress()) return;
-        boolean lastStep = blockEntity.progress >= maxProgress;
-        try (Transaction transaction = Transaction.openRoot()){
-            int i = energyStorage.extract(progressUse, transaction);
-            if(i != progressUse)  return;
-            int j = blockEntity.inputItemHandler.extract(0, blockEntity.inputItemHandler.getResource(0), 1, transaction);
-            if(j != 1) return;
-            if(lastStep){
-                int k = blockEntity.outputItemHandler.insert(ItemResource.of(blockEntity.targetItemHandler.getStackInSlot(0)), 1, transaction);
-                if(k != 1) return;
+        ServerLevel serverLevel = (ServerLevel)level;
+        AtomicReconstructionRecipeInput input = new AtomicReconstructionRecipeInput(blockEntity.getInput());
+
+        RecipeHolder<AtomicReconstructionRecipe> recipeHolder = serverLevel.recipeAccess()
+                .getRecipeFor(EtRecipes.ATOMIC_RECONSTRUCTION_RECIPE_TYPE.get(), input, serverLevel)
+                .orElse(null);
+        if(recipeHolder != null){
+            AtomicReconstructionRecipe recipe = recipeHolder.value();
+            if(blockEntity.maxProgress != recipe.tickUse()) blockEntity.maxProgress = recipe.tickUse();
+            try (Transaction transaction = Transaction.openRoot()) {
+                blockEntity.energy.extract(Math.max(1, recipe.energyUse() / recipe.tickUse()), transaction);
+                if (blockEntity.progress + 1 >= blockEntity.maxProgress) {
+                    ItemStackTemplate result = recipe.output();
+                    int insert = blockEntity.itemHandlerOutput.insert(0, ItemResource.of(result), result.count(), transaction);
+                    if (insert == result.count()) {
+                        int extracted = blockEntity.itemHandlerInput.extract(0, blockEntity.itemHandlerInput.getResource(0), recipe.itemCost(), transaction);
+                        if (extracted == recipe.itemCost()) {
+                            transaction.commit();
+                            blockEntity.progress = 0;
+                            setChanged(level, pos, state);
+                        }
+                    }
+                }
+                else {
+                    transaction.commit();
+                    blockEntity.progress++;
+                    setChanged(level, pos, state);
+                }
             }
-            transaction.commit();
-            if(lastStep) blockEntity.progress = 0;
-            else blockEntity.progress ++;
         }
-        PacketDistributor.sendToAllPlayers(new AtomicPacket(pos, blockEntity.progress));
+        else {
+            blockEntity.maxProgress = 0;
+            blockEntity.progress = 0;
+        }
     }
 
-    private boolean canUpProgress() {
-        return !this.inputItemHandler.getStackInSlot(0).isEmpty()
-                && this.inputItemHandler.getStackInSlot(0).is(Tags.Items.STONES)
-                && !this.targetItemHandler.getStackInSlot(0).isEmpty()
-                && (this.targetItemHandler.getStackInSlot(0).is(Tags.Items.INGOTS) || this.targetItemHandler.getStackInSlot(0).is(Tags.Items.GEMS))
-                && (this.outputItemHandler.getStackInSlot(0).isEmpty() || this.outputItemHandler.getStackInSlot(0).is(this.targetItemHandler.getStackInSlot(0).getItem()));
-    }
-
-    @Override
-    protected void saveAdditional(ValueOutput output) {
-        super.saveAdditional(output);
-        energy.serialize(output);
-        inputItemHandler.serializeWithKey("input_item", output);
-        outputItemHandler.serializeWithKey("output_item", output);
-        targetItemHandler.serializeWithKey("target_item", output);
+    private ItemStack getInput() {
+        return itemHandlerInput.getStackInSlot(0);
     }
 
     @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         energy.deserialize(input);
-        inputItemHandler.deserializeWithKey("input_item", input);
-        outputItemHandler.deserializeWithKey("output_item", input);
-        targetItemHandler.deserializeWithKey("target_item", input);
+        itemHandlerInput.deserializeWithKey("input_item", input);
+        itemHandlerInput.deserializeWithKey("output_item", input);
+        directionOutputSet = Function.decodeDirection(input.getIntOr("direction_set", 0x03));
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        energy.serialize(output);
+        itemHandlerInput.serializeWithKey("input_item", output);
+        itemHandlerInput.serializeWithKey("output_item", output);
+        output.putInt("direction_set", Function.encodeDirection(directionOutputSet));
     }
 
     @Override
@@ -143,13 +178,16 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
 
     @Override
     public void drops() {
-        SimpleContainer container = new SimpleContainer(inputItemHandler.getStackInSlot(0), outputItemHandler.getStackInSlot(0), targetItemHandler.getStackInSlot(0));
+        SimpleContainer container = new SimpleContainer(itemHandlerInput.getStackInSlot(0), itemHandlerOutput.getStackInSlot(0));
         Containers.dropContents(this.level, this.worldPosition, container);
     }
 
     @Override
-    public void changeItemDirectionSet(Direction direction) {
-
+    public void changeItemDirectionSet(Direction direction){
+        this.directionOutputSet.put(direction, !directionOutputSet.get(direction));
+        setChanged();
+        if(!level.isClientSide())
+            invalidateCapabilities();
     }
 
     @Override
@@ -164,22 +202,27 @@ public class AtomicReconstructionBE extends BlockEntity implements IEnergyBlockE
 
     @Override
     public StacksResourceHandler<ItemStack, ItemResource> getItemHandlerWithDirection(Direction direction){
-        StacksResourceHandler<ItemStack, ItemResource> itemHandler;
-        if(direction == null) itemHandler = outputItemHandler;
-        else
-            switch (direction){
-                case UP -> itemHandler = inputItemHandler;
-                case DOWN -> itemHandler = outputItemHandler;
-                default -> itemHandler = targetItemHandler;
-            }
-        return itemHandler;
+        if(direction == null) return itemHandlerOutput;
+        return directionOutputSet.getOrDefault(direction, true) ? itemHandlerOutput : itemHandlerInput;
     }
 
     public float getProgressPer(){
-        return (float) progress / maxProgress;
+        return maxProgress == 0 ? 0 : (float) progress / maxProgress;
     }
 
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    public ContainerData getData() {
+        return data;
+    }
+
+    public BlockEntityItemHandler getItemHandlerInput() {
+        return itemHandlerInput;
+    }
+
+    public BlockEntityItemHandler getItemHandlerOutput() {
+        return itemHandlerOutput;
     }
 }
