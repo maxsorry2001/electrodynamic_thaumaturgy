@@ -36,8 +36,8 @@ public class AtomicReconstructionBlockMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         this.data = ((AtomicReconstructionBE) blockEntity).getData();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 42, 47));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 118, 47));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 42, 32));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 118, 32));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

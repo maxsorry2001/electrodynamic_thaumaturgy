@@ -57,10 +57,11 @@ public class ElectromagneticInfusionRecipeCategory implements IRecipeCategory<Re
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<ElectromagneticInfusionRecipe> recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 16).add(recipe.value().inputItem());
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().inputFluid().fluids().get(0).value(), recipe.value().fluidCost());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<ElectromagneticInfusionRecipe> recipeHolder, IFocusGroup focuses) {
+        ElectromagneticInfusionRecipe recipe = recipeHolder.value();
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 16).add(new ItemStack(recipe.inputItem().getValues().get(0), recipe.itemCost()));
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.inputFluid().fluids().get(0).value(), recipe.fluidCost());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.output());
     }
 
     @Override

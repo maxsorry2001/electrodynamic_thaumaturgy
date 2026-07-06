@@ -17,6 +17,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,9 +58,10 @@ public class AtomicReconstructionRecipeCategory implements IRecipeCategory<Recip
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<AtomicReconstructionRecipe> recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().input());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<AtomicReconstructionRecipe> recipeHolder, IFocusGroup focuses) {
+        AtomicReconstructionRecipe recipe = recipeHolder.value();
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(new ItemStack(recipe.input().getValues().get(0), recipe.itemCost()));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.output());
     }
 
     @Override
