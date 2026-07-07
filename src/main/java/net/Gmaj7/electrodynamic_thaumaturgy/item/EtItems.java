@@ -118,6 +118,8 @@ public class EtItems {
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = ITEM.registerSimpleItem("radiant_magno_ingot");
     public static final DeferredItem<Item> STELLAR_MAGNO_INGOT = ITEM.registerSimpleItem("stellar_magno_ingot");
 
+    public static final DeferredItem<Item> DISSOCIATION_CATALYST = ITEM.registerSimpleItem("dissociation_catalyst");
+
     public static final DeferredItem<Item> COPPER_DUST = ITEM.registerSimpleItem("copper_dust");
     public static final DeferredItem<Item> IRON_DUST = ITEM.registerSimpleItem("iron_dust");
     public static final DeferredItem<Item> GOLD_DUST = ITEM.registerSimpleItem("gold_dust");

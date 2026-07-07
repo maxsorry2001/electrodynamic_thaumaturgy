@@ -6,6 +6,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityEnergyHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityItemHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.Function;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergySetPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.EtRecipes;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipeInput;
@@ -127,7 +128,7 @@ public class ElectromagneticDissociationBE extends BlockEntity implements IEnerg
         RecipeHolder<ElectromagneticDissociationRecipe> recipe = serverLevel.recipeAccess()
                 .getRecipeFor(EtRecipes.ELECTROMAGNETIC_DISSOCIATION_RECIPE_TYPE.get(), input, serverLevel)
                 .orElse(null);
-        if(recipe != null && (!recipe.value().needCatalyst() || blockEntity.itemHandlerCatalyst.getStackInSlot(0).is(Items.NETHER_STAR))){
+        if(recipe != null && (!recipe.value().needCatalyst() || blockEntity.itemHandlerCatalyst.getStackInSlot(0).is(EtItems.DISSOCIATION_CATALYST))){
             List<ItemStackTemplate> result = recipe.value().outputs();
             if(!result.isEmpty())
                 try (Transaction transaction = Transaction.openRoot()){

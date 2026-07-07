@@ -121,6 +121,8 @@ public class EtTabs {
                         output.accept(EtBlocks.ENERGY_TRANSMISSION_ANTENNA);
                         output.accept(EtBlocks.MAGNETO_CORE);
 
+                        output.accept(EtItems.DISSOCIATION_CATALYST);
+
                         output.accept(EtItems.COPPER_DUST);
                         output.accept(EtItems.IRON_DUST);
                         output.accept(EtItems.GOLD_DUST);

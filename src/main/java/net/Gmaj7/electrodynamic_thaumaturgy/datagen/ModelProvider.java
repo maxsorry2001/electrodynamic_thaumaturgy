@@ -83,6 +83,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateFlatItem(EtItems.STELLAR_MAGNO_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.MAGNETO_ENTROPY_WITCH_ENTITY_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.EMPTY_MAGIC_MODULE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.DISSOCIATION_CATALYST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.IRON_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.COPPER_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EtItems.GOLD_DUST.get(), ModelTemplates.FLAT_ITEM);

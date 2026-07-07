@@ -3,8 +3,8 @@
   "category": "misc",
   "key": {
     "a": "electrodynamic_thaumaturgy:magno_ingot",
-    "b": "electrodynamic_thaumaturgy:energy_core",
-    "c": "minecraft:glass_pane"
+    "b": "electrodynamic_thaumaturgy:resonant_crystal",
+    "c": "electrodynamic_thaumaturgy:polar_crystal"
   },
   "pattern": [
     " c ",
