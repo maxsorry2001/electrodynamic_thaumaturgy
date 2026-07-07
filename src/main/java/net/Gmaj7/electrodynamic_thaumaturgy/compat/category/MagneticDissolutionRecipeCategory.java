@@ -38,7 +38,7 @@ public class MagneticDissolutionRecipeCategory implements IRecipeCategory<Recipe
 
     @Override
     public Component getTitle() {
-        return Component.translatable("electromagnetic_infusion");
+        return Component.translatable("magnetic_dissolution");
     }
 
     @Override

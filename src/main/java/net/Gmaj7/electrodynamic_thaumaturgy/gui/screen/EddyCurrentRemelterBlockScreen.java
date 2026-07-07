@@ -55,6 +55,7 @@ public class EddyCurrentRemelterBlockScreen extends AbstractContainerScreen<Eddy
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
         int x = (width - imageWidth) / 2, y = (height - imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, backGrand,  x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+        this.extractBlurredBackground(guiGraphics);
     }
 
     private void renderEnergy(GuiGraphicsExtractor guiGraphics, int x, int y){

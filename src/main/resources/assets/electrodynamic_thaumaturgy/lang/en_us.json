@@ -183,6 +183,8 @@
   "magneto_fusion": "magneto fusion",
   "electromagnetic_dissociation": "electromagnetic dissociation",
   "electromagnetic_infusion": "electromagnetic infusion",
+  "atomic_reconstruction": "atomic reconstruction",
+  "magnetic_dissolution": "electromagnetic dissolution",
   "binding": "binding:",
 
   "enhance_chip.electrodynamic_thaumaturgy.base_strength" : "Base Strength",

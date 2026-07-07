@@ -39,7 +39,7 @@ public class AtomicReconstructionRecipeCategory implements IRecipeCategory<Recip
 
     @Override
     public Component getTitle() {
-        return Component.translatable("magic_encode");
+        return Component.translatable("atomic_reconstruction");
     }
 
     @Override
