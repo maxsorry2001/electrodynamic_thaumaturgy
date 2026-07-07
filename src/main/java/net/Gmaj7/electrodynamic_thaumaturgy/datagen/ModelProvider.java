@@ -111,6 +111,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.generateBow(EtItems.PULSE_BOW.get());
 
         itemModels.generateFlatItem(EtItems.MAGNETIC_FLUX_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EtItems.THERMAL_MAGNO_FLUX_BUCKET.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.itemModelOutput.accept(
                 EtItems.FLUID_FAKE_ITEM.get(),
@@ -237,6 +238,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                 .with(new ConditionBuilder().term(AbstractPipe.SOUTH, AbstractPipe.LinkState.EXTRACT), getBlockModel("fluid_pipe_extract").with(BlockModelGenerators.Y_ROT_180)));
 
         blockModels.createNonTemplateModelBlock(EtBlocks.MAGNETIC_FLUX_FLUID_BLOCK.get());
+        blockModels.createNonTemplateModelBlock(EtBlocks.THERMAL_MAGNO_FLUX_FLUID_BLOCK.get());
     }
 
     protected MultiVariant getBlockModel(String name){

@@ -1,0 +1,10 @@
+{
+  "type": "electrodynamic_thaumaturgy:magnetic_dissolution",
+  "fluid": "minecraft:lava",
+  "fluid_cost": 1000,
+  "item": "electrodynamic_thaumaturgy:magno_ingot",
+  "output": {
+    "amount": 500,
+    "id": "electrodynamic_thaumaturgy:thermal_magno_flux_source"
+  }
+}

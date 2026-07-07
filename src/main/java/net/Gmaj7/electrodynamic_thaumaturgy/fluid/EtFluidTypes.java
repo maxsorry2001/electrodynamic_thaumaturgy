@@ -18,7 +18,19 @@ public class EtFluidTypes {
     public static final Supplier<FluidType> MAGNETIC_FLUX_FLUID_TYPE = FLUID_TYPE.register("magnetic_flux_fluid_type",
             () -> new FluidType(FluidType.Properties.create().isWaterLike(false)));
 
+
     public static IClientFluidTypeExtensions MAGNETIC_FLUX_EXTENSION = new IClientFluidTypeExtensions() {
+        @Override
+        public void modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
+            fluidFogColor.set(0.83F, 0.16F, 0.16F);
+            IClientFluidTypeExtensions.super.modifyFogColor(camera, partialTick, level, renderDistance, darkenWorldAmount, fluidFogColor);
+        }
+    };
+
+    public static final Supplier<FluidType> THERMAL_MAGNO_FLUX_FLUID_TYPE = FLUID_TYPE.register("thermal_magno_flux_fluid_type",
+            () -> new FluidType(FluidType.Properties.create().isWaterLike(false)));
+
+    public static IClientFluidTypeExtensions THERMAL_MAGNO_FLUX_EXTENSION = new IClientFluidTypeExtensions() {
         @Override
         public void modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
             fluidFogColor.set(0.83F, 0.16F, 0.16F);

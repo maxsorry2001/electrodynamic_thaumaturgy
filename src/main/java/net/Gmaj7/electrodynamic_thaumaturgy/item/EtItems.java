@@ -113,6 +113,8 @@ public class EtItems {
             properties -> new MagnoWrenchItem(properties.stacksTo(1)));
     public static final DeferredItem<Item> MAGNETIC_FLUX_BUCKET = ITEM.registerItem("magnetic_flux_bucket",
             properties -> new BucketItem(EtFluids.MAGNETIC_FLUX_SOURCE.get(), properties.stacksTo(1).craftRemainder(Items.BUCKET)));
+    public static final DeferredItem<Item> THERMAL_MAGNO_FLUX_BUCKET = ITEM.registerItem("thermal_magno_flux_bucket",
+            properties -> new BucketItem(EtFluids.THERMAL_MAGNO_FLUX_SOURCE.get(), properties.stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final DeferredItem<Item> MAGNO_INGOT = ITEM.registerSimpleItem("magno_ingot");
     public static final DeferredItem<Item> RADIANT_MAGNO_INGOT = ITEM.registerSimpleItem("radiant_magno_ingot");

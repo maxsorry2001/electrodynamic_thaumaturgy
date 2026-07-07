@@ -147,6 +147,7 @@ public class EtTabs {
                         output.accept(EtBlocks.FLUID_PIPE);
 
                         output.accept(EtItems.MAGNETIC_FLUX_BUCKET);
+                        output.accept(EtItems.THERMAL_MAGNO_FLUX_BUCKET);
                         addEnhanceChip(output);
                     }))
                     .build());

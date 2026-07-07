@@ -480,6 +480,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         ElectromagneticInfusionRecipeBuilder.creat(items, EtItems.GOLD_DUST, Tags.Items.SANDS, 20, Fluids.WATER).unlockedBy("has_infuser", has(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE)).saveWithAddition(output, "from_infuser_sand");
 
         MagneticDissolutionRecipeBuilder.creat(items, EtFluids.MAGNETIC_FLUX_SOURCE.get(), 1000, EtItems.MAGNO_INGOT, Fluids.WATER).unlockedBy("has_magneto_ingot", has(EtItems.MAGNO_INGOT)).save(output);
+        MagneticDissolutionRecipeBuilder.creat(items, EtFluids.THERMAL_MAGNO_FLUX_SOURCE.get(), 500, EtItems.MAGNO_INGOT, Fluids.LAVA).unlockedBy("has_magneto_ingot", has(EtItems.MAGNO_INGOT)).save(output);
 
         AtomicReconstructionRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_COPPER_CLUSTER.get(), EtItems.MAGNO_CONDENSED_COPPER_DUST, 3, 1024, 40).unlockedBy("has_reconstruuction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).save(output);
         AtomicReconstructionRecipeBuilder.creat(items, EtItems.MAGNO_EXTRACTED_IRON_CLUSTER.get(), EtItems.MAGNO_CONDENSED_IRON_DUST, 3, 2048, 60).unlockedBy("has_reconstruuction", has(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE)).save(output);
