@@ -121,6 +121,8 @@ public class EtTabs {
                         output.accept(EtBlocks.ENERGY_TRANSMISSION_ANTENNA);
                         output.accept(EtBlocks.MAGNETO_CORE);
 
+                        output.accept(EtItems.DISSOCIATION_CATALYST);
+
                         output.accept(EtItems.COPPER_DUST);
                         output.accept(EtItems.IRON_DUST);
                         output.accept(EtItems.GOLD_DUST);
@@ -145,6 +147,7 @@ public class EtTabs {
                         output.accept(EtBlocks.FLUID_PIPE);
 
                         output.accept(EtItems.MAGNETIC_FLUX_BUCKET);
+                        output.accept(EtItems.THERMAL_MAGNO_FLUX_BUCKET);
                         addEnhanceChip(output);
                     }))
                     .build());

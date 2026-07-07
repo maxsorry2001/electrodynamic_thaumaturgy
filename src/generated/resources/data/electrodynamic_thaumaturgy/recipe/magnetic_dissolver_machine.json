@@ -3,12 +3,13 @@
   "category": "misc",
   "key": {
     "a": "electrodynamic_thaumaturgy:radiant_magno_ingot",
-    "b": "electrodynamic_thaumaturgy:energy_core",
-    "c": "electrodynamic_thaumaturgy:polar_crystal"
+    "b": "electrodynamic_thaumaturgy:resonant_crystal",
+    "c": "electrodynamic_thaumaturgy:polar_crystal",
+    "d": "electrodynamic_thaumaturgy:energy_core"
   },
   "pattern": [
     "aba",
-    "bcb",
+    "cdc",
     "aba"
   ],
   "result": {

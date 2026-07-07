@@ -78,6 +78,8 @@ public class EtBlocks {
             (properties) -> new AirBlock(properties.air().lightLevel(p -> 15).replaceable().noCollision().noLootTable()), null);
     public static final DeferredBlock<LiquidBlock> MAGNETIC_FLUX_FLUID_BLOCK = BLOCKS.registerBlock("magnetic_flux_fluid_block",
             (properties -> new LiquidBlock(EtFluids.MAGNETIC_FLUX_SOURCE.get(), properties.mapColor(MapColor.WATER).replaceable().noOcclusion().strength(100F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY))));
+    public static final DeferredBlock<LiquidBlock> THERMAL_MAGNO_FLUX_FLUID_BLOCK = BLOCKS.registerBlock("thermal_magno_flux_fluid_block",
+            (properties -> new LiquidBlock(EtFluids.THERMAL_MAGNO_FLUX_SOURCE.get(), properties.mapColor(MapColor.WATER).replaceable().noOcclusion().strength(100F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY))));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function){
         return registerBlock(name, function, null);

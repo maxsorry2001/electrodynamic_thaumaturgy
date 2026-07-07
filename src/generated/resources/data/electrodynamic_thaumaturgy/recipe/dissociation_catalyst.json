@@ -1,0 +1,11 @@
+{
+  "type": "electrodynamic_thaumaturgy:magno_fusion",
+  "ingredients": [
+    "electrodynamic_thaumaturgy:magnetic_essence",
+    "minecraft:nether_star",
+    "electrodynamic_thaumaturgy:glowing_essence"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:dissociation_catalyst"
+  }
+}

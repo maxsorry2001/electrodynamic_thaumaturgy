@@ -3,11 +3,13 @@
   "category": "misc",
   "key": {
     "a": "electrodynamic_thaumaturgy:magno_ingot",
-    "b": "minecraft:smithing_table"
+    "b": "electrodynamic_thaumaturgy:resonant_crystal",
+    "c": "electrodynamic_thaumaturgy:polar_crystal",
+    "d": "minecraft:smithing_table"
   },
   "pattern": [
     " a ",
-    "aba",
+    "bdc",
     " a "
   ],
   "result": {

@@ -3,13 +3,14 @@
   "category": "misc",
   "key": {
     "a": "electrodynamic_thaumaturgy:magno_ingot",
-    "b": "minecraft:piston",
-    "c": "electrodynamic_thaumaturgy:energy_core"
+    "b": "electrodynamic_thaumaturgy:energy_core",
+    "c": "electrodynamic_thaumaturgy:polar_crystal",
+    "d": "electrodynamic_thaumaturgy:resonant_crystal"
   },
   "pattern": [
-    "aba",
-    "c c",
-    "aba"
+    "aca",
+    "b b",
+    "ada"
   ],
   "result": {
     "id": "electrodynamic_thaumaturgy:electromagnetic_dissociation_machine"
