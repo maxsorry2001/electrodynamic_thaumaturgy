@@ -325,6 +325,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_potion", has(Items.GLASS_BOTTLE))
                 .save(output);
 
+        shapeless(RecipeCategory.MISC, EtItems.ENERGY_CORE)
+                .requires(Items.IRON_INGOT)
+                .requires(EtItems.MAGNO_INGOT)
+                .requires(Items.COPPER_INGOT)
+                .unlockedBy("has_magno_ingot", has(EtItems.MAGNO_INGOT))
+                .save(output);
+
         // 移动电源
         shaped(RecipeCategory.MISC, EtItems.POWER_BANK)
                 .pattern("aaa")
@@ -431,7 +438,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         MagnetoFusionRecipeBuilder.result(items, EtItems.ELECTROMAGNETIC_ROD).items(EtItems.MAGNO_INGOT).items(EtItems.ENERGY_CORE).items(EtItems.GLOWING_ESSENCE).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.PULSE_BOW).items(Items.BOW).items(EtItems.ENERGY_CORE).items(EtItems.POLAR_CRYSTAL).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.FOCUS_GUN).items(EtItems.RADIANT_MAGNO_INGOT).items(EtItems.ENERGY_CORE).items(EtItems.POLAR_CRYSTAL).save(output);
-        MagnetoFusionRecipeBuilder.result(items, EtItems.ENERGY_CORE, 4).items(Items.COPPER_INGOT).items(EtItems.MAGNO_INGOT).items(Items.IRON_INGOT).save(output);
+        MagnetoFusionRecipeBuilder.result(items, EtItems.ENERGY_CORE, 4).items(Items.COPPER_INGOT).items(EtItems.MAGNO_INGOT).items(Items.IRON_INGOT).saveWithAddition(output, "from_fusion");
 
         MagnetoFusionRecipeBuilder.result(items, EtItems.PRIMARY_LC).items(EtItems.MAGNO_INGOT).items(Items.REDSTONE).items(Items.EMERALD).save(output);
         MagnetoFusionRecipeBuilder.result(items, EtItems.INTERMEDIATE_LC).items(EtItems.PRIMARY_LC).items(EtItems.RADIANT_MAGNO_INGOT).items(Items.QUARTZ).save(output);

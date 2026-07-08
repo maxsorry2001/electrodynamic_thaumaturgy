@@ -34,6 +34,11 @@ public class EtBlockEntities {
             MOE_BLOCK_ENTITY.register("thermal_generator_be", () -> new BlockEntityType<>(
                     ThermalGeneratorBE::new, EtBlocks.THERMAL_GENERATOR.get()));
 
+    public static final Supplier<BlockEntityType<ThermalMagnoFluxGeneratorBE>> THERMAL_MAGNO_FLUX_GENERATOR_BE =
+            MOE_BLOCK_ENTITY.register("thermal_magno_flux_generator_be", () -> new BlockEntityType<>(
+                    ThermalMagnoFluxGeneratorBE::new, EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR.get()));
+
+
     public static final Supplier<BlockEntityType<BiomassGeneratorBE>> BIOMASS_GENERATOR_BE =
             MOE_BLOCK_ENTITY.register("biomass_generator_be", () -> new BlockEntityType<>(
                     BiomassGeneratorBE::new, EtBlocks.BIOMASS_GENERATOR.get()));

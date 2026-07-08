@@ -2,10 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.eventDispose;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionFluidBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IDirectionItemBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IEnergyBlockEntity;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.IItemBlockEntity;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.EnhancementDataLoader;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.*;
@@ -79,6 +76,7 @@ public class DataLoadHandler {
                 EtBlocks.TEMPERATURE_GENERATOR.get(),
                 EtBlocks.PHOTOVOLTAIC_GENERATOR.get(),
                 EtBlocks.THERMAL_GENERATOR.get(),
+                EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR.get(),
                 EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
                 EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
                 EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(),
@@ -110,6 +108,9 @@ public class DataLoadHandler {
                 EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
                 EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(),
                 EtBlocks.FLUID_BLOCK.get());
+        event.registerBlock(Capabilities.Fluid.BLOCK, ((level, pos, state, blockEntity, direction) ->
+                        blockEntity instanceof IFluidBlockEntity ? ((IFluidBlockEntity) blockEntity).getFluidHandler() : null),
+                EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR.get());
     }
 
     @SubscribeEvent

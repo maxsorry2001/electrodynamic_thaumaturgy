@@ -109,6 +109,8 @@ public class EtTabs {
                         output.accept(EtBlocks.PHOTOVOLTAIC_GENERATOR);
                         output.accept(EtBlocks.BIOMASS_GENERATOR);
                         output.accept(EtBlocks.THERMAL_GENERATOR);
+                        output.accept(EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR);
+
                         output.accept(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE);
                         output.accept(EtBlocks.BIO_REPLICATION_VAT_MACHINE);
                         output.accept(EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE);

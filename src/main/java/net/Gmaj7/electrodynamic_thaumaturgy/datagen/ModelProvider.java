@@ -149,6 +149,8 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.itemModelOutput.accept(EtBlocks.ENERGY_TRANSMISSION_ANTENNA.asItem(), setNormalBlockModule("energy_transmission_antenna_send"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.PHOTOVOLTAIC_GENERATOR.get(),
                 getBlockModel("photovoltaic_generator")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR.get(),
+                getBlockModel("thermal_magno_flux_generator")));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.TEMPERATURE_GENERATOR.get())
                                 .with(PropertyDispatch.initial(TemperatureGenerator.WORK_TYPE).select(TemperatureGenerator.WorkType.NORMAL, getBlockModel("temperature_generator_normal"))
