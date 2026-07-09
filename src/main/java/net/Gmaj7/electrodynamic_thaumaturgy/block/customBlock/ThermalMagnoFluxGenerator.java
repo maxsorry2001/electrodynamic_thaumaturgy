@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock;
 
 import com.mojang.serialization.MapCodec;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlockEntities;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.ThermalGeneratorBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.ThermalMagnoFluxGeneratorBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

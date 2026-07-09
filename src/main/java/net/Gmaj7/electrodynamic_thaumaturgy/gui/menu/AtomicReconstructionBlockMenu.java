@@ -3,7 +3,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.gui.menu;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.AtomicReconstructionBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.gui.EtMenuTypes;
-import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

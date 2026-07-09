@@ -43,6 +43,8 @@ public class EtBlocks {
             (properties) ->  new PhotovoltaicGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 1);
     public static final DeferredBlock<Block> THERMAL_MAGNO_FLUX_GENERATOR = registerBlock("thermal_magno_flux_generator",
             (properties) ->  new ThermalMagnoFluxGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> EXPLODE_GENERATOR = registerBlock("explode_generator",
+            (properties) ->  new ExplodeGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE = registerBlock("electromagnetic_driver_machine",
             (properties) -> new ElectromagneticDriver(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);

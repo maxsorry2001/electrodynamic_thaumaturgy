@@ -7,7 +7,6 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.FluidSetPacket;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;

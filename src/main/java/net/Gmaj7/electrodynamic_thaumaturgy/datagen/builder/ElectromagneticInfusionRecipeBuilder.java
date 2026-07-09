@@ -1,6 +1,5 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder;
 
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticInfusionRecipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderGetter;

@@ -40,6 +40,7 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get());
         dropSelf(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get());
         dropSelf(EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR.get());
+        dropSelf(EtBlocks.EXPLODE_GENERATOR.get());
         //add(EtBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), block -> createOreDrop(EtBlocks.ELECTROMAGNETIC_ASSEMBLY_TABLE.get(), EtItems.EMPTY_MODULE.get()))
     }
 

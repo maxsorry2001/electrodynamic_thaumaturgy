@@ -13,7 +13,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
@@ -157,6 +156,28 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .define('b', EtItems.ENERGY_CORE)
                 .define('c', Blocks.FURNACE)
                 .unlockedBy("has_energy_core", has(EtItems.ENERGY_CORE))
+                .save(output);
+
+        shaped(RecipeCategory.MISC, EtBlocks.THERMAL_MAGNO_FLUX_GENERATOR)
+                .pattern("aba")
+                .pattern("cdc")
+                .pattern("aba")
+                .define('a', EtItems.RADIANT_MAGNO_INGOT)
+                .define('b', EtItems.MAGNETIC_ESSENCE)
+                .define('c', Items.ENDER_PEARL)
+                .define('d', EtItems.ENERGY_CORE)
+                .unlockedBy("has_radiant_magno_ingot", has(EtItems.RADIANT_MAGNO_INGOT))
+                .save(output);
+
+        shaped(RecipeCategory.MISC, EtBlocks.EXPLODE_GENERATOR)
+                .pattern("aba")
+                .pattern("cdc")
+                .pattern("aba")
+                .define('a', EtItems.RADIANT_MAGNO_INGOT)
+                .define('b', EtItems.GLOWING_ESSENCE)
+                .define('c', Items.TNT)
+                .define('d', EtItems.ENERGY_CORE)
+                .unlockedBy("has_radiant_magno_ingot", has(EtItems.RADIANT_MAGNO_INGOT))
                 .save(output);
 
         // 电磁挖掘机

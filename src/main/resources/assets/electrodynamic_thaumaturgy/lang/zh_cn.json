@@ -102,6 +102,8 @@
   "block.electrodynamic_thaumaturgy.photovoltaic_generator": "光伏发电机",
   "block.electrodynamic_thaumaturgy.thermal_generator": "火力发电机",
   "block.electrodynamic_thaumaturgy.biomass_generator": "生物质能发电机",
+  "block.electrodynamic_thaumaturgy.thermal_magno_flux_generator": "热磁质发电机",
+  "block.electrodynamic_thaumaturgy.explode_generator": "爆炸发电机",
   "block.electrodynamic_thaumaturgy.energy_transmission_antenna": "能量传输天线",
   "block.electrodynamic_thaumaturgy.magic_encode_table": "法术编码台",
   "block.electrodynamic_thaumaturgy.electromagnetic_driver_machine": "电磁驱动器",
