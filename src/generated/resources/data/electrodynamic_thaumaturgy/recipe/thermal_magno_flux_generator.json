@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "electrodynamic_thaumaturgy:radiant_magno_ingot",
+    "b": "electrodynamic_thaumaturgy:magnetic_essence",
+    "c": "minecraft:ender_pearl",
+    "d": "electrodynamic_thaumaturgy:energy_core"
+  },
+  "pattern": [
+    "aba",
+    "cdc",
+    "aba"
+  ],
+  "result": {
+    "id": "electrodynamic_thaumaturgy:thermal_magno_flux_generator"
+  }
+}
