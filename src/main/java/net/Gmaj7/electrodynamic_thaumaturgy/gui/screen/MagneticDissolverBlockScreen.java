@@ -38,6 +38,7 @@ public class MagneticDissolverBlockScreen extends AbstractContainerScreen<Magnet
         if((mouseX > x + 13 && mouseY > y + 21) && (mouseX < x + 18 && mouseY < y + 71))
             guiGraphics.setTooltipForNextFrame(this.font, Component.literal(energyHandler.getAmountAsInt() + "FE / " + energyHandler.getCapacityAsInt() + "FE"), mouseX, mouseY);
         renderItemIcon(guiGraphics, Function.decodeDirection(menu.getItemSet()), mouseX, mouseY, x, y);
+        renderFluidIcon(guiGraphics, Function.decodeDirection(menu.getFluidSet()), mouseX, mouseY, x, y);
     }
 
     @Override

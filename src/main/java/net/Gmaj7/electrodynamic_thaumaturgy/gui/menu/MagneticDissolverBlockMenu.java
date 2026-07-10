@@ -99,4 +99,8 @@ public class MagneticDissolverBlockMenu extends AbstractContainerMenu {
     public int getItemSet(){
         return data.get(0);
     }
+
+    public int getFluidSet(){
+        return data.get(1);
+    }
 }
