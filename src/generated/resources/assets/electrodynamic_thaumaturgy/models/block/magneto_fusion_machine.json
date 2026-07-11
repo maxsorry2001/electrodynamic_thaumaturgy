@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "electrodynamic_thaumaturgy:block/machine_bottom_normal",
-    "side": "electrodynamic_thaumaturgy:block/magno_fusion_machine",
+    "side": "electrodynamic_thaumaturgy:block/magneto_fusion_machine",
     "top": "electrodynamic_thaumaturgy:block/machine_top_normal"
   }
 }

@@ -170,15 +170,13 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         itemModels.itemModelOutput.accept(EtBlocks.THERMAL_GENERATOR.asItem(), setNormalBlockModule("thermal_generator_false"));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETO_CORE.get(),
                 getBlockModel("magneto_core")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(),
-                getBlockModel("atomic_reconstruction_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(), getMachineModel(EtBlocks.ATOMIC_RECONSTRUCTION_MACHINE.get(), "atomic_reconstruction_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.BIOMASS_GENERATOR.get())
                                 .with(PropertyDispatch.initial(BiomassGenerator.LIT).select(true, getBlockModel("biomass_generator_true"))
                                         .select(false, getBlockModel("biomass_generator_false"))));
         itemModels.itemModelOutput.accept(EtBlocks.BIOMASS_GENERATOR.asItem(), setNormalBlockModule("biomass_generator_false"));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(),
-                getBlockModel("bio_replication_vat_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(), getMachineModel(EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(), "bio_replication_vat_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGIC_ENCODE_TABLE.get(),
                 getBlockModel("magic_encode_table")));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
@@ -193,15 +191,11 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
                                         .select(Direction.SOUTH, BlockModelGenerators.X_ROT_90)
                                 ));
         blockModels.createTrivialCube(EtBlocks.LIGHT_AIR.get());
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETO_FUSION_MACHINE.get(), getMachineModel(EtBlocks.MAGNETO_FUSION_MACHINE.get(), "magno_fusion_machine", blockModels.modelOutput)));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(),
-                getBlockModel("electromagnetic_dissociation_machine")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(),
-                getBlockModel("eddy_current_remelter_machine")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(),
-                getBlockModel("electromagnetic_infuser_machine")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(),
-                getBlockModel("magnetic_dissolver_machine")));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETO_FUSION_MACHINE.get(), getMachineModel(EtBlocks.MAGNETO_FUSION_MACHINE.get(), "magneto_fusion_machine", blockModels.modelOutput)));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(), getMachineModel(EtBlocks.ELECTROMAGNETIC_DISSOCIATION_MACHINE.get(), "electromagnetic_dissociation_machine", blockModels.modelOutput)));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(), getMachineModel(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(), "eddy_current_remelter_machine", blockModels.modelOutput)));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(), getMachineModel(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(), "electromagnetic_infuser_machine", blockModels.modelOutput)));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(), getMachineModel(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(), "magnetic_dissolver_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ENERGY_PIPE.get()).with(getBlockModel("energy_pipe"))
                 .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_270))
                 .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_90))
