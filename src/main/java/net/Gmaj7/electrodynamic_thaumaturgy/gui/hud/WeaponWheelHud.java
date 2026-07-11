@@ -1,8 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.gui.hud;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.SelectWeaponPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.ElectromagneticWeaponItem;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;

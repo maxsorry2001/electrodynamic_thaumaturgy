@@ -41,6 +41,10 @@ public class EtBlocks {
             (properties) ->  new BiomassGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
     public static final DeferredBlock<Block> PHOTOVOLTAIC_GENERATOR = registerBlock("photovoltaic_generator",
             (properties) ->  new PhotovoltaicGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F, 6.0F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> THERMAL_MAGNO_FLUX_GENERATOR = registerBlock("thermal_magno_flux_generator",
+            (properties) ->  new ThermalMagnoFluxGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> EXPLODE_GENERATOR = registerBlock("explode_generator",
+            (properties) ->  new ExplodeGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE = registerBlock("electromagnetic_driver_machine",
             (properties) -> new ElectromagneticDriver(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
@@ -62,7 +66,7 @@ public class EtBlocks {
             (properties -> new MagneticDissolver(properties.noOcclusion().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F))), 1);
 
     public static final DeferredBlock<Block> MAGNETO_CORE = registerBlock("magneto_core",
-            (properties) -> new HarmonicCore(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);
+            (properties) -> new MagnetoCore(properties.mapColor(MapColor.COLOR_BLUE).sound(SoundType.SNOW).strength(1.0F).noOcclusion().lightLevel(p -> 7)), 16);
 
     public static final DeferredBlock<Block> ENERGY_PIPE = registerBlock("energy_pipe",
             (properties -> new EnergyPipe(properties.noOcclusion().strength(1.0F))));

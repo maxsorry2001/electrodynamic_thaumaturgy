@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "electrodynamic_thaumaturgy:block/machine_bottom_normal",
+    "side": "electrodynamic_thaumaturgy:block/magnetic_dissolver_machine",
+    "top": "electrodynamic_thaumaturgy:block/machine_top_normal"
+  }
+}

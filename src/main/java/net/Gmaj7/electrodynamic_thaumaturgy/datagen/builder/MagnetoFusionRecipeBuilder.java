@@ -4,8 +4,10 @@ import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.MagnetoFusionRecipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -81,5 +83,10 @@ public class MagnetoFusionRecipeBuilder implements RecipeBuilder {
     public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
         MagnetoFusionRecipe recipe = new MagnetoFusionRecipe(ingredients, result);
         recipeOutput.accept(resourceKey, recipe, null);
+    }
+
+    public void saveWithAddition(RecipeOutput recipeOutput, String nameAddition){
+        MagnetoFusionRecipe recipe = new MagnetoFusionRecipe(ingredients, result);
+        recipeOutput.accept(ResourceKey.create(Registries.RECIPE, Identifier.parse(result.item().getRegisteredName() + '_' + nameAddition)), recipe, null);
     }
 }

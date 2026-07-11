@@ -16,10 +16,10 @@ import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class HarmonicCore extends Block {
-    public static final MapCodec<HarmonicCore> CODEC = simpleCodec(HarmonicCore::new);
+public class MagnetoCore extends Block {
+    public static final MapCodec<MagnetoCore> CODEC = simpleCodec(MagnetoCore::new);
     protected static final VoxelShape AABB = Block.box(5.0, 5.0, 5.0, 11.0, 11.0, 11.0);
-    public HarmonicCore(Properties properties) {
+    public MagnetoCore(Properties properties) {
         super(properties);
     }
 

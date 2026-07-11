@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.datagen.builder;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.AtomicReconstructionRecipe;
-import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.Nullable;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AtomicReconstructionRecipeBuilder implements RecipeBuilder {
