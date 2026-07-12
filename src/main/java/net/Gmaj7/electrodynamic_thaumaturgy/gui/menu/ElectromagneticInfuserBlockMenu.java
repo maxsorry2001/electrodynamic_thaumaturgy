@@ -32,7 +32,7 @@ public class ElectromagneticInfuserBlockMenu extends AbstractContainerMenu {
         this.data = ((ElectromagneticInfuserBE) blockEntity).getData();
 
         this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 66, 34));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 121, 34));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 113, 34));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);

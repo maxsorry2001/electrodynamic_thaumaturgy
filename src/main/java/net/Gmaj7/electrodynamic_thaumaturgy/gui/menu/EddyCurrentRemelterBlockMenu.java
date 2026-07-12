@@ -33,8 +33,8 @@ public class EddyCurrentRemelterBlockMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         this.data = ((EddyCurrentRemelterBE)blockEntity).getData();
 
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 41, 34));
-        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 121, 34));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerInput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerInput().set(slot, resource, amount), 0, 52, 32));
+        this.addSlot(new ResourceHandlerSlot(this.blockEntity.getItemHandlerOutput(), (slot, resource, amount) -> this.blockEntity.getItemHandlerOutput().set(slot, resource, amount), 0, 108, 32));
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
