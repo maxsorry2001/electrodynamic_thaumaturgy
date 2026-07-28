@@ -82,6 +82,7 @@
   "item.electrodynamic_thaumaturgy.monopole_n": "North Monopole",
   "item.electrodynamic_thaumaturgy.monopole_s": "South Monopole",
   "item.electrodynamic_thaumaturgy.magnetic_flux_bucket": "Magnetic Flux Bucket",
+  "item.electrodynamic_thaumaturgy.thermal_magno_flux_bucket": "Thermal Magno Flux Bucket",
 
   "effect.electrodynamic_thaumaturgy.exciting": "Exciting",
   "effect.electrodynamic_thaumaturgy.electric_energy_release" : "Electric Energy Release",
@@ -117,6 +118,9 @@
   "block.electrodynamic_thaumaturgy.electromagnetic_infuser_machine": "Electromagnetic Infuser Machine",
   "block.electrodynamic_thaumaturgy.magnetic_dissolver_machine": "Magnetic Dissolver Machine",
 
+  "block.electrodynamic_thaumaturgy.magnetic_flux_fluid_block": "Magnetic Flux",
+  "block.electrodynamic_thaumaturgy.thermal_magno_flux_fluid_block": "Thermal Magno Flux",
+
   "block.electrodynamic_thaumaturgy.energy_pipe": "Energy Pipe",
   "block.electrodynamic_thaumaturgy.item_pipe": "Item Pipe",
   "block.electrodynamic_thaumaturgy.fluid_pipe": "Fluid Pipe",
@@ -137,6 +141,7 @@
   "entity.electrodynamic_thaumaturgy.magneto_order_sage_entity": "Magneto‑Order Sage",
 
   "fluid_type.electrodynamic_thaumaturgy.magnetic_flux_fluid_type": "Magnetic Flux",
+  "fluid_type.electrodynamic_thaumaturgy.thermal_magno_flux_fluid_type": "Thermal Magno Flux",
 
   "advancements.electrodynamic_thaumaturgy.root.title": "Electrodynamic Thaumatury",
   "advancements.electrodynamic_thaumaturgy.root.description": "",

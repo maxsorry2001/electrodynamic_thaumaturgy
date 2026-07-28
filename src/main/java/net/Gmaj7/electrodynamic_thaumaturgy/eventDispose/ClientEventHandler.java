@@ -180,9 +180,9 @@ public class ClientEventHandler {
             event.register(magneticFluxModel, EtFluids.MAGNETIC_FLUX_SOURCE.get());
             event.register(magneticFluxModel, EtFluids.MAGNETIC_FLUX_FLOWING.get());
             FluidModel.Unbaked thermalMagnoFlux = new FluidModel.Unbaked(
-                    new Material(Identifier.withDefaultNamespace("block/lava_still")),
-                    new Material(Identifier.withDefaultNamespace("block/lava_flow")),
-                    new Material(Identifier.withDefaultNamespace("block/lava_overlay")),
+                    new Material(Identifier.withDefaultNamespace("block/water_still")),
+                    new Material(Identifier.withDefaultNamespace("block/water_flow")),
+                    new Material(Identifier.withDefaultNamespace("block/water_overlay")),
                     state -> 0xFF9933FF);
             event.register(thermalMagnoFlux, EtFluids.THERMAL_MAGNO_FLUX_SOURCE.get());
             event.register(thermalMagnoFlux, EtFluids.THERMAL_MAGNO_FLUX_FLOWING.get());

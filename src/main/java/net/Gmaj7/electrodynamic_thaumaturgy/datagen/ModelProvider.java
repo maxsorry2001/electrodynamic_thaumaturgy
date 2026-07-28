@@ -179,8 +179,6 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(), getMachineModel(EtBlocks.BIO_REPLICATION_VAT_MACHINE.get(), "bio_replication_vat_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGIC_ENCODE_TABLE.get(),
                 getBlockModel("magic_encode_table")));
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(),
-                getBlockModel("electromagnetic_driver_machine")));
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(EtBlocks.ELECTROMAGNETIC_EXTRACTOR_MACHINE.get(), getBlockModel("electromagnetic_extractor_machine"))
                                 .with(PropertyDispatch.modify(BlockStateProperties.FACING).select(Direction.DOWN, BlockModelGenerators.NOP)
@@ -196,6 +194,7 @@ public class ModelProvider extends net.minecraft.client.data.models.ModelProvide
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(), getMachineModel(EtBlocks.EDDY_CURRENT_REMELTER_MACHINE.get(), "eddy_current_remelter_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(), getMachineModel(EtBlocks.ELECTROMAGNETIC_INFUSER_MACHINE.get(), "electromagnetic_infuser_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(), getMachineModel(EtBlocks.MAGNETIC_DISSOLVER_MACHINE.get(), "magnetic_dissolver_machine", blockModels.modelOutput)));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(), getMachineModel(EtBlocks.ELECTROMAGNETIC_DRIVER_MACHINE.get(), "electromagnetic_driver_machine", blockModels.modelOutput)));
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(EtBlocks.ENERGY_PIPE.get()).with(getBlockModel("energy_pipe"))
                 .with(new ConditionBuilder().term(AbstractPipe.UP, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_270))
                 .with(new ConditionBuilder().term(AbstractPipe.DOWN, AbstractPipe.LinkState.LINK), getBlockModel("energy_pipe_part").with(BlockModelGenerators.X_ROT_90))

@@ -82,6 +82,7 @@
   "item.electrodynamic_thaumaturgy.monopole_n": "N磁单极子",
   "item.electrodynamic_thaumaturgy.monopole_s": "S磁单极子",
   "item.electrodynamic_thaumaturgy.magnetic_flux_bucket": "磁流质桶",
+  "item.electrodynamic_thaumaturgy.thermal_magno_flux_bucket": "热磁质桶",
 
   "effect.electrodynamic_thaumaturgy.exciting": "激发",
   "effect.electrodynamic_thaumaturgy.electric_energy_release" : "电能释放",
@@ -121,6 +122,9 @@
   "block.electrodynamic_thaumaturgy.item_pipe": "物品管道",
   "block.electrodynamic_thaumaturgy.fluid_pipe": "流体管道",
 
+  "block.electrodynamic_thaumaturgy.magnetic_flux_fluid_block": "磁流质",
+  "block.electrodynamic_thaumaturgy.thermal_magno_flux_fluid_block": "热磁质",
+
   "entity.electrodynamic_thaumaturgy.et_ray_entity": "电磁射线",
   "entity.electrodynamic_thaumaturgy.pulsed_plasma_entity": "脉冲等离子体",
   "entity.electrodynamic_thaumaturgy.attract_beacon_entity": "磁吸信标",
@@ -137,6 +141,7 @@
   "entity.electrodynamic_thaumaturgy.magneto_order_sage_entity": "磁序贤者",
 
   "fluid_type.electrodynamic_thaumaturgy.magnetic_flux_fluid_type": "磁流质",
+  "fluid_type.electrodynamic_thaumaturgy.thermal_magno_flux_fluid_type": "热磁质",
 
   "advancements.electrodynamic_thaumaturgy.root.title": "电磁奇术",
   "advancements.electrodynamic_thaumaturgy.root.description": "",

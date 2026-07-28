@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.compat.JEIRecipeTypes;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.Gmaj7.electrodynamic_thaumaturgy.recipe.custom.ElectromagneticDissociationRecipe;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
@@ -66,7 +67,7 @@ public class ElectromagneticDissociationRecipeCategory implements IRecipeCategor
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().ingredient());
         List<ItemStackTemplate> outputs = recipe.value().outputs();
         if(recipe.value().needCatalyst()){
-            builder.addSlot(RecipeIngredientRole.INPUT, 81, 20).add(Ingredient.of(Items.NETHER_STAR));
+            builder.addSlot(RecipeIngredientRole.INPUT, 81, 20).add(Ingredient.of(EtItems.DISSOCIATION_CATALYST));
         }
         for (int i = 0; i < outputs.size(); i++){
             builder.addSlot(RecipeIngredientRole.OUTPUT, 104 + 18 * i, 34).add(outputs.get(i));
