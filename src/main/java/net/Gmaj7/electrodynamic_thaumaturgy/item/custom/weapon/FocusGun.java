@@ -24,7 +24,7 @@ import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
-public class FocusGun extends ElectromagneticWeaponItem{
+public class FocusGun extends AbstractEnergyGun{
     private static int shootUse = 1024;
     public FocusGun(Properties properties) {
         super(properties);
@@ -36,17 +36,10 @@ public class FocusGun extends ElectromagneticWeaponItem{
             changeModule(level, player, item.getChangeSlot());
             return InteractionResult.CONSUME;
         }
-        ItemStack itemStack = player.getItemInHand(usedHand);
-        if(itemStack.getItem() instanceof FocusGun && itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack)).getCapacityAsInt() > shootUse)
-            player.startUsingItem(usedHand);
         return InteractionResult.CONSUME;
     }
 
     @Override
-    public int getUseDuration(ItemStack itemStack, LivingEntity user) {
-        return 12000;
-    }
-
     public void shoot(Level level, Player player, ItemStack itemStack){
         EnergyHandler energyHandler = itemStack.getCapability(Capabilities.Energy.ITEM, ItemAccess.forStack(itemStack));
         int pattern = itemStack.getOrDefault(EtDataComponentTypes.WEAPON_WORK_PATTERN, 0),

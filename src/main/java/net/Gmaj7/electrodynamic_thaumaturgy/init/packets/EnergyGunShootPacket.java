@@ -1,6 +1,7 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.init.packets;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.AbstractEnergyGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,14 +12,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public class GunShootPacket implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<GunShootPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "gun_shoot"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, GunShootPacket> STREAM_CODEC = CustomPacketPayload.codec(GunShootPacket::write, GunShootPacket::new);
+public class EnergyGunShootPacket implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<EnergyGunShootPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "energy_gun_shoot"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, EnergyGunShootPacket> STREAM_CODEC = CustomPacketPayload.codec(EnergyGunShootPacket::write, EnergyGunShootPacket::new);
 
-    public GunShootPacket(){
+    public EnergyGunShootPacket(){
     }
 
-    public GunShootPacket(RegistryFriendlyByteBuf buf) {
+    public EnergyGunShootPacket(RegistryFriendlyByteBuf buf) {
     }
 
     private void write(RegistryFriendlyByteBuf buf) {
@@ -29,11 +30,11 @@ public class GunShootPacket implements CustomPacketPayload {
         return TYPE;
     }
 
-    public static void handle(GunShootPacket packet, IPayloadContext context){
+    public static void handle(EnergyGunShootPacket packet, IPayloadContext context){
         context.enqueueWork(() -> {
             Player player = context.player();
             ItemStack itemStack = player.getMainHandItem();
-            if(player.level() instanceof ServerLevel level && itemStack.getItem() instanceof FocusGun gun){
+            if(player.level() instanceof ServerLevel level && itemStack.getItem() instanceof AbstractEnergyGun gun){
                 gun.shoot(level, player, itemStack);
             }
         });

@@ -10,6 +10,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.componentDatas.ItemContainerDat
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.*;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagicCastItem;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.MagnoAnnihilationCannon;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.PulseBow;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
@@ -158,6 +159,13 @@ public class EtItems {
                     .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)));
     public static final DeferredItem<Item> FOCUS_GUN = ITEM.registerItem("focus_gun",
             properties -> new FocusGun(properties.stacksTo(1)
+                    .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
+                    .component(EtDataComponentTypes.WEAPON_WORK_PATTERN.get(), 0)
+                    .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())
+                    .component(EtDataComponentTypes.ENHANCEMENT_DATA.get(), EnhancementData.savvedData)
+                    .component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.MAINHAND).build())));
+    public static final DeferredItem<Item> MAGNO_ANNIHILATION_CANNON = ITEM.registerItem("magno_annihilation_cannon",
+            properties -> new MagnoAnnihilationCannon(properties.stacksTo(1)
                     .component(EtDataComponentTypes.ET_ENERGY.get(), 0)
                     .component(EtDataComponentTypes.WEAPON_WORK_PATTERN.get(), 0)
                     .component(EtDataComponentTypes.ET_CONTAINER.get(), ItemContainerData.getEmptyWeapon())

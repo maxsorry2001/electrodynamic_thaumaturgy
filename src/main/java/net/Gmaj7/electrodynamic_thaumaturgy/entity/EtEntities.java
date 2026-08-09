@@ -95,6 +95,13 @@ public class EtEntities {
                     .noSave()
                     .noLootTable()
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "focus_bullet_entity"))));
+    public static final Supplier<EntityType<MagnoAnnihilationCannonBullet>> MAGNO_ANNIHILATION_CANNON_BULLET_ENTITY =
+            ENTITY_TYPES.register("magno_annihilation_cannon_bullet_entity", () -> EntityType.Builder.<MagnoAnnihilationCannonBullet>of(MagnoAnnihilationCannonBullet::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F)
+                    .clientTrackingRange(4)
+                    .noSave()
+                    .noLootTable()
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ElectrodynamicThaumaturgy.MODID, "magno_annihilation_cannon_bullet_entity"))));
     public static final Supplier<EntityType<FrequencyDivisionBeaconEntity>> FREQUENCY_DIVISION_BEACON_ENTITY =
             ENTITY_TYPES.register("frequency_division_beacon_entity", () -> EntityType.Builder.<FrequencyDivisionBeaconEntity>of(FrequencyDivisionBeaconEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)

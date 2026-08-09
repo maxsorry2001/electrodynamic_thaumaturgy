@@ -4,11 +4,12 @@ import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.EtBlocks;
 import net.Gmaj7.electrodynamic_thaumaturgy.effect.EtEffects;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.EtDataComponentTypes;
-import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.GunShootPacket;
+import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergyGunShootPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.EnergyPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.FluidPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.pipeNet.ItemPipeNetSaveData;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
+import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.AbstractEnergyGun;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.custom.weapon.FocusGun;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -77,8 +78,8 @@ public class TickEvent {
             if(mc.options.keyAttack.isDown()){
                 Player player = mc.player;
                 ItemStack stack = player.getMainHandItem();
-                if(stack.getItem() instanceof FocusGun && !player.getCooldowns().isOnCooldown(stack)){
-                    ClientPacketDistributor.sendToServer(new GunShootPacket());
+                if(stack.getItem() instanceof AbstractEnergyGun && !player.getCooldowns().isOnCooldown(stack)){
+                    ClientPacketDistributor.sendToServer(new EnergyGunShootPacket());
                 }
             }
     }
