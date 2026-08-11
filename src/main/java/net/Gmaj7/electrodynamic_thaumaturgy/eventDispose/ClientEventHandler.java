@@ -166,6 +166,9 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void registerOnClientExtensions(RegisterClientExtensionsEvent event){
             event.registerFluidType(EtFluidTypes.MAGNETIC_FLUX_EXTENSION, EtFluidTypes.MAGNETIC_FLUX_FLUID_TYPE.get());
+            event.registerFluidType(EtFluidTypes.THERMAL_MAGNO_FLUX_EXTENSION, EtFluidTypes.THERMAL_MAGNO_FLUX_FLUID_TYPE.get());
+            event.registerFluidType(EtFluidTypes.N_TYPE_ANNIHILATION_FLUID_EXTENSION, EtFluidTypes.N_TYPE_ANNIHILATION_FLUID_TYPE.get());
+            event.registerFluidType(EtFluidTypes.S_TYPE_ANNIHILATION_FLUID_EXTENSION, EtFluidTypes.S_TYPE_ANNIHILATION_FLUID_TYPE.get());
 
             event.registerItem(new FocusGun.Open(), EtItems.FOCUS_GUN);
         }
@@ -186,6 +189,20 @@ public class ClientEventHandler {
                     state -> 0xFF9933FF);
             event.register(thermalMagnoFlux, EtFluids.THERMAL_MAGNO_FLUX_SOURCE.get());
             event.register(thermalMagnoFlux, EtFluids.THERMAL_MAGNO_FLUX_FLOWING.get());
+            FluidModel.Unbaked nTypeFluxModel = new FluidModel.Unbaked(
+                    new Material(Identifier.withDefaultNamespace("block/water_still")),
+                    new Material(Identifier.withDefaultNamespace("block/water_flow")),
+                    new Material(Identifier.withDefaultNamespace("block/water_overlay")),
+                    state -> 0xA133BBFF);
+            event.register(magneticFluxModel, EtFluids.N_TYPE_ANNIHILATION_FLUID_SOURCE.get());
+            event.register(magneticFluxModel, EtFluids.N_TYPE_ANNIHILATION_FLUID_FLOWING.get());
+            FluidModel.Unbaked sTypeFluxModel = new FluidModel.Unbaked(
+                    new Material(Identifier.withDefaultNamespace("block/water_still")),
+                    new Material(Identifier.withDefaultNamespace("block/water_flow")),
+                    new Material(Identifier.withDefaultNamespace("block/water_overlay")),
+                    state -> 0xA133BBFF);
+            event.register(magneticFluxModel, EtFluids.S_TYPE_ANNIHILATION_FLUID_SOURCE.get());
+            event.register(magneticFluxModel, EtFluids.S_TYPE_ANNIHILATION_FLUID_FLOWING.get());
         }
 
         @SubscribeEvent

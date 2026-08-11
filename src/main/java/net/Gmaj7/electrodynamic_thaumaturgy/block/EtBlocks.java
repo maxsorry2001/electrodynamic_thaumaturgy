@@ -46,6 +46,9 @@ public class EtBlocks {
     public static final DeferredBlock<Block> EXPLODE_GENERATOR = registerBlock("explode_generator",
             (properties) ->  new ExplodeGenerator(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
+    public static final DeferredBlock<Block> ANNIHILATION_REACTOR_CORE = registerBlock("annihilation_reacto_core",
+            (properties) -> new AnnihilationReactorCore(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+
     public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE = registerBlock("electromagnetic_driver_machine",
             (properties) -> new ElectromagneticDriver(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
     public static final DeferredBlock<Block> BIO_REPLICATION_VAT_MACHINE = registerBlock("bio_replication_vat_machine",

@@ -46,6 +46,10 @@ public class EtBlockEntities {
             MOE_BLOCK_ENTITY.register("biomass_generator_be", () -> new BlockEntityType<>(
                     BiomassGeneratorBE::new, EtBlocks.BIOMASS_GENERATOR.get()));
 
+    public static final Supplier<BlockEntityType<BiomassGeneratorBE>> ANNIHILATION_REACTOR_CORE_BE =
+            MOE_BLOCK_ENTITY.register("annihilation_reactor_core_be", () -> new BlockEntityType<>(
+                    BiomassGeneratorBE::new, EtBlocks.BIOMASS_GENERATOR.get()));
+
     public static final Supplier<BlockEntityType<EnergyTransmissionAntennaBE>> ENERGY_TRANSMISSION_ANTENNA_BE =
             MOE_BLOCK_ENTITY.register("energy_transmission_antenna_be", () -> new BlockEntityType<>(
                     EnergyTransmissionAntennaBE::new, EtBlocks.ENERGY_TRANSMISSION_ANTENNA.get()));

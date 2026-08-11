@@ -25,6 +25,16 @@ public class EtFluids {
     public static final Supplier<FlowingFluid> THERMAL_MAGNO_FLUX_FLOWING = FLUIDS.register("thermal_magno_flux_flowing",
             () -> new BaseFlowingFluid.Flowing(FluidProperties.THERMAL_MAGNO_FLUX_PROPERTIES));
 
+    public static final Supplier<FlowingFluid> N_TYPE_ANNIHILATION_FLUID_SOURCE = FLUIDS.register("n_type_annihilation_fluid_sorce",
+            () -> new BaseFlowingFluid.Source(FluidProperties.THERMAL_MAGNO_FLUX_PROPERTIES));
+    public static final Supplier<FlowingFluid> N_TYPE_ANNIHILATION_FLUID_FLOWING = FLUIDS.register("n_type_annihilation_fluid_flowing",
+            () -> new BaseFlowingFluid.Flowing(FluidProperties.THERMAL_MAGNO_FLUX_PROPERTIES));
+
+    public static final Supplier<FlowingFluid> S_TYPE_ANNIHILATION_FLUID_SOURCE = FLUIDS.register("s_type_annihilation_fluid_sorce",
+            () -> new BaseFlowingFluid.Source(FluidProperties.THERMAL_MAGNO_FLUX_PROPERTIES));
+    public static final Supplier<FlowingFluid> S_TYPE_ANNIHILATION_FLUID_FLOWING = FLUIDS.register("s_type_annihilation_fluid_flowing",
+            () -> new BaseFlowingFluid.Flowing(FluidProperties.THERMAL_MAGNO_FLUX_PROPERTIES));
+
     public static class FluidProperties{
         protected static final BaseFlowingFluid.Properties MAGNETIC_FLUX_PROPERTIES = new BaseFlowingFluid.Properties(
                 EtFluidTypes.MAGNETIC_FLUX_FLUID_TYPE, MAGNETIC_FLUX_SOURCE, MAGNETIC_FLUX_FLOWING).block(EtBlocks.MAGNETIC_FLUX_FLUID_BLOCK).bucket(EtItems.MAGNETIC_FLUX_BUCKET);
