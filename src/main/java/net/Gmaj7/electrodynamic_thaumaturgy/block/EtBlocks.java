@@ -2,6 +2,7 @@ package net.Gmaj7.electrodynamic_thaumaturgy.block;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock.*;
+import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.AnnihilationReactorEnergyBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.minecraft.world.item.BlockItem;
@@ -48,6 +49,10 @@ public class EtBlocks {
 
     public static final DeferredBlock<Block> ANNIHILATION_REACTOR_CORE = registerBlock("annihilation_reacto_core",
             (properties) -> new AnnihilationReactorCore(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> ANNIHILATION_REACTOR_ENERGY = registerBlock("annihilation_reacto_energy",
+            (properties) -> new AnnihilationReactorEnergy(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
+    public static final DeferredBlock<Block> ANNIHILATION_REACTOR_FLUID = registerBlock("annihilation_reacto_fluid",
+            (properties) -> new AnnihilationReactorFluid(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.5F).noOcclusion()), 1);
 
     public static final DeferredBlock<Block> ELECTROMAGNETIC_DRIVER_MACHINE = registerBlock("electromagnetic_driver_machine",
             (properties) -> new ElectromagneticDriver(properties.mapColor(MapColor.METAL).sound(SoundType.METAL).strength(1.0F).noOcclusion()), 1);
