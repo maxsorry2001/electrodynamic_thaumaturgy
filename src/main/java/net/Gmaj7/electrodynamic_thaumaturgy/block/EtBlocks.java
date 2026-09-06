@@ -2,7 +2,6 @@ package net.Gmaj7.electrodynamic_thaumaturgy.block;
 
 import net.Gmaj7.electrodynamic_thaumaturgy.ElectrodynamicThaumaturgy;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock.*;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.AnnihilationReactorEnergyBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.fluid.EtFluids;
 import net.Gmaj7.electrodynamic_thaumaturgy.item.EtItems;
 import net.minecraft.world.item.BlockItem;

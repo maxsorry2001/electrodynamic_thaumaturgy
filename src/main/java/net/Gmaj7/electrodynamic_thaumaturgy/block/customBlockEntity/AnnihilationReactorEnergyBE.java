@@ -7,8 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 
-public class AnnihilationReactorEnergyBE extends BlockEntity implements IEnergyBlockEntity {
-    private BlockPos corePos;
+public class AnnihilationReactorEnergyBE extends AnnihilationReactorIoBE implements IEnergyBlockEntity {
     private BlockEntityEnergyHandler energyHandler;
 
     public AnnihilationReactorEnergyBE(BlockPos worldPosition, BlockState blockState) {

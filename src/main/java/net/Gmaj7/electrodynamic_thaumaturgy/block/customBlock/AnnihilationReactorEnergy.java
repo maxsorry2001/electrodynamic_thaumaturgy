@@ -1,7 +1,6 @@
 package net.Gmaj7.electrodynamic_thaumaturgy.block.customBlock;
 
 import com.mojang.serialization.MapCodec;
-import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.AnnihilationReactorCoreBE;
 import net.Gmaj7.electrodynamic_thaumaturgy.block.customBlockEntity.AnnihilationReactorEnergyBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;

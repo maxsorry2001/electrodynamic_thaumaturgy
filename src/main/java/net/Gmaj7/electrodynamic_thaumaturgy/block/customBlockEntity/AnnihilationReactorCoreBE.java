@@ -8,7 +8,7 @@ import net.Gmaj7.electrodynamic_thaumaturgy.init.BlockEntityFluidHandler;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.EnergySetPacket;
 import net.Gmaj7.electrodynamic_thaumaturgy.init.packets.FluidSetPacket;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -104,5 +104,13 @@ public class AnnihilationReactorCoreBE extends AbstractGeneratorBE implements IF
     @Override
     public void setFluid(FluidStack fluidStack, int slot) {
         this.fluidHandler.set(slot, FluidResource.of(fluidStack), fluidStack.amount());
+    }
+
+    public void startCheckLink(){
+        for (Direction direction : Direction.values()){
+            BlockPos checkPos = getBlockPos().relative(direction);
+            if(level.getBlockEntity(checkPos) instanceof AnnihilationReactorIoBE annihilationReactorIoBE)
+                annihilationReactorIoBE.checkLink(getBlockPos());
+        }
     }
 }
